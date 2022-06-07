@@ -1,4 +1,9 @@
-const { employeQueries } = require('../requests/EmployeQueries');
+// const { employeQueries } = require('../requests/EmployeQueries');
+const Employe = require("../models/employe.model");
+
+const dotenv = require("dotenv").config();
+var bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 exports.employelogin = async (req, res) => {
   
@@ -9,24 +14,35 @@ exports.employelogin = async (req, res) => {
          res.redirect(e)
      }
  };
+
  exports.employeloginPost = async (req, res) => {
    
      try{
-        const tab =[];
-        const data = req.body;
-        console.log(data);
-        const Result = await employeQueries.getAllEmploye()
-        const rr = Result.result
-        rr.forEach(element => {
-          if(element.email ==data.email && element.password ==data.password){
-            tab.push(element)
-            res.status(200).send({ data: tab, success: true });
-          } 
-      });
-
-      if(tab == ""){
-        res.status(400).send({ data: "email ou mot de passe incorrect", success: false });
+      const { email, password } = req.body;
+      if (!(email && password)) {
+        res.status(400).send("veuillez remplir tous les champs");
       }
+    const employelogin = await Employe.findOne({ email });
+    
+      if (
+        employelogin &&
+        (await bcrypt.compare(password, employelogin.password))
+      ) {
+        const token = jwt.sign(
+          { employe_id: employelogin._id, email },
+          process.env.TOKEN_KEY,
+          {
+            expiresIn: "1h",
+          }
+        );
+  
+        employelogin.token = token;
+        res.status(200).send({ employelogin,token });
+      } else {
+        res.status(400).send("email ou mot de passe incorrect");
+      }
+    
+   
     }catch (e) {
         console.log('err', e);
         res.status(400).send({ data: "verifiez les champs", success: false });

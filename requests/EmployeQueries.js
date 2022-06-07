@@ -1,12 +1,14 @@
 const Employe = require('../models/employe.model');
 const CryptoJS = require("crypto-js");
-
+var bcrypt = require('bcryptjs');
 
 exports.employeQueries = class {
 
     static setEmploye(data) {
 
         return new Promise(async next => {
+            const   encryptedPassword =  await bcrypt.hash(data.password, 10);
+
             const employe = await new Employe({
                 nom: data.nom,
                 prenom: data.prenom,
@@ -16,7 +18,7 @@ exports.employeQueries = class {
                 email: data.email,
                 numero: data.numero,
                 adresse: data.adresse,
-                password: data.password,
+                password: encryptedPassword,
                 isAdmin : "false"
             });
             await employe.save().then(res => {
@@ -49,29 +51,7 @@ exports.employeQueries = class {
             })
         })
     }
-
-
-    static getEmploye(data) {
-        return new Promise(async next => {
-            Employe.findOne({
-                email: data.email,
-                password: data.password
-            }).then(data => {
-                next({
-                    etat: true,
-                    result: data
-                });
-            }).catch(err => {
-                next({
-                    etat: false,
-                    err: err
-                });
-            })
-        })
-    }
-
-
-
+    
     static deleteEmploye(id) {
         return new Promise(async next => {
             await Employe.deleteOne({

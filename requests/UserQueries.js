@@ -1,18 +1,22 @@
 const User = require('../models/user.model');
 const CryptoJS = require("crypto-js");
+var bcrypt = require('bcryptjs');
+
 
 
 exports.userQueries = class {
 
     static setUser(data) {
         return new Promise(async next => {
+            const   encryptedPassword =  await bcrypt.hash(data.password, 10);
+
             const user = await new User({
                 username: data.username,
                 nom_etablissement: data.nom_etablissement,
                 email: data.email,
                 adresse: data.adresse,
                 numero: data.numero,
-                password: data.password,
+                password: encryptedPassword,
                 isAdmin : "false"
             });
             await user.save().then(res => {

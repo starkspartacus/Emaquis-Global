@@ -82,7 +82,7 @@ router.post(
 router.get("/allemploye", allemployecontroller.allemploye);
 router.get("/barmanparuser", barmanparusercontroller.barmanparuser);
 
-router.get("/employelogin", employelogincontroller.employelogin);
+
 router.post("/employelogin", employelogincontroller.employeloginPost);
 
 module.exports = router;

@@ -13,16 +13,19 @@
  const { categorieQueries } = require('../requests/categorieQueries');
  const { fournisseurQueries } = require('../requests/fournisseurQueries');
  const { produitQueries } = require('../requests/produitQueries');
- const { venteQueries } = require('../requests/venteQueries');
+ const User = require('../models/user.model');
+const dotenv = require("dotenv").config();
+var bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+
  const FileUpload = require("../utils/fileupload");
 
  
 
  const db = require('../settings/database');
  const { all } = require('../routes/index');
-//  const { offredappel } = require('../controllers/offredappel');
- 
-//  const Appeldoffre = require("../models/appeldoffre.model");
+
  /**
   * Get port from environment and store in Express.
   */
@@ -79,19 +82,40 @@ UserLogin.on('connection', (socket) => {
     console.log('connexion utilisateur');
     try {
         socket.on('login', async(data) => {
-            const Result = await userQueries.getUser(data);
-            if (Result.result !== null) {
-
+           
+            const { email, password } = data;
+      if (!(email && password)) {
+        console.log("veuillez remplir tous les champs");
+      }
+    //   const Result = await userQueries.getUser(data);
+     const userlogin = await User.findOne({ email });
+     console.log(userlogin)
+        
+            if (
+                userlogin &&
+                (await bcrypt.compare(password, userlogin.password))
+              ) {
+                const token = jwt.sign(
+                  { user_id: userlogin._id, email },
+                  process.env.TOKEN_KEY,
+                  {
+                    expiresIn: "1h",
+                  }
+                );
+          
+                userlogin.token = token;
                 socket.handshake.session.user = {
-                    "id": Result.result._id,
-                    "username": Result.result.username,
-                    "nom_etablissement": Result.result.nom_etablissement
-                };
-                socket.handshake.session.save();
-                socket.emit('loginsuccess', '/dashboard');
-            } else {
+                            "id": userlogin._id,
+                            "username": userlogin.username,
+                            "nom_etablissement": userlogin.nom_etablissement
+                        };
+                        socket.handshake.session.save();
+                        socket.emit('loginsuccess', '/dashboard');
+                        console.log(socket.handshake.session);
+                        console.log({"token": token});
+              } else {
                 socket.emit('bad');
-            }
+              }
         })
     } catch (e) {
         console.log(e)
