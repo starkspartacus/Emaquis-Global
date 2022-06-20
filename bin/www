@@ -58,19 +58,12 @@ SaveUSer.on("connection", (socket) => {
          if (Result.etat == false){
              socket.emit("bad");
         }else{
-            const Results = await userQueries.getUser(log);
-            if( Results !== null){
-                socket.handshake.session.user = {
-                    "id": Result.result._id,
-                    "username": Result.result.username,
-                    "nom_etablissement": Result.result.nom_etablissement
-                };
-                socket.handshake.session.save();
-                
-                console.log(Results,"zooooo")
+            if( Result !== null){
+                console.log(Result,"zooooo")
+                 socket.emit("saved");
+                 socket.emit('loginsuccess','/dashboard');
         }
-            socket.emit("saved");
-            socket.emit('loginsuccess','/dashboard');
+           
             }
          
     })
