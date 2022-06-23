@@ -59,7 +59,9 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="" method="">
+                        
+                        <form action="/ajouterproduit" method="post" enctype="multipart/form-data">
+                            
                             <div class="alert alert-success" role="alert" style="text-align: center; display: none;" id="alert-success">
                                 Nouvel employé enregistrer avec succès !
                             </div>
@@ -70,17 +72,17 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="common_input mb_15">
-                                        <input type="text" placeholder="nom du produit" name="nom_produit">
+                                        <input type="text" placeholder="nom du produit" name="nom_produit" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="common_input mb_15">
-                                        <input type="number" placeholder="prix de vente ex: 700" name="prix_vente">
+                                        <input type="number" placeholder="prix de vente ex: 700" name="prix_vente" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="common_input mb_15">
-                                        <input type="number" placeholder="prix d'achat  ex: 500" name="prix_achat">
+                                        <input type="number" placeholder="prix d'achat  ex: 500" name="prix_achat" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -92,10 +94,10 @@
                                         <input type="number" placeholder="quantite" name="quantite">
                                         <input type="text" placeholder="zo" name="session" value="<%= sess.id %>" hidden>
                                     </div>
-                                </div>
+                                </div> 
 
                                 <div class="col-lg-6">
-                                    <select class="nice_Select2 nice_Select_line wide" style="display: none;" name="categorie">
+                                    <select class="nice_Select2 nice_Select_line wide" style="display: none;" name="categorie" required>
 
                                         <option value="">Selectionner la catégorie</option>
                                         <% categorie.forEach(el =>{%>
@@ -106,7 +108,7 @@
                                 <div class="col-12">
                                     <div class="create_report_btn mt_30">
 
-                                               <button  type="submit" class="btn_1 radius_btn d-block text-center"> Ajouter Produit</button>
+                                               <button  type="submit"  id="#button" class="btn_1 radius_btn d-block text-center"> Ajouter Produit</button>
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +120,7 @@
         </div>
     </div>
 
-<!-- footer part -->
+footer part
 <div class="footer_part">
     <div class="container-fluid">
         <div class="row">
@@ -131,7 +133,7 @@
     </div>
 </div>
 </section>
-<!-- main content part end -->
+<!-- main content part end
 
 <!-- ### CHAT_MESSAGE_BOX   ### -->
 
@@ -258,44 +260,10 @@
 <!-- footer  -->
 <%- include('partial/script.ejs') %>
 <script src="../jquery-3.4.1.min.js"></script>
-<script>
+<!-- <script>
   const socket = io(window.location.origin + window.location.pathname);
   console.log(window.location.origin + window.location.pathname);
-  let fileInp = document.querySelector("input[type='file']");
-        let file;
-
-        fileInp.addEventListener("change", (event) => {
-
-            file = fileInp.files[0];
-
-            const fileReader = new FileReader();
-            let slice = file.slice(0, 100000);
-            fileReader.readAsArrayBuffer(slice);
-
-
-            fileReader.onload = event => {
-                let arrayBuffer = fileReader.result;
-                let data = {
-                    name: file.name,
-                    type: file.type,
-                    size: file.size,
-                    data: arrayBuffer
-                }
-
-                socket.emit("upload", data);
-
-                socket.on("request slice upload", data => {
-                    let place = data.currentSlice * 100000;
-                    let slice = file.slice(place, place + Math.min(100000, file.size - place));
-
-                    fileReader.readAsArrayBuffer(slice);
-                })
-
-                socket.on("upload error", () => alert("error"));
-
-            }
-
-        })
+   
 
 
   $('form').on('submit', (e) => {
@@ -312,8 +280,8 @@
         session: $('input[name="session"]').val(),
 
       };
-      console.log(data)
-      socket.emit("setproduit", data);
+    //   console.log(data)
+    //   socket.emit("setproduit", data);
       socket.on("saved", () => {
           document.getElementById("alert-success").style.display = "block";
           $("input").val('');
@@ -325,6 +293,14 @@
           });
 
   })
+</script> -->
+<script>
+    $('#button').click(function() {
+        setTimeout(1000,()=>{
+            location.reload(true);
+        })
+        
+    });
 </script>
 </body>
 

@@ -157,17 +157,18 @@ SaveFournisseur.on("connection", (socket) => {
 
 const SaveProduit = io.of('/ajouterproduit').use(Serveur.getSharedSession());
 SaveProduit.on("connection", (socket) => {
-    FileUpload.takeSocketAction(socket, "upload");
-    socket.on("setproduit", async(data) => {
-      const Result = await produitQueries.setProduit(data);
-      console.log(Result)
-        if (Result.result !== null) {
-            socket.emit("saved");
+    socket.on("addproduit", async(data) => {
+    console.log(data)
 
-        } else {
-            socket.emit("bad");
+    //   const Result = await produitQueries.setProduit(data);
+    //   console.log(Result)
+    //     if (Result.result !== null) {
+    //         socket.emit("saved");
 
-        }
+    //     } else {
+    //         socket.emit("bad");
+
+    //     }
     })
 })
 
