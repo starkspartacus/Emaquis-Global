@@ -27,9 +27,9 @@ exports.venteQueries = class{
     }
 
 
-    static getVentes(){
+    static getVente(){
         return new Promise(async next => {
-            Vente.find().then(data => {
+            Vente.find().populate('produit').then(data => {
                 next({
                     etat: true,
                     result: data

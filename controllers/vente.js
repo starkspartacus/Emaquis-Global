@@ -40,7 +40,7 @@ exports.ventePost = async (req, res) => {
                 if(vente.travail_pour == el.session){
     
                   const up = el.quantite - vente.quantite
-                  if(up>0){
+                  if(up>0 && up == 0){
                       Vente = await venteQueries.setVente(vente);
                       rest = await  Produits.findByIdAndUpdate(el._id,{ quantite: up }, function(err, produit){ 
                     })
@@ -55,6 +55,7 @@ exports.ventePost = async (req, res) => {
                         data : " votre stock  pour ce produit est vide",
                     })
                   }
+                  
                 } 
             })   
         }else{
