@@ -181,7 +181,7 @@ a:hover {
 }
 
 .section {
-  padding: 100px 0;
+  
 }
 
 .section-title {
@@ -2236,6 +2236,7 @@ hr {
 .singup-container {
   position:relative;
   left: 50%;
+  overflow: scroll;
 }
 
 .body-wallpper{
@@ -2243,7 +2244,10 @@ hr {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  
+  overflow: hidden;
+  position: sticky;
+  height: auto;
+  width: 100vw;
 }
 
 /* Fin inscription page*/
@@ -2263,6 +2267,8 @@ hr {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
+  position: relative;
 }
 .bg-login{
   
@@ -2273,7 +2279,8 @@ hr {
 
 .login-container {
   position:relative;
-  left: 50%;
+  left: 40%;
+  top: 10vh;
   
 }
 
