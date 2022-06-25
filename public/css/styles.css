@@ -2227,7 +2227,31 @@ hr {
 
 /*Fin Landing page**/
 
+/* inscription page**/
+.bg-singup{
+  background-color: rgba(250, 243, 243, 0.884);
+  box-shadow: -33px 9px 7px -6px rgba(8,5,5,0.82);
+}
+
+.singup-container {
+  position:relative;
+  left: 50%;
+}
+
+.body-wallpper{
+  background-image: url('../img/inscription1.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+/* Fin inscription page*/
+
+
 /* connexion page**/
+
+
 .logo_connexion {
   
   width: 200px;
