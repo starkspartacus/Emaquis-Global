@@ -1,7 +1,7 @@
 const Vente = require("../models/vente.model");
 
 exports.venteQueries = class{
-    static setVente({produit,quantite,employe,travail_pour}){
+    static setVente({produit,quantite,employe,travail_pour,prix}){
        return new Promise(async next =>{
 
         const vente = await new Vente({
@@ -9,6 +9,7 @@ exports.venteQueries = class{
             quantite,
             employe,
             travail_pour,
+            prix,
 
         })
 

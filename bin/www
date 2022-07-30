@@ -119,9 +119,10 @@ UserLogin.on('connection', (socket) => {
 const SaveEmploye= io.of('/ajouteruser').use(Serveur.getSharedSession());
 SaveEmploye.on("connection", (socket) => {
     socket.on("setemploye", async(data) => {
+        console.log(data)
         const Result = await employeQueries.setEmploye(data);
         console.log(Result)
-         if (Result.result !== null){
+         if(Result){
              socket.emit("saved");
         }else{
             socket.emit("bad");

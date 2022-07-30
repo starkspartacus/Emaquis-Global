@@ -3,8 +3,19 @@ const Schema = mongoose.Schema;
 
 const VenteSchema = new Schema({
 
-    produit:{ type:Schema.Types.ObjectId, ref: 'produit', required:true },
-    quantite:{ type:Number, required:true },
+    // produit:{ type:Schema.Types.ObjectId, ref: 'produit', required:true },
+    produit: {
+        type: Array,
+        required: true
+    },
+    prix: {
+        type: Number,
+        required: true,
+    },
+    quantite: {
+        type: Array,
+        required: true,
+    },
     employe:{ type:Schema.Types.ObjectId, ref: 'employe', required:true  },
     travail_pour:{ type:Schema.Types.ObjectId, ref: 'user', required:true  },
 },

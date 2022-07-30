@@ -46,7 +46,7 @@
 					<!-- Content -->
 					<div class="content text-center bg-login">
 						<div class="logo ">
-							<a href="index.html" ><img class="logo_connexion" src="../img/paresseux_parasol.svg" alt=""></a>
+							<a href="#" ><img class="logo_connexion" src="../img/paresseux_parasol.svg" alt=""></a>
 						</div>
 						<div class="title-text">
 							<h3>
@@ -110,7 +110,7 @@
             email: $('input[name="email"]').val(),
             password: $('input[name="password"]').val(),
         };
-       // console.log(data)
+       console.log(data)
         socket.emit('login',data)
       })
       socket.on("loginsuccess", () => {

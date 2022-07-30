@@ -89,6 +89,8 @@ router.post("/listeproduit", listeproduitcontroller.produitPost);
 
 router.get("/vente", ventecontroller.vente);
 router.post("/vente", ventecontroller.ventePost);
+router.post("/editvente", ventecontroller.editventePost);
+router.post("/historiquevente", ventecontroller.venteListe);
 
 router.get("/commande", commandecontroller.commande);
 router.post("/commande", commandecontroller.commandePost);
