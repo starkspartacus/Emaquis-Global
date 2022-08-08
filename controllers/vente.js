@@ -1,7 +1,9 @@
 const { venteQueries } = require("../requests/venteQueries");
 const { produitQueries } = require("../requests/produitQueries");
+const { retourQueries } = require("../requests/retourQueries");
 const Produits = require("../models/produit.model");
 const Ventes = require("../models/vente.model");
+const Retours = require("../models/retourproduit.model");
 exports.vente = async (req, res) => {
     try {
         sess = req.session.user;
@@ -71,7 +73,7 @@ exports.ventePost = async (req, res) => {
                 );
                 Produits.updateOne(
                     { session: vente.travail_pour, _id: produit_id },
-                    { $inc: { quantite: -vente.quantite[index] } },
+                    { $inc: { quantite: - vente.quantite[index] } },
                     { new: true },
                     (err, data) => {
                         if (err) {
@@ -98,31 +100,64 @@ exports.ventePost = async (req, res) => {
     }
 };
 
+
 exports.editventePost = async (req, res) => {
     try {
-        const Editvalue = req.body;
+        const vente = req.body;
+        const Produit = await produitQueries.getProduit();
+        let rebour = 0;
+        let resultqte = [];
+        let prize = [];
+        let Retourproduit = {};
 
-        if (Editvalue !== null) {
-            console.log(Editvalue);
-            let idemsell = await Ventes.find({ _id: Editvalue.id });
-            console.log(idemsell);
-            let newqty = idemsell[0].quantite - Editvalue.quantite;
-            console.log("newqty:", newqty);
-
-            // let seledit = await Ventes.findByIdAndUpdate(
-            //     Editvalue.id,
-            //     { quantite: seledit,
-            //       produit : {
-
-            //       },
-            //     },
-            //     function (err) { }
-            // );
-
-            //   res.json({
-            //     etat: true,
-            //     data: Vente.result,
-            //   });
+        let lastprize;
+        if (vente !== null) {
+            let prod = Produit.result;
+            prod.forEach(async (el) => {
+                if (vente.travail_pour == el.session) {
+                    for (let i = 0; i < vente.produit.length; i++) {
+                        if (vente.produit[i] == el._id) {
+                            resultqte.push(el.quantite);
+                          
+                        }
+                    }
+                }
+                prize.push(el.prix_vente);
+            });
+            for (let i = 0; i < Math.min(vente.quantite.length, prize.length); i++) {
+                rebour += vente.quantite[i] * prize[i];
+            }
+          
+            let mory = {
+                produit: vente.produit,
+                quantite: vente.quantite,
+                employe: vente.employe,
+                travail_pour: vente.travail_pour,
+                remboursement: rebour,
+            };
+            
+            Retourproduit = await retourQueries.setRetour(mory);
+            vente.produit.forEach((produit_id, index) => {
+                console.log(
+                    produit_id,
+                    index,
+                    vente.quantite[index],
+                    vente.travail_pour
+                );
+                Produits.updateOne(
+                    { session: vente.travail_pour, _id: produit_id },
+                    { $inc: { quantite: + vente.quantite[index] } },
+                    { new: true },
+                    (err, data) => {
+                        if (err) {
+                            console.log("error update", err);
+                            return;
+                        }
+                        console.log("produit update => data", data);
+                       
+                    }
+                );
+            });
         }
     } catch (e) {
         res.json({
@@ -147,3 +182,21 @@ exports.venteListe = async (req, res) => {
         });
     }
 };
+
+
+exports.retourListe = async (req, res) => {
+    try {
+        const maquisID = req.body.id;
+        const maquiback = await Retours.find({ travail_pour: maquisID });
+        res.json({
+            etat: true,
+            historique_retour: maquiback,
+        });
+    } catch (e) {
+        res.json({
+            etat: false,
+            data: "Error",
+        });
+    }
+};
+

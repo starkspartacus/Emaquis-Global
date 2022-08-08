@@ -1,19 +1,19 @@
-const Vente = require("../models/vente.model");
+const Retour = require("../models/retourproduit.model");
 
-exports.venteQueries = class {
-    static setVente({ produit, quantite, employe, travail_pour, prix }) {
+exports.retourQueries = class {
+    static setRetour({ produit, quantite, employe, travail_pour, remboursement }) {
         return new Promise(async next => {
 
-            const vente =  new Vente({
+            const rembrousement =  new Retour({
                 produit,
                 quantite,
                 employe,
                 travail_pour,
-                prix,
+                remboursement,
 
             })
 
-            await vente.save().then(res => {
+            await rembrousement.save().then(res => {
                 next({
                     etat: true,
                     result: res
@@ -28,9 +28,9 @@ exports.venteQueries = class {
     }
 
 
-    static getVente() {
+    static getRetour() {
         return new Promise(async next => {
-            Vente.find().populate('produit').then(data => {
+            Retour.find().populate('produit').then(data => {
                 next({
                     etat: true,
                     result: data
@@ -46,11 +46,11 @@ exports.venteQueries = class {
 
 
 
-    static getVentesById(id) {
+    static getRetourById(id) {
 
         try {
             return new Promise(async next => {
-                Vente.findById({ _id: id }).then(data => {
+                Retour.findById({ _id: id }).then(data => {
                     next({
                         etat: true,
                         result: data
@@ -70,12 +70,12 @@ exports.venteQueries = class {
 
 
 
-    static deleteVente(data) {
+    static deleteRetour(data) {
 
         try {
             return new Promise(async next => {
 
-                Vente.findByIdAndDelete({ _id: data }).then(data => {
+                Retour.findByIdAndDelete({ _id: data }).then(data => {
                     next({
                         etat: true,
                         result: data
@@ -91,9 +91,9 @@ exports.venteQueries = class {
             console.log(error);
         }
     }
-    static blindVenteAndOffer(data) {
+    static blindRetourAndOffer(data) {
         return new Promise(async next => {
-            Vente.findOneAndUpdate({ _id: data.fournisseurId }, {
+            Retour.findOneAndUpdate({ _id: data.fournisseurId }, {
                 "$set": {
                     "offreappel": data.apelOffreId
                 }

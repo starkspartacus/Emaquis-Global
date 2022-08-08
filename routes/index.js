@@ -89,7 +89,8 @@ router.post("/listeproduit", listeproduitcontroller.produitPost);
 
 router.get("/vente", ventecontroller.vente);
 router.post("/vente", ventecontroller.ventePost);
-router.post("/editvente", ventecontroller.editventePost);
+router.post("/retournerproduit", ventecontroller.editventePost);
+router.get("/listeretour", ventecontroller.retourListe);
 router.post("/historiquevente", ventecontroller.venteListe);
 
 router.get("/commande", commandecontroller.commande);
@@ -116,6 +117,14 @@ router.get("/ajouterproduit", ajouterproduitcontroller.addproduit);
 router.post('/ajouterproduit', upload.single('image'), async (req, res) => {
 
 
+
+
+
+
+
+
+
+
   const file = req.file
   const bucketName = process.env.AWS_BUCKET_NAME
   const region = process.env.AWS_BUCKET_REGION
@@ -128,7 +137,7 @@ router.post('/ajouterproduit', upload.single('image'), async (req, res) => {
     secretAccessKey
   })
   
-  // uploads a file to s3
+  // uploads a file to AWS Cloud s3
   function uploadFile(file) {
    const fileStream = fs.createReadStream(file.path)
   
