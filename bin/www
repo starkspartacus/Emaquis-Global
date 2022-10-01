@@ -159,7 +159,7 @@ const SaveProduit = io.of('/ajouterproduit').use(Serveur.getSharedSession());
 SaveProduit.on("connection", (socket) => {
     socket.on("addproduit", async(data) => {
     console.log(data)
-
+    
     //   const Result = await produitQueries.setProduit(data);
     //   console.log(Result)
     //     if (Result.result !== null) {
@@ -171,6 +171,7 @@ SaveProduit.on("connection", (socket) => {
     //     }
     })
 })
+
 
 
 
