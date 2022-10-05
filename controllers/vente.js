@@ -47,6 +47,7 @@ exports.ventePost = async (req, res) => {
                     res.json({
                         etat:true,
                         data: Vente.result,
+                        message:"okoko"
                     })
                   }
                   if(up <0 ){

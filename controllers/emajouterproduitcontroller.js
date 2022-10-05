@@ -1,9 +1,9 @@
 const {categorieQueries} = require("../requests/categorieQueries");
 exports.addproduit = async(req,res)=>{
-    if (req.session.user) {
+    // if (req.session.user) {
     try {
         let categorie= [];
-      let sess= req.session.user;
+    //   let sess= req.session.user;
         const Categorie = await categorieQueries.getCategorie();
 
         if (Categorie.result !== null) { 
@@ -15,25 +15,25 @@ exports.addproduit = async(req,res)=>{
                 }
             });
          
-            res.render("ajouterproduit", {categorie ,sess})
+            res.render("emajouterproduit", {categorie ,sess})
         }
     } catch (error) {
         res.redirect(error)
     }
-}else{
-    res.redirect("/")
-}
+// }else{
+//     res.redirect("/")
+// }
 }
 
 exports.addproduitPost = async(req,res)=>{
-    if (req.session.user) {
+    // if (req.session.user) {
     try {
-        res.render("ajouterproduit")
+        res.render("emajouterproduit")
 
     } catch (error) {
         res.redirect(error)
     }
-}else{
-    res.redirect("/")
-}
+// }else{
+//     res.redirect("/")
+// }
 }

@@ -4,9 +4,12 @@ exports.emdashboard = async (req, res) => {
   
     try {
        
-        // const Vente = await produitQueries.getProduit();
-     
-            res.render('emdashboard')
+        const Vente = await venteQueries.getVentes({status_commande:"En attente"});
+        //    if( Vente.result !== null){
+        //     console.log("try",Vente.result)
+        //    }
+        //    res.render('emdashboard')
+        res.json(Vente.result)
         
 
     } catch (e) {
