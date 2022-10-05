@@ -61,7 +61,10 @@ exports.ventePost = async (req, res) => {
                 quantite: vente.quantite,
                 employe: vente.employe,
                 travail_pour: vente.travail_pour,
+                status_commande: "En attente",
                 prix: sum,
+                somme_encaisse: vente.somme_encaisse,
+                monnaie: vente.somme_encaisse-sum,
             };
             Vente = await venteQueries.setVente(mory);
             vente.produit.forEach((produit_id, index) => {

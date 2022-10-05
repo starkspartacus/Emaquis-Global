@@ -7,11 +7,14 @@ const data_tablecontroller = require("../controllers/data_table");
 const inscriptioncontroller = require("../controllers/inscription");
 const landingcontroller = require("../controllers/landing");
 const connexioncontroller = require("../controllers/connexion");
+const emconnexioncontroller = require("../controllers/emconnexion");
 const dashboardcontroller = require("../controllers/dashboard");
+const emdashboardcontroller = require("../controllers/emdashboard");
 const deconnexioncontroller = require("../controllers/deconnexion");
 const ajoutercategoriecontroller = require("../controllers/ajoutercategorie");
 const listcategoriecontroller = require("../controllers/listcategorie");
 const listefournisseurcontroller = require("../controllers/listefournisseur");
+const emajouterproduitcontroller = require("../controllers/emajouterproduitcontroller");
 const ajouterproduitcontroller = require("../controllers/ajouterproduitcontroller");
 const listeproduitcontroller = require("../controllers/listeproduit");
 const ventecontroller = require("../controllers/vente");
@@ -73,8 +76,14 @@ router.post("/inscription", inscriptioncontroller.inscriptionPost);
 router.get("/connexion", connexioncontroller.connexion);
 router.post("/connexion", connexioncontroller.connexionPost);
 
+router.get("/emconnexion", emconnexioncontroller.emconnexion);
+router.post("/emconnexion", emconnexioncontroller.emconnexionPost);
+
 router.get("/dashboard", dashboardcontroller.dashboard);
 router.post("/dashboard", dashboardcontroller.dashboardPost);
+
+router.get("/emdashboard", emdashboardcontroller.emdashboard);
+router.post("/emdashboard", emdashboardcontroller.emdashboardPost);
 
 router.get("/deconnexion", deconnexioncontroller.deconnexion);
 router.post("/deconnexion", deconnexioncontroller.deconnexion);
@@ -112,6 +121,7 @@ router.post("/employelogin", employelogincontroller.employeloginPost);
 
 
 router.get("/ajouterproduit", ajouterproduitcontroller.addproduit);
+router.get("/emajouterproduit", emajouterproduitcontroller.addproduit);
 // router.post("/ajouterproduit", ajouterproduitcontroller.addproduitPost);
 
 router.post('/ajouterproduit', upload.single('image'), async (req, res) => {
@@ -167,6 +177,59 @@ router.post('/ajouterproduit', upload.single('image'), async (req, res) => {
     console.log(Result)
     //  res.send(200)
     ;
+     res.redirect('/listeproduit');
+     
+   }
+  
+  const description = req.body.description
+
+})
+
+router.post('/emajouterproduit', upload.single('image'), async (req, res) => {
+
+
+  const file = req.file
+  const bucketName = process.env.AWS_BUCKET_NAME
+  const region = process.env.AWS_BUCKET_REGION
+  const accessKeyId = process.env.AWS_ACCESS_KEY
+  const secretAccessKey = process.env.AWS_SECRET_KEY
+  
+  const s3 = new S3({
+    region,
+    accessKeyId,
+    secretAccessKey
+  })
+  
+  // uploads a file to s3
+  function uploadFile(file) {
+   const fileStream = fs.createReadStream(file.path)
+  
+    const uploadParams = {
+      Bucket: bucketName,
+      Body: fileStream,
+      Key: file.originalname,
+      acl:"public-read"
+    }
+    return s3.upload(uploadParams).promise()
+  }
+  
+  const result = await uploadFile(file)
+   if(result){
+    const data ={
+     nom_produit:req.body.nom_produit,
+     categorie:req.body.categorie,
+     prix_vente:parseInt(req.body.prix_vente),
+     prix_achat:parseInt(req.body.prix_achat),
+     quantite:parseInt(req.body.quantite),
+     image: result.Location,
+     session:req.body.session,
+     
+    }
+     console.log(data)
+     console.log("okokokok")
+    const Result = await produitQueries.setProduit(data);
+    console.log(Result)
+     res.send(200);
      res.redirect('/listeproduit');
      
    }
