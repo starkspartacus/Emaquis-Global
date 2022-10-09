@@ -23,9 +23,13 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Open Sans", sans-serif;
   color: #FF9C2C;
-  font-weight: 300;
+  font-weight: bold;
+
 }
 
+.EmaquisBlue {
+  color: #00FEF6 ;
+}
 
 .img_note {
   width: 50px;
