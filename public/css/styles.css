@@ -2238,9 +2238,9 @@ hr {
 }
 
 .singup-container {
-  position:relative;
-  left: 50%;
-  overflow: scroll;
+  
+  left: 50px;
+  overflow: auto;
 }
 
 .body-wallpper{
@@ -2250,8 +2250,8 @@ hr {
   background-size: cover;
   overflow: hidden;
   position: sticky;
-  height: auto;
-  width: 100vw;
+  height: 100vh;
+  width: auto;
 }
 
 /* Fin inscription page*/
@@ -2282,7 +2282,7 @@ hr {
 }
 
 .login-container {
-  position:relative;
+  
   left: 40%;
   top: 10vh;
   
