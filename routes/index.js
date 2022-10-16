@@ -24,30 +24,25 @@ const usercategoriecontroller = require("../controllers/categorieparsuser_contro
 const allemployecontroller = require("../controllers/allemploye");
 const barmanparusercontroller = require("../controllers/barmanparuser");
 const employelogincontroller = require("../controllers/employelogin");
-const multer = require('multer')
-const { produitQueries } = require('../requests/produitQueries');
-
-
-
+const multer = require("multer");
+const { produitQueries } = require("../requests/produitQueries");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/')
+    cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
-    console.log(file)
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix)
-  }
-})
+    console.log(file);
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, file.fieldname + "-" + uniqueSuffix);
+  },
+});
 
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage });
 
-require('dotenv').config()
-const fs = require('fs')
-const S3 = require('aws-sdk/clients/s3')
-
-
+require("dotenv").config();
+const fs = require("fs");
+const S3 = require("aws-sdk/clients/s3");
 
 var router = express.Router();
 
@@ -98,6 +93,8 @@ router.post("/listeproduit", listeproduitcontroller.produitPost);
 
 router.get("/vente", ventecontroller.vente);
 router.post("/vente", ventecontroller.ventePost);
+router.post("/vente/status/:venteId", ventecontroller.editStatusVente);
+
 router.post("/retournerproduit", ventecontroller.editventePost);
 router.get("/listeretour", ventecontroller.retourListe);
 router.post("/historiquevente", ventecontroller.venteListe);
@@ -105,8 +102,14 @@ router.post("/historiquevente", ventecontroller.venteListe);
 router.get("/commande", commandecontroller.commande);
 router.post("/commande", commandecontroller.commandePost);
 
-router.get("/produit_par_categorie", produitparcategorie_controller.categorieProduct);
-router.post("/produit_par_categorie", produitparcategorie_controller.categorieProductPost);
+router.get(
+  "/produit_par_categorie",
+  produitparcategorie_controller.categorieProduct
+);
+router.post(
+  "/produit_par_categorie",
+  produitparcategorie_controller.categorieProductPost
+);
 
 router.post(
   "/categorie_par_client",
@@ -116,127 +119,105 @@ router.post(
 router.get("/allemploye", allemployecontroller.allemploye);
 router.get("/barmanparuser", barmanparusercontroller.barmanparuser);
 
-
 router.post("/employelogin", employelogincontroller.employeloginPost);
-
 
 router.get("/ajouterproduit", ajouterproduitcontroller.addproduit);
 router.get("/emajouterproduit", emajouterproduitcontroller.addproduit);
 // router.post("/ajouterproduit", ajouterproduitcontroller.addproduitPost);
 
-router.post('/ajouterproduit', upload.single('image'), async (req, res) => {
+router.post("/ajouterproduit", upload.single("image"), async (req, res) => {
+  const file = req.file;
+  const bucketName = process.env.AWS_BUCKET_NAME;
+  const region = process.env.AWS_BUCKET_REGION;
+  const accessKeyId = process.env.AWS_ACCESS_KEY;
+  const secretAccessKey = process.env.AWS_SECRET_KEY;
 
-
-
-
-
-
-
-
-
-
-  const file = req.file
-  const bucketName = process.env.AWS_BUCKET_NAME
-  const region = process.env.AWS_BUCKET_REGION
-  const accessKeyId = process.env.AWS_ACCESS_KEY
-  const secretAccessKey = process.env.AWS_SECRET_KEY
-  
   const s3 = new S3({
     region,
     accessKeyId,
-    secretAccessKey
-  })
-  
+    secretAccessKey,
+  });
+
   // uploads a file to AWS Cloud s3
   function uploadFile(file) {
-   const fileStream = fs.createReadStream(file.path)
-  
+    const fileStream = fs.createReadStream(file.path);
+
     const uploadParams = {
       Bucket: bucketName,
       Body: fileStream,
       Key: file.originalname,
-      acl:"public-read"
-    }
-    return s3.upload(uploadParams).promise()
+      acl: "public-read",
+    };
+    return s3.upload(uploadParams).promise();
   }
-  
-  const result = await uploadFile(file)
-   if(result){
-    const data ={
-     nom_produit:req.body.nom_produit,
-     categorie:req.body.categorie,
-     prix_vente:parseInt(req.body.prix_vente),
-     prix_achat:parseInt(req.body.prix_achat),
-     quantite:parseInt(req.body.quantite),
-     image: result.Location,
-     session:req.body.session,
-     
-    }
-     console.log(data)
+
+  const result = await uploadFile(file);
+  if (result) {
+    const data = {
+      nom_produit: req.body.nom_produit,
+      categorie: req.body.categorie,
+      prix_vente: parseInt(req.body.prix_vente),
+      prix_achat: parseInt(req.body.prix_achat),
+      quantite: parseInt(req.body.quantite),
+      image: result.Location,
+      session: req.body.session,
+    };
+    console.log(data);
     const Result = await produitQueries.setProduit(data);
-    console.log(Result)
+    console.log(Result);
     //  res.send(200)
-    ;
-     res.redirect('/listeproduit');
-     
-   }
-  
-  const description = req.body.description
+    res.redirect("/listeproduit");
+  }
 
-})
+  const description = req.body.description;
+});
 
-router.post('/emajouterproduit', upload.single('image'), async (req, res) => {
+router.post("/emajouterproduit", upload.single("image"), async (req, res) => {
+  const file = req.file;
+  const bucketName = process.env.AWS_BUCKET_NAME;
+  const region = process.env.AWS_BUCKET_REGION;
+  const accessKeyId = process.env.AWS_ACCESS_KEY;
+  const secretAccessKey = process.env.AWS_SECRET_KEY;
 
-
-  const file = req.file
-  const bucketName = process.env.AWS_BUCKET_NAME
-  const region = process.env.AWS_BUCKET_REGION
-  const accessKeyId = process.env.AWS_ACCESS_KEY
-  const secretAccessKey = process.env.AWS_SECRET_KEY
-  
   const s3 = new S3({
     region,
     accessKeyId,
-    secretAccessKey
-  })
-  
+    secretAccessKey,
+  });
+
   // uploads a file to s3
   function uploadFile(file) {
-   const fileStream = fs.createReadStream(file.path)
-  
+    const fileStream = fs.createReadStream(file.path);
+
     const uploadParams = {
       Bucket: bucketName,
       Body: fileStream,
       Key: file.originalname,
-      acl:"public-read"
-    }
-    return s3.upload(uploadParams).promise()
+      acl: "public-read",
+    };
+    return s3.upload(uploadParams).promise();
   }
-  
-  const result = await uploadFile(file)
-   if(result){
-    const data ={
-     nom_produit:req.body.nom_produit,
-     categorie:req.body.categorie,
-     prix_vente:parseInt(req.body.prix_vente),
-     prix_achat:parseInt(req.body.prix_achat),
-     quantite:parseInt(req.body.quantite),
-     image: result.Location,
-     session:req.body.session,
-     
-    }
-     console.log(data)
-     console.log("okokokok")
+
+  const result = await uploadFile(file);
+  if (result) {
+    const data = {
+      nom_produit: req.body.nom_produit,
+      categorie: req.body.categorie,
+      prix_vente: parseInt(req.body.prix_vente),
+      prix_achat: parseInt(req.body.prix_achat),
+      quantite: parseInt(req.body.quantite),
+      image: result.Location,
+      session: req.body.session,
+    };
+    console.log(data);
+    console.log("okokokok");
     const Result = await produitQueries.setProduit(data);
-    console.log(Result)
-     res.send(200);
-     res.redirect('/listeproduit');
-     
-   }
-  
-  const description = req.body.description
+    console.log(Result);
+    res.send(200);
+    res.redirect("/listeproduit");
+  }
 
-})
-
+  const description = req.body.description;
+});
 
 module.exports = router;
