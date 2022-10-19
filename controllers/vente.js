@@ -6,27 +6,13 @@ const Ventes = require("../models/vente.model");
 const Retours = require("../models/retourproduit.model");
 exports.vente = async (req, res) => {
   try {
-    sess = req.session.user;
+   
+    res.render("vente")
 
-    if (Vente.result !== null) {
-      // la variable vente n'est pas declarer
-      res.json({
-        etat: true,
-        data: Vente.result,
-      });
-    } else {
-      res.json({
-        etat: false,
-        data: "erreur",
-      });
-    }
-  } catch (e) {
-    res.json({
-      etat: false,
-      data: "Error",
-    });
-  }
-};
+} catch (error) {
+    res.redirect(error)
+}
+}
 
 exports.ventePost = async (req, res) => {
   try {

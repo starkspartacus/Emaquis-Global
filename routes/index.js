@@ -24,6 +24,7 @@ const usercategoriecontroller = require("../controllers/categorieparsuser_contro
 const allemployecontroller = require("../controllers/allemploye");
 const barmanparusercontroller = require("../controllers/barmanparuser");
 const employelogincontroller = require("../controllers/employelogin");
+const retourcontroller = require("../controllers/retourproduit");
 const multer = require("multer");
 const { produitQueries } = require("../requests/produitQueries");
 
@@ -96,6 +97,7 @@ router.post("/vente", ventecontroller.ventePost);
 router.post("/vente/status/:venteId", ventecontroller.editStatusVente);
 
 router.post("/retournerproduit", ventecontroller.editventePost);
+router.get("/retournerproduit", retourcontroller.addback);
 router.get("/listeretour", ventecontroller.retourListe);
 router.post("/historiquevente", ventecontroller.venteListe);
 

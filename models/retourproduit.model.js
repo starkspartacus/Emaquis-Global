@@ -3,11 +3,12 @@ const Schema = mongoose.Schema;
 
 const RetourSchema = new Schema({
 
-    // produit:{ type:Schema.Types.ObjectId, ref: 'produit', required:true },
-    produit: {
-        type: Array,
-        required: true
-    },
+    produit:[{
+        type:Schema.Types.ObjectId,
+         ref: 'produit', 
+         required:true 
+    }],
+   
     remboursement: {
         type: Number,
         required: true,
