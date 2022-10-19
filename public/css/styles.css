@@ -23,9 +23,13 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Open Sans", sans-serif;
   color: #FF9C2C;
-  font-weight: 300;
+  font-weight: bold;
+
 }
 
+.EmaquisBlue {
+  color: #00FEF6 ;
+}
 
 .img_note {
   width: 50px;
@@ -181,7 +185,7 @@ a:hover {
 }
 
 .section {
-  padding: 100px 0;
+  
 }
 
 .section-title {
@@ -2227,7 +2231,35 @@ hr {
 
 /*Fin Landing page**/
 
+/* inscription page**/
+.bg-singup{
+  background-color: rgba(250, 243, 243, 0.884);
+  box-shadow: -33px 9px 7px -6px rgba(8,5,5,0.82);
+}
+
+.singup-container {
+  
+  left: 50px;
+  overflow: auto;
+}
+
+.body-wallpper{
+  background-image: url('../img/inscrip.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  position: sticky;
+  height: 100vh;
+  width: auto;
+}
+
+/* Fin inscription page*/
+
+
 /* connexion page**/
+
+
 .logo_connexion {
   
   width: 200px;
@@ -2239,6 +2271,8 @@ hr {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
+  position: relative;
 }
 .bg-login{
   
@@ -2248,8 +2282,9 @@ hr {
 }
 
 .login-container {
-  position:relative;
-  left: 50%;
+  
+  left: 40%;
+  top: 10vh;
   
 }
 
