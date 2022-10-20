@@ -317,6 +317,8 @@
           produit: $('select[name="produit"]').val(),
           quantite: $('input[name="quantite"]').val()?.split(',').map(Number),
           somme_encaisse: Number($('input[name="somme_encaisse"]').val()),
+          employe: '62b72928cfe35d8050b7a6b0',
+          travail_pour: '62b444adad125d386cd0e17d',
         };
 
         if (data.produit.filter((e) => e).length === 0) {
