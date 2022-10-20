@@ -1,23 +1,25 @@
-const { venteQueries } = require("../requests/venteQueries");
-const { produitQueries } = require("../requests/produitQueries");
-const { retourQueries } = require("../requests/retourQueries");
-const Produits = require("../models/produit.model");
-const Ventes = require("../models/vente.model");
-const Retours = require("../models/retourproduit.model");
+const { venteQueries } = require('../requests/venteQueries');
+const { produitQueries } = require('../requests/produitQueries');
+const { retourQueries } = require('../requests/retourQueries');
+const Produits = require('../models/produit.model');
+const Ventes = require('../models/vente.model');
+const Retours = require('../models/retourproduit.model');
 exports.vente = async (req, res) => {
   try {
-   
-    res.render("vente")
-
-} catch (error) {
-    res.redirect(error)
-}
-}
+    const productRes = await produitQueries.getProduit();
+    res.render('vente', {
+      produits: productRes.result || [],
+    });
+  } catch (error) {
+    res.redirect(error);
+  }
+};
 
 exports.ventePost = async (req, res) => {
   try {
     sess = req.session.user;
     const vente = req.body;
+
     let Vente = {};
     const Produit = await produitQueries.getProduit();
     let rest;
@@ -47,7 +49,7 @@ exports.ventePost = async (req, res) => {
         quantite: vente.quantite,
         employe: vente.employe,
         travail_pour: vente.travail_pour,
-        status_commande: "En attente",
+        status_commande: 'En attente',
         prix: sum,
         somme_encaisse: vente.somme_encaisse,
         monnaie: vente.somme_encaisse - sum,
@@ -61,7 +63,7 @@ exports.ventePost = async (req, res) => {
           { new: true },
           (err, data) => {
             if (err) {
-              console.log("error update", err);
+              console.log('error update', err);
               return;
             }
           }
@@ -73,17 +75,17 @@ exports.ventePost = async (req, res) => {
         data: vente,
       });
     } else {
-      console.log("iiiiicccciiiiii");
+      console.log('iiiiicccciiiiii');
       res.json({
         etat: false,
-        data: "erreur",
+        data: 'erreur',
       });
     }
   } catch (e) {
-    console.log("👉 👉 👉  ~ file: vente.js ~ line 105 ~ e", e);
+    console.log('👉 👉 👉  ~ file: vente.js ~ line 105 ~ e', e);
     res.json({
       etat: false,
-      data: "Error",
+      data: 'Error',
     });
   }
 };
@@ -136,10 +138,10 @@ exports.editventePost = async (req, res) => {
           { new: true },
           (err, data) => {
             if (err) {
-              console.log("error update", err);
+              console.log('error update', err);
               return;
             }
-            console.log("produit update edit => data", data);
+            console.log('produit update edit => data', data);
           }
         );
       });
@@ -147,7 +149,7 @@ exports.editventePost = async (req, res) => {
   } catch (e) {
     res.json({
       etat: false,
-      data: "Error",
+      data: 'Error',
     });
   }
 };
@@ -157,16 +159,16 @@ exports.editStatusVente = async (req, res) => {
 
   const vente = await Ventes.findOne({
     _id: vente_id,
-    status_commande: "En attente",
+    status_commande: 'En attente',
   });
 
   if (vente) {
-    Ventes.updateOne({ _id: vente_id }, { status_commande: "Validée" })
+    Ventes.updateOne({ _id: vente_id }, { status_commande: 'Validée' })
       .then((r) => {
         req.session.newSave = true;
-        res.redirect("/emdashboard");
+        res.redirect('/emdashboard');
       })
-      .catch((err) => res.redirect("/emdashboard"));
+      .catch((err) => res.redirect('/emdashboard'));
   }
 };
 
@@ -181,7 +183,7 @@ exports.venteListe = async (req, res) => {
   } catch (e) {
     res.json({
       etat: false,
-      data: "Error",
+      data: 'Error',
     });
   }
 };
@@ -197,7 +199,7 @@ exports.retourListe = async (req, res) => {
   } catch (e) {
     res.json({
       etat: false,
-      data: "Error",
+      data: 'Error',
     });
   }
 };
