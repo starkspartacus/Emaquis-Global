@@ -9,10 +9,15 @@ exports.emdashboard = async (req, res) => {
 
     req.session.newSave = false;
 
-    res.render("emdashboard", {
-      ventes: Vente.result,
-      newSave: newSave,
-    });
+    if (req.session.user) {
+      res.render("emdashboard", {
+        ventes: Vente.result,
+        newSave: newSave,
+        user: req.session.user,
+      });
+    } else {
+      res.redirect("/emconnexion");
+    }
   } catch (e) {
     console.log("err", e);
   }

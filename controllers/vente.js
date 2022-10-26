@@ -54,6 +54,7 @@ exports.ventePost = async (req, res) => {
         somme_encaisse: vente.somme_encaisse,
         monnaie: vente.somme_encaisse - sum,
       };
+      console.log('👉 👉 👉  ~ file: vente.js ~ line 58 ~ mory', mory);
       // il fait pas l setvente or il fait update  de produit
       Vente = await venteQueries.setVente(mory);
       vente.produit.forEach((produit_id, index) => {
@@ -62,6 +63,7 @@ exports.ventePost = async (req, res) => {
           { $inc: { quantite: -vente.quantite[index] } },
           { new: true },
           (err, data) => {
+            console.log('👉 👉 👉  ~ file: vente.js ~ line 65 ~ data', data);
             if (err) {
               console.log('error update', err);
               return;
