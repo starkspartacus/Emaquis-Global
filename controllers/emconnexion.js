@@ -19,9 +19,17 @@ exports.emconnexionPost = async (req, res) => {
     const body = req.body;
 
     const data = await employeQueries.getEmployeByEmail(body.email);
+    console.log(await employeQueries.getAllEmploye(body.email));
+    const errorData = {
+      error: "Email ou mot de passe incorrect",
+      email: body.email,
+    };
 
-    if (data.result) {
-      const isPasswordCorrect = true;
+    if (data.result?.role === "Barman") {
+      const isPasswordCorrect = bcrypt.compareSync(
+        body.password,
+        data.result.password
+      );
 
       if (isPasswordCorrect) {
         req.session.user = data.result;
@@ -31,14 +39,10 @@ exports.emconnexionPost = async (req, res) => {
           success: true,
         });
       } else {
-        res.render("emconnexion", {
-          error: "Email ou mot de passe incorrect",
-        });
+        res.render("emconnexion", errorData);
       }
     } else {
-      res.render("emconnexion", {
-        error: "Email ou mot de passe incorrect",
-      });
+      res.render("emconnexion", errorData);
     }
   } catch (e) {
     console.log("err", e);

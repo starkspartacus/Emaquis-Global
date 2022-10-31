@@ -53,7 +53,7 @@
           <div class="row">
             <div class="col-12">
               <div class="white_card card_height_100 mb_30">
-                <form action="" method="">
+                <form action="/retournerproduit" method="post">
                   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                   <div class="row targetDiv" id="div0">
                     <div class="col-md-12">
@@ -63,12 +63,16 @@
                             <select
                               class="nice_Select2 nice_Select_line wide"
                               style="display: none"
-                              name="categorie"
+                              name="produit"
                               required
                             >
                               <option value="">Selectionner le produit</option>
-                              <option value="">1</option>
-                              <option value="">2</option>
+                              <% for (var i = 0; i < locals.products?.length;
+                              i++) { %>
+                              <option value="<%= products[i].id %>">
+                                <%= products[i].nom_produit %>
+                              </option>
+                              <% } %>
                             </select>
                           </div>
                           <div class="col-lg-6">
@@ -94,6 +98,7 @@
                           </div>
                         </div>
                       </div>
+
                       <div class="col-lg-6">
                         <div class="common_input mb_15">
                           <input
@@ -101,15 +106,15 @@
                             placeholder="nom du client"
                             name="nom_client"
                           />
-                        
                         </div>
                       </div>
-                      <div style="margin-bottom: 10px;margin-left: 15px;">
-                        <button type="submit" class="btn btn-info">valider</button>
+
+                      <div style="margin-bottom: 10px; margin-left: 15px">
+                        <button type="submit" class="btn btn-info">
+                          valider
+                        </button>
                       </div>
-                     
                     </div>
-                  
                   </div>
                 </form>
               </div>
@@ -292,32 +297,6 @@
     <script>
       const socket = io(window.location.origin + window.location.pathname);
       console.log(window.location.origin + window.location.pathname);
-
-      $("form").on("submit", (e) => {
-        e.preventDefault();
-        const data = {
-          nom: $('input[name="nom"]').val(),
-          categorie_pour: $('input[name="session"]').val(),
-        };
-        console.log(data);
-        socket.emit("setcategorie", data);
-        socket.on("saved", () => {
-          document.getElementById("alert-success").style.display = "block";
-          $("input").val("");
-          setTimeout(
-            () =>
-              (document.getElementById("alert-success").style.display = "none"),
-            1000
-          );
-        });
-        socket.on("bad", () => {
-          setTimeout(
-            () =>
-              (document.getElementById("alert-danger").style.display = "block"),
-            1000
-          );
-        });
-      });
 
       $(function () {
         $(document)

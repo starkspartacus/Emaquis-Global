@@ -9,7 +9,7 @@ exports.emdashboard = async (req, res) => {
 
     req.session.newSave = false;
 
-    if (req.session.user) {
+    if (req.session.user.role === "Barman") {
       res.render("emdashboard", {
         ventes: Vente.result,
         newSave: newSave,
