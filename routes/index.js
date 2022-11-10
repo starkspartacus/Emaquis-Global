@@ -25,6 +25,7 @@ const allemployecontroller = require("../controllers/allemploye");
 const barmanparusercontroller = require("../controllers/barmanparuser");
 const employelogincontroller = require("../controllers/employelogin");
 const retourcontroller = require("../controllers/retourproduit");
+const contactcontroller = require("../controllers/contact")
 const multer = require("multer");
 const { produitQueries } = require("../requests/produitQueries");
 
@@ -103,6 +104,9 @@ router.post("/historiquevente", ventecontroller.venteListe);
 
 router.get("/commande", commandecontroller.commande);
 router.post("/commande", commandecontroller.commandePost);
+
+router.get("/contact",contactcontroller.contact)
+router.post("/contact",contactcontroller.contactPost)
 
 router.get(
   "/produit_par_categorie",

@@ -1,5 +1,5 @@
 const { produitQueries } = require("../requests/produitQueries");
-
+const { retourQueries } = require("../requests/retourQueries")
 exports.addback = async (req, res) => {
   try {
     const { result: products } = await produitQueries.getProduit();
@@ -21,3 +21,18 @@ exports.addbackPost = async (req, res) => {
     res.redirect(error);
   }
 };
+
+exports.listeRetour = async ( req,res)=>{
+
+  try{
+  const { Result: retour } = await retourQueries.getRetour();
+    console.log(Result)
+    // res.render("listeretournerproduit", {
+    //   user: req.session.user,
+    //   Result,
+    // });
+  
+  }catch (error){
+
+  }
+}
