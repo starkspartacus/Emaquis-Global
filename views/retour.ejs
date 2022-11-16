@@ -54,7 +54,6 @@
             <div class="col-12">
               <div class="white_card card_height_100 mb_30">
                 <form action="/retournerproduit" method="post">
-                  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                   <div class="row targetDiv" id="div0">
                     <div class="col-md-12">
                       <div id="group1" class="white_card_body fvrduplicate">
@@ -98,15 +97,27 @@
                           </div>
                         </div>
                       </div>
-
-                      <div class="col-lg-6">
-                        <div class="common_input mb_15">
-                          <input
-                            type="text"
-                            placeholder="nom du client"
-                            name="nom_client"
-                          />
+                      <div class="col-lg-12 d-flex">
+                        <div class="col-lg-6">
+                          <div class="common_input mb_15">
+                            <input
+                              type="text"
+                              placeholder="nom du client"
+                              name="client_name"
+                            />
+                          </div>
                         </div>
+                        <% if(locals.setting.product_return_type === "tip") {%>
+                        <div class="col-lg-6">
+                          <div class="common_input mb_15">
+                            <input
+                              type="date"
+                              placeholder="nom du client"
+                              name="dateline"
+                            />
+                          </div>
+                        </div>
+                        <% } %>
                       </div>
 
                       <div style="margin-bottom: 10px; margin-left: 15px">
@@ -294,9 +305,9 @@
     <%- include('partial/script.ejs') %>
     <script src="../jquery-3.4.1.min.js"></script>
     <script src="/socket.io/socket.io.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
       const socket = io(window.location.origin + window.location.pathname);
-      console.log(window.location.origin + window.location.pathname);
 
       $(function () {
         $(document)

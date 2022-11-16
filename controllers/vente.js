@@ -106,47 +106,47 @@ exports.editventePost = async (req, res) => {
     //  2- remboursement partiel(on rembourse partiellement)(on deduire la somme dans la caisse)
     //  3- remboursement par avoir(ces boisons devienne directement des pourboires)
 
-    let lastprize;
-    if (vente !== null) {
-      let prod = Produit.result;
-      prod.forEach(async (el) => {
-        if (vente.travail_pour == el.session) {
-          for (let i = 0; i < vente.produit.length; i++) {
-            if (vente.produit[i] == el._id) {
-              resultqte.push(el.quantite);
-            }
-          }
-        }
-        prize.push(el.prix_vente);
-      });
-      for (let i = 0; i < Math.min(vente.quantite.length, prize.length); i++) {
-        rebour += vente.quantite[i] * prize[i];
-      }
+    // let lastprize;
+    // if (vente !== null) {
+    //   let prod = Produit.result;
+    //   prod.forEach(async (el) => {
+    //     if (vente.travail_pour == el.session) {
+    //       for (let i = 0; i < vente.produit.length; i++) {
+    //         if (vente.produit[i] == el._id) {
+    //           resultqte.push(el.quantite);
+    //         }
+    //       }
+    //     }
+    //     prize.push(el.prix_vente);
+    //   });
+    //   for (let i = 0; i < Math.min(vente.quantite.length, prize.length); i++) {
+    //     rebour += vente.quantite[i] * prize[i];
+    //   }
 
-      let mory = {
-        produit: vente.produit,
-        quantite: vente.quantite,
-        employe: vente.employe,
-        travail_pour: vente.travail_pour,
-        remboursement: rebour,
-      };
+    //   let mory = {
+    //     produit: vente.produit,
+    //     quantite: vente.quantite,
+    //     employe: vente.employe,
+    //     travail_pour: vente.travail_pour,
+    //     remboursement: rebour,
+    //   };
 
-      Retourproduit = await retourQueries.setRetour(mory);
-      vente.produit.forEach((produit_id, index) => {
-        Produits.updateOne(
-          { session: vente.travail_pour, _id: produit_id },
-          { $inc: { quantite: +vente.quantite[index] } },
-          { new: true },
-          (err, data) => {
-            if (err) {
-              console.log("error update", err);
-              return;
-            }
-            console.log("produit update edit => data", data);
-          }
-        );
-      });
-    }
+    //   Retourproduit = await retourQueries.setRetour(mory);
+    //   vente.produit.forEach((produit_id, index) => {
+    //     Produits.updateOne(
+    //       { session: vente.travail_pour, _id: produit_id },
+    //       { $inc: { quantite: +vente.quantite[index] } },
+    //       { new: true },
+    //       (err, data) => {
+    //         if (err) {
+    //           console.log("error update", err);
+    //           return;
+    //         }
+    //         console.log("produit update edit => data", data);
+    //       }
+    //     );
+    //   });
+    // }
   } catch (e) {
     res.json({
       etat: false,

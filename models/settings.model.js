@@ -1,9 +1,12 @@
-const { Schema } = require("mongoose");
+const mongoose = require("mongoose");
 
-const SettingModel = new Schema({
+const SettingModel = new mongoose.Schema({
   product_return_type: {
     type: String,
     default: "full", //full | halt | tip
+  },
+  travail_pour: {
+    type: String,
   },
 });
 

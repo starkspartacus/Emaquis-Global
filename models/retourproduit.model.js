@@ -28,6 +28,10 @@ const RetourSchema = new Schema(
       type: String,
       default: "full", //full | halt | tip
     },
+    dateline: {
+      type: Date,
+      default: new Date(),
+    },
   },
   { timestamps: true }
 );
