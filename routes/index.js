@@ -25,7 +25,14 @@ const allemployecontroller = require("../controllers/allemploye");
 const barmanparusercontroller = require("../controllers/barmanparuser");
 const employelogincontroller = require("../controllers/employelogin");
 const retourcontroller = require("../controllers/retourproduit");
+
 const contactcontroller = require("../controllers/contact");
+
+
+const faqcontroller = require("../controllers/faqcontroller");
+const copyrightcontroller = require("../controllers/copyrightcontroller");
+const profilecontroller = require("../controllers/profilecontroller")
+
 const multer = require("multer");
 const { produitQueries } = require("../requests/produitQueries");
 
@@ -126,6 +133,10 @@ router.get("/allemploye", allemployecontroller.allemploye);
 router.get("/barmanparuser", barmanparusercontroller.barmanparuser);
 
 router.post("/employelogin", employelogincontroller.employeloginPost);
+
+router.get("/faq",faqcontroller.faq)
+router.get("/copyright",copyrightcontroller.copyright)
+router.get("/profile",profilecontroller.profile)
 
 router.get("/ajouterproduit", ajouterproduitcontroller.addproduit);
 router.get("/emajouterproduit", emajouterproduitcontroller.addproduit);
