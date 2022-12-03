@@ -1,6 +1,6 @@
-const Employe = require("../models/employe.model");
-const CryptoJS = require("crypto-js");
-var bcrypt = require("bcryptjs");
+const Employe = require('../models/employe.model');
+const CryptoJS = require('crypto-js');
+var bcrypt = require('bcryptjs');
 
 exports.employeQueries = class {
   static setEmploye(data) {
@@ -12,12 +12,12 @@ exports.employeQueries = class {
         prenom: data.prenom,
         role: data.role,
         travail_pour: data.chef_etablissement,
-        statut: "Actif",
+        statut: 'Actif',
         email: data.email,
         numero: data.numero,
         adresse: data.adresse,
         password: encryptedPassword,
-        isAdmin: "false",
+        isAdmin: 'false',
       });
       await employe
         .save()
@@ -37,10 +37,30 @@ exports.employeQueries = class {
   }
 
   static getEmployeByEmail(email) {
-    console.log("👉 👉 👉  ~ file: EmployeQueries.js ~ line 40 ~ email", email);
+    console.log('👉 👉 👉  ~ file: EmployeQueries.js ~ line 40 ~ email', email);
     return new Promise(async (next) => {
       await Employe.findOne({
         email: email,
+      })
+        .then((data) => {
+          next({
+            etat: true,
+            result: data,
+          });
+        })
+        .catch((err) => {
+          next({
+            etat: false,
+            err: err,
+          });
+        });
+    });
+  }
+
+  static getEmployeById(id) {
+    return new Promise(async (next) => {
+      await Employe.findOne({
+        _id: id,
       })
         .then((data) => {
           next({
@@ -90,6 +110,44 @@ exports.employeQueries = class {
           next({
             etat: false,
             err: rr,
+          });
+        });
+    });
+  }
+
+  static updateEmploye(id, data) {
+    const updateData = {
+      nom: data.nom,
+      prenom: data.prenom,
+      role: data.role,
+      email: data.email,
+      numero: data.numero,
+      adresse: data.adresse,
+    };
+
+    if (data.password) {
+      updateData.password = bcrypt.hash(data.password, 10);
+    }
+
+    return new Promise((next) => {
+      Employe.updateOne(
+        {
+          _id: id,
+        },
+        {
+          $set: updateData,
+        }
+      )
+        .then((data) => {
+          next({
+            etat: true,
+            result: data,
+          });
+        })
+        .catch((err) => {
+          next({
+            etat: false,
+            err: err,
           });
         });
     });

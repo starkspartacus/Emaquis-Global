@@ -4,220 +4,220 @@
  * Module dependencies.
  */
 
+var Server = require('../app');
+var debug = require('debug')('eagle:server');
+var http = require('http');
+const { userQueries } = require('../requests/UserQueries');
+const { employeQueries } = require('../requests/EmployeQueries');
+const { categorieQueries } = require('../requests/categorieQueries');
+const { fournisseurQueries } = require('../requests/fournisseurQueries');
+const { produitQueries } = require('../requests/produitQueries');
+const User = require('../models/user.model');
+const dotenv = require('dotenv').config();
+var bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
- var Server = require('../app');
- var debug = require('debug')('eagle:server');
- var http = require('http');
- const { userQueries } = require('../requests/UserQueries');
- const { employeQueries } = require('../requests/EmployeQueries');
- const { categorieQueries } = require('../requests/categorieQueries');
- const { fournisseurQueries } = require('../requests/fournisseurQueries');
- const { produitQueries } = require('../requests/produitQueries');
- const User = require('../models/user.model');
-const dotenv = require("dotenv").config();
-var bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const FileUpload = require('../utils/fileupload');
 
+const db = require('../settings/database');
+const { all } = require('../routes/index');
 
- const FileUpload = require("../utils/fileupload");
+/**
+ * Get port from environment and store in Express.
+ */
+const Serveur = new Server();
+const app = Serveur.getApp();
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
- 
+/**
+ * Create HTTP server.
+ */
 
- const db = require('../settings/database');
- const { all } = require('../routes/index');
-
- /**
-  * Get port from environment and store in Express.
-  */
- const Serveur = new Server();
- const app = Serveur.getApp();
- var port = normalizePort(process.env.PORT || '3000');
- app.set('port', port);
- 
- /**
-  * Create HTTP server.
-  */
- 
- var server = http.createServer(app);
- const io = require('socket.io').listen(server);
- /**
-  * Listen on provided port, on all network interfaces.
-  */
- db();
-
+var server = http.createServer(app);
+const io = require('socket.io').listen(server);
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+db();
 
 const SaveUSer = io.of('/inscription').use(Serveur.getSharedSession());
-SaveUSer.on("connection", (socket) => {
-    socket.on("setUser", async(data) => {
-        let log={
-            email : data.email,
-            password : data.password
-        };
-       
-        const Result = await userQueries.setUser(data);
-         if (Result.etat == false){
-             socket.emit("bad");
-        }else{
-            if( Result !== null){
-                console.log(Result,"zooooo")
-                 socket.emit("saved");
-                 socket.emit('loginsuccess','/dashboard');
-        }
-           
-            }
-         
-    })
-})
+SaveUSer.on('connection', (socket) => {
+  socket.on('setUser', async (data) => {
+    let log = {
+      email: data.email,
+      password: data.password,
+    };
+
+    const Result = await userQueries.setUser(data);
+    if (Result.etat == false) {
+      socket.emit('bad');
+    } else {
+      if (Result !== null) {
+        console.log(Result, 'zooooo');
+        socket.emit('saved');
+        socket.emit('loginsuccess', '/dashboard');
+      }
+    }
+  });
+});
 
 //connexion admin
 const UserLogin = io.of('/connexion').use(Serveur.getSharedSession());
 UserLogin.on('connection', (socket) => {
-    console.log('connexion utilisateur');
-    try {
-        socket.on('login', async(data) => {
-           
-            const { email, password } = data;
+  console.log('connexion utilisateur');
+  try {
+    socket.on('login', async (data) => {
+      const { email, password } = data;
       if (!(email && password)) {
-        console.log("veuillez remplir tous les champs");
+        console.log('veuillez remplir tous les champs');
       }
-    //   const Result = await userQueries.getUser(data);
-     const userlogin = await User.findOne({ email });
-     console.log(userlogin)
-        
-            if (
-                userlogin &&
-                (await bcrypt.compare(password, userlogin.password))
-              ) {
-                const token = jwt.sign(
-                  { user_id: userlogin._id, email },
-                  process.env.TOKEN_KEY,
-                  {
-                    expiresIn: "1h",
-                  }
-                );
-          
-                userlogin.token = token;
-                socket.handshake.session.user = {
-                            "id": userlogin._id,
-                            "username": userlogin.username,
-                            "nom_etablissement": userlogin.nom_etablissement
-                        };
-                        socket.handshake.session.save();
-                        socket.emit('loginsuccess', '/dashboard');
-                        console.log(socket.handshake.session);
-                        console.log({"token": token});
-              } else {
-                socket.emit('bad');
-              }
-        })
-    } catch (e) {
-        console.log(e)
-    }
+      //   const Result = await userQueries.getUser(data);
+      const userlogin = await User.findOne({ email });
+      console.log(userlogin);
 
+      if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
+        const token = jwt.sign(
+          { user_id: userlogin._id, email },
+          process.env.TOKEN_KEY,
+          {
+            expiresIn: '1h',
+          }
+        );
+
+        userlogin.token = token;
+        socket.handshake.session.user = {
+          id: userlogin._id,
+          username: userlogin.username,
+          nom_etablissement: userlogin.nom_etablissement,
+        };
+        socket.handshake.session.save();
+        socket.emit('loginsuccess', '/dashboard');
+        console.log(socket.handshake.session);
+        console.log({ token: token });
+      } else {
+        socket.emit('bad');
+      }
+    });
+  } catch (e) {
+    console.log(e);
+  }
 });
 
-const SaveEmploye= io.of('/ajouteruser').use(Serveur.getSharedSession());
-SaveEmploye.on("connection", (socket) => {
-    socket.on("setemploye", async(data) => {
-        console.log(data)
-        const Result = await employeQueries.setEmploye(data);
-        console.log(Result)
-         if(Result){
-             socket.emit("saved");
-        }else{
-            socket.emit("bad");
-        }
-    })
-})
+const SaveEmploye = io.of('/ajouteruser').use(Serveur.getSharedSession());
+SaveEmploye.on('connection', (socket) => {
+  socket.on('setemploye', async (data) => {
+    console.log(data);
+    const Result = await employeQueries.setEmploye(data);
+    console.log(Result);
+    if (Result) {
+      socket.emit('saved');
+    } else {
+      socket.emit('bad');
+    }
+  });
+});
 
-const SaveCategorie= io.of('/ajoutercategorie').use(Serveur.getSharedSession());
-SaveCategorie.on("connection", (socket) => {
-    socket.on("setcategorie", async(data) => {
-        const Result = await categorieQueries.setCategorie(data);
-        console.log(Result)
-         if (Result.result !== null){
-             socket.emit("saved");
-        }else{
-            socket.emit("bad");
-        }
-    })
-})
+const updateEmploye = io.of('/edituser').use(Serveur.getSharedSession());
 
-const SaveFournisseur= io.of('/fournisseur').use(Serveur.getSharedSession());
-SaveFournisseur.on("connection", (socket) => {
-    socket.on("setfournisseur", async(data) => {
-        const Result = await fournisseurQueries.setFournisseur(data);
-        console.log(Result)
-         if (Result.result !== null){
-             socket.emit("saved");
-        }else{
-            socket.emit("bad");
-        }
-    })
-})
+updateEmploye.on('connection', (socket) => {
+  socket.on('updateEmploye', async (data) => {
+    const Result = await employeQueries.updateEmploye(data.userId, data.data);
+    console.log('👉 👉 👉  ~ file: www:126 ~ Result', Result);
+    if (Result.etat) {
+      socket.emit('saved', {
+        update: true,
+      });
+    } else {
+      socket.emit('bad');
+    }
+  });
+});
 
+const SaveCategorie = io
+  .of('/ajoutercategorie')
+  .use(Serveur.getSharedSession());
+SaveCategorie.on('connection', (socket) => {
+  socket.on('setcategorie', async (data) => {
+    const Result = await categorieQueries.setCategorie(data);
+    console.log(Result);
+    if (Result.result !== null) {
+      socket.emit('saved');
+    } else {
+      socket.emit('bad');
+    }
+  });
+});
 
+const SaveFournisseur = io.of('/fournisseur').use(Serveur.getSharedSession());
+SaveFournisseur.on('connection', (socket) => {
+  socket.on('setfournisseur', async (data) => {
+    const Result = await fournisseurQueries.setFournisseur(data);
+    console.log(Result);
+    if (Result.result !== null) {
+      socket.emit('saved');
+    } else {
+      socket.emit('bad');
+    }
+  });
+});
 
- server.listen(port, console.log(" le serveur ecoute sur le port", port));
- server.on('error', onError);
- server.on('listening', onListening);
+server.listen(port, console.log(' le serveur ecoute sur le port', port));
+server.on('error', onError);
+server.on('listening', onListening);
 
- /**
-  * Normalize a port into a number, string, or false.
-  */
+/**
+ * Normalize a port into a number, string, or false.
+ */
 
- function normalizePort(val) {
-     var port = parseInt(val, 10);
+function normalizePort(val) {
+  var port = parseInt(val, 10);
 
-     if (isNaN(port)) {
-         // named pipe
-         return val;
-     }
- 
-     if (port >= 0) {
-         // port number
-         return port;
-     }
- 
-     return false;
- }
- 
- /**
-  * Event listener for HTTP server "error" event.
-  */
- 
- function onError(error) {
-     if (error.syscall !== 'listen') {
-         throw error;
-     }
- 
-     var bind = typeof port === 'string' ?
-         'Pipe ' + port :
-         'Port ' + port;
- 
-     // handle specific listen errors with friendly messages
-     switch (error.code) {
-         case 'EACCES':
-             console.error(bind + ' requires elevated privileges');
-             process.exit(1);
-             break;
-         case 'EADDRINUSE':
-             console.error(bind + ' is already in use');
-             process.exit(1);
-             break;
-         default:
-             throw error;
-     }
- }
- 
- /**
-  * Event listener for HTTP server "listening" event.
-  */
- 
- function onListening() {
-     var addr = server.address();
-     var bind = typeof addr === 'string' ?
-         'pipe ' + addr :
-         'port ' + addr.port;
-     debug('Listening on ' + bind);
- }
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
