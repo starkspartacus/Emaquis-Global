@@ -8,7 +8,9 @@
 
     $('.dataTables_info').hide();
 
-    const list = $('table').DataTable();
+    const list = $('table').DataTable({
+      responsive: true,
+    });
 
     searchBtn.on('click', () => {
       const search = input.val();
