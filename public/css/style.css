@@ -8048,6 +8048,9 @@ canvas#highlights {
 .dataTables_wrapper .dataTables_paginate .paginate_button {
   border: 0 !important;
 }
+.dataTables_filter {
+  display: none;
+}
 
 /* line 1, G:/admin_project/8 admin/management_html/scss/_pie.scss */
 .min_400 {
