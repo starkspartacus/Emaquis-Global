@@ -106,7 +106,14 @@
                                 >
                                   <i class="far fa-edit"></i>
                                 </a>
-                                <a href="#" class="action_btn">
+                                <a
+                                  href="#"
+                                  class="action_btn"
+                                  data-toggle="modal"
+                                  data-userId="<%=el._id%>"
+                                  data-username="<%=el.nom%> <%=el.prenom%>"
+                                  data-target="#delete_user_modal"
+                                >
                                   <i class="fas fa-trash"></i>
                                 </a>
                               </div>
@@ -290,6 +297,65 @@
       </a>
     </div>
 
+    <!-- MODAL -->
+
+    <div
+      class="modal fade"
+      id="delete_user_modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="delete_user_modalTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Suppression d'un employé
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Voulez vous supprimer l'employé "<strong
+              id="user_delete_name"
+            ></strong
+            >"
+          </div>
+          <form method="post">
+            <input type="hidden" id="user_delete_id" name="userId" />
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-success"
+                data-dismiss="modal"
+              >
+                Non
+              </button>
+              <button type="submit" class="btn btn-danger">Oui</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <%- include('partial/script.ejs') %>
+    <script>
+      const btns = $('.action_btn');
+
+      btns.each((index, btn) => {
+        $(btn).on('click', () => {
+          const user_name = $(btn).attr('data-username');
+          $('#user_delete_name').text(user_name);
+          $('#user_delete_id').val($(btn).attr('data-userId'));
+        });
+      });
+    </script>
   </body>
 </html>
