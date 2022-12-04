@@ -83,7 +83,7 @@
                         <div class="container rounded bg-white mt-5 mb-5">
                             <div class="row">
                                 <div class="col-md-3 border-right">
-                                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">barman@mail.com</span><span> </span></div>
+                                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold"><%= nom %> <%= prenom %></span><span class="text-black-50"><%= email %></span><span> </span></div>
                                 </div>
                                 <div class="col-md-5 border-right">
                                     <div class="p-3 py-5">
@@ -91,22 +91,22 @@
                                             <h4 class="text-right">Paramettre </h4>
                                         </div>
                                         <div class="row mt-2">
-                                            <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" placeholder="Nom" value=""></div>
-                                            <div class="col-md-6"><label class="labels">Prenom</label><input type="text" class="form-control" value="" placeholder="Prenom"></div>
+                                            <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" placeholder="Nom" value="<%= nom %>"></div>
+                                            <div class="col-md-6"><label class="labels">Prenom</label><input type="text" class="form-control" value="<%= prenom %>" placeholder="Prenom"></div>
                                         </div>
                                         <div class="row mt-3">
-                                            <div class="col-md-12"><label class="labels">Télephone</label><input type="text" class="form-control" placeholder="Entrer le numero  " value=""></div>
-                                            <div class="col-md-12"><label class="labels">Adresse</label><input type="text" class="form-control" placeholder="Entrer l'adresse" value=""></div>
+                                            <div class="col-md-12"><label class="labels">Télephone</label><input type="text" class="form-control" placeholder="Entrer le numero" value="<%= telephone %>"></div>
+                                            <div class="col-md-12"><label class="labels">Adresse</label><input type="text" class="form-control" placeholder="Entrer l'adresse" value="<%= adresse %>"></div>
                                             <div class="col-md-12"><label class="labels">Choisir le mode retour produit</label>
-                                                <select  class="form-control">
-                                                <option value=""> --Mode remboursement--</option>
+                                                <select  class="form-control" disabled>
+                   
                                                 <option value="">Produit  </option>
-                                                <option value="">Produit ( expire après 3 jours ) </option>
-                                                <option value="">argent </option>
+                                                <option value="">Avoir ( expire après 3 jours ) </option>
+                                                <option value="">remboursement </option>
                                                 </select>
                                             </div>
                                            
-                                            <div class="col-md-12"><label class="labels">Email </label><input type="text" class="form-control" placeholder="Entrer l'email" value=""></div>
+                                            <div class="col-md-12"><label class="labels">Email </label><input type="text" class="form-control" placeholder="Entrer l'email" value="<%= email %>"></div>
                                           
                                         </div>
                                         <div class="row mt-3">
@@ -119,8 +119,8 @@
                                 <div class="col-md-4">
                                     <div class="p-3 py-5">
                                         <div class="d-flex justify-content-between align-items-center experience"><span>Changer votre mot de pass?</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;sinon laissez vide les champs</span></div><br>
-                                        <div class="col-md-12"><label class="labels">Nouveau mot de pass</label><input type="password" class="form-control" placeholder="experience" value=""></div> <br>
-                                        <div class="col-md-12"><label class="labels">Confirmer</label><input type="password" class="form-control" placeholder="experience" value=""></div>
+                                        <div class="col-md-12"><label class="labels">Nouveau mot de pass</label><input type="password" class="form-control" placeholder="" value=""></div> <br>
+                                        <div class="col-md-12"><label class="labels">Confirmer</label><input type="password" class="form-control" placeholder="" value=""></div>
                                     </div>
                                 </div>
                             </div>

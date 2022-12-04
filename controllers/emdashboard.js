@@ -26,28 +26,15 @@ exports.emdashboard = async (req, res) => {
   const sumvente = await   venteQueries.getVentes({
     status_commande :"Validée",
     travail_pour :req.session.user.travail_pour
+    // travail_pour :"62b444adad125d386cd0e17c"
+    
   });
 
  
   sumvente.result.forEach( async el=>{
-                
-
-    sum.push(el);
-        
-    //   console.log(Tvente.produit.prix_vente,'Tvente')
-    sum.forEach(element => {
-      //   for(let i=0;i<sum.length;i++){
-      //       sum.push(element.produit.prix_vente[i] *element.quantite[i])
-      //   }
-      //   const qt= element.quantite;
-      //   const prix =element.produit.prix_vente;
-      //   const values = object.values(element);
-      //  console.log(values.reduce((prix, qte) => prix * qte)) 
-        
-    }); 
-    
-
+    sum.push(el.prix);
  })
+ console.log("summm",eval(sum.join('+'))) 
 
 
 
@@ -60,7 +47,7 @@ exports.emdashboard = async (req, res) => {
         user: req.session.user,
         Produit:produit.result,
         emplnum : employenum.length,
-       
+        sellsum : eval(sum.join('+'))
       });
     } else {
       res.redirect("/emconnexion");
