@@ -27,6 +27,7 @@ exports.addback = async (req, res) => {
         user: req.session.user,
         products,
         setting,
+        
       });
     } else {
       res.redirect("emconnexion");
@@ -47,7 +48,7 @@ exports.addbackPost = async (req, res) => {
 
     /// 1- remboursement total(on rembourse tout)(on recalcul le prix de vente avec le stock)
     //  2- remboursement partiel(on rembourse partiellement)(on deduire la somme dans la caisse)
-    //  3- remboursement par avoir(ces boisons devienne directement des pourboires)
+    //  3- remboursement par avoir(ces boisons deviennent directement des pourboires)
 
     if (req.session.user) {
       const { result: setting } = await settingQueries.getSettingByUserId(

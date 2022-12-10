@@ -51,7 +51,12 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12">
+            
+
+             <div class="col-12">
+              <div class="alert alert-success" role="alert" style="text-align: center; display: none;" id="alert-success">
+                Operation effectuée avec succès !
+            </div>
               <div class="white_card card_height_100 mb_30">
                 <form action="/retournerproduit" method="post">
                   <div class="row targetDiv" id="div0">
@@ -63,6 +68,7 @@
                               class="nice_Select2 nice_Select_line wide"
                               style="display: none"
                               name="produit"
+                              id="produit"
                               required
                             >
                               <option value="">Selectionner le produit</option>
@@ -80,6 +86,7 @@
                                 type="number"
                                 placeholder="quantite"
                                 name="quantite"
+                                id="quantite"
                               />
                             </div>
                           </div>
@@ -104,6 +111,7 @@
                               type="text"
                               placeholder="nom du client"
                               name="client_name"
+                              id="client_name"
                             />
                           </div>
                         </div>
@@ -328,8 +336,28 @@
           .on("click", ".btn-remove", function (e) {
             $(this).closest(".entry").remove();
             return false;
+          })
+
+          .on("click", ".btn-info", function (e) { 
+            const produit = document.getElementById("produit").value;       
+            const quantite = document.getElementById("quantite").value;       
+            const client_name = document.getElementById("client_name").value; 
+           
+          if(produit !== '' && quantite !== '' && client_name !== ''){
+            document.getElementById("alert-success").style.display = "block";
+            setTimeout(() => window.location.reload(), 2000 );
+          }else if(produit !== '' && quantite !== '' ){
+            document.getElementById("alert-success").style.display = "block";
+            setTimeout(() => window.location.reload(), 2000 );
+         
+          }else{
+            console.log("erreur");
+          }
+        
           });
       });
+
+      
     </script>
   </body>
 </html>
