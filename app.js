@@ -19,7 +19,7 @@ const session = require("express-session")({
 const sharedSession = require("express-socket.io-session");
 
 const indexRouters = require("./routes/index");
-const adminRouters = require("./routes/admin.router");
+// const adminRouters = require("./routes/admin.router");
 //const usersRouter = require("./routes/users.router");
 
 const Serveur = class {
@@ -59,7 +59,7 @@ const Serveur = class {
 
   routes() {
     this.app.use("/", indexRouters);
-    this.app.use("/admin", adminRouters);
+    // this.app.use("/admin", adminRouters);
     //this.app.use("/users", usersRouter);
 
     // catch 404 and forward to error handler
