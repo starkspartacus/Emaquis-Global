@@ -225,6 +225,36 @@
             }
           }
         } 
+      },
+
+      "/produit_par_categorie": {
+        "post": {
+          "tags": [
+            "Categorie"
+          ],
+          "description": "produit par categorie",
+          "parameters": [
+            {
+              "name": "categorie",
+              "in": "body",
+              "description": "categorie par client",
+              "schema": {
+                "$ref": "#/definitions/produit_par_categorie"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "produit par categorie",
+              "schema": {
+                "$ref": "#/definitions/produit_par_categorie"
+              }
+            }
+          }
+        } 
       }
       
     },
@@ -283,6 +313,21 @@
               }
           }
       },
+      "produit_par_categorie":{
+        "required": [
+            "CategoryId",
+            "Session"
+          ],
+          "properties": {
+            "CategoryId": {
+                "type": "string"
+              },
+              "Session": {
+                "type": "string"
+              }
+          }
+      },
+      
       "Employe": {
         "required": [
           "nom"
