@@ -2,6 +2,7 @@ const { categorieQueries } = require("../requests/categorieQueries");
 
 exports.usercategoriesPost = async (req, res) => {
   try {
+   
     user_sess = req.body._id;
     if (user_sess !== null) {
       const Categorie = await categorieQueries.getCategorie();
@@ -21,6 +22,7 @@ exports.usercategoriesPost = async (req, res) => {
         }
       }
     }
+
   } catch (e) {
     console.log("err", e);
   }

@@ -6,7 +6,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-
+const swaggerUi = require("swagger-ui-express"),
+swaggerDocument = require("./swagger.json")
 const session = require("express-session")({
   secret: "maisdismoitucherchesquoiputin",
   resave: true,
@@ -59,6 +60,11 @@ const Serveur = class {
 
   routes() {
     this.app.use("/", indexRouters);
+    this.app.use(
+      '/api-docs',
+      swaggerUi.serve, 
+      swaggerUi.setup(swaggerDocument)
+    );
     // this.app.use("/admin", adminRouters);
     //this.app.use("/users", usersRouter);
 
