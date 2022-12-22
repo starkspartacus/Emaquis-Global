@@ -255,8 +255,37 @@
             }
           }
         } 
-      }
+      },
       
+      "/vente": {
+        "post": {
+          "tags": [
+            "Vente"
+          ],
+          "description": " vendre un produit ",
+          "parameters": [
+            {
+              "name": "categorie",
+              "in": "body",
+              "description": "vendre un produit",
+              "schema": {
+                "$ref": "#/definitions/vente"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "vendre un produit",
+              "schema": {
+                "$ref": "#/definitions/vente"
+              }
+            }
+          }
+        } 
+      }
     },
     "definitions": {
       "User": {
@@ -327,7 +356,43 @@
               }
           }
       },
-      
+      "vente":{
+        "required": [
+            "quantite",
+            "produit",
+            "employe",
+            "travail_pour",
+            "prix"
+          ],
+          "properties": {
+            "produit": [{
+                "type": "string"
+              }],
+            "quantite": [{
+                "type": "string"
+                }],
+            "status_commande": {
+                "type": "string"
+              },
+              "monnaie": {
+                "type": "number"
+              },
+              "prix": {
+                "type": "number"
+              },
+              "somme_encaisse": {
+                "type": "number"
+              },
+              "employe": {
+                "type": "string"
+              },
+              "travail_pour": {
+                "type": "string"
+              }
+
+              
+          }
+      },
       "Employe": {
         "required": [
           "nom"
