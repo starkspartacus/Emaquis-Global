@@ -36,7 +36,7 @@ const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
 
 const storage = multer.diskStorage({
-  destination: '../uploads/',
+  storage: multer.memoryStorage(),
   filename: function (req, file, cb) {
     console.log(file);
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
