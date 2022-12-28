@@ -41,6 +41,7 @@ exports.employeQueries = class {
     return new Promise(async (next) => {
       await Employe.findOne({
         email: email,
+        deleted: false,
       })
         .then((data) => {
           next({
@@ -61,6 +62,7 @@ exports.employeQueries = class {
     return new Promise(async (next) => {
       await Employe.findOne({
         _id: id,
+        deleted: false,
       })
         .then((data) => {
           next({
@@ -79,7 +81,9 @@ exports.employeQueries = class {
 
   static getAllEmploye() {
     return new Promise(async (next) => {
-      Employe.find()
+      Employe.find({
+        deleted: false,
+      })
         .then((data) => {
           next({
             etat: true,
@@ -97,9 +101,14 @@ exports.employeQueries = class {
 
   static deleteEmploye(id) {
     return new Promise(async (next) => {
-      await Employe.deleteOne({
-        _id: id,
-      })
+      await Employe.updateOne(
+        {
+          _id: id,
+        },
+        {
+          deleted: true,
+        }
+      )
         .then((data) => {
           next({
             etat: true,
