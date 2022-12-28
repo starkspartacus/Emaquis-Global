@@ -167,8 +167,9 @@ router.post('/ajouterproduit', upload.single('image'), async (req, res) => {
     };
     return s3.upload(uploadParams).promise();
   }
-
+  console.log('file', file);
   const result = await uploadFile(file);
+  console.log('result', result);
   if (result) {
     const data = {
       nom_produit: req.body.nom_produit,
