@@ -90,7 +90,13 @@
                             </td>
                             <td style="font-size: 15px"><%= el.quantite %></td>
                             <td style="font-size: 15px">
-                              <img src="<%= el.image %>" alt="" width="100px" />
+                              <img
+                                src="<%= el.image %>"
+                                alt=""
+                                width="100px"
+                                height="100px"
+                                style="object-fit: contain"
+                              />
                             </td>
                           </tr>
                           <%})%>
