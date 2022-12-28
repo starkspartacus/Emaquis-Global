@@ -1,15 +1,15 @@
 /** @format */
 
-const createError = require("http-errors");
-const express = require("express");
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const cors = require("cors");
-const swaggerUi = require("swagger-ui-express"),
-swaggerDocument = require("./swagger.json")
-const session = require("express-session")({
-  secret: "maisdismoitucherchesquoiputin",
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
+const swaggerUi = require('swagger-ui-express'),
+  swaggerDocument = require('./swagger.json');
+const session = require('express-session')({
+  secret: 'maisdismoitucherchesquoiputin',
   resave: true,
   saveUninitialized: true,
   cookie: {
@@ -17,9 +17,9 @@ const session = require("express-session")({
   },
 });
 
-const sharedSession = require("express-socket.io-session");
+const sharedSession = require('express-socket.io-session');
 
-const indexRouters = require("./routes/index");
+const indexRouters = require('./routes/index');
 // const adminRouters = require("./routes/admin.router");
 //const usersRouter = require("./routes/users.router");
 
@@ -37,17 +37,17 @@ const Serveur = class {
   }
 
   settings() {
-    this.app.set("views", path.join(__dirname, "views"));
-    this.app.set("view engine", "ejs");
+    this.app.set('views', path.join(__dirname, 'views'));
+    this.app.set('view engine', 'ejs');
   }
 
   middleware() {
     //MIDDLEWARES
     this.app.use(cors());
-    this.app.use(logger("dev"));
+    this.app.use(logger('dev'));
     this.app.use(session);
     this.app.use(cookieParser());
-    this.app.use(express.static(path.join(__dirname, "public")));
+    this.app.use(express.static(path.join(__dirname, 'public')));
     // this.app.use(bodyParser.urlencoded({ extended: false }));
     // this.app.use(bodyParser.json());
     this.app.use(express.json());
@@ -59,10 +59,10 @@ const Serveur = class {
   }
 
   routes() {
-    this.app.use("/", indexRouters);
+    this.app.use('/', indexRouters);
     this.app.use(
       '/api-docs',
-      swaggerUi.serve, 
+      swaggerUi.serve,
       swaggerUi.setup(swaggerDocument)
     );
     // this.app.use("/admin", adminRouters);
@@ -75,13 +75,14 @@ const Serveur = class {
 
     // error handler
     this.app.use(function (err, req, res, next) {
+      console.log('👉 👉 👉  ~ file: app.js:78 ~ err', err);
       // set locals, only providing error in development
       res.locals.message = err.message;
-      res.locals.error = req.app.get("env") === "development" ? err : {};
+      res.locals.error = req.app.get('env') === 'development' ? err : {};
 
       // render the error page
       res.status(err.status || 500);
-      res.render("error");
+      res.render('error');
     });
   }
 
