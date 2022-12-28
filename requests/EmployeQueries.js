@@ -126,7 +126,7 @@ exports.employeQueries = class {
     };
 
     if (data.password) {
-      updateData.password = bcrypt.hash(data.password, 10);
+      updateData.password = bcrypt.hashSync(data.password, 10);
     }
 
     return new Promise((next) => {
