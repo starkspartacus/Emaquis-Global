@@ -46,7 +46,7 @@
 					<!-- Content -->
 					<div class="content text-center bg-login">
 						<div class="logo ">
-							<a href="index.html" ><img class="logo_connexion" src="../img/paresseux_parasol.svg" alt=""></a>
+							<a href="#" ><img class="logo_connexion" src="../img/paresseux_parasol.svg" alt=""></a>
 						</div>
 						<div class="title-text">
 							<h3>
@@ -96,7 +96,7 @@
   <script src="plugins/google-map/gmap.js"></script>
   
   <script src="js/script.js"></script>
-  <script src="../jquery-3.4.1.min.js"></script>
+  <!-- <script src="../jquery-3.4.1.min.js"></script> -->
   <script src="/socket.io/socket.io.js "></script>
   <script>
      const socket = io(window.location.origin + window.location.pathname);
@@ -110,7 +110,7 @@
             email: $('input[name="email"]').val(),
             password: $('input[name="password"]').val(),
         };
-       // console.log(data)
+       console.log(data)
         socket.emit('login',data)
       })
       socket.on("loginsuccess", () => {

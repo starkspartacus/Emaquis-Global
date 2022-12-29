@@ -1,0 +1,480 @@
+
+
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "My User Project CRUD",
+      "description": "My User Project Application API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Users",
+        "description": "API for users in the system"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/inscription": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": "Create new user in system",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New user is created",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        } 
+      },
+      "/users": {
+        "get": {
+            "tags": [
+              "Users"
+            ],
+            "summary": "Get all users in system",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/Users"
+                }
+              }
+            }
+          }
+      },
+      "/user/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "integer"
+          }
+        ],
+        "delete": {
+          "summary": "Delete user with given ID",
+          "tags": [
+            "Users"
+          ],
+          "responses": {
+            "200": {
+              "description": "User is deleted",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update user with give ID",
+          "tags": [
+            "Users"
+          ],
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User with new values of properties",
+              "schema": {
+                "$ref": "#/definitions/updateUser"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User is updated",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "/employee": {
+        "post": {
+          "tags": [
+            "Employe"
+          ],
+          "description": "Create new employee in system",
+          "parameters": [
+            {
+              "name": "employee",
+              "in": "body",
+              "description": "Employee that we want to create",
+              "schema": {
+                "$ref": "#/definitions/Employe"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New employee is created",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        } 
+      },
+      "/allemploye": {
+        "get": {
+            "tags": [
+              "Employe"
+            ],
+            "summary": "Get all employee in system",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/Employe"
+                }
+              }
+            }
+          }
+      },
+      "/employelogin": {
+        "post": {
+          "tags": [
+            "Employe"
+          ],
+          "description": "employee login",
+          "parameters": [
+            {
+              "name": "employee",
+              "in": "body",
+              "description": "Employeelogin",
+              "schema": {
+                "$ref": "#/definitions/Employeelogin"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": " employee is login",
+              "schema": {
+                "$ref": "#/definitions/Employeelogin"
+              }
+            }
+          }
+        } 
+      },
+      "/categorie_par_client": {
+        "post": {
+          "tags": [
+            "Categorie"
+          ],
+          "description": "categorie par client",
+          "parameters": [
+            {
+              "name": "categorie",
+              "in": "body",
+              "description": "categorie par client",
+              "schema": {
+                "$ref": "#/definitions/categorie_par_client"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": " categorie par client",
+              "schema": {
+                "$ref": "#/definitions/categorie_par_client"
+              }
+            }
+          }
+        } 
+      },
+
+      "/produit_par_categorie": {
+        "post": {
+          "tags": [
+            "Categorie"
+          ],
+          "description": "produit par categorie",
+          "parameters": [
+            {
+              "name": "categorie",
+              "in": "body",
+              "description": "categorie par client",
+              "schema": {
+                "$ref": "#/definitions/produit_par_categorie"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "produit par categorie",
+              "schema": {
+                "$ref": "#/definitions/produit_par_categorie"
+              }
+            }
+          }
+        } 
+      },
+      
+      "/vente": {
+        "post": {
+          "tags": [
+            "Vente"
+          ],
+          "description": " vendre un produit ",
+          "parameters": [
+            {
+              "name": "categorie",
+              "in": "body",
+              "description": "vendre un produit",
+              "schema": {
+                "$ref": "#/definitions/vente"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "vendre un produit",
+              "schema": {
+                "$ref": "#/definitions/vente"
+              }
+            }
+          }
+        } 
+      }
+    },
+    "definitions": {
+      "User": {
+        "required": [
+          "name",
+          "_id",
+          "companies"
+        ],
+        "properties": {
+       
+          "username": {
+            "type": "string"
+          },
+          "nom_etablissement": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "adresse": {
+            "type": "string"
+          }
+         
+        }
+      },
+      "Employeelogin":{
+        "required": [
+            "email",
+            "password"
+           
+          ],
+          "properties": {
+            "email": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+          }
+      },
+      "categorie_par_client":{
+        "required": [
+            "_id"       
+          ],
+          "properties": {
+            "_id": {
+                "type": "string"
+              }
+          }
+      },
+      "produit_par_categorie":{
+        "required": [
+            "CategoryId",
+            "Session"
+          ],
+          "properties": {
+            "CategoryId": {
+                "type": "string"
+              },
+              "Session": {
+                "type": "string"
+              }
+          }
+      },
+      "vente":{
+        "required": [
+            "quantite",
+            "produit",
+            "employe",
+            "travail_pour",
+            "prix"
+          ],
+          "properties": {
+            "produit": [{
+                "type": "string"
+              }],
+            "quantite": [{
+                "type": "string"
+                }],
+            "status_commande": {
+                "type": "string"
+              },
+              "monnaie": {
+                "type": "number"
+              },
+              "prix": {
+                "type": "number"
+              },
+              "somme_encaisse": {
+                "type": "number"
+              },
+              "employe": {
+                "type": "string"
+              },
+              "travail_pour": {
+                "type": "string"
+              }
+
+              
+          }
+      },
+      "Employe": {
+        "required": [
+          "nom"
+         
+        ],
+        "properties": {
+       
+          "nom": {
+            "type": "string"
+          },
+          "prenom": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "travail_pour": {
+            "type": "string"
+          },
+          "statut": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "adresse": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+          
+          
+         
+        }
+      },
+      "updateUser": {
+        "required": [
+          "name",
+          "companies"
+        ],
+        "properties": {
+            "username": {
+                "type": "string"
+              },
+              "nom_etablissement": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "numero": {
+                "type": "string"
+              },
+              "adresse": {
+                "type": "string"
+              }
+         
+        }
+      },
+      "Users": {
+        "type": "array",
+        "$ref": "#/definitions/User"
+      }
+     
+
+
+
+
+
+      
+    }
+
+
+
+
+  }
+
+  

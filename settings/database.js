@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const connection = async() => {
     try {
         
-        await mongoose.connect("mongodb+srv://aniki:anikileboss@cluster0.bzpyn.mongodb.net/emaquis?retryWrites=true&w=majority", {
+        await mongoose.connect("mongodb+srv://aniki:anikileboss@cluster0.qlorx.mongodb.net/emaquis?retryWrites=true&w=majority", {
             useNewUrlParser: true,
             useCreateIndex: true,
             useUnifiedTopology: true,

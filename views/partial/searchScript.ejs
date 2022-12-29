@@ -1,0 +1,20 @@
+<script>
+  $(document).ready(() => {
+    const input = $('#search');
+    const searchBtn = $('#search__btn');
+    const table = $('table').DataTable();
+
+    table.destroy();
+
+    $('.dataTables_info').hide();
+
+    const list = $('table').DataTable({
+      responsive: true,
+    });
+
+    searchBtn.on('click', () => {
+      const search = input.val();
+      list.search(search).draw();
+    });
+  });
+</script>

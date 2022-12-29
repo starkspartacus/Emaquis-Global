@@ -12,7 +12,7 @@ exports.categorieProductPost = async (req, res) => {
       const Produit = await produitQueries.getProduit();
       if (Produit.result !== null) {
         Produit.result.forEach((el) => {
-          console.log(el.categorie);
+          
           cat.push(el.categorie);
           cat.forEach((ol) => {
             if (ol._id == CategoryId && el.session == Session) {
