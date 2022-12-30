@@ -2310,7 +2310,8 @@ hr {
 /* logo emaqui **/
 
 .logo_bar{
-  height: 85px;
+  height: 80px;
+  width: 100px;
 }
 
 /* fin logo emaqui **/
