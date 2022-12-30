@@ -16,6 +16,7 @@ exports.userlist = async (req, res) => {
         console.log(Result, 'zo');
         res.render('user_list', {
           Result: Result,
+          user: req.session.user,
         });
       }
     } catch (e) {

@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="row">
-                <p id="sess" hidden> <%= sess.id %></p>
+                <p id="sess" hidden> <%= user?.id %></p>
                 <div class="col-12">
                     <div class="white_card card_height_100 mb_30">
                         <div class="white_card_header">
@@ -96,7 +96,7 @@
                                 <div class="col-lg-6">
                                     <div class="common_input mb_15">
                                         <input type="text" id="searchTextField" placeholder="nature du produit" name="produit">
-                                        <input type="text" placeholder="zo" name="session" value="<%= sess.id %>" hidden>
+                                        <input type="text" placeholder="zo" name="session" value="<%= user?.id %>" hidden>
                                     </div>
                                 </div>
 

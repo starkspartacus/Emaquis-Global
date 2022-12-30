@@ -37,7 +37,6 @@ exports.employeQueries = class {
   }
 
   static getEmployeByEmail(email) {
-    console.log('👉 👉 👉  ~ file: EmployeQueries.js ~ line 40 ~ email', email);
     return new Promise(async (next) => {
       await Employe.findOne({
         email: email,

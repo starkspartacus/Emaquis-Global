@@ -33,7 +33,7 @@
             <!-- page title  -->
               <!-- page title  -->
               <div class="row">
-                <p id="sess" hidden> <%= sess.id %></p>
+                <p id="sess" hidden> <%= user?.id %></p>
                 <div class="col-12">
                     <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
                         <div class="page_title_left d-flex align-items-center">
@@ -74,7 +74,7 @@
                                 <div class="col-lg-6">
                                     <div class="common_input mb_15">
                                         <input type="text" placeholder="nom de la catégorie" name="nom">
-                                        <input type="text" placeholder="zo" name="session" value="<%= sess.id %>" hidden>
+                                        <input type="text" placeholder="zo" name="session" value="<%= user?.id %>" hidden>
                                     </div>
                                 </div>
 

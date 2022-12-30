@@ -1,39 +1,31 @@
-const {categorieQueries} = require("../requests/categorieQueries");
-exports.addproduit = async(req,res)=>{
-    // if (req.session.user) {
-    try {
-        let categorie= [];
+const { categorieQueries } = require('../requests/categorieQueries');
+exports.addproduit = async (req, res) => {
+  // if (req.session.user) {
+  try {
     //   let sess= req.session.user;
-        const Categorie = await categorieQueries.getCategorie();
+    const Categorie = await categorieQueries.getCategorie();
 
-        if (Categorie.result !== null) { 
-          const categories = Categorie.result;
-            categories.forEach(el => {
-            if(el.categorie_pour == sess.id){ 
-                categorie.push(el);
-                console.log(categorie)
-                }
-            });
-         
-            res.render("emajouterproduit", {categorie ,sess})
-        }
-    } catch (error) {
-        res.redirect(error)
+    if (Categorie.result !== null) {
+      const categories = Categorie.result;
+
+      res.render('emajouterproduit', { categorie: categories, user: sess });
     }
-// }else{
-//     res.redirect("/")
-// }
-}
+  } catch (error) {
+    res.redirect(error);
+  }
+  // }else{
+  //     res.redirect("/")
+  // }
+};
 
-exports.addproduitPost = async(req,res)=>{
-    // if (req.session.user) {
-    try {
-        res.render("emajouterproduit")
-
-    } catch (error) {
-        res.redirect(error)
-    }
-// }else{
-//     res.redirect("/")
-// }
-}
+exports.addproduitPost = async (req, res) => {
+  // if (req.session.user) {
+  try {
+    res.render('emajouterproduit');
+  } catch (error) {
+    res.redirect(error);
+  }
+  // }else{
+  //     res.redirect("/")
+  // }
+};
