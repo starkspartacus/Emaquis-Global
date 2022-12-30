@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="row">
-            <p id="sess" hidden><%= sess.id %></p>
+            <p id="sess" hidden><%= user?.id %></p>
             <div class="col-12">
               <p id="sess" hidden></p>
               <div class="white_card card_height_100 mb_30">
@@ -85,15 +85,36 @@
                   <div class="white_card_body">
                     <div class="row">
                       <div class="col-lg-6">
-                        <div class="common_input mb_15">
-                          <input
-                            type="text"
-                            placeholder="nom du produit"
-                            name="nom_produit"
-                            required
-                          />
-                        </div>
+                        <select
+                          class="nice_Select2 nice_Select_line wide"
+                          style="display: none"
+                          name="categorie"
+                          id="categorie"
+                         
+                          required
+                        >
+                          <option value="">Selectionner la catégorie</option>
+                          <% categories.forEach(categorie =>{%>
+                          <option value="<%= categorie._id %>"><%= categorie.nom %></option>
+                          <%})%>
+                        </select>
                       </div>
+
+                      <div class="col-lg-6 mb_15" id='productContainer'>
+                        <select
+                          class="nice_Select2 nice_Select_line wide"
+                          style="display: none"
+                          name="produit"
+                          id="produit"
+                          required
+                        >
+                          <option value="">Selectionner un produit</option>
+                          <% produits.forEach(produit =>{%>
+                          <option value="<%= produit._id %>" data-categorieId='<%= produit.categorie %>'><%= produit.nom_produit %></option>
+                          <%})%>
+                        </select>
+                      </div>
+
                       <div class="col-lg-6">
                         <div class="common_input mb_15">
                           <input
@@ -114,15 +135,7 @@
                           />
                         </div>
                       </div>
-                      <div class="col-lg-6">
-                        <p>photo</p>
-                        <input
-                          type="file"
-                          placeholder="image"
-                          name="image"
-                          accept="image/*"
-                        />
-                      </div>
+                    
                       <div class="col-lg-6">
                         <div class="common_input mb_15">
                           <input
@@ -130,29 +143,43 @@
                             placeholder="quantite"
                             name="quantite"
                           />
-                          <input
-                            type="text"
-                            placeholder="zo"
-                            name="session"
-                            value="<%= sess.id %>"
-                            hidden
-                          />
+
+                         
                         </div>
                       </div>
 
+
                       <div class="col-lg-6">
-                        <select
+                        <div class="common_input mb_15" >
+                          <select
                           class="nice_Select2 nice_Select_line wide"
                           style="display: none"
                           name="categorie"
                           required
                         >
-                          <option value="">Selectionner la catégorie</option>
-                          <% categorie.forEach(el =>{%>
-                          <option value="<%= el._id %>"><%= el.nom %></option>
+                          <option value="">Selectionner la taille du produit</option>
+                          <% product_sizes.forEach(size =>{%>
+                          <option value="<%= size %>"><%= size %></option>
                           <%})%>
                         </select>
+
+
+                          <input
+                            type="text"
+                            placeholder="zo"
+                            name="session"
+                            value="<%= user?.id %>"
+                            hidden
+                          />
+                        </div>
                       </div>
+
+
+                      <div class="col-lg-6">
+                       <img src="" id="preview-image" alt="" width="150px" height="150px" style='object-fit: contain;display: none;'>
+                      </div>
+                     
+                    
                       <div class="col-12">
                         <div class="create_report_btn mt_30">
                           <button
@@ -173,7 +200,7 @@
         </div>
       </div>
 
-      footer part
+     
       <div class="footer_part">
         <div class="container-fluid">
           <div class="row">
@@ -379,6 +406,47 @@
   })
 </script> -->
     <script>
+      const productsList = <%- JSON.stringify(produits) %>;
+
+    const listenerSelectChange = (e)=>{
+      const categorie = e.target.value;
+
+      $('#produit')
+      .niceSelect('destroy')
+      .empty()
+      .append(`<option value="">Selectionner un produit</option>`)
+
+
+      for(let produit of productsList){
+
+        if(produit.categorie === categorie){
+        $('#produit').append(`<option value="${produit._id}">${produit.nom_produit}</option>`);
+        } 
+      }
+
+      $('#produit').niceSelect()
+
+      }
+
+      $(function() {
+        $('#categorie') 
+          .on('change', listenerSelectChange);
+
+
+        $('#produit').on('change',(e)=>{
+          const produit = productsList.find(p=>p._id === e.target.value);
+
+          if(e.target.value === ""){
+            $('#preview-image').css('display', 'none');
+            return;
+          }
+          
+        $('#preview-image').attr('src', produit.image).css('display', 'block');
+      
+        })
+      });
+
+
       $("#button").click(function () {
         setTimeout(1000, () => {
           location.reload(true);

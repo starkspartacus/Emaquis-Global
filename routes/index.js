@@ -49,6 +49,7 @@ const upload = multer({ storage: storage });
 require('dotenv').config();
 const fs = require('fs');
 const S3 = require('aws-sdk/clients/s3');
+const { authSuperAdmin } = require('../middleware/auth');
 
 var router = express.Router();
 
@@ -136,57 +137,63 @@ router.get('/faq', faqcontroller.faq);
 router.get('/copyright', copyrightcontroller.copyright);
 router.get('/profile', profilecontroller.profile);
 
+router.get(
+  '/ajouter-produit-global',
+  authSuperAdmin,
+  ajouterproduitcontroller.addproduitGlobal
+);
 router.get('/ajouterproduit', ajouterproduitcontroller.addproduit);
 router.get('/emajouterproduit', emajouterproduitcontroller.addproduit);
 // router.post("/ajouterproduit", ajouterproduitcontroller.addproduitPost);
 
-router.post('/ajouterproduit', upload.single('image'), async (req, res) => {
-  const file = req.file;
-  const bucketName = process.env.AWS_BUCKET_NAME;
-  const region = process.env.AWS_BUCKET_REGION;
-  const accessKeyId = process.env.AWS_ACCESS_KEY;
-  const secretAccessKey = process.env.AWS_SECRET_KEY;
+router.post(
+  '/ajouter-produit-global',
+  authSuperAdmin,
+  upload.single('image'),
+  async (req, res) => {
+    const file = req.file;
+    const bucketName = process.env.AWS_BUCKET_NAME;
+    const region = process.env.AWS_BUCKET_REGION;
+    const accessKeyId = process.env.AWS_ACCESS_KEY;
+    const secretAccessKey = process.env.AWS_SECRET_KEY;
 
-  const s3 = new S3({
-    region,
-    accessKeyId,
-    secretAccessKey,
-  });
+    const s3 = new S3({
+      region,
+      accessKeyId,
+      secretAccessKey,
+    });
 
-  // uploads a file to AWS Cloud s3
-  function uploadFile(file) {
-    const fileStream = fs.createReadStream(file.path);
+    // uploads a file to AWS Cloud s3
+    function uploadFile(file) {
+      const fileStream = fs.createReadStream(file.path);
 
-    const uploadParams = {
-      Bucket: bucketName,
-      Body: fileStream,
-      Key: file.originalname,
-      acl: 'public-read',
-    };
-    return s3.upload(uploadParams).promise();
+      const uploadParams = {
+        Bucket: bucketName,
+        Body: fileStream,
+        Key: file.originalname,
+        acl: 'public-read',
+      };
+      return s3.upload(uploadParams).promise();
+    }
+    console.log('file', file);
+    const result = await uploadFile(file);
+    console.log('result', result);
+    if (result) {
+      const data = {
+        nom_produit: req.body.nom_produit,
+        categorie: req.body.categorie,
+        image: result.Location,
+      };
+      console.log(data);
+      const Result = await produitQueries.setGlobalProduit(data);
+      console.log(Result);
+      //  res.send(200)
+      res.redirect('/ajouter-produit-global');
+    }
   }
-  console.log('file', file);
-  const result = await uploadFile(file);
-  console.log('result', result);
-  if (result) {
-    const data = {
-      nom_produit: req.body.nom_produit,
-      categorie: req.body.categorie,
-      prix_vente: parseInt(req.body.prix_vente),
-      prix_achat: parseInt(req.body.prix_achat),
-      quantite: parseInt(req.body.quantite),
-      image: result.Location,
-      session: req.body.session,
-    };
-    console.log(data);
-    const Result = await produitQueries.setProduit(data);
-    console.log(Result);
-    //  res.send(200)
-    res.redirect('/listeproduit');
-  }
+);
 
-  const description = req.body.description;
-});
+router.post('/ajouterproduit', ajouterproduitcontroller.addproduitPost);
 
 router.post('/emajouterproduit', upload.single('image'), async (req, res) => {
   const file = req.file;

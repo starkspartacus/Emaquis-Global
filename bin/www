@@ -76,11 +76,11 @@ UserLogin.on('connection', (socket) => {
       }
       //   const Result = await userQueries.getUser(data);
       const userlogin = await User.findOne({ email });
-      console.log(userlogin);
+      console.log(userlogin, 'userlogin');
 
       if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
         const token = jwt.sign(
-          { user_id: userlogin._id, email },
+          { user_id: userlogin._id, email, isAdmin: userlogin.isAdmin },
           process.env.TOKEN_KEY,
           {
             expiresIn: '1h',
@@ -92,6 +92,7 @@ UserLogin.on('connection', (socket) => {
           id: userlogin._id,
           username: userlogin.username,
           nom_etablissement: userlogin.nom_etablissement,
+          isAdmin: userlogin.isAdmin,
         };
         socket.handshake.session.save();
         socket.emit('loginsuccess', '/dashboard');
@@ -141,6 +142,7 @@ const SaveCategorie = io
   .use(Serveur.getSharedSession());
 SaveCategorie.on('connection', (socket) => {
   socket.on('setcategorie', async (data) => {
+    console.log('👉 👉 👉  ~ file: www:145 ~ data', data);
     const Result = await categorieQueries.setCategorie(data);
     console.log(Result);
     if (Result.result !== null) {
