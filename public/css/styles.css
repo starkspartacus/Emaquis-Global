@@ -41,7 +41,7 @@ h6 {
 }
 
 .img_footer {
-  width: 150px;
+  width: 200px;
   height: 150px;
 }
 
@@ -1111,6 +1111,8 @@ button:focus,
 .video-promo {
   padding: 150px 0;
 }
+
+
 
 .video-promo .content-block {
   width: 60%;
