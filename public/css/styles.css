@@ -41,7 +41,7 @@ h6 {
 }
 
 .img_footer {
-  width: 150px;
+  width: 200px;
   height: 150px;
 }
 
@@ -175,7 +175,7 @@ a {
 
 a:focus,
 a:hover {
-  color: #2e7eed;
+  color: #5b8a14;
   text-decoration: none;
 }
 
@@ -188,7 +188,7 @@ a:hover {
 }
 
 .bg-1 {
-  background: url(../images/background/promo-video-back.jpg) fixed no-repeat;
+  background: url(../images/background/bg1.jpg) fixed no-repeat;
   background-size: cover;
 }
 
@@ -1111,6 +1111,8 @@ button:focus,
 .video-promo {
   padding: 150px 0;
 }
+
+
 
 .video-promo .content-block {
   width: 60%;
@@ -2282,7 +2284,7 @@ hr {
 /* connexion page**/
 
 .logo_connexion {
-  width: 200px;
+  width: 256px;
   height: 200px;
 }
 .body-cover {
