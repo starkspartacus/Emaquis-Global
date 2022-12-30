@@ -10,6 +10,7 @@ exports.produitQueries = class {
         prix_achat: data.prix_achat,
         quantite: data.quantite,
         taille: data.taille,
+        historiques: data.historiques,
         session: data.session,
       });
 
@@ -82,7 +83,12 @@ exports.produitQueries = class {
     try {
       return new Promise(async (next) => {
         Produit.find()
-          .populate('categorie')
+          .populate({
+            path: 'produit',
+            populate: {
+              path: 'categorie',
+            },
+          })
           .then((data) => {
             next({
               etat: true,
@@ -104,6 +110,28 @@ exports.produitQueries = class {
     try {
       return new Promise(async (next) => {
         Produit.findById({ _id: id })
+          .then((data) => {
+            next({
+              etat: true,
+              result: data,
+            });
+          })
+          .catch((err) => {
+            next({
+              etat: false,
+              err: err,
+            });
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static getProduitByData(data) {
+    try {
+      return new Promise(async (next) => {
+        Produit.findOne(data)
           .then((data) => {
             next({
               etat: true,
@@ -166,13 +194,9 @@ exports.produitQueries = class {
     }
   }
 
-  static updateProduit(data) {
+  static updateProduit(produitId, data) {
     return new Promise(async (next) => {
-      const produit = await Produit.findByIdAndUpdate({ _id: data }).then(
-        (data) => data
-      );
-      produit
-        .save()
+      Produit.updateOne({ _id: produitId }, data)
         .then((data) => {
           next({ etat: true, result: data });
         })

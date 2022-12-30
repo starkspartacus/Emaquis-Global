@@ -12,6 +12,9 @@ const ProduitSchema = new Schema(
     taille: { type: String, required: true },
     quantite: { type: Number, required: true },
     session: { type: Schema.Types.ObjectId, ref: 'user', required: true },
+    historiques: {
+      type: [Object],
+    },
   },
   { timestamps: true }
 );
