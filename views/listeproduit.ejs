@@ -71,6 +71,7 @@
                           <tr>
                             <th scope="col">nom</th>
                             <th scope="col">categorie</th>
+                            <th scope="col">taille</th>
                             <th scope="col">prix vente</th>
                             <th scope="col">quantite</th>
                             <th scope="col">image</th>
@@ -80,18 +81,20 @@
                           <% Result.forEach(el =>{%>
                           <tr>
                             <td style="font-size: 15px">
-                              <%= el.nom_produit %>
+                              <%= el.produit.nom_produit %>
                             </td>
                             <td style="font-size: 15px">
-                              <%= el.categorie?.nom %>
+
+                              <%= el.produit.categorie?.nom %>
                             </td>
+                            <td style="font-size: 15px"><%= el.taille %></td>
                             <td style="font-size: 15px">
                               <%= el.prix_vente %>
                             </td>
                             <td style="font-size: 15px"><%= el.quantite %></td>
                             <td style="font-size: 15px">
                               <img
-                                src="<%= el.image %>"
+                                src="<%= el.produit.image %>"
                                 alt=""
                                 width="100px"
                                 height="100px"

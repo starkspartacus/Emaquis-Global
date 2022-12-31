@@ -64,7 +64,6 @@
                 <form
                   action="/ajouterproduit"
                   method="post"
-                  enctype="multipart/form-data"
                 >
                   <div
                     class="alert alert-success"
@@ -72,7 +71,7 @@
                     style="text-align: center; display: none"
                     id="alert-success"
                   >
-                    Nouvel employé enregistrer avec succès !
+                   Produit enregistré avec succès !
                   </div>
                   <div
                     class="alert alert-danger"
@@ -154,7 +153,7 @@
                           <select
                           class="nice_Select2 nice_Select_line wide"
                           style="display: none"
-                          name="categorie"
+                          name="taille"
                           required
                         >
                           <option value="">Selectionner la taille du produit</option>
@@ -172,13 +171,13 @@
                             hidden
                           />
                         </div>
+
                       </div>
 
 
                       <div class="col-lg-6">
                        <img src="" id="preview-image" alt="" width="150px" height="150px" style='object-fit: contain;display: none;'>
-                      </div>
-                     
+                      </div>                  
                     
                       <div class="col-12">
                         <div class="create_report_btn mt_30">
@@ -425,6 +424,9 @@
       }
 
       $('#produit').niceSelect()
+
+      $('#preview-image').css('display', 'none');
+
 
       }
 
