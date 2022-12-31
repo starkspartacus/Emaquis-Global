@@ -10,7 +10,9 @@ exports.produitQueries = class {
         prix_achat: data.prix_achat,
         quantite: data.quantite,
         taille: data.taille,
+
         historiques: data.historiques,
+
         session: data.session,
       });
 
@@ -83,12 +85,14 @@ exports.produitQueries = class {
     try {
       return new Promise(async (next) => {
         Produit.find()
+
           .populate({
             path: 'produit',
             populate: {
               path: 'categorie',
             },
           })
+
           .then((data) => {
             next({
               etat: true,
@@ -193,6 +197,7 @@ exports.produitQueries = class {
       console.log(error);
     }
   }
+
 
   static updateProduit(produitId, data) {
     return new Promise(async (next) => {

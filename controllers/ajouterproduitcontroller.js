@@ -84,7 +84,6 @@ exports.addproduitPost = async (req, res) => {
       data.historiques.push(newHistorique);
       result = await produitQueries.setProduit(data);
     }
-    //  res.send(200)
     res.redirect('/listeproduit');
   }
 
