@@ -70,13 +70,16 @@
                         <thead>
                           <tr>
                             <th scope="col">Categories</th>
+                            <% if(locals.user?.isAdmin){ %>
                             <th scope="col">Action</th>
+                            <%}%>
                           </tr>
                         </thead>
                         <tbody>
                           <% categories.forEach(el =>{%>
                           <tr>
                             <td style="font-size: 15px"><%= el.nom %></td>
+                            <% if(locals.user?.isAdmin){ %>
                             <td>
                               <div class="action_btns d-flex">
                                 <a href="#" class="action_btn mr_10">
@@ -87,6 +90,7 @@
                                 </a>
                               </div>
                             </td>
+                            <%}%>
                           </tr>
                           <%})%>
                         </tbody>
