@@ -7,12 +7,12 @@ const { helperConverStrToArr } = require("../utils/helperConvertStrToArr");
 exports.addback = async (req, res) => {
   try {
     if (req.session.user) {
-      const { result: products } = await produitQueries.getProduit();
+      const { result: products } = await produitQueries.getProduit({session :  req.session.user.travail_pour});
 
       let { result: setting } = await settingQueries.getSettingByUserId(
         req.session.user.travail_pour
       );
-
+// j'appel sur wha 
       if (!setting) {
         let res = await settingQueries.setSetting({
           travail_pour: req.session.user.travail_pour,
@@ -23,6 +23,9 @@ exports.addback = async (req, res) => {
         }
       }
 
+      // donne ton idée ... y'a un truc pas normal meme un find il ramene tout
+      console.log(products,'products')
+      //voila le log modiaaaaaaaaa t'es dou oh
       res.render("retour", {
         user: req.session.user,
         products,
@@ -101,6 +104,7 @@ exports.addbackPost = async (req, res) => {
         employe: req.session.user._id,
         remboursement: total,
         product_return_type: setting.product_return_type,
+        
       });
       console.log(
         "👉 👉 👉  ~ file: retourproduit.js ~ line 107 ~ retournData",
@@ -124,7 +128,7 @@ exports.listeRetour = async (req, res) => {
       travail_pour: req.session.user.travail_pour,
       employe: req.session.user._id,
     });
-
+    console.log(retourProduits[0].produit,"produit")
     res.render("listeretournerproduit", {
       user: req.session.user,
       retourProduits,

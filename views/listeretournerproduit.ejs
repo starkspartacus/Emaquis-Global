@@ -72,6 +72,7 @@
                             <th scope="col">produit</th>
                             <th scope="col">quantité</th>
                             <th scope="col">remboursement</th>
+                            <th scope="col">type de retour</th>
                             <th scope="col">nom du client</th>
                           </tr>
                         </thead>
@@ -80,11 +81,12 @@
                           <tr>
                             <td>
                               <%=
-                              retourProduit.produit?.map(produit=>produit.nom_produit).join(',')
+                              retourProduit.produit?.map(produit=>produit.produit.nom_produit).join(',')
                               %>
                             </td>
                             <td><%=retourProduit.quantite %></td>
                             <td><%=retourProduit.remboursement %></td>
+                            <td><%=retourProduit.product_return_type %></td>
                             <td><%=retourProduit.client_name %></td>
                           </tr>
 

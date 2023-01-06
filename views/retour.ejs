@@ -75,7 +75,7 @@
                               <% for (var i = 0; i < locals.products?.length;
                               i++) { %>
                               <option value="<%= products[i].id %>">
-                                <%= products[i].nom_produit %>
+                                <%= products[i].produit.nom_produit %>
                               </option>
                               <% } %>
                             </select>
@@ -90,6 +90,7 @@
                               />
                             </div>
                           </div>
+                          
 
                           <div class="col-xs-12 col-md-2">
                             <div class="form-group">

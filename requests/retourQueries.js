@@ -25,7 +25,12 @@ exports.retourQueries = class {
   static getRetour(reqData) {
     return new Promise(async (next) => {
       Retour.find(reqData)
-        .populate("produit")
+        .populate({
+          path: 'produit',
+          populate: {
+            path: 'produit',
+          },
+        })
         .sort({ _id: -1 })
         .then((data) => {
           next({
