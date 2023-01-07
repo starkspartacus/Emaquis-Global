@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d07d9389-a4ee-407d-8935-e8312e7dcf78" name="Changes" comment="ajout du nouveau logo connexion page">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-    </list>
+    <list default="true" id="d07d9389-a4ee-407d-8935-e8312e7dcf78" name="Changes" comment="ajout du nouveau logo connexion page" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,6 +79,7 @@
       <workItem from="1672350897652" duration="6990000" />
       <workItem from="1672423503834" duration="1240000" />
       <workItem from="1672520460645" duration="5218000" />
+      <workItem from="1673125014766" duration="579000" />
     </task>
     <task id="LOCAL-00001" summary="ajout du nouveau logo landing page">
       <created>1672349174259</created>
