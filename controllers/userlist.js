@@ -13,7 +13,6 @@ exports.userlist = async (req, res) => {
             Result.push(el);
           }
         });
-        console.log(Result, 'zo');
         res.render('user_list', {
           Result: Result,
           user: req.session.user,

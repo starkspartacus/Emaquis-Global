@@ -88,7 +88,7 @@ exports.produitQueries = class {
             path: 'produit',
             populate: {
               path: 'categorie',
-            },
+            },  
           })
           .then((data) => {
             next({
