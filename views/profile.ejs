@@ -79,11 +79,12 @@
                     <div class="white_box_tittle list_header">
                    
                     </div>
-                    <div class="col-xl-10">
+                    <div class="col-xl-12">
+                      <form action='/profile' method='post'>
                         <div class="container rounded bg-white mt-5 mb-5">
                             <div class="row">
                                 <div class="col-md-3 border-right">
-                                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold"><%= nom %> <%= prenom %></span><span class="text-black-50"><%= email %></span><span> </span></div>
+                                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold"><%= user?.nom %> <%= user?.prenom %></span><span class="text-black-50"><%= user.email %></span><span> </span></div>
                                 </div>
                                 <div class="col-md-5 border-right">
                                     <div class="p-3 py-5">
@@ -91,42 +92,62 @@
                                             <h4 class="text-right">Paramettre </h4>
                                         </div>
                                         <div class="row mt-2">
-                                            <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" placeholder="Nom" value="<%= nom %>"></div>
-                                            <div class="col-md-6"><label class="labels">Prenom</label><input type="text" class="form-control" value="<%= prenom %>" placeholder="Prenom"></div>
+                                            <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" placeholder="Nom" name='nom' value="<%= user.nom %>"></div>
+                                            <div class="col-md-6"><label class="labels">Prenom</label><input type="text" class="form-control" name='prenoms' value="<%= user.prenoms %>" placeholder="Prenom"></div>
                                         </div>
                                         <div class="row mt-3">
-                                            <div class="col-md-12"><label class="labels">Télephone</label><input type="text" class="form-control" placeholder="Entrer le numero" value="<%= telephone %>"></div>
-                                            <div class="col-md-12"><label class="labels">Adresse</label><input type="text" class="form-control" placeholder="Entrer l'adresse" value="<%= adresse %>"></div>
+                                          <div class="col-md-12"><label class="labels">Nom de l'établissement</label><input type="text" class="form-control"  name='nom_etablissement' placeholder="Entrer le nom de l'établissement" value="<%= user.nom_etablissement %>"></div>
+
+                                            <div class="col-md-12"><label class="labels">Télephone</label><input type="text" class="form-control" name='numero' placeholder="Entrer le numero" value="<%= user.numero %>"></div>
+                                            <div class="col-md-12"><label class="labels">Adresse</label><input type="text" class="form-control" name="adresse" placeholder="Entrer l'adresse" value="<%= user.adresse %>"></div>
                                             <div class="col-md-12"><label class="labels">Choisir le mode retour produit</label>
-                                                <select  class="form-control" disabled>
-                   
-                                                <option value="">Produit  </option>
-                                                <option value="">Avoir ( expire après 3 jours ) </option>
-                                                <option value="">remboursement </option>
+                                                <select  class="form-control" name='product_return_type' value="<%user.product_return_type%>">
+                                                  <% retour_produits_types.forEach((p)=> { %>
+                                                    <% if(p.type == user.product_return_type) { %>
+                                                      <option value="<%= p.type %>" selected><%= p.nom %></option>
+                                                    <% } else { %>
+                                                      <option value="<%= p.type %>"><%= p.nom %></option>
+                                                    <% } %>
+                                                  <% }) %>
+                                              
                                                 </select>
                                             </div>
                                            
-                                            <div class="col-md-12"><label class="labels">Email </label><input type="text" class="form-control" placeholder="Entrer l'email" value="<%= email %>"></div>
+                                            <div class="col-md-12"><label class="labels">Email </label><input type="text" class="form-control" name="email" placeholder="Entrer l'email" value="<%= user.email %>"></div>
                                           
                                         </div>
                                         <div class="row mt-3">
-                                            <div class="col-md-6"><label class="labels">Pays</label><input type="text" class="form-control" placeholder="¨pays" value=""></div>
-                                            <div class="col-md-6"><label class="labels">Region</label><input type="text" class="form-control" value="" placeholder="Région"></div>
+                                            <div class="col-md-6"><label class="labels">Pays</label>
+                                              <select class='form-control' id="pays" name="country">
+                                                <% pays.forEach((p)=> { %>
+                                                  <% if(p.code == user.country) { %>
+                                                    <option value="<%= p.code %>" selected><%= p.nom %></option>
+                                                  <% } else { %>
+                                                  <option value="<%= p.code %>"><%= p.nom %></option>
+                                                  <% } %>
+                                                <% }); %>
+                                              </select>
+                                             </div>
+                                            <div class="col-md-6"><label class="labels">Region</label><input type="text" class="form-control" name="city" value="<%=user.city%>" placeholder="Région"></div>
                                         </div>
-                                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Enregistrer Profil</button></div>
+                                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Enregistrer Profil</button></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
+                                    <div class='alert alert-danger' style='display: none;'>
+                                      
+                                    </div>
                                     <div class="p-3 py-5">
                                         <div class="d-flex justify-content-between align-items-center experience"><span>Changer votre mot de pass?</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;sinon laissez vide les champs</span></div><br>
-                                        <div class="col-md-12"><label class="labels">Nouveau mot de pass</label><input type="password" class="form-control" placeholder="" value=""></div> <br>
-                                        <div class="col-md-12"><label class="labels">Confirmer</label><input type="password" class="form-control" placeholder="" value=""></div>
+                                        <div class="col-md-12"><label class="labels">Nouveau mot de pass</label><input type="password" class="form-control" name='newPassword' placeholder="" value=""></div> <br>
+                                        <div class="col-md-12"><label class="labels">Confirmer</label><input type="password" class="form-control" name='confirmPassword' placeholder="" value=""></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         </div>
                         </div>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -302,5 +323,33 @@
     <!-- footer  -->
     <!-- jquery slim -->
     <%- include('partial/script.ejs') %>
+    <script>
+      $(document).ready(function () {
+        //  chat box
+        const inputPassword = $('input[name="newPassword"]');
+        const inputConfirmPassword = $('input[name="confirmPassword"]');
+
+        const onChangePassword = function(e){
+         
+         const confirmValue = inputConfirmPassword.val();
+         const passwordValue = inputPassword.val();
+
+         if(confirmValue && confirmValue !== passwordValue){
+           inputConfirmPassword.removeClass('is-valid');
+           inputConfirmPassword.addClass('is-invalid');
+         }else if(confirmValue && confirmValue === passwordValue){
+           inputConfirmPassword.removeClass('is-invalid');
+           inputConfirmPassword.addClass('is-valid');
+         }
+
+       }
+
+        inputPassword.on('input',onChangePassword)
+
+        inputConfirmPassword.on('input',onChangePassword)
+
+     
+      });
+    </script>
   </body>
 </html>

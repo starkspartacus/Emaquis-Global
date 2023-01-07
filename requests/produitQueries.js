@@ -10,7 +10,9 @@ exports.produitQueries = class {
         prix_achat: data.prix_achat,
         quantite: data.quantite,
         taille: data.taille,
+
         historiques: data.historiques,
+
         session: data.session,
       });
 
@@ -79,8 +81,7 @@ exports.produitQueries = class {
     }
   }
 
-  static getProduit(data={}) {
-    
+  static getProduit(data = {}) {
     try {
       return new Promise(async (next) => {
         Produit.find(data)
@@ -88,8 +89,9 @@ exports.produitQueries = class {
             path: 'produit',
             populate: {
               path: 'categorie',
-            },  
+            },
           })
+
           .then((data) => {
             next({
               etat: true,

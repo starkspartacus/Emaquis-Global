@@ -93,6 +93,7 @@ UserLogin.on('connection', (socket) => {
           username: userlogin.username,
           nom_etablissement: userlogin.nom_etablissement,
           isAdmin: userlogin.isAdmin,
+          ...userlogin._doc,
         };
         socket.handshake.session.save();
         socket.emit('loginsuccess', '/dashboard');

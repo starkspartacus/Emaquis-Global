@@ -136,6 +136,7 @@ router.post('/employelogin', employelogincontroller.employeloginPost);
 router.get('/faq', faqcontroller.faq);
 router.get('/copyright', copyrightcontroller.copyright);
 router.get('/profile', profilecontroller.profile);
+router.post('/profile', profilecontroller.editUserProfile);
 
 router.get(
   '/ajouter-produit-global',
