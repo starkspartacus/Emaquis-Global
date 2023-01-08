@@ -31,7 +31,7 @@ const contactcontroller = require('../controllers/contact');
 const faqcontroller = require('../controllers/faqcontroller');
 const copyrightcontroller = require('../controllers/copyrightcontroller');
 const profilecontroller = require('../controllers/profilecontroller');
-
+const summarycontroller = require('../controllers/summary')
 const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
 
@@ -147,6 +147,9 @@ router.get(
 );
 router.get('/ajouterproduit', ajouterproduitcontroller.addproduit);
 router.get('/emajouterproduit', emajouterproduitcontroller.addproduit);
+
+router.get('/summary', summarycontroller.summary);
+router.post('/summary', summarycontroller.summaryPost);
 // router.post("/ajouterproduit", ajouterproduitcontroller.addproduitPost);
 
 router.post(
