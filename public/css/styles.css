@@ -2284,7 +2284,7 @@ hr {
 /* connexion page**/
 
 .logo_connexion {
-  width: 256px;
+  width: 230px;
   height: 200px;
 }
 .body-cover {
@@ -2306,5 +2306,14 @@ hr {
 }
 
 /*Fin connexion page**/
+
+/* logo emaqui **/
+
+.logo_bar{
+  height: 40px;
+  width: 100px;
+}
+
+/* fin logo emaqui **/
 
 

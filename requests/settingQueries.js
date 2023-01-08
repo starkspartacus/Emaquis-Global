@@ -1,4 +1,4 @@
-const settingsModel = require("../models/settings.model");
+const settingsModel = require('../models/settings.model');
 
 exports.settingQueries = class {
   static setSetting(data) {
@@ -32,11 +32,19 @@ exports.settingQueries = class {
           .findOne({
             travail_pour,
           })
-          .then((data) => {
-            next({
-              etat: true,
-              result: data,
-            });
+          .then(async (data) => {
+            if (data) {
+              next({
+                etat: true,
+                result: data,
+              });
+            } else {
+              const newSetting = await this.setSetting({
+                travail_pour,
+                product_return_type: 'full',
+              });
+              next(newSetting);
+            }
           })
           .catch((err) => {
             next({
@@ -48,5 +56,34 @@ exports.settingQueries = class {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  static updateSetting(travail_pour, data) {
+    console.log(
+      '👉 👉 👉  ~ file: settingQueries.js:62 ~ travail_pour',
+      travail_pour,
+      data
+    );
+    return new Promise(async (next) => {
+      settingsModel
+        .updateOne(
+          {
+            travail_pour,
+          },
+          data
+        )
+        .then((data) => {
+          next({
+            etat: true,
+            result: data,
+          });
+        })
+        .catch((err) => {
+          next({
+            etat: false,
+            err: err,
+          });
+        });
+    });
   }
 };

@@ -1,4 +1,5 @@
 const { produitQueries } = require('../requests/produitQueries');
+
 exports.produit = async (req, res) => {
   if (req.session.user) {
     const session = req.session.user;

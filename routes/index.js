@@ -106,6 +106,8 @@ router.post('/vente/status/:venteId', ventecontroller.editStatusVente);
 router.post('/retournerproduit', retourcontroller.addbackPost);
 router.get('/retournerproduit', retourcontroller.addback);
 router.get('/listeRetour', retourcontroller.listeRetour);
+router.get('/retournerproduit/:code', retourcontroller.getProductReturn);
+
 router.post('/historiquevente', ventecontroller.venteListe);
 
 router.get('/commande', commandecontroller.commande);
@@ -136,6 +138,7 @@ router.post('/employelogin', employelogincontroller.employeloginPost);
 router.get('/faq', faqcontroller.faq);
 router.get('/copyright', copyrightcontroller.copyright);
 router.get('/profile', profilecontroller.profile);
+router.post('/profile', profilecontroller.editUserProfile);
 
 router.get(
   '/ajouter-produit-global',

@@ -1,21 +1,26 @@
-const { produitQueries } = require("../requests/produitQueries");
-const { retourQueries } = require("../requests/retourQueries");
-const { settingQueries } = require("../requests/settingQueries");
-const Produits = require("../models/produit.model");
-const { helperConverStrToArr } = require("../utils/helperConvertStrToArr");
+const { produitQueries } = require('../requests/produitQueries');
+const { retourQueries } = require('../requests/retourQueries');
+const { settingQueries } = require('../requests/settingQueries');
+const Produits = require('../models/produit.model');
+const { helperConverStrToArr } = require('../utils/helperConvertStrToArr');
+const { TYPE_RETOUR_PRDUITS } = require('../constants');
 
 exports.addback = async (req, res) => {
   try {
     if (req.session.user) {
-      const { result: products } = await produitQueries.getProduit({session :  req.session.user.travail_pour});
+      const userSession = req.session.user.travail_pour;
+
+      const { result: products } = await produitQueries.getProduit({
+        session: userSession,
+      });
 
       let { result: setting } = await settingQueries.getSettingByUserId(
-        req.session.user.travail_pour
+        userSession
       );
-// j'appel sur wha 
+
       if (!setting) {
         let res = await settingQueries.setSetting({
-          travail_pour: req.session.user.travail_pour,
+          travail_pour: userSession,
         });
 
         if (res.etat) {
@@ -23,17 +28,22 @@ exports.addback = async (req, res) => {
         }
       }
 
-      // donne ton idée ... y'a un truc pas normal meme un find il ramene tout
-      console.log(products,'products')
-      //voila le log modiaaaaaaaaa t'es dou oh
-      res.render("retour", {
+      let retournData = null;
+
+      if (req.session.retournData) {
+        retournData = req.session.retournData;
+        delete req.session.retournData;
+      }
+
+      res.render('retour', {
         user: req.session.user,
         products,
         setting,
-        
+        retournData,
+        code: retournData?._id?.slice(-6).toUpperCase(),
       });
     } else {
-      res.redirect("emconnexion");
+      res.redirect('emconnexion');
     }
   } catch (error) {
     res.redirect(error);
@@ -42,7 +52,6 @@ exports.addback = async (req, res) => {
 
 exports.addbackPost = async (req, res) => {
   try {
-    console.log(req.body, "body");
     const body = {
       ...req.body,
       produit: helperConverStrToArr(req.body.produit),
@@ -69,10 +78,6 @@ exports.addbackPost = async (req, res) => {
           };
 
           const produit = await Produits.findOne(reqData);
-          console.log(
-            "👉 👉 👉  ~ file: retourproduit.js ~ line 67 ~ produit",
-            produit
-          );
 
           if (produit) {
             produit.quantite += parseInt(body.quantite[index]);
@@ -85,16 +90,13 @@ exports.addbackPost = async (req, res) => {
       };
 
       switch (setting.product_return_type) {
-        case "full":
+        case 'full':
           // remboursement total(on rembourse tout)(on recalcul le prix de vente avec le stock)
           total = await updateProductStock();
           break;
-        case "half":
+        case 'half':
           //  2- remboursement partiel(on rembourse partiellement)(on deduire la somme dans la caisse)
           total = await updateProductStock();
-          break;
-        case "tip":
-          //TODO cron job to add tip to user with
           break;
       }
 
@@ -104,20 +106,15 @@ exports.addbackPost = async (req, res) => {
         employe: req.session.user._id,
         remboursement: total,
         product_return_type: setting.product_return_type,
-        
       });
-      console.log(
-        "👉 👉 👉  ~ file: retourproduit.js ~ line 107 ~ retournData",
-        retournData,
-        total
-      );
 
-      res.redirect("retournerproduit");
+      req.session.retournData = retournData.result;
+
+      res.redirect('retournerproduit');
     } else {
-      res.redirect("emconnexion");
+      res.redirect('emconnexion');
     }
   } catch (error) {
-    console.log("👉 👉 👉  ~ file: retourproduit.js ~ line 107 ~ error", error);
     res.redirect(error);
   }
 };
@@ -128,10 +125,51 @@ exports.listeRetour = async (req, res) => {
       travail_pour: req.session.user.travail_pour,
       employe: req.session.user._id,
     });
-    console.log(retourProduits[0].produit,"produit")
-    res.render("listeretournerproduit", {
+
+    res.render('listeretournerproduit', {
       user: req.session.user,
       retourProduits,
+      type_retour_produit: TYPE_RETOUR_PRDUITS,
     });
   } catch (error) {}
+};
+
+exports.getProductReturn = async (req, res) => {
+  try {
+    const code = req.params.code;
+
+    const data = await retourQueries.getRetourByCode(
+      new RegExp(`${code.toLowerCase()}$`)
+    );
+
+    if (!data.etat)
+      return res.status(404).json({ etat: false, message: 'Not found' });
+
+    const return_product = data.result[0];
+
+    if (return_product.product_return_type === 'tip') {
+      if (new Date().getTime() <= new Date(return_product.dateline).getTime()) {
+        return res.status(200).json({
+          etat: true,
+          message: `Ce code est valide jusqu'au ${new Date(
+            return_product.dateline
+          ).toLocaleString('fr-fr')}`,
+          data: return_product,
+        });
+      }
+    }
+
+    res.status(200).json({
+      etat: true,
+      message: `Ce code est expiré depuis le ${new Date(
+        return_product.createdAt
+      ).toLocaleString('fr-fr')}`,
+      code,
+    });
+  } catch (error) {
+    res.status(500).json({
+      etat: false,
+      message: error.message,
+    });
+  }
 };

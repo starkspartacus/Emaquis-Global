@@ -69,16 +69,20 @@
                       <table class="table lms_table_active3">
                         <thead>
                           <tr>
+                            <th scope='col'>Code</th>
                             <th scope="col">produit</th>
                             <th scope="col">quantité</th>
                             <th scope="col">remboursement</th>
                             <th scope="col">type de retour</th>
                             <th scope="col">nom du client</th>
+                            <th scope='col'>Date d'expiration</th>
+                            <th>Actions</th>
                           </tr>
                         </thead>
                         <tbody>
                           <% retourProduits.forEach((retourProduit) => { %>
                           <tr>
+                            <td><%= (retourProduit._id +"").slice(-6).toUpperCase() %></td>
                             <td>
                               <%=
                               retourProduit.produit?.map(produit=>produit.produit.nom_produit).join(',')
@@ -86,8 +90,16 @@
                             </td>
                             <td><%=retourProduit.quantite %></td>
                             <td><%=retourProduit.remboursement %></td>
-                            <td><%=retourProduit.product_return_type %></td>
+                            <td><%= type_retour_produit.find(rtp=>rtp.type === retourProduit.product_return_type)?.nom %></td>
                             <td><%=retourProduit.client_name %></td>
+                            <td><%= new Date(retourProduit.product_return_type === 'tip'? retourProduit.dateline:retourProduit.createdAt).toLocaleString('fr-fr') %></td>
+                            
+                              <td>
+                                <% if(retourProduit.product_return_type === 'tip' && new Date(retourProduit.dateline) >= new Date()) { %>
+                                <button class='btn btn-success'>Confirmer</button>
+                                <% } %>
+                              </td>
+                             
                           </tr>
 
                           <%})%>
