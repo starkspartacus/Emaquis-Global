@@ -81,11 +81,10 @@ exports.produitQueries = class {
     }
   }
 
-  static getProduit() {
+  static getProduit(data = {}) {
     try {
       return new Promise(async (next) => {
-        Produit.find()
-
+        Produit.find(data)
           .populate({
             path: 'produit',
             populate: {
@@ -197,7 +196,6 @@ exports.produitQueries = class {
       console.log(error);
     }
   }
-
 
   static updateProduit(produitId, data) {
     return new Promise(async (next) => {

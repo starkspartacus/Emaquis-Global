@@ -44,7 +44,12 @@ exports.venteQueries = class {
   static getVente() {
     return new Promise(async (next) => {
       Vente.find()
-        .populate("produit")
+      .populate({
+        path: 'produit',
+        populate: {
+          path: 'produit',
+        },
+      })
         .then((data) => {
           next({
             etat: true,

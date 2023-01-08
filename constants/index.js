@@ -42,6 +42,6 @@ exports.TYPE_RETOUR_PRDUITS = [
   },
   {
     type: 'tip',
-    nom: 'remboursement par avoir',
+    nom: 'avoir',
   },
 ];

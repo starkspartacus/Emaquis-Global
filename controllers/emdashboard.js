@@ -39,7 +39,7 @@ exports.emdashboard = async (req, res) => {
 
 
 
-
+console.log(JSON.stringify(Vente.result,null,2),"ventes")
     if (req.session.user.role === "Barman") {
       res.render("emdashboard", {
         ventes: Vente.result,

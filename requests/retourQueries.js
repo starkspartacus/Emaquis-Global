@@ -1,4 +1,4 @@
-const Retour = require("../models/retourproduit.model");
+const Retour = require('../models/retourproduit.model');
 
 exports.retourQueries = class {
   static setRetour(data) {
@@ -7,10 +7,17 @@ exports.retourQueries = class {
 
       await rembrousement
         .save()
-        .then((res) => {
+        .then(async (res) => {
+          const result = await Retour.findOne({ _id: res._id }).populate({
+            path: 'produit',
+            populate: {
+              path: 'produit',
+            },
+          });
+
           next({
             etat: true,
-            result: res,
+            result,
           });
         })
         .catch((err) => {
@@ -25,12 +32,57 @@ exports.retourQueries = class {
   static getRetour(reqData) {
     return new Promise(async (next) => {
       Retour.find(reqData)
-        .populate("produit")
+        .populate({
+          path: 'produit',
+          populate: {
+            path: 'produit',
+          },
+        })
         .sort({ _id: -1 })
         .then((data) => {
           next({
             etat: true,
             result: data,
+          });
+        })
+        .catch((err) => {
+          next({
+            etat: false,
+            err: err,
+          });
+        });
+    });
+  }
+
+  static getRetourByCode(code) {
+    return new Promise(async (next) => {
+      Retour.aggregate([
+        /** Create a field of type 'string' from `_id`*/
+        { $addFields: { convertedId: { $toString: '$_id' } } },
+        /** Regex search against it */
+        {
+          $match: {
+            convertedId: {
+              $regex: code,
+              $options: 'i',
+            },
+          },
+        },
+        /** Remove additionally added field */
+        { $project: { convertedId: 0 } },
+      ])
+
+        .then(async (data) => {
+          const result = await Retour.populate(data, {
+            path: 'produit',
+            select: '-historiques',
+            populate: {
+              path: 'produit',
+            },
+          });
+          next({
+            etat: true,
+            result,
           });
         })
         .catch((err) => {
