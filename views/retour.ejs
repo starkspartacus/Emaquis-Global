@@ -51,12 +51,15 @@
             </div>
           </div>
           <div class="row">
-            
-
-             <div class="col-12">
-              <div class="alert alert-success" role="alert" style="text-align: center; display: none;" id="alert-success">
+            <div class="col-12">
+              <div
+                class="alert alert-success"
+                role="alert"
+                style="text-align: center; display: none"
+                id="alert-success"
+              >
                 Operation effectuée avec succès !
-            </div>
+              </div>
               <div class="white_card card_height_100 mb_30">
                 <form action="/retournerproduit" method="post">
                   <div class="row targetDiv" id="div0">
@@ -90,7 +93,6 @@
                               />
                             </div>
                           </div>
-                          
 
                           <div class="col-xs-12 col-md-2">
                             <div class="form-group">
@@ -310,55 +312,116 @@
       </a>
     </div>
 
+    <!-- MODAL -->
+    <% if(locals.retournData){ %>
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Retour produit crée avec succès
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <strong>Produit:</strong>
+              <%=
+              locals.retournData.produit?.map(produit=>produit.produit.nom_produit).join(',')
+              %>
+            </p>
+            <p>
+              <strong>Quantité:</strong>
+              <%= locals.retournData.quantite %>
+            </p>
+            <p>
+              <strong>Client:</strong>
+              <%= locals.retournData.client_name %>
+            </p>
+            <p>
+              <strong>Code:</strong>
+              <%= locals.code %>
+            </p>
+          </div>
+          <form method="post">
+            <input type="hidden" id="user_delete_id" name="userId" />
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-success"
+                data-dismiss="modal"
+                onclick="refreshPage"
+              >
+                Ok
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
     <!-- footer  -->
     <%- include('partial/script.ejs') %>
-    <script src="../jquery-3.4.1.min.js"></script>
     <script src="/socket.io/socket.io.js "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
       const socket = io(window.location.origin + window.location.pathname);
 
+      $(window).on('load', function () {
+        $('#myModal').modal('show');
+      });
+
       $(function () {
         $(document)
-          .on("click", ".btn-add", function (e) {
+          .on('click', '.btn-add', function (e) {
             e.preventDefault();
-            var controlForm = $(this).closest(".fvrduplicate"),
-              currentEntry = $(this).parents(".entry:first"),
+            var controlForm = $(this).closest('.fvrduplicate'),
+              currentEntry = $(this).parents('.entry:first'),
               newEntry = $(currentEntry.clone()).appendTo(controlForm);
-            newEntry.find("input").val("");
+            newEntry.find('input').val('');
             controlForm
-              .find(".entry:not(:last) .btn-add")
-              .removeClass("btn-add")
-              .addClass("btn-remove")
-              .removeClass("btn-success")
-              .addClass("btn-danger")
+              .find('.entry:not(:last) .btn-add')
+              .removeClass('btn-add')
+              .addClass('btn-remove')
+              .removeClass('btn-success')
+              .addClass('btn-danger')
               .html('<i class="fa fa-minus" aria-hidden="true"></i>');
           })
-          .on("click", ".btn-remove", function (e) {
-            $(this).closest(".entry").remove();
+          .on('click', '.btn-remove', function (e) {
+            $(this).closest('.entry').remove();
             return false;
           })
 
-          .on("click", ".btn-info", function (e) { 
-            const produit = document.getElementById("produit").value;       
-            const quantite = document.getElementById("quantite").value;       
-            const client_name = document.getElementById("client_name").value; 
-           
-          if(produit !== '' && quantite !== '' && client_name !== ''){
-            document.getElementById("alert-success").style.display = "block";
-            setTimeout(() => window.location.reload(), 2000 );
-          }else if(produit !== '' && quantite !== '' ){
-            document.getElementById("alert-success").style.display = "block";
-            setTimeout(() => window.location.reload(), 2000 );
-         
-          }else{
-            console.log("erreur");
-          }
-        
+          .on('click', '.btn-info', function (e) {
+            const produit = document.getElementById('produit').value;
+            const quantite = document.getElementById('quantite').value;
+            const client_name = document.getElementById('client_name').value;
+
+            if (produit !== '' && quantite !== '' && client_name !== '') {
+              document.getElementById('alert-success').style.display = 'block';
+              setTimeout(() => window.location.reload(), 2000);
+            } else if (produit !== '' && quantite !== '') {
+              document.getElementById('alert-success').style.display = 'block';
+              setTimeout(() => window.location.reload(), 2000);
+            } else {
+              console.log('erreur');
+            }
           });
       });
-
-      
     </script>
   </body>
 </html>
