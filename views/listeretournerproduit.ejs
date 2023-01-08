@@ -92,10 +92,10 @@
                             <td><%=retourProduit.remboursement %></td>
                             <td><%= type_retour_produit.find(rtp=>rtp.type === retourProduit.product_return_type)?.nom %></td>
                             <td><%=retourProduit.client_name %></td>
-                            <td><%= new Date(retourProduit.product_return_type === 'tip'? retourProduit.date:retourProduit.createdAt).toLocaleString('fr-fr') %></td>
+                            <td><%= new Date(retourProduit.product_return_type === 'tip'? retourProduit.dateline:retourProduit.createdAt).toLocaleString('fr-fr') %></td>
                             
                               <td>
-                                <% if(retourProduit.product_return_type === 'tip' && new Date(return_product.dateline) >= new Date()) { %>
+                                <% if(retourProduit.product_return_type === 'tip' && new Date(retourProduit.dateline) >= new Date()) { %>
                                 <button class='btn btn-success'>Confirmer</button>
                                 <% } %>
                               </td>
