@@ -10,9 +10,9 @@ exports.addback = async (req, res) => {
     if (req.session.user) {
       const userSession = req.session.user.travail_pour;
 
-      const { result: products } = await produitQueries.getProduit({
-        session: userSession,
-      });
+      const { result: products } = await produitQueries.getProduitBySession(
+        userSession
+      );
 
       let { result: setting } = await settingQueries.getSettingByUserId(
         userSession
