@@ -111,7 +111,7 @@
                         <tr>
                           <td>
                             <%=
-                            vente.produit.map((el)=>el.nom_produit).join(',') %>
+                            vente.produit.map((el)=>el.produit.nom_produit).join(',') %>
                           </td>
                           <td><%= vente.quantite %></td>
                           <td><%= vente.prix %></td>

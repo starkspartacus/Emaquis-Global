@@ -68,7 +68,12 @@ exports.venteQueries = class {
   static getVentes(query) {
     return new Promise(async (next) => {
       Vente.find(query)
-        .populate("produit")
+        .populate({
+          path : "produit",
+          populate : {
+            path:"produit"
+          }
+        })
         .sort("-_id")
         .then((ventes) => {
           next({
