@@ -1,9 +1,17 @@
-const { commandeQueries } = require("../requests/commandeQueries");
+const { venteQueries } = require("../requests/venteQueries");
 
 exports.commande = async (req, res) => {
     try {
-        sess = req.session.user;
-        res.json(sess);
+        sess = req.body.session;
+        
+        const sumvente = await   venteQueries.getVentes({
+            travail_pour :sess,
+          });
+        
+       
+        if(sumvente){
+            res.json(sumvente.result);
+        }
     } catch (e) {
         res.json({
             etat: false,
