@@ -1,5 +1,4 @@
-const produitModel = require("../models/produit.model");
-const Vente = require("../models/vente.model");
+const Vente = require('../models/vente.model');
 
 exports.venteQueries = class {
   static setVente({
@@ -44,12 +43,12 @@ exports.venteQueries = class {
   static getVente() {
     return new Promise(async (next) => {
       Vente.find()
-      .populate({
-        path: 'produit',
-        populate: {
+        .populate({
           path: 'produit',
-        },
-      })
+          populate: {
+            path: 'produit',
+          },
+        })
         .then((data) => {
           next({
             etat: true,
@@ -68,8 +67,13 @@ exports.venteQueries = class {
   static getVentes(query) {
     return new Promise(async (next) => {
       Vente.find(query)
-        .populate("produit")
-        .sort("-_id")
+        .populate({
+          path: 'produit',
+          populate: {
+            path: 'produit',
+          },
+        })
+        .sort('-_id')
         .then((ventes) => {
           next({
             success: true,
