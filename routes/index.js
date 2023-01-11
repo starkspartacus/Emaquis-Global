@@ -110,6 +110,7 @@ router.get('/retournerproduit/:code', retourcontroller.getProductReturn);
 
 router.post('/historiquevente', ventecontroller.venteListe);
 
+
 router.post('/commandes', commandecontroller.commande);
 router.post('/commande', commandecontroller.commandePost);
 
