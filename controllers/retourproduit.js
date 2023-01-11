@@ -159,7 +159,7 @@ exports.getProductReturn = async (req, res) => {
       }
     }
 
-    res.status(200).json({
+    res.status(301).json({
       etat: true,
       message: `Ce code est expiré depuis le ${new Date(
         return_product.createdAt
