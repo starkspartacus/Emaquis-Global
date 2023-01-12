@@ -1,7 +1,7 @@
-const Jimp = require("jimp");
-const fs = require("fs");
-const path = require("path");
-const csv = require("csv-parser");
+const Jimp = require('jimp');
+const fs = require('fs');
+const path = require('path');
+const csv = require('csv-parser');
 
 exports.handleError = (error, res) => {
   console.log(error);
@@ -16,7 +16,7 @@ exports.handleResizeImage = async (file, size, quality, output) => {
       .quality(quality) // set JPEG quality
       .write(output); // save
   });
-  return "resized";
+  return 'resized';
 };
 
 exports.handleMkdir = async (dest, dir) => {
@@ -24,7 +24,7 @@ exports.handleMkdir = async (dest, dir) => {
     if (err) {
       return console.error(err);
     }
-    console.log("Directory created successfully!");
+    console.log('Directory created successfully!');
   });
 };
 
@@ -32,9 +32,9 @@ exports.handleReadCsv = async (csvFile) => {
   const results = [];
   fs.createReadStream(csvFile)
     .pipe(csv())
-    .on("data", (data) => results.push(data))
-    .on("end", () => {
-      console.log("End");
+    .on('data', (data) => results.push(data))
+    .on('end', () => {
+      console.log('End');
       return results;
     });
 };
@@ -43,7 +43,7 @@ exports.handleReadDirectoy = (directoryRoute) => {
   const directoryPath = path.join(__dirname, directoryRoute);
   fs.readdir(directoryPath, function (err, files) {
     if (err) {
-      return console.log("Impossible to scan directory : " + err);
+      return console.log('Impossible to scan directory : ' + err);
     }
     files.forEach(function (file) {
       console.log(file);

@@ -98,6 +98,27 @@ exports.employeQueries = class {
     });
   }
 
+  static getEmployeByEtablissement(id) {
+    return new Promise(async (next) => {
+      Employe.find({
+        travail_pour: id,
+        deleted: false,
+      })
+        .then((data) => {
+          next({
+            etat: true,
+            result: data,
+          });
+        })
+        .catch((err) => {
+          next({
+            etat: false,
+            err: err,
+          });
+        });
+    });
+  }
+
   static deleteEmploye(id) {
     return new Promise(async (next) => {
       await Employe.updateOne(
