@@ -91,7 +91,7 @@
                             <option value="">Selectionner le produit</option>
                             <% for (let i = 0; i < produits.length; i++) { %>
                             <option value="<%= produits[i]._id %>">
-                              <%= produits[i].nom_produit %>
+                              <%= produits[i].produit.nom_produit %>
                             </option>
                             <% } %>
                           </select>

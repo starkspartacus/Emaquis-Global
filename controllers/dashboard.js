@@ -1,61 +1,57 @@
+const { MONTHS } = require('../constants');
 const { employeQueries } = require('../requests/EmployeQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const { venteQueries } = require('../requests/venteQueries');
+const { formatAmount } = require('../utils/formatAmount');
+const { formatTime } = require('../utils/formatTime');
+const { generateYears } = require('../utils/generateYear');
 exports.dashboard = async (req, res) => {
   if (req.session.user) {
     let totalemploye;
     res.setHeader('Content-Type', 'text/html');
     const session = req.session.user;
+    const userId = session.id;
     try {
-      const Employe = await employeQueries.getAllEmploye();
-      const Produit = await produitQueries.getProduit();
-      const Vente = await venteQueries.getVente();
-      let Result = [];
-      let Tab = [];
-      let Tvente = [];
-      let sum = [];
-      if (
-        Employe.result !== null &&
-        Produit.result !== null &&
-        Vente.result !== null
-      ) {
-        let employe = Employe.result;
-        let prod = Produit.result;
-        let vente = Vente.result;
-        employe.forEach(async (el) => {
-          if (session.id == el.travail_pour) {
-            Result.push(el);
-            // console.log(Result)
-          }
-        });
-        prod.forEach(async (el) => {
-          if (session.id == el.session) {
-            Tab.push(el);
-            // console.log(Tab,'tab')
-          }
-        });
+      const Employe = await employeQueries.getEmployeByEtablissement(userId);
+      console.log('👉 👉 👉  ~ file: dashboard.js:12 ~ Employe', Employe);
+      const Produit = await produitQueries.getProduitBySession(userId);
+      console.log('👉 👉 👉  ~ file: dashboard.js:13 ~ Produit', Produit);
+      const Vente = await venteQueries.getVentes({
+        travail_pour: userId,
+        status_commande: 'Validée',
+      });
+      console.log('👉 👉 👉  ~ file: dashboard.js:16 ~ Vente', Vente);
 
-        vente.forEach(async (el) => {
-          if (session.id == el.travail_pour) {
-            Tvente.push(el);
+      let employe = Employe.result;
+      let prod = Produit.result;
+      let vente = Vente.result;
 
-            //   console.log(Tvente.produit.prix_vente,'Tvente')
-            Tvente.forEach((element) => {
-              // for(let i=0;i<Tvente.length;i++){
-              //     sum.push(element.produit.prix_vente[i] *element.quantite[i])
-              // }
-              //     const qt= element.quantite;
-              //     const prix =element.produit.prix_vente;
-              //     const values = object.values(element);
-              //    console.log(values.reduce((prix, qte) => prix * qte))
-            });
-          }
-        });
-        //console.log(Tvente,'Tvente')
-        totalemploye = Result.length;
+      let venteByDay = vente.reduce((acc, item) => {
+        const date = new Date(item.createdAt);
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        const key = `${formatTime(month)}/${formatTime(day)}/${year}`;
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(item);
+        return acc;
+      }, {});
 
-        res.render('dashboard', { totalemploye, Tab, user: session });
-      }
+      const totalVente = vente.reduce((acc, item) => {
+        return acc + item.prix;
+      }, 0);
+
+      res.render('dashboard', {
+        totalemploye: employe.length,
+        Tab: prod,
+        totalVente: formatAmount(totalVente),
+        venteByDay,
+        user: session,
+        years: generateYears(),
+        months: MONTHS,
+      });
     } catch (e) {
       console.log('err', e);
       res.redirect(e);

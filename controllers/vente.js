@@ -1,13 +1,14 @@
-const { venteQueries } = require("../requests/venteQueries");
-const { produitQueries } = require("../requests/produitQueries");
-const { retourQueries } = require("../requests/retourQueries");
-const Produits = require("../models/produit.model");
-const Ventes = require("../models/vente.model");
-const Retours = require("../models/retourproduit.model");
+const { venteQueries } = require('../requests/venteQueries');
+const { produitQueries } = require('../requests/produitQueries');
+const { retourQueries } = require('../requests/retourQueries');
+const Produits = require('../models/produit.model');
+const Ventes = require('../models/vente.model');
+const Retours = require('../models/retourproduit.model');
 exports.vente = async (req, res) => {
   try {
     const productRes = await produitQueries.getProduit();
-    res.render("vente", {
+
+    res.render('vente', {
       produits: productRes.result || [],
     });
   } catch (error) {
@@ -49,12 +50,12 @@ exports.ventePost = async (req, res) => {
         quantite: vente.quantite,
         employe: vente.employe,
         travail_pour: vente.travail_pour,
-        status_commande: "En attente",
+        status_commande: 'En attente',
         prix: sum,
         somme_encaisse: vente.somme_encaisse,
         monnaie: vente.somme_encaisse - sum,
       };
-      console.log("👉 👉 👉  ~ file: vente.js ~ line 58 ~ mory", mory);
+      console.log('👉 👉 👉  ~ file: vente.js ~ line 58 ~ mory', mory);
       // il fait pas l setvente or il fait update  de produit
       Vente = await venteQueries.setVente(mory);
       vente.produit.forEach((produit_id, index) => {
@@ -63,9 +64,9 @@ exports.ventePost = async (req, res) => {
           { $inc: { quantite: -vente.quantite[index] } },
           { new: true },
           (err, data) => {
-            console.log("👉 👉 👉  ~ file: vente.js ~ line 65 ~ data", data);
+            console.log('👉 👉 👉  ~ file: vente.js ~ line 65 ~ data', data);
             if (err) {
-              console.log("error update", err);
+              console.log('error update', err);
               return;
             }
           }
@@ -77,17 +78,17 @@ exports.ventePost = async (req, res) => {
         data: vente,
       });
     } else {
-      console.log("iiiiicccciiiiii");
+      console.log('iiiiicccciiiiii');
       res.json({
         etat: false,
-        data: "erreur",
+        data: 'erreur',
       });
     }
   } catch (e) {
-    console.log("👉 👉 👉  ~ file: vente.js ~ line 105 ~ e", e);
+    console.log('👉 👉 👉  ~ file: vente.js ~ line 105 ~ e', e);
     res.json({
       etat: false,
-      data: "Error",
+      data: 'Error',
     });
   }
 };
@@ -95,7 +96,7 @@ exports.ventePost = async (req, res) => {
 exports.editventePost = async (req, res) => {
   try {
     const vente = req.body;
-    console.log("👉 👉 👉  ~ file: vente.js ~ line 98 ~ vente", vente);
+    console.log('👉 👉 👉  ~ file: vente.js ~ line 98 ~ vente', vente);
     const Produit = await produitQueries.getProduit();
     let rebour = 0;
     let resultqte = [];
@@ -150,26 +151,27 @@ exports.editventePost = async (req, res) => {
   } catch (e) {
     res.json({
       etat: false,
-      data: "Error",
+      data: 'Error',
     });
   }
 };
 
 exports.editStatusVente = async (req, res) => {
   const vente_id = req.params.venteId;
+  console.log('👉 👉 👉  ~ file: vente.js:160 ~ vente_id', vente_id);
 
   const vente = await Ventes.findOne({
     _id: vente_id,
-    status_commande: "En attente",
+    status_commande: 'En attente',
   });
 
   if (vente) {
-    Ventes.updateOne({ _id: vente_id }, { status_commande: "Validée" })
+    Ventes.updateOne({ _id: vente_id }, { status_commande: 'Validée' })
       .then((r) => {
         req.session.newSave = true;
-        res.redirect("/emdashboard");
+        res.redirect('/emdashboard');
       })
-      .catch((err) => res.redirect("/emdashboard"));
+      .catch((err) => res.redirect('/emdashboard'));
   }
 };
 
@@ -184,7 +186,7 @@ exports.venteListe = async (req, res) => {
   } catch (e) {
     res.json({
       etat: false,
-      data: "Error",
+      data: 'Error',
     });
   }
 };
@@ -200,7 +202,7 @@ exports.retourListe = async (req, res) => {
   } catch (e) {
     res.json({
       etat: false,
-      data: "Error",
+      data: 'Error',
     });
   }
 };

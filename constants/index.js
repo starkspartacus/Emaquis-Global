@@ -45,3 +45,18 @@ exports.TYPE_RETOUR_PRDUITS = [
     nom: 'avoir',
   },
 ];
+
+exports.MONTHS = [
+  { code: 1, nom: 'Janvier' },
+  { code: 2, nom: 'Février' },
+  { code: 3, nom: 'Mars' },
+  { code: 4, nom: 'Avril' },
+  { code: 5, nom: 'Mai' },
+  { code: 6, nom: 'Juin' },
+  { code: 7, nom: 'Juillet' },
+  { code: 8, nom: 'Août' },
+  { code: 9, nom: 'Septembre' },
+  { code: 10, nom: 'Octobre' },
+  { code: 11, nom: 'Novembre' },
+  { code: 12, nom: 'Décembre' },
+];
