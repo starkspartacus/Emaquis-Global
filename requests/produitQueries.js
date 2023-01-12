@@ -81,10 +81,10 @@ exports.produitQueries = class {
     }
   }
 
-  static getProduit(data = {}) {
+  static getProduit() {
     try {
       return new Promise(async (next) => {
-        Produit.find(data)
+        Produit.find()
           .populate({
             path: 'produit',
             populate: {
@@ -109,6 +109,38 @@ exports.produitQueries = class {
       console.log(error);
     }
   }
+
+  static getProduitBySession(sessionId) {
+    try {
+      return new Promise(async (next) => {
+        Produit.find({
+          session: sessionId,
+        })
+          .populate({
+            path: 'produit',
+            populate: {
+              path: 'categorie',
+            },
+          })
+
+          .then((data) => {
+            next({
+              etat: true,
+              result: data,
+            });
+          })
+          .catch((err) => {
+            next({
+              etat: false,
+              err: err,
+            });
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   static getProduitById(id) {
     try {
       return new Promise(async (next) => {

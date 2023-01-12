@@ -107,7 +107,7 @@
                     </thead>
                     <tbody>
                       <% ventes.map((vente,id)=>{ %>
-                      <form method="post" action="/vente/status/<%=vente._id%>">
+                      <form>
                         <tr>
                           <td>
                             <%=
@@ -118,7 +118,7 @@
                           <td><%= vente.somme_encaisse %></td>
                           <td><%= vente.monnaie %></td>
                           <td>
-                            <button class="btn btn-info">confirmer</button>
+                            <button class="btn btn-info" data-vente-id="<%=vente._id%>" onclick='onClickBtnConfirm(this)' >confirmer</button>
                           </td>
                         </tr>
                       </form>
@@ -410,14 +410,42 @@
     <script>
       const newSave = "<%= newSave %>";
 
-      if (newSave == "true") {
-        document.getElementById("alert-success").style.display = "block";
+      const onClickBtnConfirm = (_selfThis)=>{
+        const venteId = _selfThis.getAttribute('data-vente-id');
 
-        setTimeout(
-          () =>
-            (document.getElementById("alert-success").style.display = "none"),
-          1000
-        );
+        if(venteId){
+          fetch(`/vente/status/${venteId}`,{
+          method:'POST',
+          headers:{
+              'Content-Type':'application/json'
+          }
+          
+        }).then
+        (res=>{
+          
+          
+          document.getElementById("alert-success").style.display = "block";
+
+            setTimeout(
+              () =>
+                {
+                  window.location.reload()
+                },
+              1000
+            );
+         
+          return res.json()
+        }).catch(err=>{
+          console.log(err)
+        })
+        }
+       
+
+     console.log( _selfThis.getAttribute('data-vente-id'))
+      }
+
+      if (newSave == "true") {
+       
       }
 
     </script>

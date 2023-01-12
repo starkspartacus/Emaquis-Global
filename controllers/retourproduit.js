@@ -10,9 +10,9 @@ exports.addback = async (req, res) => {
     if (req.session.user) {
       const userSession = req.session.user.travail_pour;
 
-      const { result: products } = await produitQueries.getProduit({
-        session: userSession,
-      });
+      const { result: products } = await produitQueries.getProduitBySession(
+        userSession
+      );
 
       let { result: setting } = await settingQueries.getSettingByUserId(
         userSession
@@ -159,7 +159,7 @@ exports.getProductReturn = async (req, res) => {
       }
     }
 
-    res.status(200).json({
+    res.status(301).json({
       etat: true,
       message: `Ce code est expiré depuis le ${new Date(
         return_product.createdAt
