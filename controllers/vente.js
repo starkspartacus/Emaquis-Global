@@ -22,7 +22,9 @@ exports.vente = async (req, res) => {
 exports.ventePost = async (req, res) => {
   try {
     let sess = req.session.user;
+    console.log('👉 👉 👉  ~ file: vente.js:25 ~ sess', sess);
     const vente = req.body;
+    console.log('👉 👉 👉  ~ file: vente.js:26 ~ vente', vente);
 
     let Vente = {};
     const Produit = await produitQueries.getProduit();
