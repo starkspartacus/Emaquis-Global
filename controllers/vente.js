@@ -6,10 +6,13 @@ const Ventes = require('../models/vente.model');
 const Retours = require('../models/retourproduit.model');
 exports.vente = async (req, res) => {
   try {
-    const productRes = await produitQueries.getProduit();
+    const productRes = await produitQueries.getProduitBySession(
+      req.session.user.travail_pour
+    );
 
     res.render('vente', {
       produits: productRes.result || [],
+      user: req.session.user,
     });
   } catch (error) {
     res.redirect(error);
@@ -18,22 +21,22 @@ exports.vente = async (req, res) => {
 
 exports.ventePost = async (req, res) => {
   try {
-    sess = req.session.user;
+    let sess = req.session.user;
     const vente = req.body;
 
     let Vente = {};
     const Produit = await produitQueries.getProduit();
-    let rest;
-    let uniq;
+    // let rest;
+    // let uniq;
 
     let resultqte = [];
     let prize = [];
-    let qte = vente.quantite;
+    // let qte = vente.quantite;
     let sum = 0;
     if (vente !== null) {
       let prod = Produit.result;
       prod.forEach(async (el) => {
-        if (vente.travail_pour == el.session) {
+        if (sess.travail_pour == el.session) {
           for (let i = 0; i < vente.produit.length; i++) {
             if (vente.produit[i] == el._id) {
               resultqte.push(el.quantite);
@@ -48,23 +51,21 @@ exports.ventePost = async (req, res) => {
       let mory = {
         produit: vente.produit,
         quantite: vente.quantite,
-        employe: vente.employe,
-        travail_pour: vente.travail_pour,
+        employe: sess._id,
+        travail_pour: sess.travail_pour,
         status_commande: 'En attente',
         prix: sum,
         somme_encaisse: vente.somme_encaisse,
         monnaie: vente.somme_encaisse - sum,
       };
-      console.log('👉 👉 👉  ~ file: vente.js ~ line 58 ~ mory', mory);
       // il fait pas l setvente or il fait update  de produit
       Vente = await venteQueries.setVente(mory);
       vente.produit.forEach((produit_id, index) => {
         Produits.updateOne(
-          { session: vente.travail_pour, _id: produit_id },
+          { session: sess.travail_pour, _id: produit_id },
           { $inc: { quantite: -vente.quantite[index] } },
           { new: true },
           (err, data) => {
-            console.log('👉 👉 👉  ~ file: vente.js ~ line 65 ~ data', data);
             if (err) {
               console.log('error update', err);
               return;
@@ -177,8 +178,9 @@ exports.editStatusVente = async (req, res) => {
 
 exports.venteListe = async (req, res) => {
   try {
-    const maquisID = req.body.id;
-    const maquiSell = await Ventes.find({ travail_pour: maquisID });
+    // const maquisID = req.body.id;
+    console.log(req.session.user._id);
+    const maquiSell = await Ventes.find({ travail_pour: req.session._id });
     res.json({
       etat: true,
       historique_vente: maquiSell,

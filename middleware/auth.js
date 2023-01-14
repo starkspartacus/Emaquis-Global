@@ -33,6 +33,14 @@ exports.authUser = async (req, res, next) => {
   }
 };
 
+exports.checkAuthUser = async (req, res, next) => {
+  if (req.session.user) {
+    next();
+  } else {
+    res.redirect('/connexion');
+  }
+};
+
 exports.authAdmin = async (req, res, next) => {
   const token = req.headers.token;
   if (!!!token) {
