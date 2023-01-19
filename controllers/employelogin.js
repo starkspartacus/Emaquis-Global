@@ -27,7 +27,7 @@ exports.employeloginPost = async (req, res) => {
     ) {
       const token = jwt.sign(
         { employe_id: employelogin._id, email },
-        process.env.TOKEN_KEY,
+        process.env.SECRET,
         {
           expiresIn: '1h',
         }
@@ -35,6 +35,7 @@ exports.employeloginPost = async (req, res) => {
 
       employelogin.token = token;
       req.session.user = employelogin;
+      console.log(req.session.user, 'session');
       res.status(200).send({ employelogin, token });
     } else {
       res.status(400).send('email ou mot de passe incorrect');

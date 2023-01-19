@@ -1,5 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const employeModel = require('../models/employe.model');
 const secret = process.env.SECRET;
 const User = require('../models/user.model');
 
@@ -84,5 +85,19 @@ exports.authSuperAdmin = async (req, res, next) => {
     return;
   }
 
+  next();
+};
+
+// Authorization Bearer token
+
+exports.forceSession = async (req, res, next) => {
+  const authorization = req.headers.authorization;
+
+  if (authorization && !req.session.user) {
+    const token = authorization.split(' ')[1];
+    const data = jwt.verify(token, secret);
+    const employe = await employeModel.findOne({ _id: data?.employe_id });
+    req.session.user = employe;
+  }
   next();
 };

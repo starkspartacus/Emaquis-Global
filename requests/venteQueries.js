@@ -102,6 +102,21 @@ exports.venteQueries = class {
     try {
       return new Promise(async (next) => {
         Vente.findById({ _id: id })
+          .populate([
+            {
+              path: 'produit',
+              populate: {
+                path: 'produit',
+                populate: {
+                  path: 'categorie',
+                },
+              },
+            },
+            {
+              path: 'employe',
+              select: 'nom prenom',
+            },
+          ])
           .then((data) => {
             next({
               etat: true,

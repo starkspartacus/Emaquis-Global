@@ -6,7 +6,7 @@ exports.emdashboard = async (req, res) => {
   try {
     const Vente = await venteQueries.getVentes({
       status_commande: 'En attente',
-      travail_pour: req.session.user.travail_pour,
+      travail_pour: req.session?.user?.travail_pour,
     });
     const newSave = req.session.newSave;
 

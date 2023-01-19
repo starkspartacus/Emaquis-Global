@@ -32,12 +32,15 @@ const app = Serveur.getApp();
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 /**
  * Create HTTP server.
  */
 
 var server = http.createServer(app);
 const io = require('socket.io').listen(server);
+
+app.io = io;
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -81,7 +84,7 @@ UserLogin.on('connection', (socket) => {
       if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
         const token = jwt.sign(
           { user_id: userlogin._id, email, isAdmin: userlogin.isAdmin },
-          process.env.TOKEN_KEY,
+          process.env.SECRET,
           {
             expiresIn: '1h',
           }

@@ -76,6 +76,15 @@ exports.ventePost = async (req, res) => {
         );
       });
 
+      const venteRes = await venteQueries.getVentesById(Vente.result?._id);
+
+      if (req.app.io) {
+        console.log(req.io, sess.travail_pour);
+        req.app.io.emit(`${sess.travail_pour}-vente`, {
+          vente: venteRes.result,
+        });
+      }
+
       res.json({
         etat: true,
         data: vente,
