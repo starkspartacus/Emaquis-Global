@@ -6,7 +6,7 @@ exports.userQueries = class {
     return new Promise(async (next) => {
       const encryptedPassword = await bcrypt.hash(data.password, 10);
 
-      const user = await new User({
+      const user = new User({
         username: data.username,
         nom_etablissement: data.nom_etablissement,
         email: data.email,
