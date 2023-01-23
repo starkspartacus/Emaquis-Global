@@ -154,7 +154,17 @@
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
                       <div class="crm_body">
-                        <h4><a href="#" class="text_color_5">+ 7,5 % </a></h4>
+                        <h4>
+                          <% if(toDayPercent>0) { %>
+                          <a href="#" class="text_color_5">
+                            <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
+                          </a>
+                          <% } else { %>
+                          <a href="#" style="color: rgb(237, 47, 47)">
+                            <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
+                          </a>
+                          <% } %>
+                        </h4>
                         <p>Evolution des ventes</p>
                       </div>
                     </div>

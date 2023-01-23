@@ -4,7 +4,10 @@ const { produitQueries } = require('../requests/produitQueries');
 const { venteQueries } = require('../requests/venteQueries');
 const { formatAmount } = require('../utils/formatAmount');
 const { formatTime } = require('../utils/formatTime');
-const { generateYears } = require('../utils/generateYear');
+const { generateYears, formatDate } = require('../utils/generateYear');
+const moment = require('moment');
+const { getPercent } = require('../utils/getPercent');
+
 exports.dashboard = async (req, res) => {
   if (req.session.user) {
     let totalemploye;
@@ -13,31 +16,45 @@ exports.dashboard = async (req, res) => {
     const userId = session.id;
     try {
       const Employe = await employeQueries.getEmployeByEtablissement(userId);
-      console.log('👉 👉 👉  ~ file: dashboard.js:12 ~ Employe', Employe);
       const Produit = await produitQueries.getProduitBySession(userId);
-      console.log('👉 👉 👉  ~ file: dashboard.js:13 ~ Produit', Produit);
       const Vente = await venteQueries.getVentes({
         travail_pour: userId,
         status_commande: 'Validée',
       });
-      console.log('👉 👉 👉  ~ file: dashboard.js:16 ~ Vente', Vente);
 
       let employe = Employe.result;
       let prod = Produit.result;
       let vente = Vente.result;
+      // ( (nombre final - nombre initial) / nombre initial ) * 100
 
       let venteByDay = vente.reduce((acc, item) => {
         const date = new Date(item.createdAt);
-        const day = date.getDate();
-        const month = date.getMonth() + 1;
-        const year = date.getFullYear();
-        const key = `${formatTime(month)}/${formatTime(day)}/${year}`;
+
+        const key = formatDate(date);
         if (!acc[key]) {
           acc[key] = [];
         }
         acc[key].push(item);
         return acc;
       }, {});
+
+      const yesterdayKey = formatDate(
+        moment(new Date()).subtract(1, 'days').toDate()
+      );
+      const toDayKey = formatDate(new Date());
+
+      const yesterday = venteByDay[yesterdayKey] || [];
+      const today = venteByDay[toDayKey] || [];
+
+      const yesterdayTotal = yesterday.reduce((acc, item) => {
+        return acc + item.prix;
+      }, 0);
+
+      const todayTotal = today.reduce((acc, item) => {
+        return acc + item.prix;
+      }, 0);
+
+      const toDayPercent = getPercent(yesterdayTotal, todayTotal);
 
       const totalVente = vente.reduce((acc, item) => {
         return acc + item.prix;
@@ -51,6 +68,7 @@ exports.dashboard = async (req, res) => {
         user: session,
         years: generateYears(),
         months: MONTHS,
+        toDayPercent: toDayPercent.toFixed(2),
       });
     } catch (e) {
       console.log('err', e);
