@@ -49,17 +49,11 @@ db();
 const SaveUSer = io.of('/inscription').use(Serveur.getSharedSession());
 SaveUSer.on('connection', (socket) => {
   socket.on('setUser', async (data) => {
-    let log = {
-      email: data.email,
-      password: data.password,
-    };
-
     const Result = await userQueries.setUser(data);
     if (Result.etat == false) {
       socket.emit('bad');
     } else {
       if (Result !== null) {
-        console.log(Result, 'zooooo');
         socket.emit('saved');
         socket.emit('loginsuccess', '/dashboard');
       }

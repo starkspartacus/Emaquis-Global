@@ -10,9 +10,9 @@ const UserSchema = new Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     numero: { type: String, required: true },
-    adresse: { type: String, required: true },
-    country: { type: String, required: true },
-    city: { type: String, required: true },
+    adresse: { type: String },
+    country: { type: String },
+    city: { type: String },
     isAdmin: {
       type: Boolean,
       default: false,
