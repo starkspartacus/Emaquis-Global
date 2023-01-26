@@ -22,34 +22,23 @@ exports.vente = async (req, res) => {
 exports.ventePost = async (req, res) => {
   try {
     let sess = req.session.user;
-    console.log('👉 👉 👉  ~ file: vente.js:25 ~ sess', sess);
     const vente = req.body;
-    console.log('👉 👉 👉  ~ file: vente.js:26 ~ vente', vente);
 
     let Vente = {};
-    const Produit = await produitQueries.getProduit();
-    // let rest;
-    // let uniq;
-
-    let resultqte = [];
     let prize = [];
-    // let qte = vente.quantite;
     let sum = 0;
+
     if (vente !== null) {
-      let prod = Produit.result;
-      prod.forEach(async (el) => {
-        if (sess.travail_pour == el.session) {
-          for (let i = 0; i < vente.produit.length; i++) {
-            if (vente.produit[i] == el._id) {
-              resultqte.push(el.quantite);
-            }
-          }
-        }
-        prize.push(el.prix_vente);
-      });
+      // get the price of each product
+      for (let prodId of vente.produit) {
+        const currentProduct = await produitQueries.getProduitById(prodId);
+        prize.push(currentProduct.result.prix_vente);
+      }
+
       for (let i = 0; i < Math.min(vente.quantite.length, prize.length); i++) {
         sum += vente.quantite[i] * prize[i];
       }
+
       let mory = {
         produit: vente.produit,
         quantite: vente.quantite,
@@ -69,7 +58,6 @@ exports.ventePost = async (req, res) => {
           { new: true },
           (err, data) => {
             if (err) {
-              console.log('error update', err);
               return;
             }
           }
@@ -170,7 +158,6 @@ exports.editventePost = async (req, res) => {
 
 exports.editStatusVente = async (req, res) => {
   const vente_id = req.params.venteId;
-  console.log('👉 👉 👉  ~ file: vente.js:160 ~ vente_id', vente_id);
 
   const vente = await Ventes.findOne({
     _id: vente_id,

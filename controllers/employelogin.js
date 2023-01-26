@@ -27,10 +27,7 @@ exports.employeloginPost = async (req, res) => {
     ) {
       const token = jwt.sign(
         { employe_id: employelogin._id, email },
-        process.env.SECRET,
-        {
-          expiresIn: '1h',
-        }
+        process.env.SECRET
       );
 
       employelogin.token = token;

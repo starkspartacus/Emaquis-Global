@@ -1,11 +1,14 @@
-const { venteQueries } = require("../requests/venteQueries");
+const { venteQueries } = require('../requests/venteQueries');
 
 exports.commande = async (req, res) => {
   try {
-    sess = req.body.session;
+    const travail_pour = req.body.session || req.session.user.travail_pour;
+
+    const employeId = req.body.employe || req.session.user._id;
 
     const vente = await venteQueries.getVentes({
-      travail_pour: sess,
+      travail_pour: travail_pour,
+      employe: employeId,
     });
 
     if (vente) {
@@ -14,7 +17,7 @@ exports.commande = async (req, res) => {
   } catch (e) {
     res.json({
       etat: false,
-      data: "Error",
+      data: 'Error',
     });
   }
 };
@@ -35,13 +38,13 @@ exports.commandePost = async (req, res) => {
     } else {
       res.json({
         etat: false,
-        data: "erreur",
+        data: 'erreur',
       });
     }
   } catch (e) {
     res.json({
       etat: false,
-      data: "Error",
+      data: 'Error',
     });
   }
 };
