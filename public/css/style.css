@@ -14212,11 +14212,13 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 
 /* line 36, G:/admin_project/8 admin/management_html/scss/_crm.scss */
 .user_crm_wrapper .crm_reports_bnner {
-  background-image: url(../img/crm/bg.svg);
+  background-image: url(../img/_logo_.png);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  border-radius: 15px;
+  width: 200px;
+  margin-top: 30px;
+  border-radius: 5px;
   padding: 40px 30px;
 }
 
@@ -14230,7 +14232,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 
 /* line 49, G:/admin_project/8 admin/management_html/scss/_crm.scss */
 .user_crm_wrapper .crm_reports_bnner p {
-  color: #c8b4de;
+  color: #91e388;
   font-size: 12px;
   font-weight: 400;
   line-height: 20px;
