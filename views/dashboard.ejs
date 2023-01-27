@@ -239,7 +239,7 @@
                 <div class="white_card_body">
                   <div id="chart-currently"></div>
                   <div class="monthly_plan_wraper">
-                    <% if(productMostSold) { %>
+                    <% if(productMostSold?.produit) { %>
                     <div
                       class="single_plan d-flex align-items-center justify-content-between"
                     >
@@ -250,8 +250,8 @@
                         <div>
                           <h5>Produit le plus vendu</h5>
                           <span
-                            ><%= productMostSold.produit.nom_produit %> x <%=
-                            productMostSold.quantite %></span
+                            ><%= productMostSold?.produit?.nom_produit %> x <%=
+                            productMostSold?.quantite %></span
                           >
                         </div>
                       </div>
