@@ -29,7 +29,6 @@ exports.dashboard = async (req, res) => {
       let employe = Employe.result;
       let prod = Produit.result;
       let vente = Vente.result;
-      // ( (nombre final - nombre initial) / nombre initial ) * 100
 
       let venteByDay = vente.reduce((acc, item) => {
         const date = new Date(item.createdAt);
@@ -65,13 +64,52 @@ exports.dashboard = async (req, res) => {
           return acc + item.prix;
         }, 0) || 0;
 
+      const allProductsByDay = venteByDay[toDayKey]?.reduce((acc, item) => {
+        let products = [];
+        for (let [key, value] of Object.entries(item.produit)) {
+          products.push({
+            ...value._doc,
+            quantite: Number(item.quantite[key] || item.quantite[0]),
+          });
+        }
+
+        return [...acc, ...products];
+      }, []);
+
+      const allProductsByDayGrouped =
+        allProductsByDay?.reduce((acc, item) => {
+          const productId = item.produit._id;
+          const productFind = acc.find(
+            (item) => item.produit._id === productId
+          );
+
+          if (productFind) {
+            productFind.prix_vente += item.prix_vente * item.quantite;
+            productFind.quantite += item.quantite;
+          } else {
+            acc.push({
+              ...item,
+              prix_vente: item.prix_vente * item.quantite,
+            });
+          }
+
+          return acc;
+        }, []) || [];
+
+      const productMostSold = allProductsByDayGrouped?.reduce(
+        (acc, item) => {
+          if (acc.quantite < item.quantite) {
+            return item;
+          }
+          return acc;
+        },
+        {
+          quantite: 0,
+        }
+      );
+
       const objectivePercent =
         (totalVente / (settings?.result.objective || 1)) * 100;
-
-      console.log(
-        '👉 👉 👉  ~ file: dashboard.js:69 ~ objectivePercent',
-        objectivePercent
-      );
 
       res.render('dashboard', {
         totalemploye: employe.length,
@@ -85,6 +123,8 @@ exports.dashboard = async (req, res) => {
         objective: settings?.result.objective || 0,
         objectivePercent:
           objectivePercent > 100 ? 100 : objectivePercent.toFixed(2),
+        allProductsByDayGrouped,
+        productMostSold,
       });
     } catch (e) {
       console.log('err', e);

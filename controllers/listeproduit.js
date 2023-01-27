@@ -3,6 +3,7 @@ const { produitQueries } = require('../requests/produitQueries');
 exports.produit = async (req, res) => {
   if (req.session.user) {
     const session = req.session.user;
+
     try {
       const Produit = await produitQueries.getProduit();
 
@@ -12,11 +13,12 @@ exports.produit = async (req, res) => {
         const produit = await produitQueries.getProduit(Produitid);
         let prod = produit.result;
         prod.forEach(async (el) => {
-          if (session.id == el.session) {
+          if (session.id == el.session || session.travail_pour == el.session) {
             Result.push(el);
           }
         });
       }
+
       res.render('listeproduit', { Result, user: req.session.user });
     } catch (e) {
       console.log('err', e);

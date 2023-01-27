@@ -12,7 +12,9 @@
     <%- include('partial/head.ejs') %>
   </head>
   <body class="crm_body_bg">
-    <%- include('partial/sidebar.ejs') %>
+  
+      <%- include(user.role === "Barman"?'partial/emsidebar.ejs':'partial/sidebar.ejs') %>
+   
     <!--/ sidebar  -->
 
     <section class="main_content dashboard_part large_header_bg">
