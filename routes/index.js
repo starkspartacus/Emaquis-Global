@@ -31,7 +31,7 @@ const contactcontroller = require('../controllers/contact');
 const faqcontroller = require('../controllers/faqcontroller');
 const copyrightcontroller = require('../controllers/copyrightcontroller');
 const profilecontroller = require('../controllers/profilecontroller');
-
+const summarycontroller = require('../controllers/summary');
 const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
 
@@ -49,7 +49,7 @@ const upload = multer({ storage: storage });
 require('dotenv').config();
 const fs = require('fs');
 const S3 = require('aws-sdk/clients/s3');
-const { authSuperAdmin } = require('../middleware/auth');
+const { authSuperAdmin, checkAuthUser } = require('../middleware/auth');
 
 var router = express.Router();
 
@@ -99,16 +99,18 @@ router.post('/listcategorie', listcategoriecontroller.seecatPost);
 router.get('/listeproduit', listeproduitcontroller.produit);
 router.post('/listeproduit', listeproduitcontroller.produitPost);
 
-router.get('/vente', ventecontroller.vente);
+router.get('/vente', checkAuthUser, ventecontroller.vente);
 router.post('/vente', ventecontroller.ventePost);
 router.post('/vente/status/:venteId', ventecontroller.editStatusVente);
 
 router.post('/retournerproduit', retourcontroller.addbackPost);
 router.get('/retournerproduit', retourcontroller.addback);
 router.get('/listeRetour', retourcontroller.listeRetour);
+router.get('/retournerproduit/:code', retourcontroller.getProductReturn);
+
 router.post('/historiquevente', ventecontroller.venteListe);
 
-router.get('/commande', commandecontroller.commande);
+router.post('/commandes', commandecontroller.commande);
 router.post('/commande', commandecontroller.commandePost);
 
 router.get('/contact', contactcontroller.contact);
@@ -136,6 +138,7 @@ router.post('/employelogin', employelogincontroller.employeloginPost);
 router.get('/faq', faqcontroller.faq);
 router.get('/copyright', copyrightcontroller.copyright);
 router.get('/profile', profilecontroller.profile);
+router.post('/profile', profilecontroller.editUserProfile);
 
 router.get(
   '/ajouter-produit-global',
@@ -144,6 +147,9 @@ router.get(
 );
 router.get('/ajouterproduit', ajouterproduitcontroller.addproduit);
 router.get('/emajouterproduit', emajouterproduitcontroller.addproduit);
+
+router.get('/summary', summarycontroller.summary);
+router.post('/summary', summarycontroller.summaryPost);
 // router.post("/ajouterproduit", ajouterproduitcontroller.addproduitPost);
 
 router.post(

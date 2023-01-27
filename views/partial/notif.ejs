@@ -84,11 +84,14 @@
             <img src="img/aniki.jpg" alt="#" />
             <div class="profile_info_iner">
               <div class="profile_author_name">
-                <p><%= locals.user?.nom %> <%= locals.user?.prenom %></p>
+                <p>
+                  <%= locals.user?.nom %> <%= locals.user?.prenom ||
+                  locals.user?.prenoms %>
+                </p>
                 <h5><%= locals.user?.role %></h5>
               </div>
               <div class="profile_info_details">
-                <a href="#">Mon Profil </a>
+                <a href="/profile">Mon Profil </a>
                 <a href="#">Reglage</a>
                 <a href="/deconnexion">Deconnexion </a>
               </div>

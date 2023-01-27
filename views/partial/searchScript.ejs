@@ -2,19 +2,22 @@
   $(document).ready(() => {
     const input = $('#search');
     const searchBtn = $('#search__btn');
-    const table = $('table').DataTable();
 
-    table.destroy();
+    if ($('table') && $('table').DataTable) {
+      const table = $('table').DataTable();
 
-    $('.dataTables_info').hide();
+      table.destroy();
 
-    const list = $('table').DataTable({
-      responsive: true,
-    });
+      $('.dataTables_info').hide();
 
-    searchBtn.on('click', () => {
-      const search = input.val();
-      list.search(search).draw();
-    });
+      const list = $('table').DataTable({
+        responsive: true,
+      });
+
+      searchBtn.on('click', () => {
+        const search = input.val();
+        list.search(search).draw();
+      });
+    }
   });
 </script>

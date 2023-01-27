@@ -78,6 +78,7 @@ exports.addproduitPost = async (req, res) => {
     if (produit_exist.etat && produit_exist.result) {
       result = await produitQueries.updateProduit(produit_exist.result._id, {
         ...data,
+        quantite: produit_exist.result.quantite + data.quantite,
         historiques: [...produit_exist.result.historiques, newHistorique],
       });
     } else {

@@ -20,6 +20,7 @@ const session = require('express-session')({
 const sharedSession = require('express-socket.io-session');
 
 const indexRouters = require('./routes/index');
+const { forceSession } = require('./middleware/auth');
 // const adminRouters = require("./routes/admin.router");
 //const usersRouter = require("./routes/users.router");
 
@@ -52,6 +53,7 @@ const Serveur = class {
     // this.app.use(bodyParser.json());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(forceSession);
     // this.app.use(function (req, res, next) {
     //   res.locals.user = req.session.user;
     //   next();

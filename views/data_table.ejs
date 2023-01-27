@@ -69,42 +69,32 @@
                       <table class="table lms_table_active3">
                         <thead>
                           <tr>
+                            <th scope="col">Code</th>
                             <th scope="col">Produit</th>
                             <th scope="col">Categories</th>
                             <th scope="col">Vendeur / Vendeuse</th>
                             <th scope="col">Quantité</th>
                             <th scope="col">Prix</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Date</th>
                           </tr>
                         </thead>
                         <tbody>
+                          <% for(let vente of ventes) {%>
                           <tr>
-                            <td style="font-size: 15px">Ivoire 66</td>
-                            <td style="font-size: 15px">Bierre</td>
-                            <td style="font-size: 15px">ines kouassi</td>
-                            <td style="font-size: 15px">10</td>
-                            <td style="font-size: 15px">650 FCFA</td>
-                            <td style="font-size: 15px">
-                              <div
-                                class="checkbox_wrap d-flex align-items-center"
-                              >
-                                <label class="lms_checkbox_1" for="course_1">
-                                  <input type="checkbox" id="course_1" />
-                                  <div class="slider-check round"></div>
-                                </label>
-                              </div>
-                            </td>
+                            <td><%= vente.code %></td>
+                            <td><%= vente.produit %></td>
+                            <td><%= vente.categories%></td>
+
+                            <td><%= vente.employe%></td>
+
+                            <td><%= vente.quantite%></td>
+
+                            <td><%= vente.prix%></td>
+                            <td><%= vente.status_commande %></td>
+                            <td><%= vente.createdAt %></td>
                           </tr>
-                          <tr>
-                            <td style="font-size: 15px">Orangina</td>
-                            <td style="font-size: 15px">Limonade</td>
-                            <td style="font-size: 15px">ines kouassi</td>
-                            <td style="font-size: 15px">5</td>
-                            <td style="font-size: 15px">500 FCFA</td>
-                            <td style="font-size: 15px">
-                              <a href="#" class="status_btn">Commande livrée</a>
-                            </td>
-                          </tr>
+                          <% } %>
                         </tbody>
                       </table>
                     </div>

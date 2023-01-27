@@ -1,5 +1,4 @@
-const produitModel = require("../models/produit.model");
-const Vente = require("../models/vente.model");
+const Vente = require('../models/vente.model');
 
 exports.venteQueries = class {
   static setVente({
@@ -44,7 +43,12 @@ exports.venteQueries = class {
   static getVente() {
     return new Promise(async (next) => {
       Vente.find()
-        .populate("produit")
+        .populate({
+          path: 'produit',
+          populate: {
+            path: 'produit',
+          },
+        })
         .then((data) => {
           next({
             etat: true,
@@ -63,8 +67,22 @@ exports.venteQueries = class {
   static getVentes(query) {
     return new Promise(async (next) => {
       Vente.find(query)
-        .populate("produit")
-        .sort("-_id")
+        .populate([
+          {
+            path: 'produit',
+            populate: {
+              path: 'produit',
+              populate: {
+                path: 'categorie',
+              },
+            },
+          },
+          {
+            path: 'employe',
+            select: 'nom prenom',
+          },
+        ])
+        .sort('-_id')
         .then((ventes) => {
           next({
             success: true,
@@ -84,6 +102,21 @@ exports.venteQueries = class {
     try {
       return new Promise(async (next) => {
         Vente.findById({ _id: id })
+          .populate([
+            {
+              path: 'produit',
+              populate: {
+                path: 'produit',
+                populate: {
+                  path: 'categorie',
+                },
+              },
+            },
+            {
+              path: 'employe',
+              select: 'nom prenom',
+            },
+          ])
           .then((data) => {
             next({
               etat: true,
