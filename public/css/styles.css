@@ -2284,11 +2284,11 @@ hr {
 /* connexion page**/
 
 .logo_connexion {
-  width: 230px;
+  width: 210px;
   height: 200px;
 }
 .body-cover {
-  background-image: url('../img/bg-connexion1.jpg');
+  background-image: url('../img/bg_connexion.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -2296,7 +2296,7 @@ hr {
   position: relative;
 }
 .bg-login {
-  background-color: rgba(250, 243, 243, 0.884);
+  background-color: rgba(229, 218, 218, 0.88);
   box-shadow: -33px 9px 7px -6px rgba(8, 5, 5, 0.82);
 }
 
@@ -2306,6 +2306,29 @@ hr {
 }
 
 /*Fin connexion page**/
+
+/* bodi_cover emconnexion**/
+
+.bodi-cover{
+  background-image: url('../img/bg-connexion1.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+}
+
+.bg-emconnexion {
+  background-color: rgba(250, 243, 243, 0.884);
+  box-shadow: -33px 9px 7px -6px rgba(8, 5, 5, 0.82);
+}
+
+.em-container {
+  left: 40%;
+  top: 70%;
+}
+
+/*fin emconnexion **/
 
 /* logo emaqui **/
 
