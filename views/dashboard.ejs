@@ -28,7 +28,7 @@
       <%- include('partial/notif.ejs') %>
       <div styl="postion:absolute;inset:0;" id="confetti"></div>
       <!--/ menu  -->
-      <div class="main_content_iner overly_inner">
+      <div class="main_content_iner overly_inner admin_dashboard">
         <div class="container-fluid p-0">
           <!-- page title  -->
           <div class="row">
@@ -203,7 +203,7 @@
             </div>
 
             <div class="col-xl-4">
-              <div class="white_card card_height_100 mb_30">
+              <div class="white_card white_card_bottom card_height_100 mb_30">
                 <div class="white_card_header">
                   <div class="box_header m-0">
                     <div class="main-title">
@@ -239,6 +239,7 @@
                 <div class="white_card_body">
                   <div id="chart-currently"></div>
                   <div class="monthly_plan_wraper">
+                    <% if(productMostSold) { %>
                     <div
                       class="single_plan d-flex align-items-center justify-content-between"
                     >
@@ -248,11 +249,15 @@
                         </div>
                         <div>
                           <h5>Produit le plus vendu</h5>
-                          <span>le produit le plus vendu</span>
+                          <span
+                            ><%= productMostSold.produit.nom_produit %> x <%=
+                            productMostSold.quantite %></span
+                          >
                         </div>
                       </div>
                     </div>
-                    <div
+                    <% } %>
+                    <!-- <div
                       class="single_plan d-flex align-items-center justify-content-between"
                     >
                       <div class="plan_left d-flex align-items-center">
@@ -280,13 +285,15 @@
                           <span>14,45 / 20</span>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-xl-4">
-              <div class="white_card card_height_100 mb_30 overflow_hidden">
+              <div
+                class="white_card white_card_bottom card_height_100 mb_30 overflow_hidden"
+              >
                 <div class="white_card_header">
                   <div class="box_header m-0">
                     <div class="main-title">
@@ -322,77 +329,38 @@
                 <div class="white_card_body pb-0">
                   <div class="Sales_Details_plan">
                     <div class="row">
+                      <% for( product of allProductsByDayGrouped) {%>
                       <div class="col-lg-6">
                         <div
                           class="single_plan d-flex align-items-center justify-content-between"
                         >
                           <div class="plan_left d-flex align-items-center">
                             <div class="thumb">
-                              <img src="img/icon2/3.svg" alt="" />
+                              <img
+                                src="<%= product.produit.image %>"
+                                alt=""
+                                style="height: 100%; object-fit: contain"
+                              />
                             </div>
                             <div>
-                              <h5>20 034 FCFA</h5>
-                              <span>VIN</span>
+                              <h5><%= product.prix_vente %> FCFA</h5>
+                              <span><%= product.produit.nom_produit %></span>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-6">
-                        <div
-                          class="single_plan d-flex align-items-center justify-content-between"
-                        >
-                          <div class="plan_left d-flex align-items-center">
-                            <div class="thumb">
-                              <img src="img/icon2/1.svg" alt="" />
-                            </div>
-                            <div>
-                              <h5>70 660 FcFA</h5>
-                              <span>CHAMPAGNE</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div
-                          class="single_plan d-flex align-items-center justify-content-between"
-                        >
-                          <div class="plan_left d-flex align-items-center">
-                            <div class="thumb">
-                              <img src="img/icon2/4.svg" alt="" />
-                            </div>
-                            <div>
-                              <h5>70 660 FcFA</h5>
-                              <span>LIMONADE</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div
-                          class="single_plan d-flex align-items-center justify-content-between"
-                        >
-                          <div class="plan_left d-flex align-items-center">
-                            <div class="thumb">
-                              <img src="img/icon2/2.svg" alt="" />
-                            </div>
-                            <div>
-                              <h5>150 660 FcFA</h5>
-                              <span>LIQUEUR</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <% } %>
                     </div>
                   </div>
                 </div>
-                <div class="chart_wrap overflow_hidden">
+                <!-- <div class="chart_wrap overflow_hidden">
                   <div id="chart4"></div>
-                </div>
+                </div> -->
               </div>
             </div>
 
             <div class="col-lg-4">
-              <div class="white_card card_height_100 mb_20">
+              <div class="white_card white_card_bottom card_height_100 mb_20">
                 <div class="white_card_header">
                   <div class="box_header m-0">
                     <div class="main-title">
@@ -450,9 +418,13 @@
                             <div class="customer d-flex align-items-center">
                               <div class="thumb_34 mr_15 mt-0">
                                 <img
-                                  class="img-fluid radius_50"
-                                  src="img/customers/pro_1.png"
+                                  src="<%= el.produit.image %>"
                                   alt=""
+                                  style="
+                                    width: 40px;
+                                    height: 40px;
+                                    object-fit: contain;
+                                  "
                                 />
                               </div>
                               <span class="f_s_12 f_w_600 color_text_5"

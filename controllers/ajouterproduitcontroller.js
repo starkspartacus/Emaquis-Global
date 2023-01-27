@@ -57,7 +57,7 @@ exports.addproduitPost = async (req, res) => {
       prix_achat: parseInt(req.body.prix_achat),
       quantite: parseInt(req.body.quantite),
       taille: req.body.taille,
-      session: req.body.session,
+      session: req.body.session || req.session.user.travail_pour,
       historiques: [],
     };
 
@@ -73,6 +73,7 @@ exports.addproduitPost = async (req, res) => {
       prix_vente: data.prix_vente,
       prix_achat: data.prix_achat,
       date: new Date(),
+      add_by: `${req.session.user.nom} ${req.session.user.prenom}`,
     };
 
     if (produit_exist.etat && produit_exist.result) {

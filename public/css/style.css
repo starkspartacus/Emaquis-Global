@@ -5742,6 +5742,11 @@ body::-webkit-scrollbar {
   padding: 5px 30px 25px 30px;
 }
 
+.admin_dashboard .white_card.white_card_bottom {
+  max-height: 400px !important;
+  overflow: scroll !important;
+}
+
 /* line 57, G:/admin_project/8 admin/management_html/scss/_dashboard_part.scss */
 .white_box_50px {
   padding: 43px 45px 38px 50px;
