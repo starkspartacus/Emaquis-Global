@@ -5,6 +5,16 @@ const { formatAmount } = require('../utils/formatAmount');
 exports.emdashboard = async (req, res) => {
   try {
     const Vente = await venteQueries.getVentes({
+      status_commande: 'Validée',
+      employe_validate_id: req.session.user?._id,
+      createdAt: {
+        $gte: new Date(new Date().setHours(0, 0, 0, 0)),
+        $lte: new Date(new Date().setHours(23, 59, 59, 999)),
+      },
+      travail_pour: req.session?.user?.travail_pour,
+    });
+
+    const VenteEntente = await venteQueries.getVentes({
       status_commande: 'En attente',
       travail_pour: req.session?.user?.travail_pour,
     });
@@ -12,24 +22,23 @@ exports.emdashboard = async (req, res) => {
 
     req.session.newSave = false;
 
-    const produit = await produitQueries.getProduit({
-      session: req.session.user.travail_pour,
-    });
-    const employes = await employeQueries.getAllEmploye({
-      travail_pour: req.session.user.travail_pour,
-      deleted: false,
-    });
+    const produit = await produitQueries.getProduitBySession(
+      req.session.user.travail_pour
+    );
+    const employes = await employeQueries.getEmployeByEtablissement(
+      req.session.user.travail_pour
+    );
 
     const sum = Vente.result.reduce((total, vente) => total + vente.prix, 0);
 
-    console.log(JSON.stringify(Vente.result, null, 2), 'ventes');
     if (req.session.user.role === 'Barman') {
       res.render('emdashboard', {
-        ventes: Vente.result,
+        ventes: VenteEntente.result,
         newSave: newSave,
         user: req.session.user,
-        Produit: produit.result,
-        emplnum: employes.length,
+        // Produit: produit.result,
+        produits: produit.result,
+        emplnum: employes.length || 0,
         sum: formatAmount(sum),
       });
     } else {

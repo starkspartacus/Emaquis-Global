@@ -18,6 +18,7 @@ exports.profile = async (req, res) => {
         ...req.session.user,
         ...user._doc,
         product_return_type: userSetting.result.product_return_type,
+        objective: userSetting.result.objective,
       },
       pays: PAYS,
       retour_produits_types: TYPE_RETOUR_PRDUITS,
@@ -62,6 +63,7 @@ exports.editUserProfile = async (req, res) => {
     if (req.body.product_return_type) {
       await settingQueries.updateSetting(user.id, {
         product_return_type: req.body.product_return_type,
+        objective: req.body.objective || 0,
       });
     }
 

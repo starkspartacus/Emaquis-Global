@@ -8,6 +8,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <title>E-maquis Admin</title>
+    <script src="js/confetti.js"></script>
     <%- include('partial/head.ejs') %>
   </head>
   <body class="crm_body_bg">
@@ -25,6 +26,7 @@
     <section class="main_content dashboard_part large_header_bg">
       <!-- menu  -->
       <%- include('partial/notif.ejs') %>
+      <div styl="postion:absolute;inset:0;" id="confetti"></div>
       <!--/ menu  -->
       <div class="main_content_iner overly_inner">
         <div class="container-fluid p-0">
@@ -169,7 +171,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-6">
+                  <!-- <div class="col-lg-6">
                     <div class="single_crm">
                       <div
                         class="crm_head crm_bg_3 d-flex align-items-center justify-content-between"
@@ -184,7 +186,7 @@
                         <p>on vera bien ce qu'on va mettre ici</p>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="crm_reports_bnner">
                   <div class="row justify-content-end">
@@ -658,7 +660,49 @@
          const year = date.getFullYear();
 
 
+        const celebriteObjective = ()=>{
+              startConfetti(
+                  {
+                      particleCount: 100,
+                      spread: 70,
+                      origin: { y: 0.6 }
+                  }
+            );
+
+
+          const canvas =   document.getElementsByTagName('canvas');
+
+          if(canvas){
+                canvas[0].style.position = 'absolute';
+                canvas[0].style.top = '0';
+                canvas[0].style.left = '0';
+                canvas[0].style.width = '100%';
+                canvas[0].style.height = '100%';
+
+
+                setTimeout(() => {
+                  stopConfetti();
+                }, 5000);
+
+          }
+      }
+
+
          const ventes = <%- JSON.stringify(venteByDay) %>;
+         const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
+
+
+         if(localStorage.getItem('celebriteObjective') && localStorage.getItem('celebriteObjectiveDate') != new Date().toLocaleDateString()){
+            localStorage.removeItem('celebriteObjective');
+            localStorage.removeItem('celebriteObjectiveDate');
+         }
+
+
+        if(objectivePercent == 100 && !localStorage.getItem('celebriteObjective')){
+            celebriteObjective();
+            localStorage.setItem('celebriteObjective', true);
+            localStorage.setItem('celebriteObjectiveDate', new Date().toLocaleDateString());
+        }
 
 
          const filterLabelsByMonth = (month, year) => {
@@ -689,7 +733,7 @@
          const ventesValues = filterVentesValuesByMonth(month,year);
 
        var options = {
-         series: [74],
+         series: [objectivePercent],
          chart: {
            height: 300,
            type: 'radialBar',

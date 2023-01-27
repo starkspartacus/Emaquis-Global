@@ -60,6 +60,90 @@
               </div>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="white_card card_height_100 mb_30">
+                <form action="" method="post" id="form_vente">
+                  <div
+                    class="alert alert-success"
+                    role="alert"
+                    style="text-align: center; display: none"
+                    id="alert-success"
+                  >
+                    Operation effectuée avec succès !
+                  </div>
+                  <div
+                    class="alert alert-danger"
+                    role="alert"
+                    style="text-align: center; display: none"
+                    id="alert-danger"
+                  >
+                    Echec de l'opération, veillez recommencer!
+                  </div>
+                  <div class="white_card_header">
+                    <div class="box_header m-0">
+                      <div class="main-title">
+                        <h3 class="m-0">Faire une vente</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="white_card_body">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="common_input mb_15">
+                          <select
+                            class="nice_Select2 nice_Select_line wide multiSelect"
+                            style="display: none"
+                            name="produit"
+                            required
+                            multiple
+                          >
+                            <option value="">Selectionner le produit</option>
+                            <% for (let i = 0; i < produits.length; i++) { %>
+                            <option value="<%= produits[i]._id %>">
+                              <%= produits[i].produit.nom_produit %>
+                            </option>
+                            <% } %>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="common_input mb_15">
+                          <input
+                            type="text"
+                            placeholder="quantite"
+                            name="quantite"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="common_input mb_15">
+                          <input
+                            type="number"
+                            placeholder="somme encaissé"
+                            name="somme_encaisse"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-6">
+                      <div class="create_report_btn mt_30">
+                        <button
+                          type="submit"
+                          class="btn_1 radius_btn d-block text-center btn-submit-vente"
+                        >
+                          Enregistrer
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-xl-8">
               <div class="white_card mb_30 card_height_100">
@@ -211,7 +295,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <% Produit.map((el)=>{ %>
+                        <% produits.map((el)=>{ %>
                         <tr>
                           <td>
                             <div class="customer d-flex align-items-center">
@@ -522,6 +606,62 @@
 
         })
       });
+
+      $('#form_vente').on('submit',(e)=>{
+        e.preventDefault();
+        const produit = $('select[name="produit"]').val();
+        const quantite = $('input[name="quantite"]').val();
+        const somme_encaisse = $('input[name="somme_encaisse"]').val();
+        // const somme_encaisse = $('#somme_encaisse').val();
+        // const monnaie = $('#monnaie').val();
+
+        const vente = {
+          produit,
+          quantite:quantite.split(','),
+          // prix,
+          somme_encaisse,
+          // monnaie
+        }
+
+        if(vente.produit.length === 0){
+          return alert('Veuillez selectionner au moins un produit');
+        }
+
+        if(vente.quantite.length === 0){
+          return alert('Veuillez selectionner au moins une quantite');
+        }
+
+        if(vente.somme_encaisse.length === 0){
+          return alert('Veuillez selectionner au moins une somme encaisse');
+        }
+
+        $('#btn-submit-vente').attr('disabled',true);
+        $('#btn-submit-vente').html('En cours...');
+
+        fetch('/vente',{
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify(vente)
+        }).then(res=>res.json()).then(data=>{
+          $('#form_vente').trigger('reset');
+          $('#btn-submit-vente').attr('disabled',false);
+          $('#btn-submit-vente').html('Enregistrer');
+
+          $('select').niceSelect('destroy').empty().niceSelect();
+        }).catch(err=>{
+          console.log('👉 👉 👉  ~ file: emdashboard.ejs:620 ~ err', err)
+          // $('#form_vente').trigger('reset');
+          $('#btn-submit-vente').attr('disabled',false);
+          $('#btn-submit-vente').html('Enregistrer');
+        })
+
+        // console.log('👉 👉 👉  ~ file: emdashboard.ejs:620 ~ vente', vente)
+
+
+        // socket.emit('vente',vente);
+      })
     </script>
   </body>
 </html>

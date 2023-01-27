@@ -7,10 +7,11 @@ const { formatTime } = require('../utils/formatTime');
 const { generateYears, formatDate } = require('../utils/generateYear');
 const moment = require('moment');
 const { getPercent } = require('../utils/getPercent');
+const { settingQueries } = require('../requests/settingQueries');
 
 exports.dashboard = async (req, res) => {
   if (req.session.user) {
-    let totalemploye;
+    // let totalemploye;
     res.setHeader('Content-Type', 'text/html');
     const session = req.session.user;
     const userId = session.id;
@@ -21,6 +22,9 @@ exports.dashboard = async (req, res) => {
         travail_pour: userId,
         status_commande: 'Validée',
       });
+
+      const settings = await settingQueries.getSettingByUserId(userId);
+      console.log('👉 👉 👉  ~ file: dashboard.js:27 ~ settings', settings);
 
       let employe = Employe.result;
       let prod = Produit.result;
@@ -56,9 +60,18 @@ exports.dashboard = async (req, res) => {
 
       const toDayPercent = getPercent(yesterdayTotal, todayTotal);
 
-      const totalVente = vente.reduce((acc, item) => {
-        return acc + item.prix;
-      }, 0);
+      const totalVente =
+        venteByDay[toDayKey]?.reduce((acc, item) => {
+          return acc + item.prix;
+        }, 0) || 0;
+
+      const objectivePercent =
+        (totalVente / (settings?.result.objective || 1)) * 100;
+
+      console.log(
+        '👉 👉 👉  ~ file: dashboard.js:69 ~ objectivePercent',
+        objectivePercent
+      );
 
       res.render('dashboard', {
         totalemploye: employe.length,
@@ -69,6 +82,9 @@ exports.dashboard = async (req, res) => {
         years: generateYears(),
         months: MONTHS,
         toDayPercent: toDayPercent.toFixed(2),
+        objective: settings?.result.objective || 0,
+        objectivePercent:
+          objectivePercent > 100 ? 100 : objectivePercent.toFixed(2),
       });
     } catch (e) {
       console.log('err', e);

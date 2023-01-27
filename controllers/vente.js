@@ -165,7 +165,13 @@ exports.editStatusVente = async (req, res) => {
   });
 
   if (vente) {
-    Ventes.updateOne({ _id: vente_id }, { status_commande: 'Validée' })
+    Ventes.updateOne(
+      { _id: vente_id },
+      { status_commande: 'Validée', employe_validate_id: req.session.user._id },
+      {
+        new: true,
+      }
+    )
       .then((r) => {
         req.session.newSave = true;
         res.redirect('/emdashboard');
