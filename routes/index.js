@@ -31,7 +31,7 @@ const contactcontroller = require('../controllers/contact');
 const faqcontroller = require('../controllers/faqcontroller');
 const copyrightcontroller = require('../controllers/copyrightcontroller');
 const profilecontroller = require('../controllers/profilecontroller');
-const summarycontroller = require('../controllers/summary');
+const summarycontroller = require('../controllers/summary')
 const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
 
@@ -49,7 +49,7 @@ const upload = multer({ storage: storage });
 require('dotenv').config();
 const fs = require('fs');
 const S3 = require('aws-sdk/clients/s3');
-const { authSuperAdmin, checkAuthUser } = require('../middleware/auth');
+const { authSuperAdmin } = require('../middleware/auth');
 
 var router = express.Router();
 
@@ -99,7 +99,7 @@ router.post('/listcategorie', listcategoriecontroller.seecatPost);
 router.get('/listeproduit', listeproduitcontroller.produit);
 router.post('/listeproduit', listeproduitcontroller.produitPost);
 
-router.get('/vente', checkAuthUser, ventecontroller.vente);
+router.get('/vente', ventecontroller.vente);
 router.post('/vente', ventecontroller.ventePost);
 router.post('/vente/status/:venteId', ventecontroller.editStatusVente);
 
@@ -109,6 +109,7 @@ router.get('/listeRetour', retourcontroller.listeRetour);
 router.get('/retournerproduit/:code', retourcontroller.getProductReturn);
 
 router.post('/historiquevente', ventecontroller.venteListe);
+
 
 router.post('/commandes', commandecontroller.commande);
 router.post('/commande', commandecontroller.commandePost);

@@ -6,13 +6,10 @@ const Ventes = require('../models/vente.model');
 const Retours = require('../models/retourproduit.model');
 exports.vente = async (req, res) => {
   try {
-    const productRes = await produitQueries.getProduitBySession(
-      req.session.user.travail_pour
-    );
+    const productRes = await produitQueries.getProduit();
 
     res.render('vente', {
       produits: productRes.result || [],
-      user: req.session.user,
     });
   } catch (error) {
     res.redirect(error);
@@ -21,57 +18,60 @@ exports.vente = async (req, res) => {
 
 exports.ventePost = async (req, res) => {
   try {
-    let sess = req.session.user;
+    sess = req.session.user;
     const vente = req.body;
 
     let Vente = {};
+    const Produit = await produitQueries.getProduit();
+    let rest;
+    let uniq;
+
+    let resultqte = [];
     let prize = [];
+    let qte = vente.quantite;
     let sum = 0;
-
     if (vente !== null) {
-      // get the price of each product
-      for (let prodId of vente.produit) {
-        const currentProduct = await produitQueries.getProduitById(prodId);
-        prize.push(currentProduct.result.prix_vente);
-      }
-
+      let prod = Produit.result;
+      prod.forEach(async (el) => {
+        if (vente.travail_pour == el.session) {
+          for (let i = 0; i < vente.produit.length; i++) {
+            if (vente.produit[i] == el._id) {
+              resultqte.push(el.quantite);
+            }
+          }
+        }
+        prize.push(el.prix_vente);
+      });
       for (let i = 0; i < Math.min(vente.quantite.length, prize.length); i++) {
         sum += vente.quantite[i] * prize[i];
       }
-
       let mory = {
         produit: vente.produit,
         quantite: vente.quantite,
-        employe: sess._id,
-        travail_pour: sess.travail_pour,
+        employe: vente.employe,
+        travail_pour: vente.travail_pour,
         status_commande: 'En attente',
         prix: sum,
         somme_encaisse: vente.somme_encaisse,
         monnaie: vente.somme_encaisse - sum,
       };
+      console.log('👉 👉 👉  ~ file: vente.js ~ line 58 ~ mory', mory);
       // il fait pas l setvente or il fait update  de produit
       Vente = await venteQueries.setVente(mory);
       vente.produit.forEach((produit_id, index) => {
         Produits.updateOne(
-          { session: sess.travail_pour, _id: produit_id },
+          { session: vente.travail_pour, _id: produit_id },
           { $inc: { quantite: -vente.quantite[index] } },
           { new: true },
           (err, data) => {
+            console.log('👉 👉 👉  ~ file: vente.js ~ line 65 ~ data', data);
             if (err) {
+              console.log('error update', err);
               return;
             }
           }
         );
       });
-
-      const venteRes = await venteQueries.getVentesById(Vente.result?._id);
-
-      if (req.app.io) {
-        console.log(req.io, sess.travail_pour);
-        req.app.io.emit(`${sess.travail_pour}-vente`, {
-          vente: venteRes.result,
-        });
-      }
 
       res.json({
         etat: true,
@@ -158,6 +158,7 @@ exports.editventePost = async (req, res) => {
 
 exports.editStatusVente = async (req, res) => {
   const vente_id = req.params.venteId;
+  console.log('👉 👉 👉  ~ file: vente.js:160 ~ vente_id', vente_id);
 
   const vente = await Ventes.findOne({
     _id: vente_id,
@@ -165,13 +166,7 @@ exports.editStatusVente = async (req, res) => {
   });
 
   if (vente) {
-    Ventes.updateOne(
-      { _id: vente_id },
-      { status_commande: 'Validée', employe_validate_id: req.session.user._id },
-      {
-        new: true,
-      }
-    )
+    Ventes.updateOne({ _id: vente_id }, { status_commande: 'Validée' })
       .then((r) => {
         req.session.newSave = true;
         res.redirect('/emdashboard');
@@ -182,9 +177,8 @@ exports.editStatusVente = async (req, res) => {
 
 exports.venteListe = async (req, res) => {
   try {
-    // const maquisID = req.body.id;
-    console.log(req.session.user._id);
-    const maquiSell = await Ventes.find({ travail_pour: req.session._id });
+    const maquisID = req.body.id;
+    const maquiSell = await Ventes.find({ travail_pour: maquisID });
     res.json({
       etat: true,
       historique_vente: maquiSell,
