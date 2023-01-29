@@ -642,8 +642,7 @@
          const date = new Date();
          const month = date.getMonth()+1;
          const year = date.getFullYear();
-
-
+      
         const celebriteObjective = ()=>{
               startConfetti(
                   {
@@ -670,10 +669,20 @@
 
           }
       }
+              const ventes = <%- JSON.stringify(venteByDay) %>;
+              const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
+          //     const user_travail_pour = <%- JSON.stringify(user.travail_pour) %>;
+          // const socket = io();
+          // socket.on('connect', () => {
+          //   socket.on(`${user_travail_pour}-editvente`,(data)=>{
+          //     $.notify("Vous avez une vente  !", "success");
+          //     const ventes = <%- JSON.stringify(venteByDay) %>;
+          //     const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
 
-
-         const ventes = <%- JSON.stringify(venteByDay) %>;
-         const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
+          //   })
+          // })
+        //  const ventes = <%- JSON.stringify(venteByDay) %>;
+        //  const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
 
 
          if(localStorage.getItem('celebriteObjective') && localStorage.getItem('celebriteObjectiveDate') != new Date().toLocaleDateString()){
@@ -848,7 +857,7 @@
        })
 
 
-       $('#chart_year').on('change',function(){
+      $('#chart_year').on('change',function(){
 
         console.log(this.value)
         const month = $('#chart_month').val();
@@ -993,7 +1002,10 @@
        var chart = new ApexCharts(document.querySelector('#chart4'), options);
        chart.render();
     </script>
+
+
     <!-- JAVASCRIPTS -->
+
 
     <script src="../plugins/jquery/jquery.min.js"></script>
     <script src="../plugins/bootstrap/bootstrap.min.js"></script>

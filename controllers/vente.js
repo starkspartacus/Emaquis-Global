@@ -102,6 +102,7 @@ exports.editventePost = async (req, res) => {
     let resultqte = [];
     let prize = [];
     let Retourproduit = {};
+   
 
     /// 1- remboursement total(on rembourse tout)(on recalcul le prix de vente avec le stock)
     //  2- remboursement partiel(on rembourse partiellement)(on deduire la somme dans la caisse)
@@ -158,25 +159,38 @@ exports.editventePost = async (req, res) => {
 
 exports.editStatusVente = async (req, res) => {
   const vente_id = req.params.venteId;
-
+  let sess = req.session.user;
   const vente = await Ventes.findOne({
     _id: vente_id,
     status_commande: 'En attente',
   });
+ 
 
   if (vente) {
     Ventes.updateOne(
       { _id: vente_id },
       { status_commande: 'Validée', employe_validate_id: req.session.user._id },
+      
       {
         new: true,
       }
+      
     )
       .then((r) => {
         req.session.newSave = true;
         res.redirect('/emdashboard');
       })
       .catch((err) => res.redirect('/emdashboard'));
+
+      const venteRes = await venteQueries.getVentesById(sess.travail_pour);
+
+      if (req.app.io) {
+        console.log(req.app.io, sess.travail_pour,"lkfjdkfjdlfjldkfjk");
+        req.app.io.emit(`${sess.travail_pour}-editvente`, {
+          vente: venteRes.result,
+        });
+      }
+      
   }
 };
 
