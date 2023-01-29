@@ -14186,7 +14186,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 
 /* line 11, G:/admin_project/8 admin/management_html/scss/_crm.scss */
 .user_crm_wrapper .single_crm .crm_head {
-  background: #ff7ea5;
+  background: #98ED58;
   padding: 8px 20px;
   border-radius: 13px;
 }
@@ -14212,7 +14212,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 .user_crm_wrapper .single_crm .crm_body p {
   font-size: 14px;
   color: #9b9aba;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 /* line 36, G:/admin_project/8 admin/management_html/scss/_crm.scss */

@@ -7,8 +7,13 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>E-maquis Admin</title>
+    <title>E-maquis Barman(aid)</title>
     <%- include('partial/head.ejs') %>
+    <link rel="stylesheet" href="../plugins/aos/aos.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
+
   </head>
   <body class="crm_body_bg">
     <style>
@@ -43,12 +48,12 @@
                 class="page_title_box d-flex flex-wrap align-items-center justify-content-between"
               >
                 <div class="page_title_left d-flex align-items-center">
-                  <h3 class="f_s_25 f_w_700 dark_text mr_30">Barman</h3>
+                  <h3 class="f_s_25 f_w_700 dark_text mr_30">Barman(aid)</h3>
                   <ol class="breadcrumb page_bradcam mb-0">
                     <li class="breadcrumb-item">
                       <a href="javascript:void(0);">Acceuil</a>
                     </li>
-                    <li class="breadcrumb-item active">Analyse</li>
+
                   </ol>
                 </div>
                 <div class="page_title_right">
@@ -84,7 +89,9 @@
                   <div class="white_card_header">
                     <div class="box_header m-0">
                       <div class="main-title">
-                        <h3 class="m-0">Faire une vente</h3>
+
+                          <h3 class="m-0">Faire une vente</h3>
+
                       </div>
                     </div>
                   </div>
@@ -290,9 +297,13 @@
                             <div class="customer d-flex align-items-center">
                               <div class="thumb_34 mr_15 mt-0">
                                 <img
-                                  class="img-fluid radius_50"
-                                  src="img/customers/pro_1.png"
-                                  alt=""
+                                    src="<%= el.produit.image %>"
+                                    alt="image produit"
+                                    style="
+                                    width: 40px;
+                                    height: 40px;
+                                    object-fit: contain;
+                                  "
                                 />
                               </div>
                               <span class="f_s_12 f_w_600 color_text_5">
@@ -652,5 +663,6 @@
         // socket.emit('vente',vente);
       })
     </script>
+    <script src="../plugins/aos/aos.js"></script>
   </body>
 </html>
