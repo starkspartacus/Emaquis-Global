@@ -51,18 +51,20 @@ exports.addproduitGlobal = async (req, res) => {
 
 exports.addproduitPost = async (req, res) => {
   if (req.session.user) {
+    const session = req.body.session || req.session.user.travail_pour;
     const data = {
       produit: req.body.produit,
       prix_vente: parseInt(req.body.prix_vente),
       prix_achat: parseInt(req.body.prix_achat),
       quantite: parseInt(req.body.quantite),
       taille: req.body.taille,
-      session: req.body.session || req.session.user.travail_pour,
+      session: session,
       historiques: [],
     };
 
     const produit_exist = await produitQueries.getProduitByData({
       produit: data.produit,
+      session,
       taille: data.taille,
     });
 
@@ -77,11 +79,14 @@ exports.addproduitPost = async (req, res) => {
     };
 
     if (produit_exist.etat && produit_exist.result) {
-      result = await produitQueries.updateProduit(produit_exist.result._id, {
-        ...data,
-        quantite: produit_exist.result.quantite + data.quantite,
-        historiques: [...produit_exist.result.historiques, newHistorique],
-      });
+      result = await produitQueries.updateProduit(
+        { produitId: produit_exist.result._id, session },
+        {
+          ...data,
+          quantite: produit_exist.result.quantite + data.quantite,
+          historiques: [...produit_exist.result.historiques, newHistorique],
+        }
+      );
     } else {
       data.historiques.push(newHistorique);
       result = await produitQueries.setProduit(data);

@@ -229,9 +229,9 @@ exports.produitQueries = class {
     }
   }
 
-  static updateProduit(produitId, data) {
+  static updateProduit({ produitId, session }, data) {
     return new Promise(async (next) => {
-      Produit.updateOne({ _id: produitId }, data)
+      Produit.updateOne({ _id: produitId, session }, data)
         .then((data) => {
           next({ etat: true, result: data });
         })
