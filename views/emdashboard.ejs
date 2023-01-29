@@ -128,7 +128,7 @@
                         <div class="common_input mb_15">
                           <input
                             type="number"
-                            placeholder="somme encaissé"
+                            placeholder="somme encaissée"
                             name="somme_encaisse"
                           />
                         </div>
@@ -286,12 +286,13 @@
                       <thead>
                         <tr>
                           <th scope="col">Nom de produit</th>
-
+                          <th scope="col">Prix de vente</th>
                           <th scope="col">quantité</th>
                         </tr>
                       </thead>
                       <tbody>
                         <% produits.map((el)=>{ %>
+
                         <tr>
                           <td>
                             <div class="customer d-flex align-items-center">
@@ -310,6 +311,9 @@
                                 <%= el.nom_produit %></span
                               >
                             </div>
+                          </td>
+                          <td class="f_s_12 f_w_400 color_text_6">
+                            <%= el.prix_vente %> FcFA
                           </td>
                           <td class="f_s_12 f_w_400 text-center">
                             <% if(el.quantite <= 10){ %>
