@@ -14179,8 +14179,8 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 /* line 6, G:/admin_project/8 admin/management_html/scss/_crm.scss */
 .user_crm_wrapper .single_crm {
   background: #fff;
-  border-radius: 15px;
-  margin-bottom: 15px;
+  border-radius: 5px;
+  margin-bottom: 5px;
   padding: 5px;
 }
 
