@@ -185,7 +185,7 @@ exports.editStatusVente = async (req, res) => {
       const venteRes = await venteQueries.getVentesById(sess.travail_pour);
 
       if (req.app.io) {
-        console.log(req.app.io, sess.travail_pour,"lkfjdkfjdlfjldkfjk");
+       // console.log(req.app.io, sess.travail_pour,"lkfjdkfjdlfjldkfjk");
         req.app.io.emit(`${sess.travail_pour}-editvente`, {
           vente: venteRes.result,
         });
