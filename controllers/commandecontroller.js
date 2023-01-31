@@ -14,22 +14,33 @@ exports.commande = async (req, res) => {
     });
 
     if (vente) {
-        const commandes = vente.result.map(commande => {
+         const commandes = vente.result.map(commande => {
 
-          return {
-            produits:  commande.produit.map(prod => prod.produit),
-            quantité: commande.quantite,
-            monnaie: commande.monnaie,
-            somme_encaissée: commande.somme_encaisse,
-            employé: `${commande.employe.prenom} ${commande.employe.nom}`,
-            prix: commande.prix,
-            idCommande: commande._id,
-            date: commande.createdAt
-          };
-        });
+          const produitcommande = commande.produit.map((produit, index) => {
+            return {
+              produit:{
+                nom :produit.produit.nom_produit,
+                quantité: commande.quantite[index],
+                image: produit.produit.image
+              },
+              monnaie: commande.monnaie,
+              somme_encaissée: commande.somme_encaisse,
+              employé: `${commande.employe.prenom} ${commande.employe.nom}`,
+              prix: commande.prix,
+              idCommande: commande._id,
+              date: commande.createdAt
+              
+            };
+              
+          });
+          res.json({
+            produitcommande
+            
+          });
+
+         });
         
-        res.json(commandes);
-        
+
       }
   } catch (e) {
     res.json({
