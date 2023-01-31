@@ -15,13 +15,16 @@ exports.commande = async (req, res) => {
 
     if (vente) {
         const commandes = vente.result.map(commande => {
+
           return {
-            produits: commande.produit.map(prod => prod.produit.nom_produit),
+            produits:  commande.produit.map(prod => prod.produit),
             quantité: commande.quantite,
             monnaie: commande.monnaie,
             somme_encaissée: commande.somme_encaisse,
             employé: `${commande.employe.prenom} ${commande.employe.nom}`,
             prix: commande.prix,
+            idCommande: commande._id,
+            date: commande.createdAt
           };
         });
         
