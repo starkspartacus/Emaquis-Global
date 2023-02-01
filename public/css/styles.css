@@ -41,7 +41,7 @@ h6 {
 }
 
 .img_footer {
-  width: 200px;
+  width: 165px;
   height: 150px;
 }
 
@@ -1216,7 +1216,7 @@ button:focus,
   background-image: linear-gradient(
     45deg,
     #009ec5 0%,
-    #2e7eed 20%,
+    rgba(46, 126, 237, 0.77) 20%,
     #02225b 50%
   );
 }
@@ -1244,7 +1244,7 @@ button:focus,
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 156, 44, 0.76);
   -webkit-transform: rotate(-35deg);
   transform: rotate(-35deg);
   position: absolute;
@@ -1268,7 +1268,7 @@ button:focus,
 .shapes-container .shape:nth-child(3) {
   top: 80%;
   left: 4%;
-  width: 300px;
+  width: 150px;
   height: 60px;
 }
 
@@ -2253,6 +2253,8 @@ hr {
 
 /* Landing page**/
 .btn-go {
+  padding: 20px;
+  border-radius: 50px;
 }
 
 /*Fin Landing page**/
@@ -2338,5 +2340,12 @@ hr {
 }
 
 /* fin logo emaqui **/
+
+/* icon **/
+
+
+
+
+/* fin icon **/
 
 

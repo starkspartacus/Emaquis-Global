@@ -131,13 +131,16 @@
                         class="crm_head d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="img/crm/businessman.svg" alt="" />
+                          <img src="../img/icone_employee.png" alt=""
+                               style="height: 29px"
+                          />
+                          <span style="font-weight: bold">Employés</span>
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
                       <div class="crm_body" >
-                        <h4 ><%- totalemploye %></h4>
-                        <p>Employé</p>
+                        <h3 class="text-center"><%- totalemploye %></h3>
+
                       </div>
                     </div>
                   </div>
@@ -147,13 +150,16 @@
                         class="crm_head crm_bg_1 d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="img/crm/customer.svg" alt="" />
+                          <img src="../img/icone_ventes.png"
+                               style="height: 17px; transform: rotate(-20deg)"
+                               alt="" />
+                          <span style="font-weight: bold">Ventes</span>
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
                       <div class="crm_body">
                         <h4><%= totalVente %></h4>
-                        <p>Total des ventes journalier</p>
+                        <p>Aujourd'hui</p>
                       </div>
                     </div>
                   </div>
@@ -163,7 +169,11 @@
                         class="crm_head crm_bg_2 d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="img/crm/infographic.svg" alt="" />
+                          <img src="img/crm/infographic.svg"
+                               alt=""
+                               style="height: 20px"
+                          >
+                           <span style="font-weight: bold"> Evolution</span>
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
@@ -183,22 +193,29 @@
                       </div>
                     </div>
                   </div>
-                  <!-- <div class="col-lg-6">
+
+
+                  <div class="col-lg-6">
                     <div class="single_crm">
                       <div
                         class="crm_head crm_bg_3 d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="img/crm/sqr.svg" alt="" />
+                          <img src="../img/franc_cfa.png"
+                               alt="chiffre d'affaire"
+                          style="height: 25px"
+                          />
+                          <span style="font-weight: bold">Chiffre d'affaire</span>
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
                       <div class="crm_body">
-                        <h4>2455</h4>
-                        <p>on vera bien ce qu'on va mettre ici</p>
+                        <h4>2455 Fcfa</h4>
+                        <p>Cette semaine</p>
                       </div>
                     </div>
-                  </div> -->
+                  </div>
+
                 </div>
                 <div class="crm_reports_bnner">
                   <div class="row justify-content-end">
@@ -639,12 +656,12 @@
 
     <script>
        // currently sale
-      
+
         const socket = io();
          const date = new Date();
          const month = date.getMonth()+1;
          const year = date.getFullYear();
-      
+
         const celebriteObjective = ()=>{
               startConfetti(
                   {
@@ -834,12 +851,12 @@
 
        chart_management.render();
        console.log("chart management")
-      // 
+      //
        console.log("chart management 11")
 
-         
+
           socket.on('connect', () => {
-            
+
             socket.on(`${user_travail_pour}-editvente`,(data)=>{
              alert('Edit');
              console.log("chart management 22")
