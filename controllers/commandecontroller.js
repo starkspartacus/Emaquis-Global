@@ -5,7 +5,7 @@ exports.commande = async (req, res) => {
     const travail_pour = req.body.session || req.session.user.travail_pour;
 
     const employeId = req.body.employe || req.session.user._id;
-  
+    let produitcommandes =[];
     const vente = await venteQueries.getVentes({
       travail_pour: travail_pour,
       employe: employeId,
@@ -27,19 +27,20 @@ exports.commande = async (req, res) => {
               somme_encaissée: commande.somme_encaisse,
               employé: `${commande.employe.prenom} ${commande.employe.nom}`,
               prix: commande.prix,
+              status_commande: "En attente",
               idCommande: commande._id,
-              date: commande.createdAt
+              date: commande.createdAt 
               
             };
               
           });
-          res.json({
-            produitcommande
-            
-          });
+          produitcommandes.push(produitcommande)
 
          });
-        
+         res.json({
+          produitcommandes
+   
+        });
 
       }
   } catch (e) {
