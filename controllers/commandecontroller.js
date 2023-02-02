@@ -27,6 +27,7 @@ exports.commande = async (req, res) => {
               somme_encaissée: commande.somme_encaisse,
               employé: `${commande.employe.prenom} ${commande.employe.nom}`,
               prix: commande.prix,
+              status_commande: "En attente",
               idCommande: commande._id,
               date: commande.createdAt
               
