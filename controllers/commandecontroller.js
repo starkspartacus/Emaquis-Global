@@ -29,7 +29,7 @@ exports.commande = async (req, res) => {
               prix: commande.prix,
               status_commande: "En attente",
               idCommande: commande._id,
-              date: commande.createdAt
+              date: commande.createdAt 
               
             };
               
