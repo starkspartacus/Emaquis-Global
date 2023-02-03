@@ -8,15 +8,21 @@
 
     <!-- Mobile Specific Metas
     ================================================== -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="E-maquis, Gestionnaire d'établissement">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="author" content="Haut Numérique et Médias">
-    <meta name="generator" content="E-maquis, Gestionnaire d'établissement">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="E-maquis, Gestionnaire d'établissement" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <meta name="author" content="Haut Numérique et Médias" />
+    <meta name="generator" content="E-maquis, Gestionnaire d'établissement" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
-
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../img/paresseux_sous_officiel.png"
+    />
 
     <!-- PLUGINS CSS STYLE -->
     <link
@@ -34,13 +40,16 @@
     <link href="../css/styles.css" rel="stylesheet" />
   </head>
 
-  <body class="body-wrapper bodi-cover" data-spy="scroll" data-target=".privacy-nav">
+  <body
+    class="body-wrapper bodi-cover"
+    data-spy="scroll"
+    data-target=".privacy-nav"
+  >
     <section class="user-login section">
-      <div class="container em-container ">
+      <div class="container em-container">
         <div class="row mt-5">
           <div class="col-lg-5 col-md-12">
             <div class="block m-lg-3">
-
               <!-- Content -->
               <div class="content text-center bg-emconnexion">
                 <div class="logo">
@@ -112,6 +121,7 @@
           </div>
         </div>
       </div>
+      <div id="like_button_container"></div>
     </section>
 
     <!-- To Top -->
@@ -134,10 +144,10 @@
 
     <script src="/socket.io/socket.io.js "></script>
     <script>
-      const loginSuccess = "<%= locals.success %>";
+      const loginSuccess = '<%= locals.success %>';
       if (JSON.parse(loginSuccess) === true) {
         setTimeout(() => {
-          window.location.href = "/emdashboard";
+          window.location.href = '/emdashboard';
         }, 1000);
       }
     </script>

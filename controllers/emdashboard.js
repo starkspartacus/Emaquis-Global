@@ -2,6 +2,8 @@ const { venteQueries } = require('../requests/venteQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const { employeQueries } = require('../requests/EmployeQueries');
 const { formatAmount } = require('../utils/formatAmount');
+const categorieModel = require('../models/categorie.model');
+
 exports.emdashboard = async (req, res) => {
   try {
     const Vente = await venteQueries.getVentes({
@@ -18,6 +20,9 @@ exports.emdashboard = async (req, res) => {
       status_commande: 'En attente',
       travail_pour: req.session?.user?.travail_pour,
     });
+
+    const Categories = await categorieModel.find({});
+
     const newSave = req.session.newSave;
 
     req.session.newSave = false;
@@ -40,6 +45,7 @@ exports.emdashboard = async (req, res) => {
         produits: produit.result,
         emplnum: employes.length || 0,
         sum: formatAmount(sum),
+        categories: Categories,
       });
     } else {
       res.redirect('/emconnexion');

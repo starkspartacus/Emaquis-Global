@@ -12,16 +12,19 @@
     <%- include('partial/head.ejs') %>
 
     <!-- PLUGINS CSS STYLE -->
-    <link rel="stylesheet" href="../plugins/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../plugins/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="../plugins/slick/slick.css">
-    <link rel="stylesheet" href="../plugins/slick/slick-theme.css">
-    <link rel="stylesheet" href="../plugins/fancybox/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="../plugins/aos/aos.css">
+    <link rel="stylesheet" href="../plugins/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../plugins/themify-icons/themify-icons.css" />
+    <link rel="stylesheet" href="../plugins/slick/slick.css" />
+    <link rel="stylesheet" href="../plugins/slick/slick-theme.css" />
+    <link rel="stylesheet" href="../plugins/fancybox/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="../plugins/aos/aos.css" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
-
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../img/paresseux_sous_officiel.png"
+    />
   </head>
   <body class="crm_body_bg">
     <style>
@@ -131,16 +134,18 @@
                         class="crm_head d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="../img/icone_employee.png" alt=""
-                               style="height: 29px"
+                          <img
+                            src="../img/icone_employee.png"
+                            alt=""
+                            style="height: 29px"
                           />
                           <span style="font-weight: bold">Employés</span>
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
-                      <div class="crm_body" >
-                        <h3 class="text-center"><%- totalemploye %></h3>
-
+                      <div class="crm_body">
+                        <h4><%- totalemploye %></h4>
+                        <p>Employé</p>
                       </div>
                     </div>
                   </div>
@@ -150,9 +155,11 @@
                         class="crm_head crm_bg_1 d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="../img/icone_ventes.png"
-                               style="height: 17px; transform: rotate(-20deg)"
-                               alt="" />
+                          <img
+                            src="../img/icone_ventes.png"
+                            style="height: 17px; transform: rotate(-20deg)"
+                            alt=""
+                          />
                           <span style="font-weight: bold">Ventes</span>
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
@@ -169,11 +176,12 @@
                         class="crm_head crm_bg_2 d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="img/crm/infographic.svg"
-                               alt=""
-                               style="height: 20px"
-                          >
-                           <span style="font-weight: bold"> Evolution</span>
+                          <img
+                            src="img/crm/infographic.svg"
+                            alt=""
+                            style="height: 20px"
+                          />
+                          <span style="font-weight: bold"> Evolution</span>
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
@@ -194,18 +202,20 @@
                     </div>
                   </div>
 
-
                   <div class="col-lg-6">
                     <div class="single_crm">
                       <div
                         class="crm_head crm_bg_3 d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="../img/franc_cfa.png"
-                               alt="chiffre d'affaire"
-                          style="height: 25px"
+                          <img
+                            src="../img/franc_cfa.png"
+                            alt="chiffre d'affaire"
+                            style="height: 25px"
                           />
-                          <span style="font-weight: bold">Chiffre d'affaire</span>
+                          <span style="font-weight: bold"
+                            >Chiffre d'affaire</span
+                          >
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
@@ -215,7 +225,6 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
                 <div class="crm_reports_bnner">
                   <div class="row justify-content-end">
@@ -491,8 +500,10 @@
               <div class="footer_iner text-center">
                 <p>
                   2023 © HNM - Designed by
-                  <a href="https://haut-numerique.com/"> <i class="ti-gun"></i> </a
-                  ><a href="https://haut-numerique.com/"> HNM</a> - <a href="/faq">FAQ</a>
+                  <a href="https://haut-numerique.com/">
+                    <i class="ti-gun"></i> </a
+                  ><a href="https://haut-numerique.com/"> HNM</a> -
+                  <a href="/faq">FAQ</a>
                 </p>
               </div>
             </div>
@@ -865,7 +876,6 @@
           })
           console.log("chart management 33")
        $('#chart_month').on('change',function(){
-        console.log(this.value)
         const year = $('#chart_year').val();
 
         chart_management.updateOptions({
@@ -1025,9 +1035,7 @@
        chart.render();
     </script>
 
-
     <!-- JAVASCRIPTS -->
-
 
     <script src="../plugins/jquery/jquery.min.js"></script>
     <script src="../plugins/bootstrap/bootstrap.min.js"></script>
@@ -1035,6 +1043,5 @@
     <script src="../plugins/fancybox/jquery.fancybox.min.js"></script>
     <script src="../plugins/syotimer/jquery.syotimer.min.js"></script>
     <script src="../plugins/aos/aos.js"></script>
-
   </body>
 </html>
