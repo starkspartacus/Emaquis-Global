@@ -9,11 +9,15 @@
     />
     <title>E-maquis Barman(aid)</title>
     <%- include('partial/head.ejs') %>
-    <link rel="stylesheet" href="../plugins/aos/aos.css">
+    <link rel="stylesheet" href="../plugins/aos/aos.css" />
+    <link rel="stylesheet" href="/css/vente.css" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
-
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../img/paresseux_sous_officiel.png"
+    />
   </head>
   <body class="crm_body_bg">
     <style>
@@ -31,7 +35,8 @@
       }
     </style>
 
-    <%- include('partial/emsidebar.ejs') %>
+    <%- include('partial/emsidebar.ejs') %> <%-
+    include('partial/reactScript.ejs') %>
 
     <!--/ sidebar  -->
 
@@ -53,7 +58,6 @@
                     <li class="breadcrumb-item">
                       <a href="javascript:void(0);">Acceuil</a>
                     </li>
-
                   </ol>
                 </div>
                 <div class="page_title_right">
@@ -67,7 +71,8 @@
           </div>
 
           <div class="row">
-            <div class="col-12">
+            <div id="add_vente"></div>
+            <!-- <div class="col-12">
               <div class="white_card card_height_100 mb_30">
                 <form action="" method="post" id="form_vente">
                   <div
@@ -89,9 +94,7 @@
                   <div class="white_card_header">
                     <div class="box_header m-0">
                       <div class="main-title">
-
-                          <h3 class="m-0">Faire une vente</h3>
-
+                        <h3 class="m-0">Faire une vente</h3>
                       </div>
                     </div>
                   </div>
@@ -148,7 +151,7 @@
                   </div>
                 </form>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="row">
@@ -238,16 +241,13 @@
                         class="crm_head d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="../img/icone_employee.png" alt=""
-                               style="height: 29px"
-                          />
-                          <span style="font-weight: bold">Employés</span>
+                          <img src="img/crm/businessman.svg" alt="" />
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
                       <div class="crm_body">
-                        <h4 class="text-center"><%= emplnum %></h4>
-
+                        <h4><%= emplnum %></h4>
+                        <p>Employé</p>
                       </div>
                     </div>
                   </div>
@@ -257,16 +257,13 @@
                         class="crm_head crm_bg_1 d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="../img/icone_ventes.png"
-                               style="height: 17px; transform: rotate(-20deg)"
-                               alt="" />
-                          <span style="font-weight: bold">Ventes</span>
+                          <img src="img/crm/customer.svg" alt="" />
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
                       <div class="crm_body">
                         <h4><%= sum %></h4>
-                        <p>Aujourd'hui</p>
+                        <p>Total des ventes</p>
                       </div>
                     </div>
                   </div>
@@ -304,9 +301,9 @@
                             <div class="customer d-flex align-items-center">
                               <div class="thumb_34 mr_15 mt-0">
                                 <img
-                                    src="<%= el.produit.image %>"
-                                    alt="image produit"
-                                    style="
+                                  src="<%= el.produit.image %>"
+                                  alt="image produit"
+                                  style="
                                     width: 40px;
                                     height: 40px;
                                     object-fit: contain;
@@ -364,7 +361,7 @@
                 <p>
                   2020 © HNM - Designed by
                   <a href="#"> <i class="ti-gun"></i> </a
-                  ><a href="#"> HNM</a> - <a href="/faq">FAQ</a> -
+                  ><a href="#"> ANIKI</a> - <a href="/faq">FAQ</a> -
                   <a href="/contact">Contact</a>
                 </p>
               </div>
@@ -673,6 +670,16 @@
         // socket.emit('vente',vente);
       })
     </script>
+
     <script src="../plugins/aos/aos.js"></script>
+    <script>
+      const globalCategories = <%- JSON.stringify(categories) %>;
+      const globalProducts = <%- JSON.stringify(produits) %>;
+    </script>
+    <script src="/js/products.context.js" type="text/babel"></script>
+    <script src="/js/products.js" type="text/babel"></script>
+    <script src="/js/carts.js" type="text/babel"></script>
+    <script src="/js/categories.js" type="text/babel"></script>
+    <script src="/js/vente.js" type="text/babel"></script>
   </body>
 </html>
