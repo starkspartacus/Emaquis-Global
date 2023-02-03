@@ -123,7 +123,7 @@ const CartFooter = () => {
       <button
         onClick={handleSubmit}
         className='btn btn-success'
-        disabled={loading}
+        disabled={loading || carts.length === 0}
       >
         {loading ? 'En cours...' : 'Valider'}
       </button>
