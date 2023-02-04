@@ -12,9 +12,9 @@
     <%- include('partial/head.ejs') %>
   </head>
   <body class="crm_body_bg">
-  
+
       <%- include(user.role === "Barman"?'partial/emsidebar.ejs':'partial/sidebar.ejs') %>
-   
+
     <!--/ sidebar  -->
 
     <section class="main_content dashboard_part large_header_bg">
@@ -81,7 +81,7 @@
                     style="text-align: center; display: none"
                     id="alert-danger"
                   >
-                    Echec de l'opération, veillez recommencer!
+                    Echec de l'opération, veuillez recommencer!
                   </div>
                   <div class="white_card_body">
                     <div class="row">
@@ -91,7 +91,7 @@
                           style="display: none"
                           name="categorie"
                           id="categorie"
-                         
+
                           required
                         >
                           <option value="">Selectionner la catégorie</option>
@@ -136,7 +136,7 @@
                           />
                         </div>
                       </div>
-                    
+
                       <div class="col-lg-6">
                         <div class="common_input mb_15">
                           <input
@@ -145,7 +145,7 @@
                             name="quantite"
                           />
 
-                         
+
                         </div>
                       </div>
 
@@ -179,8 +179,8 @@
 
                       <div class="col-lg-6">
                        <img src="" id="preview-image" alt="" width="150px" height="150px" style='object-fit: contain;display: none;'>
-                      </div>                  
-                    
+                      </div>
+
                       <div class="col-12">
                         <div class="create_report_btn mt_30">
                           <button
@@ -201,15 +201,15 @@
         </div>
       </div>
 
-     
+
       <div class="footer_part">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12">
               <div class="footer_iner text-center">
                 <p>
-                  2020 © HNM - Designed by
-                  <p>2020 © HNM - Designed by <a href="#"> <i class="ti-gun"></i> </a><a href="#"> ANIKI</a> - <a href="/faq">FAQ</a></p>
+                  2023 © HNM - Designed by
+                  <p>2023 © HNM - Designed by <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> - <a href="/faq">FAQ</a></p>
 
                 </p>
               </div>
@@ -375,7 +375,7 @@
     <!-- <script>
   const socket = io(window.location.origin + window.location.pathname);
   console.log(window.location.origin + window.location.pathname);
-   
+
 
 
   $('form').on('submit', (e) => {
@@ -398,7 +398,7 @@
           document.getElementById("alert-success").style.display = "block";
           $("input").val('');
           setTimeout(() => document.getElementById("alert-success").style.display = "none", 1000);
-          
+
       });
       socket.on("bad", () => {
               setTimeout(() =>  document.getElementById("alert-danger").style.display = "block", 1000);
@@ -422,7 +422,7 @@
 
         if(produit.categorie === categorie){
         $('#produit').append(`<option value="${produit._id}">${produit.nom_produit}</option>`);
-        } 
+        }
       }
 
       $('#produit').niceSelect()
@@ -433,7 +433,7 @@
       }
 
       $(function() {
-        $('#categorie') 
+        $('#categorie')
           .on('change', listenerSelectChange);
 
 
@@ -444,9 +444,9 @@
             $('#preview-image').css('display', 'none');
             return;
           }
-          
+
         $('#preview-image').attr('src', produit.image).css('display', 'block');
-      
+
         })
       });
 

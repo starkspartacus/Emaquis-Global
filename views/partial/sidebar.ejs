@@ -75,7 +75,27 @@
           <img src="img/menu-icon/5.svg" alt="" />
         </div>
         <div class="nav_title">
-          <span>Fournisseur</span>
+          <span>Produit</span>
+        </div>
+      </a>
+      <ul>
+        <li><a href="/listeproduit"> voir mes produits</a></li>
+        <li><a href="/ajouterproduit">Enregistrer un produit</a></li>
+
+        <% if(locals.user?.isAdmin){ %>
+          <li>
+            <a href="/ajouter-produit-global">Enregistrer un produit global</a>
+          </li>
+        <% } %>
+      </ul>
+    </li>
+    <li class="">
+      <a class="has-arrow" href="#" aria-expanded="false">
+        <div class="nav_icon_small">
+          <img src="img/menu-icon/5.svg" alt="" />
+        </div>
+        <div class="nav_title">
+          <span>Fournisseurs</span> <span class="badge badge-info">Bêta</span>
         </div>
       </a>
       <ul>
@@ -85,25 +105,6 @@
         </li>
       </ul>
     </li>
-    <li class="">
-      <a class="has-arrow" href="#" aria-expanded="false">
-        <div class="nav_icon_small">
-          <img src="img/menu-icon/5.svg" alt="" />
-        </div>
-        <div class="nav_title">
-          <span>Produit</span>
-        </div>
-      </a>
-      <ul>
-        <li><a href="/listeproduit"> voir mes produits</a></li>
-        <li><a href="/ajouterproduit">Enregistrer un produit</a></li>
 
-        <% if(locals.user?.isAdmin){ %>
-        <li>
-          <a href="/ajouter-produit-global">Enregistrer un produit global</a>
-        </li>
-        <% } %>
-      </ul>
-    </li>
   </ul>
 </nav>

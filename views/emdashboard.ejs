@@ -235,35 +235,50 @@
             <div class="col-xl-4">
               <div class="white_card card_height_100 mb_30 user_crm_wrapper">
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 mt-5">
                     <div class="single_crm">
                       <div
                         class="crm_head d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="img/crm/businessman.svg" alt="" />
+                          <img
+                                  src="../img/icone_employee.png"
+                                  alt=""
+                                  style="height: 29px"
+                          />
+                          <span style="font-weight: bold">Employés</span>
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
                       <div class="crm_body">
-                        <h4><%= emplnum %></h4>
-                        <p>Employé</p>
+                        <h4 class="text-center"><%= emplnum %></h4>
+
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 mt-5">
                     <div class="single_crm">
                       <div
                         class="crm_head crm_bg_1 d-flex align-items-center justify-content-between"
                       >
                         <div class="thumb">
-                          <img src="img/crm/customer.svg" alt="" />
+                          <img
+                                  src="../img/icone_ventes.png"
+                                  style="height: 17px; transform: rotate(-20deg)"
+                                  alt=""
+                          />
+                          <span
+                           style="font-weight: bold"
+                          class="text-center"
+                          >
+                            Ventes
+                          </span>
                         </div>
                         <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                       </div>
                       <div class="crm_body">
                         <h4><%= sum %></h4>
-                        <p>Total des ventes</p>
+                        <p>Aujourd'hui</p>
                       </div>
                     </div>
                   </div>
