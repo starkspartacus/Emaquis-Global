@@ -13,6 +13,7 @@
 .vente .categories {
   width: 20%;
   padding: 10px;
+  cursor: pointer;
 }
 
 .vente .categories ul li {
