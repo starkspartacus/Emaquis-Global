@@ -13,18 +13,27 @@
 .vente .categories {
   width: 20%;
   padding: 10px;
-  cursor: pointer;
+  overflow-y: auto;
 }
 
 .vente .categories ul li {
   width: 100%;
-  background-color: white;
+  background-color: #97c0ff;
+  cursor: pointer;
   min-height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
   margin-bottom: 5px;
+  scale: 0.9;
+
+}
+
+.vente .categories ul li:hover {
+  scale: 1;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 .vente .categories ul li.active {
@@ -62,6 +71,17 @@
   height: 100px;
   object-fit: contain;
   scale: 1;
+  animation-duration: 0.7s;
+  animation-name: img-produit;
+}
+
+@keyframes img-produit {
+  from{
+    scale: 0;
+  }
+  to{
+    scale: 1;
+  }
 }
 
 .vente .product-list__grid .product-card .product-card__image img:hover {
@@ -100,10 +120,12 @@
   width: 25%;
 }
 
+/* Panier */
 .vente .carts-list {
   height: 100%;
   max-height: 345px;
   overflow-y: auto;
+  background: #0B2E135C;
 }
 
 .vente .carts-footer {
