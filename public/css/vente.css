@@ -12,6 +12,8 @@
 
 .vente .categories {
   width: 20%;
+  height: 100%;
+  max-height: 400px;
   padding: 10px;
   overflow-y: auto;
 }
@@ -126,7 +128,7 @@
   height: 100%;
   max-height: 345px;
   overflow-y: auto;
-  border-radius: 5px;
+  border-radius: 5px 5px;
   background: #0B2E135C;
 }
 
