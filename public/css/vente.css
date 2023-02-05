@@ -47,7 +47,7 @@
 }
 
 .vente .product-list__grid .product-card {
-  background-color: white;
+  background-color: #F1F1F184;
   min-height: 100px;
   padding: 10px;
   border-radius: 5px;
@@ -61,10 +61,18 @@
   width: 100%;
   height: 100px;
   object-fit: contain;
+  scale: 1;
+}
+
+.vente .product-list__grid .product-card .product-card__image img:hover {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  scale: 1.1;
 }
 
 .vente .carts .cart-item {
-  background-color: white;
+  background-color: #e6e0e0;
   min-height: 100px;
   padding: 10px;
   border-radius: 5px;
