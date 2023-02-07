@@ -295,7 +295,7 @@
               </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-5">
               <div class="white_card card_height_100 mb_20">
                 <div class="white_card_header">
                   <div class="box_header m-0">
@@ -312,10 +312,12 @@
                     <table class="table lms_table_active2 p-0">
                       <thead>
                         <tr>
-                          <th scope="col">produit</th>
+                          <th scope="col">Produit</th>
                           <th scope="col">Nom du produit</th>
+                          <th scope="col">Taile</th>
                           <th scope="col">Prix de vente</th>
-                          <th scope="col">quantité</th>
+                          <th scope="col">Quantité</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
@@ -345,6 +347,9 @@
                             <%= el.produit.nom_produit %> 
                           </td>
                           <td class="f_s_12 f_w_400 color_text_6">
+                            <%= el.taille %>
+                          </td>
+                          <td class="f_s_12 f_w_400 color_text_6">
                             <%= el.prix_vente %> FcFA
                           </td>
                           <td class="f_s_12 f_w_400 text-center">
@@ -368,6 +373,7 @@
 
                             <% } %>
                           </td>
+                          
                         </tr>
                         <% }) %>
                       </tbody>
