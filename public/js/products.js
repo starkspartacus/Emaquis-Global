@@ -12,7 +12,7 @@ const ProductList = () => {
 
   return (
     <div className='product-list'>
-      <h4>Products</h4>
+      <h4>Produits</h4>
       <div className='product-list__grid'>
         {products.map((product) => {
           return <ProductCard key={product._id} product={product} />;
@@ -26,8 +26,10 @@ const ProductCard = ({ product }) => {
   const { addProductToCart } = React.useContext(ProductsContext);
   return (
     <div className='product-card'>
+      <h4 className="badge text-bg-danger taille_produits">{ product.taille}</h4>
       <div className='product-card__image'>
         <img src={product.produit.image} alt='product' />
+        
       </div>
       <div className='product-card__details'>
         <h4>{product.produit.nom_produit}</h4>

@@ -51,6 +51,7 @@
 
 .vente .product-list {
   width: 60%;
+  
 
 }
 
@@ -58,6 +59,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+  overflow-y: auto;
 }
 
 .vente .product-list__grid .product-card {
@@ -147,3 +149,4 @@
   padding: auto;
 
 }
+
