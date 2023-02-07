@@ -5262,7 +5262,7 @@ body::-webkit-scrollbar {
   transition: 0.5s;
   position: relative;
   min-height: 100vh;
-  padding-bottom: 70px;
+  
 }
 
 /* line 13, G:/admin_project/8 admin/management_html/scss/_main_content.scss */
