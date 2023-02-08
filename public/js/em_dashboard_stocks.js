@@ -41,11 +41,9 @@ const TablesStocksBody = () => {
             <td className="f_s_12 f_w_400 color_text_6">
               {product.produit.nom_produit}
             </td>
+            <td className="f_s_12 f_w_400 color_text_6">{product.taille}</td>
             <td className="f_s_12 f_w_400 color_text_6">
-              {product.produit.taille}
-            </td>
-            <td className="f_s_12 f_w_400 color_text_6">
-              {product.vente_prix} FCFA
+              {product.prix_vente} FCFA
             </td>
             <td className="f_s_12 f_w_400 text-center">
               <a
@@ -124,10 +122,6 @@ const TablesStocksBody = () => {
 
 const EmDashboardStocks = () => {
   const { products } = React.useContext(AppContext);
-  console.log(
-    "👉 👉 👉  ~ file: em_dashboard_stocks.js:17 ~ products",
-    products
-  );
 
   return (
     <div className="col-lg-12">

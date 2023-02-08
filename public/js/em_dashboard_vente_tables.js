@@ -65,7 +65,7 @@ const TablesItem = ({ vente, setShowSuccess, setShowDanger }) => {
   return (
     <tr>
       <td>{vente.produit.map((el) => el.produit.nom_produit).join(",")}</td>
-      <td>{vente.quantite}</td>
+      <td>{vente.quantite.join(",")}</td>
       <td>{vente.prix}</td>
       <td>{vente.somme_encaisse}</td>
       <td>{vente.monnaie}</td>
