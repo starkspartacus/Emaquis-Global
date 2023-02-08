@@ -1,6 +1,6 @@
 const AddVente = () => {
   return (
-    <div className='vente'>
+    <div className="vente">
       <Categories />
       <ProductList />
       <CartList />
@@ -8,13 +8,23 @@ const AddVente = () => {
   );
 };
 
-const AppRoot = () => {
+const VenteRoot = () => {
   const [carts, setCarts] = React.useState([]);
   const [categorySelectedId, setCategorySelectedId] = React.useState(null);
 
   const addProductToCart = (product) => {
+    if (product.quantite <= 0) {
+      return;
+    }
+
     const cartItem = carts.find((cart) => cart._id === product._id);
+
     if (cartItem) {
+      if (cartItem.quantity + 1 > product.quantite) {
+        alert("Vous ne pouvez pas ajouter plus de produits que le stock");
+        return;
+      }
+
       cartItem.quantity++;
       setCarts([...carts]);
     } else {
@@ -42,9 +52,9 @@ const AppRoot = () => {
   const handleUpdateProductQuantity = (product, type) => {
     const cartItem = carts.find((cart) => cart._id === product._id);
     if (cartItem) {
-      if (type === 'decr' && cartItem.quantity > 1) {
+      if (type === "decr" && cartItem.quantity > 1) {
         cartItem.quantity--;
-      } else if (type === 'incr') {
+      } else if (type === "incr") {
         cartItem.quantity++;
       }
 
@@ -78,9 +88,9 @@ const AppRoot = () => {
         clearCarts,
       }}
     >
-      <AddVente />
+      <div className="row">
+        <AddVente />
+      </div>
     </ProductsContext.Provider>
   );
 };
-
-ReactDOM.render(<AppRoot />, document.getElementById('add_vente'));
