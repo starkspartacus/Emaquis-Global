@@ -42,6 +42,11 @@ const VenteRoot = () => {
   const updateProductQuantity = (product, quantity) => {
     const cartItem = carts.find((cart) => cart._id === product._id);
     if (cartItem) {
+      if (quantity > product.quantite) {
+        alert("Vous ne pouvez pas ajouter plus de produits que le stock");
+        return;
+      }
+
       cartItem.quantity = quantity;
       setCarts([...carts]);
     } else {
