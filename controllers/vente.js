@@ -176,8 +176,22 @@ exports.editStatusVente = async (req, res) => {
         new: true,
       }
     )
-      .then((r) => {
+      .then(async (r) => {
         req.session.newSave = true;
+
+        if (req.body.type === "Annulée") {
+          for (let [i, product] of vente.produit.entries()) {
+            console.log("👉 👉 👉  ~ file: vente.js:189 ~ product", product);
+            const produit = await produitQueries.getProduitById(product);
+            const newQte = produit.result.quantite + Number(vente.quantite[i]);
+
+            await produitQueries.updateProduit(
+              { produitId: product, session: req.session.user.travail_pour },
+              { quantite: newQte }
+            );
+          }
+        }
+
         res.redirect("/emdashboard");
       })
       .catch((err) => res.redirect("/emdashboard"));

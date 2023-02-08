@@ -60,6 +60,22 @@ const AppRoot = () => {
       const total = vente.prix;
 
       updateTotalVentes(total);
+    } else if (type === "Annulée") {
+      setProducts((prProducts) => {
+        const newProducts = prProducts.map((product) => {
+          const index = vente.produit.findIndex((el) => el._id === product._id);
+
+          if (index !== -1) {
+            const newProduct = { ...product };
+            newProduct.quantite += vente.quantite[index];
+            return newProduct;
+          } else {
+            return product;
+          }
+        });
+
+        return newProducts;
+      });
     }
 
     const newVentes = ventes.filter((el) => el._id !== venteId);
