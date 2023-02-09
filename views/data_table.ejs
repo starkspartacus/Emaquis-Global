@@ -36,6 +36,10 @@
         transform: translateX(20px);
         background: #2eec1c;
       }
+
+      .venteRed td {
+        color: rgb(219, 36, 23) !important;
+      }
     </style>
 
     <%- include('partial/sidebar.ejs') %>
@@ -81,7 +85,7 @@
                         </thead>
                         <tbody>
                           <% for(let vente of ventes) {%>
-                          <tr>
+                          <tr class="<%=vente.prix<0?'venteRed':''%>">
                             <td><%= vente.code %></td>
                             <td><%= vente.produit %></td>
                             <td><%= vente.categories%></td>

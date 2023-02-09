@@ -330,9 +330,10 @@
             </h5>
             <button
               type="button"
-              class="close"
+              class="close close-modal"
               data-dismiss="modal"
               aria-label="Close"
+              id="close-modal"
             >
               <span aria-hidden="true">&times;</span>
             </button>
@@ -362,9 +363,8 @@
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-success"
+                class="btn btn-success close-modal"
                 data-dismiss="modal"
-                onclick="refreshPage"
               >
                 Ok
               </button>
@@ -404,6 +404,9 @@
           .on('click', '.btn-remove', function (e) {
             $(this).closest('.entry').remove();
             return false;
+          })
+          .on('click', '.close-modal', function (e) {
+            $('#myModal').modal('hide');
           })
 
           .on('click', '.btn-info', function (e) {

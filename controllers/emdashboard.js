@@ -1,18 +1,18 @@
-const { venteQueries } = require("../requests/venteQueries");
-const { produitQueries } = require("../requests/produitQueries");
-const { employeQueries } = require("../requests/EmployeQueries");
-const { formatAmount } = require("../utils/formatAmount");
-const categorieModel = require("../models/categorie.model");
+const { venteQueries } = require('../requests/venteQueries');
+const { produitQueries } = require('../requests/produitQueries');
+const { employeQueries } = require('../requests/EmployeQueries');
+const { formatAmount } = require('../utils/formatAmount');
+const categorieModel = require('../models/categorie.model');
 
 exports.emdashboard = async (req, res) => {
   try {
     if (!req.session.user) {
-      res.redirect("/emconnexion");
+      res.redirect('/emconnexion');
       return;
     }
 
     const Vente = await venteQueries.getVentes({
-      status_commande: "Validée",
+      status_commande: { $in: ['Validée', 'Retour'] },
       employe_validate_id: req.session.user?._id,
       createdAt: {
         $gte: new Date(new Date().setHours(0, 0, 0, 0)),
@@ -22,7 +22,7 @@ exports.emdashboard = async (req, res) => {
     });
 
     const VenteEntente = await venteQueries.getVentes({
-      status_commande: "En attente",
+      status_commande: 'En attente',
       travail_pour: req.session?.user?.travail_pour,
     });
 
@@ -41,8 +41,8 @@ exports.emdashboard = async (req, res) => {
 
     const sum = Vente.result.reduce((total, vente) => total + vente.prix, 0);
 
-    if (req.session.user.role === "Barman") {
-      res.render("emdashboard", {
+    if (req.session.user.role === 'Barman') {
+      res.render('emdashboard', {
         ventes: VenteEntente.result,
         newSave: newSave,
         user: req.session.user,
@@ -53,19 +53,19 @@ exports.emdashboard = async (req, res) => {
         categories: Categories,
       });
     } else {
-      res.redirect("/emconnexion");
+      res.redirect('/emconnexion');
     }
   } catch (e) {
-    console.log("err", e);
+    console.log('err', e);
   }
 };
 
 exports.emdashboardPost = async (req, res) => {
-  res.setHeader("Content-Type", "text/html");
+  res.setHeader('Content-Type', 'text/html');
   try {
-    res.render("emdashboard");
+    res.render('emdashboard');
   } catch (e) {
-    console.log("err", e);
+    console.log('err', e);
     res.redirect(e);
   }
 };

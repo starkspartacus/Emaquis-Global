@@ -1,27 +1,9 @@
 const Vente = require('../models/vente.model');
 
 exports.venteQueries = class {
-  static setVente({
-    produit,
-    quantite,
-    employe,
-    travail_pour,
-    status_commande,
-    monnaie,
-    prix,
-    somme_encaisse,
-  }) {
+  static setVente(data) {
     return new Promise(async (next) => {
-      const vente = new Vente({
-        produit,
-        quantite,
-        employe,
-        travail_pour,
-        status_commande,
-        monnaie,
-        prix,
-        somme_encaisse,
-      });
+      const vente = new Vente(data);
 
       await vente
         .save()

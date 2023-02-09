@@ -4,6 +4,7 @@ const { settingQueries } = require('../requests/settingQueries');
 const Produits = require('../models/produit.model');
 const { helperConverStrToArr } = require('../utils/helperConvertStrToArr');
 const { TYPE_RETOUR_PRDUITS } = require('../constants');
+const { venteQueries } = require('../requests/venteQueries');
 
 exports.addback = async (req, res) => {
   try {
@@ -57,15 +58,18 @@ exports.addbackPost = async (req, res) => {
       produit: helperConverStrToArr(req.body.produit),
       quantite: helperConverStrToArr(req.body.quantite),
     };
+    const user = req.session.user;
 
     /// 1- remboursement total(on rembourse tout)(on recalcul le prix de vente avec le stock)
     //  2- remboursement partiel(on rembourse partiellement)(on deduire la somme dans la caisse)
     //  3- remboursement par avoir(ces boisons deviennent directement des pourboires)
 
-    if (req.session.user) {
+    if (user) {
       const { result: setting } = await settingQueries.getSettingByUserId(
-        req.session.user.travail_pour
+        user.travail_pour
       );
+
+      const product_return_type = setting.product_return_type;
 
       let total = 0;
 
@@ -74,7 +78,7 @@ exports.addbackPost = async (req, res) => {
         for (let [index, produit_id] of body.produit.entries()) {
           const reqData = {
             _id: produit_id,
-            session: req.session.user.travail_pour,
+            session: user.travail_pour,
           };
 
           const produit = await Produits.findOne(reqData);
@@ -89,23 +93,36 @@ exports.addbackPost = async (req, res) => {
         return sum;
       };
 
-      switch (setting.product_return_type) {
-        case 'full':
-          // remboursement total(on rembourse tout)(on recalcul le prix de vente avec le stock)
-          total = await updateProductStock();
-          break;
-        case 'half':
-          //  2- remboursement partiel(on rembourse partiellement)(on deduire la somme dans la caisse)
-          total = await updateProductStock();
-          break;
+      if (['full', 'half'].includes(product_return_type)) {
+        total = await updateProductStock();
+
+        let venteData = {
+          produit: body.produit,
+          quantite: body.quantite,
+          travail_pour: user.travail_pour,
+          employe: user._id,
+          status_commande: 'Retour',
+          prix: -(product_return_type === 'half'
+            ? Number((total / 2).toFixed(2))
+            : total),
+          somme_encaisse: 0,
+          monnaie: 0,
+          employe_validate_id: user._id,
+        };
+
+        await venteQueries.setVente(venteData);
       }
 
       const retournData = await retourQueries.setRetour({
         ...body,
-        travail_pour: req.session.user.travail_pour,
-        employe: req.session.user._id,
-        remboursement: total,
-        product_return_type: setting.product_return_type,
+        travail_pour: user.travail_pour,
+        employe: user._id,
+        remboursement:
+          product_return_type === 'half'
+            ? Number((total / 2).toFixed(2))
+            : total,
+        product_return_type: product_return_type,
+        confirm: ['full', 'half'].includes(product_return_type) ? true : false,
       });
 
       req.session.retournData = retournData.result;

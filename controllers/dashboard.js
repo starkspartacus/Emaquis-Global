@@ -20,11 +20,10 @@ exports.dashboard = async (req, res) => {
       const Produit = await produitQueries.getProduitBySession(userId);
       const Vente = await venteQueries.getVentes({
         travail_pour: userId,
-        status_commande: 'Validée',
+        status_commande: { $in: ['Validée', 'Retour'] },
       });
 
       const settings = await settingQueries.getSettingByUserId(userId);
-      console.log('👉 👉 👉  ~ file: dashboard.js:27 ~ settings', settings);
 
       let employe = Employe.result;
       let prod = Produit.result;

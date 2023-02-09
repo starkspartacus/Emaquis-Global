@@ -33,11 +33,11 @@ exports.PAYS = [
 
 exports.TYPE_RETOUR_PRDUITS = [
   {
-    type: 'half',
+    type: 'full',
     nom: 'remboursement total',
   },
   {
-    type: 'full',
+    type: 'half',
     nom: 'remboursement partiel',
   },
   {
