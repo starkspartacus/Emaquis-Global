@@ -12,6 +12,7 @@ const { employeQueries } = require('../requests/EmployeQueries');
 const { categorieQueries } = require('../requests/categorieQueries');
 const { fournisseurQueries } = require('../requests/fournisseurQueries');
 const { produitQueries } = require('../requests/produitQueries');
+const { venteQueries } = require("../requests/venteQueries")
 const User = require('../models/user.model');
 const dotenv = require('dotenv').config();
 var bcrypt = require('bcryptjs');
@@ -161,6 +162,21 @@ SaveFournisseur.on('connection', (socket) => {
     } else {
       socket.emit('bad');
     }
+  });
+});
+
+
+const Summary = io.of('/summary').use(Serveur.getSharedSession());
+Summary.on('connection', (socket) => {
+  socket.on('selected_month_year', async (date) => {
+    console.log(date,'okokokdsdsdsdsdsdsdsdsdsdsdssdsd');
+     const Result = await venteQueries.getVente({ _id:date._id});
+     console.log(Result,"resulttttttttttttttttttttttttt");
+    // if (Result) {
+    //   socket.emit('saved');
+    // } else {
+    //   socket.emit('bad');
+    // }
   });
 });
 

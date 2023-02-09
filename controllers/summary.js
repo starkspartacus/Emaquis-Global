@@ -1,9 +1,9 @@
 exports.summary = async (req, res) => {
   if (req.session.user) {
     try {
-      sess = req.session.user;
+      let sess = req.session.user;;
       //console.log(sess.id,"sqddsddqs")
-      res.render('summary', { user: sess });
+      res.render('summary', {   user: sess, });
     } catch (error) {
       res.redirect(error);
     }
