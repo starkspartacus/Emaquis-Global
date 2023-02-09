@@ -104,6 +104,11 @@ router.post('/vente', ventecontroller.ventePost);
 router.post('/vente/status/:venteId', ventecontroller.editStatusVente);
 
 router.post('/retournerproduit', retourcontroller.addbackPost);
+router.post(
+  '/confirm/retournerproduit/:id',
+  retourcontroller.confirmBackProduct
+);
+
 router.get('/retournerproduit', retourcontroller.addback);
 router.get('/listeRetour', retourcontroller.listeRetour);
 router.get('/retournerproduit/:code', retourcontroller.getProductReturn);

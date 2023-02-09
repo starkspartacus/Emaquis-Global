@@ -34,7 +34,7 @@ exports.emconnexionPost = async (req, res) => {
       if (isPasswordCorrect) {
         req.session.user = data.result;
 
-        // console.log(data.result);
+        console.log(JSON.stringify(data.result, null, 2));
         req.session.isAuth = true;
 
         res.render('emconnexion', {

@@ -119,6 +119,45 @@ exports.addbackPost = async (req, res) => {
   }
 };
 
+exports.confirmBackProduct = async (req, res) => {
+  try {
+    if (!req.session.user) {
+      res.redirect('/emconnexion');
+      return;
+    }
+
+    const backProductId = req.params.id;
+
+    const { result: backProduct } = await retourQueries.getRetourById(
+      backProductId
+    );
+
+    if (!backProduct) {
+      res.status(401).json({
+        etat: false,
+        message: 'Produit introuvable',
+      });
+      return;
+    }
+
+    const { result: retour } = await retourQueries.updateRetour(
+      backProduct._id,
+      {
+        confirm: true,
+        confirm_by: req.session.user._id,
+      }
+    );
+
+    res.json({
+      etat: true,
+      message: 'Produit retourné avec succès',
+      data: retour,
+    });
+  } catch (error) {
+    res.redirect('/emconnexion');
+  }
+};
+
 exports.listeRetour = async (req, res) => {
   try {
     const { result: retourProduits } = await retourQueries.getRetour({

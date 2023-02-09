@@ -18,7 +18,7 @@ exports.data_table = async (req, res) => {
               ...new Set(el.produit.map((el) => el.produit.categorie.nom)),
             ].join(','),
             employe: `${el.employe.nom} ${el.employe.prenom}`,
-            createdAt: new Date(el.createdAt).toLocaleString(),
+            createdAt: new Date(el.createdAt).toLocaleString('fr-Fr'),
           };
         }),
       });

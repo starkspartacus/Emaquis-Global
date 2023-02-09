@@ -95,9 +95,18 @@
                             <td><%= new Date(retourProduit.product_return_type === 'tip'? retourProduit.dateline:retourProduit.createdAt).toLocaleString('fr-fr') %></td>
                             
                               <td>
-                                <% if(retourProduit.product_return_type === 'tip' && new Date(retourProduit.dateline) >= new Date()) { %>
-                                <button class='btn btn-success'>Confirmer</button>
+                                <% if((new Date(retourProduit.dateline) >= new Date()) && !retourProduit.confirm) { %>
+                                <button class='btn btn-success m-auto' data-retourId='<%= retourProduit._id %>'>Confirmer</button>
                                 <% } %>
+
+                                <% if(retourProduit.confirm) { %>
+                                <p class='text-success text-center'>Confirmé</p>
+                                <% } %>
+
+                                <% if((new Date(retourProduit.dateline) < new Date()) && !retourProduit.confirm) { %>
+                                <p class='text-danger text-center'>Expiré</p>
+                                <% } %>
+
                               </td>
                              
                           </tr>
@@ -278,5 +287,41 @@
     </div>
 
     <%- include('partial/script.ejs') %>
+    <script>
+      $(document).ready(function () {
+      // foreach get btn-success jquery
+        $('.btn-success').each(function(){
+
+       $(this).click(function(){
+        const id = $(this).attr('data-retourId');
+
+        let self = this;
+
+
+        $(this).text('En cours...')
+        $(this).attr('disabled', true)
+
+        fetch('/confirm/retournerproduit/'+id,{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({id})
+        }).then(res => res.json()).then(data => {
+        
+         $(this).parent().html("<p class='text-success text-center'>Confirmé</p>")
+
+        }).catch(err => {
+          console.log(err)
+          $(this).text('Confirmer')
+          $(this).attr('disabled', false)
+        })
+       
+         
+       });
+
+        });
+      });
+    </script>
   </body>
 </html>

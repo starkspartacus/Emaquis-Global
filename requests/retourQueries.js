@@ -116,6 +116,35 @@ exports.retourQueries = class {
     }
   }
 
+  static updateRetour(id, data) {
+    try {
+      return new Promise(async (next) => {
+        Retour.updateOne(
+          {
+            _id: id,
+          },
+          {
+            $set: data,
+          }
+        )
+          .then((data) => {
+            next({
+              etat: true,
+              result: data,
+            });
+          })
+          .catch((err) => {
+            next({
+              etat: false,
+              err: err,
+            });
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   static deleteRetour(data) {
     try {
       return new Promise(async (next) => {
