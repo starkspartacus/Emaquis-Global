@@ -19,7 +19,7 @@ exports.addproduit = async (req, res) => {
           categories: categories,
           globalProduits: resProduits.result,
           produits: resProduitsBySession.result,
-          user: sess,
+          user: { ...sess, id: sess.id || sess._id },
           product_sizes: PRODUCT_SIZE,
         });
       }
