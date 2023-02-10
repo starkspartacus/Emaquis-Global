@@ -76,6 +76,7 @@
                             <th scope="col">prix vente</th>
                             <th scope="col">quantite</th>
                             <th scope="col">image</th>
+                            <th scope="col">actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -100,6 +101,15 @@
                                 height="100px"
                                 style="object-fit: contain"
                               />
+                            </td>
+                            <td>
+                              <% if (user.role !== 'Barman') {%>
+                              <button class="btn btn-success">Modifier</button>
+                              <% } %>
+                              <button class="btn btn-info">historiques</button>
+                              <% if (user.role !== 'Barman') {%>
+                              <button class="btn btn-danger">Supprimer</button>
+                              <% } %>
                             </td>
                           </tr>
                           <%})%>

@@ -8,13 +8,17 @@ exports.addproduit = async (req, res) => {
       let sess = req.session.user;
       const Categorie = await categorieQueries.getCategorie();
       const resProduits = await produitQueries.getGlobalProduit();
+      const resProduitsBySession = await produitQueries.getProduitBySession(
+        sess.id || sess.travail_pour
+      );
 
       if (Categorie.result !== null) {
         const categories = Categorie.result;
 
         res.render('ajouterproduit', {
           categories: categories,
-          produits: resProduits.result,
+          globalProduits: resProduits.result,
+          produits: resProduitsBySession.result,
           user: sess,
           product_sizes: PRODUCT_SIZE,
         });

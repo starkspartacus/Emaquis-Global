@@ -50,7 +50,7 @@
           </div>
           <div class="row">
             <div class="col-12">
-              <p id="sess" hidden><%= sess?.id %></p>
+              <p id="sess" hidden><%= user?.id %></p>
               <div class="white_card card_height_100 mb_30">
                 <div class="white_card_header">
                   <div class="box_header m-0">
@@ -96,7 +96,7 @@
                             type="text"
                             placeholder="prenom"
                             name="prenom"
-                            value="<%= locals.user?.prenom %>"
+                            value="<%= locals.employe?.prenom %>"
                           />
                         </div>
                       </div>
@@ -106,7 +106,7 @@
                             type="text"
                             placeholder="nom"
                             name="nom"
-                            value="<%=locals.user?.nom%>"
+                            value="<%=locals.employe?.nom%>"
                           />
                         </div>
                       </div>
@@ -116,7 +116,7 @@
                             type="text"
                             placeholder="speudo"
                             name="speudo"
-                            value="<%=locals.user?.pseudo%>"
+                            value="<%=locals.employe?.pseudo%>"
                           />
                         </div>
                       </div>
@@ -126,7 +126,7 @@
                             type="text"
                             placeholder="adresse"
                             name="adresse"
-                            value="<%=locals.user?.adresse%>"
+                            value="<%=locals.employe?.adresse%>"
                           />
                         </div>
                       </div>
@@ -136,7 +136,7 @@
                             type="text"
                             placeholder="numero"
                             name="numero"
-                            value="<%=locals.user?.numero%>"
+                            value="<%=locals.employe?.numero%>"
                           />
                         </div>
                       </div>
@@ -155,12 +155,12 @@
                             type="email"
                             placeholder="Email"
                             name="email"
-                            value="<%=locals.user?.email%>"
+                            value="<%=locals.employe?.email%>"
                           />
                           <input
                             type="text"
                             name="session"
-                            value="<%= sess?.id %>"
+                            value="<%= user?.id %>"
                             hidden
                           />
                           <input
@@ -177,7 +177,7 @@
                           class="nice_Select2 nice_Select_line wide"
                           style="display: none"
                           name="role"
-                          value="<%=locals.user?.role%>"
+                          value="<%=locals.employe?.role%>"
                         >
                           <option value="1">Selectionner le rôle</option>
                           <option value="Barman">Barman</option>
@@ -412,14 +412,14 @@
 
         if (updated) {
           if (data.role === '1') {
-            data.role = '<%= locals.user?.role %>';
+            data.role = '<%= locals.employe?.role %>';
           }
           socket.emit('updateEmploye', {
-            userId: '<%= locals.user?._id%>',
+            userId: '<%= locals.employe?._id%>',
             data,
           });
           console.log('update', {
-            userId: '<%= locals.user?._id%>',
+            userId: '<%= locals.employe?._id%>',
             data,
           });
         } else {

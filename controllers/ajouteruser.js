@@ -4,7 +4,7 @@ exports.ajouteruser = async (req, res) => {
   if (req.session.user) {
     try {
       sess = req.session.user;
-      res.render('add_new_user', { sess });
+      res.render('add_new_user', { user: sess });
     } catch (e) {
       console.log('err', e);
       res.redirect(e);
@@ -34,7 +34,11 @@ exports.edituser = async (req, res) => {
       console.log('👉 👉 👉  ~ file: ajouteruser.js:34 ~ user', user);
       if (user) {
         sess = req.session.user;
-        res.render('add_new_user', { user: user.result, sess, update: true });
+        res.render('add_new_user', {
+          employe: user.result,
+          user: sess,
+          update: true,
+        });
       } else {
         res.redirect('/utilisateur');
       }

@@ -12,8 +12,12 @@
     <%- include('partial/head.ejs') %>
   </head>
   <body class="crm_body_bg">
+    <%- include(user.role ===
+    "Barman"?'partial/emsidebar.ejs':'partial/sidebar.ejs') %>
 
-      <%- include(user.role === "Barman"?'partial/emsidebar.ejs':'partial/sidebar.ejs') %>
+    <!-- React -->
+
+    <%- include('partial/reactScript.ejs') %>
 
     <!--/ sidebar  -->
 
@@ -51,166 +55,25 @@
             </div>
           </div>
           <div class="row">
-            
             <div class="col-12">
-              <p id="sess" hidden><%= user?.id %></p>
-              <div class="white_card card_height_100 mb_30">
-                <div class="white_card_header">
-                  <div class="box_header m-0">
-                    <div class="main-title">
-                      <h3 class="m-0">Ajouter un produit</h3>
-                    </div>
-                  </div>
-                </div>
-
-                <form
-                  action="/ajouterproduit"
-                  method="post"
-                >
-                  <div
-                    class="alert alert-success"
-                    role="alert"
-                    style="text-align: center; display: none"
-                    id="alert-success"
-                  >
-                   Produit enregistré avec succès !
-                  </div>
-                  <div
-                    class="alert alert-danger"
-                    role="alert"
-                    style="text-align: center; display: none"
-                    id="alert-danger"
-                  >
-                    Echec de l'opération, veuillez recommencer!
-                  </div>
-                  <div class="white_card_body">
-                    <div class="row">
-                      <div class="col-lg-6">
-                        <select
-                          class="nice_Select2 nice_Select_line wide"
-                          style="display: none"
-                          name="categorie"
-                          id="categorie"
-
-                          required
-                        >
-                          <option value="">Selectionner la catégorie</option>
-                          <% categories.forEach(categorie =>{%>
-                          <option value="<%= categorie._id %>"><%= categorie.nom %></option>
-                          <%})%>
-                        </select>
-                      </div>
-
-                      <div class="col-lg-6 mb_15" id='productContainer'>
-                        <select
-                          class="nice_Select2 nice_Select_line wide"
-                          style="display: none"
-                          name="produit"
-                          id="produit"
-                          required
-                        >
-                          <option value="">Selectionner un produit</option>
-                          <% produits.forEach(produit =>{%>
-                          <option value="<%= produit._id %>" data-categorieId='<%= produit.categorie %>'><%= produit.nom_produit %></option>
-                          <%})%>
-                        </select>
-                      </div>
-
-                      <div class="col-lg-6">
-                        <div class="common_input mb_15">
-                          <input
-                            type="number"
-                            placeholder="prix de vente ex: 700"
-                            name="prix_vente"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="common_input mb_15">
-                          <input
-                            type="number"
-                            placeholder="prix d'achat  ex: 500"
-                            name="prix_achat"
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div class="col-lg-6">
-                        <div class="common_input mb_15">
-                          <input
-                            type="number"
-                            placeholder="quantite"
-                            name="quantite"
-                          />
-
-
-                        </div>
-                      </div>
-
-
-                      <div class="col-lg-6">
-                        <div class="common_input mb_15" >
-                          <select
-                          class="nice_Select2 nice_Select_line wide"
-                          style="display: none"
-                          name="taille"
-                          required
-                        >
-                          <option value="">Selectionner la taille du produit</option>
-                          <% product_sizes.forEach(size =>{%>
-                          <option value="<%= size %>"><%= size %></option>
-                          <%})%>
-                        </select>
-
-
-                          <input
-                            type="text"
-                            placeholder="zo"
-                            name="session"
-                            value="<%= user?.id %>"
-                            hidden
-                          />
-                        </div>
-
-                      </div>
-
-
-                      <div class="col-lg-6">
-                       <img src="" id="preview-image" alt="" width="150px" height="150px" style='object-fit: contain;display: none;'>
-                      </div>
-
-                      <div class="col-12">
-                        <div class="create_report_btn mt_30">
-                          <button
-                            type="submit"
-                            id="#button"
-                            class="btn_1 radius_btn d-block text-center"
-                          >
-                            Ajouter Produit
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
+              <p id="sess" hidden></p>
+              <div id="add_product"></div>
             </div>
           </div>
         </div>
       </div>
-
 
       <div class="footer_part">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12">
               <div class="footer_iner text-center">
+                <p>2023 © HNM - Designed by</p>
+
                 <p>
                   2023 © HNM - Designed by
-                  <p>2023 © HNM - Designed by <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> - <a href="/faq">FAQ</a></p>
-
+                  <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> -
+                  <a href="/faq">FAQ</a>
                 </p>
               </div>
             </div>
@@ -406,56 +269,336 @@
 
   })
 </script> -->
-    <script>
-      const productsList = <%- JSON.stringify(produits) %>;
 
-    const listenerSelectChange = (e)=>{
-      const categorie = e.target.value;
+    <script type="text/babel">
+      const AddProduct = () => {
 
-      $('#produit')
-      .niceSelect('destroy')
-      .empty()
-      .append(`<option value="">Selectionner un produit</option>`)
+        const [ allProducts, setAllProducts ] = React.useState(<%- JSON.stringify(globalProduits) %>);
+        const [ products, setProducts ] = React.useState(<%- JSON.stringify(produits) %>);
+        const [ categories, setCategories ] = React.useState(<%- JSON.stringify(categories) %>);
+        const [sizesProduct, setSizesProduct] = React.useState(<%- JSON.stringify(product_sizes) %>);
+        const adminSession = <%- JSON.stringify(user?.id) %>;
 
+        const [productSelected,setProductSelected] = React.useState(null);
+        const [productId, setProductId] = React.useState(null);
+        const [selectedSize, setSelectedSize] = React.useState(null);
+        const [ categoryId, setCategoryId ] = React.useState(null);
+        const [ prix_vente, setPrixVente ] = React.useState(null);
+        const [ prix_achat, setPrixAchat ] = React.useState(null);
+        const [ quantite, setQuantite ] = React.useState(null);
+        const [ quantiteStock, setQuantiteStock ] = React.useState(null);
 
-      for(let produit of productsList){
-
-        if(produit.categorie === categorie){
-        $('#produit').append(`<option value="${produit._id}">${produit.nom_produit}</option>`);
-        }
-      }
-
-      $('#produit').niceSelect()
-
-      $('#preview-image').css('display', 'none');
-
-
-      }
-
-      $(function() {
-        $('#categorie')
-          .on('change', listenerSelectChange);
+        const [loading, setLoading] = React.useState(false);
+        const [showSuccess, setShowSuccess] = React.useState(false);
+        const [showError, setShowError] = React.useState(false);
 
 
-        $('#produit').on('change',(e)=>{
-          const produit = productsList.find(p=>p._id === e.target.value);
-
-          if(e.target.value === ""){
-            $('#preview-image').css('display', 'none');
-            return;
+        const handleSubmit = ()=>{
+          const data = {
+            produit: productId,
+            taille: selectedSize,
+            prix_vente: prix_vente,
+            prix_achat: prix_achat,
+            quantite: quantite,
+            session: adminSession
           }
 
-        $('#preview-image').attr('src', produit.image).css('display', 'block');
-
-        })
-      });
+          setShowSuccess(false)
+          setShowError(false)
 
 
-      $("#button").click(function () {
-        setTimeout(1000, () => {
-          location.reload(true);
-        });
-      });
+          for(let key of Object.keys(data)){
+            if(!data[key]){
+              return alert("Veuillez remplir tous les champs");
+            }
+          }
+
+          setLoading(true);
+
+          fetch('/ajouterproduit',{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }).then(res =>{
+
+
+            setShowSuccess(true);
+            setTimeout(() => {
+              setShowSuccess(false);
+              setProducts(
+                products.map(p => {
+                  if(p.produit._id == productId){
+                    return {
+                      ...p,
+                      quantite: p.quantite + parseInt(quantite)
+                    }
+                  }
+                  return p;
+                })
+              )
+
+              setProductSelected(null);
+              setProductId(null);
+              setSelectedSize(null);
+              setPrixVente('');
+              setPrixAchat('');
+              setQuantite('');
+              setQuantiteStock('');
+
+              $('select').val('');
+              $('select').niceSelect('update');
+
+              setLoading(false);
+
+
+
+
+            }, 500);
+          }).catch(err=>{
+            setShowError(true);
+            setLoading(false);
+          })
+        }
+
+
+
+        React.useEffect(() => {
+           $('select')
+           .niceSelect()
+
+          $('#categorie').on('change', (e) => {
+            const id = e.target.value;
+            setCategoryId(id);
+            const products = allProducts.filter(p => p.categorie == id);
+            $('#produit')
+            .niceSelect('destroy')
+            .empty()
+            .append(`<option value="">Selectionner un produit</option>`)
+
+            for(let produit of products){
+              $('#produit').append(`<option value="${produit._id}">${produit.nom_produit}</option>`);
+            }
+
+            $('#produit').niceSelect();
+          })
+
+          $('#produit').on('change', (e) => {
+            const id = e.target.value;
+            setProductId(id);
+          })
+
+          $('#taille').on('change', (e) => {
+            const id = e.target.value;
+
+            setSelectedSize(id);
+          })
+
+        }, []);
+
+
+        React.useEffect(()=>{
+
+          if(products.length > 0 && productId  && categoryId){
+
+            const product = products.find(p => p.produit._id == productId && p.produit.categorie._id == categoryId && p.taille == selectedSize);
+
+            if(product){
+              setPrixVente(product.prix_vente);
+              setPrixAchat(product.prix_achat);
+              setQuantiteStock(product.quantite);
+            }else{
+              setPrixVente("");
+              setPrixAchat("");
+              setQuantiteStock("");
+            }
+          }
+
+        },[productId,products, selectedSize, categoryId])
+
+        React.useEffect(()=>{
+          const productSelected = allProducts.find(p => p._id == productId && p.categorie == categoryId);
+          setProductSelected(productSelected);
+        },[productId, categoryId,allProducts])
+
+        return (
+          <div className='white_card card_height_100 mb_30'>
+            <div className='white_card_header'>
+              <div className='box_header m-0'>
+                <div className='main-title'>
+                  <h3 className='m-0'>Ajouter un produit</h3>
+                </div>
+              </div>
+            </div>
+
+            <div>
+             {showSuccess &&  <div
+                className='alert alert-success'
+                role='alert'
+                // style="text-align: center; display: none"
+                style={{
+                  textAlign: 'center',
+
+                }}
+                id='alert-success'
+              >
+                Produit enregistré avec succès !
+              </div>}
+             {showError && <div
+                className='alert alert-danger'
+                role='alert'
+                // style="text-align: center; display: none"
+                style={{
+                  textAlign: 'center',
+
+                }}
+                id='alert-danger'
+              >
+                Echec de l'opération, veuillez recommencer!
+              </div>}
+              <div className='white_card_body'>
+                <div className='row'>
+                  <div className='col-lg-6'>
+                    <select
+                      className='nice_Select2 nice_Select_line wide'
+                      name='categorie'
+                      id='categorie'
+                      required
+                      value={categoryId}
+                    >
+                    <option value="">Selectionner la catégorie</option>
+                       {categories.map(categorie =>(
+                          <option value={categorie._id}>{categorie.nom}</option>
+                          ))}
+
+                    </select>
+                  </div>
+
+                  <div className='col-lg-6 mb_15' id='productContainer'>
+                    <select
+                      className='nice_Select2 nice_Select_line wide'
+                      name='produit'
+                      id='produit'
+                      required
+
+                      onChange={(e) => {
+                        const id = e.target.value;
+                        setProductId(id);
+                      }}
+                      value={productId}
+                    >
+                    <option value="">Selectionner un produit</option>
+                        {allProducts.map(produit =>(
+                            <option value={produit._id}>{produit.nom_produit}</option>
+                            ))}
+
+                    </select>
+                  </div>
+
+                  <div className='col-lg-6'>
+                    <div className='common_input mb_15'>
+                      <select
+                        className='nice_Select2 nice_Select_line wide'
+                        name='taille'
+                        id="taille"
+                        required
+                      >
+                      <option value="">Selectionner la taille du produit</option>
+                        {sizesProduct.map(size =>(
+                            <option value={size}>{size}</option>
+                            ))}
+
+                      </select>
+
+                      <input
+                        type='text'
+                        placeholder='zo'
+                        name='session'
+                        value='<%= user?.id %>'
+                        hidden
+                      />
+                    </div>
+                  </div>
+
+
+                  <div className='col-lg-6'>
+                    <div className='common_input mb_15'>
+                      <input
+                        type='number'
+                        placeholder='prix de vente ex: 700'
+                        name='prix_vente'
+                        required
+                        value={prix_vente}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setPrixVente(value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className='col-lg-6'>
+                    <div className='common_input mb_15'>
+                      <input
+                        type='number'
+                        placeholder="prix d'achat  ex: 500"
+                        name='prix_achat'
+                        required
+                        value={prix_achat}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setPrixAchat(value);
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className='col-lg-6'>
+                    <div className='common_input mb_15'>
+                      <input
+                        type='number'
+                        placeholder='quantite'
+                        name='quantite'
+                        required
+                        value={quantite}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setQuantite(value);
+                        }}
+                      />
+                    </div>
+                  </div>
+
+
+                  <div className='col-lg-6'>
+                    {productSelected &&  <p>Quantité en stock: {quantiteStock || 0}</p>}
+                   {!!productSelected &&  <img src={productSelected.image} id="preview-image" alt="" width="150px" height="150px" style={{
+                      objectFit:'contain'
+                     }} />
+                    }
+                  </div>
+
+                  <div className='col-12'>
+                    <div className='create_report_btn mt_30'>
+                      <button
+                        type='submit'
+                        id='#button'
+                        className='btn_1 radius_btn d-block text-center'
+                        onClick={handleSubmit}
+                        disabled={loading}
+                      >
+                        {loading?'En cours...':'Ajouter Produit'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      ReactDOM.render(<AddProduct />, document.getElementById('add_product'));
     </script>
   </body>
 
