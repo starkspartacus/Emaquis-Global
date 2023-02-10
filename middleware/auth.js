@@ -74,11 +74,6 @@ exports.authAdmin = async (req, res, next) => {
 
 exports.authSuperAdmin = async (req, res, next) => {
   const isAdmin = req.session.user?.isAdmin;
-  console.log(
-    '👉 👉 👉  ~ file: auth.js:68 ~ isAdmin',
-    isAdmin,
-    req.session.user
-  );
   if (!!!isAdmin) {
     res.redirect('/connexion');
 
@@ -93,12 +88,12 @@ exports.authSuperAdmin = async (req, res, next) => {
 exports.forceSession = async (req, res, next) => {
   const authorization = req.headers.authorization;
 
-  // if (authorization && !req.session.user) {
-  //   const token = authorization.split(' ')[1];
-  //   const data = jwt.verify(token, secret);
-  //   const employe = await employeModel.findOne({ _id: data?.employe_id });
-  //   req.session.user = employe;
-  // }
+  if (authorization && !req.session.user) {
+    const token = authorization.split(' ')[1];
+    const data = jwt.verify(token, secret);
+    const employe = await employeModel.findOne({ _id: data?.employe_id });
+    req.session.user = employe;
+  }
 
   // req.session.user = {
   //   deleted: false,
