@@ -28,13 +28,13 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="product-card">
-      <h4 className="badge text-bg-danger taille_produits">{product.taille}</h4>
+      <h4 className="badge emTaille taille_produits">{product.taille}</h4>
       <div className="product-card__image">
         <img src={product.produit.image} alt="product" />
       </div>
       <div className="product-card__details">
         <h4>{product.produit.nom_produit}</h4>
-        <p>{product.prix_vente} FCFA</p>
+        <p className="emPriceproduct">{product.prix_vente} FCFA</p>
         {product.quantite > 0 && (
           <p>
             Stock:{" "}
@@ -50,7 +50,7 @@ const ProductCard = ({ product }) => {
             </span>
           </p>
         )}
-        {product.quantite === 0 && <p>Rupture de stock</p>}
+        {product.quantite === 0 && <p className="">Rupture de stock</p>}
       </div>
       <div
         className="product-card__actions"

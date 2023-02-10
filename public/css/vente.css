@@ -19,10 +19,13 @@
 }
 
 .vente .categories ul li {
+  text-transform: uppercase;
+}
+
+.vente .categories ul li {
   width: 100%;
   background-color: #f1f1f1;
   font-weight: bold;
-  text-decoration: uppercase;
   cursor: pointer;
   min-height: 50px;
   display: flex;
@@ -92,6 +95,7 @@
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
+  overflow-wrap: break-all;
 }
 
 .vente .product-list__grid .product-card button {
@@ -174,4 +178,14 @@
   background-color: #2FD8F2;
   padding: auto;
   align-items: center;
+}
+
+.emTaille{
+  background-color: #2FD8F2;
+  padding: auto;
+  align-items: center;
+}
+
+.emPriceproduct{
+  font-weight: 700;
 }
