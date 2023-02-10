@@ -56,7 +56,7 @@ const ProductCard = ({ product }) => {
         className="product-card__actions"
         onClick={() => addProductToCart(product)}
       >
-        <button className="btn btn-success">Ajouter</button>
+        <button className="btn ">Ajouter</button>
       </div>
       {product.quantite === 0 && <div className="product-overlay" />}
     </div>
