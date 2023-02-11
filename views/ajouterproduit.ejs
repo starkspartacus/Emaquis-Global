@@ -278,15 +278,17 @@
         const [ categories, setCategories ] = React.useState(<%- JSON.stringify(categories) %>);
         const [sizesProduct, setSizesProduct] = React.useState(<%- JSON.stringify(product_sizes) %>);
         const adminSession = <%- JSON.stringify(user?.id) %>;
+        const updateProduct = <%- JSON.stringify(update) %>;
 
-        const [productSelected,setProductSelected] = React.useState(null);
-        const [productId, setProductId] = React.useState(null);
-        const [selectedSize, setSelectedSize] = React.useState(null);
-        const [ categoryId, setCategoryId ] = React.useState(null);
-        const [ prix_vente, setPrixVente ] = React.useState(null);
-        const [ prix_achat, setPrixAchat ] = React.useState(null);
-        const [ quantite, setQuantite ] = React.useState(null);
-        const [ quantiteStock, setQuantiteStock ] = React.useState(null);
+        const [productSelected,setProductSelected] = React.useState(<%- JSON.stringify(product) %>);
+        const [productId, setProductId] = React.useState(<%- JSON.stringify(product?.produit?._id) %>);
+        const [selectedSize, setSelectedSize] = React.useState(<%- JSON.stringify(product?.taille) %>);
+        const [ categoryId, setCategoryId ] = React.useState(<%- JSON.stringify(product?.produit?.categorie?._id) %>);
+
+        const [ prix_vente, setPrixVente ] = React.useState(<%- JSON.stringify(product?.prix_vente) %>);
+        const [ prix_achat, setPrixAchat ] = React.useState(<%- JSON.stringify(product?.prix_achat) %>);
+        const [ quantite, setQuantite ] = React.useState(<%- JSON.stringify(product?.quantite) %>);
+        const [ quantiteStock, setQuantiteStock ] = React.useState(<%- JSON.stringify(product?.quantite) %>);
 
         const [loading, setLoading] = React.useState(false);
         const [showSuccess, setShowSuccess] = React.useState(false);
@@ -315,7 +317,11 @@
 
           setLoading(true);
 
-          fetch('/ajouterproduit',{
+          if(updateProduct){
+            data.productId = <%- JSON.stringify(product?._id || null) %> ;
+          }
+
+          fetch(!updateProduct?'/ajouterproduit':'/editproduit',{
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -332,27 +338,31 @@
                   if(p.produit._id == productId){
                     return {
                       ...p,
-                      quantite: p.quantite + parseInt(quantite)
+                      quantite: updateProduct? quantite : p.quantite + parseInt(quantite)
                     }
                   }
                   return p;
                 })
               )
 
-              setProductSelected(null);
-              setProductId(null);
-              setSelectedSize(null);
-              setPrixVente('');
-              setPrixAchat('');
-              setQuantite('');
-              setQuantiteStock('');
 
-              $('select').val('');
-              $('select').niceSelect('update');
 
               setLoading(false);
 
+              if(updateProduct){
+                window.location.href = '/listeproduit';
+              }else{
+                setProductSelected(null);
+                setProductId(null);
+                setSelectedSize(null);
+                setPrixVente('');
+                setPrixAchat('');
+                setQuantite('');
+                setQuantiteStock('');
 
+                $('select').val('');
+                $('select').niceSelect('update');
+              }
 
 
             }, 500);
@@ -419,7 +429,9 @@
 
         React.useEffect(()=>{
           const productSelected = allProducts.find(p => p._id == productId && p.categorie == categoryId);
-          setProductSelected(productSelected);
+          if(productId && categoryId){
+             setProductSelected(productSelected);
+          }
         },[productId, categoryId,allProducts])
 
         return (
@@ -466,6 +478,7 @@
                       id='categorie'
                       required
                       value={categoryId}
+                      disabled={updateProduct}
                     >
                     <option value="">Selectionner la catégorie</option>
                        {categories.map(categorie =>(
@@ -481,7 +494,7 @@
                       name='produit'
                       id='produit'
                       required
-
+                      disabled={updateProduct}
                       onChange={(e) => {
                         const id = e.target.value;
                         setProductId(id);
@@ -503,6 +516,8 @@
                         name='taille'
                         id="taille"
                         required
+                        value={selectedSize}
+                        disabled={updateProduct}
                       >
                       <option value="">Selectionner la taille du produit</option>
                         {sizesProduct.map(size =>(
@@ -587,7 +602,7 @@
                         onClick={handleSubmit}
                         disabled={loading}
                       >
-                        {loading?'En cours...':'Ajouter Produit'}
+                        {loading?'En cours...':updateProduct?'Modifier le produit':'Ajouter Produit'}
                       </button>
                     </div>
                   </div>

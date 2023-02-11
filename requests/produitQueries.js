@@ -145,6 +145,12 @@ exports.produitQueries = class {
     try {
       return new Promise(async (next) => {
         Produit.findById({ _id: id })
+          .populate({
+            path: 'produit',
+            populate: {
+              path: 'categorie',
+            },
+          })
           .then((data) => {
             next({
               etat: true,
@@ -210,11 +216,11 @@ exports.produitQueries = class {
   static deleteProduit(data) {
     try {
       return new Promise(async (next) => {
-        Produit.findByIdAndDelete({ _id: data })
-          .then((data) => {
+        Produit.deleteOne(data)
+          .then((res) => {
             next({
               etat: true,
-              result: data,
+              result: res,
             });
           })
           .catch((err) => {

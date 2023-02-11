@@ -98,7 +98,7 @@ exports.addbackPost = async (req, res) => {
 
         let venteData = {
           produit: body.produit,
-          quantite: body.quantite,
+          quantite: body.quantite.map((q) => -q),
           travail_pour: user.travail_pour,
           employe: user._id,
           status_commande: 'Retour',

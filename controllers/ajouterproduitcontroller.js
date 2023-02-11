@@ -21,6 +21,8 @@ exports.addproduit = async (req, res) => {
           produits: resProduitsBySession.result,
           user: { ...sess, id: sess.id || sess._id },
           product_sizes: PRODUCT_SIZE,
+          update: false,
+          product: null,
         });
       }
     } catch (error) {
@@ -54,8 +56,9 @@ exports.addproduitGlobal = async (req, res) => {
 };
 
 exports.addproduitPost = async (req, res) => {
-  if (req.session.user) {
-    const session = req.body.session || req.session.user.travail_pour;
+  const user = req.session.user;
+  if (user) {
+    const session = req.body.session || user.travail_pour;
     const data = {
       produit: req.body.produit,
       prix_vente: parseInt(req.body.prix_vente),
@@ -79,14 +82,16 @@ exports.addproduitPost = async (req, res) => {
       prix_vente: data.prix_vente,
       prix_achat: data.prix_achat,
       date: new Date(),
-      add_by: `${req.session.user.nom} ${req.session.user.prenom}`,
+      add_by:
+        user.nom && user.prenoms
+          ? `${user.nom} ${user.prenoms}`
+          : user.username,
     };
 
     if (produit_exist.etat && produit_exist.result) {
       result = await produitQueries.updateProduit(
         { produitId: produit_exist.result._id, session },
         {
-          ...data,
           quantite: produit_exist.result.quantite + data.quantite,
           historiques: [...produit_exist.result.historiques, newHistorique],
         }
@@ -97,6 +102,113 @@ exports.addproduitPost = async (req, res) => {
     }
     res.redirect('/listeproduit');
   }
+};
 
-  const description = req.body.description;
+exports.editProduit = async (req, res) => {
+  if (req.session.user) {
+    const produitId = req.query.productId;
+    console.log(
+      '👉 👉 👉  ~ file: ajouterproduitcontroller.js:104 ~ produitId',
+      produitId
+    );
+
+    let sess = req.session.user;
+
+    const Categorie = await categorieQueries.getCategorie();
+    const resProduits = await produitQueries.getGlobalProduit();
+    const resProduitsBySession = await produitQueries.getProduitBySession(
+      sess.id || sess.travail_pour
+    );
+
+    const produit = await produitQueries.getProduitById(produitId);
+
+    if (!produit.result) {
+      res.redirect('/listeproduit');
+      return;
+    }
+
+    res.render('ajouterproduit', {
+      categories: Categorie.result,
+      product: produit.result,
+      globalProduits: resProduits.result,
+      produits: resProduitsBySession.result,
+      user: { ...sess, id: sess.id || sess._id },
+      product_sizes: PRODUCT_SIZE,
+      update: true,
+    });
+  } else {
+    res.redirect('/connexion');
+  }
+};
+
+exports.editproduitPost = async (req, res) => {
+  const user = req.session.user;
+  if (user) {
+    const session = req.body.session || user.travail_pour;
+    const data = {
+      produit: req.body.produit,
+      prix_vente: parseInt(req.body.prix_vente),
+      prix_achat: parseInt(req.body.prix_achat),
+      quantite: parseInt(req.body.quantite),
+      taille: req.body.taille,
+      session: session,
+      historiques: [],
+    };
+    console.log(
+      '👉 👉 👉  ~ file: ajouterproduitcontroller.js:150 ~ data',
+      data
+    );
+
+    const produit_exist = await produitQueries.getProduitByData({
+      produit: data.produit,
+      session,
+      taille: data.taille,
+    });
+
+    const newHistorique = {
+      quantite: data.quantite,
+      prix_vente: data.prix_vente,
+      prix_achat: data.prix_achat,
+      prev_quantite: produit_exist.result.quantite,
+      date: new Date(),
+      add_by:
+        user.nom && user.prenoms
+          ? `${user.nom} ${user.prenoms}`
+          : user.username,
+      update: true,
+    };
+
+    let result = await produitQueries.updateProduit(
+      { produitId: req.body.productId, session },
+      {
+        ...data,
+        quantite: data.quantite,
+        historiques: [...produit_exist.result.historiques, newHistorique],
+      }
+    );
+
+    if (result.etat) {
+      res.json(result);
+    } else {
+      res.status(500).json({
+        etat: false,
+        message: "Une erreur s'est produite lors de la mise à jour du produit",
+      });
+    }
+  }
+};
+
+exports.deleteProduit = async (req, res) => {
+  if (req.session.user) {
+    const user = req.session.user;
+    const produitId = req.params.productId;
+    const session = user.id || req.session.user.travail_pour;
+    const result = await produitQueries.deleteProduit({
+      _id: produitId,
+      session,
+    });
+    res.json(result);
+  } else {
+    res.redirect('/connexion');
+  }
 };
