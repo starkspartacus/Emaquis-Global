@@ -2284,8 +2284,8 @@ hr {
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
-  position: sticky;
-  height: 100vh;
+  position: relative;
+  min-height: 100vh;
   width: auto;
 }
 
@@ -2298,6 +2298,7 @@ hr {
   height: 200px;
 }
 .body-cover {
+  min-height: 100vh;
   background-image: url('../img/bg_connexion.jpg');
   background-position: center;
   background-repeat: no-repeat;
@@ -2320,6 +2321,7 @@ hr {
 /* bodi_cover emconnexion**/
 
 .bodi-cover{
+  min-height: 100vh;
   background-image: url('../img/bg-connexion1.jpg');
   background-position: center;
   background-repeat: no-repeat;
