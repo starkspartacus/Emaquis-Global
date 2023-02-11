@@ -2266,7 +2266,7 @@ hr {
 }
 
 .singup-container {
-  left: 50px;
+  left: 25%;
   overflow: auto;
   top: 150px;
   width: 100%;
@@ -2381,3 +2381,121 @@ hr {
 
 /* fin icon **/
 
+
+/* responsive **/
+@media (max-width: 1024px){
+  
+  .btn-go{
+    font-size: 14px;
+    margin: 10px 0px;
+  }
+
+  .btn-groupe{
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .logo_connexion{
+    width: 25%;
+    height: 25%;
+  }
+  
+  .singup-container{
+    width: 80%;
+  }
+}
+
+@media (max-width: 1306px) {
+  
+  .btn-go{
+    font-size: 14px;
+    margin: 10px 0px;
+  }
+
+  .btn-groupe{
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .logo_connexion{
+    width: 15%;
+    height: 15%;
+  }
+  
+  .singup-container{
+    width: 80%;
+  }
+}
+
+
+@media (max-width: 1440px) {
+  
+  .btn-go{
+    font-size: 14px;
+    margin: 10px 0px;
+  }
+
+  .btn-groupe{
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .logo_connexion{
+    width: 15%;
+    height: 15%;
+  }
+  
+  .singup-container{
+    width: 50%;
+  }
+}
+
+@media (max-width: 2080px) {
+  .btn-go{
+    font-size: 14px;
+    margin: 10px 0px;
+  }
+
+  .btn-groupe{
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .logo_connexion{
+    width: 15%;
+    height: 15%;
+  }
+  
+  .singup-container{
+    width: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .btn-go{
+    font-size: 14px;
+    margin: 10px 0px;
+  }
+
+  .btn-groupe{
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .logo_connexion{
+    width: 15%;
+    height: 15%;
+  }
+  
+  .singup-container{
+    width: 80%;
+  }
+}
+  
+
+/* fin responsive **/

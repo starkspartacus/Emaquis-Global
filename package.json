@@ -47,6 +47,7 @@
     "path": "^0.12.7",
     "socket.io": "^2.3.0",
     "swagger-ui-express": "^4.6.0",
-    "transporter": "0.0.1"
+    "transporter": "0.0.1",
+    "typed.js": "^2.0.12"
   }
 }
