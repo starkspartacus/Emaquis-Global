@@ -205,6 +205,12 @@ router.post(
 );
 
 router.post('/ajouterproduit', ajouterproduitcontroller.addproduitPost);
+router.get('/editproduit', ajouterproduitcontroller.editProduit);
+router.post('/editproduit', ajouterproduitcontroller.editproduitPost);
+router.delete(
+  '/deleteproduit/:productId',
+  ajouterproduitcontroller.deleteProduit
+);
 
 router.post('/emajouterproduit', upload.single('image'), async (req, res) => {
   const file = req.file;
