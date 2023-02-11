@@ -116,7 +116,7 @@ const EmDashboardVenteTables = () => {
   const [showDanger, setShowDanger] = React.useState(false);
 
   return (
-    <div className="col-xl-8 z-2">
+    <div className="col-xl-10 z-2 mt-2">
       <div className="white_card mb_30 card_height_100">
         <div className="white_card_header">
           <div className="row align-items-center justify-content-between flex-wrap">

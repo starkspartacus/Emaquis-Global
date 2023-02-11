@@ -50,7 +50,7 @@ const CartItem = ({ product }) => {
           {product.quantity}
         </span>
         <button
-          className='btn btn-success incr'
+          className='btn btn-valider incr'
           onClick={() => handleUpdateProductQuantity(product, 'incr')}
         >
           +
@@ -122,7 +122,7 @@ const CartFooter = () => {
       />
       <button
         onClick={handleSubmit}
-        className='btn btn-success'
+        className='btn btn-valider'
         disabled={loading || carts.length === 0}
       >
         {loading ? 'En cours...' : 'Valider'}

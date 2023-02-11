@@ -101,6 +101,8 @@
 .vente .product-list__grid .product-card button {
   width: 100%;
   background-color: #98ED58;
+  color: #f1f1f1;
+  font-weight: bold;
 }
 
 .vente .product-list__grid .product-card .product-card__image img {
@@ -129,7 +131,7 @@
 }
 
 .vente .carts .cart-item {
-  background-color: #e6e0e0;
+  background-color: #f4f4f4;
   min-height: 100px;
   padding: 10px;
   border-radius: 5px;
@@ -163,8 +165,17 @@
   max-height: 345px;
   overflow-y: auto;
   border-radius: 5px 5px;
-  background: #0b2e135c;
+  
 }
+
+.vente  button.btn-valider{
+  background-color: #98ED58;
+  color: #f1f1f1;
+  font-weight: bold;
+  
+}
+
+
 
 .vente .carts-footer {
   margin-top: auto;

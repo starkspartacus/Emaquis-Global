@@ -30,10 +30,10 @@ const EmDashboardEmployes = () => {
   const { totalEmployes, totalVentes } = React.useContext(AppContext);
 
   return (
-    <div className="col-xl-4">
+    <div className="col-xl-2 mt-2">
       <div className="white_card card_height_100 mb_30 user_crm_wrapper">
         <div className="row">
-          <div className="col-lg-6">
+          {/* <div className="col-lg-6">
             <div className="single_crm">
               <div className="crm_head d-flex align-items-center justify-content-between">
                 <div className="thumb">
@@ -59,8 +59,8 @@ const EmDashboardEmployes = () => {
                 <h4 className="text-center">{totalEmployes}</h4>
               </div>
             </div>
-          </div>
-          <div className="col-lg-6">
+          </div> */}
+          <div className="col-lg-12">
             <div className="single_crm">
               <div className="crm_head crm_bg_1 d-flex align-items-center justify-content-between">
                 <div className="thumb">
