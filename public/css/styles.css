@@ -2499,3 +2499,10 @@ hr {
   
 
 /* fin responsive **/
+
+.btn-valider{
+  background-color: #98ED58;
+  color: #f1f1f1;
+  font-weight: bold;
+  
+}

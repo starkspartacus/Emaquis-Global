@@ -8,6 +8,7 @@ const { generateYears, formatDate } = require('../utils/generateYear');
 const moment = require('moment');
 const { getPercent } = require('../utils/getPercent');
 const { settingQueries } = require('../requests/settingQueries');
+let totalHebdomadaire = 0;
 
 exports.dashboard = async (req, res) => {
   if (req.session.user) {
@@ -62,6 +63,16 @@ exports.dashboard = async (req, res) => {
         venteByDay[toDayKey]?.reduce((acc, item) => {
           return acc + item.prix;
         }, 0) || 0;
+      
+      /* Calcul du total hebdomadaire */
+      
+      // for (let day = 0; day < 7; day++) { 
+      //   let sale = venteByDay[formatDate(moment(new Date()).subtract(day, 'days').toDate())];
+        
+      //   totalHebdomadaire += sale;
+      //   console.log(totalHebdomadaire);
+
+      // }
 
       const allProductsByDay = venteByDay[toDayKey]?.reduce((acc, item) => {
         let products = [];
