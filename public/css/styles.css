@@ -2287,6 +2287,7 @@ hr {
   position: relative;
   min-height: 100vh;
   width: auto;
+  
 }
 
 /* Fin inscription page*/
@@ -2382,8 +2383,10 @@ hr {
 /* fin icon **/
 
 
-/* responsive **/
-@media (max-width: 1024px){
+/* responsive *
+@media screen and (max-width: 1024px ) , 
+
+screen and (max-height: 963px ) {
   
   .btn-go{
     font-size: 14px;
@@ -2399,6 +2402,12 @@ hr {
   .logo_connexion{
     width: 25%;
     height: 25%;
+  }
+
+  .container-inscri{
+    position: relative;
+    top: -50px;
+    
   }
   
   .singup-container{
@@ -2425,7 +2434,7 @@ hr {
   }
   
   .singup-container{
-    width: 80%;
+    width: 50%;
   }
 }
 
@@ -2459,6 +2468,12 @@ hr {
     margin: 10px 0px;
   }
 
+  .container-inscri{
+    position: relative;
+    top: -50px;
+    
+  }
+
   .btn-groupe{
     align-items: center;
     justify-content: center;
@@ -2466,12 +2481,18 @@ hr {
   }
 
   .logo_connexion{
-    width: 15%;
-    height: 15%;
+    margin-bottom: -10px;
+    width: 25%;
+    height: 25%;
   }
   
   .singup-container{
+    display: flex;
+    position: relative;
+    margin-bottom: 150px;
     width: 30%;
+    overflow-y: auto;
+    border-radius: 30px;
   }
 }
 
@@ -2495,7 +2516,7 @@ hr {
   .singup-container{
     width: 80%;
   }
-}
+} */
   
 
 /* fin responsive **/
