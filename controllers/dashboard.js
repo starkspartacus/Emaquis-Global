@@ -63,12 +63,12 @@ exports.dashboard = async (req, res) => {
         venteByDay[toDayKey]?.reduce((acc, item) => {
           return acc + item.prix;
         }, 0) || 0;
-      
+
       /* Calcul du total hebdomadaire */
-      
-      // for (let day = 0; day < 7; day++) { 
+
+      // for (let day = 0; day < 7; day++) {
       //   let sale = venteByDay[formatDate(moment(new Date()).subtract(day, 'days').toDate())];
-        
+
       //   totalHebdomadaire += sale;
       //   console.log(totalHebdomadaire);
 
@@ -89,8 +89,9 @@ exports.dashboard = async (req, res) => {
       const allProductsByDayGrouped =
         allProductsByDay?.reduce((acc, item) => {
           const productId = item.produit._id;
+          const taille = item.taille;
           const productFind = acc.find(
-            (item) => item.produit._id === productId
+            (item) => item.produit._id === productId && item.taille === taille
           );
 
           if (productFind) {

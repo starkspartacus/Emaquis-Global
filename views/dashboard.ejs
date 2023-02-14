@@ -1,301 +1,247 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>E-maquis Gestionnaire</title>
-    <script src="js/confetti.js"></script>
-    <%- include('partial/head.ejs') %>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
-    <!-- PLUGINS CSS STYLE -->
-    <link rel="stylesheet" href="../plugins/bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="../plugins/themify-icons/themify-icons.css" />
-    <link rel="stylesheet" href="../plugins/slick/slick.css" />
-    <link rel="stylesheet" href="../plugins/slick/slick-theme.css" />
-    <link rel="stylesheet" href="../plugins/fancybox/jquery.fancybox.min.css" />
-    <link rel="stylesheet" href="../plugins/aos/aos.css" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>E-maquis Gestionnaire</title>
+  <script src="js/confetti.js"></script>
+  <%- include('partial/head.ejs') %>
 
-    <!-- Favicon -->
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="../img/paresseux_sous_officiel.png"
-    />
-  </head>
-  <body class="crm_body_bg">
-    <style>
-      .sidebar .logo .large_logo img {
-        width: 70%;
-        margin-left: 15%;
-      }
-    </style>
+  <!-- PLUGINS CSS STYLE -->
+  <link rel="stylesheet" href="../plugins/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="../plugins/themify-icons/themify-icons.css" />
+  <link rel="stylesheet" href="../plugins/slick/slick.css" />
+  <link rel="stylesheet" href="../plugins/slick/slick-theme.css" />
+  <link rel="stylesheet" href="../plugins/fancybox/jquery.fancybox.min.css" />
+  <link rel="stylesheet" href="../plugins/aos/aos.css" />
 
-    <%- include('partial/sidebar.ejs') %>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
+</head>
 
-    <!--/ sidebar  -->
+<body class="crm_body_bg">
+  <style>
+    .sidebar .logo .large_logo img {
+      width: 70%;
+      margin-left: 15%;
+    }
+  </style>
 
-    <section class="main_content dashboard_part large_header_bg">
-      <!-- menu  -->
-      <%- include('partial/notif.ejs') %>
-      <div style="postion: absolute; inset: 0" id="confetti"></div>
-      <!--/ menu  -->
-      <div class="main_content_iner overly_inner admin_dashboard">
-        <div class="container-fluid p-0">
-          <!-- page title  -->
-          <div class="row">
-            <div class="col-12">
-              <div
-                class="page_title_box d-flex flex-wrap align-items-center justify-content-between"
-              >
-                <div class="page_title_left d-flex align-items-center">
-                  <h3 class="f_s_25 f_w_700 dark_text mr_30">
-                    Tableau de bord
-                  </h3>
-                  <ol class="breadcrumb page_bradcam mb-0">
-                    <li class="breadcrumb-item">
-                      <a href="javascript:void(0);">Acceuil</a>
-                    </li>
-                    <li class="breadcrumb-item active">Analyse</li>
-                  </ol>
-                </div>
-                <div class="page_title_right">
-                  <div class="page_date_button d-flex align-items-center">
-                    <img src="img/icon/calender_icon.svg" alt="" />
-                    1 Août 2021
-                  </div>
+  <%- include('partial/sidebar.ejs') %>
+
+  <!--/ sidebar  -->
+
+  <section class="main_content dashboard_part large_header_bg">
+    <!-- menu  -->
+    <%- include('partial/notif.ejs') %>
+    <div style="postion: absolute; inset: 0" id="confetti"></div>
+    <!--/ menu  -->
+    <div class="main_content_iner overly_inner admin_dashboard">
+      <div class="container-fluid p-0">
+        <!-- page title  -->
+        <div class="row">
+          <div class="col-12">
+            <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+              <div class="page_title_left d-flex align-items-center">
+                <h3 class="f_s_25 f_w_700 dark_text mr_30">
+                  Tableau de bord
+                </h3>
+                <ol class="breadcrumb page_bradcam mb-0">
+                  <li class="breadcrumb-item">
+                    <a href="javascript:void(0);">Acceuil</a>
+                  </li>
+                  <li class="breadcrumb-item active">Analyse</li>
+                </ol>
+              </div>
+              <div class="page_title_right">
+                <div class="page_date_button d-flex align-items-center">
+                  <img src="img/icon/calender_icon.svg" alt="" />
+                  1 Août 2021
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-xl-8">
-              <div class="white_card mb_30 card_height_100">
-                <div class="white_card_header">
-                  <div
-                    class="row align-items-center justify-content-between flex-wrap"
-                  >
-                    <div class="col-lg-4">
-                      <div class="main-title">
-                        <h3 class="m-0">VENTES</h3>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-4 text-right d-flex justify-content-end">
-                      <select
-                        class="nice_Select2 max-width-220 mr-2"
-                        id="chart_month"
-                      >
-                        <option value="1">choisir le mois</option>
-                        <% for( month of months) { %> <% if (month.code === new
-                        Date().getMonth()+1) { %>
-                        <option value="<%= month.code %>" selected>
-                          <%= month.nom %>
-                        </option>
-                        <% } else { %>
-                        <option value="<%= month.code %>">
-                          <%= month.nom %>
-                        </option>
-                        <% } %> <% } %>
-                      </select>
-
-                      <select
-                        class="nice_Select2 max-width-220"
-                        id="chart_year"
-                      >
-                        <option value="1">choisir l'année</option>
-                        <% for( year of years) { %> <% if(year === new
-                        Date().getFullYear()) { %>
-                        <option value="<%= year %>" selected>
-                          <%= year %>
-                        </option>
-                        <% } else { %>
-
-                        <option value="<%= year %>"><%= year %></option>
-                        <% } %> <% } %>
-                      </select>
+        </div>
+        <div class="row">
+          <div class="col-xl-8">
+            <div class="white_card mb_30 card_height_100">
+              <div class="white_card_header">
+                <div class="row align-items-center justify-content-between flex-wrap">
+                  <div class="col-lg-4">
+                    <div class="main-title">
+                      <h3 class="m-0">VENTES</h3>
                     </div>
                   </div>
-                </div>
-                <div class="white_card_body">
-                  <div id="management_bar"></div>
+
+                  <div class="col-lg-4 text-right d-flex justify-content-end">
+                    <select class="nice_Select2 max-width-220 mr-2" id="chart_month">
+                      <option value="1">choisir le mois</option>
+                      <% for( month of months) { %> <% if (month.code === new
+                        Date().getMonth()+1) { %>
+                      <option value="<%= month.code %>" selected>
+                        <%= month.nom %>
+                      </option>
+                      <% } else { %>
+                      <option value="<%= month.code %>">
+                        <%= month.nom %>
+                      </option>
+                      <% } %> <% } %>
+                    </select>
+
+                    <select class="nice_Select2 max-width-220" id="chart_year">
+                      <option value="1">choisir l'année</option>
+                      <% for( year of years) { %> <% if(year === new
+                        Date().getFullYear()) { %>
+                      <option value="<%= year %>" selected>
+                        <%= year %>
+                      </option>
+                      <% } else { %>
+
+                      <option value="<%= year %>"><%= year %></option>
+                      <% } %> <% } %>
+                    </select>
+                  </div>
                 </div>
               </div>
+              <div class="white_card_body">
+                <div id="management_bar"></div>
+              </div>
             </div>
-            <div class="col-xl-4">
-              <div class="white_card card_height_100 mb_30 user_crm_wrapper">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="single_crm">
-                      <div
-                        class="crm_head d-flex align-items-center justify-content-between"
-                      >
-                        <div class="thumb">
-                          <img
-                            src="../img/icone_employee.png"
-                            alt=""
-                            style="height: 29px"
-                          />
-                          <span style="font-weight: bold">Employé(e)s</span>
-                        </div>
-                        <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+          </div>
+          <div class="col-xl-4">
+            <div class="white_card card_height_100 mb_30 user_crm_wrapper">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="single_crm">
+                    <div class="crm_head d-flex align-items-center justify-content-between">
+                      <div class="thumb">
+                        <img src="../img/icone_employee.png" alt="" style="height: 29px" />
+                        <span style="font-weight: bold">Employé(e)s</span>
                       </div>
-                      <div class="crm_body">
-                        <h4><%- totalemploye %></h4>
-                        <p>Employé(e)s</p>
-                      </div>
+                      <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
                     </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="single_crm">
-                      <div
-                        class="crm_head crm_bg_1 d-flex align-items-center justify-content-between"
-                      >
-                        <div class="thumb">
-                          <img
-                            src="../img/icone_ventes.png"
-                            style="height: 17px; transform: rotate(-20deg)"
-                            alt=""
-                          />
-                          <span style="font-weight: bold">Ventes</span>
-                        </div>
-                        <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
-                      </div>
-                      <div class="crm_body">
-                        <h4><%= totalVente %></h4>
-                        <p>Aujourd'hui</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="single_crm">
-                      <div
-                        class="crm_head crm_bg_2 d-flex align-items-center justify-content-between"
-                      >
-                        <div class="thumb">
-                          <img
-                            src="img/crm/infographic.svg"
-                            alt=""
-                            style="height: 20px"
-                          />
-                          <span style="font-weight: bold"> Evolution</span>
-                        </div>
-                        <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
-                      </div>
-                      <div class="crm_body">
-                        <h4>
-                          <% if(toDayPercent>0) { %>
-                          <a href="#" class="text_color_5">
-                            <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
-                          </a>
-                          <% } else { %>
-                          <a href="#" style="color: rgb(237, 47, 47)">
-                            <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
-                          </a>
-                          <% } %>
-                        </h4>
-                        <p>Evolution des ventes J - 1</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-6">
-                    <div class="single_crm">
-                      <div
-                        class="crm_head crm_bg_3 d-flex align-items-center justify-content-between"
-                      >
-                        <div class="thumb">
-                          <img
-                            src="../img/franc_cfa.png"
-                            alt="chiffre d'affaire"
-                            style="height: 25px"
-                          />
-                          <span style="font-weight: bold"
-                            >Chiffre d'affaire</span
-                          >
-                        </div>
-                        <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
-                      </div>
-                      <div class="crm_body">
-                        <h4>2455 Fcfa</h4>
-                        <p>Cette semaine</p>
-                      </div>
+                    <div class="crm_body">
+                      <h4><%- totalemploye %></h4>
+                      <p>Employé(e)s</p>
                     </div>
                   </div>
                 </div>
-                <div class="crm_reports_bnner">
-                  <div class="row justify-content-end">
-                    <!-- <div class="col-lg-6">
+                <div class="col-lg-6">
+                  <div class="single_crm">
+                    <div class="crm_head crm_bg_1 d-flex align-items-center justify-content-between">
+                      <div class="thumb">
+                        <img src="../img/icone_ventes.png" style="height: 17px; transform: rotate(-20deg)" alt="" />
+                        <span style="font-weight: bold">Ventes</span>
+                      </div>
+                      <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                    </div>
+                    <div class="crm_body">
+                      <h4><%= totalVente %></h4>
+                      <p>Aujourd'hui</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="single_crm">
+                    <div class="crm_head crm_bg_2 d-flex align-items-center justify-content-between">
+                      <div class="thumb">
+                        <img src="img/crm/infographic.svg" alt="" style="height: 20px" />
+                        <span style="font-weight: bold"> Evolution</span>
+                      </div>
+                      <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                    </div>
+                    <div class="crm_body">
+                      <h4>
+                        <% if(toDayPercent>0) { %>
+                        <a href="#" class="text_color_5">
+                          <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
+                        </a>
+                        <% } else { %>
+                        <a href="#" style="color: rgb(237, 47, 47)">
+                          <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
+                        </a>
+                        <% } %>
+                      </h4>
+                      <p>Evolution des ventes J - 1</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="single_crm">
+                    <div class="crm_head crm_bg_3 d-flex align-items-center justify-content-between">
+                      <div class="thumb">
+                        <img src="../img/franc_cfa.png" alt="chiffre d'affaire" style="height: 25px" />
+                        <span style="font-weight: bold">Chiffre d'affaire</span>
+                      </div>
+                      <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                    </div>
+                    <div class="crm_body">
+                      <h4>2455 Fcfa</h4>
+                      <p>Cette semaine</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="crm_reports_bnner">
+                <div class="row justify-content-end">
+                  <!-- <div class="col-lg-6">
                       <h4>E-MAQUIS</h4>
                       <p>je gagnes en temps je me détends.</p>
                       <a href="#"
                         >Voir plus <i class="fas fa-arrow-right"></i>
                       </a>
                     </div> -->
-                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="col-xl-4">
-              <div class="white_card white_card_bottom card_height_100 mb_30">
-                <div class="white_card_header">
-                  <div class="box_header m-0">
-                    <div class="main-title">
-                      <h3 class="m-0">Objectif à atteindre</h3>
-                    </div>
-                    <div class="header_more_tool">
-                      <div class="dropdown">
-                        <span
-                          class="dropdown-toggle"
-                          id="dropdownMenuButton"
-                          data-toggle="dropdown"
-                        >
-                          <i class="ti-more-alt"></i>
-                        </span>
-                        <div
-                          class="dropdown-menu dropdown-menu-right"
-                          aria-labelledby="dropdownMenuButton"
-                        >
-                          <a class="dropdown-item" href="#">
-                            <i class="ti-eye"></i> Voir plus
-                          </a>
-                          <a class="dropdown-item" href="#">
-                            <i class="ti-printer"></i> Print</a
-                          >
-                          <a class="dropdown-item" href="#">
-                            <i class="fa fa-download"></i> Download</a
-                          >
-                        </div>
+          <div class="col-xl-4">
+            <div class="white_card white_card_bottom card_height_100 mb_30">
+              <div class="white_card_header">
+                <div class="box_header m-0">
+                  <div class="main-title">
+                    <h3 class="m-0">Objectif à atteindre</h3>
+                  </div>
+                  <div class="header_more_tool">
+                    <div class="dropdown">
+                      <span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
+                        <i class="ti-more-alt"></i>
+                      </span>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">
+                          <i class="ti-eye"></i> Voir plus
+                        </a>
+                        <a class="dropdown-item" href="#">
+                          <i class="ti-printer"></i> Print</a>
+                        <a class="dropdown-item" href="#">
+                          <i class="fa fa-download"></i> Download</a>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="white_card_body">
-                  <div id="chart-currently"></div>
-                  <div class="monthly_plan_wraper">
-                    <% if(productMostSold?.produit) { %>
-                    <div
-                      class="single_plan d-flex align-items-center justify-content-between"
-                    >
-                      <div class="plan_left d-flex align-items-center">
-                        <div class="thumb">
-                          <img src="img/icon2/7.svg" alt="" />
-                        </div>
-                        <div>
-                          <h5>Produit le plus vendu</h5>
-                          <span
-                            ><%= productMostSold?.produit?.nom_produit %> x <%=
-                            productMostSold?.quantite %></span
-                          >
-                        </div>
+              </div>
+              <div class="white_card_body">
+                <div id="chart-currently"></div>
+                <div class="monthly_plan_wraper">
+                  <% if(productMostSold?.produit) { %>
+                  <div class="single_plan d-flex align-items-center justify-content-between">
+                    <div class="plan_left d-flex align-items-center">
+                      <div class="thumb">
+                        <img src="img/icon2/7.svg" alt="" />
+                      </div>
+                      <div>
+                        <h5>Produit le plus vendu</h5>
+                        <span><%= productMostSold?.produit?.nom_produit %> <%= productMostSold?.taille %> x <%=
+                            productMostSold?.quantite %></span>
                       </div>
                     </div>
-                    <% } %>
-                    <!-- <div
+                  </div>
+                  <% } %>
+                  <!-- <div
                       class="single_plan d-flex align-items-center justify-content-between"
                     >
                       <div class="plan_left d-flex align-items-center">
@@ -324,590 +270,560 @@
                         </div>
                       </div>
                     </div> -->
-                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-xl-4">
-              <div
-                class="white_card white_card_bottom card_height_100 mb_30 overflow_hidden"
-              >
-                <div class="white_card_header">
-                  <div class="box_header m-0">
-                    <div class="main-title">
-                      <h3 class="m-0">Details des ventes</h3>
-                    </div>
-                    <div class="header_more_tool">
-                      <div class="dropdown">
-                        <span
-                          class="dropdown-toggle"
-                          id="dropdownMenuButton"
-                          data-toggle="dropdown"
-                        >
-                          <i class="ti-more-alt"></i>
-                        </span>
-                        <div
-                          class="dropdown-menu dropdown-menu-right"
-                          aria-labelledby="dropdownMenuButton"
-                        >
-                          <a class="dropdown-item" href="#">
-                            <i class="ti-eye"></i> Voir plus</a
-                          >
-                          <a class="dropdown-item" href="#">
-                            <i class="ti-printer"></i> Print</a
-                          >
-                          <a class="dropdown-item" href="#">
-                            <i class="fa fa-download"></i> Download</a
-                          >
-                        </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="white_card white_card_bottom card_height_100 mb_30 overflow_hidden">
+              <div class="white_card_header">
+                <div class="box_header m-0">
+                  <div class="main-title">
+                    <h3 class="m-0">Details des ventes</h3>
+                  </div>
+                  <div class="header_more_tool">
+                    <div class="dropdown">
+                      <span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
+                        <i class="ti-more-alt"></i>
+                      </span>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">
+                          <i class="ti-eye"></i> Voir plus</a>
+                        <a class="dropdown-item" href="#">
+                          <i class="ti-printer"></i> Print</a>
+                        <a class="dropdown-item" href="#">
+                          <i class="fa fa-download"></i> Download</a>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="white_card_body pb-0">
-                  <div class="Sales_Details_plan">
-                    <div class="row">
-                      <% for( product of allProductsByDayGrouped) {%>
-                      <div class="col-lg-6">
-                        <div
-                          class="single_plan d-flex align-items-center justify-content-between"
-                        >
-                          <div class="plan_left d-flex align-items-center">
-                            <div class="thumb">
-                              <img
-                                src="<%= product.produit.image %>"
-                                alt=""
-                                style="height: 100%; object-fit: contain"
-                              />
-                            </div>
-                            <div>
-                              <h5><%= product.prix_vente %> FCFA</h5>
-                              <span><%= product.produit.nom_produit %>
+              </div>
+              <div class="white_card_body pb-0">
+                <div class="Sales_Details_plan">
+                  <div class="row">
+                    <% for( product of allProductsByDayGrouped) {%>
+                    <div class="col-lg-6">
+                      <div class="single_plan d-flex align-items-center justify-content-between">
+                        <div class="plan_left d-flex align-items-center">
+                          <div class="thumb">
+                            <img src="<%= product.produit.image %>" alt="" style="height: 100%; object-fit: contain" />
+                          </div>
+                          <div>
+                            <h5><%= product.prix_vente %> FCFA</h5>
+                            <span><%= product.produit.nom_produit %> <%= product.taille %>
                               x <%= product.quantite %>
-                              </span>
-                            </div>
+                            </span>
                           </div>
                         </div>
                       </div>
-                      <% } %>
                     </div>
+                    <% } %>
                   </div>
                 </div>
-                <!-- <div class="chart_wrap overflow_hidden">
+              </div>
+              <!-- <div class="chart_wrap overflow_hidden">
                   <div id="chart4"></div>
                 </div> -->
-              </div>
             </div>
+          </div>
 
-            <div class="col-lg-4">
-              <div class="white_card white_card_bottom card_height_100 mb_20">
-                <div class="white_card_header">
-                  <div class="box_header m-0">
-                    <div class="main-title">
-                      <h3 class="m-0">Inventaire du stock</h3>
-                    </div>
-                    <div class="header_more_tool">
-                      <div class="dropdown">
-                        <span
-                          class="dropdown-toggle"
-                          id="dropdownMenuButton"
-                          data-toggle="dropdown"
-                        >
-                          <i class="ti-more-alt"></i>
-                        </span>
-                        <div
-                          class="dropdown-menu dropdown-menu-right"
-                          aria-labelledby="dropdownMenuButton"
-                        >
-                          <a class="dropdown-item" href="#">
-                            <i class="ti-eye"></i> Action</a
-                          >
-                          <a class="dropdown-item" href="#">
-                            <i class="ti-trash"></i> Delete</a
-                          >
-                          <a class="dropdown-item" href="#">
-                            <i class="fas fa-edit"></i> Edit</a
-                          >
-                          <a class="dropdown-item" href="#">
-                            <i class="ti-printer"></i> Print</a
-                          >
-                          <a class="dropdown-item" href="#">
-                            <i class="fa fa-download"></i> Download</a
-                          >
-                        </div>
+          <div class="col-lg-4">
+            <div class="white_card white_card_bottom card_height_100 mb_20">
+              <div class="white_card_header">
+                <div class="box_header m-0">
+                  <div class="main-title">
+                    <h3 class="m-0">Inventaire du stock</h3>
+                  </div>
+                  <div class="header_more_tool">
+                    <div class="dropdown">
+                      <span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
+                        <i class="ti-more-alt"></i>
+                      </span>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">
+                          <i class="ti-eye"></i> Action</a>
+                        <a class="dropdown-item" href="#">
+                          <i class="ti-trash"></i> Delete</a>
+                        <a class="dropdown-item" href="#">
+                          <i class="fas fa-edit"></i> Edit</a>
+                        <a class="dropdown-item" href="#">
+                          <i class="ti-printer"></i> Print</a>
+                        <a class="dropdown-item" href="#">
+                          <i class="fa fa-download"></i> Download</a>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="white_card_body QA_section">
-                  <div class="QA_table">
-                    <!-- table-responsive -->
-                    <table class="table lms_table_active2 p-0">
-                      <thead>
-                        <tr>
-                          <th scope="col">Nom de produit</th>
-                          <th scope="col">Prix d'achat</th>
-                          <th scope="col">Prix de vente</th>
-                          <th scope="col">quantité</th>
-                          <th scope="col">taille</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% Tab.forEach(el =>{%>
-                        <tr>
-                          <td>
-                            <div class="customer d-flex align-items-center">
-                              <div class="thumb_34 mr_15 mt-0">
-                                <img
-                                  src="<%= el.produit.image %>"
-                                  alt=""
-                                  style="
+              </div>
+              <div class="white_card_body QA_section">
+                <div class="QA_table">
+                  <!-- table-responsive -->
+                  <table class="table lms_table_active2 p-0">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nom de produit</th>
+                        <th scope="col">Prix d'achat</th>
+                        <th scope="col">Prix de vente</th>
+                        <th scope="col">quantité</th>
+                        <th scope="col">taille</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% Tab.forEach(el =>{%>
+                      <tr>
+                        <td>
+                          <div class="customer d-flex align-items-center">
+                            <div class="thumb_34 mr_15 mt-0">
+                              <img src="<%= el.produit.image %>" alt="" style="
                                     width: 40px;
                                     height: 40px;
                                     object-fit: contain;
-                                  "
-                                />
-                              </div>
-                              <span class="f_s_12 f_w_600 color_text_5"
-                                ><%= el.produit.nom_produit %></span
-                              >
+                                  " />
                             </div>
-                          </td>
-                          <td class="f_s_12 f_w_400 color_text_6">
-                            <%= el.prix_achat %> FcFA
-                          </td>
-                          <td class="f_s_12 f_w_400 color_text_6">
-                            <%= el.prix_vente %> FcFA
-                          </td>
-                          <td class="f_s_12 f_w_400 text-center">
-                            <% if(el.quantite <= 100){ %>
-                            <a
-                              href="#"
-                              class=""
-                              style="color: rgb(219, 36, 23)"
-                            >
-                              <%= el.quantite %></a
-                            >
+                            <span class="f_s_12 f_w_600 color_text_5"><%= el.produit.nom_produit %></span>
+                          </div>
+                        </td>
+                        <td class="f_s_12 f_w_400 color_text_6">
+                          <%= el.prix_achat %> FcFA
+                        </td>
+                        <td class="f_s_12 f_w_400 color_text_6">
+                          <%= el.prix_vente %> FcFA
+                        </td>
+                        <td class="f_s_12 f_w_400 text-center">
+                          <% if(el.quantite <= 100){ %>
+                          <a href="#" class="" style="color: rgb(219, 36, 23)">
+                            <%= el.quantite %></a>
 
-                            <% } else{ %>
-                            <a
-                              href="#"
-                              class=""
-                              style="color: rgb(47, 204, 47)"
-                            >
-                              <%= el.quantite %></a
-                            >
+                          <% } else{ %>
+                          <a href="#" class="" style="color: rgb(47, 204, 47)">
+                            <%= el.quantite %></a>
 
-                            <% } %>
-                          </td>
-                          <td class="f_s_12 f_w_400 color_text_6">
-                            <%= el.taille %>
-                          </td>
-                        </tr>
+                          <% } %>
+                        </td>
+                        <td class="f_s_12 f_w_400 color_text_6">
+                          <%= el.taille %>
+                        </td>
+                      </tr>
 
-                        <%})%>
-                      </tbody>
-                    </table>
-                  </div>
+                      <%})%>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-
-    <div id="back-top" style="display: none">
-      <a title="Go to Top" href="#">
-        <i class="ti-angle-up"></i>
-      </a>
     </div>
+  </section>
 
-    <%- include('partial/script.ejs') %>
-    <script src="../jquery-3.4.1.min.js"></script>
-    <!-- <script>
+  <div id="back-top" style="display: none">
+    <a title="Go to Top" href="#">
+      <i class="ti-angle-up"></i>
+    </a>
+  </div>
+
+  <%- include('partial/script.ejs') %>
+  <script src="../jquery-3.4.1.min.js"></script>
+  <!-- <script>
       socket.on('loginsuccess', (data) => {
         location.href = data;
       });
     </script> -->
 
-    <script>
-       // currently sale
+  <script>
+    // currently sale
 
-        const socket = io();
-         const date = new Date();
-         const month = date.getMonth()+1;
-         const year = date.getFullYear();
+    const socket = io();
+    const date = new Date();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
 
-        const celebriteObjective = ()=>{
-              startConfetti(
-                  {
-                      particleCount: 100,
-                      spread: 70,
-                      origin: { y: 0.6 }
-                  }
-            );
-
-
-          const canvas =   document.getElementsByTagName('canvas');
-
-          if(canvas){
-                canvas[0].style.position = 'absolute';
-                canvas[0].style.top = '0';
-                canvas[0].style.left = '0';
-                canvas[0].style.width = '100%';
-                canvas[0].style.height = '100%';
-
-
-                setTimeout(() => {
-                  stopConfetti();
-                }, 3000);
-
-          }
-      }
-              const ventes = <%- JSON.stringify(venteByDay) %>;
-              const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
-          //     const user_travail_pour = <%- JSON.stringify(user.travail_pour) %>;
-          // const socket = io();
-          // socket.on('connect', () => {
-          //   socket.on(`${user_travail_pour}-editvente`,(data)=>{
-          //     $.notify("Vous avez une vente  !", "success");
-          //     const ventes = <%- JSON.stringify(venteByDay) %>;
-          //     const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
-
-          //   })
-          // })
-        //  const ventes = <%- JSON.stringify(venteByDay) %>;
-        //  const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
-
-
-         if(localStorage.getItem('celebriteObjective') && localStorage.getItem('celebriteObjectiveDate') != new Date().toLocaleDateString()){
-            localStorage.removeItem('celebriteObjective');
-            localStorage.removeItem('celebriteObjectiveDate');
-         }
-
-
-        if(objectivePercent == 100 && !localStorage.getItem('celebriteObjective')){
-            celebriteObjective();
-            localStorage.setItem('celebriteObjective', true);
-            localStorage.setItem('celebriteObjectiveDate', new Date().toLocaleDateString());
+    const celebriteObjective = () => {
+      startConfetti({
+        particleCount: 100,
+        spread: 70,
+        origin: {
+          y: 0.6
         }
+      });
 
 
-         const filterLabelsByMonth = (month, year) => {
-             return Object.keys(ventes).filter(label=>{
-                 const dateSplit = label.split('/');
-                 return Number(dateSplit[0]) == month && dateSplit[2] == year;
-             });
-         }
+      const canvas = document.getElementsByTagName('canvas');
+
+      if (canvas) {
+        canvas[0].style.position = 'absolute';
+        canvas[0].style.top = '0';
+        canvas[0].style.left = '0';
+        canvas[0].style.width = '100%';
+        canvas[0].style.height = '100%';
 
 
-         const filterVentesValuesByMonth = ( month, year) => {
-             return Object.entries(ventes).map((vente) => {
-           return [vente[0], vente[1].reduce((acc, val) => acc + val.prix, 0)]
-         }).filter(vente=>{
-             const dateSplit = vente[0].split('/');
-             return Number(dateSplit[0]) == month && dateSplit[2] == year;
-         }).sort((a,b)=>{
-             if(new Date(a[0]) > new Date(b[0])) return -1;
-             if(new Date(a[0]) < new Date(b[0])) return 1;
-             return 0;
-         }).map((vente) => vente[1]);
-         }
+        setTimeout(() => {
+          stopConfetti();
+        }, 3000);
+
+      }
+    }
+    const ventes = <%- JSON.stringify(venteByDay) %>;
+    const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
+    //     const user_travail_pour = <%- JSON.stringify(user.travail_pour) %>;
+    // const socket = io();
+    // socket.on('connect', () => {
+    //   socket.on(`${user_travail_pour}-editvente`,(data)=>{
+    //     $.notify("Vous avez une vente  !", "success");
+    //     const ventes = <%- JSON.stringify(venteByDay) %>;
+    //     const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
+
+    //   })
+    // })
+    //  const ventes = <%- JSON.stringify(venteByDay) %>;
+    //  const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
 
 
-         const ventesLabels = filterLabelsByMonth(month,year);
+    if (localStorage.getItem('celebriteObjective') && localStorage.getItem('celebriteObjectiveDate') != new Date().toLocaleDateString()) {
+      localStorage.removeItem('celebriteObjective');
+      localStorage.removeItem('celebriteObjectiveDate');
+    }
 
 
-         const ventesValues = filterVentesValuesByMonth(month,year);
-
-       var options = {
-         series: [objectivePercent],
-         chart: {
-           height: 300,
-           type: 'radialBar',
-           offsetY: 0,
-         },
-         plotOptions: {
-           radialBar: {
-             startAngle: -90,
-             endAngle: 90,
-
-             hollow: {
-               margin: 0,
-               size: '70%',
-             },
-             dataLabels: {
-               showOn: 'always',
-               name: {
-                 show: true,
-                 fontSize: '13px',
-                 fontWeight: '700',
-                 offsetY: -5,
-                 color: ['#000000', '#E5ECFF'],
-               },
-               value: {
-                 color: ['#000000', '#E5ECFF'],
-                 fontSize: '30px',
-                 fontWeight: '700',
-                 offsetY: -40,
-                 show: true,
-               },
-             },
-             track: {
-               background: ['rgba(208,181,137,0.35)', '#E5ECFF'],
-               strokeWidth: '100%',
-             },
-           },
-         },
-         colors: ['#98ED58'],
-         stroke: {
-           lineCap: 'round',
-         },
-         labels: ['Progress'],
-       };
-
-       var chart = new ApexCharts(
-         document.querySelector('#chart-currently'),
-         options
-       );
-       chart.render();
-
-       /* -------------------------------------------------------------------------- */
-       /*                                     chart                                    */
-       /* -------------------------------------------------------------------------- */
-
-       options = {
-         chart: {
-           height: 500,
-           type: 'line',
-           stacked: !1,
-           toolbar: { show: !1 },
-         },
-         stroke: { width: [0, 2, 4], curve: 'smooth' },
-         plotOptions: { bar: { columnWidth: '30%' } },
-         colors: ['#FF9C2C', '#dfe2e6', '#98ED58'],
-         series: [
-           {
-             name: 'total',
-             type: 'column',
-             data: ventesValues.reverse(),
-           }
-         ],
-         fill: {
-           opacity: [0.85, 0.25, 1],
-           gradient: {
-             inverseColors: !1,
-             shade: 'light',
-             type: 'vertical',
-             opacityFrom: 0.85,
-             opacityTo: 0.55,
-             stops: [0, 100, 100, 100],
-           },
-         },
-         labels: ventesLabels.reverse(),
-         markers: { size: 0 },
-         xaxis: { type: 'datetime' },
-         yaxis: { title: { text: 'Prix total' } },
-         tooltip: {
-           shared: !0,
-           intersect: !1,
-           y: {
-             formatter: function (e) {
-               return void 0 !== e ? e.toFixed(0) + ' FCFA' : e;
-             },
-           },
-         },
-         grid: { borderColor: '#f1f1f1' },
-       };
-      let chart_management = new ApexCharts(
-         document.querySelector('#management_bar'),
-         options
-       )
+    if (objectivePercent == 100 && !localStorage.getItem('celebriteObjective')) {
+      celebriteObjective();
+      localStorage.setItem('celebriteObjective', true);
+      localStorage.setItem('celebriteObjectiveDate', new Date().toLocaleDateString());
+    }
 
 
-       chart_management.render();
-       console.log("chart management")
-      //
-       console.log("chart management 11")
+    const filterLabelsByMonth = (month, year) => {
+      return Object.keys(ventes).filter(label => {
+        const dateSplit = label.split('/');
+        return Number(dateSplit[0]) == month && dateSplit[2] == year;
+      });
+    }
 
 
-          socket.on('connect', () => {
-
-            socket.on(`${user_travail_pour}-editvente`,(data)=>{
-             alert('Edit');
-             console.log("chart management 22")
-
-            })
-          })
-          console.log("chart management 33")
-       $('#chart_month').on('change',function(){
-        const year = $('#chart_year').val();
-
-        chart_management.updateOptions({
-            labels: filterLabelsByMonth(this.value,year).reverse(),
-            series: [{
-                name: 'total',
-                type: 'column',
-                data: filterVentesValuesByMonth(this.value,year).reverse(),
-            }]
-        })
-       })
+    const filterVentesValuesByMonth = (month, year) => {
+      return Object.entries(ventes).map((vente) => {
+        return [vente[0], vente[1].reduce((acc, val) => acc + val.prix, 0)]
+      }).filter(vente => {
+        const dateSplit = vente[0].split('/');
+        return Number(dateSplit[0]) == month && dateSplit[2] == year;
+      }).sort((a, b) => {
+        if (new Date(a[0]) > new Date(b[0])) return -1;
+        if (new Date(a[0]) < new Date(b[0])) return 1;
+        return 0;
+      }).map((vente) => vente[1]);
+    }
 
 
-      $('#chart_year').on('change',function(){
+    const ventesLabels = filterLabelsByMonth(month, year);
 
-        console.log(this.value)
-        const month = $('#chart_month').val();
-        chart_management.updateOptions({
-            labels: filterLabelsByMonth(month,this.value).reverse(),
-            series: [{
-                name: 'total',
-                type: 'column',
-                data: filterVentesValuesByMonth(month,this.value).reverse(),
-            }]
-        })
-       })
 
-       // cart area
+    const ventesValues = filterVentesValuesByMonth(month, year);
 
-       // currently sale
-       var options = {
-         series: [
-           {
-             name: 'Net Profit',
-             data: [30, 25, 45, 30, 55, 55],
-           },
-         ],
-         chart: {
-           type: 'area',
-           height: 270,
-           offsetY: 0,
-           toolbar: {
-             show: false,
-           },
-           zoom: {
-             enabled: false,
-           },
-           sparkline: {
-             enabled: true,
-           },
-         },
-         plotOptions: {},
-         legend: {
-           show: false,
-         },
-         dataLabels: {
-           enabled: false,
-         },
-         fill: {
-           type: 'solid',
-           opacity: 0.2,
-         },
-         stroke: {
-           curve: 'smooth',
-           show: true,
-           width: 3,
-           colors: ['#a2ff00', '#E5ECFF'],
-         },
-         xaxis: {
-           categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-           axisBorder: {
-             show: false,
-           },
-           axisTicks: {
-             show: false,
-           },
-           labels: {
-             show: false,
-             style: {
-               // colors: KTApp.getSettings()['colors']['gray']['gray-500'],
-               fontSize: '12px',
-               // fontFamily: KTApp.getSettings()['font-family']
-             },
-           },
-           crosshairs: {
-             show: false,
-             position: 'front',
-             stroke: {
-               color: ['#9767FD', '#E5ECFF'],
-               width: 1,
-               dashArray: 3,
-             },
-           },
-           tooltip: {
-             enabled: true,
-             formatter: undefined,
-             offsetY: 0,
-             style: {
-               fontSize: '12px',
-               // fontFamily: KTApp.getSettings()['font-family']
-             },
-           },
-         },
-         yaxis: {
-           min: 0,
-           max: 60,
-           labels: {
-             show: false,
-             style: {
-               // colors: KTApp.getSettings()['c^olors']['gray']['gray-500'],
-               fontSize: '12px',
-               // fontFamily: KTApp.getSettings()['font-family']
-             },
-           },
-         },
-         states: {
-           normal: {
-             filter: {
-               type: 'none',
-               value: 0,
-             },
-           },
-           hover: {
-             filter: {
-               type: 'none',
-               value: 0,
-             },
-           },
-           active: {
-             allowMultipleDataPointsSelection: false,
-             filter: {
-               type: 'none',
-               value: 0,
-             },
-           },
-         },
-         tooltip: {
-           style: {
-             fontSize: '12px',
-             // fontFamily: KTApp.getSettings()['font-family']
-           },
-           y: {
-             formatter: function (val) {
-               return '$' + val + ' thousands';
-             },
-           },
-         },
-         colors: ['#9767FD', '#E5ECFF'],
-         markers: {
-           colors: ['#9767FD', '#E5ECFF'],
-           strokeColor: ['#9767FD', '#E5ECFF'],
-           strokeWidth: 3,
-         },
-       };
+    var options = {
+      series: [objectivePercent],
+      chart: {
+        height: 300,
+        type: 'radialBar',
+        offsetY: 0,
+      },
+      plotOptions: {
+        radialBar: {
+          startAngle: -90,
+          endAngle: 90,
 
-       var chart = new ApexCharts(document.querySelector('#chart4'), options);
-       chart.render();
-    </script>
+          hollow: {
+            margin: 0,
+            size: '70%',
+          },
+          dataLabels: {
+            showOn: 'always',
+            name: {
+              show: true,
+              fontSize: '13px',
+              fontWeight: '700',
+              offsetY: -5,
+              color: ['#000000', '#E5ECFF'],
+            },
+            value: {
+              color: ['#000000', '#E5ECFF'],
+              fontSize: '30px',
+              fontWeight: '700',
+              offsetY: -40,
+              show: true,
+            },
+          },
+          track: {
+            background: ['rgba(208,181,137,0.35)', '#E5ECFF'],
+            strokeWidth: '100%',
+          },
+        },
+      },
+      colors: ['#98ED58'],
+      stroke: {
+        lineCap: 'round',
+      },
+      labels: ['Progress'],
+    };
 
-    <!-- JAVASCRIPTS -->
+    var chart = new ApexCharts(
+      document.querySelector('#chart-currently'),
+      options
+    );
+    chart.render();
 
-    <script src="../plugins/jquery/jquery.min.js"></script>
-    <script src="../plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="../plugins/slick/slick.min.js"></script>
-    <script src="../plugins/fancybox/jquery.fancybox.min.js"></script>
-    <script src="../plugins/syotimer/jquery.syotimer.min.js"></script>
-    <script src="../plugins/aos/aos.js"></script>
-  </body>
+    /* -------------------------------------------------------------------------- */
+    /*                                     chart                                    */
+    /* -------------------------------------------------------------------------- */
+
+    options = {
+      chart: {
+        height: 500,
+        type: 'line',
+        stacked: !1,
+        toolbar: {
+          show: !1
+        },
+      },
+      stroke: {
+        width: [0, 2, 4],
+        curve: 'smooth'
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: '30%'
+        }
+      },
+      colors: ['#FF9C2C', '#dfe2e6', '#98ED58'],
+      series: [{
+        name: 'total',
+        type: 'column',
+        data: ventesValues.reverse(),
+      }],
+      fill: {
+        opacity: [0.85, 0.25, 1],
+        gradient: {
+          inverseColors: !1,
+          shade: 'light',
+          type: 'vertical',
+          opacityFrom: 0.85,
+          opacityTo: 0.55,
+          stops: [0, 100, 100, 100],
+        },
+      },
+      labels: ventesLabels.reverse(),
+      markers: {
+        size: 0
+      },
+      xaxis: {
+        type: 'datetime'
+      },
+      yaxis: {
+        title: {
+          text: 'Prix total'
+        }
+      },
+      tooltip: {
+        shared: !0,
+        intersect: !1,
+        y: {
+          formatter: function(e) {
+            return void 0 !== e ? e.toFixed(0) + ' FCFA' : e;
+          },
+        },
+      },
+      grid: {
+        borderColor: '#f1f1f1'
+      },
+    };
+    let chart_management = new ApexCharts(
+      document.querySelector('#management_bar'),
+      options
+    )
+
+
+    chart_management.render();
+    console.log("chart management")
+    //
+    console.log("chart management 11")
+
+
+    socket.on('connect', () => {
+
+      socket.on(`${user_travail_pour}-editvente`, (data) => {
+        alert('Edit');
+        console.log("chart management 22")
+
+      })
+    })
+    console.log("chart management 33")
+    $('#chart_month').on('change', function() {
+      const year = $('#chart_year').val();
+
+      chart_management.updateOptions({
+        labels: filterLabelsByMonth(this.value, year).reverse(),
+        series: [{
+          name: 'total',
+          type: 'column',
+          data: filterVentesValuesByMonth(this.value, year).reverse(),
+        }]
+      })
+    })
+
+
+    $('#chart_year').on('change', function() {
+
+      console.log(this.value)
+      const month = $('#chart_month').val();
+      chart_management.updateOptions({
+        labels: filterLabelsByMonth(month, this.value).reverse(),
+        series: [{
+          name: 'total',
+          type: 'column',
+          data: filterVentesValuesByMonth(month, this.value).reverse(),
+        }]
+      })
+    })
+
+    // cart area
+
+    // currently sale
+    var options = {
+      series: [{
+        name: 'Net Profit',
+        data: [30, 25, 45, 30, 55, 55],
+      }, ],
+      chart: {
+        type: 'area',
+        height: 270,
+        offsetY: 0,
+        toolbar: {
+          show: false,
+        },
+        zoom: {
+          enabled: false,
+        },
+        sparkline: {
+          enabled: true,
+        },
+      },
+      plotOptions: {},
+      legend: {
+        show: false,
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      fill: {
+        type: 'solid',
+        opacity: 0.2,
+      },
+      stroke: {
+        curve: 'smooth',
+        show: true,
+        width: 3,
+        colors: ['#a2ff00', '#E5ECFF'],
+      },
+      xaxis: {
+        categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        axisBorder: {
+          show: false,
+        },
+        axisTicks: {
+          show: false,
+        },
+        labels: {
+          show: false,
+          style: {
+            // colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+            fontSize: '12px',
+            // fontFamily: KTApp.getSettings()['font-family']
+          },
+        },
+        crosshairs: {
+          show: false,
+          position: 'front',
+          stroke: {
+            color: ['#9767FD', '#E5ECFF'],
+            width: 1,
+            dashArray: 3,
+          },
+        },
+        tooltip: {
+          enabled: true,
+          formatter: undefined,
+          offsetY: 0,
+          style: {
+            fontSize: '12px',
+            // fontFamily: KTApp.getSettings()['font-family']
+          },
+        },
+      },
+      yaxis: {
+        min: 0,
+        max: 60,
+        labels: {
+          show: false,
+          style: {
+            // colors: KTApp.getSettings()['c^olors']['gray']['gray-500'],
+            fontSize: '12px',
+            // fontFamily: KTApp.getSettings()['font-family']
+          },
+        },
+      },
+      states: {
+        normal: {
+          filter: {
+            type: 'none',
+            value: 0,
+          },
+        },
+        hover: {
+          filter: {
+            type: 'none',
+            value: 0,
+          },
+        },
+        active: {
+          allowMultipleDataPointsSelection: false,
+          filter: {
+            type: 'none',
+            value: 0,
+          },
+        },
+      },
+      tooltip: {
+        style: {
+          fontSize: '12px',
+          // fontFamily: KTApp.getSettings()['font-family']
+        },
+        y: {
+          formatter: function(val) {
+            return '$' + val + ' thousands';
+          },
+        },
+      },
+      colors: ['#9767FD', '#E5ECFF'],
+      markers: {
+        colors: ['#9767FD', '#E5ECFF'],
+        strokeColor: ['#9767FD', '#E5ECFF'],
+        strokeWidth: 3,
+      },
+    };
+
+    var chart = new ApexCharts(document.querySelector('#chart4'), options);
+    chart.render();
+  </script>
+
+  <!-- JAVASCRIPTS -->
+
+  <script src="../plugins/jquery/jquery.min.js"></script>
+  <script src="../plugins/bootstrap/bootstrap.min.js"></script>
+  <script src="../plugins/slick/slick.min.js"></script>
+  <script src="../plugins/fancybox/jquery.fancybox.min.js"></script>
+  <script src="../plugins/syotimer/jquery.syotimer.min.js"></script>
+  <script src="../plugins/aos/aos.js"></script>
+</body>
+
 </html>
