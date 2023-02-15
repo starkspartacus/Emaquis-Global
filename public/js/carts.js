@@ -17,13 +17,15 @@ const CartList = () => {
 const CartItem = ({ product }) => {
   const { handleUpdateProductQuantity, updateProductQuantity } =
     React.useContext(ProductsContext);
+
+  const quantity = (product.quantity_already_sold || 0) + product.quantity;
   return (
     <div className='cart-item'>
       <div className='cart-item__details'>
         <img src={product.produit.image} alt='product' />
         <div>
           <h6>
-            {product.quantity}x {product.produit.nom_produit}
+            {quantity}x {product.produit.nom_produit} {product.taille}
           </h6>
           <p>{product.prix_vente} FCFA</p>
         </div>
@@ -40,14 +42,14 @@ const CartItem = ({ product }) => {
           className='quantity'
           contentEditable
           suppressContentEditableWarning
-          onBlur={(e) =>
-            updateProductQuantity(
-              product,
-              Number(e.target.textContent) || product.quantity
-            )
-          }
+          onBlur={(e) => {
+            const value =
+              Number(e.target.innerText) - (product.quantity_already_sold || 0);
+            if (Number(e.target.innerText) > 0)
+              updateProductQuantity(product, value);
+          }}
         >
-          {product.quantity}
+          {quantity}
         </span>
         <button
           className='btn btn-valider incr'
@@ -61,12 +63,15 @@ const CartItem = ({ product }) => {
 };
 
 const CartFooter = () => {
-  const { carts, clearCarts } = React.useContext(ProductsContext);
+  const { carts, clearCarts, venteId } = React.useContext(ProductsContext);
   const [sommeEncaisse, setSommeEncaisse] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
 
   const total = carts.reduce(
-    (acc, produit) => acc + produit.prix_vente * produit.quantity,
+    (acc, produit) =>
+      acc +
+      produit.prix_vente *
+        (produit.quantity + (produit.quantity_already_sold || 0)),
     0
   );
 
@@ -76,6 +81,7 @@ const CartFooter = () => {
     const vente = {
       produit: carts.map((prod) => prod._id),
       quantite: carts.map((prod) => prod.quantity),
+      quantite_already_sold: carts.map((prod) => prod.quantity_already_sold),
       somme_encaisse: Number(sommeEncaisse),
     };
 
@@ -87,8 +93,8 @@ const CartFooter = () => {
 
     setLoading(true);
 
-    fetch('/vente', {
-      method: 'POST',
+    fetch(venteId ? `/editvente/${venteId}` : '/vente', {
+      method: venteId ? 'PUT' : 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -125,8 +131,13 @@ const CartFooter = () => {
         className='btn btn-valider'
         disabled={loading || carts.length === 0}
       >
-        {loading ? 'En cours...' : 'Valider'}
+        {loading ? 'En cours...' : venteId ? 'Modifier' : 'Valider'}
       </button>
+      {venteId && (
+        <button className='btn btn-danger mt-1' onClick={clearCarts}>
+          Annuler la modification
+        </button>
+      )}
     </div>
   );
 };

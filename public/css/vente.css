@@ -88,7 +88,6 @@
   transition: all 0.5s ease;
 }
 
-
 /* Name product */
 
 .product-card__details h4 {
@@ -100,7 +99,7 @@
 
 .vente .product-list__grid .product-card button {
   width: 100%;
-  background-color: #98ED58;
+  background-color: #98ed58;
   color: #f1f1f1;
   font-weight: bold;
 }
@@ -165,17 +164,13 @@
   max-height: 345px;
   overflow-y: auto;
   border-radius: 5px 5px;
-  
 }
 
-.vente  button.btn-valider{
-  background-color: #98ED58;
+.vente button.btn-valider {
+  background-color: #98ed58;
   color: #f1f1f1;
   font-weight: bold;
-  
 }
-
-
 
 .vente .carts-footer {
   margin-top: auto;
@@ -186,17 +181,33 @@
 }
 
 .emRole {
-  background-color: #2FD8F2;
+  background-color: #2fd8f2;
   padding: auto;
   align-items: center;
 }
 
-.emTaille{
-  background-color: #2FD8F2;
+.emTaille {
+  background-color: #2fd8f2;
   padding: auto;
   align-items: center;
 }
 
-.emPriceproduct{
+.emPriceproduct {
   font-weight: 700;
+}
+
+.vente_table_item.active {
+  background-color: #98ed58;
+  color: #fff;
+}
+
+.vente_table_item button {
+  border: none;
+  background-color: transparent;
+}
+
+.vente_table_item button img {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
 }

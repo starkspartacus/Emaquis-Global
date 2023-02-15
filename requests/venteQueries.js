@@ -117,6 +117,31 @@ exports.venteQueries = class {
     }
   }
 
+  static updateVente(id, data) {
+    return new Promise(async (next) => {
+      Vente.updateOne(
+        {
+          _id: id,
+        },
+        {
+          $set: data,
+        }
+      )
+        .then((data) => {
+          next({
+            etat: true,
+            result: data,
+          });
+        })
+        .catch((err) => {
+          next({
+            etat: false,
+            err: err,
+          });
+        });
+    });
+  }
+
   static deleteVente(data) {
     try {
       return new Promise(async (next) => {

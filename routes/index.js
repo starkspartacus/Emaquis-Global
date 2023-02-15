@@ -101,6 +101,7 @@ router.post('/listeproduit', listeproduitcontroller.produitPost);
 
 router.get('/vente', checkAuthUser, ventecontroller.vente);
 router.post('/vente', ventecontroller.ventePost);
+router.put('/editvente/:id', ventecontroller.editventePost);
 router.post('/vente/status/:venteId', ventecontroller.editStatusVente);
 
 router.post('/retournerproduit', retourcontroller.addbackPost);

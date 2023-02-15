@@ -95,61 +95,83 @@ exports.ventePost = async (req, res) => {
 
 exports.editventePost = async (req, res) => {
   try {
-    const vente = req.body;
+    let sess = req.session.user;
+    const venteId = req.params.id;
 
-    const Produit = await produitQueries.getProduit();
-    let rebour = 0;
-    let resultqte = [];
+    if (!sess) {
+      res.status(401).json({
+        etat: false,
+        data: 'Error',
+      });
+      return;
+    }
+    const body = req.body;
+
+    let Vente = {};
     let prize = [];
-    let Retourproduit = {};
+    let sum = 0;
 
-    /// 1- remboursement total(on rembourse tout)(on recalcul le prix de vente avec le stock)
-    //  2- remboursement partiel(on rembourse partiellement)(on deduire la somme dans la caisse)
-    //  3- remboursement par avoir(ces boisons devienne directement des pourboires)
+    if (body !== null) {
+      // get the price of each product
+      for (let prodId of body.produit) {
+        const currentProduct = await produitQueries.getProduitById(prodId);
 
-    // let lastprize;
-    // if (vente !== null) {
-    //   let prod = Produit.result;
-    //   prod.forEach(async (el) => {
-    //     if (vente.travail_pour == el.session) {
-    //       for (let i = 0; i < vente.produit.length; i++) {
-    //         if (vente.produit[i] == el._id) {
-    //           resultqte.push(el.quantite);
-    //         }
-    //       }
-    //     }
-    //     prize.push(el.prix_vente);
-    //   });
-    //   for (let i = 0; i < Math.min(vente.quantite.length, prize.length); i++) {
-    //     rebour += vente.quantite[i] * prize[i];
-    //   }
+        prize.push(currentProduct.result.prix_vente);
+      }
 
-    //   let newVente = {
-    //     produit: vente.produit,
-    //     quantite: vente.quantite,
-    //     employe: vente.employe,
-    //     travail_pour: vente.travail_pour,
-    //     remboursement: rebour,
-    //   };
+      for (let i = 0; i < Math.min(body.quantite.length, prize.length); i++) {
+        sum += (body.quantite[i] + body.quantite_already_sold[i]) * prize[i];
+      }
 
-    //   Retourproduit = await retourQueries.setRetour(newVente);
-    //   vente.produit.forEach((produit_id, index) => {
-    //     Produits.updateOne(
-    //       { session: vente.travail_pour, _id: produit_id },
-    //       { $inc: { quantite: +vente.quantite[index] } },
-    //       { new: true },
-    //       (err, data) => {
-    //         if (err) {
-    //           console.log("error update", err);
-    //           return;
-    //         }
-    //         console.log("produit update edit => data", data);
-    //       }
-    //     );
-    //   });
-    // }
+      let newVente = {
+        produit: body.produit,
+        quantite: body.quantite.map(
+          (q, i) => q + body.quantite_already_sold[i]
+        ),
+        employe: sess._id,
+        travail_pour: sess.travail_pour,
+        prix: sum,
+        somme_encaisse: body.somme_encaisse,
+        monnaie: body.somme_encaisse - sum,
+      };
+
+      Vente = await venteQueries.updateVente(venteId, newVente);
+      body.produit.forEach((produit_id, index) => {
+        Produits.updateOne(
+          { session: sess.travail_pour, _id: produit_id },
+          { $inc: { quantite: -body.quantite[index] } },
+          { new: true },
+          (err, data) => {
+            if (err) {
+              return;
+            }
+          }
+        );
+      });
+
+      const venteRes = await venteQueries.getVentesById(venteId);
+
+      if (req.app.io) {
+        console.log(req.io, sess.travail_pour);
+        req.app.io.emit(`${sess.travail_pour}-edit-vente`, {
+          vente: venteRes.result,
+          quantites: body.quantite,
+        });
+      }
+
+      res.json({
+        etat: true,
+        data: venteRes?.result,
+      });
+    } else {
+      console.log('iiiiicccciiiiii');
+      res.json({
+        etat: false,
+        data: 'erreur',
+      });
+    }
   } catch (e) {
-    res.json({
+    res.status(500).json({
       etat: false,
       data: 'Error',
     });

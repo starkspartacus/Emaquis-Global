@@ -1,163 +1,124 @@
 <!DOCTYPE html>
 <html lang="zxx">
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>E-maquis Barman(aid)</title>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
-    <link rel="stylesheet" href="../plugins/aos/aos.css" />
-    <link rel="stylesheet" href="/css/vente.css" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>E-maquis Barman(aid)</title>
 
-    <!-- Favicon -->
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="../img/paresseux_sous_officiel.png"
-    />
-  </head>
-  <body class="crm_body_bg">
-    <style>
-      .sidebar .logo .large_logo img {
-        width: 70%;
-        margin-left: 15%;
-      }
-      .my-custom-scrollbar {
-        position: relative;
-        height: 330px;
-        overflow: auto;
-      }
-      .table-wrapper-scroll-y {
-        display: block;
-      }
-    </style>
+  <link rel="stylesheet" href="../plugins/aos/aos.css" />
+  <link rel="stylesheet" href="/css/vente.css" />
 
-    <%- include('partial/emsidebar.ejs') %> <%-
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
+</head>
+
+<body class="crm_body_bg">
+  <style>
+    .sidebar .logo .large_logo img {
+      width: 70%;
+      margin-left: 15%;
+    }
+
+    .my-custom-scrollbar {
+      position: relative;
+      height: 330px;
+      overflow: auto;
+    }
+
+    .table-wrapper-scroll-y {
+      display: block;
+    }
+  </style>
+
+  <%- include('partial/emsidebar.ejs') %> <%-
     include('partial/reactScript.ejs') %>
 
-    <!--/ sidebar  -->
+  <!--/ sidebar  -->
 
-    <section class="main_content dashboard_part large_header_bg">
-      <!-- menu  -->
+  <section class="main_content dashboard_part large_header_bg">
+    <!-- menu  -->
 
-      <!--/ menu  -->
-      <div class="main_content_iner overly_inner">
-        <div class="container-fluid p-0">
-          <!-- page title  -->
-          <div class="row">
-            <div class="col-12">
-              <div
-                class="page_title_box d-flex flex-wrap align-items-center justify-content-between"
-              >
-                <div class="page_title_left d-flex align-items-center">
-                  <h3 class="f_s_25 f_w_700 dark_text mr_30">Barman(aid)</h3>
-                  <ol class="breadcrumb page_bradcam mb-0">
-                    <li class="breadcrumb-item">
-                      <a href="javascript:void(0);">Acceuil</a>
-                    </li>
-                  </ol>
-                </div>
-                
-                <div class="page_title_right">
-                  <div class="page_date_button d-flex align-items-center">
-                    <div class="profile_author_name">
-                      <p class="text-center">
-                        <%= locals.user?.nom %> <%= locals.user?.prenom ||
+    <!--/ menu  -->
+    <div class="main_content_iner overly_inner">
+      <div class="container-fluid p-0">
+        <!-- page title  -->
+        <div class="row">
+          <div class="col-12">
+            <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+              <div class="page_title_left d-flex align-items-center">
+                <h3 class="f_s_25 f_w_700 dark_text mr_30">Barman(aid)</h3>
+                <ol class="breadcrumb page_bradcam mb-0">
+                  <li class="breadcrumb-item">
+                    <a href="javascript:void(0);">Acceuil</a>
+                  </li>
+                </ol>
+              </div>
+
+              <div class="page_title_right">
+                <div class="page_date_button d-flex align-items-center">
+                  <div class="profile_author_name">
+                    <p class="text-center">
+                      <%= locals.user?.nom %> <%= locals.user?.prenom ||
                         locals.user?.prenoms %>
-                      </p>
-                      <h5 class="emRole badge"><%= locals.user?.role %></h5>
-                    </div>
+                    </p>
+                    <h5 class="emRole badge"><%= locals.user?.role %></h5>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div id="root"></div>
         </div>
+
+        <div id="root"></div>
       </div>
-    </section>
-
-    <div id="back-top" style="display: none">
-      <a title="Go to Top" href="#">
-        <i class="ti-angle-up"></i>
-      </a>
     </div>
+  </section>
 
-    <%- include('partial/script.ejs') %>
-    <script src="/socket.io/socket.io.js "></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.4.2/countUp.min.js"
-      type="module"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
-    <script src="../jquery-3.4.1.min.js">
-            let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      let today  = new Date();
-      let date = today.toLocaleDateString("fr-FR", options);
+  <div id="back-top" style="display: none">
+    <a title="Go to Top" href="#">
+      <i class="ti-angle-up"></i>
+    </a>
+  </div>
 
-      document.getElementById("dates").innerHTML = "date";
-    </script>
-    <script>
-      const newSave = "<%= newSave %>";
+  <%- include('partial/script.ejs') %>
+  <script src="/socket.io/socket.io.js "></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.4.2/countUp.min.js" type="module"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+  <script src="../jquery-3.4.1.min.js">
+    let options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
+    let today = new Date();
+    let date = today.toLocaleDateString("fr-FR", options);
 
-      const onClickBtnConfirm = (_selfThis) => {
-        console.log(
-          "👉 👉 👉  ~ file: emdashboard.ejs:441 ~ _selfThis",
-          _selfThis
-        );
-        const venteId = _selfThis.getAttribute("data-vente-id");
-        const rowId = _selfThis.getAttribute("data-row-id");
-        console.log("👉 👉 👉  ~ file: emdashboard.ejs:442 ~ venteId", venteId);
+    document.getElementById("dates").innerHTML = "date";
+  </script>
 
-        if (venteId) {
-          fetch(`/vente/status/${venteId}`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then((res) => {
-              document.getElementById("alert-success").style.display = "block";
 
-              setTimeout(() => {
-                document.getElementById("alert-success").style.display = "none";
+  <script>
+    const user_travail_pour = <%- JSON.stringify(user.travail_pour) %>;
+    const globalCategories = <%- JSON.stringify(categories) %>;
+    const globalProducts = <%- JSON.stringify(produits) %>;
+    const globalVentes = <%- JSON.stringify(ventes) %>;
+    const sumEmployes = <%- JSON.stringify(emplnum) %>;
+    const sumVentes = <%- JSON.stringify(sum) %>;
+  </script>
+  <script src="../utils/formatAmount.js" type="module"></script>
+  <script src="/js/products.context.js" type="text/babel"></script>
+  <script src="/js/products.js" type="text/babel"></script>
+  <script src="/js/carts.js" type="text/babel"></script>
+  <script src="/js/categories.js" type="text/babel"></script>
+  <script src="/js/vente.js" type="text/babel"></script>
+  <script src="/js/em_dashboard_employes.js" type="text/babel"></script>
+  <script src="/js/em_dashboard_stocks.js" type="text/babel"></script>
+  <script src="/js/em_dashboard_vente_tables.js" type="text/babel"></script>
+  <script src="/js/em_dashboard_body.js" type="text/babel"></script>
+  <script src="/js/em_dashboard.js" type="text/babel"></script>
+</body>
 
-                window.location.reload();
-              }, 500);
-
-              return res.json();
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }
-
-        console.log(_selfThis.getAttribute("data-vente-id"));
-      };
-    </script>
-
-    <script>
-      const user_travail_pour = <%- JSON.stringify(user.travail_pour) %>;
-      const globalCategories = <%- JSON.stringify(categories) %>;
-      const globalProducts = <%- JSON.stringify(produits) %>;
-      const globalVentes = <%- JSON.stringify(ventes) %>;
-      const sumEmployes = <%- JSON.stringify(emplnum) %>;
-      const sumVentes = <%- JSON.stringify(sum) %>;
-    </script>
-    <script src="../utils/formatAmount.js" type="module"></script>
-    <script src="/js/products.context.js" type="text/babel"></script>
-    <script src="/js/products.js" type="text/babel"></script>
-    <script src="/js/carts.js" type="text/babel"></script>
-    <script src="/js/categories.js" type="text/babel"></script>
-    <script src="/js/vente.js" type="text/babel"></script>
-    <script src="/js/em_dashboard_employes.js" type="text/babel"></script>
-    <script src="/js/em_dashboard_stocks.js" type="text/babel"></script>
-    <script src="/js/em_dashboard_vente_tables.js" type="text/babel"></script>
-    <script src="/js/em_dashboard_body.js" type="text/babel"></script>
-    <script src="/js/em_dashboard.js" type="text/babel"></script>
-  </body>
 </html>
