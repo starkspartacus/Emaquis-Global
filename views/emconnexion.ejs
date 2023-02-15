@@ -39,81 +39,39 @@
     <!-- CUSTOM CSS -->
     <link href="../css/styles.css" rel="stylesheet" />
   </head>
-
-  <body
-    class="body-wrapper bodi-cover"
-    data-spy="scroll"
-    data-target=".privacy-nav"
-  >
+  <body class="body-wrapper bodi-cover" data-spy="scroll" data-target=".privacy-nav">
     <section class="user-login section">
       <div class="container em-container">
         <div class="row mt-5">
           <div class="col-lg-5 col-md-12">
             <div class="block m-lg-3">
-              <!-- Content -->
               <div class="content text-center bg-emconnexion">
                 <div class="logo">
-                  <a href="/"
-                    ><img
-                      src="img/paresseux_sous_officiel.png"
-                      alt=""
-                      style="height: 200px; width: 200px"
-                  /></a>
+                  <a href="/">
+                    <img src="img/paresseux_sous_officiel.png" alt="" style="max-height: 200px; max-width: 200px; width: 100%;">
+                  </a>
                 </div>
                 <div class="title-text">
                   <h3>Connectez-vous à votre compte</h3>
                 </div>
                 <%if (locals.success){%>
-                <div
-                  class="alert alert-success"
-                  role="alert"
-                  style="text-align: center"
-                  id="alert-success"
-                >
-                  Connexion reussie !
+                <div class="alert alert-success" role="alert" style="text-align: center" id="alert-success">
+                  Connexion réussie !
                 </div>
                 <%}%> <%if (locals.error) { %>
-                <div
-                  class="alert alert-danger"
-                  role="alert"
-                  style="text-align: center"
-                  id="alert-danger"
-                >
+                <div class="alert alert-danger" role="alert" style="text-align: center" id="alert-danger">
                   <%= locals.error %>
                 </div>
                 <% } %>
                 <form action="/emconnexion" method="post">
-                  <!-- Username -->
-                  <input
-                    class="form-control main"
-                    type="email"
-                    placeholder="email"
-                    name="email"
-                    value="<%= locals.email %>"
-                    required
-                  />
-                  <!-- Password -->
-                  <input
-                    class="form-control main"
-                    type="password"
-                    placeholder="mot de passe"
-                    name="password"
-                    required
-                  />
-                  <!-- Submit Button -->
-                  <button type="submit" class="btn btn-main-sm">
-                    se connecter
-                  </button>
+                  <input class="form-control main" type="email" placeholder="email" name="email" value="<%= locals.email %>" required>
+                  <input class="form-control main" type="password" placeholder="mot de passe" name="password" required>
+                  <button type="submit" class="btn btn-main-sm">se connecter</button>
                 </form>
                 <div class="new-acount">
-                  <a href="#" style="text-decoration: none"
-                    >mot de passe oublié?</a
-                  >
-                  <p>
-                    Vous n'avez pas de compte?
-                    <a href="/inscription" style="text-decoration: none">
-                      Inscription</a
-                    >
+                  <a href="#" style="text-decoration: none">mot de passe oublié?</a>
+                  <p>Vous n'avez pas de compte?
+                    <a href="/inscription" style="text-decoration: none">Inscription</a>
                   </p>
                 </div>
               </div>
@@ -123,25 +81,20 @@
       </div>
       <div id="like_button_container"></div>
     </section>
-
-    <!-- To Top -->
+  
     <div class="scroll-top-to">
       <i class="ti-angle-up"></i>
     </div>
-
-    <!-- JAVASCRIPTS -->
+  
     <script src="plugins/jquery/jquery.min.js"></script>
     <script src="plugins/bootstrap/bootstrap.min.js"></script>
     <script src="plugins/slick/slick.min.js"></script>
     <script src="plugins/fancybox/jquery.fancybox.min.js"></script>
     <script src="plugins/syotimer/jquery.syotimer.min.js"></script>
     <script src="plugins/aos/aos.js"></script>
-    <!-- google map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
     <script src="plugins/google-map/gmap.js"></script>
-
     <script src="js/script.js"></script>
-
     <script src="/socket.io/socket.io.js "></script>
     <script>
       const loginSuccess = '<%= locals.success %>';
@@ -152,4 +105,5 @@
       }
     </script>
   </body>
+  
 </html>

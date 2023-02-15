@@ -36,49 +36,44 @@
 
 <body class="body-wrapper body-cover" data-spy="scroll" data-target=".privacy-nav">
 
+  <section class="user-login section">
+    <div class="container login-container">
+      <div class="row mt-5">
+        <div class="col-lg-5 col-md-8 offset-md-2">
+          <div class="block m-lg-3">
 
-<section class="user-login section ">
-	<div class="container login-container">
-		<div class="row mt-5">
-			<div class="col-lg-5 col-md-12">
-				<div class="block m-lg-3">
-
-					<!-- Content -->
-					<div class="content text-center bg-login">
-						<div class="logo" data-aos="zoom-out" data-aos-easing="linear"
-            data-aos-duration="1500">
-							<a href="/" ><img class="logo_connexion" src="../img/paresseux_sous_officiel.png" alt=""></a>
-						</div>
-						<div class="title-text">
-							<h3>
-                Connectez-vous à votre espace</h3>
-						</div>
-            <div class="alert alert-success" role="alert" style="text-align: center; display: none;" id="alert-success">
-              Connexion reussie !
+            <!-- Content -->
+            <div class="content text-center bg-login">
+              <div class="logo" data-aos="zoom-out" data-aos-easing="linear" data-aos-duration="1500">
+                <a href="/"><img class="logo-connexion" src="../img/paresseux_sous_officiel.png" alt=""></a>
+              </div>
+              <div class="title-text">
+                <h3>Connectez-vous à votre espace</h3>
+              </div>
+              <div class="alert alert-success" role="alert" style="text-align: center; display: none;" id="alert-success">
+                Connexion réussie !
+              </div>
+              <div class="alert alert-danger" role="alert" style="text-align: center; display: none;" id="alert-danger">
+                Email ou mot de passe incorrecte
+              </div>
+              <form action="#">
+                <!-- Email -->
+                <input class="form-control main" type="email" placeholder="Email" name="email" required>
+                <!-- Password -->
+                <input class="form-control main" type="password" placeholder="Mot de passe" name="password" required>
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-main-sm">Se connecter</button>
+              </form>
+              <div class="new-account">
+                <a href="#" style="text-decoration: none;">Mot de passe oublié?</a>
+                <p>Vous n'avez pas de compte? <a href="/inscription" style="text-decoration: none;">Inscription</a></p>
+              </div>
+            </div>
           </div>
-        <div class="alert alert-danger" role="alert" style="text-align: center; display: none;" id="alert-danger">
-         email ou mot de passe incorrecte
+        </div>
       </div>
-						<form action="#">
-
-							<!-- Username -->
-							<input class="form-control main" type="email" placeholder="email" name="email" required>
-							<!-- Password -->
-							<input class="form-control main" type="password" placeholder="mot de passe" name="password"  required>
-							<!-- Submit Button -->
-							<button type="submit" class="btn btn-main-sm">se connecter</button>
-						</form>
-						<div class="new-acount">
-							<a href="#"  style="text-decoration: none;">mot de passe oublié?</a>
-							<p>Vous n'avez pas de compte? <a href="/inscription"  style="text-decoration: none;"> Inscription</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
+    </div>
+  </section>
 
   <!-- To Top -->
   <div class="scroll-top-to">
@@ -93,12 +88,12 @@
   <script src="plugins/syotimer/jquery.syotimer.min.js"></script>
   <script src="plugins/aos/aos.js"></script>
   <!-- google map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY"></script>
   <script src="plugins/google-map/gmap.js"></script>
 
   <script src="js/script.js"></script>
-  <!-- <script src="../jquery-3.4.1.min.js"></script> -->
-  <script src="/socket.io/socket.io.js "></script>
+  <script src="/socket.io/socket.io.js"></script>
+  
   <script>
      const socket = io(window.location.origin + window.location.pathname);
      console.log(window.location.origin + window.location.pathname);
