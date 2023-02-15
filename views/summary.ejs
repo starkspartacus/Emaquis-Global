@@ -7,6 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-maquis Admin</title>
     <%- include('partial/head.ejs') %>
   </head>
@@ -67,100 +68,75 @@
                       </div>
                     </div>
                     <p id="sess" hidden><%= user?.id %></p>
-                    <div class="col-lg-4 text-right d-flex justify-content-end">
+                    <div class="col-12 col-lg-4 d-flex justify-content-end align-items-center">
                       <select class="nice_Select2 max-width-220" id="month">
-                        <option value="1">choisir le mois</option>
-                        <option value="1">janvier</option>
-                        <option value="2">fevrier</option>
-                        <option value="3">mars</option>
-                        <option value="4">avril</option>
-                        <option value="5">mai</option>
-                        <option value="6">juin</option>
-                        <option value="7">juillet</option>
-                        <option value="8">août</option>
-                        <option value="9">septembre</option>
-                        <option value="10">octobre</option>
-                        <option value="11">novembre</option>
-                        <option value="12">decembre</option></select
-                      >&nbsp;
+                          <option value="1">choisir le mois</option>
+                          <option value="1">janvier</option>
+                          <option value="2">fevrier</option>
+                          <option value="3">mars</option>
+                          <option value="4">avril</option>
+                          <option value="5">mai</option>
+                          <option value="6">juin</option>
+                          <option value="7">juillet</option>
+                          <option value="8">août</option>
+                          <option value="9">septembre</option>
+                          <option value="10">octobre</option>
+                          <option value="11">novembre</option>
+                          <option value="12">decembre</option>
+                      </select>
+                      &nbsp;
                       <select class="nice_Select2 max-width-220" id="year">
-                        <option>choisir l'année</option>
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option></select
-                      >&nbsp;
-                    </div>
+                          <option>choisir l'année</option>
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                      </select>
+                      &nbsp;
+                  </div>
+                  
                   </div>
                 </div>
 
                 <div class="white_card_body">
                   <div class="row">
-                    <div
-                      class="col text-center"
-                      style="
-                        background: #e6ffcc;
-                        width: 20%;
-                        height: 80px;
-                        border-radius: 5px;
-                        margin: 10px;
-                      "
-                    >
-                      <h4 style="margin-top: 20px">150456 Frcfa</h4>
-                      <p style="margin-top: 10px">semaine 1</p>
+                    <div class="col-sm-6 col-md-3 text-center mb-3">
+                      <div class="bg-light rounded p-2">
+                        <h4 class="mt-3"></h4>
+                        <p class="mt-2">Semaine 1</p>
+                      </div>
                     </div>
-                    <div
-                      class="col text-center"
-                      style="
-                        background: #fff9e6;
-                        width: 20%;
-                        height: 80px;
-                        border-radius: 5px;
-                        margin: 10px;
-                      "
-                    >
-                      <h4 style="margin-top: 20px">1500 FRcfa</h4>
-                      <p style="margin-top: 10px">Semaine 2</p>
+                    <div class="col-sm-6 col-md-3 text-center mb-3">
+                      <div class="bg-light rounded p-2">
+                        <h4 class="mt-3"></h4>
+                        <p class="mt-2">Semaine 2</p>
+                      </div>
                     </div>
-                    <div
-                      class="col text-center"
-                      style="
-                        background: #fff9e6;
-                        width: 20%;
-                        height: 80px;
-                        border-radius: 5px;
-                        margin: 10px;
-                      "
-                    >
-                      <h4 style="margin-top: 20px">1500 FRcfa</h4>
-                      <p style="margin-top: 10px">semaine 3</p>
+                    <div class="col-sm-6 col-md-3 text-center mb-3">
+                      <div class="bg-light rounded p-2">
+                        <h4 class="mt-3"></h4>
+                        <p class="mt-2">Semaine 3</p>
+                      </div>
                     </div>
-                    <div
-                      class="col text-center"
-                      style="
-                        background: #fff9e6;
-                        width: 20%;
-                        height: 80px;
-                        border-radius: 5px;
-                        margin: 10px;
-                      "
-                    >
-                      <h4 style="margin-top: 20px">1500 FRcfa</h4>
-                      <p style="margin-top: 10px">semaine 4</p>
+                    <div class="col-sm-6 col-md-3 text-center mb-3">
+                      <div class="bg-light rounded p-2">
+                        <h4 class="mt-3"></h4>
+                        <p class="mt-2">Semaine 4</p>
+                      </div>
                     </div>
-                    <div
-                      class="col text-center"
-                      style="
-                        background: #e6ffcc;
-                        width: 20%;
-                        height: 80px;
-                        border-radius: 5px;
-                        margin: 10px;
-                      "
-                    >
-                      <h4 style="margin-top: 20px">1500 FRcfa</h4>
-                      <p style="margin-top: 10px">Mon credit credit</p>
+                    <div class="col-sm-6 col-md-3 text-center mb-3">
+                      <div class="bg-light rounded p-2">
+                        <h4 class="mt-3" id="totalPrix"></h4>
+                        <p class="mt-2">Total vendu</p>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 text-center mb-3">
+                      <div class="bg-light rounded p-2">
+                        <h4 class="mt-3" id="totalBenefice"></h4>
+                        <p class="mt-2">Mon crédit crédit</p>
+                      </div>
                     </div>
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>
@@ -361,6 +337,11 @@
             }
           });
         });
+        socket.on('saved',(data)=>{
+          console.log(data);
+          document.getElementById("totalPrix").innerText = data.totalPrix+" FCFA";
+          document.getElementById("totalBenefice").innerText = data.totalBenefice+" FCFA";
+        })
       });
     </script>
   </body>
