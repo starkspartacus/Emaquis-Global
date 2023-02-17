@@ -12,9 +12,9 @@ const ProductList = () => {
   }, [categorySelectedId, allProducts]);
 
   return (
-    <div className="product-list">
+    <div className='product-list'>
       <h4>Produits</h4>
-      <div className="product-list__grid">
+      <div className='product-list__grid'>
         {products.map((product) => {
           return <ProductCard key={product._id} product={product} />;
         })}
@@ -27,38 +27,44 @@ const ProductCard = ({ product }) => {
   const { addProductToCart } = React.useContext(ProductsContext);
 
   return (
-    <div className="product-card">
-      <h4 className="badge emTaille taille_produits">{product.taille}</h4>
-      <div className="product-card__image">
-        <img src={product.produit.image} alt="product" />
+    <div className='product-card'>
+      <h4 className='badge emTaille taille_produits'>{product.taille}</h4>
+      <div className='product-card__image'>
+        <img src={product.produit.image} alt='product' />
       </div>
-      <div className="product-card__details">
-        <h4>{product.produit.nom_produit}</h4>
-        <p className="emPriceproduct">{product.prix_vente} FCFA</p>
+      <div className='product-card__details'>
+        <h4
+          data-toggle='tooltip'
+          data-placement='top'
+          title={product.produit.nom_produit + ' ' + product.taille}
+        >
+          {product.produit.nom_produit}
+        </h4>
+        <p className='emPriceproduct'>{product.prix_vente} FCFA</p>
         {product.quantite > 0 && (
           <p>
-            Stock:{" "}
+            Stock:{' '}
             <span
               style={{
                 color:
                   product.quantite >= 100
-                    ? "rgb(47, 204, 47)"
-                    : "rgb(219, 36, 23)",
+                    ? 'rgb(47, 204, 47)'
+                    : 'rgb(219, 36, 23)',
               }}
             >
               {product.quantite}
             </span>
           </p>
         )}
-        {product.quantite === 0 && <p className="">Rupture de stock</p>}
+        {product.quantite === 0 && <p className=''>Rupture de stock</p>}
       </div>
       <div
-        className="product-card__actions"
+        className='product-card__actions'
         onClick={() => addProductToCart(product)}
       >
-        <button className="btn ">Ajouter</button>
+        <button className='btn '>Ajouter</button>
       </div>
-      {product.quantite === 0 && <div className="product-overlay" />}
+      {product.quantite === 0 && <div className='product-overlay' />}
     </div>
   );
 };

@@ -104,10 +104,6 @@ router.post('/vente', ventecontroller.ventePost);
 router.put('/editvente/:id', ventecontroller.editventePost);
 router.post('/vente/status/:venteId', ventecontroller.editStatusVente);
 
-router.get('/test-api', (req, res) => {
-  res.send('ok-test-api top cooool!🥰');
-});
-
 router.post('/retournerproduit', retourcontroller.addbackPost);
 router.post(
   '/confirm/retournerproduit/:id',

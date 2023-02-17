@@ -3,6 +3,13 @@
   max-height: 490px;
 }
 
+.modal {
+  background: rgba(0, 0, 0, 0.5);
+}
+.modal-backdrop {
+  display: none;
+}
+
 .vente {
   display: flex;
   justify-content: space-between;
@@ -34,6 +41,8 @@
   border-radius: 5px;
   margin-bottom: 5px;
   scale: 0.9;
+  text-align: center;
+  font-size: 12px;
 }
 
 .vente .categories ul li:hover {
@@ -72,6 +81,7 @@
   padding: 10px;
   border-radius: 5px;
   position: relative;
+  cursor: pointer;
 }
 
 .vente .product-list__grid .product-card .product-overlay {
@@ -95,6 +105,11 @@
   font-weight: bold;
   text-transform: uppercase;
   overflow-wrap: break-all;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 110px;
+  display: block;
+  overflow: hidden;
 }
 
 .vente .product-list__grid .product-card button {
@@ -210,4 +225,9 @@
   width: 25px;
   height: 25px;
   object-fit: contain;
+}
+
+.cart-item button.btn-danger {
+  background-color: rgb(219, 36, 23) !important;
+  color: #fff;
 }

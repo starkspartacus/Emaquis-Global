@@ -123,11 +123,48 @@ exports.editventePost = async (req, res) => {
         sum += (body.quantite[i] + body.quantite_already_sold[i]) * prize[i];
       }
 
+      const oldVente = await venteQueries.getVentesById(venteId);
+      const products = [];
+
+      if (oldVente.result.produit.length > 0) {
+        for (let [index, product] of oldVente.result.produit.entries()) {
+          const productId = '' + product._id;
+          const productIdFinded = body.produit.find((id) => id === productId);
+
+          if (productIdFinded) {
+            const productIndex = body.produit.findIndex(
+              (id) => id === productId
+            );
+
+            const currentProduct = await produitQueries.getProduitById(
+              body.produit[productIndex]
+            );
+
+            if (currentProduct.result.taille === product.taille) {
+              const quantite =
+                body.quantite[productIndex] - oldVente.result.quantite[index];
+              products.push({
+                id: product._id,
+                quantite: quantite,
+              });
+            } else {
+              products.push({
+                id: product._id,
+                quantite: body.quantite[productIndex],
+              });
+            }
+          } else {
+            products.push({
+              id: product._id,
+              quantite: -oldVente.result.quantite[index],
+            });
+          }
+        }
+      }
+
       let newVente = {
         produit: body.produit,
-        quantite: body.quantite.map(
-          (q, i) => q + body.quantite_already_sold[i]
-        ),
+        quantite: body.quantite,
         employe: sess._id,
         travail_pour: sess.travail_pour,
         prix: sum,
@@ -136,10 +173,21 @@ exports.editventePost = async (req, res) => {
       };
 
       Vente = await venteQueries.updateVente(venteId, newVente);
-      body.produit.forEach((produit_id, index) => {
+      const allProducts = body.produit
+        .filter((prodId) => !products.find((prod) => '' + prod.id === prodId))
+        .map((prodId) => {
+          const productIndex = body.produit.findIndex((id) => id === prodId);
+          return {
+            id: prodId,
+            quantite: body.quantite[productIndex],
+          };
+        })
+        .concat(products);
+
+      allProducts.forEach((product, index) => {
         Produits.updateOne(
-          { session: sess.travail_pour, _id: produit_id },
-          { $inc: { quantite: -body.quantite[index] } },
+          { session: sess.travail_pour, _id: product.id },
+          { $inc: { quantite: -product.quantite } },
           { new: true },
           (err, data) => {
             if (err) {
@@ -155,7 +203,7 @@ exports.editventePost = async (req, res) => {
         console.log(req.io, sess.travail_pour);
         req.app.io.emit(`${sess.travail_pour}-edit-vente`, {
           vente: venteRes.result,
-          quantites: body.quantite,
+          allProducts,
         });
       }
 

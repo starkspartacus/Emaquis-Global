@@ -52,7 +52,7 @@ const AppRoot = () => {
 
       socket.on(`${user_travail_pour}-edit-vente`, (data) => {
         const vente = data.vente;
-        const quantites = data.quantites;
+        const allProducts = data.allProducts;
 
         setVentes((prVentes) => {
           const newVentes = prVentes.map((el) => {
@@ -68,13 +68,11 @@ const AppRoot = () => {
 
         setProducts((prProducts) => {
           const newProducts = prProducts.map((product) => {
-            const index = vente.produit.findIndex(
-              (el) => el._id === product._id
-            );
+            const index = allProducts.findIndex((el) => el.id === product._id);
 
             if (index !== -1) {
               const newProduct = { ...product };
-              newProduct.quantite -= quantites[index];
+              newProduct.quantite -= allProducts[index].quantite;
               return newProduct;
             } else {
               return product;
@@ -84,6 +82,12 @@ const AppRoot = () => {
           return newProducts;
         });
       });
+    });
+  }, []);
+
+  React.useEffect(() => {
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
     });
   }, []);
 
@@ -178,18 +182,11 @@ const AppRoot = () => {
     const cartItem = carts.find((cart) => cart._id === product._id);
 
     if (cartItem) {
-      if (
-        type === 'decr' &&
-        (cartItem.quantity > 1 ||
-          (!!cartItem.quantity_already_sold && cartItem.quantity >= 1))
-      ) {
+      if (type === 'decr' && cartItem.quantity > 1) {
         cartItem.quantity--;
       } else if (type === 'incr') {
         cartItem.quantity++;
-      } else if (
-        type === 'decr' &&
-        cartItem.quantity + (cartItem.quantity_already_sold || 0) === 1
-      ) {
+      } else if (type === 'decr' && cartItem.quantity === 1) {
         if (!cartItem.quantity_already_sold) {
           removeProductFromCart(cartItem);
           return;
@@ -211,8 +208,7 @@ const AppRoot = () => {
     vente.produit.forEach((product, index) => {
       carts.push({
         ...product,
-        quantity: 0,
-        quantity_already_sold: vente.quantite[index],
+        quantity: vente.quantite[index],
       });
     });
 

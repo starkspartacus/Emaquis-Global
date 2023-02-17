@@ -15,8 +15,11 @@ const CartList = () => {
 };
 
 const CartItem = ({ product }) => {
-  const { handleUpdateProductQuantity, updateProductQuantity } =
-    React.useContext(ProductsContext);
+  const {
+    handleUpdateProductQuantity,
+    updateProductQuantity,
+    removeProductFromCart,
+  } = React.useContext(ProductsContext);
 
   const quantity = (product.quantity_already_sold || 0) + product.quantity;
   return (
@@ -58,6 +61,12 @@ const CartItem = ({ product }) => {
           +
         </button>
       </div>
+      <button
+        className='btn btn-danger w-100 mt-1'
+        onClick={() => removeProductFromCart(product)}
+      >
+        supprimer
+      </button>
     </div>
   );
 };
