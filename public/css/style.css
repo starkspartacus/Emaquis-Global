@@ -3560,15 +3560,10 @@ table.dataTable.dtr-inline.collapsed
   position: fixed;
   top: 0;
   z-index: 99;
-  padding: 20px 30px;
   position: relative;
   border-radius: 0px;
   margin: 0;
   background: #f6f7fb;
-  border-radius: 0;
-  margin: 0;
-  border-radius: 0px;
-  border-bottom: 2px solid #e8e8e8;
 }
 
 /* line 29, G:/admin_project/8 admin/management_html/scss/_header.scss */
@@ -4385,7 +4380,7 @@ table.dataTable {
 
 /* line 46, G:/admin_project/8 admin/management_html/scss/_sidebar.scss */
 .sidebar .logo .large_logo img {
-  width: 100%;
+  width: 77%;
 }
 
 @media (max-width: 991px) {
