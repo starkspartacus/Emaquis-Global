@@ -8,6 +8,7 @@ const TablesHead = () => {
         <th scope='col'>Encaisse</th>
         <th scope='col'>Monnaie</th>
         <th scope='col'>Date</th>
+        <th scope='col'>Employé</th>
         <th scope='col'>Action</th>
       </tr>
     </thead>
@@ -20,6 +21,10 @@ const TablesItem = ({
   setShowDanger,
   setVenteIdToDelete,
 }) => {
+  console.log(
+    '👉 👉 👉  ~ file: em_dashboard_vente_tables.js:24 ~ vente',
+    vente
+  );
   const [loading, setLoading] = React.useState({
     ['Validée']: false,
     ['Annulée']: false,
@@ -93,6 +98,7 @@ const TablesItem = ({
           second: 'numeric',
         })}
       </td>
+      <td>{vente.employe.prenoms || vente.employe.prenom}</td>
       <td>
         <button
           disabled={loading['Validée'] || loading['Annulée']}
