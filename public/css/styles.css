@@ -191,7 +191,7 @@ a:hover {
   background: url(../images/background/bg1.jpg) fixed no-repeat;
   background-size: cover;
   background-position: bottom;
-  
+
 }
 
 
@@ -2262,7 +2262,7 @@ hr {
   border-radius: 10px;
   padding: 20px;
   margin-top: 20px;
-  
+
 }
 
 .singup-container {
@@ -2295,7 +2295,7 @@ hr {
   position: relative;
   min-height: 100vh;
   width: auto;
-  
+
 }
 
 /* Fin inscription page*/
@@ -2366,8 +2366,9 @@ hr {
   background-color: #98ED58;
   border: 1px solid #98ED58;
   width: 60%;
+  padding: 20px;
   border-radius: 5px;
-  color: #000;
+  color: #FFFFFF;
   font-size: 14px;
   font-weight: bold;
   padding: 10px 30px;
@@ -2392,10 +2393,10 @@ hr {
 
 
 /* responsive *
-@media screen and (max-width: 1024px ) , 
+@media screen and (max-width: 1024px ) ,
 
 screen and (max-height: 963px ) {
-  
+
   .btn-go{
     font-size: 14px;
     margin: 10px 0px;
@@ -2415,16 +2416,16 @@ screen and (max-height: 963px ) {
   .container-inscri{
     position: relative;
     top: -50px;
-    
+
   }
-  
+
   .singup-container{
     width: 80%;
   }
 }
 
 @media (max-width: 1306px) {
-  
+
   .btn-go{
     font-size: 14px;
     margin: 10px 0px;
@@ -2440,7 +2441,7 @@ screen and (max-height: 963px ) {
     width: 15%;
     height: 15%;
   }
-  
+
   .singup-container{
     width: 50%;
   }
@@ -2448,7 +2449,7 @@ screen and (max-height: 963px ) {
 
 
 @media (max-width: 1440px) {
-  
+
   .btn-go{
     font-size: 14px;
     margin: 10px 0px;
@@ -2464,7 +2465,7 @@ screen and (max-height: 963px ) {
     width: 15%;
     height: 15%;
   }
-  
+
   .singup-container{
     width: 50%;
   }
@@ -2479,7 +2480,7 @@ screen and (max-height: 963px ) {
   .container-inscri{
     position: relative;
     top: -50px;
-    
+
   }
 
   .btn-groupe{
@@ -2493,7 +2494,7 @@ screen and (max-height: 963px ) {
     width: 25%;
     height: 25%;
   }
-  
+
   .singup-container{
     display: flex;
     position: relative;
@@ -2520,12 +2521,12 @@ screen and (max-height: 963px ) {
     width: 15%;
     height: 15%;
   }
-  
+
   .singup-container{
     width: 80%;
   }
 } */
-  
+
 
 /* fin responsive **/
 
@@ -2533,5 +2534,5 @@ screen and (max-height: 963px ) {
   background-color: #98ED58;
   color: #f1f1f1;
   font-weight: bold;
-  
+
 }

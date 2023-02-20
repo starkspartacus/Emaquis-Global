@@ -64,7 +64,7 @@
                 <!-- Password -->
                 <input class="form-control main" type="password" placeholder="Mot de passe" name="password" required>
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-main-sm">Se connecter</button>
+                <button type="submit" class="btn btn-main-sm " id="btn-validate">Se connecter</button>
               </form>
               <div class="new-account">
                 <a href="#" style="text-decoration: none;">Mot de passe oublié?</a>
@@ -95,7 +95,7 @@
 
   <script src="js/script.js"></script>
   <script src="/socket.io/socket.io.js"></script>
-  
+
   <script>
      const socket = io(window.location.origin + window.location.pathname);
      console.log(window.location.origin + window.location.pathname);

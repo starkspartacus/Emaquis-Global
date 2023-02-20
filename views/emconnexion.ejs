@@ -66,7 +66,7 @@
                 <form action="/emconnexion" method="post">
                   <input class="form-control main" type="email" placeholder="email" name="email" value="<%= locals.email %>" required>
                   <input class="form-control main" type="password" placeholder="mot de passe" name="password" required>
-                  <button type="submit" class="btn btn-main-sm">se connecter</button>
+                  <button type="submit" class="btn btn-main-sm" id="btn-validate">se connecter</button>
                 </form>
                 <div class="new-acount">
                   <a href="#" style="text-decoration: none">mot de passe oublié?</a>
@@ -81,11 +81,11 @@
       </div>
       <div id="like_button_container"></div>
     </section>
-  
+
     <div class="scroll-top-to">
       <i class="ti-angle-up"></i>
     </div>
-  
+
     <script src="plugins/jquery/jquery.min.js"></script>
     <script src="plugins/bootstrap/bootstrap.min.js"></script>
     <script src="plugins/slick/slick.min.js"></script>
@@ -105,5 +105,5 @@
       }
     </script>
   </body>
-  
+
 </html>
