@@ -2375,7 +2375,18 @@ hr {
   text-transform: uppercase;
   transition: all 0.3s ease 0s;
   margin-top: 20px;
+  transition: all 0.3s ease 0s;
 }
+/* animation button **/
+
+#btn-validate:hover{
+    background-color: #FFFFFF;
+    border: 1px solid #98ED58;
+    color: #98ED58;
+    letter-spacing: .25em;
+}
+
+/* fin button **/
 
 
 /* fin btn inscription **/
