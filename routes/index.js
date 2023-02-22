@@ -32,6 +32,7 @@ const faqcontroller = require('../controllers/faqcontroller');
 const copyrightcontroller = require('../controllers/copyrightcontroller');
 const profilecontroller = require('../controllers/profilecontroller');
 const summarycontroller = require('../controllers/summary');
+const bilan_controller = require('../controllers/bilan_controller');
 const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
 
@@ -84,6 +85,10 @@ router.post('/emconnexion', emconnexioncontroller.emconnexionPost);
 
 router.get('/dashboard', dashboardcontroller.dashboard);
 router.post('/dashboard', dashboardcontroller.dashboardPost);
+
+router.get('/bilan', bilan_controller.bilan);
+router.post('/bilan', bilan_controller.bilanPost);
+
 
 router.get('/emdashboard', emdashboardcontroller.emdashboard);
 router.post('/emdashboard', emdashboardcontroller.emdashboardPost);
