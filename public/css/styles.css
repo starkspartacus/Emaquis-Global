@@ -2403,143 +2403,7 @@ hr {
 /* fin icon **/
 
 
-/* responsive *
-@media screen and (max-width: 1024px ) ,
 
-screen and (max-height: 963px ) {
-
-  .btn-go{
-    font-size: 14px;
-    margin: 10px 0px;
-  }
-
-  .btn-groupe{
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .logo_connexion{
-    width: 25%;
-    height: 25%;
-  }
-
-  .container-inscri{
-    position: relative;
-    top: -50px;
-
-  }
-
-  .singup-container{
-    width: 80%;
-  }
-}
-
-@media (max-width: 1306px) {
-
-  .btn-go{
-    font-size: 14px;
-    margin: 10px 0px;
-  }
-
-  .btn-groupe{
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .logo_connexion{
-    width: 15%;
-    height: 15%;
-  }
-
-  .singup-container{
-    width: 50%;
-  }
-}
-
-
-@media (max-width: 1440px) {
-
-  .btn-go{
-    font-size: 14px;
-    margin: 10px 0px;
-  }
-
-  .btn-groupe{
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .logo_connexion{
-    width: 15%;
-    height: 15%;
-  }
-
-  .singup-container{
-    width: 50%;
-  }
-}
-
-@media (max-width: 2080px) {
-  .btn-go{
-    font-size: 14px;
-    margin: 10px 0px;
-  }
-
-  .container-inscri{
-    position: relative;
-    top: -50px;
-
-  }
-
-  .btn-groupe{
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .logo_connexion{
-    margin-bottom: -10px;
-    width: 25%;
-    height: 25%;
-  }
-
-  .singup-container{
-    display: flex;
-    position: relative;
-    margin-bottom: 150px;
-    width: 30%;
-    overflow-y: auto;
-    border-radius: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .btn-go{
-    font-size: 14px;
-    margin: 10px 0px;
-  }
-
-  .btn-groupe{
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .logo_connexion{
-    width: 15%;
-    height: 15%;
-  }
-
-  .singup-container{
-    width: 80%;
-  }
-} */
-
-
-/* fin responsive **/
 
 .btn-valider{
   background-color: #98ED58;
@@ -2547,3 +2411,21 @@ screen and (max-height: 963px ) {
   font-weight: bold;
 
 }
+
+.copyright{
+  background-color: #d92727;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+    transition: all 0.3s ease 0s;
+
+}
+/* animation copyright **/
+.copyright:hover{
+  background-color: #98ED58;
+  color: #000;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease 0s;
+}
+
