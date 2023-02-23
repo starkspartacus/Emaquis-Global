@@ -12,11 +12,22 @@ const ProduitSchema = new Schema(
     taille: { type: String, required: true },
     quantite: { type: Number, required: true },
     session: { type: Schema.Types.ObjectId, ref: 'user', required: true },
+    promo: {
+      type: Boolean,
+      default: null,
+    },
+    promo_quantity: {
+      type: Number,
+      default: null,
+    },
+    promo_price: {
+      type: Number,
+      default: null,
+    },
 
     historiques: {
       type: [Object],
     },
-
   },
   { timestamps: true }
 );

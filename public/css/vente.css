@@ -207,13 +207,28 @@
   align-items: center;
 }
 
+.formule {
+  background-color: rgb(219, 36, 23);
+  color: white;
+  padding: auto;
+  align-items: center;
+}
+
+.product-formule {
+  color: #20deff;
+}
+
 .emPriceproduct {
   font-weight: 700;
 }
 
 .vente_table_item.active {
-  background-color: #98ed58;
-  color: #fff;
+  background-color: #98ed58c7;
+  color: #fff !important;
+}
+
+.vente_table_item.active td {
+  color: #fff !important;
 }
 
 .vente_table_item button {

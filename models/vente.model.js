@@ -12,6 +12,20 @@ const VenteSchema = new Schema(
     employe: { type: Schema.Types.ObjectId, ref: 'employe', required: true },
     employe_validate_id: { type: Schema.Types.ObjectId, ref: 'employe' },
     travail_pour: { type: Schema.Types.ObjectId, ref: 'user', required: true },
+    formules: {
+      type: [
+        {
+          produit_name: { type: String, required: true },
+          quantite: { type: Number, required: true },
+          prix: { type: Number, required: true },
+          prix_hors_promo: { type: Number, required: true },
+          promo: { type: Boolean, required: true },
+          promo_quantity: { type: Number, required: true },
+          promo_price: { type: Number, required: true },
+          taille: { type: String, required: true },
+        },
+      ],
+    },
   },
   { timestamps: true }
 );
