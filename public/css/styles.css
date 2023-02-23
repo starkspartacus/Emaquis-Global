@@ -2429,3 +2429,10 @@ hr {
   transition: all 0.3s ease 0s;
 }
 
+/* fin copyright **/
+/* rendre responsive**/
+.debut{
+    display: flex;
+
+}
+
