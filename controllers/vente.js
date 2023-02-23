@@ -25,18 +25,66 @@ exports.ventePost = async (req, res) => {
     const vente = req.body;
 
     let Vente = {};
-    let prize = [];
+    // let prize = [];
+    const formulesProduct = [];
+    const product_unavailables = [];
     let sum = 0;
 
     if (vente !== null) {
       // get the price of each product
-      for (let prodId of vente.produit) {
+      for (let [index, prodId] of vente.produit.entries()) {
         const currentProduct = await produitQueries.getProduitById(prodId);
-        prize.push(currentProduct.result.prix_vente);
+
+        if (currentProduct.result !== null) {
+          // prize.push(currentProduct.result.prix_vente);
+          let promo_quantity = 0;
+          if (currentProduct.result.promo) {
+            if (currentProduct.result.promo_quantity <= vente.quantite[index]) {
+              promo_quantity = parseInt(
+                vente.quantite[index] / currentProduct.result.promo_quantity
+              );
+            }
+          }
+
+          if (promo_quantity) {
+            const prix =
+              promo_quantity * currentProduct.result.promo_price +
+              (vente.quantite[index] % currentProduct.result.promo_quantity) *
+                currentProduct.result.prix_vente;
+
+            sum += prix;
+
+            formulesProduct.push({
+              produit_name: currentProduct.result.produit.nom_produit,
+              quantite: vente.quantite[index],
+              prix: prix,
+              prix_hors_promo:
+                currentProduct.result.prix_vente * vente.quantite[index],
+              promo: currentProduct.result.promo,
+              promo_quantity: currentProduct.result.promo_quantity,
+              promo_price: currentProduct.result.promo_price,
+              taille: currentProduct.result.taille,
+            });
+          } else {
+            sum += vente.quantite[index] * currentProduct.result.prix_vente;
+          }
+
+          if (currentProduct.result.quantite < vente.quantite[index]) {
+            product_unavailables.push(
+              currentProduct.result.produit.nom_produit +
+                ' ' +
+                currentProduct.result.taille
+            );
+          }
+        }
       }
 
-      for (let i = 0; i < Math.min(vente.quantite.length, prize.length); i++) {
-        sum += vente.quantite[i] * prize[i];
+      if (product_unavailables.length > 0) {
+        res.status(400).json({
+          message: 'Produits non disponible',
+          product_unavailables: product_unavailables,
+        });
+        return;
       }
 
       let newVente = {
@@ -48,6 +96,7 @@ exports.ventePost = async (req, res) => {
         prix: sum,
         somme_encaisse: vente.somme_encaisse,
         monnaie: vente.somme_encaisse - sum,
+        formules: formulesProduct,
       };
       // il fait pas l setvente or il fait update  de produit
       Vente = await venteQueries.setVente(newVente);
@@ -67,7 +116,6 @@ exports.ventePost = async (req, res) => {
       const venteRes = await venteQueries.getVentesById(Vente.result?._id);
 
       if (req.app.io) {
-        console.log(req.io, sess.travail_pour);
         req.app.io.emit(`${sess.travail_pour}-vente`, {
           vente: venteRes.result,
         });
@@ -107,20 +155,66 @@ exports.editventePost = async (req, res) => {
     }
     const body = req.body;
 
-    let Vente = {};
-    let prize = [];
+    const formulesProduct = [];
+    const product_unavailables = [];
+
     let sum = 0;
 
     if (body !== null) {
       // get the price of each product
-      for (let prodId of body.produit) {
+      for (let [index, prodId] of body.produit.entries()) {
         const currentProduct = await produitQueries.getProduitById(prodId);
 
-        prize.push(currentProduct.result.prix_vente);
+        if (currentProduct.result !== null) {
+          // prize.push(currentProduct.result.prix_vente);
+          let promo_quantity = 0;
+          if (currentProduct.result.promo) {
+            if (currentProduct.result.promo_quantity <= body.quantite[index]) {
+              promo_quantity = parseInt(
+                body.quantite[index] / currentProduct.result.promo_quantity
+              );
+            }
+          }
+
+          if (promo_quantity) {
+            const prix =
+              promo_quantity * currentProduct.result.promo_price +
+              (body.quantite[index] % currentProduct.result.promo_quantity) *
+                currentProduct.result.prix_vente;
+
+            sum += prix;
+
+            formulesProduct.push({
+              produit_name: currentProduct.result.produit.nom_produit,
+              quantite: body.quantite[index],
+              prix: prix,
+              prix_hors_promo:
+                currentProduct.result.prix_vente * body.quantite[index],
+              promo: currentProduct.result.promo,
+              promo_quantity: currentProduct.result.promo_quantity,
+              promo_price: currentProduct.result.promo_price,
+              taille: currentProduct.result.taille,
+            });
+          } else {
+            sum += body.quantite[index] * currentProduct.result.prix_vente;
+          }
+
+          if (currentProduct.result.quantite < body.quantite[index]) {
+            product_unavailables.push(
+              currentProduct.result.produit.nom_produit +
+                ' ' +
+                currentProduct.result.taille
+            );
+          }
+        }
       }
 
-      for (let i = 0; i < Math.min(body.quantite.length, prize.length); i++) {
-        sum += (body.quantite[i] + body.quantite_already_sold[i]) * prize[i];
+      if (product_unavailables.length > 0) {
+        res.status(400).json({
+          message: 'Produits non disponible',
+          product_unavailables: product_unavailables,
+        });
+        return;
       }
 
       const oldVente = await venteQueries.getVentesById(venteId);
@@ -170,9 +264,10 @@ exports.editventePost = async (req, res) => {
         prix: sum,
         somme_encaisse: body.somme_encaisse,
         monnaie: body.somme_encaisse - sum,
+        formules: formulesProduct,
       };
 
-      Vente = await venteQueries.updateVente(venteId, newVente);
+      await venteQueries.updateVente(venteId, newVente);
       const allProducts = body.produit
         .filter((prodId) => !products.find((prod) => '' + prod.id === prodId))
         .map((prodId) => {

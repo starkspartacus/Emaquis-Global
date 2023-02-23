@@ -28,7 +28,10 @@ const CartItem = ({ product }) => {
         <img src={product.produit.image} alt='product' />
         <div>
           <h6>
-            {quantity}x {product.produit.nom_produit} {product.taille}
+            {quantity}x {product.produit.nom_produit} {product.taille}{' '}
+            {product.promo && product.promo_quantity <= quantity && (
+              <p className='badge formule'>F</p>
+            )}
           </h6>
           <p>{product.prix_vente} FCFA</p>
         </div>
@@ -76,13 +79,24 @@ const CartFooter = () => {
   const [sommeEncaisse, setSommeEncaisse] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
 
-  const total = carts.reduce(
-    (acc, produit) =>
-      acc +
-      produit.prix_vente *
-        (produit.quantity + (produit.quantity_already_sold || 0)),
-    0
-  );
+  const total = carts.reduce((acc, produit) => {
+    let quantity;
+    let promo_quantity = 0;
+
+    if (produit.promo && produit.promo_quantity <= produit.quantity) {
+      promo_quantity = parseInt(produit.quantity / produit.promo_quantity);
+    }
+
+    if (promo_quantity) {
+      quantity = produit.quantity % produit.promo_quantity;
+    } else {
+      quantity = produit.quantity;
+    }
+
+    return (
+      acc + produit.prix_vente * quantity + produit.promo_price * promo_quantity
+    );
+  }, 0);
 
   const handleSubmit = () => {
     if (loading) return;

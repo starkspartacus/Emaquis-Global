@@ -28,7 +28,15 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className='product-card'>
-      <h4 className='badge emTaille taille_produits'>{product.taille}</h4>
+      <div className='d-flex justify-content-between'>
+        <h4 className='badge emTaille taille_produits'>{product.taille}</h4>
+        {product.promo && (
+          <h4 className='badge formule'>
+            {product.promo_quantity} x {product.promo_price}
+          </h4>
+        )}
+      </div>
+
       <div className='product-card__image'>
         <img src={product.produit.image} alt='product' />
       </div>
@@ -40,7 +48,11 @@ const ProductCard = ({ product }) => {
         >
           {product.produit.nom_produit}
         </h4>
-        <p className='emPriceproduct'>{product.prix_vente} FCFA</p>
+        <p className='emPriceproduct'>
+          {product.prix_vente}
+          FCFA
+        </p>
+
         {product.quantite > 0 && (
           <p>
             Stock:{' '}

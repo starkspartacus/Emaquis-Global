@@ -65,6 +65,9 @@ exports.addproduitPost = async (req, res) => {
       prix_achat: parseInt(req.body.prix_achat),
       quantite: parseInt(req.body.quantite),
       taille: req.body.taille,
+      promo: req.body.promo,
+      promo_quantity: parseInt(req.body.promo_quantity),
+      promo_price: parseInt(req.body.promo_price),
       session: session,
       historiques: [],
     };
@@ -107,10 +110,6 @@ exports.addproduitPost = async (req, res) => {
 exports.editProduit = async (req, res) => {
   if (req.session.user) {
     const produitId = req.query.productId;
-    console.log(
-      '👉 👉 👉  ~ file: ajouterproduitcontroller.js:104 ~ produitId',
-      produitId
-    );
 
     let sess = req.session.user;
 
@@ -151,6 +150,9 @@ exports.editproduitPost = async (req, res) => {
       prix_achat: parseInt(req.body.prix_achat),
       quantite: parseInt(req.body.quantite),
       taille: req.body.taille,
+      promo: req.body.promo,
+      promo_quantity: parseInt(req.body.promo_quantity),
+      promo_price: parseInt(req.body.promo_price),
       session: session,
       historiques: [],
     };

@@ -81,9 +81,35 @@ const TablesItem = ({
       });
   };
 
+  const produits = vente.produit.map((el, i) => {
+    const text = i === vente.produit.length - 1 ? '' : ' , ';
+    if (
+      vente.formules &&
+      vente.formules.find(
+        (formule) =>
+          formule.taille === el.taille &&
+          formule.produit_name === el.produit.nom_produit
+      )
+    ) {
+      return (
+        <span className='product-formule'>
+          {el.produit.nom_produit}
+          {text}
+        </span>
+      );
+    } else {
+      return (
+        <span>
+          {el.produit.nom_produit}
+          {text}
+        </span>
+      );
+    }
+  });
+
   return (
     <tr className={`vente_table_item${vente._id === venteId ? ' active' : ''}`}>
-      <td>{vente.produit.map((el) => el.produit.nom_produit).join(',')}</td>
+      <td>{produits}</td>
       <td>{vente.quantite.join(',')}</td>
       <td>{vente.prix}</td>
       <td>{vente.somme_encaisse}</td>

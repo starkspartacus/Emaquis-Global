@@ -10,6 +10,9 @@ exports.produitQueries = class {
         prix_achat: data.prix_achat,
         quantite: data.quantite,
         taille: data.taille,
+        promo: data.promo,
+        promo_quantity: data.promo_quantity,
+        promo_price: data.promo_price,
 
         historiques: data.historiques,
 
