@@ -2433,6 +2433,16 @@ hr {
 /* rendre responsive**/
 .debut{
     display: flex;
+    justify-content: space-between;
+}
 
+.google-play{
+    width: 250px;
+    height: 70px;
+}
+
+.block-2 .google-play{
+    width: 250px;
+    height: 50px;
 }
 
