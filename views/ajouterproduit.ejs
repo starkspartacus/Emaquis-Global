@@ -176,7 +176,9 @@
 
 
           for(let key of Object.keys(data)){
-            if(!data[key]){
+            if(!['promo','promo_quantity','promo_price'].includes(key) &&!data[key]){
+              return alert("Veuillez remplir tous les champs");
+            }else if(data.promo && (!data.promo_quantity || !data.promo_price)){
               return alert("Veuillez remplir tous les champs");
             }
           }
