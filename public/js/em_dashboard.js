@@ -7,6 +7,7 @@ const AppRoot = () => {
   const [carts, setCarts] = React.useState([]);
   const [categorySelectedId, setCategorySelectedId] = React.useState(null);
   const [venteId, setVenteId] = React.useState(null);
+  const [productUnvailable, setProductUnvailable] = React.useState([]);
 
   const handleSelectCategory = (id) => {
     setCategorySelectedId(id);
@@ -144,15 +145,33 @@ const AppRoot = () => {
     const cartItem = carts.find((cart) => cart._id === product._id);
 
     if (cartItem) {
-      if (cartItem.quantity + 1 > product.quantite) {
+      const qty = cartItem.quantity - (cartItem.quantity_already_sold || 0);
+
+      if (
+        qty + 1 > product.quantite ||
+        (categorySelectedId === 'formule' &&
+          qty + cartItem.promo_quantity > product.quantite)
+      ) {
         alert('Vous ne pouvez pas ajouter plus de produits que le stock');
         return;
       }
 
-      cartItem.quantity++;
+      if (categorySelectedId === 'formule') {
+        cartItem.quantity += cartItem.promo_quantity;
+      } else {
+        cartItem.quantity++;
+      }
+
       setCarts([...carts]);
     } else {
-      setCarts([...carts, { ...product, quantity: 1 }]);
+      setCarts([
+        ...carts,
+        {
+          ...product,
+          quantity:
+            categorySelectedId === 'formule' ? product.promo_quantity : 1,
+        },
+      ]);
     }
   };
 
@@ -187,10 +206,8 @@ const AppRoot = () => {
       } else if (type === 'incr') {
         cartItem.quantity++;
       } else if (type === 'decr' && cartItem.quantity === 1) {
-        if (!cartItem.quantity_already_sold) {
-          removeProductFromCart(cartItem);
-          return;
-        }
+        removeProductFromCart(cartItem);
+        return;
       }
 
       setCarts([...carts]);
@@ -209,11 +226,20 @@ const AppRoot = () => {
       carts.push({
         ...product,
         quantity: vente.quantite[index],
+        quantity_already_sold: vente.quantite[index],
       });
     });
 
     setVenteId(vente._id);
     setCarts(carts);
+  };
+
+  const initProductsUnvailable = (products) => {
+    setProductUnvailable(products);
+  };
+
+  const resetProductsUnvailable = () => {
+    setProductUnvailable([]);
   };
 
   return (
@@ -233,14 +259,87 @@ const AppRoot = () => {
           clearCarts,
           initCarts,
           venteId,
+          productUnvailable,
+          initProductsUnvailable,
+          resetProductsUnvailable,
         }}
       >
         <React.Fragment>
           <VenteRoot />
           <EmDashboardBody />
+          <ModalUnvailableProducts />
         </React.Fragment>
       </ProductsContext.Provider>
     </AppContext.Provider>
+  );
+};
+
+const ModalUnvailableProducts = () => {
+  const { resetProductsUnvailable, productUnvailable } =
+    React.useContext(ProductsContext);
+
+  const handleClose = () => {
+    resetProductsUnvailable();
+    $('#productUnvailableModal').modal('hide');
+  };
+
+  return (
+    <div
+      class='modal fade'
+      id='productUnvailableModal'
+      tabindex='-1'
+      role='dialog'
+      aria-labelledby='myModalTitle'
+    >
+      <div
+        class='modal-dialog modal-dialog-centered'
+        style={{
+          maxWidth: '600px',
+        }}
+        role='document'
+      >
+        (
+        <div class='modal-content'>
+          <div class='modal-header'>
+            <h2 class='modal-title' id='exampleModalLongTitle'>
+              Produits non disponible
+            </h2>
+            <button
+              type='button'
+              class='close close-modal'
+              data-dismiss='modal'
+              aria-label='Close'
+              id='close-modal'
+            >
+              <span aria-hidden='true'>&times;</span>
+            </button>
+          </div>
+          <div class='modal-body'>
+            {productUnvailable &&
+              productUnvailable.map((el, index) => {
+                return (
+                  <p key={index}>
+                    {el.nom_produit}{' '}
+                    {el.taille + `\n quantité restante: ${el.quantite}`}
+                  </p>
+                );
+              })}
+          </div>
+
+          <div class='modal-footer'>
+            <button
+              type='button'
+              class='btn btn-success close-modal'
+              data-dismiss='modal'
+              onClick={handleClose}
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+        )
+      </div>
+    </div>
   );
 };
 

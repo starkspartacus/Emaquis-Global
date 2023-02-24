@@ -5,8 +5,10 @@ const ProductList = () => {
   const { products: allProducts } = React.useContext(AppContext);
 
   React.useEffect(() => {
-    const prods = (allProducts || []).filter(
-      (prod) => prod.produit.categorie._id === categorySelectedId
+    const prods = (allProducts || []).filter((prod) =>
+      categorySelectedId === 'formule'
+        ? prod.promo
+        : prod.produit.categorie._id === categorySelectedId
     );
     setProducts(prods);
   }, [categorySelectedId, allProducts]);
