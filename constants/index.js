@@ -8,6 +8,7 @@ exports.PRODUCT_SIZE = [
   '125cl',
   '150cl',
   '200cl',
+  '250cl',
 ];
 
 // pays de l'afrique de l'ouest
