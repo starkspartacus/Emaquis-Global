@@ -70,11 +70,11 @@ exports.ventePost = async (req, res) => {
           }
 
           if (currentProduct.result.quantite < vente.quantite[index]) {
-            product_unavailables.push(
-              currentProduct.result.produit.nom_produit +
-                ' ' +
-                currentProduct.result.taille
-            );
+            product_unavailables.push({
+              nom_produit: currentProduct.result.produit.nom_produit,
+              taille: currentProduct.result.taille,
+              quantite: currentProduct.result.quantite,
+            });
           }
         }
       }
@@ -161,6 +161,8 @@ exports.editventePost = async (req, res) => {
     let sum = 0;
 
     if (body !== null) {
+      const oldVente = await venteQueries.getVentesById(venteId);
+
       // get the price of each product
       for (let [index, prodId] of body.produit.entries()) {
         const currentProduct = await produitQueries.getProduitById(prodId);
@@ -199,12 +201,24 @@ exports.editventePost = async (req, res) => {
             sum += body.quantite[index] * currentProduct.result.prix_vente;
           }
 
+          const product_in_old_vente_index = oldVente.result.produit.findIndex(
+            (product) => '' + product._id === prodId
+          );
+
           if (currentProduct.result.quantite < body.quantite[index]) {
-            product_unavailables.push(
-              currentProduct.result.produit.nom_produit +
-                ' ' +
-                currentProduct.result.taille
-            );
+            if (product_in_old_vente_index !== -1) {
+              const qty = oldVente.result.quantite[product_in_old_vente_index];
+              if (qty - body.quantite[index] > 0) {
+                // return no do nothing
+                continue;
+              }
+            }
+
+            product_unavailables.push({
+              nom_produit: currentProduct.result.produit.nom_produit,
+              taille: currentProduct.result.taille,
+              quantite: currentProduct.result.quantite,
+            });
           }
         }
       }
@@ -217,7 +231,6 @@ exports.editventePost = async (req, res) => {
         return;
       }
 
-      const oldVente = await venteQueries.getVentesById(venteId);
       const products = [];
 
       if (oldVente.result.produit.length > 0) {

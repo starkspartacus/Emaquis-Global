@@ -21,7 +21,7 @@ const CartItem = ({ product }) => {
     removeProductFromCart,
   } = React.useContext(ProductsContext);
 
-  const quantity = (product.quantity_already_sold || 0) + product.quantity;
+  const quantity = product.quantity;
   return (
     <div className='cart-item'>
       <div className='cart-item__details'>
@@ -60,6 +60,10 @@ const CartItem = ({ product }) => {
         <button
           className='btn btn-valider incr'
           onClick={() => handleUpdateProductQuantity(product, 'incr')}
+          disabled={
+            product.quantite <=
+            product.quantity - (product.quantity_already_sold || 0)
+          }
         >
           +
         </button>
@@ -75,7 +79,8 @@ const CartItem = ({ product }) => {
 };
 
 const CartFooter = () => {
-  const { carts, clearCarts, venteId } = React.useContext(ProductsContext);
+  const { carts, clearCarts, venteId, initProductsUnvailable } =
+    React.useContext(ProductsContext);
   const [sommeEncaisse, setSommeEncaisse] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
 
@@ -104,7 +109,6 @@ const CartFooter = () => {
     const vente = {
       produit: carts.map((prod) => prod._id),
       quantite: carts.map((prod) => prod.quantity),
-      quantite_already_sold: carts.map((prod) => prod.quantity_already_sold),
       somme_encaisse: Number(sommeEncaisse),
     };
 
@@ -125,9 +129,15 @@ const CartFooter = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        clearCarts();
-        setSommeEncaisse(0);
-        setLoading(false);
+        if (data.product_unavailables) {
+          setLoading(false);
+          initProductsUnvailable(data.product_unavailables);
+          $('#productUnvailableModal').modal('show');
+        } else {
+          clearCarts();
+          setSommeEncaisse(0);
+          setLoading(false);
+        }
       })
       .catch((err) => {
         console.log(err);
