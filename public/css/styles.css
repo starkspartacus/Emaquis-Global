@@ -2265,6 +2265,11 @@ hr {
 
 }
 
+.bg-singup form {
+  margin-top: 20px;
+  overflow-y: auto;
+}
+
 .singup-container {
   left: 25%;
   overflow: auto;
@@ -2273,10 +2278,6 @@ hr {
 
 }
 
-.bg-singup form{
-  margin-top: 20px;
-
-}
 
 .img-incription{
   position: center;
