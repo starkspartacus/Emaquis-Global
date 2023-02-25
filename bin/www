@@ -68,17 +68,19 @@ UserLogin.on('connection', (socket) => {
   console.log('connexion utilisateur');
   try {
     socket.on('login', async (data) => {
-      const { email, password } = data;
-      if (!(email && password)) {
-        console.log('veuillez remplir tous les champs');
+      const { emailOrPhoneNumber, password } = data;
+      console.log(emailOrPhoneNumber,password,"data")
+      if (!(emailOrPhoneNumber && password)) {
+        console.log('Veuillez remplir tous les champs');
       }
-      //   const Result = await userQueries.getUser(data);
-      const userlogin = await User.findOne({ email });
-      console.log(userlogin, 'userlogin');
+      const userlogin = await User.findOne({
+        $or: [{ email: emailOrPhoneNumber }, { numero: emailOrPhoneNumber }],
+      });
+       console.log(userlogin, 'userlogin');
 
       if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
         const token = jwt.sign(
-          { user_id: userlogin._id, email, isAdmin: userlogin.isAdmin },
+          { user_id: userlogin._id, emailOrPhoneNumber, isAdmin: userlogin.isAdmin },
           process.env.SECRET,
           {
             expiresIn: '1h',
