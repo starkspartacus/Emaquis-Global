@@ -66,8 +66,8 @@ exports.addproduitPost = async (req, res) => {
       quantite: parseInt(req.body.quantite),
       taille: req.body.taille,
       promo: req.body.promo,
-      promo_quantity: parseInt(req.body.promo_quantity),
-      promo_price: parseInt(req.body.promo_price),
+      promo_quantity: parseInt(req.body.promo_quantity) || null,
+      promo_price: parseInt(req.body.promo_price) || null,
       session: session,
       historiques: [],
     };
@@ -151,8 +151,8 @@ exports.editproduitPost = async (req, res) => {
       quantite: parseInt(req.body.quantite),
       taille: req.body.taille,
       promo: req.body.promo,
-      promo_quantity: parseInt(req.body.promo_quantity),
-      promo_price: parseInt(req.body.promo_price),
+      promo_quantity: parseInt(req.body.promo_quantity) || null,
+      promo_price: parseInt(req.body.promo_price) || null,
       session: session,
       historiques: [],
     };
