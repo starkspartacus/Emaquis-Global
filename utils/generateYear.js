@@ -13,7 +13,6 @@ exports.generateYears = () => {
 };
 
 exports.formatDate = (date = new Date(date)) => {
-  console.log('👉 👉 👉  ~ file: generateYear.js:16 ~ date', date);
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
