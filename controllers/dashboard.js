@@ -3,7 +3,6 @@ const { employeQueries } = require('../requests/EmployeQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const { venteQueries } = require('../requests/venteQueries');
 const { formatAmount } = require('../utils/formatAmount');
-const { formatTime } = require('../utils/formatTime');
 const { generateYears, formatDate } = require('../utils/generateYear');
 const moment = require('moment');
 const { getPercent } = require('../utils/getPercent');
@@ -82,15 +81,16 @@ exports.dashboard = async (req, res) => {
         time - ((toDay === 0 ? 7 : toDay) - 1) * 24 * 60 * 60 * 1000
       );
 
-      let totalVenteWeek = Object.keys(venteByDay)
-        .filter((acc) => {
-          const date = new Date(acc);
-          if (date >= previousWeekDay) {
-            return true;
-          } else {
-            return false;
-          }
-        })
+      const weekKeys = Object.keys(venteByDay).filter((acc) => {
+        const date = new Date(acc);
+        if (date >= new Date(formatDate(previousWeekDay))) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      let totalVenteWeek = weekKeys
         .map((key) => {
           return (
             venteByDay[key]?.reduce((acc, item) => {
