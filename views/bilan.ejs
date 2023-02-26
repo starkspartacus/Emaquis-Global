@@ -37,7 +37,7 @@
             <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
               <div class="page_title_left d-flex align-items-center">
                 <h3 class="f_s_25 f_w_700 dark_text mr_30">
-                  Bilan
+
                 </h3>
               </div>
             </div>
@@ -66,14 +66,29 @@
     const Bilan = () =>{
 
       return(
-              <div>
-                <h1>Hello Bilan</h1>
+              <div className="justify-content-between row">
+                <h3 className="">Bonjour <b><%= locals.user?.nom %> <%= locals.user?.prenom ||
+                locals.user?.prenoms %></b></h3>
+                <div >
+                  <label>
+                    <select className="form-control mr-5" aria-label="Default select example">
+                      <option selected>Catégories</option>
+                      <option value="1">Employés</option>
+                      <option value="2">Ventes</option>
+                      <option value="3">Produits</option>
+                    </select>
+                  </label>
+                  <label>
+                    <input type="date" className="form-control" name="date"/>
+                  </label>
+                </div>
+
               </div>
       );
 
     };
 
-    ReactDom.render(<Bilan />, document.getElementById('add_bilan'));
+    ReactDOM.render(<Bilan />, document.getElementById('add_bilan'));
   </script>
 </body>
 
