@@ -1,10 +1,9 @@
 const { categorieQueries } = require('../requests/categorieQueries');
 exports.seecat = async (req, res) => {
   if (req.session.user) {
-    const session = req.session.user;
     try {
       const Categorie = await categorieQueries.getCategorie();
-      const Categorieid = await categorieQueries.getCategorieById(req.query.id);
+
       if (Categorie.result !== null) {
         const categorie = await categorieQueries.getCategorie();
         let categories = categorie.result;

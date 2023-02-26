@@ -3,7 +3,6 @@ const { employeQueries } = require('../requests/EmployeQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const { venteQueries } = require('../requests/venteQueries');
 const { formatAmount } = require('../utils/formatAmount');
-const { formatTime } = require('../utils/formatTime');
 const { generateYears, formatDate } = require('../utils/generateYear');
 const moment = require('moment');
 const { getPercent } = require('../utils/getPercent');
@@ -66,6 +65,8 @@ exports.dashboard = async (req, res) => {
 
       /* Calcul du total hebdomadaire */
 
+      // get week day to begin monday
+
       // for (let day = 0; day < 7; day++) {
       //   let sale = venteByDay[formatDate(moment(new Date()).subtract(day, 'days').toDate())];
 
@@ -73,6 +74,31 @@ exports.dashboard = async (req, res) => {
       //   console.log(totalHebdomadaire);
 
       // }
+
+      const toDay = new Date().getDay();
+      const time = new Date().getTime();
+      const previousWeekDay = new Date(
+        time - ((toDay === 0 ? 7 : toDay) - 1) * 24 * 60 * 60 * 1000
+      );
+
+      const weekKeys = Object.keys(venteByDay).filter((acc) => {
+        const date = new Date(acc);
+        if (date >= new Date(formatDate(previousWeekDay))) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      let totalVenteWeek = weekKeys
+        .map((key) => {
+          return (
+            venteByDay[key]?.reduce((acc, item) => {
+              return acc + item.prix;
+            }, 0) || 0
+          );
+        })
+        .reduce((acc, item) => acc + item, 0);
 
       const allProductsByDay = venteByDay[toDayKey]?.reduce((acc, item) => {
         let products = [];
@@ -136,6 +162,7 @@ exports.dashboard = async (req, res) => {
           objectivePercent > 100 ? 100 : objectivePercent.toFixed(2),
         allProductsByDayGrouped,
         productMostSold,
+        totalVenteWeek: formatAmount(totalVenteWeek || 0),
       });
     } catch (e) {
       console.log('err', e);

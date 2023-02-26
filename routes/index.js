@@ -51,6 +51,7 @@ require('dotenv').config();
 const fs = require('fs');
 const S3 = require('aws-sdk/clients/s3');
 const { authSuperAdmin, checkAuthUser } = require('../middleware/auth');
+const { uploadFile } = require('../utils/uploadFile');
 
 var router = express.Router();
 
@@ -89,7 +90,6 @@ router.post('/dashboard', dashboardcontroller.dashboardPost);
 router.get('/bilan', bilan_controller.bilan);
 router.post('/bilan', bilan_controller.bilanPost);
 
-
 router.get('/emdashboard', emdashboardcontroller.emdashboard);
 router.post('/emdashboard', emdashboardcontroller.emdashboardPost);
 
@@ -97,6 +97,9 @@ router.get('/deconnexion', deconnexioncontroller.deconnexion);
 router.post('/deconnexion', deconnexioncontroller.deconnexion);
 
 router.get('/ajoutercategorie', ajoutercategoriecontroller.addcat);
+router.get('/modifiercategorie', ajoutercategoriecontroller.editCat);
+router.delete('/deletecategorie/:catId', ajoutercategoriecontroller.deleteCat);
+
 router.post('/ajoutercategorie', ajoutercategoriecontroller.addcatPost);
 router.get('/listcategorie', listcategoriecontroller.seecat);
 router.post('/listcategorie', listcategoriecontroller.seecatPost);
@@ -169,29 +172,7 @@ router.post(
   upload.single('image'),
   async (req, res) => {
     const file = req.file;
-    const bucketName = process.env.AWS_BUCKET_NAME;
-    const region = process.env.AWS_BUCKET_REGION;
-    const accessKeyId = process.env.AWS_ACCESS_KEY;
-    const secretAccessKey = process.env.AWS_SECRET_KEY;
 
-    const s3 = new S3({
-      region,
-      accessKeyId,
-      secretAccessKey,
-    });
-
-    // uploads a file to AWS Cloud s3
-    function uploadFile(file) {
-      const fileStream = fs.createReadStream(file.path);
-
-      const uploadParams = {
-        Bucket: bucketName,
-        Body: fileStream,
-        Key: file.originalname,
-        acl: 'public-read',
-      };
-      return s3.upload(uploadParams).promise();
-    }
     console.log('file', file);
     const result = await uploadFile(file);
     console.log('result', result);
