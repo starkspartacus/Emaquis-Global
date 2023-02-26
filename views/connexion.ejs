@@ -62,7 +62,7 @@
               </div>
               <form action="#" class="p-3">
                 <!-- Email -->
-                <input class="form-control main" type="email" placeholder="Email" name="email" required>
+                <input class="form-control main" type="text" placeholder="Email" name="emailOrPhoneNumber" required>
                 <!-- Password -->
                 <input class="form-control main" type="password" placeholder="Mot de passe" name="password" required>
                 <!-- Submit Button -->
@@ -107,7 +107,7 @@
         isSucces = true;
         const data = {
 
-            email: $('input[name="email"]').val(),
+          emailOrPhoneNumber: $('input[name="emailOrPhoneNumber"]').val(),
             password: $('input[name="password"]').val(),
         };
        console.log(data)
