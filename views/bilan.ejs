@@ -66,6 +66,7 @@
     const Bilan = () =>{
 
       return(
+
               <div className="justify-content-between row">
                 <h3 className="">Bonjour <b><%= locals.user?.nom %> <%= locals.user?.prenom ||
                 locals.user?.prenoms %></b></h3>
@@ -73,8 +74,8 @@
                   <label>
                     <select className="form-control mr-5" aria-label="Default select example">
                       <option selected>Catégories</option>
-                      <option value="1">Employés</option>
-                      <option value="2">Ventes</option>
+                      <option value="1">Performance employés</option>
+                      <option value="2">Business</option>
                       <option value="3">Produits</option>
                     </select>
                   </label>
@@ -82,8 +83,9 @@
                     <input type="date" className="form-control" name="date"/>
                   </label>
                 </div>
-
               </div>
+
+
       );
 
     };
