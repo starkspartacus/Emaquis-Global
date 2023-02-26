@@ -76,7 +76,7 @@
                   </div>
 
                   <div class="col-lg-4 text-right d-flex justify-content-end">
-                    <select class="nice_Select2 max-width-220 mr-2" id="chart_month">
+                    <label for="chart_month"></label><select class="nice_Select2 max-width-220 mr-2" id="chart_month">
                       <option value="1">choisir le mois</option>
                       <% for( month of months) { %> <% if (month.code === new
                         Date().getMonth()+1) { %>
