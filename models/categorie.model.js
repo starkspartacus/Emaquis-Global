@@ -6,6 +6,11 @@ const CategorieSchema = new Schema(
     nom: {
       type: String,
       required: true,
+      unique: true,
+    },
+    image: {
+      type: String,
+      default: null,
     },
   },
   { timestamps: true }
