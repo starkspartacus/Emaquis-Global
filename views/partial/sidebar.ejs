@@ -7,8 +7,8 @@
       <i class="ti-close"></i>
     </div>
   </div>
-  <ul id="sidebar_menu">
-    <li class="">
+  <ul id="sidebar_menu" class="list-group">
+    <li class="" disabled>
       <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
           <img src="../img/paresseux_sous_officiel.png" alt="" />
@@ -17,8 +17,8 @@
           <span>E-maquis </span>
         </div>
       </a>
-       <ul>
-         <li><a href="/bilan">Bilan</a></li>
+       <ul >
+         <li class="list-group-item disabled"><a href="/bilan" >Bilan <span class="badge badge-info">En cour</span></a></li>
 
        </ul>
     </li>
@@ -63,7 +63,8 @@
     <li class="">
       <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
-          <img src="img/menu-icon/5.svg" alt="" />
+          <img src="../img/categorie.svg" alt=""
+               style="height: 29px; width: 29px;"/>
         </div>
         <div class="nav_title">
           <span>Catégories</span>
@@ -99,25 +100,25 @@
         <% } %>
       </ul>
     </li>
-    <li class=" disabled">
-      <a class="has-arrow" href="#" aria-expanded="false">
-        <div class="nav_icon_small">
-          <img
-            src="../img/icone_fournisseurs.png"
-            style="height: 40px; width: 40px; transform: rotate(-20deg)"
-            alt=""
-          />
-        </div>
-        <div class="nav_title">
-          <span>Fournisseurs</span> <span class="badge badge-info">Bêta</span>
-        </div>
-      </a>
-      <ul>
-        <li><a href="/listefournisseur"> voir mes fournisseurs</a></li>
-        <li>
-          <a href="/fournisseur">Enregistrer un fournisseur</a>
-        </li>
-      </ul>
+    <!-- <li >
+       <a class="has-arrow" href="#" aria-expanded="false">
+         <div class="nav_icon_small">
+           <img
+             src="../img/icone_fournisseurs.png"
+             style="height: 40px; width: 40px; transform: rotate(-20deg)"
+             alt=""
+           />
+         </div>
+         <div class="nav_title">
+           <span>Fournisseurs</span> <span class="badge badge-info">Bêta</span>
+         </div>
+       </a>
+       <ul>
+         <li><a href="/listefournisseur"> voir mes fournisseurs</a></li>
+         <li>
+           <a href="/fournisseur">Enregistrer un fournisseur</a>
+         </li>
+       </ul> -->
     </li>
 
   </ul>
