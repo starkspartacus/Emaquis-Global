@@ -17,8 +17,8 @@
           <span>E-maquis </span>
         </div>
       </a>
-       <ul >
-         <li ><a href="/bilan" >Bilan</a></li>
+       <ul class="list-group">
+         <li class="list-group-item disabled"><a href="/bilan" >Bilan <span class="badge badge-info">En cour</span></a></li>
 
        </ul>
     </li>
@@ -63,26 +63,9 @@
     <li class="">
       <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
-          <img src="../img/categorie.svg" alt=""
-               style="height: 29px; width: 29px;"/>
-        </div>
-        <div class="nav_title">
-          <span>Catégories</span>
-        </div>
-      </a>
-      <ul>
-        <li><a href="/listcategorie"> Mes catégories</a></li>
-        <% if(locals.user?.isAdmin){ %>
-        <li><a href="/ajoutercategorie">ajouter</a></li>
-        <% } %>
-      </ul>
-    </li>
-    <li class="">
-      <a class="has-arrow" href="#" aria-expanded="false">
-        <div class="nav_icon_small">
-          <img src="img/menu-icon/icone_produits.png" 
-            style="height: 40px; width: 40px;" 
-            class="img-fluid " alt="img produits"
+          <img src="img/menu-icon/icone_produits.png"
+               style="height: 40px; width: 40px;"
+               class="img-fluid " alt="img produits"
           />
         </div>
         <div class="nav_title">
@@ -100,6 +83,24 @@
         <% } %>
       </ul>
     </li>
+    <li class="">
+      <a class="has-arrow" href="#" aria-expanded="false">
+        <div class="nav_icon_small">
+          <img src="../img/categorie.svg" alt=""
+               style="height: 29px; width: 29px;"/>
+        </div>
+        <div class="nav_title">
+          <span>Catégories</span>
+        </div>
+      </a>
+      <ul>
+        <li><a href="/listcategorie"> Mes catégories</a></li>
+        <% if(locals.user?.isAdmin){ %>
+        <li><a href="/ajoutercategorie">ajouter</a></li>
+        <% } %>
+      </ul>
+    </li>
+
     <!-- <li >
        <a class="has-arrow" href="#" aria-expanded="false">
          <div class="nav_icon_small">

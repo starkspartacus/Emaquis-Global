@@ -45,9 +45,56 @@
                 </ol>
               </div>
               <div class="page_title_right">
-                <div class="page_date_button d-flex align-items-center">
-                  <img src="img/icon/calender_icon.svg" alt="">
-                  1 Août 2021
+                <div class="page_title_right d-flex">
+                  <div class="page_date d-flex align-items-center">
+
+                    <div class="date_content ml-2">
+                      <span id="heure"></span>
+                      <script>
+                        setInterval("heure()", 1000);
+                      </script>
+
+                    </div>
+
+                  </div>
+                  <div class="page_date d-flex align-items-center">
+
+                    <div class="date_content ml-2">
+                      <span id="date"></span>
+
+                    </div>
+                  </div>
+                  <div class="page_date_button d-flex  align-items-center">
+
+                    <script>
+                      var d = new Date();
+                      //affichage de la date du jour
+                      var jour = d.getDate();
+                      var mois = d.getMonth();
+                      var annee = d.getFullYear();
+                      var date = jour + "/" + (mois + 1) + "/" + annee;
+                      document.getElementById("date").innerHTML = date;
+                      //affichage de l'heure dynamique
+                      function heure(){
+                        var d = new Date();
+                        var h = d.getHours();
+                        var m = d.getMinutes();
+                        var s = d.getSeconds();
+                        if(h<10){
+                          h = "0"+h;
+                        }
+                        if(m<10){
+                          m = "0"+m;
+                        }
+                        if(s<10){
+                          s = "0"+s;
+                        }
+                        document.getElementById("heure").innerHTML = h+":"+m+":"+s;
+                      }
+                    </script>
+
+                  </div>
+
                 </div>
               </div>
             </div>
