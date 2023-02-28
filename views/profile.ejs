@@ -15,31 +15,34 @@
     <style>
      .form-control:focus {
     box-shadow: none;
-    border-color: #BA68C8
+    border-color: #98ED58
 }
 
 .profile-button {
-    background: rgb(99, 39, 120);
+    background: #98ED58;
     box-shadow: none;
     border: none
 }
 
 .profile-button:hover {
-    background: #682773
+  background-color: #FFFFFF;
+  border: 1px solid #98ED58;
+  color: #98ED58;
+  letter-spacing: .25em;
 }
 
 .profile-button:focus {
-    background: #682773;
+    background: #98ED58;
     box-shadow: none
 }
 
 .profile-button:active {
-    background: #682773;
+    background: #98ED58;
     box-shadow: none
 }
 
 .back:hover {
-    color: #682773;
+    color: #98ED58;
     cursor: pointer
 }
 
@@ -48,10 +51,10 @@
 }
 
 .add-experience:hover {
-    background: #BA68C8;
+    background: #98ED58;
     color: #fff;
     cursor: pointer;
-    border: solid 1px #BA68C8
+    border: solid 1px #98ED58
 }
     </style>
 
@@ -77,7 +80,7 @@
                 <div class="white_card_body">
                   <div class="QA_section">
                     <div class="white_box_tittle list_header">
-                   
+
                     </div>
                     <div class="col-xl-12">
                       <form action='/profile' method='post'>
@@ -109,11 +112,11 @@
                                                       <option value="<%= p.type %>"><%= p.nom %></option>
                                                     <% } %>
                                                   <% }) %>
-                                              
+
                                                 </select>
                                             </div>
-                                           
-                                           
+
+
 
                                             <div class="col-md-12"><label class="labels">Email </label><input type="text" class="form-control" name="email" placeholder="Entrer l'email" value="<%= user.email %>"></div>
                                             <div class="col-md-12"><label class="labels">Objectif à atteindre par jour</label><input type="number" class="form-control" name="objective" placeholder="Objectif" value="<%= user.objective %>"></div>
@@ -132,13 +135,13 @@
                                              </div>
                                             <div class="col-md-6"><label class="labels">Region</label><input type="text" class="form-control" name="city" value="<%=user.city%>" placeholder="Région"></div>
                                         </div>
-                                        
+
                                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Enregistrer Profil</button></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class='alert alert-danger' style='display: none;'>
-                                      
+
                                     </div>
                                     <div class="p-3 py-5">
                                         <div class="d-flex justify-content-between align-items-center experience"><span>Changer votre mot de pass?</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;sinon laissez vide les champs</span></div><br>
@@ -157,8 +160,8 @@
                 </div>
               </div>
             </div>
-        
-       
+
+
       </div>
 
       <div class="footer_part">
@@ -167,8 +170,8 @@
             <div class="col-lg-12">
               <div class="footer_iner text-center">
                 <p>
-                  2020 © HNM - Designed by
-                  <a href="#"> <i class="ti-gun"></i> </a><a href="#"> ANIKI</a> - <a href="/faq">FAQ</a>
+                  2023 © E-MAQUIS - Designed by
+                  <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> - <a href="/faq">FAQ</a>
                 </p>
               </div>
             </div>
@@ -333,7 +336,7 @@
         const inputConfirmPassword = $('input[name="confirmPassword"]');
 
         const onChangePassword = function(e){
-         
+
          const confirmValue = inputConfirmPassword.val();
          const passwordValue = inputPassword.val();
 
@@ -351,7 +354,7 @@
 
         inputConfirmPassword.on('input',onChangePassword)
 
-     
+
       });
     </script>
   </body>
