@@ -2767,8 +2767,8 @@ p a:hover {
 /******** base color css ********/
 /* line 2, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1 {
-  background-color: #884ffb;
-  border: 1px solid #884ffb;
+  background-color: #98ED58;
+  border: 1px solid #98ED58;
   color: #fff;
   display: inline-block;
   padding: 9px 25px;
@@ -2790,7 +2790,7 @@ p a:hover {
 /* line 18, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1:hover {
   color: #fff;
-  background-color: #884ffb;
+  background-color: #98ED58;
   box-shadow: 0 3px 11px rgba(136, 79, 251, 0.4);
 }
 
@@ -2810,7 +2810,7 @@ p a:hover {
 
 /* line 33, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1.orange_btn {
-  background: #2d1967;
+  background: #98ED58;
   font-size: 16px;
   border: 0;
   font-weight: 400;
@@ -2819,7 +2819,7 @@ p a:hover {
 
 /* line 39, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1.orange_btn:hover {
-  background: #2d1967;
+  background: #98ED58;
   color: #fff;
 }
 
@@ -2853,19 +2853,27 @@ p a:hover {
 
 /* line 60, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1.radius_btn {
-  border-radius: 15px;
+  background-color: #98ED58;
+  border: 1px solid #98ED58;
+  width: 60%;
+  padding: 20px;
+  border-radius: 5px;
+  color: #FFFFFF;
   font-size: 14px;
-  color: #fff;
-  font-weight: 400;
-  background: #5b6ce1;
-  padding: 16px 10px;
+  font-weight: bold;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+  margin-top: 20px;
+  transition: all 0.3s ease 0s;;
 }
 
 /* line 67, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1.radius_btn:hover {
-  color: #fff;
-  background-color: #5b6ce1;
-  box-shadow: 0 3px 6px #cbd1ff;
+  background-color: #FFFFFF;
+  border: 1px solid #98ED58;
+  color: #98ED58;
+  letter-spacing: .25em;
 }
 
 /* line 74, G:/admin_project/8 admin/management_html/scss/_button.scss */
@@ -5257,7 +5265,7 @@ body::-webkit-scrollbar {
   transition: 0.5s;
   position: relative;
   min-height: 100vh;
-  
+
 }
 
 /* line 13, G:/admin_project/8 admin/management_html/scss/_main_content.scss */
@@ -14177,6 +14185,13 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
   border-radius: 5px;
   margin-bottom: 5px;
   padding: 5px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  transform: scale(1);
+}
+
+.user_crm_wrapper .single_crm:hover {
+  transform: scale(1.03);
+  transition: all 0.5s ease;
 }
 
 /* line 11, G:/admin_project/8 admin/management_html/scss/_crm.scss */

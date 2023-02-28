@@ -246,3 +246,27 @@
   background-color: rgb(219, 36, 23) !important;
   color: #fff;
 }
+
+.btn-validate{
+  background-color: #98ED58;
+  border: 1px solid #98ED58;
+  width: 60%;
+  padding: 20px;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+  margin-top: 20px;
+  transition: all 0.3s ease 0s;
+}
+/* animation button **/
+
+.btn-validate:hover{
+  background-color: #FFFFFF;
+  border: 1px solid #98ED58;
+  color: #98ED58;
+  letter-spacing: .25em;
+}
