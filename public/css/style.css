@@ -9574,17 +9574,17 @@ canvas#highlights {
   margin-right: 10px;
   padding: 12px;
   line-height: 1;
-  animation: produit_obj infinite 0.9s linear;
+  animation: produit_obj infinite 3s linear;
 
 }
 
 @keyframes produit_obj {
   0% {
-    transform: rotate(0deg);
+
     transform: scale(0.3);
   }
   100% {
-    transform: rotateY(30deg);
+
     transform: scale(0.4);
   }
 }
