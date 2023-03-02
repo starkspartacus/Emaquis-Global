@@ -1,6 +1,6 @@
 <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
 <script>
- function checkout(price) {
+ function checkout() {
     CinetPay.setConfig({
         apikey: '212203080763d5904661eff5.58954293',//   YOUR APIKEY
         site_id: '397031',//YOUR_SITE_ID
@@ -9,7 +9,7 @@
     });
     CinetPay.getCheckout({
         transaction_id: Math.floor(Math.random() * 100000000).toString(), // YOUR TRANSACTION ID
-        amount: price, // Utilisez le paramètre 'price' comme valeur pour 'amount'
+        amount:  parseInt(document.getElementById("totalPrix").innerHTML), // Utilisez le paramètre 'price' comme valeur pour 'amount'
         currency: 'XOF',
         channels: 'ALL',
         description: 'Test de paiement',

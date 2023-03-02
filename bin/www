@@ -206,7 +206,6 @@ SaveFournisseur.on('connection', (socket) => {
 const Summary = io.of('/summary').use(Serveur.getSharedSession());
 Summary.on('connection', (socket) => {
   socket.on('selected_month_year', async (data) => {
-    console.log(data, 'okokokdsdsdsdsdsdsdsdsdsdsdssdsd');
     const moment = require('moment');
     console.log(data.date + '-01');
     const startOfMonth = moment(data.date + '-01').startOf('month');
@@ -215,18 +214,20 @@ Summary.on('connection', (socket) => {
       createdAt: { $gte: startOfMonth.toDate() },
     });
     console.log(Result);
+    
     if (Result) {
       const beneficeParBouteille = 5;
       let totalPrix = 0;
       const bouteillesVendues = {};
-      const semaineVentes = {};
+      const semaineVentes = { semaine1: 0, semaine2: 0, semaine3: 0, semaine4: 0 };
+      const semaineBenefice = { semaine1: 0, semaine2: 0, semaine3: 0, semaine4: 0 };
       let totalBenefice = 0;
-
+    
       Result.result.forEach((vente) => {
         // Calculer le prix total de la vente
         const prixTotal = vente.prix;
         totalPrix += prixTotal;
-
+    
         vente.produit.forEach((produit, i) => {
           // Calculer le nombre total de bouteilles vendues
           const quantiteVendue = vente.quantite[i];
@@ -234,34 +235,41 @@ Summary.on('connection', (socket) => {
             bouteillesVendues[produit] = 0;
           }
           bouteillesVendues[produit] += quantiteVendue;
-
+    
           // Diviser les ventes en fonction des semaines
           const dateVente = new Date(vente.createdAt);
-          const jourVente = dateVente.getDate();
-          console.log(jourVente, 'jourVente');
-          // if (jourVente <= 07) {
-          //   semaineVentes.semaine1 += prixTotal;
-          // } else if ( 07<jourVente <= 14) {
-          //   semaineVentes.semaine2 += prixTotal;
-          // } else if (14 < jourVente <= 21) {
-          //   semaineVentes.semaine3 += prixTotal;
-          // } else {
-          //   semaineVentes.semaine4 += prixTotal;
-          // }
-
+          const semaineVente = moment(dateVente).isoWeek();
+    
+          if (semaineVente === moment(startOfMonth).isoWeek()) {
+            semaineVentes.semaine1 += prixTotal;
+            semaineBenefice.semaine1 += quantiteVendue * beneficeParBouteille;
+          } else if (semaineVente === moment(startOfMonth).add(1, 'week').isoWeek()) {
+            semaineVentes.semaine2 += prixTotal;
+            semaineBenefice.semaine2 += quantiteVendue * beneficeParBouteille;
+          } else if (semaineVente === moment(startOfMonth).add(2, 'week').isoWeek()) {
+            semaineVentes.semaine3 += prixTotal;
+            semaineBenefice.semaine3 += quantiteVendue * beneficeParBouteille;
+          } else {
+            semaineVentes.semaine4 += prixTotal;
+            semaineBenefice.semaine4 += quantiteVendue * beneficeParBouteille;
+          }
+    
           // Calculer le bénéfice total
           const beneficeVente = quantiteVendue * beneficeParBouteille;
           totalBenefice += beneficeVente;
         });
       });
-
-      console.log('Total prix : ', totalPrix);
-      console.log('Total bénéfice : ', totalBenefice);
-      console.log('Ventes par semaine : ', semaineVentes);
-      data = {
-        totalBenefice,
+    
+      console.log('Ventes par semaine:', semaineVentes);
+      console.log('Bénéfice par semaine:', semaineBenefice);
+      console.log('Total des ventes:', totalPrix);
+      console.log('Total du bénéfice:', totalBenefice);
+       let data = {
+        semaineVentes,
+        semaineBenefice,
         totalPrix,
-      };
+        totalBenefice
+       }
       socket.emit('saved', data);
     } else {
       socket.emit('bad');

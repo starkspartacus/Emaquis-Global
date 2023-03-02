@@ -112,25 +112,29 @@
                   <div class="row">
                     <div class="col-sm-6 col-md-3 text-center mb-3">
                       <div class="bg-light rounded p-2">
-                        <h4 class="mt-3"></h4>
-                        <p class="mt-2">Semaine 1</p>
+                        <h4 class="mt-3" id="semaine1"></h4>
+                        <span style="color:red" id="creditsemaine1"></span>
+                        <p class="mt-2">Semaine 1</p> 
                       </div>
                     </div>
                     <div class="col-sm-6 col-md-3 text-center mb-3">
                       <div class="bg-light rounded p-2">
-                        <h4 class="mt-3"></h4>
+                        <h4 class="mt-3" id="semaine2"></h4>
+                        <span style="color:red" id="creditsemaine2"></span>
                         <p class="mt-2">Semaine 2</p>
                       </div>
                     </div>
                     <div class="col-sm-6 col-md-3 text-center mb-3">
                       <div class="bg-light rounded p-2">
-                        <h4 class="mt-3"></h4>
+                        <h4 class="mt-3" id="semaine3"></h4>
+                        <span style="color:red" id="creditsemaine3"></span>
                         <p class="mt-2">Semaine 3</p>
                       </div>
                     </div>
                     <div class="col-sm-6 col-md-3 text-center mb-3">
                       <div class="bg-light rounded p-2">
-                        <h4 class="mt-3"></h4>
+                        <h4 class="mt-3" id="semaine4"></h4>
+                        <span style="color:red" id="creditsemaine4"></span>
                         <p class="mt-2">Semaine 4</p>
                       </div>
                     </div>
@@ -151,8 +155,18 @@
                 
               </div>
             </div>
+            <div class="col-xl-4">
+              <div class="white_card mb_30 card_height_100">
+                <div class="white_card_header">
+                  <div class="card-body" style="transform: scale(0.5); width: 1px; height: 1px; background-color: red;">
+                   <p style="margin-left: 40px; margin-top: -20px; font-size: 25px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: black;">CREDIT PAR SEMAINE</p>
+                  </div>
+                  
+                  
+                </div>
+            </div>
           </div>
-
+          
           <div class="col-lg-6">
             <div class="single_crm">
               <div class="crm_body">
@@ -344,9 +358,9 @@
           
           $("#paiement").click(function () {
            
-        const price = parseInt(document.getElementById("totalBenefice").innerHTML);
+        // const price = parseInt(document.getElementById("totalPrix").innerHTML);
         socket.emit("paiementdata", price) // Obtenez le prix à partir de la page
-        // checkout(price); // Passez le prix en tant que paramètre lors de l'appel de la fonction checkout()
+        checkout(); // Passez le prix en tant que paramètre lors de l'appel de la fonction checkout()
     });
 
 
@@ -366,9 +380,21 @@
           });
         });
         socket.on('saved',(data)=>{
-          console.log(data);
-          document.getElementById("totalPrix").innerText = data.totalPrix+" FCFA";
+        
+          document.getElementById("semaine1").innerText = data.semaineVentes.semaine1+" FCFA";
+          document.getElementById("semaine2").innerText = data.semaineVentes.semaine2+" FCFA";
+          document.getElementById("semaine3").innerText = data.semaineVentes.semaine3+" FCFA";
+          document.getElementById("semaine4").innerText = data.semaineVentes.semaine4+" FCFA";
+
+          document.getElementById("creditsemaine1").innerText = data.semaineBenefice.semaine1+" FCFA";
+          document.getElementById("creditsemaine2").innerText = data.semaineBenefice.semaine2+" FCFA";
+          document.getElementById("creditsemaine3").innerText = data.semaineBenefice.semaine3+" FCFA";
+          document.getElementById("creditsemaine4").innerText = data.semaineBenefice.semaine4+" FCFA";
+
           document.getElementById("totalBenefice").innerText = data.totalBenefice+" FCFA";
+          document.getElementById("totalPrix").innerText = data.totalPrix+" FCFA";
+
+          console.log(data.totalBenefice,)
         })
       });
     </script>
