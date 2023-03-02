@@ -259,7 +259,7 @@ Summary.on('connection', (socket) => {
           totalBenefice += beneficeVente;
         });
       });
-    
+      
       console.log('Ventes par semaine:', semaineVentes);
       console.log('Bénéfice par semaine:', semaineBenefice);
       console.log('Total des ventes:', totalPrix);
