@@ -267,6 +267,12 @@ Summary.on('connection', (socket) => {
       socket.emit('bad');
     }
   });
+
+
+  socket.on('paiementdata', (data)=>{
+    console.log(data,'data')
+    
+  })
 });
 
 server.listen(port, console.log(' le serveur ecoute sur le port', port));

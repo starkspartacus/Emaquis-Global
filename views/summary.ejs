@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="zxx">
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+  <style>
+    .sdk {
+        display: block;
+        position: absolute;
+        background-position: center;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
   <head>
     <meta charset="utf-8" />
     <meta
@@ -144,7 +156,7 @@
           <div class="col-lg-6">
             <div class="single_crm">
               <div class="crm_body">
-                <button class="btn btn-success">Payer mon credit</button>
+                <button class="btn btn-success" onclick="checkout()" id="paiement">Payer mon credit</button>
               </div>
             </div>
           </div>
@@ -314,14 +326,30 @@
     </div>
 
     <%- include('partial/script.ejs') %>
+    <%- include('partial/payscript.ejs') %>
     <script src="../jquery-3.4.1.min.js"></script>
+    <script>
+      console.log(parseInt(document.getElementById("totalBenefice").innerHTML))
+     
+  </script>
     <script>
        
       $(document).ready(function () {
         const socket = io("http://localhost:3000/summary");
         let _id = document.getElementById("sess").innerText
         console.log(_id)
+        
+      
         socket.on("connect", () => {
+          
+          $("#paiement").click(function () {
+           
+        const price = parseInt(document.getElementById("totalBenefice").innerHTML);
+        socket.emit("paiementdata", price) // Obtenez le prix à partir de la page
+        // checkout(price); // Passez le prix en tant que paramètre lors de l'appel de la fonction checkout()
+    });
+
+
           $("#month, #year").change(function () {
             let month = $("#month").val();
             let year = $("#year").val();
