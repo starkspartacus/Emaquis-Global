@@ -2709,7 +2709,7 @@ p a:hover {
   display: block;
   color: #fff;
   line-height: 40px;
-  background: #884ffb;
+  background: #98ED58;
   font-size: 15px;
   border-radius: 30px;
   -webkit-transition: 0.3s;
@@ -2761,7 +2761,7 @@ p a:hover {
   align-items: center;
   border-radius: 10px;
   background: rgba(95, 99, 242, 0.06);
-  color: #884ffb;
+  color: #98ED58;
 }
 
 /******** base color css ********/
@@ -2890,12 +2890,12 @@ p a:hover {
   white-space: nowrap;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  color: #9267ff;
+  color: #98ED58;
 }
 
 /* line 88, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .Euro_btn:hover {
-  background-color: #9267ff;
+  background-color: #98ED58;
   color: #000;
 }
 
