@@ -351,14 +351,13 @@
       $(document).ready(function () {
         const socket = io("http://localhost:3000/summary");
         let _id = document.getElementById("sess").innerText
-        console.log(_id)
         
       
         socket.on("connect", () => {
           
           $("#paiement").click(function () {
            
-        // const price = parseInt(document.getElementById("totalPrix").innerHTML);
+       
         socket.emit("paiementdata", price) // Obtenez le prix à partir de la page
         checkout(); // Passez le prix en tant que paramètre lors de l'appel de la fonction checkout()
     });

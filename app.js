@@ -44,7 +44,12 @@ const Serveur = class {
 
   middleware() {
     //MIDDLEWARES
-    this.app.use(cors());
+  
+    this.app.use(
+      cors({
+        origin: ["http://localhost:3000"],
+      })
+    );
     this.app.use(logger('dev'));
     this.app.use(session);
     this.app.use(cookieParser());

@@ -13,6 +13,7 @@ const { categorieQueries } = require('../requests/categorieQueries');
 const { fournisseurQueries } = require('../requests/fournisseurQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const { venteQueries } = require('../requests/venteQueries');
+const { paiementQueries } = require('../requests/paiementQueries');
 const User = require('../models/user.model');
 const dotenv = require('dotenv').config();
 var bcrypt = require('bcryptjs');
@@ -260,10 +261,10 @@ Summary.on('connection', (socket) => {
         });
       });
       
-      console.log('Ventes par semaine:', semaineVentes);
-      console.log('Bénéfice par semaine:', semaineBenefice);
-      console.log('Total des ventes:', totalPrix);
-      console.log('Total du bénéfice:', totalBenefice);
+      // console.log('Ventes par semaine:', semaineVentes);
+      // console.log('Bénéfice par semaine:', semaineBenefice);
+      // console.log('Total des ventes:', totalPrix);
+      // console.log('Total du bénéfice:', totalBenefice);
        let data = {
         semaineVentes,
         semaineBenefice,
@@ -277,8 +278,15 @@ Summary.on('connection', (socket) => {
   });
 
 
-  socket.on('paiementdata', (data)=>{
+  socket.on('paiementdataDB', async (data)=>{
     console.log(data,'data')
+    // const Result = await paiementQueries.setPaiement(data);
+    // if(Result){
+    //   socket.emit('paymentsaved')
+    // }else{
+    //   socket.emit('paymentbad');
+    // }
+   
     
   })
 });
