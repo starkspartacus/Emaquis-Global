@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="zxx">
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+  <style>
+    .sdk {
+        display: block;
+        position: absolute;
+        background-position: center;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
   <head>
     <meta charset="utf-8" />
     <meta
@@ -147,25 +159,29 @@
                   <div class="row">
                     <div class="col-sm-6 col-md-3 text-center mb-3">
                       <div class="bg-light rounded p-2">
-                        <h4 class="mt-3"></h4>
-                        <p class="mt-2">Semaine 1</p>
+                        <h4 class="mt-3" id="semaine1"></h4>
+                        <span style="color:red" id="creditsemaine1"></span>
+                        <p class="mt-2">Semaine 1</p> 
                       </div>
                     </div>
                     <div class="col-sm-6 col-md-3 text-center mb-3">
                       <div class="bg-light rounded p-2">
-                        <h4 class="mt-3"></h4>
+                        <h4 class="mt-3" id="semaine2"></h4>
+                        <span style="color:red" id="creditsemaine2"></span>
                         <p class="mt-2">Semaine 2</p>
                       </div>
                     </div>
                     <div class="col-sm-6 col-md-3 text-center mb-3">
                       <div class="bg-light rounded p-2">
-                        <h4 class="mt-3"></h4>
+                        <h4 class="mt-3" id="semaine3"></h4>
+                        <span style="color:red" id="creditsemaine3"></span>
                         <p class="mt-2">Semaine 3</p>
                       </div>
                     </div>
                     <div class="col-sm-6 col-md-3 text-center mb-3">
                       <div class="bg-light rounded p-2">
-                        <h4 class="mt-3"></h4>
+                        <h4 class="mt-3" id="semaine4"></h4>
+                        <span style="color:red" id="creditsemaine4"></span>
                         <p class="mt-2">Semaine 4</p>
                       </div>
                     </div>
@@ -178,7 +194,7 @@
                     <div class="col-sm-6 col-md-3 text-center mb-3">
                       <div class="bg-light rounded p-2">
                         <h4 class="mt-3" id="totalBenefice"></h4>
-                        <p class="mt-2">Mon crédit crédit</p>
+                        <p class="mt-2">Mon crédit Total</p>
                       </div>
                     </div>
                   </div>
@@ -186,12 +202,22 @@
                 
               </div>
             </div>
+            <div class="col-xl-4">
+              <div class="white_card mb_30 card_height_100">
+                <div class="white_card_header">
+                  <div class="card-body" style="transform: scale(0.5); width: 1px; height: 1px; background-color: red;">
+                   <p style="margin-left: 40px; margin-top: -20px; font-size: 25px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: black;">CREDIT PAR SEMAINE</p>
+                  </div>
+                  
+                  
+                </div>
+            </div>
           </div>
-
+          
           <div class="col-lg-6">
             <div class="single_crm">
               <div class="crm_body">
-                <button class="btn btn-success">Payer mon credit</button>
+                <button class="btn btn-success" onclick="checkout()" id="paiement">Payer mon credit</button>
               </div>
             </div>
           </div>
@@ -361,14 +387,29 @@
     </div>
 
     <%- include('partial/script.ejs') %>
+    <%- include('partial/payscript.ejs') %>
     <script src="../jquery-3.4.1.min.js"></script>
+    <script>
+      console.log(parseInt(document.getElementById("totalBenefice").innerHTML))
+     
+  </script>
     <script>
        
       $(document).ready(function () {
         const socket = io("http://localhost:3000/summary");
         let _id = document.getElementById("sess").innerText
-        console.log(_id)
+        
+      
         socket.on("connect", () => {
+          
+          $("#paiement").click(function () {
+           
+       
+        socket.emit("paiementdata", price) // Obtenez le prix à partir de la page
+        checkout(); // Passez le prix en tant que paramètre lors de l'appel de la fonction checkout()
+    });
+
+
           $("#month, #year").change(function () {
             let month = $("#month").val();
             let year = $("#year").val();
@@ -385,9 +426,21 @@
           });
         });
         socket.on('saved',(data)=>{
-          console.log(data);
-          document.getElementById("totalPrix").innerText = data.totalPrix+" FCFA";
+        
+          document.getElementById("semaine1").innerText = data.semaineVentes.semaine1+" FCFA";
+          document.getElementById("semaine2").innerText = data.semaineVentes.semaine2+" FCFA";
+          document.getElementById("semaine3").innerText = data.semaineVentes.semaine3+" FCFA";
+          document.getElementById("semaine4").innerText = data.semaineVentes.semaine4+" FCFA";
+
+          document.getElementById("creditsemaine1").innerText = data.semaineBenefice.semaine1+" FCFA";
+          document.getElementById("creditsemaine2").innerText = data.semaineBenefice.semaine2+" FCFA";
+          document.getElementById("creditsemaine3").innerText = data.semaineBenefice.semaine3+" FCFA";
+          document.getElementById("creditsemaine4").innerText = data.semaineBenefice.semaine4+" FCFA";
+
           document.getElementById("totalBenefice").innerText = data.totalBenefice+" FCFA";
+          document.getElementById("totalPrix").innerText = data.totalPrix+" FCFA";
+
+          console.log(data.totalBenefice,)
         })
       });
     </script>

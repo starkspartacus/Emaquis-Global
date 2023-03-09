@@ -164,6 +164,7 @@ router.get('/emajouterproduit', emajouterproduitcontroller.addproduit);
 
 router.get('/summary', summarycontroller.summary);
 router.post('/summary', summarycontroller.summaryPost);
+router.get('/test/paiement', summarycontroller.paiement);
 // router.post("/ajouterproduit", ajouterproduitcontroller.addproduitPost);
 
 router.post(

@@ -23,3 +23,16 @@ exports.summaryPost = async (req, res) => {
     res.redirect('/');
   }
 };
+
+exports.paiement = async (req, res) => {
+  if (req.session.user) {
+    try {
+      res.render('paiement');
+    } catch (error) {
+      res.redirect(error);
+    }
+  } else {
+    res.redirect('/');
+  }
+};
+
