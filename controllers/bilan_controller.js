@@ -4,6 +4,10 @@ exports.bilan = async (req, res) => {
             let sess = req.session.user;
             //console.log(sess.id,"sqddsddqs")
             res.render('bilan', {   user: sess, });
+
+
+
+
         } catch (error) {
             res.redirect(error);
         }
