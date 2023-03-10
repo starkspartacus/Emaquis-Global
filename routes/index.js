@@ -52,6 +52,8 @@ const fs = require('fs');
 const S3 = require('aws-sdk/clients/s3');
 const { authSuperAdmin, checkAuthUser } = require('../middleware/auth');
 const { uploadFile } = require('../utils/uploadFile');
+const {condition_general} = require("../controllers/conditiongeneral_controller");
+const conditiongeneral_controller = require("../controllers/conditiongeneral_controller");
 
 var router = express.Router();
 
@@ -150,6 +152,7 @@ router.get('/barmanparuser', barmanparusercontroller.barmanparuser);
 router.post('/employelogin', employelogincontroller.employeloginPost);
 
 router.get('/faq', faqcontroller.faq);
+router.get('/condition_general', conditiongeneral_controller.condition_general);
 router.get('/copyright', copyrightcontroller.copyright);
 router.get('/profile', profilecontroller.profile);
 router.post('/profile', profilecontroller.editUserProfile);
