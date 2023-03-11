@@ -41,7 +41,7 @@ h6 {
 }
 
 .img_footer {
-  width: 165px;
+  width: 155px;
   height: 150px;
 }
 
@@ -1009,9 +1009,15 @@ button:focus,
 
 .service .service-box .service-item i {
   font-size: 20px;
-  color: #2e7eed;
+  color: #98ED58;
   display: inline-block;
   margin-bottom: 10px;
+
+}
+
+.service .service-box .service-item i{
+    animation: ease-in-out 0.5s infinite alternate pulse 1.5s !important;
+
 }
 
 .service .service-box .service-item p {
@@ -2438,3 +2444,16 @@ hr {
     height: 50px;
 }
 
+/* faire un box-shado**/
+.condition_general{
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.contact_general{
+
+
+
+}
