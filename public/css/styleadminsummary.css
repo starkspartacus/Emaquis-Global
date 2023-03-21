@@ -8768,7 +8768,7 @@ progress {
   --bs-table-active-color: #212529;
   --bs-table-active-bg: rgba(0, 0, 0, 0.1);
   --bs-table-hover-color: #212529;
-  --bs-table-hover-bg: #000000;
+  --bs-table-hover-bg: #f1f1f1;
   width: 100%;
   margin-bottom: 1rem;
   color: #ffffff;
@@ -11150,7 +11150,7 @@ textarea.is-invalid.tt-hint {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #191c24;
+  background-color: #ffffff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem; }

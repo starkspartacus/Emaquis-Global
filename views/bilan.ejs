@@ -11,6 +11,19 @@
   <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
   <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="..css/jquery-jvectormap.css">
+  <link rel="stylesheet" href="../css/flag-icon.min.css">
+  <link rel="stylesheet" href="..css/owl.carousel.min.css">
+  <link rel="stylesheet" href="..css/owl.theme.default.min.css">
+
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <!-- endinject -->
+  <!-- Layout styles -->
+
+  <link rel="stylesheet" href="../css/styleadminsummary.css">
+  <link href="../css/styles.css" rel="stylesheet">
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <link rel="stylesheet" href="vendors/chartist/chartist.min.css">
@@ -87,52 +100,58 @@
 
       return(
             <div  className="container">
-              <div className="row justify-content-between">
-                <h3 className="">Bonjour <b><%= locals.user?.nom %> <%= locals.user?.prenom ||
-                locals.user?.prenoms %></b></h3>
-                <div className="col-lg-4 text-right d-flex justify-content-end">
-                  <label htmlFor="chart_month"></label><select className="nice_Select2 max-width-220 mr-2" id="chart_month">
-                  <option value="1">choisir le mois</option>
-                  <% for( month of months) { %> <% if (month.code === new
-                Date().getMonth()+1) { %>
-                  <option value="<%= month.code %>" selected>
-                    <%= month.nom %>
-                  </option>
-                  <% } else { %>
-                  <option value="<%= month.code %>">
-                    <%= month.nom %>
-                  </option>
-                  <% } %> <% } %>
-                </select>
 
-                  <select className="nice_Select2 max-width-220" id="chart_year">
-                    <option value="1">choisir l'année</option>
-                    <% for( year of years) { %> <% if(year === new
-                  Date().getFullYear()) { %>
-                    <option value="<%= year %>" selected>
-                      <%= year %>
+              <div className="row justify-content-between">
+                <div className="col-lg-4">
+                  <h3 className="">Bonjour <b><%= locals.user?.nom %> <%= locals.user?.prenom ||
+                locals.user?.prenoms %></b></h3>
+                </div>
+
+                
+                <div className="col-lg-4 text-right d-flex justify-content-end">
+                  <label htmlFor="chart_month"></label>
+                    <select className="nice_Select2 max-width-220 mr-2" id="chart_month">
+                    <option value="1">choisir le mois</option>
+                    <% for( month of months) { %> <% if (month.code === new
+                  Date().getMonth()+1) { %>
+                    <option value="<%= month.code %>" selected>
+                      <%= month.nom %>
                     </option>
                     <% } else { %>
-
-                    <option value="<%= year %>"><%= year %></option>
+                    <option value="<%= month.code %>">
+                      <%= month.nom %>
+                    </option>
                     <% } %> <% } %>
-                  </select>
+                    </select>
+
+                    <select className="nice_Select2 max-width-220" id="chart_year">
+                      <option value="1">choisir l'année</option>
+                      <% for( year of years) { %> <% if(year === new
+                    Date().getFullYear()) { %>
+                      <option value="<%= year %>" selected>
+                        <%= year %>
+                      </option>
+                      <% } else { %>
+
+                      <option value="<%= year %>"><%= year %></option>
+                      <% } %> <% } %>
+                    </select>
                 </div>
 
-                <div >
-                  <label>
-                    <input type="date" className="form-control" name="date"/>
-                  </label>
-                  <label>
-                    <select className="form-control mr-5" aria-label="Default select example">
-                      <option selected>Ventes du jour</option>
-                      <option value="1">Semaine</option>
-                      <option value="2">Mois</option>
-                      <option value="3">Année</option>
-                    </select>
-                  </label>
-                </div>
-              </div>
+                  <div>
+                    <label>
+                      <input type="date" className="form-control" name="date"/>
+                    </label>
+                    <label>
+                      <select className="form-control mr-5" aria-label="Default select example">
+                        <option selected>Ventes du jour</option>
+                        <option value="1">Semaine</option>
+                        <option value="2">Mois</option>
+                        <option value="3">Année</option>
+                      </select>
+                    </label>
+                  </div>
+             </div>
 
               <table className="table mt-4 table-striped table-hover table-bordered">
                 <thead>
