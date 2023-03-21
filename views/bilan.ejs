@@ -136,29 +136,18 @@
                   <th scope="col">Total Bénéfice</th>
                 </tr>
                 </thead>
+                <% for( product of allProductsByDayGrouped) {%>
                 <tbody>
                 <tr>
-                  <th scope="row">Bière</th>
-                  <td>Bock (33L)</td>
-                  <td>300</td>
+                  <th scope="row">Categorie à dynamiser</th>
+                  <td><%= product.produit.nom_produit %></td>
+                  <td><%= product.quantite%></td>
                   <td>150.000FCFA</td>
                   <td>40.000FCFA</td>
                 </tr>
-                <tr>
-                  <th scope="row">Whisky</th>
-                  <td>Jack Daniel</td>
-                  <td>50</td>
-                  <td>400.000FCFA</td>
-                  <td>160.000FCFA</td>
-                </tr>
-                <tr>
-                  <th scope="row">Boisson gazeuse</th>
-                  <td>Orangina</td>
-                  <td>500</td>
-                  <td>100.000FCFA</td>
-                  <td>25.000FCFA</td>
-                </tr>
+
                 </tbody>
+                <% } %>
               </table>
 
               <div className="row mt-5">

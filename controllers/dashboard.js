@@ -116,6 +116,7 @@ exports.dashboard = async (req, res) => {
         allProductsByDay?.reduce((acc, item) => {
           const productId = item.produit._id;
           const taille = item.taille;
+          const categorieBilan = item.categorie;
           const productFind = acc.find(
             (item) => item.produit._id === productId && item.taille === taille
           );
