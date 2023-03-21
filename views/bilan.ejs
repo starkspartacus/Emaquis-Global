@@ -102,13 +102,11 @@
             <div  className="container">
 
               <div className="row justify-content-between">
-                <div className="col-lg-4">
+                <div className="col-lg-4 col-lg-2">
                   <h3 className="">Bonjour <b><%= locals.user?.nom %> <%= locals.user?.prenom ||
                 locals.user?.prenoms %></b></h3>
                 </div>
-
-                
-                <div className="col-lg-4 text-right d-flex justify-content-end">
+                <div className="col-lg-4 col-md-2 text-right d-flex justify-content-end">
                   <label htmlFor="chart_month"></label>
                     <select className="nice_Select2 max-width-220 mr-2" id="chart_month">
                     <option value="1">choisir le mois</option>
@@ -138,7 +136,7 @@
                     </select>
                 </div>
 
-                  <div>
+                  <div className="col-lg-4 col-md-2">
                     <label>
                       <input type="date" className="form-control" name="date"/>
                     </label>
