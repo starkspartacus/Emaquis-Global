@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="vendors/chartist/chartist.min.css">
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
+    <link rel="stylesheet" href="../css/style.css" />
 
   <!--  <link rel="stylesheet" href="../css/styleBilan.css" /> -->
 </head>
@@ -71,6 +72,13 @@
   <%- include('partial/script.ejs') %>
   <%- include('partial/scriptBilan.ejs') %>
   <script src="../jquery-3.4.1.min.js"></script>
+    <!-- faire un donut pour le voir la quantitée des produits les plus vendus-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+               <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
   <!-- JAVASCRIPTS -->
   <script type="text/babel">
 
@@ -110,8 +118,8 @@
                     <% } %> <% } %>
                   </select>
                 </div>
-                <div >
 
+                <div >
                   <label>
                     <input type="date" className="form-control" name="date"/>
                   </label>
@@ -156,8 +164,8 @@
                 <% } %>
               </table>
 
-              <div className="row mt-5">
-                <div className="col-lg-3 grid-margin stretch-card">
+              <div className="row mt-5 anime-carte-bilan">
+                <div className="col-lg-6 grid-margin stretch-card ">
                   <div className="card">
                     <div className="card-body">
                       <h4 className="card-title">Catégories vendues</h4>
@@ -166,7 +174,7 @@
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-3 grid-margin stretch-card">
+                <div className="col-lg-6 grid-margin stretch-card">
                   <div className="card">
                     <div className="card-body">
                       <h4 className="card-title">Qui vend le plus ?</h4>
@@ -175,15 +183,16 @@
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-3 grid-margin stretch-card">
+                <div className="col-lg-6 grid-margin stretch-card mt-4">
                   <div className="card">
                     <div className="card-body">
                       <h4 className="card-title">Objectif</h4>
+                      <p>Faire apparaitre une stat des objectifs atteint ou pas ?</p>
                       <div className="ct-chart ct-perfect-fourth" id="ct-chart-donut"></div>
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-3 grid-margin stretch-card">
+                <div className="col-lg-6 grid-margin stretch-card mt-4">
                   <div className="card">
                     <div className="card-body">
                       <h4 className="card-title">Meilleur produit</h4>
@@ -193,7 +202,25 @@
                     </div>
                   </div>
                 </div>
+                <div className="col-lg-6 grid-margin stretch-card mt-4">
+                  <div className="card">
+                    <div className="card-body">
+                      <h4 className="card-title">Ventes par jour</h4>
+                      <div className="ct-chart ct-perfect-fourth" id="ct-chart-line">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 grid-margin stretch-card mt-4">
+                  <div className="card">
+                    <div className="card-body">
+                      <h4 className="card-title">Ventes par mois</h4>
+                      <div className="ct-chart ct-perfect-fourth" id="ct-chart-line"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
           </div>
 
       );

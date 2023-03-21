@@ -14305,3 +14305,13 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 
 
 /*# sourceMappingURL=style.css.map */
+/*Bilan*/
+.anime-carte-bilan div{
+  position: relative;
+  transform: scale(1);
+  transition: all 0.5s ease;
+}
+.anime-carte-bilan div:hover{
+  transform: scale(1.03);
+  transition: all 0.5s ease;
+}
