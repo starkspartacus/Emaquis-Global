@@ -1,12 +1,14 @@
 const { MONTHS } = require('../constants');
-const { employeQueries } = require('../requests/EmployeQueries');
+const { PRODUCT_SIZE } = require('../constants');
 const { produitQueries } = require('../requests/produitQueries');
+const { employeQueries } = require('../requests/EmployeQueries');
 const { venteQueries } = require('../requests/venteQueries');
 const { formatAmount } = require('../utils/formatAmount');
 const { generateYears, formatDate } = require('../utils/generateYear');
 const moment = require('moment');
 const { getPercent } = require('../utils/getPercent');
 const { settingQueries } = require('../requests/settingQueries');
+const {categorieQueries} = require("../requests/categorieQueries");
 let totalHebdomadaire = 0;
 
 
@@ -20,7 +22,7 @@ exports.bilan = async (req, res) => {
         const userId = session.id;
         try {
 
-
+            const Categorie = await categorieQueries.getCategorie();
             const Employe = await employeQueries.getEmployeByEtablissement(userId);
             const Produit = await produitQueries.getProduitBySession(userId);
             const Vente = await venteQueries.getVentes({
@@ -152,6 +154,7 @@ exports.bilan = async (req, res) => {
 
             const objectivePercent =
                 (totalVente / (settings?.result.objective || 1)) * 100;
+            const categories = Categorie.result;
 
             res.render('bilan', {
                 totalemploye: employe.length,
@@ -163,11 +166,12 @@ exports.bilan = async (req, res) => {
                 months: MONTHS,
                 toDayPercent: toDayPercent.toFixed(2),
                 objective: settings?.result.objective || 0,
-                objectivePercent:
-                    objectivePercent > 100 ? 100 : objectivePercent.toFixed(2),
+                objectivePercent: objectivePercent > 100 ? 100 : objectivePercent.toFixed(2),
                 allProductsByDayGrouped,
                 productMostSold,
                 totalVenteWeek: formatAmount(totalVenteWeek || 0),
+                categories: categories,
+                product_sizes: PRODUCT_SIZE,
             });
 
 

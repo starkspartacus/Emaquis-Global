@@ -132,6 +132,9 @@
                   <th scope="col">Catégories</th>
                   <th scope="col">Produits</th>
                   <th scope="col">Quantités</th>
+                  <th scope="col">Taille</th>
+                  <th scope="col">Prix d'achat</th>
+                  <th scope="col">Prix de vente</th>
                   <th scope="col">Total CA</th>
                   <th scope="col">Total Bénéfice</th>
                 </tr>
@@ -142,7 +145,10 @@
                   <th scope="row">Categorie à dynamiser</th>
                   <td><%= product.produit.nom_produit %></td>
                   <td><%= product.quantite%></td>
-                  <td>150.000FCFA</td>
+                  <td><%= product.taille %></td>
+                  <td><%= product.prix_achat %> FCFA</td>
+                  <td> FCFA</td>
+                  <td><%= product.prix_vente %> FCFA</td>
                   <td>40.000FCFA</td>
                 </tr>
 
