@@ -7999,7 +7999,7 @@ canvas#highlights {
 
 /* line 40, G:/admin_project/8 admin/management_html/scss/_projects.scss */
 .dataTables_paginate a.current {
-  background: #884ffb !important;
+  background: #91e388 !important;
   box-shadow: 0px 5px 10px rgba(59, 118, 239, 0.3) !important;
   border: 0 !important;
   color: #fff !important;
@@ -8007,7 +8007,7 @@ canvas#highlights {
 
 /* line 46, G:/admin_project/8 admin/management_html/scss/_projects.scss */
 .dataTables_paginate a:hover {
-  background: #884ffb !important;
+  background: #91e388 !important;
   box-shadow: 0px 5px 10px rgba(59, 118, 239, 0.3);
   border: 0 !important;
   color: #fff !important;
@@ -8047,8 +8047,8 @@ canvas#highlights {
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
   color: #fff !important;
-  border: 1px solid #884ffb;
-  background-color: #884ffb !important;
+  border: 1px solid #91e388;
+  background-color: #91e388 !important;
   box-shadow: 0px 5px 10px rgba(136, 79, 251, 0.04) !important;
 }
 
@@ -13219,7 +13219,7 @@ a.pswp__share--download:hover {
   transition: 0.3s;
   width: 13px;
   top: 1.4px;
-  border: 3px solid #8950fc;
+  border: 3px solid #91e388;
 }
 
 /* line 334, G:/admin_project/8 admin/management_html/scss/_predefine.scss */
@@ -13256,7 +13256,7 @@ a.pswp__share--download:hover {
   right: 0;
   top: 0;
   transition: 0.3s;
-  border: 3px solid #8950fc;
+  border: 3px solid #91e388;
   background: transparent;
 }
 
@@ -13481,12 +13481,12 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 /* line 52, G:/admin_project/8 admin/management_html/scss/_product.scss */
 .ribbon1 span.rib1-primary::before,
 .ribbon1 span.rib1-primary {
-  background: #884ffb;
+  background: #91e388;
 }
 
 /* line 55, G:/admin_project/8 admin/management_html/scss/_product.scss */
 .ribbon1.rib1-primary::after {
-  border-top-color: #884ffb;
+  border-top-color: #91e388;
 }
 
 /* line 58, G:/admin_project/8 admin/management_html/scss/_product.scss */
@@ -13504,7 +13504,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 /* line 68, G:/admin_project/8 admin/management_html/scss/_product.scss */
 .ribbon1 span.rib1-primary::before,
 .ribbon1 span.rib1-primary {
-  background: #884ffb;
+  background: #91e388;
 }
 
 /* line 71, G:/admin_project/8 admin/management_html/scss/_product.scss */
@@ -13524,7 +13524,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 
 /* line 81, G:/admin_project/8 admin/management_html/scss/_product.scss */
 .ribbon1 span.rib1-primary::after {
-  background: #884ffb;
+  background: #91e388;
 }
 
 /* line 84, G:/admin_project/8 admin/management_html/scss/_product.scss */
@@ -13600,7 +13600,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
   font-family: 'Font Awesome 5 Free' !important;
   font-weight: 600;
   font-size: 12px;
-  color: #03d87f !important;
+  color: #91e388 !important;
   display: inline-block;
   margin-right: 8px;
 }
@@ -13625,7 +13625,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 .bar_line {
   height: 49px;
   width: 4px;
-  background: #64e355;
+  background: #91e388;
   border-radius: 5px;
 }
 
@@ -13803,7 +13803,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 .sidebar.mini_sidebar #sidebar_menu > li ul li a {
   white-space: nowrap;
   padding-left: 18px;
-  color: #144339;
+  color: #91e388;
   width: 194px;
   padding-left: 20px !important;
 }
@@ -13959,7 +13959,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 
 /* line 189, G:/admin_project/8 admin/management_html/scss/_mini_menu.scss */
 .sidebar.mini_sidebar ul li ul {
-  background: #144339;
+  background: #91e388;
   opacity: 0.9;
   position: absolute;
   left: 100%;
@@ -14284,7 +14284,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 
 /* line 67, G:/admin_project/8 admin/management_html/scss/_crm.scss */
 .crm_bg_2 {
-  background: #c388f6 !important;
+  background: #91e388 !important;
 }
 
 /* line 70, G:/admin_project/8 admin/management_html/scss/_crm.scss */
@@ -14294,7 +14294,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 
 /* line 72, G:/admin_project/8 admin/management_html/scss/_crm.scss */
 .crm_bg_3 i {
-  color: #58377e !important;
+  color: #91e388 !important;
 }
 
 /* line 76, G:/admin_project/8 admin/management_html/scss/_crm.scss */
@@ -14305,3 +14305,13 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 
 
 /*# sourceMappingURL=style.css.map */
+/*Bilan*/
+.anime-carte-bilan div{
+  position: relative;
+  transform: scale(1);
+  transition: all 0.5s ease;
+}
+.anime-carte-bilan div:hover{
+  transform: scale(1.03);
+  transition: all 0.5s ease;
+}

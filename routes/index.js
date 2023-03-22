@@ -25,13 +25,12 @@ const allemployecontroller = require('../controllers/allemploye');
 const barmanparusercontroller = require('../controllers/barmanparuser');
 const employelogincontroller = require('../controllers/employelogin');
 const retourcontroller = require('../controllers/retourproduit');
-
 const contactcontroller = require('../controllers/contact');
-
 const faqcontroller = require('../controllers/faqcontroller');
 const copyrightcontroller = require('../controllers/copyrightcontroller');
 const profilecontroller = require('../controllers/profilecontroller');
 const summarycontroller = require('../controllers/summary');
+const summaryadmincontroller= require('../controllers/summary_admin');
 const bilan_controller = require('../controllers/bilan_controller');
 const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
@@ -168,6 +167,8 @@ router.get('/emajouterproduit', emajouterproduitcontroller.addproduit);
 router.get('/summary', summarycontroller.summary);
 router.post('/summary', summarycontroller.summaryPost);
 router.get('/test/paiement', summarycontroller.paiement);
+router.get('/summaryadmin', summaryadmincontroller.summaryadmin);
+router.post('/summaryadmin', summaryadmincontroller.summaryadmin);
 // router.post("/ajouterproduit", ajouterproduitcontroller.addproduitPost);
 
 router.post(
