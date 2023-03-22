@@ -32,6 +32,7 @@ const profilecontroller = require('../controllers/profilecontroller');
 const summarycontroller = require('../controllers/summary');
 const summaryadmincontroller= require('../controllers/summary_admin');
 const bilan_controller = require('../controllers/bilan_controller');
+const config_profil = require('../controllers/config_profil');
 const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
 
@@ -78,6 +79,8 @@ router.post('/data_table', data_tablecontroller.data_tablePost);
 
 router.get('/inscription', inscriptioncontroller.inscription);
 router.post('/inscription', inscriptioncontroller.inscriptionPost);
+router.get('/config_profil', config_profil.config_profil);
+/*router.post('/config_profil', config_profil.config_profilPost); */
 
 router.get('/connexion', connexioncontroller.connexion);
 router.post('/connexion', connexioncontroller.connexionPost);
