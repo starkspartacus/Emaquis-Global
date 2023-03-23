@@ -1,5 +1,5 @@
-/* -------------------------------- 
-Main 
+/* --------------------------------
+Main
 -------------------------------- */
 .cd-nav-trigger {
   position: absolute;
@@ -367,7 +367,7 @@ ul.cd-primary-nav {
 }
 
 .cd-overlay-nav span {
-  background-color: #0073e5;
+  background-color: #98ED58;
 }
 
 .cd-overlay-content {
@@ -376,5 +376,5 @@ ul.cd-primary-nav {
 }
 
 .cd-overlay-content span {
-  background-color: #0073e5;
+  background-color: #2FD8F2;
 }
