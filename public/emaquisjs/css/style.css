@@ -1523,3 +1523,22 @@ input[type=file]::-webkit-file-upload-button:focus, input[type=file].invalid::-w
     display: none !important;
   }
 }
+
+.img-mode-retour {
+  position: relative;
+  bottom: 25px;
+  width: 130px;
+  height: 130px;
+  z-index: 1;
+  display: none;
+}
+
+.img-mode-retour50{
+  position: relative;
+  bottom: 25px;
+  width: 110px;
+  height: 110px;
+  z-index: 1;
+  display: none;
+
+}
