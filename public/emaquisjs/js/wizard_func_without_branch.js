@@ -7,7 +7,7 @@
 		// PHPMailer text/html SMTP > phpmailer/without_branch_phpmailer_smtp.php
 		// PHPMailer with html template > phpmailer/without_branch_phpmailer_template.php
 		// PHPMailer with html template SMTP> phpmailer/without_branch_phpmailer_template_smtp.php
-		$('form#wrapped').attr('action', 'form_send_without_branch.php');
+		//$('form#wrapped').attr('action', 'form_send_without_branch.php');
 		$("#wizard_container").wizard({
 			stepsWrapper: "#wrapped",
 			submit: ".submit",

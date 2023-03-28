@@ -21,9 +21,10 @@ exports.emconnexionPost = async (req, res) => {
     const data = await employeQueries.getEmployeByEmail(body.email);
     console.log(await employeQueries.getAllEmploye(body.email));
     const errorData = {
-      error: 'Email ou mot de passe incorrect',
+      error: 'Email ou mot de passe incorrect ',
       email: body.email,
     };
+
 
     if (data.result?.role === 'Barman') {
       const isPasswordCorrect = bcrypt.compareSync(

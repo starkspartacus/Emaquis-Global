@@ -80,7 +80,7 @@ router.post('/data_table', data_tablecontroller.data_tablePost);
 router.get('/inscription', inscriptioncontroller.inscription);
 router.post('/inscription', inscriptioncontroller.inscriptionPost);
 router.get('/config_profil', config_profil.config_profil);
-/*router.post('/config_profil', config_profil.config_profilPost); */
+router.post('/config_profil', config_profil.config_profilPost);
 
 router.get('/connexion', connexioncontroller.connexion);
 router.post('/connexion', connexioncontroller.connexionPost);

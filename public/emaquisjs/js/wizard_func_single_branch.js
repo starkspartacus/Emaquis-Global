@@ -7,7 +7,7 @@
 		// PHPMailer text/html SMTP > phpmailer/single_branch_phpmailer_smtp.php
 		// PHPMailer with html template > phpmailer/single_branch_phpmailer_template.php
 		// PHPMailer with html template SMTP> phpmailer/single_branch_phpmailer_template_smtp.php
-		$('form#wrapped').attr('action', 'form_send_single_branch.php');
+		//$('form#wrapped').attr('action', 'form_send_single_branch.php');
 		$("#wizard_container").wizard({
 			stepsWrapper: "#wrapped",
 			submit: ".submit",
@@ -42,4 +42,3 @@
 			}
 		}
 	});
-	

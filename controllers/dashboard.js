@@ -172,6 +172,7 @@ exports.dashboard = async (req, res) => {
   } else {
     res.redirect('/');
   }
+
 };
 
 exports.dashboardPost = async (req, res) => {

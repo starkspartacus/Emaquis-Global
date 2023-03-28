@@ -7,7 +7,7 @@
 		// PHPMailer text/html SMTP > phpmailer/multiple_branch_phpmailer_fileupload_smtp.php
 		// PHPMailer with html template > phpmailer/multiple_branch_phpmailer_fileupload_template.php
 		// PHPMailer with html template SMTP> phpmailer/multiple_branch_phpmailer_fileupload_template_smtp.php
-		$('form#wrapped').attr('action', 'form_send_multiple_branch_fileupload.php');
+		//$('form#wrapped').attr('action', 'form_send_multiple_branch_fileupload.php');
 		$("#wizard_container").wizard({
 			stepsWrapper: "#wrapped",
 			submit: ".submit",
@@ -61,5 +61,4 @@
 						}
 					}
 				}
-			}); 
-	
+			});

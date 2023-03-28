@@ -58,12 +58,12 @@
                   <h3>Connectez-vous à votre espace Barman(aid)</h3>
                 </div>
                 <%if (locals.success){%>
-                <div class="alert alert-success" role="alert" style="text-align: center" id="alert-success">
+                <div class="alert alert-success animSuccessConnect" role="alert" style="text-align: center" id="alert-success">
                   Connexion réussie !
                 </div>
                 <%}%> <%if (locals.error) { %>
-                <div class="alert alert-danger" role="alert" style="text-align: center" id="alert-danger">
-                  <%= locals.error %>
+                <div class="alert alert-danger animFailConnect" role="alert" style="text-align: center" id="alert-danger">
+                  <%= locals.error %> 😢
                 </div>
                 <% } %>
                 <form action="/emconnexion" method="post" class="p-4">

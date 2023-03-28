@@ -2336,6 +2336,40 @@ hr {
   top: 70%;
 }
 
+.animFailConnect {
+  font-weight: bold;
+  animation: animFailConnect 1s;
+}
+
+@keyframes animFailConnect {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animSuccessConnect {
+  font-weight: bold;
+  animation: animSuccessConnect 1s;
+}
+
+@keyframes animSuccessConnect {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 /*fin emconnexion **/
 
 /* logo emaqui **/
