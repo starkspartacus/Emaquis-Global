@@ -3,10 +3,10 @@ const EmDashboardBody = () => {
     <React.Fragment>
       <div className='row'>
         <EmDashboardVenteTables />
-        <EmDashboardEmployes />
       </div>
       <div className='row'>
         <EmDashboardStocks />
+        <EmDashboardEmployes />
       </div>
     </React.Fragment>
   );

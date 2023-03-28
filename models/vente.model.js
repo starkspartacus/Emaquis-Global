@@ -26,6 +26,8 @@ const VenteSchema = new Schema(
         },
       ],
     },
+    table_number: { type: Number, default: null },
+    amount_collected: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

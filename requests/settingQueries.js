@@ -6,6 +6,7 @@ exports.settingQueries = class {
       const setting = new settingsModel({
         product_return_type: data.product_return_type,
         travail_pour: data.travail_pour,
+        numberOfTables: data.numberOfTables,
       });
 
       await setting

@@ -4,6 +4,7 @@ const { retourQueries } = require('../requests/retourQueries');
 const Produits = require('../models/produit.model');
 const Ventes = require('../models/vente.model');
 const Retours = require('../models/retourproduit.model');
+const { settingQueries } = require('../requests/settingQueries');
 exports.vente = async (req, res) => {
   try {
     const productRes = await produitQueries.getProduitBySession(
@@ -79,6 +80,20 @@ exports.ventePost = async (req, res) => {
         }
       }
 
+      const setting = await settingQueries.getSettingByUserId(
+        sess.travail_pour
+      );
+
+      if (
+        vente.table_number &&
+        setting.result.numberOfTables < vente.table_number
+      ) {
+        res.status(400).json({
+          message: 'Numéro de table invalide',
+        });
+        return;
+      }
+
       if (product_unavailables.length > 0) {
         res.status(400).json({
           message: 'Produits non disponible',
@@ -95,8 +110,10 @@ exports.ventePost = async (req, res) => {
         status_commande: 'En attente',
         prix: sum,
         somme_encaisse: vente.somme_encaisse,
-        monnaie: vente.somme_encaisse - sum,
+        monnaie: vente.amount_collected ? vente.somme_encaisse - sum : 0,
         formules: formulesProduct,
+        table_number: vente.table_number,
+        amount_collected: vente.amount_collected,
       };
       // il fait pas l setvente or il fait update  de produit
       Vente = await venteQueries.setVente(newVente);
@@ -223,6 +240,20 @@ exports.editventePost = async (req, res) => {
         }
       }
 
+      const setting = await settingQueries.getSettingByUserId(
+        sess.travail_pour
+      );
+
+      if (
+        body.table_number &&
+        setting.result.numberOfTables < body.table_number
+      ) {
+        res.status(400).json({
+          message: 'Numéro de table invalide',
+        });
+        return;
+      }
+
       if (product_unavailables.length > 0) {
         res.status(400).json({
           message: 'Produits non disponible',
@@ -276,8 +307,11 @@ exports.editventePost = async (req, res) => {
         travail_pour: sess.travail_pour,
         prix: sum,
         somme_encaisse: body.somme_encaisse,
-        monnaie: body.somme_encaisse - sum,
+        monnaie: body.amount_collected ? body.somme_encaisse - sum : 0,
         formules: formulesProduct,
+        table_number: body.table_number ?? oldVente.result.table_number,
+        amount_collected:
+          body.amount_collected ?? oldVente.result.amount_collected,
       };
 
       await venteQueries.updateVente(venteId, newVente);

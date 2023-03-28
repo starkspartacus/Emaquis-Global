@@ -7,6 +7,7 @@ const AppRoot = () => {
   const [carts, setCarts] = React.useState([]);
   const [categorySelectedId, setCategorySelectedId] = React.useState(null);
   const [venteId, setVenteId] = React.useState(null);
+  const [venteSelected, setVenteSelected] = React.useState(null);
   const [productUnvailable, setProductUnvailable] = React.useState([]);
 
   const handleSelectCategory = (id) => {
@@ -231,6 +232,7 @@ const AppRoot = () => {
     });
 
     setVenteId(vente._id);
+    setVenteSelected(vente);
     setCarts(carts);
   };
 
@@ -244,7 +246,13 @@ const AppRoot = () => {
 
   return (
     <AppContext.Provider
-      value={{ products, totalVentes, totalEmployes, ventes, confirmVente }}
+      value={{
+        products,
+        totalVentes,
+        totalEmployes,
+        ventes,
+        confirmVente,
+      }}
     >
       <ProductsContext.Provider
         value={{
@@ -262,6 +270,7 @@ const AppRoot = () => {
           productUnvailable,
           initProductsUnvailable,
           resetProductsUnvailable,
+          venteSelected,
         }}
       >
         <React.Fragment>

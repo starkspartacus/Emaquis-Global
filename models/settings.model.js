@@ -12,6 +12,9 @@ const SettingModel = new mongoose.Schema({
   travail_pour: {
     type: String,
   },
+  numberOfTables: {
+    type: Number,
+  },
 });
 
 module.exports = mongoose.model('Setting', SettingModel);

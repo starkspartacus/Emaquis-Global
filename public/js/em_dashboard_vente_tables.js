@@ -7,6 +7,7 @@ const TablesHead = () => {
         <th scope='col'>Prix</th>
         <th scope='col'>Encaisse</th>
         <th scope='col'>Monnaie</th>
+        <th scope='col'>Table</th>
         <th scope='col'>Date</th>
         <th scope='col'>Employé</th>
         <th scope='col'>Action</th>
@@ -20,11 +21,9 @@ const TablesItem = ({
   setShowSuccess,
   setShowDanger,
   setVenteIdToDelete,
+  setVenteToConfirm,
+  venteToConfirm,
 }) => {
-  console.log(
-    '👉 👉 👉  ~ file: em_dashboard_vente_tables.js:24 ~ vente',
-    vente
-  );
   const [loading, setLoading] = React.useState({
     ['Validée']: false,
     ['Annulée']: false,
@@ -35,13 +34,17 @@ const TablesItem = ({
 
   const handleSubmit = (venteId, type) => {
     if (type === 'edit') {
-      console.log('vente', vente);
       initCarts(vente);
       return;
     } else if (type === 'Annulée') {
       $('#deleteVenteModal').modal('show');
 
       setVenteIdToDelete(venteId);
+      return;
+    } else if (!vente.amount_collected) {
+      $('#collectedAmount').modal('show');
+
+      setVenteToConfirm(vente);
       return;
     }
 
@@ -108,12 +111,20 @@ const TablesItem = ({
   });
 
   return (
-    <tr className={`vente_table_item${vente._id === venteId ? ' active' : ''}`}>
+    <tr
+      className={`vente_table_item${
+        vente._id === venteId ||
+        (venteToConfirm && vente._id === venteToConfirm._id)
+          ? ' active'
+          : ''
+      }`}
+    >
       <td>{produits}</td>
       <td>{vente.quantite.join(',')}</td>
       <td>{vente.prix}</td>
       <td>{vente.somme_encaisse}</td>
       <td>{vente.monnaie}</td>
+      <td>{vente.table_number}</td>
       <td>
         {new Date(vente.createdAt).toLocaleDateString('fr-FR', {
           year: 'numeric',
@@ -125,7 +136,8 @@ const TablesItem = ({
         })}
       </td>
       <td>{vente.employe.prenoms || vente.employe.prenom}</td>
-      <td>
+
+      <td className='btn-actions'>
         <button
           disabled={loading['Validée'] || loading['Annulée']}
           onClick={() => handleSubmit(vente._id, 'Validée')}
@@ -142,12 +154,14 @@ const TablesItem = ({
           <img src='/svgs/modifier.svg' alt='edit' />
         </button>
 
-        <button
-          disabled={loading['Validée'] || loading['Annulée']}
-          onClick={() => handleSubmit(vente._id, 'Annulée')}
-        >
-          <img src='/svgs/trash-b.svg' alt='cancel' />
-        </button>
+        {vente.amount_collected && (
+          <button
+            disabled={loading['Validée'] || loading['Annulée']}
+            onClick={() => handleSubmit(vente._id, 'Annulée')}
+          >
+            <img src='/svgs/trash-b.svg' alt='cancel' />
+          </button>
+        )}
       </td>
     </tr>
   );
@@ -168,7 +182,7 @@ const ModalDelete = ({
     $('#deleteVenteModal').modal('hide');
   };
 
-  const handleDelete = () => {
+  const handleUpdateVente = () => {
     setLoading(true);
     fetch(`/vente/status/${venteIdToDelete}`, {
       method: 'POST',
@@ -255,7 +269,152 @@ const ModalDelete = ({
   );
 };
 
-const TablesBody = ({ setShowSuccess, setShowDanger, setVenteIdToDelete }) => {
+const ModalCollectedAmount = ({ vente, onClose }) => {
+  const [loading, setLoading] = React.useState(false);
+
+  const { confirmVente } = React.useContext(AppContext);
+
+  const [sommeEncaisse, setSommeEncaisse] = React.useState(null);
+
+  const handleClose = () => {
+    onClose();
+    $('#collectedAmount').modal('hide');
+    setSommeEncaisse(null);
+  };
+
+  const handleUpdateVente = () => {
+    if (sommeEncaisse < vente.prix) {
+      alert('La somme encaissée doit être supérieure au prix de la vente');
+      return;
+    }
+
+    const data = {
+      produit: vente.produit.map((prod) => prod._id),
+      quantite: vente.quantite,
+      somme_encaisse: Number(sommeEncaisse),
+      amount_collected: true,
+      table_number: vente.table_number,
+    };
+
+    setLoading(true);
+    fetch(`/editvente/${vente._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.etat) {
+          fetch(`/vente/status/${vente._id}`, {
+            method: 'POST',
+            body: JSON.stringify({ type: 'Validée' }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }).then((res) => {
+            setLoading(false);
+            confirmVente(vente._id, 'Validée');
+            handleClose();
+          });
+        } else {
+          alert('Une erreur est survenue');
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('Une erreur est survenue');
+        setLoading(false);
+      });
+  };
+
+  return (
+    <div
+      className='modal fade'
+      id='collectedAmount'
+      tabindex='-1'
+      role='dialog'
+      aria-labelledby='myModalTitle'
+      data-backdrop='false'
+    >
+      <div
+        className='modal-dialog modal-dialog-centered'
+        style={{
+          maxWidth: '600px',
+        }}
+        role='document'
+      >
+        {!!vente && (
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <h3 className='modal-title' id='exampleModalLongTitle'>
+                Confirmation de la vente table N°{vente.table_number}
+              </h3>
+              <button
+                type='button'
+                className='close close-modal'
+                data-dismiss='modal'
+                aria-label='Close'
+                id='close-modal'
+                onClick={handleClose}
+              >
+                <span aria-hidden='true'>&times;</span>
+              </button>
+            </div>
+            <div className='modal-body'>
+              <h4>
+                Prix: <b>{vente.prix} Fcfa</b>
+              </h4>
+              <input
+                type='number'
+                placeholder='Somme encaissé'
+                className='form-control mb-1'
+                value={sommeEncaisse}
+                onChange={(e) => setSommeEncaisse(e.target.value)}
+              />
+              <p>
+                Monnaie à rendre:{' '}
+                <b>
+                  {vente.prix < sommeEncaisse ? sommeEncaisse - vente.prix : 0}{' '}
+                  Fcfa
+                </b>
+              </p>
+            </div>
+
+            <div className='modal-footer'>
+              <button
+                type='button'
+                className='btn btn-success close-modal'
+                onClick={handleUpdateVente}
+                disabled={loading}
+              >
+                {loading ? 'En cours..' : 'Valider'}
+              </button>
+              <button
+                type='button'
+                className='btn btn-danger close-modal'
+                data-dismiss='modal'
+                onClick={handleClose}
+              >
+                Fermer
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const TablesBody = ({
+  setShowSuccess,
+  setShowDanger,
+  setVenteIdToDelete,
+  setVenteToConfirm,
+  venteToConfirm,
+}) => {
   const { ventes } = React.useContext(AppContext);
 
   return (
@@ -268,6 +427,8 @@ const TablesBody = ({ setShowSuccess, setShowDanger, setVenteIdToDelete }) => {
             setShowDanger={setShowDanger}
             setShowSuccess={setShowSuccess}
             setVenteIdToDelete={setVenteIdToDelete}
+            setVenteToConfirm={setVenteToConfirm}
+            venteToConfirm={venteToConfirm}
           />
         );
       })}
@@ -279,11 +440,12 @@ const EmDashboardVenteTables = () => {
   const [showSuccess, setShowSuccess] = React.useState(false);
   const [showDanger, setShowDanger] = React.useState(false);
   const [venteIdToDelete, setVenteIdToDelete] = React.useState(null);
+  const [venteToConfirm, setVenteToConfirm] = React.useState(null);
   const { venteId } = React.useContext(ProductsContext);
 
   return (
     <React.Fragment>
-      <div className={`col-xl-9 z-2 mt-${venteId ? '5' : '2'}`}>
+      <div className={`col-xl-12 z-2 mt-${venteId ? '5' : '2'}`}>
         <div className='white_card mb_30 card_height_100'>
           <div className='white_card_header'>
             <div className='row align-items-center justify-content-between flex-wrap'>
@@ -335,6 +497,8 @@ const EmDashboardVenteTables = () => {
                 setShowDanger={setShowDanger}
                 setShowSuccess={setShowSuccess}
                 setVenteIdToDelete={setVenteIdToDelete}
+                setVenteToConfirm={setVenteToConfirm}
+                venteToConfirm={venteToConfirm}
               />
             </table>
           </div>
@@ -345,6 +509,10 @@ const EmDashboardVenteTables = () => {
         venteIdToDelete={venteIdToDelete}
         setShowDanger={setShowDanger}
         setShowSuccess={setShowSuccess}
+      />
+      <ModalCollectedAmount
+        vente={venteToConfirm}
+        onClose={() => setVenteToConfirm(null)}
       />
     </React.Fragment>
   );

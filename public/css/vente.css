@@ -176,7 +176,7 @@
 /* Panier */
 .vente .carts-list {
   height: 100%;
-  max-height: 345px;
+  max-height: 330px;
   overflow-y: auto;
   border-radius: 5px 5px;
 }
@@ -231,7 +231,7 @@
   color: #fff !important;
 }
 
-.vente_table_item button {
+.vente_table_item .btn-actions button {
   border: none;
   background-color: transparent;
 }
@@ -247,13 +247,13 @@
   color: #fff;
 }
 
-.btn-validate{
-  background-color: #98ED58;
-  border: 1px solid #98ED58;
+.btn-validate {
+  background-color: #98ed58;
+  border: 1px solid #98ed58;
   width: 60%;
   padding: 20px;
   border-radius: 5px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 14px;
   font-weight: bold;
   padding: 10px 30px;
@@ -264,9 +264,9 @@
 }
 /* animation button **/
 
-.btn-validate:hover{
-  background-color: #FFFFFF;
-  border: 1px solid #98ED58;
-  color: #98ED58;
-  letter-spacing: .25em;
+.btn-validate:hover {
+  background-color: #ffffff;
+  border: 1px solid #98ed58;
+  color: #98ed58;
+  letter-spacing: 0.25em;
 }
