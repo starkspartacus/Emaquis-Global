@@ -13,7 +13,10 @@ exports.categorieProductPost = async (req, res) => {
 
       if (Produit.result !== null) {
         for (let el of Produit.result) {
-          if (el.produit.categorie._id == CategoryId && el.session == Session) {
+          if (
+            el?.produit?.categorie?._id == CategoryId &&
+            el.session == Session
+          ) {
             const { historiques, ...data } = el._doc;
             resultat.push(data);
           }

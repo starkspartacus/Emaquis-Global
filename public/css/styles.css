@@ -191,11 +191,7 @@ a:hover {
   background: url(../images/background/bg1.jpg) fixed no-repeat;
   background-size: cover;
   background-position: bottom;
-
 }
-
-
-
 
 .section-title {
   text-align: center;
@@ -720,7 +716,7 @@ button:focus,
   height: 40px;
   line-height: 40px;
   text-align: center;
-  background: #FF9C2C;
+  background: #ff9c2c;
   color: #fff;
   transition: 0.3s;
   z-index: 999556;
@@ -729,7 +725,7 @@ button:focus,
 }
 
 .scroll-top-to:hover {
-  background: #98ED58;
+  background: #98ed58;
 }
 
 @media (max-width: 768px) {
@@ -1009,15 +1005,13 @@ button:focus,
 
 .service .service-box .service-item i {
   font-size: 20px;
-  color: #98ED58;
+  color: #98ed58;
   display: inline-block;
   margin-bottom: 10px;
-
 }
 
-.service .service-box .service-item i{
-    animation: ease-in-out 0.5s infinite alternate pulse 1.5s !important;
-
+.service .service-box .service-item i {
+  animation: ease-in-out 0.5s infinite alternate pulse 1.5s !important;
 }
 
 .service .service-box .service-item p {
@@ -1113,8 +1107,6 @@ button:focus,
 .video-promo {
   padding: 150px 0;
 }
-
-
 
 .video-promo .content-block {
   width: 60%;
@@ -2268,15 +2260,13 @@ hr {
   border-radius: 10px;
   padding: 20px;
   margin-top: 20px;
-
 }
 
 .bg-singup form {
   margin-top: 20px;
-
 }
 
-.img-incription{
+.img-incription {
   position: center;
   top: 50%;
   width: 30%;
@@ -2293,7 +2283,6 @@ hr {
   position: relative;
   min-height: 100vh;
   width: auto;
-
 }
 
 /* Fin inscription page*/
@@ -2327,7 +2316,7 @@ hr {
 
 /* bodi_cover emconnexion**/
 
-.bodi-cover{
+.bodi-cover {
   min-height: 100vh;
   background-image: url('../img/bg-connexion1.jpg');
   background-position: center;
@@ -2351,7 +2340,7 @@ hr {
 
 /* logo emaqui **/
 
-.logo_bar{
+.logo_bar {
   height: 40px;
   width: 100px;
 }
@@ -2360,13 +2349,13 @@ hr {
 
 /* bouton **/
 
-#btn-validate{
-  background-color: #98ED58;
-  border: 1px solid #98ED58;
+#btn-validate {
+  background-color: #98ed58;
+  border: 1px solid #98ed58;
   width: 60%;
   padding: 20px;
   border-radius: 5px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 14px;
   font-weight: bold;
   padding: 10px 30px;
@@ -2377,50 +2366,47 @@ hr {
 }
 /* animation button **/
 
-#btn-validate:hover{
-    background-color: #FFFFFF;
-    border: 1px solid #98ED58;
-    color: #98ED58;
-    letter-spacing: .25em;
+#btn-validate:hover {
+  background-color: #ffffff;
+  border: 1px solid #98ed58;
+  color: #98ed58;
+  letter-spacing: 0.25em;
 }
 
 /* fin button **/
-
 
 /* fin btn inscription **/
 
 /* incon **/
 
-.app-btn{
-  background-color: #FF9C2C;
+.app-btn {
+  background-color: #ff9c2c;
   color: #f1f1f1;
   margin-left: 5%;
 }
 
-
 /* fin icon **/
 
-
-
-
-.btn-valider{
-  background-color: #98ED58;
+.btn-valider {
+  background-color: #98ed58;
   color: #f1f1f1;
   font-weight: bold;
-
 }
 
-.copyright{
+button.btn-valider {
+  background-color: #98ed58 !important;
+}
+
+.copyright {
   background-color: #d92727;
   color: #fff;
   padding: 20px;
   text-align: center;
-    transition: all 0.3s ease 0s;
-
+  transition: all 0.3s ease 0s;
 }
 /* animation copyright **/
-.copyright:hover{
-  background-color: #98ED58;
+.copyright:hover {
+  background-color: #98ed58;
   color: #000;
   padding: 20px;
   text-align: center;
@@ -2429,31 +2415,28 @@ hr {
 
 /* fin copyright **/
 /* rendre responsive**/
-.debut{
-    display: flex;
-    justify-content: space-between;
+.debut {
+  display: flex;
+  justify-content: space-between;
 }
 
-.google-play{
-    width: 250px;
-    height: 70px;
+.google-play {
+  width: 250px;
+  height: 70px;
 }
 
-.block-2 .google-play{
-    width: 250px;
-    height: 50px;
+.block-2 .google-play {
+  width: 250px;
+  height: 50px;
 }
 
 /* faire un box-shado**/
-.condition_general{
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
+.condition_general {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
-.contact_general{
-
-
-
+.contact_general {
 }

@@ -19,6 +19,7 @@ exports.profile = async (req, res) => {
         ...user._doc,
         product_return_type: userSetting.result.product_return_type,
         objective: userSetting.result.objective,
+        numberOfTables: userSetting.result.numberOfTables,
       },
       pays: PAYS,
       retour_produits_types: TYPE_RETOUR_PRDUITS,
@@ -64,6 +65,7 @@ exports.editUserProfile = async (req, res) => {
       await settingQueries.updateSetting(user.id, {
         product_return_type: req.body.product_return_type,
         objective: req.body.objective || 0,
+        numberOfTables: req.body.numberOfTables || 0,
       });
     }
 

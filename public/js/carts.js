@@ -79,10 +79,12 @@ const CartItem = ({ product }) => {
 };
 
 const CartFooter = () => {
-  const { carts, clearCarts, venteId, initProductsUnvailable } =
+  const { carts, clearCarts, venteId, initProductsUnvailable, venteSelected } =
     React.useContext(ProductsContext);
-  const [sommeEncaisse, setSommeEncaisse] = React.useState(0);
+  const [sommeEncaisse, setSommeEncaisse] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+  const [collectedLater, setCollectedLater] = React.useState(false);
+  const [tableNumber, setTableNumber] = React.useState(null);
 
   const total = carts.reduce((acc, produit) => {
     let quantity;
@@ -103,6 +105,14 @@ const CartFooter = () => {
     );
   }, 0);
 
+  const handleChangeCollectedLater = (e) => {
+    if (e.target.checked) {
+      setTableNumber(null);
+    }
+
+    setCollectedLater(e.target.checked);
+  };
+
   const handleSubmit = () => {
     if (loading) return;
 
@@ -110,12 +120,18 @@ const CartFooter = () => {
       produit: carts.map((prod) => prod._id),
       quantite: carts.map((prod) => prod.quantity),
       somme_encaisse: Number(sommeEncaisse),
+      amount_collected: collectedLater ? false : true,
+      table_number: tableNumber,
     };
 
-    if (!vente.somme_encaisse)
+    if (collectedLater && !tableNumber) {
+      return alert('Veuillez saisir le numéro de table');
+    }
+
+    if (!vente.somme_encaisse && !collectedLater)
       return alert('Veuillez saisir la somme encaissée');
 
-    if (vente.somme_encaisse < total)
+    if (vente.somme_encaisse < total && !collectedLater)
       return alert('La somme encaissée est insuffisante');
 
     setLoading(true);
@@ -133,9 +149,14 @@ const CartFooter = () => {
           setLoading(false);
           initProductsUnvailable(data.product_unavailables);
           $('#productUnvailableModal').modal('show');
-        } else {
+        } else if (data.etat) {
           clearCarts();
           setSommeEncaisse(0);
+          setCollectedLater(false);
+          setTableNumber(null);
+          setLoading(false);
+        } else {
+          alert('Une erreur est survenue: ' + data.message);
           setLoading(false);
         }
       })
@@ -146,19 +167,53 @@ const CartFooter = () => {
       });
   };
 
+  React.useEffect(() => {
+    if (venteSelected) {
+      setCollectedLater(!venteSelected.amount_collected);
+      setSommeEncaisse(venteSelected.somme_encaisse || 0);
+      setTableNumber(venteSelected.table_number || null);
+    }
+  }, [venteSelected]);
+
   return (
     <div className='carts-footer'>
+      <div class='form-check'>
+        <input
+          class='form-check-input'
+          checked={collectedLater}
+          onChange={handleChangeCollectedLater}
+          type='checkbox'
+          value=''
+          id='flexCheckDefault'
+        />
+        <p class='form-check-label' for='flexSwitchCheckDefault'>
+          Encaisser plus tard
+        </p>
+      </div>
+
       <h4>
         Total: {total}
         FCFA
       </h4>
-      <input
-        type='number'
-        placeholder='Somme encaissé'
-        className='form-control mb-1'
-        value={sommeEncaisse}
-        onChange={(e) => setSommeEncaisse(e.target.value)}
-      />
+      {!collectedLater && (
+        <input
+          type='number'
+          placeholder='Somme encaissé'
+          className='form-control mb-1'
+          value={sommeEncaisse}
+          onChange={(e) => setSommeEncaisse(e.target.value)}
+        />
+      )}
+
+      {collectedLater && (
+        <input
+          type='number'
+          placeholder='Numéro de table'
+          className='form-control mb-1'
+          value={tableNumber}
+          onChange={(e) => setTableNumber(e.target.value)}
+        />
+      )}
       <button
         onClick={handleSubmit}
         className='btn btn-valider'
