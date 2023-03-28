@@ -3,26 +3,54 @@ const Schema = mongoose.Schema;
 
 const VenteSchema = new Schema(
   {
-    produit: [{ type: Schema.Types.ObjectId, ref: 'produit', required: true }],
-    quantite: [{ type: Number, required: true }],
+    produit: [
+      {
+        produit: {
+          type: Schema.Types.ObjectId,
+          ref: 'produit-global',
+        },
+        prix_vente: { type: Number },
+        prix_achat: { type: Number },
+        taille: { type: String },
+        quantite: { type: Number },
+        session: { type: Schema.Types.ObjectId, ref: 'user' },
+        promo: {
+          type: Boolean,
+          default: null,
+        },
+        promo_quantity: {
+          type: Number,
+          default: null,
+        },
+        promo_price: {
+          type: Number,
+          default: null,
+        },
+
+        historiques: {
+          type: [Object],
+        },
+      },
+    ],
+    quantite: [{ type: Number }],
     status_commande: { type: String, default: 'En attente' },
     monnaie: { type: Number },
-    prix: { type: Number, required: true },
+    prix: { type: Number },
     somme_encaisse: { type: Number },
-    employe: { type: Schema.Types.ObjectId, ref: 'employe', required: true },
+    employe: { type: Schema.Types.ObjectId, ref: 'employe' },
     employe_validate_id: { type: Schema.Types.ObjectId, ref: 'employe' },
-    travail_pour: { type: Schema.Types.ObjectId, ref: 'user', required: true },
+    travail_pour: { type: Schema.Types.ObjectId, ref: 'user' },
     formules: {
       type: [
         {
-          produit_name: { type: String, required: true },
-          quantite: { type: Number, required: true },
-          prix: { type: Number, required: true },
-          prix_hors_promo: { type: Number, required: true },
-          promo: { type: Boolean, required: true },
-          promo_quantity: { type: Number, required: true },
-          promo_price: { type: Number, required: true },
-          taille: { type: String, required: true },
+          produit_name: { type: String },
+          quantite: { type: Number },
+          prix: { type: Number },
+          prix_hors_promo: { type: Number },
+          promo: { type: Boolean },
+          promo_quantity: { type: Number },
+          promo_price: { type: Number },
+          taille: { type: String },
         },
       ],
     },

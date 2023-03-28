@@ -26,10 +26,7 @@ exports.venteQueries = class {
     return new Promise(async (next) => {
       Vente.find()
         .populate({
-          path: 'produit',
-          populate: {
-            path: 'produit',
-          },
+          path: 'produit.produit',
         })
         .then((data) => {
           next({
@@ -49,21 +46,9 @@ exports.venteQueries = class {
   static getVentes(query) {
     return new Promise(async (next) => {
       Vente.find(query)
-        .populate([
-          {
-            path: 'produit',
-            populate: {
-              path: 'produit',
-              populate: {
-                path: 'categorie',
-              },
-            },
-          },
-          {
-            path: 'employe',
-            select: 'nom prenom',
-          },
-        ])
+        .populate('produit.produit')
+        .populate('employe')
+
         .sort('-_id')
         .then((ventes) => {
           next({
@@ -86,12 +71,9 @@ exports.venteQueries = class {
         Vente.findById({ _id: id })
           .populate([
             {
-              path: 'produit',
+              path: 'produit.produit',
               populate: {
-                path: 'produit',
-                populate: {
-                  path: 'categorie',
-                },
+                path: 'categorie',
               },
             },
             {
