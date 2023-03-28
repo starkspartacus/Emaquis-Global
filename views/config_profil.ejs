@@ -2,221 +2,224 @@
 <html lang="fr">
 
 <head>
-	<meta charset="utf-8">
-	<title>E-maquis Configuration Profil</title>
+  <meta charset="utf-8">
+  <title>E-maquis Configuration Profil</title>
 
-	<!-- Mobile Specific Metas
+  <!-- Mobile Specific Metas
     ================================================== -->
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="E-maquis, Gestionnaire d'établissement">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-	<meta name="author" content="Haut Numérique et Médias">
-	<meta name="generator" content="E-maquis, Gestionnaire d'établissement">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="E-maquis, Gestionnaire d'établissement">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="author" content="Haut Numérique et Médias">
+  <meta name="generator" content="E-maquis, Gestionnaire d'établissement">
 
-	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
 
-	<!-- Favicons-->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" type="image/x-icon" href="emaquisjs/img/apple-touch-icon-57x57-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="emaquisjs/img/apple-touch-icon-72x72-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="emaquisjs/img/apple-touch-icon-114x114-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="emaquisjs/img/apple-touch-icon-144x144-precomposed.png">
+  <!-- Favicons-->
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" type="image/x-icon" href="emaquisjs/img/apple-touch-icon-57x57-precomposed.png">
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="emaquisjs/img/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="emaquisjs/img/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="emaquisjs/img/apple-touch-icon-144x144-precomposed.png">
 
-    <!-- GOOGLE WEB FONT -->
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- GOOGLE WEB FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <!-- BASE CSS -->
-    <link href="emaquisjs/css/bootstrap.min.css" rel="stylesheet">
-    <link href="emaquisjs/css/style.css" rel="stylesheet">
-	<link href="emaquisjs/css/menu.css" rel="stylesheet">
-	<link href="emaquisjs/css/vendors.min.css" rel="stylesheet">
-	<link href="emaquisjs/css/icon_fonts/css/all_icons.min.css" rel="stylesheet">
-	<link href="emaquisjs/css/skins/square/grey.css" rel="stylesheet">
+  <!-- BASE CSS -->
+  <link href="emaquisjs/css/bootstrap.min.css" rel="stylesheet">
+  <link href="emaquisjs/css/style.css" rel="stylesheet">
+  <link href="emaquisjs/css/menu.css" rel="stylesheet">
+  <link href="emaquisjs/css/vendors.min.css" rel="stylesheet">
+  <link href="emaquisjs/css/icon_fonts/css/all_icons.min.css" rel="stylesheet">
+  <link href="emaquisjs/css/skins/square/grey.css" rel="stylesheet">
 
-    <!-- YOUR CUSTOM CSS -->
-    <link href="emaquisjs/css/custom.css" rel="stylesheet">
+  <!-- YOUR CUSTOM CSS -->
+  <link href="emaquisjs/css/custom.css" rel="stylesheet">
 
 
-	<%- include('partial/scriptconfigprofil.ejs') %>
+
 
 
 </head>
 
 <body>
 
-	<div id="preloader">
-		<div data-loader="circle-side"></div>
-	</div><!-- /Preload -->
+  <div id="preloader">
+    <div data-loader="circle-side"></div>
+  </div><!-- /Preload -->
 
-	<div id="loader_form">
-		<div data-loader="circle-side-2"></div>
-	</div><!-- /loader_form -->
+  <div id="loader_form">
+    <div data-loader="circle-side-2"></div>
+  </div><!-- /loader_form -->
 
-	<header>
-		<div class="container-fluid">
-		    <div class="row">
-                <div class="col-3">
-                    <div id="logo_home">
-                        <h1><a href="/"></a></h1>
-                    </div>
+  <header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3">
+          <div id="logo_home">
+            <h1><a href="/"></a></h1>
+          </div>
+        </div>
+        <div class="col-9">
+          <div id="social">
+            <ul>
+              <li><a href="#0"><i class="icon-facebook"></i></a></li>
+              <li><a href="#0"><i class="icon-twitter"></i></a></li>
+              <li><a href="#0"><i class="icon-google"></i></a></li>
+              <li><a href="#0"><i class="icon-linkedin"></i></a></li>
+            </ul>
+          </div>
+          <!-- /social -->
+          <nav>
+            <ul class="cd-primary-nav">
+              <li><a href="/" class="animated_link"><i class="icon-home"></i></a></li>
+              <li><a href="/contact" class="animated_link"><i class="icon-contacts"></i></a></li>
+              <li><a href="#" class="animated_link"><i class="icon-facebook"></i></a></li>
+              <li><a href="#" class="animated_link"><i class="icon-instagram"></i></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!-- /container -->
+  </header>
+  <!-- /Header -->
+
+  <main>
+    <div class="container">
+      <div id="wizard_container">
+        <form name="example-1" id="wrapped" method="POST">
+          <input id="website" name="website" type="text" value="">
+          <!-- Leave input above for security protection, read docs for details -->
+          <div id="middle-wizard">
+
+            <!-- First branch What Type of Project ============================== -->
+            <div class="step" data-state="branchtype">
+              <div class="question_title">
+                <h3>Choisissez votre mode retour produit</h3>
+                <p>La politique de votre établissement lorsque le client ne peut plus consommer le produit déjà acheté <strong></strong>.</p>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="item">
+                    <input id="answer_1" type="radio" name="branch_1_group_1" value="Design" class="required">
+                    <label for="answer_1"><img src="emaquisjs/img/remboursement1.png" class="img-mode-retour" alt=""><strong>Remboursement total</strong>Vous remboursez l'intégralité des sous selon le prix d'achat du produit au depart et vous récupérez le ou les produit(s)</label>
+                  </div>
                 </div>
-                <div class="col-9">
-                    <div id="social">
-                        <ul>
-                            <li><a href="#0"><i class="icon-facebook"></i></a></li>
-                            <li><a href="#0"><i class="icon-twitter"></i></a></li>
-                            <li><a href="#0"><i class="icon-google"></i></a></li>
-                            <li><a href="#0"><i class="icon-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                    <!-- /social -->
-                    <nav>
-                        <ul class="cd-primary-nav">
-                            <li><a href="/" class="animated_link"><i class="icon-home"></i></a></li>
-                            <li><a href="/contact" class="animated_link"><i class="icon-contacts"></i></a></li>
-                            <li><a href="#" class="animated_link"><i class="icon-facebook"></i></a></li>
-                            <li><a href="#" class="animated_link"><i class="icon-instagram"></i></a></li>
-                        </ul>
-                    </nav>
+                <div class="col-lg-4">
+                  <div class="item">
+                    <input id="answer_2" name="branch_1_group_1" type="radio" value="Design" class="required">
+                    <label for="answer_2"><img src="emaquisjs/img/remboursement50.png" class="img-mode-retour50" alt=""><strong>remboursement partiel</strong>Vous remboursez la moitié des sous selon le prix d'achat du produit au depart et vous récupérez le ou les produit(s)</label>
+                  </div>
                 </div>
+                <div class="col-lg-4">
+                  <div class="item">
+                    <input id="answer_3" name="branch_1_group_1" type="radio" value="Design" class="required">
+                    <label for="answer_3"><img src="emaquisjs/img/avoir.png" class="img-mode-retour" alt=""><strong>Avoir</strong>Vous faites un avoir du ou des produit(s) restant en définissant une date limite de consommation</label>
+                  </div>
+                </div>
+              </div>
+              <!-- /row-->
             </div>
-		</div>
-		<!-- /container -->
-	</header>
-	<!-- /Header -->
-
-	<main>
-		<div class="container">
-			<div id="wizard_container">
-				<form name="example-1" id="wrapped" method="POST">
-					<input id="website" name="website" type="text" value="">
-					<!-- Leave input above for security protection, read docs for details -->
-					<div id="middle-wizard">
-
-						<!-- First branch What Type of Project ============================== -->
-						<div class="step" data-state="branch">
-							<div class="question_title">
-								<h3>Choisissez votre mode retour produit</h3>
-								<p>La politique de votre établissement lorsque le client ne peut plus consommer le produit déjà acheté <strong></strong>.</p>
-							</div>
-							<div class="row">
-								<div class="col-lg-4">
-									<div class="item">
-										<input id="answer_1" type="radio" name="branch_1_group_1" value="Seo-Optimization" class="required">
-										<label for="answer_1"><img src="emaquisjs/img/remboursement1.png" class="img-mode-retour" alt=""><strong>Remboursement total</strong>Vous remboursez l'intégralité des sous selon le prix d'achat du produit au depart et vous récupérez le ou les produit(s)</label>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="item">
-										<input id="answer_2" name="branch_1_group_1" type="radio" value="Web-Development" class="required">
-										<label for="answer_2"><img src="emaquisjs/img/remboursement50.png" class="img-mode-retour50" alt=""><strong>remboursement partiel</strong>Vous remboursez la moitié des sous selon le prix d'achat du produit au depart et vous récupérez le ou les produit(s)</label>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="item">
-										<input id="answer_3" name="branch_1_group_1" type="radio" value="Design" class="required">
-										<label for="answer_3"><img src="emaquisjs/img/avoir.png" class="img-mode-retour" alt=""><strong>Avoir</strong>Vous faites un avoir du ou des produit(s) restant en définissant une date limite de consommation</label>
-									</div>
-								</div>
-							</div>
-							<!-- /row-->
-						</div>
-						<!-- /First branch What Type of Project ============================== -->
+            <!-- /First branch What Type of Project ============================== -->
 
 
-						<!-- /Web-Development > HTML-Development ============================== -->
+            <!-- /Web-Development > HTML-Development ============================== -->
 
 
-						<!-- /Web-Development > CMS-Development ============================== -->
+            <!-- /Web-Development > CMS-Development ============================== -->
 
 
-						<!-- /Web-Development > FrontEnd-Development ============================== -->
+            <!-- /Web-Development > FrontEnd-Development ============================== -->
 
-						<!-- Design > What Type of Design do you need ============================== -->
-						<div class="branch" id="Design">
+            <!-- Design > What Type of Design do you need ============================== -->
+            <div class="branch" id="Design">
 
-							<!-- /Design > What Type of Design do you need ============================== -->
+              <!-- /Design > What Type of Design do you need ============================== -->
 
-							<!-- Budget ============================== -->
-							<div class="step" id="budget" data-state="end">
-								<div class="question_title">
-									<h3>Objectif à atteindre par journalier?</h3>
-									<p>Vous pouvez définir un objectif journalier </p>
-								</div>
-								<div class="row justify-content-center">
-									<div class="col-lg-5">
-										<div class="box_general">
-										<div class="rounded_slider">
-											<div id="budget_slider" style="margin: 0 auto 20px;"></div>
-											<p>Renseigner un objectif à atteindre</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- /row -->
-							</div>
-							<!-- /Budget ============================== -->
+              <!-- Budget ============================== -->
+              <div class="step" id="budget" data-state="end">
+                <div class="question_title">
+                  <h3>Objectif à atteindre par journalier?</h3>
+                  <p>Vous pouvez définir un objectif journalier </p>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="col-lg-5">
+                    <div class="box_general">
+                      <div class="rounded_slider">
+                        <div id="budget_slider" style="margin: 0 auto 20px;"></div>
+                        <p>Renseigner un objectif à atteindre</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /row -->
+              </div>
+              <!-- /Budget ============================== -->
 
-							<!-- Last step ============================== -->
-							<div class="submit step" id="end">
-								<div class="question_title">
-									<h3>Plase fill with your details</h3>
-									<p>Ei duo homero postea dignissim.</p>
-								</div>
-								<div class="row justify-content-center">
-									<div class="col-lg-5">
-										<div class="box_general">
-											<div class="form-group">
-												<input type="text" name="first_last_name" class="required form-control" placeholder="First and Last name">
-											</div>
-											<div class="form-group">
-												<input type="email" name="email" class="required form-control" placeholder="Your Email">
-											</div>
-											<div class="form-group">
-												<input type="text" name="telephone" class="form-control" placeholder="Your Telephone">
-											</div>
-											<div class="form-group add_bottom_30">
-												<div class="styled-select">
-													<select class="required" name="country">
-														<option value="" selected>Select your country</option>
-														<option value="Europe">Europe</option>
-														<option value="Asia">Asia</option>
-														<option value="North America">North America</option>
-														<option value="South America">South America</option>
-													</select>
-												</div>
-											</div>
-											<div class="checkbox_questions">
-												<input name="terms" type="checkbox" class="icheck required" value="yes">
-												<label>Please accept <a href="#" data-toggle="modal" data-target="#terms-txt">terms and conditions</a>.</label>
-											</div>
-										</div>
-										<!-- /box_general -->
-									</div>
-								</div>
-								<!-- /row -->
-							</div>
-							<!-- /Last step ============================== -->
-						</div>
-					</div>
-					<!-- /middle-wizard -->
-					<div id="bottom-wizard">
-						<button type="button" name="backward" class="backward">Arrière </button>
-						<button type="button" name="forward" class="forward">suivant</button>
-						<button type="submit" name="process" class="submit">Soumettre</button>
-					</div>
-					<!-- /bottom-wizard -->
-				</form>
-			</div>
-			<!-- /Wizard container -->
-		</div>
-		<!-- /Container -->
-	</main>
-	<!-- /main -->
+              <!-- Last step ============================== -->
+              <div class="submit step" id="end">
+                <div class="question_title">
+                  <h3>Plase fill with your details</h3>
+                  <p>Ei duo homero postea dignissim.</p>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="col-lg-5">
+                    <div class="box_general">
+                      <div class="form-group">
+                        <input type="text" name="first_last_name" class="required form-control" placeholder="First and Last name">
+                      </div>
+                      <div class="form-group">
+                        <input type="email" name="email" class="required form-control" placeholder="Your Email">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" name="telephone" class="form-control" placeholder="Your Telephone">
+                      </div>
+                      <div class="form-group add_bottom_30">
+                        <div class="styled-select">
+                          <select class="required" name="country">
+                            <option value="" selected>Select your country</option>
+                            <option value="Europe">Europe</option>
+                            <option value="Asia">Asia</option>
+                            <option value="North America">North America</option>
+                            <option value="South America">South America</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="checkbox_questions">
+                        <input name="terms" type="checkbox" class="icheck required" value="yes">
+                        <label>Please accept <a href="#" data-toggle="modal" data-target="#terms-txt">terms and conditions</a>.</label>
+                      </div>
+                    </div>
+                    <!-- /box_general -->
+                  </div>
+                </div>
+                <!-- /row -->
+              </div>
+              <!-- /Last step ============================== -->
+            </div>
 
 
-	<!--<footer>
+
+          </div>
+          <!-- /middle-wizard -->
+          <div id="bottom-wizard">
+            <button type="button" name="backward" class="backward">Arrière </button>
+            <button type="button" name="forward" class="forward">suivant</button>
+            <button type="submit" name="process" class="submit">Soumettre</button>
+          </div>
+          <!-- /bottom-wizard -->
+        </form>
+      </div>
+      <!-- /Wizard container -->
+    </div>
+    <!-- /Container -->
+  </main>
+  <!-- /main -->
+
+
+  <!--<footer>
 		<div class="container clearfix">
 			<ul>
 				<li><a href="index.html" class="animated_link active">Multiple Branch</a></li>
@@ -229,44 +232,44 @@
 			<p>© 2021 Steps</p>
 		</div>
 	</footer>-->
-	<!-- /footer -->
+  <!-- /footer -->
 
-	<div class="cd-overlay-nav">
-		<span></span>
-	</div>
-	<!-- /cd-overlay-nav -->
+  <div class="cd-overlay-nav">
+    <span></span>
+  </div>
+  <!-- /cd-overlay-nav -->
 
-	<div class="cd-overlay-content">
-		<span></span>
-	</div>
-	<!-- /cd-overlay-content -->
+  <div class="cd-overlay-content">
+    <span></span>
+  </div>
+  <!-- /cd-overlay-content -->
 
-	<a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
-	<!-- /cd-nav-trigger -->
+  <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
+  <!-- /cd-nav-trigger -->
 
-	<!-- Modal terms -->
-	<div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="termsLabel">Terms and conditions</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			</button>
-				</div>
-				<div class="modal-body">
-					<p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-					<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-					<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /Modal terms -->
-
-<script>
+  <!-- Modal terms -->
+  <div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="termsLabel">Terms and conditions</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+          <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+          <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Modal terms -->
 
 
-</script>
+  <%- include('partial/scriptconfigprofil.ejs') %>
+
 </body>
+
 </html>
