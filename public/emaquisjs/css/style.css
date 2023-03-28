@@ -1280,7 +1280,7 @@ input.qtyminus {
   color: #333;
 }
 .rs-tooltip-text:before {
-  content: '$';
+  content: 'XOF ';
 }
 
 /*** handle types ***/
