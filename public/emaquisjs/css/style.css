@@ -1276,7 +1276,6 @@ input.qtyminus {
   font-family: "Roboto Condensed", Arial, sans-serif !important;
   font-weight: bold;
   font-size: 28px !important;
-  font-size: 28px !important;
   color: #333;
 }
 .rs-tooltip-text:before {
@@ -1288,7 +1287,7 @@ input.qtyminus {
   border: 1px solid #ccc !important;
   padding: 6px;
 }
-.rs-handle-dot:after {
+.rs-handle-dot::after {
   border: 1px solid #fff !important;
 }
 
@@ -1321,7 +1320,7 @@ input.qtyminus {
   background-color: #FFFFFF;
 }
 
-.rs-handle-dot:after {
+.rs-handle-dot::after {
   background-color: #333 !important;
 }
 
@@ -1329,7 +1328,6 @@ input.qtyminus {
 .fileupload {
   position: relative;
   width: 100%;
-  font-size: 14px;
   font-size: 0.875rem;
 }
 
@@ -1337,7 +1335,6 @@ input[type=file] {
   border: 1px solid #d9e1e6;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
   background-color: #fff;
   padding: 5px;
