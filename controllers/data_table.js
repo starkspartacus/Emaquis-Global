@@ -15,9 +15,13 @@ exports.data_table = async (req, res) => {
             code: ('' + el._id).slice(-6).toUpperCase(),
             produit: el.produit.map((el) => el.produit.nom_produit).join(','),
             categories: [
-              ...new Set(el.produit.map((el) => el.produit.categorie.nom)),
+              ...new Set(
+                el.produit
+                  .filter((el) => el.produit.categorie)
+                  .map((el) => el.produit.categorie?.nom)
+              ),
             ].join(','),
-            employe: `${el.employe.nom} ${el.employe.prenom}`,
+            employe: `${el.employe?.nom} ${el.employe?.prenom}`,
             createdAt: new Date(el.createdAt).toLocaleString('fr-Fr'),
           };
         }),

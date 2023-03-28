@@ -7,7 +7,6 @@ const { generateYears, formatDate } = require('../utils/generateYear');
 const moment = require('moment');
 const { getPercent } = require('../utils/getPercent');
 const { settingQueries } = require('../requests/settingQueries');
-let totalHebdomadaire = 0;
 
 exports.dashboard = async (req, res) => {
   if (req.session.user) {
@@ -63,18 +62,6 @@ exports.dashboard = async (req, res) => {
           return acc + item.prix;
         }, 0) || 0;
 
-      /* Calcul du total hebdomadaire */
-
-      // get week day to begin monday
-
-      // for (let day = 0; day < 7; day++) {
-      //   let sale = venteByDay[formatDate(moment(new Date()).subtract(day, 'days').toDate())];
-
-      //   totalHebdomadaire += sale;
-      //   console.log(totalHebdomadaire);
-
-      // }
-
       const toDay = new Date().getDay();
       const time = new Date().getTime();
       const previousWeekDay = new Date(
@@ -116,18 +103,31 @@ exports.dashboard = async (req, res) => {
         allProductsByDay?.reduce((acc, item) => {
           const productId = item.produit._id;
           const taille = item.taille;
-          const categorieBilan = item.categorie;
           const productFind = acc.find(
             (item) => item.produit._id === productId && item.taille === taille
           );
 
+          let promo_quantity = 0;
+          let prix_vente = item.prix_vente * item.quantite;
+          if (item.promo) {
+            if (item.promo_quantity <= item.quantite) {
+              promo_quantity = parseInt(item.quantite / item.promo_quantity);
+            }
+          }
+
+          if (promo_quantity) {
+            prix_vente =
+              promo_quantity * item.promo_price +
+              (item.quantite % item.promo_quantity) * item.prix_vente;
+          }
+
           if (productFind) {
-            productFind.prix_vente += item.prix_vente * item.quantite;
+            productFind.prix_vente += prix_vente;
             productFind.quantite += item.quantite;
           } else {
             acc.push({
               ...item,
-              prix_vente: item.prix_vente * item.quantite,
+              prix_vente,
             });
           }
 
