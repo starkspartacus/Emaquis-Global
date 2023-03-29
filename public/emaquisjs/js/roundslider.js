@@ -30,7 +30,7 @@
         // that type should be included in the "_props:" for validation
         defaults: {
             min: 100,
-            max: 3000,
+            max: 100000000000000000000000000000000000000000000,
             step: 100,
             value: null,
             radius: 85,
@@ -591,20 +591,20 @@
                 this.block2.css("opacity", o2);
                 this.block3.css("opacity", o3);
 
-                (this._active == 1 ? this.block4 : this.block2).rsRotate(lAngle - 180);
-                (this._active == 1 ? this.block1 : this.block3).rsRotate(lAngle);
+                (this._active === 1 ? this.block4 : this.block2).rsRotate(lAngle - 180);
+                (this._active === 1 ? this.block1 : this.block3).rsRotate(lAngle);
             }
         },
         // WAI-ARIA support
         _updateARIA: function (value) {
             var min = this.options.min, max = this.options.max;
             this.bar.children().attr({ "aria-valuenow": value });
-            if (this.options.sliderType == "range") {
+            if (this.options.sliderType === "range") {
                 var handles = this._handles();
                 handles.eq(0).attr({ "aria-valuemin": min });
                 handles.eq(1).attr({ "aria-valuemax": max });
 
-                if (this._active == 1) handles.eq(1).attr({ "aria-valuemin": value });
+                if (this._active === 1) handles.eq(1).attr({ "aria-valuemin": value });
                 else handles.eq(0).attr({ "aria-valuemax": value });
             }
             else this.bar.children().attr({ "aria-valuemin": min, "aria-valuemax": max });
