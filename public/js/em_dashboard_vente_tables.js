@@ -289,7 +289,7 @@ const ModalCollectedAmount = ({ vente, onClose }) => {
     }
 
     const data = {
-      produit: vente.produit.map((prod) => prod._id),
+      produit: vente.produit.map((prod) => prod.productId),
       quantite: vente.quantite,
       somme_encaisse: Number(sommeEncaisse),
       amount_collected: true,
