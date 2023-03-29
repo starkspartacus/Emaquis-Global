@@ -81,7 +81,7 @@ exports.ventePost = async (req, res) => {
 
           const { _id, ...data } = currentProduct.result._doc;
 
-          produits.push({ ...data, produit: data.produit._id });
+          produits.push({ ...data, productId: _id, produit: data.produit._id });
         }
       }
 
@@ -245,7 +245,11 @@ exports.editventePost = async (req, res) => {
 
           const { _id, ...data } = currentProduct.result._doc;
 
-          produits.push({ ...data, produit: data.produit._id });
+          produits.push({
+            ...data,
+            productId: _id,
+            produit: data.produit._id,
+          });
         }
       }
 
@@ -275,7 +279,7 @@ exports.editventePost = async (req, res) => {
 
       if (oldVente.result.produit.length > 0) {
         for (let [index, product] of oldVente.result.produit.entries()) {
-          const productId = '' + product._id;
+          const productId = '' + product.productId;
           const productIdFinded = body.produit.find((id) => id === productId);
 
           if (productIdFinded) {
@@ -287,29 +291,27 @@ exports.editventePost = async (req, res) => {
               body.produit[productIndex]
             );
 
-            if (currentProduct.result.taille === product.taille) {
+            if (currentProduct?.result?.taille === product.taille) {
               const quantite =
                 body.quantite[productIndex] - oldVente.result.quantite[index];
               products.push({
-                id: product._id,
+                id: product.productId,
                 quantite: quantite,
               });
             } else {
               products.push({
-                id: product._id,
+                id: product.productId,
                 quantite: body.quantite[productIndex],
               });
             }
           } else {
             products.push({
-              id: product._id,
+              id: product.productId,
               quantite: -oldVente.result.quantite[index],
             });
           }
         }
       }
-
-      console.log(produits, 'produits');
 
       let newVente = {
         produit: produits,
