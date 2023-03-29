@@ -29,6 +29,7 @@ exports.ventePost = async (req, res) => {
     // let prize = [];
     const formulesProduct = [];
     const product_unavailables = [];
+    let produits = [];
     let sum = 0;
 
     if (vente !== null) {
@@ -77,6 +78,10 @@ exports.ventePost = async (req, res) => {
               quantite: currentProduct.result.quantite,
             });
           }
+
+          const { _id, ...data } = currentProduct.result._doc;
+
+          produits.push({ ...data, produit: data.produit._id });
         }
       }
 
@@ -103,7 +108,7 @@ exports.ventePost = async (req, res) => {
       }
 
       let newVente = {
-        produit: vente.produit,
+        produit: produits,
         quantite: vente.quantite,
         employe: sess._id,
         travail_pour: sess.travail_pour,
@@ -150,7 +155,6 @@ exports.ventePost = async (req, res) => {
       });
     }
   } catch (e) {
-    console.log('👉 👉 👉  ~ file: vente.js ~ line 105 ~ e', e);
     res.json({
       etat: false,
       data: 'Error',
@@ -162,6 +166,7 @@ exports.editventePost = async (req, res) => {
   try {
     let sess = req.session.user;
     const venteId = req.params.id;
+    let produits = [];
 
     if (!sess) {
       res.status(401).json({
@@ -237,6 +242,10 @@ exports.editventePost = async (req, res) => {
               quantite: currentProduct.result.quantite,
             });
           }
+
+          const { _id, ...data } = currentProduct.result._doc;
+
+          produits.push({ ...data, produit: data.produit._id });
         }
       }
 
@@ -300,8 +309,10 @@ exports.editventePost = async (req, res) => {
         }
       }
 
+      console.log(produits, 'produits');
+
       let newVente = {
-        produit: body.produit,
+        produit: produits,
         quantite: body.quantite,
         employe: sess._id,
         travail_pour: sess.travail_pour,
