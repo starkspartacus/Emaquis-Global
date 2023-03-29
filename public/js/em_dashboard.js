@@ -228,6 +228,7 @@ const AppRoot = () => {
         ...product,
         quantity: vente.quantite[index],
         quantity_already_sold: vente.quantite[index],
+        _id: product.productId,
       });
     });
 

@@ -30,6 +30,7 @@ const VenteSchema = new Schema(
         historiques: {
           type: [Object],
         },
+        productId: { type: String },
       },
     ],
     quantite: [{ type: Number }],
