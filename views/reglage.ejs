@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>E-maquis Admin</title>
+
+    <%- include('partial/head.ejs') %>
+</head>
+
+<body class="crm_body_bg">
+<style>
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #98ED58
+    }
+
+    .profile-button {
+        background: #98ED58;
+        box-shadow: none;
+        border: none
+    }
+
+    .profile-button:hover {
+        background-color: #FFFFFF;
+        border: 1px solid #98ED58;
+        color: #98ED58;
+        letter-spacing: .25em;
+    }
+
+    .profile-button:focus {
+        background: #98ED58;
+        box-shadow: none
+    }
+
+    .profile-button:active {
+        background: #98ED58;
+        box-shadow: none
+    }
+
+    .back:hover {
+        color: #98ED58;
+        cursor: pointer
+    }
+
+    .labels {
+        font-size: 11px
+    }
+
+    .add-experience:hover {
+        background: #98ED58;
+        color: #fff;
+        cursor: pointer;
+        border: solid 1px #98ED58
+    }
+</style>
+
+<%- include('partial/sidebar.ejs') %>
+<!--/ sidebar  -->
+
+<section class="main_content dashboard_part large_header_bg">
+    <div class="main_content_iner">
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="white_card card_height_100 mb_30">
+                        <div class="white_card_header">
+                            <div class="box_header m-0">
+                                <div class="main-title">
+                                    <h3 class="m-0">Modifier le réglage</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="white_card_body">
+                            <div class="QA_section">
+                                <div class="white_box_tittle list_header">
+
+                                </div>
+                                <div class="col-xl-12">
+                                    <form action='/reglage' method='post'>
+                                        <div class="container rounded bg-white mt-5 mb-5">
+                                            <div class="row">
+                                                <div class="col-md-3 border-right">
+                                                </div>
+                                                <div class="col-md-5 border-right">
+                                                    <div class="p-3 py-5">
+                                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                                            <h4 class="text-right">Parametre </h4>
+                                                        </div>
+
+                                                        <div class="row mt-3">
+
+                                                            <div class="col-md-12"><label class="labels">Choisir le mode retour produit</label>
+                                                                <select class="form-control" name='product_return_type' value="<%user.product_return_type%>">
+                                                                    <% retour_produits_types.forEach((p)=> { %>
+                                                                        <% if(p.type == user.product_return_type) { %>
+                                                                            <option value="<%= p.type %>" selected><%= p.nom %></option>
+                                                                        <% } else { %>
+                                                                            <option value="<%= p.type %>"><%= p.nom %></option>
+                                                                        <% } %>
+                                                                    <% }) %>
+
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-12"><label class="labels">Objectif à atteindre par jour</label><input type="number" class="form-control" name="objective" placeholder="Objectif" value="<%= user.objective %>"></div>
+                                                            <div class="col-md-12"><label class="labels">Nombre de table</label><input type="number" class="form-control" name="numberOfTables" placeholder="Nombre de table" value="<%= user.numberOfTables %>"></div>
+                                                        </div>
+
+
+                                                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Enregistrer réglage</button></div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="footer_part">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer_iner text-center">
+                        <p>
+                            2023 © E-MAQUIS - Designed by
+                            <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> - <a href="/faq">FAQ</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div id="back-top" style="display: none">
+    <a title="Go to Top" href="#">
+        <i class="ti-angle-up"></i>
+    </a>
+</div>
+<!-- footer  -->
+<!-- footer  -->
+<!-- jquery slim -->
+<%- include('partial/script.ejs') %>
+<script>
+    $(document).ready(function() {
+        //  chat box
+        const inputPassword = $('input[name="newPassword"]');
+        const inputConfirmPassword = $('input[name="confirmPassword"]');
+
+        const onChangePassword = function(e) {
+
+            const confirmValue = inputConfirmPassword.val();
+            const passwordValue = inputPassword.val();
+
+            if (confirmValue && confirmValue !== passwordValue) {
+                inputConfirmPassword.removeClass('is-valid');
+                inputConfirmPassword.addClass('is-invalid');
+            } else if (confirmValue && confirmValue === passwordValue) {
+                inputConfirmPassword.removeClass('is-invalid');
+                inputConfirmPassword.addClass('is-valid');
+            }
+
+        }
+
+        inputPassword.on('input', onChangePassword)
+
+        inputConfirmPassword.on('input', onChangePassword)
+
+
+    });
+</script>
+</body>
+
+</html>
