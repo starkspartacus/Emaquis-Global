@@ -48,6 +48,7 @@ exports.venteQueries = class {
       Vente.find(query)
         .populate('produit.produit')
         .populate('employe')
+          .populate('categories')
 
         .sort('-_id')
         .then((ventes) => {

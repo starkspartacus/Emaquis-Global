@@ -107,35 +107,7 @@
                   <h3 className="">Bonjour <b><%= locals.user?.nom %> <%= locals.user?.prenom ||
                   locals.user?.prenoms %></b></h3>
                 </div>
-                <div className="col-lg-4 col-md-2 text-right d-flex justify-content-end">
-                  <label htmlFor="chart_month"></label>
-                  <select className="nice_Select2 max-width-220 mr-2" id="chart_month">
-                    <option value="1">choisir le mois</option>
-                    <% for( month of months) { %> <% if (month.code === new
-                  Date().getMonth()+1) { %>
-                    <option value="<%= month.code %>" selected>
-                      <%= month.nom %>
-                    </option>
-                    <% } else { %>
-                    <option value="<%= month.code %>">
-                      <%= month.nom %>
-                    </option>
-                    <% } %> <% } %>
-                  </select>
 
-                  <select className="nice_Select2 max-width-220" id="chart_year">
-                    <option value="1">choisir l'année</option>
-                    <% for( year of years) { %> <% if(year === new
-                  Date().getFullYear()) { %>
-                    <option value="<%= year %>" selected>
-                      <%= year %>
-                    </option>
-                    <% } else { %>
-
-                    <option value="<%= year %>"><%= year %></option>
-                    <% } %> <% } %>
-                  </select>
-                </div>
 
                 <div className="col-lg-4 col-md-2">
                   <label>
@@ -173,8 +145,8 @@
                   <td><%= product.quantite%></td>
                   <td><%= product.taille %></td>
                   <td><%= product.prix_achat %> FCFA</td>
-                  <td> FCFA</td>
                   <td><%= product.prix_vente %> FCFA</td>
+                  <td><%= product.prix_vente %>*<%= product.quantite%> FCFA</td>
                   <td>40.000FCFA</td>
                 </tr>
 
