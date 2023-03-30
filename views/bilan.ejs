@@ -93,9 +93,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
+<script>
+    //calcul le chiffre d'affaire
+    for (let i = 0; i < allProductsByDayGrouped.length; i++) {
+        let total = 0;
+        for (let j = 0; j < allProductsByDayGrouped[i].length; j++) {
+            total += allProductsByDayGrouped[i][j].prix_vente * allProductsByDayGrouped[i][j].quantite;
+        }
+        allProductsByDayGrouped[i].total = total;
+    }
+</script>
 <!-- JAVASCRIPTS -->
 <script type="text/babel">
-
 
   const Bilan = () =>{
 
@@ -135,6 +144,7 @@
                   <th scope="col">Prix de vente</th>
                   <th scope="col">Total CA</th>
                   <th scope="col">Total Bénéfice</th>
+
                 </tr>
                 </thead>
                 <% for( product of allProductsByDayGrouped) {%>
@@ -145,9 +155,12 @@
                   <td><%= product.quantite%></td>
                   <td><%= product.taille %></td>
                   <td><%= product.prix_achat %> FCFA</td>
-                  <td><%= product.prix_vente %> FCFA</td>
-                  <td><%= product.prix_vente %>*<%= product.quantite%> FCFA</td>
-                  <td>40.000FCFA</td>
+                    <td><%= product.prix_vente %> FCFA</td>
+                  <td><%= product.prix_vente * product.quantite %> FCFA</td>
+                  <td><%= product.prix_vente * product.quantite - product.prix_achat * product.quantite %> FCFA</td>
+                  
+
+
                 </tr>
 
                 </tbody>
