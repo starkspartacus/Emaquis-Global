@@ -326,6 +326,12 @@
             setSelectedSize(id);
           })
 
+          $('#stockType').on('change', (e) => {
+            const id = e.target.value;
+
+            setStockType(id);
+          })
+
         }, []);
 
 
@@ -511,9 +517,7 @@
                         id="stockType"
                         required
                         value={stockType}
-                        onChange={(e) => {
-                          setStockType(e.target.value);
-                        }}
+                       
                       >
                      
                         {
