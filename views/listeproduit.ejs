@@ -292,7 +292,7 @@
                                <div class="modal-body">
                                  <h4> {productSelected.produit.nom_produit} {productSelected.taille}</h4>
                                  {productSelected.historiques && productSelected.historiques.reverse().map((el, index)=>{
-                                   return <p>{el.add_by} a {el.update?`modifiée la quantité de ${el.prev_quantite} à ${el.quantite}`:`ajoutée ${el.quantite} quantité`} le {new Date(el.date).toLocaleDateString('fr-FR',{
+                                   return <p>{el.add_by} a {el.update?`modifiée la quantité de ${el.prev_quantite} à ${el.quantite}`:`ajoutée ${el.stockType === "locker"?`${el.lockerQty} casier(s) de ${el.quantite} bouteilles`:`${el.quantite} quantité(s)`}`} le {new Date(el.date).toLocaleDateString('fr-FR',{
                                      year: 'numeric',
                                      month: 'long',
                                      day: 'numeric',

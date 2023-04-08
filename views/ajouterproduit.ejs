@@ -75,21 +75,21 @@
                       var date = jour + "/" + (mois + 1) + "/" + annee;
                       document.getElementById("date").innerHTML = date;
                       //affichage de l'heure dynamique
-                      function heure(){
+                      function heure() {
                         var d = new Date();
                         var h = d.getHours();
                         var m = d.getMinutes();
                         var s = d.getSeconds();
-                        if(h<10){
-                          h = "0"+h;
+                        if (h < 10) {
+                          h = "0" + h;
                         }
-                        if(m<10){
-                          m = "0"+m;
+                        if (m < 10) {
+                          m = "0" + m;
                         }
-                        if(s<10){
-                          s = "0"+s;
+                        if (s < 10) {
+                          s = "0" + s;
                         }
-                        document.getElementById("heure").innerHTML = h+":"+m+":"+s;
+                        document.getElementById("heure").innerHTML = h + ":" + m + ":" + s;
                       }
                     </script>
                   </div>
@@ -198,6 +198,7 @@
         const [ promo,setPromo] = React.useState(<%- JSON.stringify(product?.promo) %>);
         const [promoQuantity, setPromoQuantity] = React.useState(<%- JSON.stringify(product?.promo_quantity) %>);
         const [promoPrice, setPromoPrice] = React.useState(<%- JSON.stringify(product?.promo_price) %>);
+        const [stockType, setStockType] = React.useState('locker');
 
 
         const [loading, setLoading] = React.useState(false);
@@ -215,7 +216,9 @@
             session: adminSession,
             promo: promo,
             promo_quantity: promoQuantity,
-            promo_price: promoPrice
+            promo_price: promoPrice,
+            stockType
+
           }
 
           setShowSuccess(false)
@@ -487,7 +490,8 @@
                   </div>
 
                   <div className='col-lg-6'>
-                    <div className='common_input mb_15'>
+                    <div className="row">
+                    <div className={`col-lg-${updateProduct?'12':'6'} common_input mb_15`}>
                       <input
                         type='number'
                         placeholder='quantite'
@@ -500,6 +504,28 @@
                         }}
                       />
                     </div>
+                   {!updateProduct && <div className='col-lg-6 common_input mb_15'>
+                      <select
+                        className='nice_Select2 nice_Select_line wide'
+                        name='stockType'
+                        id="stockType"
+                        required
+                        value={stockType}
+                        onChange={(e) => {
+                          setStockType(e.target.value);
+                        }}
+                      >
+                     
+                        {
+                          ['locker','bottle'].map(type =>(
+                            <option value={type}>{type ==="locker"?"Casier":"Bouteille"}</option>
+                            ))
+                        }
+
+                      </select>
+                    </div>}
+                    </div>
+                  
                   </div>
 
                    <div className="col-lg-12 pl-4">

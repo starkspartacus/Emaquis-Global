@@ -1,6 +1,9 @@
 const { PRODUCT_SIZE } = require('../constants');
 const { categorieQueries } = require('../requests/categorieQueries');
 const { produitQueries } = require('../requests/produitQueries');
+const {
+  generateQuantityByLocker,
+} = require('../utils/generateQuantityByLocker');
 
 exports.addproduit = async (req, res) => {
   if (req.session.user) {
@@ -63,7 +66,11 @@ exports.addproduitPost = async (req, res) => {
       produit: req.body.produit,
       prix_vente: parseInt(req.body.prix_vente),
       prix_achat: parseInt(req.body.prix_achat),
-      quantite: parseInt(req.body.quantite),
+      quantite: parseInt(
+        req.body.stockType === 'locker'
+          ? generateQuantityByLocker(req.body.quantite, req.body.taille)
+          : req.body.quantite
+      ),
       taille: req.body.taille,
       promo: req.body.promo,
       promo_quantity: parseInt(req.body.promo_quantity) || null,
@@ -82,6 +89,8 @@ exports.addproduitPost = async (req, res) => {
 
     const newHistorique = {
       quantite: data.quantite,
+      stockType: req.body.stockType,
+      lockerQty: req.body.quantite,
       prix_vente: data.prix_vente,
       prix_achat: data.prix_achat,
       date: new Date(),
@@ -148,7 +157,7 @@ exports.editproduitPost = async (req, res) => {
       produit: req.body.produit,
       prix_vente: parseInt(req.body.prix_vente),
       prix_achat: parseInt(req.body.prix_achat),
-      quantite: parseInt(req.body.quantite),
+      quantite: req.body.quantite,
       taille: req.body.taille,
       promo: req.body.promo,
       promo_quantity: parseInt(req.body.promo_quantity) || null,
@@ -156,10 +165,6 @@ exports.editproduitPost = async (req, res) => {
       session: session,
       historiques: [],
     };
-    console.log(
-      '👉 👉 👉  ~ file: ajouterproduitcontroller.js:150 ~ data',
-      data
-    );
 
     const produit_exist = await produitQueries.getProduitByData({
       produit: data.produit,
