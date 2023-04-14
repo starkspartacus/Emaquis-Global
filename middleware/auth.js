@@ -91,7 +91,15 @@ exports.forceSession = async (req, res, next) => {
   if (authorization && !req.session.user) {
     const token = authorization.split(' ')[1];
     const data = jwt.verify(token, secret);
-    const employe = await employeModel.findOne({ _id: data?.employe_id });
+    const employe = await employeModel.findOne({
+      _id: data?.employe_id,
+      deleted: false,
+    });
+
+    if (!employe) {
+      res.status(401).send({ error: 'error signature' });
+      return;
+    }
     req.session.user = employe;
   }
 

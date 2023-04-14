@@ -157,7 +157,11 @@ exports.editproduitPost = async (req, res) => {
       produit: req.body.produit,
       prix_vente: parseInt(req.body.prix_vente),
       prix_achat: parseInt(req.body.prix_achat),
-      quantite: req.body.quantite,
+      quantite: parseInt(
+        req.body.stockType === 'locker'
+          ? generateQuantityByLocker(req.body.quantite, req.body.taille)
+          : req.body.quantite
+      ),
       taille: req.body.taille,
       promo: req.body.promo,
       promo_quantity: parseInt(req.body.promo_quantity) || null,
@@ -174,6 +178,8 @@ exports.editproduitPost = async (req, res) => {
 
     const newHistorique = {
       quantite: data.quantite,
+      stockType: req.body.stockType,
+      lockerQty: req.body.quantite,
       prix_vente: data.prix_vente,
       prix_achat: data.prix_achat,
       prev_quantite: produit_exist.result.quantite,
@@ -195,7 +201,7 @@ exports.editproduitPost = async (req, res) => {
     );
 
     if (result.etat) {
-      res.json(result);
+      res.json(data);
     } else {
       res.status(500).json({
         etat: false,
