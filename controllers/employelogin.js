@@ -19,7 +19,7 @@ exports.employeloginPost = async (req, res) => {
     if (!(email && password)) {
       res.status(400).send('veuillez remplir tous les champs');
     }
-    const employelogin = await Employe.findOne({ email });
+    const employelogin = await Employe.findOne({ email, deleted: false });
 
     if (
       employelogin &&
