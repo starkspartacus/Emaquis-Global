@@ -1,5 +1,4 @@
 exports.generateQuantityByLocker = (locker, size) => {
-  console.log({ locker, size }, 'locker, size');
   if (!locker || !size) return 1;
 
   if (['50cl', '60cl', '65cl'].includes(size)) {

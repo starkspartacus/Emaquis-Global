@@ -198,7 +198,7 @@
         const [ promo,setPromo] = React.useState(<%- JSON.stringify(product?.promo) %>);
         const [promoQuantity, setPromoQuantity] = React.useState(<%- JSON.stringify(product?.promo_quantity) %>);
         const [promoPrice, setPromoPrice] = React.useState(<%- JSON.stringify(product?.promo_price) %>);
-        const [stockType, setStockType] = React.useState('locker');
+        const [stockType, setStockType] = React.useState(updateProduct?'bottle':'locker');
 
 
         const [loading, setLoading] = React.useState(false);
@@ -245,9 +245,13 @@
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-          }).then(res =>{
+          }).then(async res =>{
 
+            const data = await res.json();
+           
 
+            const newQty = data.quantite;
+            
             setShowSuccess(true);
             setTimeout(() => {
               setShowSuccess(false);
@@ -256,7 +260,7 @@
                   if(p.produit._id == productId){
                     return {
                       ...p,
-                      quantite: updateProduct? quantite : p.quantite + parseInt(quantite)
+                      quantite: updateProduct? newQty : p.quantite + parseInt(newQty)
                     }
                   }
                   return p;
@@ -288,6 +292,7 @@
 
             }, 500);
           }).catch(err=>{
+            console.log('👉 👉 👉  ~ file: ajouterproduit.ejs:295 ~ err:', err)
             setShowError(true);
             setLoading(false);
           })
@@ -497,7 +502,7 @@
 
                   <div className='col-lg-6'>
                     <div className="row">
-                    <div className={`col-lg-${updateProduct?'12':'6'} common_input mb_15`}>
+                    <div className={'col-lg-6 common_input mb_15'}>
                       <input
                         type='number'
                         placeholder='quantite'
@@ -510,7 +515,7 @@
                         }}
                       />
                     </div>
-                   {!updateProduct && <div className='col-lg-6 common_input mb_15'>
+                  <div className='col-lg-6 common_input mb_15'>
                       <select
                         className='nice_Select2 nice_Select_line wide'
                         name='stockType'
@@ -527,7 +532,7 @@
                         }
 
                       </select>
-                    </div>}
+                    </div>
                     </div>
                   
                   </div>
