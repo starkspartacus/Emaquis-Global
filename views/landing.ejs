@@ -536,6 +536,16 @@
 
 
   <script src="../js/script.js"></script>
+<script>
+	let btn = document.querySelector('.debut a');
+	btn.addEventListener('mouseover', e =>{
+		let rec = e.target.getBoundingClientRect();
+		let x = e.clientX * 3 - rec.left;
+		btn.style.setProperty('--x', x + 'deg');
+
+	})
+</script>
+
 </body>
 
 </html>
