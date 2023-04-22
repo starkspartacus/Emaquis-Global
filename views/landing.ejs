@@ -540,7 +540,7 @@
 	let btn = document.querySelector('.debut a');
 	btn.addEventListener('mouseover', e =>{
 		let rec = e.target.getBoundingClientRect();
-		let x = e.clientX * 3 - rec.left;
+		let x = e.clientX * 5 - rec.left;
 		btn.style.setProperty('--x', x + 'deg');
 
 	})

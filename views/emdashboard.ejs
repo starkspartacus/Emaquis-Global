@@ -60,10 +60,12 @@
                 <div class="page_date_button d-flex align-items-center">
                   <div class="profile_author_name">
                     <p class="text-center">
-                      <%= locals.user?.nom %> <%= locals.user?.prenom ||
-                        locals.user?.prenoms %>
+                      <%= locals.user?.nom %> <%= locals.user?.prenom %>
                     </p>
                     <h5 class="emRole badge"><%= locals.user?.role %></h5>
+                    </div>
+                    <%= locals.user?.role %> <%= locals.user?.travail_pour.nom %>
+
                   </div>
                 </div>
               </div> -->
