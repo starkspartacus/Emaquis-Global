@@ -430,6 +430,76 @@ button:focus,
   z-index: 1;
 }
 
+.navHover{
+
+
+}
+
+.navHover:hover {
+  background: #98ed58;
+  border-radius: 5px;
+  color: #FFFFFF;
+  transform: scale(1.1);
+}
+
+.infoBullet {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+
+
+.bull {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.bull p{
+  position: absolute;
+  bottom: 77px;
+  width: 400px;
+  background: #FFFFFF;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s ease;
+  transform: translateX(-50%) translateY(-50px);
+}
+
+
+.bull p::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: #FFFFFF;
+  transform: translateX(-50%);
+}
+
+.bull p {
+  visibility: visible;
+  opacity: 0.99;
+  color: #ff9c2c;
+  font-weight: bold;
+  font-size: 17px;
+  transform: translateX(-5%) translateY(0px);
+}
+
+
+
+
+
+
+
+
+
 .main-nav .navbar-brand {
   padding: 0;
 }
