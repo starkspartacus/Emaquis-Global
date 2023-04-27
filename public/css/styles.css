@@ -2579,7 +2579,10 @@ button.btn-valider {
 /* rendre responsive**/
 .debut {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
+
 }
 
 .google-play {
