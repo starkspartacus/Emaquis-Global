@@ -10,10 +10,9 @@ exports.inscription = async (req, res) => {
  };
  exports.inscriptionPost = async (req, res) => {
      try{
-             res.render('signup')
+             res.render('/connexion')
         }catch (e) {
              console.log('err', e);
              res.redirect(e)
          }
      };
- 
