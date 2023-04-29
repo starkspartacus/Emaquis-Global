@@ -10,7 +10,7 @@ exports.inscription = async (req, res) => {
  };
  exports.inscriptionPost = async (req, res) => {
      try{
-             res.render('/connexion')
+             res.render('connexion')
         }catch (e) {
              console.log('err', e);
              res.redirect(e)
