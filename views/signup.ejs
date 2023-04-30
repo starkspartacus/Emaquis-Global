@@ -222,6 +222,13 @@
             1000
           );
         });
+
+        socket.on("signupsuccess", () => {
+
+          setTimeout(() =>  document.getElementById("alert-sucsess").style.display = "block", 2000);
+          location.href = "/connexion";
+
+      });
       });
     </script>
   </body>
