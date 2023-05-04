@@ -2,6 +2,16 @@
 <html lang="zxx">
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NT2SW8WBHT');
+    </script>
+    <!-- End Google tag (gtag.js) -->
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -93,7 +103,7 @@
                             <td><%= type_retour_produit.find(rtp=>rtp.type === retourProduit.product_return_type)?.nom %></td>
                             <td><%=retourProduit.client_name %></td>
                             <td><%= new Date(retourProduit.product_return_type === 'tip'? retourProduit.dateline:retourProduit.createdAt).toLocaleString('fr-fr') %></td>
-                            
+
                               <td>
                                 <% if((new Date(retourProduit.dateline) >= new Date()) && !retourProduit.confirm) { %>
                                 <button class='btn btn-success m-auto' data-retourId='<%= retourProduit._id %>'>Confirmer</button>
@@ -108,7 +118,7 @@
                                 <% } %>
 
                               </td>
-                             
+
                           </tr>
 
                           <%})%>
@@ -308,7 +318,7 @@
           },
           body: JSON.stringify({id})
         }).then(res => res.json()).then(data => {
-        
+
          $(this).parent().html("<p class='text-success text-center'>Confirmé</p>")
 
         }).catch(err => {
@@ -316,8 +326,8 @@
           $(this).text('Confirmer')
           $(this).attr('disabled', false)
         })
-       
-         
+
+
        });
 
         });
