@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
+
 
   <!-- End plugin css for this page -->
   <!-- inject:css -->
@@ -37,11 +37,16 @@
   <link href="../css/styles.css" rel="stylesheet">
   <!-- endinject -->
   <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="vendors/chartist/chartist.min.css">
+
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/my_chart.js"  async></script>
 
   <!--  <link rel="stylesheet" href="../css/styleBilan.css" /> -->
 </head>
@@ -63,7 +68,7 @@
 
 
   <section class="main_content dashboard_part large_header_bg">
-    <%- include('partial/notif.ejs') %>
+    <%- include('partial/notifBar.ejs') %>
     <div class="main_content_iner overly_inner">
       <div class="container-fluid p-0">
         <div class="row">
@@ -87,22 +92,16 @@
     </div>
   </section>
 
-  <script>
 
-
-  </script>
 
 
 
   <%- include('partial/script.ejs') %>
-  <%- include('partial/scriptBilan.ejs') %>
-  <script src="../jquery-3.4.1.min.js"></script>
+
+  <script src="../js/jquery-3.4.1.min.js"></script>
   <!-- faire un donut pour le voir la quantitée des produits les plus vendus-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+
 
   <script>
     //calcul le chiffre d'affaire
@@ -121,19 +120,19 @@
 
       const [dateType, setDateType] = React.useState('date');
       const [date,setDate] = React.useState(new Date());
-    
+
 
       const handleChange = (e)=>{
         setDateType(e.target.value);
       }
-      
+
       const handleChangeDate = (e)=>{
         setDate(e.target.value);
       }
 
-  
 
-    
+
+
 
     return(
             <div  className="container">
@@ -189,16 +188,14 @@
                 <% } %>
               </table>
 
-              <div className="row mt-5 anime-carte-bilan">
-                <div className="col-lg-6 grid-margin stretch-card ">
-                  <div className="card">
-                    <div className="card-body">
-                      <h4 className="card-title">Catégories vendues</h4>
-                      <p>ici un donut avec les noms des catégories de boisson repartis en pourcentage</p>
-                      <div className="ct-chart ct-perfect-fourth" id="ct-chart-pie"></div>
-                    </div>
-                  </div>
+              <div className="graphBox">
+                <div className="box">
+                  <canvas id="myChart"></canvas>
                 </div>
+                <div className=" box"></div>
+              </div>
+              <div className="row mt-5 anime-carte-bilan">
+
                 <div className="col-lg-6 grid-margin stretch-card">
                   <div className="card">
                     <div className="card-body">
