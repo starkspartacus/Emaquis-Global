@@ -3,6 +3,8 @@
 /* Tablet desktop :768px. */
 /* small mobile :320px. */
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400&amp;display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700&amp;display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 /* line 1, G:/admin_project/8 admin/management_html/scss/_extends.scss */
 .CRM_dropdown.dropdown .dropdown-toggle:hover,
 .CRM_dropdown.dropdown .dropdown-toggle:focus {
@@ -13803,7 +13805,9 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 .sidebar.mini_sidebar #sidebar_menu > li ul li a {
   white-space: nowrap;
   padding-left: 18px;
-  color: #91e388;
+  color: #031e33;
+    font-size: 16px;
+    font-weight: bold;
   width: 194px;
   padding-left: 20px !important;
 }
@@ -13927,6 +13931,19 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
   z-index: 1000;
   margin-left: 0;
   padding-left: 0;
+}
+
+.side-deconnexion{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-family: Poppins, serif;
+    text-align: center;
+    padding: 10px 0;
+    background: #fff;
 }
 
 /* line 171, G:/admin_project/8 admin/management_html/scss/_mini_menu.scss */
@@ -14314,4 +14331,34 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 .anime-carte-bilan div:hover{
   transform: scale(1.01);
   transition: all 0.5s ease;
+}
+
+.graphBox{
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-grap: 30px;
+  min-height: 200px;
+}
+
+.graphBox .box{
+  position: relative;
+  display: flex;
+  margin-right: 20px;
+  background: #FFFFFF;
+  padding: 20px;
+  width: 100%;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+}
+
+/*Bilan*/
+
+@media (max-width: 991px) {
+  .graphBox{
+    grid-template-columns: 1fr;
+    height: auto;
+  }
 }
