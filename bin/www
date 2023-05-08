@@ -52,20 +52,42 @@ app.io = io;
 db();
 
 const SaveUSer = io.of('/inscription').use(Serveur.getSharedSession());
+
 SaveUSer.on('connection', (socket) => {
   socket.on('setUser', async (data) => {
     const Result = await userQueries.setUser(data);
+    console.log(Result,'mouss')
     if (Result.etat == false) {
       socket.emit('bad');
     } else {
       if (Result !== null) {
+        const token = jwt.sign(
+          { user_id: Result._id, isAdmin: Result.isAdmin },
+          process.env.SECRET,
+          {
+            expiresIn: '1h',
+          }
+        );
+
+        Result.token = token;
+        socket.handshake.session.user = {
+          id: Result.result._id,
+          username: Result.result.username,
+          nom_etablissement: Result.result.nom_etablissement,
+          isAdmin: Result.result.isAdmin,
+          ...Result.result._doc,
+        };
+        socket.handshake.session.save();
+        console.log(socket.handshake.session);
+        console.log({ token: token });
         socket.emit('saved');
-        socket.emit('signupsuccess', '/connexion');
+
+        socket.emit('redirect', '/config_profil');
+
       }
     }
   });
 });
-
 //connexion admin
 const UserLogin = io.of('/connexion').use(Serveur.getSharedSession());
 UserLogin.on('connection', (socket) => {
