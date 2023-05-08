@@ -13,6 +13,8 @@ const UserSchema = new Schema(
     adresse: { type: String },
     country: { type: String },
     city: { type: String },
+    square: { type: String },
+    othersquare :{type:String},
     isAdmin: {
       type: Boolean,
       default: false,

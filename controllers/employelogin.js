@@ -15,18 +15,18 @@ exports.employelogin = async (req, res) => {
 
 exports.employeloginPost = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    if (!(email && password)) {
+    const { numero, password } = req.body;
+    if (!(numero && password)) {
       res.status(400).send('veuillez remplir tous les champs');
     }
-    const employelogin = await Employe.findOne({ email });
+    const employelogin = await Employe.findOne({ numero });
 
     if (
       employelogin &&
       (await bcrypt.compare(password, employelogin.password))
     ) {
       const token = jwt.sign(
-        { employe_id: employelogin._id, email },
+        { employe_id: employelogin._id, numero },
         process.env.SECRET
       );
 

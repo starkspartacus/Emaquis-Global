@@ -13,7 +13,7 @@ exports.employeQueries = class {
         role: data.role,
         travail_pour: data.chef_etablissement,
         statut: 'Actif',
-        email: data.email,
+        // email: data.email,
         numero: data.numero,
         adresse: data.adresse,
         password: encryptedPassword,
