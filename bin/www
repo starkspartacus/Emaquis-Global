@@ -82,7 +82,7 @@ SaveUSer.on('connection', (socket) => {
         console.log({ token: token });
         socket.emit('saved');
 
-        socket.emit('signupsuccess', '/connexion');
+        socket.emit('redirect', '/config_profil');
 
       }
     }
