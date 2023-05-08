@@ -3,6 +3,20 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-NT2SW8WBHT');
+  </script>
+  <!-- End Google tag (gtag.js) -->
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>E-maquis Gestionnaire</title>
@@ -12,10 +26,7 @@
   <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
   <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="..css/jquery-jvectormap.css">
-  <link rel="stylesheet" href="../css/flag-icon.min.css">
-  <link rel="stylesheet" href="..css/owl.carousel.min.css">
-  <link rel="stylesheet" href="..css/owl.theme.default.min.css">
+
 
   <!-- End plugin css for this page -->
   <!-- inject:css -->
@@ -26,87 +37,102 @@
   <link href="../css/styles.css" rel="stylesheet">
   <!-- endinject -->
   <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="vendors/chartist/chartist.min.css">
+
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/my_chart.js"  async></script>
 
   <!--  <link rel="stylesheet" href="../css/styleBilan.css" /> -->
 </head>
 
 <body class="crm_body_bg">
-<style>
-  .sidebar .logo .large_logo img {
-    width: 70%;
-    margin-left: 15%;
-  }
-</style>
-<!-- React -->
+  <style>
+    .sidebar .logo .large_logo img {
+      width: 70%;
+      margin-left: 15%;
+    }
+  </style>
+  <!-- React -->
 
-<%- include('partial/reactScript.ejs') %>
+  <%- include('partial/reactScript.ejs') %>
 
-<%- include('partial/sidebar.ejs') %>
+  <%- include('partial/sidebar.ejs') %>
 
-<!--/ sidebar  -->
+  <!--/ sidebar  -->
 
 
-<section class="main_content dashboard_part large_header_bg">
-  <%- include('partial/notif.ejs') %>
-  <div class="main_content_iner overly_inner">
-    <div class="container-fluid p-0">
-      <div class="row">
-        <div class="col-12">
-          <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
-            <div class="page_title_left d-flex align-items-center">
-              <h3 class="f_s_25 f_w_700 dark_text mr_30">
+  <section class="main_content dashboard_part large_header_bg">
+    <%- include('partial/notifBar.ejs') %>
+    <div class="main_content_iner overly_inner">
+      <div class="container-fluid p-0">
+        <div class="row">
+          <div class="col-12">
+            <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+              <div class="page_title_left d-flex align-items-center">
+                <h3 class="f_s_25 f_w_700 dark_text mr_30">
 
-              </h3>
+                </h3>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <p id="sess" hidden></p>
-          <div id="add_bilan"></div>
+        <div class="row">
+          <div class="col-12">
+            <p id="sess" hidden></p>
+            <div id="add_bilan"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<script>
-
-
-</script>
+  </section>
 
 
 
-<%- include('partial/script.ejs') %>
-<%- include('partial/scriptBilan.ejs') %>
-<script src="../jquery-3.4.1.min.js"></script>
-<!-- faire un donut pour le voir la quantitée des produits les plus vendus-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
-<script>
+
+  <%- include('partial/script.ejs') %>
+
+  <script src="../js/jquery-3.4.1.min.js"></script>
+  <!-- faire un donut pour le voir la quantitée des produits les plus vendus-->
+
+
+
+  <script>
     //calcul le chiffre d'affaire
     for (let i = 0; i < allProductsByDayGrouped.length; i++) {
-        let total = 0;
-        for (let j = 0; j < allProductsByDayGrouped[i].length; j++) {
-            total += allProductsByDayGrouped[i][j].prix_vente * allProductsByDayGrouped[i][j].quantite;
-        }
-        allProductsByDayGrouped[i].total = total;
+      let total = 0;
+      for (let j = 0; j < allProductsByDayGrouped[i].length; j++) {
+        total += allProductsByDayGrouped[i][j].prix_vente * allProductsByDayGrouped[i][j].quantite;
+      }
+      allProductsByDayGrouped[i].total = total;
     }
-</script>
-<!-- JAVASCRIPTS -->
-<script type="text/babel">
+  </script>
+  <!-- JAVASCRIPTS -->
+  <script type="text/babel">
 
-  const Bilan = () =>{
+    const Bilan = () =>{
+
+      const [dateType, setDateType] = React.useState('date');
+      const [date,setDate] = React.useState(new Date());
+
+
+      const handleChange = (e)=>{
+        setDateType(e.target.value);
+      }
+
+      const handleChangeDate = (e)=>{
+        setDate(e.target.value);
+      }
+
+
+
+
 
     return(
             <div  className="container">
@@ -120,14 +146,14 @@
 
                 <div className="col-lg-4 col-md-2">
                   <label>
-                    <input type="date" className="form-control" name="date"/>
+                    <input type={dateType} value={date} onChange={handleChangeDate} className="form-control" name="date"/>
                   </label>
                   <label>
-                    <select className="form-control mr-5" aria-label="Default select example">
-                      <option selected>Ventes du jour</option>
-                      <option value="1">Semaine</option>
-                      <option value="2">Mois</option>
-                      <option value="3">Année</option>
+                    <select className="form-control mr-5" value={dateType} onChange={handleChange} aria-label="Default select example">
+                      <option value="day">Ventes du jour</option>
+                      <option value="week">Semaine</option>
+                      <option value="month">Mois</option>
+                      <option value="year">Année</option>
                     </select>
                   </label>
                 </div>
@@ -149,7 +175,7 @@
                 <% for( product of allProductsByDayGrouped) {%>
                 <tbody>
                 <tr>
-                  <td scope="row">Categorie à dynamiser</td>
+                  <td scope="row"><%= product.produit.categorie.nom %></td>
                   <td><%= product.produit.nom_produit %></td>
                   <td><%= product.quantite%></td>
                   <td><%= product.taille %></td>
@@ -162,16 +188,14 @@
                 <% } %>
               </table>
 
-              <div className="row mt-5 anime-carte-bilan">
-                <div className="col-lg-6 grid-margin stretch-card ">
-                  <div className="card">
-                    <div className="card-body">
-                      <h4 className="card-title">Catégories vendues</h4>
-                      <p>ici un donut avec les noms des catégories de boisson repartis en pourcentage</p>
-                      <div className="ct-chart ct-perfect-fourth" id="ct-chart-pie"></div>
-                    </div>
-                  </div>
+              <div className="graphBox">
+                <div className="box">
+                  <canvas id="myChart"></canvas>
                 </div>
+                <div className=" box"></div>
+              </div>
+              <div className="row mt-5 anime-carte-bilan">
+
                 <div className="col-lg-6 grid-margin stretch-card">
                   <div className="card">
                     <div className="card-body">
@@ -227,6 +251,12 @@
 
   ReactDOM.render(<Bilan />, document.getElementById('add_bilan'));
 </script>
+  <script>
+    $('.datepicker').datepicker({
+      format: 'mm/dd/yyyy',
+      startDate: '-3d'
+    });
+  </script>
 </body>
 
 </html>

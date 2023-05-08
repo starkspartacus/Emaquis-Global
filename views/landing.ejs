@@ -3,6 +3,15 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-NT2SW8WBHT');
+	</script>
 
   <!-- Basic Page Needs
   ================================================== -->
@@ -49,26 +58,26 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
 
-		  <li class="nav-item active ">
+		  <li class="nav-item active navHover">
 			  <a class="nav-link dropdown-toggle "
 				 href="/connexion" >
 				  Gestionnaire
 			  </a>
 		  </li>
 
-		  <li class="nav-item active ">
+		  <li class="nav-item active navHover">
 			  <a class="nav-link dropdown-toggle "
 				 href="/emconnexion" >
 				  Barman
 			  </a>
 		  </li>
 
-        <li class="nav-item active">
+        <li class="nav-item active navHover">
           <a class="nav-link dropdown-toggle " href="/inscription" >inscription
           </a>
         </li>
 
-        <li class="nav-item dropdown @@contact active">
+        <li class="nav-item dropdown @@contact active navHover">
           <a class="nav-link" href="/contact">Contact</a>
         </li>
       </ul>
@@ -104,20 +113,36 @@
 				<h1 class="text-white font-weight-bold mb-4">Gérer votre bar , lounge et maquis</h1>
 				<p class="text-white mb-5">avec facilité et suivez l'évolution de votre établissement même à distance.</p>
 				<div class="debut">
-					<a href="/inscription" class="btn btn-success btn-go"
+					<a href="/inscription"
 					   data-aos="zoom-in"
 					   data-aos-duration="1200"
+					   class="md-col-3 mx-col-3 ms-col-3"
 					>
-						essai gratuit de 1 mois
+						<i></i><i></i>
+						<span>Commencez maintenant</span>
 					</a>
+					<div class="infoBull ">
 
-					<a href="https://play.google.com/store/apps/details?id=com.hnm.emaquisapp&hl=en-US&ah=5I5RDxLgwjTllmBjffDVS-jZjXM"
-					   data-aos="zoom-in"
-					   data-aos-duration="1200"
-					   target="_blank"
-					>
-						<img class="img-fluid google-play" src="../img/google-play.png" alt="google play">
-					</a>
+
+
+						<a href="https://play.google.com/store/apps/details?id=com.hnm.emaquisapp&hl=en-US&ah=5I5RDxLgwjTllmBjffDVS-jZjXM"
+						   data-aos="zoom-in"
+						   data-aos-duration="1200"
+						   target="_blank"
+						   class="md-col-3 mx-col-3 ms-col-3"
+						>
+							<img class="img-fluid google-play " src="../img/google-play.png" alt="google play">
+						</a>
+						<!-- faire des tooltips sur des boutons-->
+
+
+
+
+						<p>L'application mobile est utilisé par les server(ses)
+							qui sont rattaché(s) à votre établissement.
+						</p>
+					</div>
+
 				</div>
 
 			</div>
@@ -168,7 +193,7 @@
 				<!-- Feature Mockup -->
 				<div class="image-content" data-aos="fade-right">
 					<img class="img-fluid mt-3" src="../img/paresseux_sous_officiel.png"
-					data-aos-duration="1500" alt="emaqui logo"
+					data-aos-duration="1500" alt="emaquis logo"
 					style="height: 350px"
 					>
 				</div>
@@ -428,17 +453,18 @@
             <!-- Social Site Icons -->
             <ul class="social-icon list-inline">
               <li class="list-inline-item">
-                <a href="#"><i class="ti-facebook"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100092069260402"><i class="ti-facebook"></i></a>
               </li>
               <li class="list-inline-item">
                 <a href="#"><i class="ti-twitter"></i></a>
               </li>
               <li class="list-inline-item">
-                <a href="#"><i class="ti-instagram"></i></a>
+                <a href="https://www.instagram.com/emaquis225/"><i class="ti-instagram"></i></a>
               </li>
 				<li class="list-inline-item">
-					<a href="#"><i class="ti-youtube"></i></a>
+					<a href="https://www.youtube.com/watch?v=hQ8UUccZEMM"><i class="ti-youtube"></i></a>
 				</li>
+
             </ul>
           </div>
         </div>
@@ -471,6 +497,7 @@
 						<li><a href="https://wa.me/2250709031399">+225 0709031399</a></li>
 						<li><a href="https://wa.me/2250777129951">+225 0777129951</a></li>
 						<li><a href="https://wa.me/33760484911">+33 0760484911</a></li>
+						<li><a href="mailto:hostmaster@e-maquis.com">hostmaster@e-maquis.com</a></li>
 					</ul>
 
             </ul>
@@ -534,6 +561,17 @@
 
 
   <script src="../js/script.js"></script>
+  <script src="../js/landingScriptmano.js"></script>
+<script>
+	let btn = document.querySelector('.debut a');
+	btn.addEventListener('mouseover', e =>{
+		let rec = e.target.getBoundingClientRect();
+		let x = e.clientX * 5 - rec.left;
+		btn.style.setProperty('--x', x + 'deg');
+
+	})
+</script>
+
 </body>
 
 </html>

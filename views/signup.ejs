@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NT2SW8WBHT');
+    </script>
+    <!-- End Google tag (gtag.js) -->
     <!-- Basic Page Needs
   ================================================== -->
     <meta charset="utf-8" />
@@ -112,15 +122,15 @@
 
                   <input
                     class="form-control main"
-                    type="texte"
+                    type="text"
                     placeholder="adresse"
                     name="adresse"
                     required
                   />
                   <input
                     class="form-control main"
-                    type="texte"
-                    placeholder="numero"
+                    type="number"
+                    placeholder="numéro"
                     name="numero"
                     required
                   />
@@ -144,7 +154,7 @@
                 <div class="new-acount">
                   <p>
                     En cliquant sur "S'inscrire", j'accepte
-                    <a href="#" style="text-decoration: none"
+                    <a href="/condition_general" style="text-decoration: none"
                       >Conditions d'utilisation.</a
                     >
                   </p>
@@ -228,11 +238,13 @@
             1000
           );
         });
-      
 
-   
-  socket.on("redirect", () => {
-      location.href = "/config_profil ";
+
+        socket.on("signupsuccess", () => {
+
+          setTimeout(() =>  document.getElementById("alert-sucsess").style.display = "block", 3000);
+          location.href = "/connexion";
+
       });
 
       });

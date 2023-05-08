@@ -91,27 +91,20 @@ exports.forceSession = async (req, res, next) => {
   if (authorization && !req.session.user) {
     const token = authorization.split(' ')[1];
     const data = jwt.verify(token, secret);
-    const employe = await employeModel.findOne({ _id: data?.employe_id });
-    req.session.user = employe;
-  }
+    const employe = await employeModel.findOne({
+      _id: data?.employe_id,
+      deleted: false,
+    });
 
-  // req.session.user = {
-  //   deleted: false,
-  //   isAdmin: false,
-  //   _id: '63c31980dcfdae70c90f0621',
-  //   nom: 'Ouattara',
-  //   prenom: 'Mory',
-  //   role: 'Barman',
-  //   travail_pour: '62bba1bc9bace93c2139ccdc',
-  //   statut: 'Actif',
-  //   email: 'mory@gmail.com',
-  //   numero: '0749601753',
-  //   adresse: 'Koumassi',
-  //   password: '$2a$10$xnwgrlKECAdb0.feYcZgtehriBSx40uTYky3mM1HcDEuJPsJCxfXa',
-  //   createdAt: '2023-01-14T21:07:12.048Z',
-  //   updatedAt: '2023-01-14T21:07:12.048Z',
-  //   __v: 0,
-  // };
+    if (!employe) {
+      res.status(401).send({ error: 'error signature' });
+      return;
+    }
+    req.session.user = employe;
+  } else if (req.session.user && req.session.user.deleted) {
+    res.status(401).send({ error: 'error signature' });
+    return;
+  }
 
   next();
 };

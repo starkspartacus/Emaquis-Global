@@ -3,6 +3,15 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NT2SW8WBHT');
+  </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>E-maquis Barman(aid)</title>
@@ -60,10 +69,12 @@
                 <div class="page_date_button d-flex align-items-center">
                   <div class="profile_author_name">
                     <p class="text-center">
-                      <%= locals.user?.nom %> <%= locals.user?.prenom ||
-                        locals.user?.prenoms %>
+                      <%= locals.user?.nom %> <%= locals.user?.prenom %>
                     </p>
                     <h5 class="emRole badge"><%= locals.user?.role %></h5>
+                    </div>
+                    <%= locals.user?.role %> <%= locals.user?.travail_pour.nom %>
+
                   </div>
                 </div>
               </div> -->

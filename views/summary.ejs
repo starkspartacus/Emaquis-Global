@@ -14,6 +14,16 @@
     }
 </style>
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NT2SW8WBHT');
+    </script>
+    <!-- End Google tag (gtag.js) -->
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -51,7 +61,7 @@
                   <h3 class="f_s_25 f_w_700 dark_text mr_30">
                     Tableau de bord
                   </h3>
-                 
+
                 </div>
                 <div class="page_title_right">
                   <div class="page_title_right d-flex">
@@ -146,7 +156,7 @@
                       </select>
                       &nbsp;
                   </div>
-                  
+
                   </div>
                 </div>
 
@@ -156,7 +166,7 @@
                       <div class="bg-light rounded p-2">
                         <h4 class="mt-3" id="semaine1"></h4>
                         <span style="color:red" id="creditsemaine1"></span>
-                        <p class="mt-2">Semaine 1</p> 
+                        <p class="mt-2">Semaine 1</p>
                       </div>
                     </div>
                     <div class="col-sm-6 col-md-3 text-center mb-3">
@@ -194,7 +204,7 @@
                     </div>
                   </div>
                 </div>
-                
+
               </div>
             </div>
             <div class="col-xl-4">
@@ -203,12 +213,12 @@
                   <div class="card-body" style="transform: scale(0.5); width: 1px; height: 1px; background-color: red;">
                    <p style="margin-left: 40px; margin-top: -20px; font-size: 25px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: black;">CREDIT PAR SEMAINE</p>
                   </div>
-                  
-                  
+
+
                 </div>
             </div>
           </div>
-          
+
           <div class="col-lg-6">
             <div class="single_crm">
               <div class="crm_body">
@@ -386,20 +396,20 @@
     <script src="../jquery-3.4.1.min.js"></script>
     <script>
       console.log(parseInt(document.getElementById("totalBenefice").innerHTML))
-     
+
   </script>
     <script>
-       
+
       $(document).ready(function () {
         const socket = io("http://localhost:3000/summary");
         let _id = document.getElementById("sess").innerText
-        
-      
+
+
         socket.on("connect", () => {
-          
+
           $("#paiement").click(function () {
-           
-       
+
+
         socket.emit("paiementdata", price) // Obtenez le prix à partir de la page
         checkout(); // Passez le prix en tant que paramètre lors de l'appel de la fonction checkout()
     });
@@ -421,7 +431,7 @@
           });
         });
         socket.on('saved',(data)=>{
-        
+
           document.getElementById("semaine1").innerText = data.semaineVentes.semaine1+" FCFA";
           document.getElementById("semaine2").innerText = data.semaineVentes.semaine2+" FCFA";
           document.getElementById("semaine3").innerText = data.semaineVentes.semaine3+" FCFA";

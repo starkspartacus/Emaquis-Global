@@ -5,44 +5,39 @@ exports.commande = async (req, res) => {
     const travail_pour = req.body.session || req.session.user.travail_pour;
 
     const employeId = req.body.employe || req.session.user._id;
-    let produitcommandes =[];
+    let produitcommandes = [];
     const vente = await venteQueries.getVentes({
       travail_pour: travail_pour,
       employe: employeId,
-      status_commande: "En attente",
-      
+      status_commande: 'En attente',
     });
 
     if (vente) {
-         const commandes = vente.result.map(commande => {
-
-          const produitcommande = commande.produit.map((produit, index) => {
-            return {
-              produit:{
-                nom :produit.produit.nom_produit,
-                quantité: commande.quantite[index],
-                image: produit.produit.image
-              },
-              monnaie: commande.monnaie,
-              somme_encaissée: commande.somme_encaisse,
-              employé: `${commande.employe.prenom} ${commande.employe.nom}`,
-              prix: commande.prix,
-              status_commande: "En attente",
-              idCommande: commande._id,
-              date: commande.createdAt 
-              
-            };
-              
-          });
-          produitcommandes.push(produitcommande)
-
-         });
-         res.json({
-          produitcommandes
-   
+      const commandes = vente.result.map((commande) => {
+        const produitcommande = commande.produit.map((produit, index) => {
+          return {
+            produit: {
+              nom: produit.produit.nom_produit,
+              quantité: commande.quantite[index],
+              image: produit.produit.image,
+            },
+            monnaie: commande.monnaie,
+            somme_encaissée: commande.somme_encaisse,
+            employé: `${commande.employe.prenom} ${commande.employe.nom}`,
+            prix: commande.prix,
+            status_commande: 'En attente',
+            idCommande: commande._id,
+            date: commande.createdAt,
+            table_number: commande.table_number,
+            amount_collected: commande.amount_collected,
+          };
         });
-
-      }
+        produitcommandes.push(produitcommande);
+      });
+      res.json({
+        produitcommandes,
+      });
+    }
   } catch (e) {
     res.json({
       etat: false,
