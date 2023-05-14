@@ -57,6 +57,27 @@ exports.employeQueries = class {
     });
   }
 
+  static getEmployeByNumber(numero) {
+    return new Promise(async (next) => {
+      await Employe.findOne({
+        numero: numero,
+        deleted: false,
+      })
+        .then((data) => {
+          next({
+            etat: true,
+            result: data,
+          });
+        })
+        .catch((err) => {
+          next({
+            etat: false,
+            err: err,
+          });
+        });
+    });
+  }
+
   static getEmployeById(id) {
     return new Promise(async (next) => {
       await Employe.findOne({
