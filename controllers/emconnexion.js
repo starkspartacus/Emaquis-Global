@@ -21,7 +21,7 @@ exports.emconnexionPost = async (req, res) => {
     const data = await employeQueries.getEmployeByEmail(body.email);
 
     const errorData = {
-      error: 'Email ou mot de passe incorrect ',
+      error: 'Numéro de téléphone ou mot de passe incorrect ',
       email: body.email,
     };
 
@@ -51,3 +51,5 @@ exports.emconnexionPost = async (req, res) => {
     res.redirect(e);
   }
 };
+
+
