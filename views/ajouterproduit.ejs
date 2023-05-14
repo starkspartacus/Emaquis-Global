@@ -444,9 +444,10 @@
                       value={productId}
                     >
                     <option value="">Selectionner un produit</option>
-                        {allProducts.map(produit =>(
-                            <option value={produit._id}>{produit.nom_produit}</option>
-                            ))}
+                      {allProducts.sort((a,b) => a.nom_produit.localeCompare(b.nom_produit)).map(produit =>(
+                          <option value={produit._id}>{produit.nom_produit}</option>
+                          ))}
+
 
                     </select>
                   </div>
