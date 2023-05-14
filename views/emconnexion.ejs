@@ -76,7 +76,7 @@
                 </div>
                 <% } %>
                 <form action="/emconnexion" method="post" class="p-4">
-                  <input class="form-control main" type="email" placeholder="email" name="email" value="<%= locals.email %>" required>
+                  <input class="form-control main" type="number" placeholder="numero" name="numero" value="<%= locals.numero %>" required>
                   <input class="form-control main" type="password" placeholder="mot de passe" name="password" required>
                   <button type="submit" class="btn btn-main-sm" id="btn-validate">se connecter</button>
                 </form>
