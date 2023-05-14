@@ -2319,6 +2319,20 @@ hr {
 
 /*# sourceMappingURL=style.css.map */
 
+/* nav bar aide*/
+
+.aide{
+  background-color: rgba(202, 45, 45, 0.34);
+  border-radius: 10px;
+}
+
+/* animer le background color*/
+
+
+.aide a{
+  color: #f1f1f1;
+}
+
 /* Landing page**/
 .btn-go {
   padding: 20px;
