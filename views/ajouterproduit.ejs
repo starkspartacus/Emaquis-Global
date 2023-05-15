@@ -270,7 +270,7 @@
                   if(p.produit._id == productId){
                     return {
                       ...p,
-                      quantite: updateProduct? newQty : p.quantite + parseInt(newQty)
+                      quantite:  p.quantite + parseInt(newQty)
                     }
                   }
                   return p;

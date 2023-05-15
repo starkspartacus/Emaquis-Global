@@ -183,8 +183,10 @@ exports.editproduitPost = async (req, res) => {
       taille: data.taille,
     });
 
+    const newQty = data.quantite + produit_exist.result.quantite;
+
     const newHistorique = {
-      quantite: data.quantite,
+      quantite: newQty,
       stockType: req.body.stockType,
       lockerQty: req.body.quantite,
       prix_vente: data.prix_vente,
@@ -202,7 +204,7 @@ exports.editproduitPost = async (req, res) => {
       { produitId: req.body.productId, session },
       {
         ...data,
-        quantite: data.quantite,
+        quantite: newQty,
         historiques: [...produit_exist.result.historiques, newHistorique],
       }
     );
