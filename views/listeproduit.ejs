@@ -47,6 +47,19 @@
       transform: translateX(20px);
       background: #2eec1c;
     }
+
+    .dataTables_scrollBody table thead {
+      display: none;
+    }
+
+    @media screen and (max-width:765px) {
+      td button.btn {
+        font-size: 10px;
+        margin-bottom: 5px;
+        width: 100%;
+      }
+
+    }
   </style>
 
   <!-- react js -->
@@ -222,6 +235,7 @@
                                    console.log('👉 👉 👉  ~ file: listeproduit.ejs:259 ~ handleEdit ~ handleEdit')
                                    handleSelectProduct(product)
                                  }
+                                 
 
 
                                  return (
@@ -248,7 +262,7 @@
                                                }}
                                              />
                                            </td>
-                                           <td>
+                                           <td className="product_btns">
                                              {employee.role !== 'Barman' && (
                                                <button onClick={()=>handleEdit(el._id)} className='btn btn-success mr-1'>Modifier</button>
                                              )}
@@ -275,23 +289,23 @@
 
 
                                  return  <div
-                           class="modal fade"
+                           className="modal fade"
                            id="myModal"
                            tabindex="-1"
                            role="dialog"
                            aria-labelledby="myModalTitle"
                          >
-                           <div class="modal-dialog modal-dialog-centered" style={{
+                           <div className="modal-dialog modal-dialog-centered" style={{
                              maxWidth: '600px',
                            }} role="document">
-                           {!!productSelected && productSelected.produit &&  <div class="modal-content">
-                               <div class="modal-header">
-                                 <h2 class="modal-title" id="exampleModalLongTitle">
+                           {!!productSelected && productSelected.produit &&  <div className="modal-content">
+                               <div className="modal-header">
+                                 <h2 className="modal-title" id="exampleModalLongTitle">
                                 Historiques des modifications
                                  </h2>
                                  <button
                                    type="button"
-                                   class="close close-modal"
+                                   className="close close-modal"
                                    data-dismiss="modal"
                                    aria-label="Close"
                                    id="close-modal"
@@ -299,7 +313,7 @@
                                    <span aria-hidden="true">&times;</span>
                                  </button>
                                </div>
-                               <div class="modal-body">
+                               <div className="modal-body">
                                  <h4> {productSelected.produit.nom_produit} {productSelected.taille}</h4>
                                  {productSelected.historiques && productSelected.historiques.reverse().map((el, index)=>{
                                    return <p>{el.add_by} a {el.update?`modifiée la quantité de ${el.prev_quantite} à ${el.stockType === "locker"?`${el.lockerQty} casier(s) de ${el.quantite} bouteilles`:el.quantite}`:`ajoutée ${el.stockType === "locker"?`${el.lockerQty} casier(s) de ${el.quantite} bouteilles`:`${el.quantite} quantité(s)`}`} le {new Date(el.date).toLocaleDateString('fr-FR',{
@@ -315,10 +329,10 @@
 
                                  </div>
 
-                               <div class="modal-footer">
+                               <div className="modal-footer">
                                  <button
                                    type="button"
-                                   class="btn btn-success close-modal"
+                                   className="btn btn-success close-modal"
                                    data-dismiss="modal"
                                  >
                                    Ok
