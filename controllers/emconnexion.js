@@ -18,11 +18,11 @@ exports.emconnexionPost = async (req, res) => {
   try {
     const body = req.body;
 
-    const data = await employeQueries.getEmployeByEmail(body.email);
+    const data = await employeQueries.getEmployeByNumber(body.numero);
 
     const errorData = {
-      error: 'Email ou mot de passe incorrect ',
-      email: body.email,
+      error: 'Numero ou mot de passe incorrect ',
+      numero: body.numero,
     };
 
     if (data.result?.role === 'Barman') {

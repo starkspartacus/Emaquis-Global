@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NT2SW8WBHT');
+    </script>
+    <!-- End Google tag (gtag.js) -->
     <!-- Basic Page Needs
   ================================================== -->
     <meta charset="utf-8" />
@@ -8,11 +18,14 @@
 
     <!-- Mobile Specific Metas
   ================================================== -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="E-maquis, Gestionnaire d'établissement">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="author" content="Haut Numérique et Médias">
-  <meta name="generator" content="E-maquis, Gestionnaire d'établissement">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="E-maquis, Gestionnaire d'établissement" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <meta name="author" content="Haut Numérique et Médias" />
+    <meta name="generator" content="E-maquis, Gestionnaire d'établissement" />
 
     <!-- Favicon -->
     <link
@@ -46,8 +59,10 @@
 =            Sign Up            =
 ==============================-->
 
-    <section class="section ">
-      <div class=" container col-lg-7 col-md-12 col-sm-4 m-auto m-md-auto m-lg-auto m-sm-auto">
+    <section class="section">
+      <div
+        class="container col-lg-7 col-md-12 col-sm-4 m-auto m-md-auto m-lg-auto m-sm-auto"
+      >
         <div class="row overflow-auto">
           <div>
             <div class="block col-lg-12 col-md-7 col-sm-4">
@@ -80,7 +95,7 @@
                   Echec de l'opération, nom de l'établissement ou email déjà
                   utilisé!
                 </div>
-                <form action="#" class="mb-6 ">
+                <form action="#" class="mb-6">
                   <input
                     class="form-control main"
                     type="text"
@@ -107,15 +122,15 @@
 
                   <input
                     class="form-control main"
-                    type="texte"
+                    type="text"
                     placeholder="adresse"
                     name="adresse"
                     required
                   />
                   <input
                     class="form-control main"
-                    type="texte"
-                    placeholder="numero"
+                    type="number"
+                    placeholder="numéro"
                     name="numero"
                     required
                   />
@@ -139,7 +154,7 @@
                 <div class="new-acount">
                   <p>
                     En cliquant sur "S'inscrire", j'accepte
-                    <a href="#" style="text-decoration: none"
+                    <a href="/condition_general" style="text-decoration: none"
                       >Conditions d'utilisation.</a
                     >
                   </p>
@@ -184,11 +199,11 @@
       const socket = io(window.location.origin + window.location.pathname);
       console.log(window.location.origin + window.location.pathname);
 
-      $('form').on('submit', (e) => {
+      $("form").on("submit", (e) => {
         e.preventDefault();
-        const btn = $('#btn-validate');
-        btn.html('En cours...');
-        btn.attr('disabled', true);
+        const btn = $("#btn-validate");
+        btn.html("En cours...");
+        btn.attr("disabled", true);
 
         isSucces = true;
         const data = {
@@ -198,30 +213,40 @@
           adresse: $('input[name="adresse"]').val(),
           password: $('input[name="password"]').val(),
           numero: $('input[name="numero"]').val(),
+          password: $('input[name="password"]').val(),
         };
+          console.log(data)
+          socket.emit("setUser", data);
 
-        socket.emit('setUser', data);
-
-        socket.on('saved', () => {
-          document.getElementById('alert-success').style.display = 'block';
-          $('input').val('');
-          btn.html('Valider');
-          btn.attr('disabled', false);
+        socket.on("saved", () => {
+          document.getElementById("alert-success").style.display = "block";
+          $("input").val("");
+          btn.html("Valider");
+          btn.attr("disabled", false);
           setTimeout(
             () =>
-              (document.getElementById('alert-success').style.display = 'none'),
+              (document.getElementById("alert-success").style.display = "none"),
             1000
           );
         });
-        socket.on('bad', () => {
-          btn.html('Valider');
-          btn.attr('disabled', false);
+        socket.on("bad", () => {
+          btn.html("Valider");
+          btn.attr("disabled", false);
           setTimeout(
             () =>
-              (document.getElementById('alert-danger').style.display = 'block'),
+              (document.getElementById("alert-danger").style.display = "block"),
             1000
           );
         });
+
+
+        socket.on("signupsuccess", () => {
+
+          setTimeout(() =>  document.getElementById("alert-sucsess").style.display = "block", 3000);
+          location.href = "/connexion";
+
+      });
+
       });
     </script>
   </body>

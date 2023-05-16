@@ -16,4 +16,3 @@ exports.inscription = async (req, res) => {
              res.redirect(e)
          }
      };
- 

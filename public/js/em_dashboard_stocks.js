@@ -4,7 +4,7 @@ const TablesStocksHead = () => {
       <tr>
         <th scope='col'>Produit</th>
         <th scope='col'>Nom du produit</th>
-        <th scope='col'>Taile</th>
+        <th scope='col'>Taille</th>
         <th scope='col'>Prix de vente</th>
         <th scope='col'>Quantité</th>
       </tr>

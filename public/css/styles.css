@@ -20,6 +20,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+:root{
+  --x: 45deg;
+}
+
 h1,
 h2,
 h3,
@@ -425,6 +429,76 @@ button:focus,
   background: #fff;
   z-index: 1;
 }
+
+.navHover{
+
+
+}
+
+.navHover:hover {
+  background: #98ed58;
+  border-radius: 5px;
+  color: #FFFFFF;
+  transform: scale(1.1);
+}
+
+.infoBullet {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+
+
+.bull {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.bull p{
+  position: absolute;
+  bottom: 77px;
+  width: 400px;
+  background: #FFFFFF;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s ease;
+  transform: translateX(-50%) translateY(-50px);
+}
+
+
+.bull p::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: #FFFFFF;
+  transform: translateX(-50%);
+}
+
+.bull p {
+  visibility: visible;
+  opacity: 0.99;
+  color: #ff9c2c;
+  font-weight: bold;
+  font-size: 17px;
+  transform: translateX(-5%) translateY(0px);
+}
+
+
+
+
+
+
+
+
 
 .main-nav .navbar-brand {
   padding: 0;
@@ -2245,10 +2319,78 @@ hr {
 
 /*# sourceMappingURL=style.css.map */
 
+/* nav bar aide*/
+
+.aide{
+  background-color: rgba(202, 45, 45, 0.34);
+  border-radius: 10px;
+}
+
+/* animer le background color*/
+
+
+.aide a{
+  color: #f1f1f1;
+}
+
 /* Landing page**/
 .btn-go {
   padding: 20px;
-  border-radius: 50px;
+  border-radius: 10px;
+}
+
+.debut a {
+  position: relative;
+  width: 250px;
+  height: 70px;
+  display: inline-block;
+  border-radius: 15px;
+}
+.debut a i{
+  position: absolute;
+  inset: -2px;
+  display: block;
+  border-radius: 15px;
+}
+
+.debut a i,
+.debut a i:nth-child(2) {
+  background: linear-gradient(var(--x), #FF9C2C, #747679 ,#98ED58 );
+
+}
+
+.debut a i:nth-child(2){
+  filter: blur(15px);
+}
+
+.debut a span{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(14, 21, 56, 0.41);
+  text-transform: uppercase;
+  color: #f1f1f1;
+  letter-spacing: 0.5px;
+  border: 1px solid #f1f1f1;
+  font-weight: bold;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.debut a span::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.075);
+  transform: skew(25deg);
 }
 
 /*Fin Landing page**/
@@ -2451,7 +2593,10 @@ button.btn-valider {
 /* rendre responsive**/
 .debut {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
+
 }
 
 .google-play {

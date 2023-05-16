@@ -29,10 +29,12 @@ const contactcontroller = require('../controllers/contact');
 const faqcontroller = require('../controllers/faqcontroller');
 const copyrightcontroller = require('../controllers/copyrightcontroller');
 const profilecontroller = require('../controllers/profilecontroller');
+const reglagecontroller = require('../controllers/reglagecontroller');
 const summarycontroller = require('../controllers/summary');
 const summaryadmincontroller= require('../controllers/summary_admin');
 const bilan_controller = require('../controllers/bilan_controller');
 const config_profil = require('../controllers/config_profil');
+
 const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
 
@@ -158,6 +160,8 @@ router.get('/condition_general', conditiongeneral_controller.condition_general);
 router.get('/copyright', copyrightcontroller.copyright);
 router.get('/profile', profilecontroller.profile);
 router.post('/profile', profilecontroller.editUserProfile);
+router.get('/reglage', reglagecontroller.reglage);
+router.post('/reglage', reglagecontroller.editUserReglage);
 
 router.get(
   '/ajouter-produit-global',

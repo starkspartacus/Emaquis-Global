@@ -3,6 +3,7 @@ exports.PRODUCT_SIZE = [
   '30cl',
   '33cl',
   '50cl',
+  '60cl',
   '65cl',
   '70cl',
   '75cl',

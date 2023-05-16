@@ -52,20 +52,42 @@ app.io = io;
 db();
 
 const SaveUSer = io.of('/inscription').use(Serveur.getSharedSession());
+
 SaveUSer.on('connection', (socket) => {
   socket.on('setUser', async (data) => {
     const Result = await userQueries.setUser(data);
+    console.log(Result,'mouss')
     if (Result.etat == false) {
       socket.emit('bad');
     } else {
       if (Result !== null) {
+        const token = jwt.sign(
+          { user_id: Result._id, isAdmin: Result.isAdmin },
+          process.env.SECRET,
+          {
+            expiresIn: '1h',
+          }
+        );
+
+        Result.token = token;
+        socket.handshake.session.user = {
+          id: Result.result._id,
+          username: Result.result.username,
+          nom_etablissement: Result.result.nom_etablissement,
+          isAdmin: Result.result.isAdmin,
+          ...Result.result._doc,
+        };
+        socket.handshake.session.save();
+        console.log(socket.handshake.session);
+        console.log({ token: token });
         socket.emit('saved');
-        socket.emit('loginsuccess', '/dashboard');
+
+        socket.emit('redirect', '/config_profil');
+
       }
     }
   });
 });
-
 //connexion admin
 const UserLogin = io.of('/connexion').use(Serveur.getSharedSession());
 UserLogin.on('connection', (socket) => {
@@ -215,7 +237,7 @@ Summary.on('connection', (socket) => {
       createdAt: { $gte: startOfMonth.toDate() },
     });
     console.log(Result);
-    
+
     if (Result) {
       const beneficeParBouteille = 5;
       let totalPrix = 0;
@@ -223,12 +245,12 @@ Summary.on('connection', (socket) => {
       const semaineVentes = { semaine1: 0, semaine2: 0, semaine3: 0, semaine4: 0 };
       const semaineBenefice = { semaine1: 0, semaine2: 0, semaine3: 0, semaine4: 0 };
       let totalBenefice = 0;
-    
+
       Result.result.forEach((vente) => {
         // Calculer le prix total de la vente
         const prixTotal = vente.prix;
         totalPrix += prixTotal;
-    
+
         vente.produit.forEach((produit, i) => {
           // Calculer le nombre total de bouteilles vendues
           const quantiteVendue = vente.quantite[i];
@@ -236,11 +258,11 @@ Summary.on('connection', (socket) => {
             bouteillesVendues[produit] = 0;
           }
           bouteillesVendues[produit] += quantiteVendue;
-    
+
           // Diviser les ventes en fonction des semaines
           const dateVente = new Date(vente.createdAt);
           const semaineVente = moment(dateVente).isoWeek();
-    
+
           if (semaineVente === moment(startOfMonth).isoWeek()) {
             semaineVentes.semaine1 += prixTotal;
             semaineBenefice.semaine1 += quantiteVendue * beneficeParBouteille;
@@ -254,13 +276,13 @@ Summary.on('connection', (socket) => {
             semaineVentes.semaine4 += prixTotal;
             semaineBenefice.semaine4 += quantiteVendue * beneficeParBouteille;
           }
-    
+
           // Calculer le bénéfice total
           const beneficeVente = quantiteVendue * beneficeParBouteille;
           totalBenefice += beneficeVente;
         });
       });
-      
+
       // console.log('Ventes par semaine:', semaineVentes);
       // console.log('Bénéfice par semaine:', semaineBenefice);
       // console.log('Total des ventes:', totalPrix);
@@ -286,8 +308,8 @@ Summary.on('connection', (socket) => {
     // }else{
     //   socket.emit('paymentbad');
     // }
-   
-    
+
+
   })
 });
 

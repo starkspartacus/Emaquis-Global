@@ -13,7 +13,7 @@ exports.employeQueries = class {
         role: data.role,
         travail_pour: data.chef_etablissement,
         statut: 'Actif',
-        email: data.email,
+        // email: data.email,
         numero: data.numero,
         adresse: data.adresse,
         password: encryptedPassword,
@@ -40,6 +40,27 @@ exports.employeQueries = class {
     return new Promise(async (next) => {
       await Employe.findOne({
         email: email,
+        deleted: false,
+      })
+        .then((data) => {
+          next({
+            etat: true,
+            result: data,
+          });
+        })
+        .catch((err) => {
+          next({
+            etat: false,
+            err: err,
+          });
+        });
+    });
+  }
+
+  static getEmployeByNumber(numero) {
+    return new Promise(async (next) => {
+      await Employe.findOne({
+        numero: numero,
         deleted: false,
       })
         .then((data) => {
