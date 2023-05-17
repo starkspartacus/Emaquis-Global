@@ -247,6 +247,10 @@ const AppRoot = () => {
     const carts = [];
 
     vente.produit.forEach((product, index) => {
+      const prProduct = products.find((el) => el._id === product.productId);
+      if (prProduct) {
+        product.quantite = prProduct.quantite;
+      }
       carts.push({
         ...product,
         quantity: vente.quantite[index],

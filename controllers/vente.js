@@ -236,12 +236,16 @@ exports.editventePost = async (req, res) => {
           }
 
           const product_in_old_vente_index = oldVente.result.produit.findIndex(
-            (product) => '' + product._id === prodId
+            (product) => '' + product.productId === prodId
           );
 
-          if (currentProduct.result.quantite < body.quantite[index]) {
+          const qty =
+            oldVente?.result?.quantite[product_in_old_vente_index] || 0;
+
+          if (currentProduct.result.quantite + qty < body.quantite[index]) {
             if (product_in_old_vente_index !== -1) {
               const qty = oldVente.result.quantite[product_in_old_vente_index];
+
               if (qty - body.quantite[index] > 0) {
                 // return no do nothing
                 continue;
