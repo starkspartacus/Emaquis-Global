@@ -1,11 +1,11 @@
 const { venteQueries } = require('../requests/venteQueries');
 const { produitQueries } = require('../requests/produitQueries');
-const { retourQueries } = require('../requests/retourQueries');
 const Produits = require('../models/produit.model');
 const Ventes = require('../models/vente.model');
 const Retours = require('../models/retourproduit.model');
 const { settingQueries } = require('../requests/settingQueries');
 const { employeQueries } = require('../requests/EmployeQueries');
+const { BilletQueries } = require('../requests/BilletQueries');
 exports.vente = async (req, res) => {
   try {
     const productRes = await produitQueries.getProduitBySession(
@@ -89,6 +89,14 @@ exports.ventePost = async (req, res) => {
       const setting = await settingQueries.getSettingByUserId(
         sess.travail_pour
       );
+      let billet = await BilletQueries.getBilletByEmployeId(body.for_employe);
+
+      if (!billet.result) {
+        res.status(400).json({
+          message: 'la caisse de ce barman est fermée',
+        });
+        return;
+      }
 
       if (
         vente.table_number &&
@@ -261,6 +269,15 @@ exports.editventePost = async (req, res) => {
         sess.travail_pour
       );
 
+      let billet = await BilletQueries.getBilletByEmployeId(body.for_employe);
+
+      if (!billet.result) {
+        res.status(400).json({
+          message: 'la caisse de ce barman est fermée',
+        });
+        return;
+      }
+
       if (
         body.table_number &&
         setting.result.numberOfTables < body.table_number
@@ -332,6 +349,7 @@ exports.editventePost = async (req, res) => {
       };
 
       await venteQueries.updateVente(venteId, newVente);
+
       const allProducts = body.produit
         .filter((prodId) => !products.find((prod) => '' + prod.id === prodId))
         .map((prodId) => {
