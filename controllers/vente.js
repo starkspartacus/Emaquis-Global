@@ -5,6 +5,7 @@ const Produits = require('../models/produit.model');
 const Ventes = require('../models/vente.model');
 const Retours = require('../models/retourproduit.model');
 const { settingQueries } = require('../requests/settingQueries');
+const { employeQueries } = require('../requests/EmployeQueries');
 exports.vente = async (req, res) => {
   try {
     const productRes = await produitQueries.getProduitBySession(
@@ -107,6 +108,8 @@ exports.ventePost = async (req, res) => {
         return;
       }
 
+      const barmans = await employeQueries.getBarmans(sess.travail_pour);
+
       let newVente = {
         produit: produits,
         quantite: vente.quantite,
@@ -119,6 +122,7 @@ exports.ventePost = async (req, res) => {
         formules: formulesProduct,
         table_number: vente.table_number,
         amount_collected: vente.amount_collected,
+        for_employe: vente.for_employe || barmans.result[0]?._id,
       };
       // il fait pas l setvente or il fait update  de produit
       Vente = await venteQueries.setVente(newVente);

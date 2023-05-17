@@ -202,4 +202,27 @@ exports.employeQueries = class {
         });
     });
   }
+
+  static getBarmans(travail_pour) {
+    return new Promise(async (next) => {
+      await Employe.find({
+        travail_pour: travail_pour,
+        role: 'Barman',
+        deleted: false,
+      })
+        .select('_id nom prenom travail_pour')
+        .then((data) => {
+          next({
+            etat: true,
+            result: data,
+          });
+        })
+        .catch((err) => {
+          next({
+            etat: false,
+            err: err,
+          });
+        });
+    });
+  }
 };

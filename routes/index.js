@@ -31,9 +31,11 @@ const copyrightcontroller = require('../controllers/copyrightcontroller');
 const profilecontroller = require('../controllers/profilecontroller');
 const reglagecontroller = require('../controllers/reglagecontroller');
 const summarycontroller = require('../controllers/summary');
-const summaryadmincontroller= require('../controllers/summary_admin');
+const summaryadmincontroller = require('../controllers/summary_admin');
 const bilan_controller = require('../controllers/bilan_controller');
 const config_profil = require('../controllers/config_profil');
+
+const billetRouter = require('./billet.router');
 
 const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
@@ -54,8 +56,10 @@ const fs = require('fs');
 const S3 = require('aws-sdk/clients/s3');
 const { authSuperAdmin, checkAuthUser } = require('../middleware/auth');
 const { uploadFile } = require('../utils/uploadFile');
-const {condition_general} = require("../controllers/conditiongeneral_controller");
-const conditiongeneral_controller = require("../controllers/conditiongeneral_controller");
+const {
+  condition_general,
+} = require('../controllers/conditiongeneral_controller');
+const conditiongeneral_controller = require('../controllers/conditiongeneral_controller');
 
 var router = express.Router();
 
@@ -152,6 +156,7 @@ router.post(
 
 router.get('/allemploye', allemployecontroller.allemploye);
 router.get('/barmanparuser', barmanparusercontroller.barmanparuser);
+router.post('/allbarmans', allemployecontroller.allBarmans);
 
 router.post('/employelogin', employelogincontroller.employeloginPost);
 
@@ -258,5 +263,7 @@ router.post('/emajouterproduit', upload.single('image'), async (req, res) => {
 
   const description = req.body.description;
 });
+
+router.use('/billet', billetRouter);
 
 module.exports = router;

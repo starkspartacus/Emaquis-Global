@@ -248,7 +248,7 @@ const ModalDelete = ({
               <button
                 type='button'
                 className='btn btn-danger close-modal'
-                onClick={handleDelete}
+                onClick={handleUpdateVente}
                 disabled={loading}
               >
                 {loading ? 'Annulation..' : 'Oui'}
@@ -294,6 +294,7 @@ const ModalCollectedAmount = ({ vente, onClose }) => {
       somme_encaisse: Number(sommeEncaisse),
       amount_collected: true,
       table_number: vente.table_number,
+      update_for_collected_amount: true,
     };
 
     setLoading(true);
@@ -307,17 +308,9 @@ const ModalCollectedAmount = ({ vente, onClose }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.etat) {
-          fetch(`/vente/status/${vente._id}`, {
-            method: 'POST',
-            body: JSON.stringify({ type: 'Validée' }),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }).then((res) => {
-            setLoading(false);
-            confirmVente(vente._id, 'Validée');
-            handleClose();
-          });
+          setLoading(false);
+          confirmVente(vente._id, 'Validée');
+          handleClose();
         } else {
           alert('Une erreur est survenue');
           setLoading(false);

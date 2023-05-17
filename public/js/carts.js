@@ -81,6 +81,7 @@ const CartItem = ({ product }) => {
 const CartFooter = () => {
   const { carts, clearCarts, venteId, initProductsUnvailable, venteSelected } =
     React.useContext(ProductsContext);
+  const { user } = React.useContext(AppContext);
   const [sommeEncaisse, setSommeEncaisse] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [collectedLater, setCollectedLater] = React.useState(false);
@@ -122,6 +123,7 @@ const CartFooter = () => {
       somme_encaisse: Number(sommeEncaisse),
       amount_collected: collectedLater ? false : true,
       table_number: tableNumber,
+      for_employe: user._id,
     };
 
     if (collectedLater && !tableNumber) {

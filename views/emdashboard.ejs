@@ -12,6 +12,18 @@
 
     gtag('config', 'G-NT2SW8WBHT');
   </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-NT2SW8WBHT');
+  </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>E-maquis Barman(aid)</title>
@@ -114,11 +126,13 @@
 
   <script>
     const user_travail_pour = <%- JSON.stringify(user.travail_pour) %>;
+    const globalUser = <%- JSON.stringify(user) %>;
     const globalCategories = <%- JSON.stringify(categories) %>;
     const globalProducts = <%- JSON.stringify(produits) %>;
     const globalVentes = <%- JSON.stringify(ventes) %>;
     const sumEmployes = <%- JSON.stringify(emplnum) %>;
     const sumVentes = <%- JSON.stringify(sum) %>;
+    const globalBillet = <%- JSON.stringify(billet) %>;
   </script>
 
   <script src="../utils/formatAmount.js" type="module"></script>
