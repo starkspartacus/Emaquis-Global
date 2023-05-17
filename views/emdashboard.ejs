@@ -7,7 +7,10 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'G-NT2SW8WBHT');
@@ -114,11 +117,13 @@
 
   <script>
     const user_travail_pour = <%- JSON.stringify(user.travail_pour) %>;
+    const globalUser = <%- JSON.stringify(user) %>;
     const globalCategories = <%- JSON.stringify(categories) %>;
     const globalProducts = <%- JSON.stringify(produits) %>;
     const globalVentes = <%- JSON.stringify(ventes) %>;
     const sumEmployes = <%- JSON.stringify(emplnum) %>;
     const sumVentes = <%- JSON.stringify(sum) %>;
+    const globalBillet = <%- JSON.stringify(billet) %>;
   </script>
 
   <script src="../utils/formatAmount.js" type="module"></script>

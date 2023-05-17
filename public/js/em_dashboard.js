@@ -9,6 +9,8 @@ const AppRoot = () => {
   const [venteId, setVenteId] = React.useState(null);
   const [venteSelected, setVenteSelected] = React.useState(null);
   const [productUnvailable, setProductUnvailable] = React.useState([]);
+  const [billet, setBillet] = React.useState(null);
+  const [user, setUser] = React.useState(null);
 
   const handleSelectCategory = (id) => {
     setCategorySelectedId(id);
@@ -19,8 +21,14 @@ const AppRoot = () => {
 
     socket.on('connect', () => {
       socket.on(`${user_travail_pour}-vente`, (data) => {
-        $.notify('Vous avez une nouvelle commande !', 'success');
         const vente = data.vente;
+
+        if (
+          !vente.for_employe ||
+          (vente.for_employe && vente.for_employe === globalUser._id)
+        ) {
+          $.notify('Vous avez une nouvelle commande !', 'success');
+        }
 
         let vente_exist = false;
 
@@ -30,13 +38,17 @@ const AppRoot = () => {
             return prVentes;
           }
 
+          if (vente.for_employe && vente.for_employe !== globalUser._id) {
+            return prVentes;
+          }
+
           return [...prVentes, vente];
         });
 
         setProducts((prProducts) => {
           const newProducts = prProducts.map((product) => {
             const index = vente.produit.findIndex(
-              (el) => el._id === product._id
+              (el) => el.productId === product._id
             );
 
             if (index !== -1) {
@@ -70,7 +82,9 @@ const AppRoot = () => {
 
         setProducts((prProducts) => {
           const newProducts = prProducts.map((product) => {
-            const index = allProducts.findIndex((el) => el.id === product._id);
+            const index = allProducts.findIndex(
+              (el) => el.productId === product._id
+            );
 
             if (index !== -1) {
               const newProduct = { ...product };
@@ -98,12 +112,17 @@ const AppRoot = () => {
     setTotalVentes(Number(sumVentes));
     setTotalEmployes(Number(sumEmployes));
     setVentes(globalVentes);
+    setBillet(globalBillet);
+    setUser(globalUser);
   }, []);
 
   const updateTotalVentes = (total) => {
     setTotalVentes((prTotal) => Number(prTotal) + Number(total));
   };
 
+  const resetTotalVentes = () => {
+    setTotalVentes(0);
+  };
   const confirmVente = (venteId, type) => {
     const vente = ventes.find((el) => el._id === venteId);
 
@@ -118,7 +137,9 @@ const AppRoot = () => {
     } else if (type === 'Annulée') {
       setProducts((prProducts) => {
         const newProducts = prProducts.map((product) => {
-          const index = vente.produit.findIndex((el) => el._id === product._id);
+          const index = vente.produit.findIndex(
+            (el) => el.productId === product._id
+          );
 
           if (index !== -1) {
             const newProduct = { ...product };
@@ -241,6 +262,10 @@ const AppRoot = () => {
     setProductUnvailable(products);
   };
 
+  const updateBillet = (billet) => {
+    setBillet(billet);
+  };
+
   const resetProductsUnvailable = () => {
     setProductUnvailable([]);
   };
@@ -253,6 +278,10 @@ const AppRoot = () => {
         totalEmployes,
         ventes,
         confirmVente,
+        billet,
+        updateBillet,
+        user,
+        resetTotalVentes,
       }}
     >
       <ProductsContext.Provider
