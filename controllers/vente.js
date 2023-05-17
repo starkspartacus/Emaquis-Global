@@ -89,7 +89,7 @@ exports.ventePost = async (req, res) => {
       const setting = await settingQueries.getSettingByUserId(
         sess.travail_pour
       );
-      let billet = await BilletQueries.getBilletByEmployeId(body.for_employe);
+      let billet = await BilletQueries.getBilletByEmployeId(vente.for_employe);
 
       if (!billet.result) {
         res.status(400).json({
