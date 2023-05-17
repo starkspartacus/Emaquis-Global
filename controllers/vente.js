@@ -410,11 +410,17 @@ exports.editStatusVente = async (req, res) => {
 
         if (req.body.type === 'Annulée') {
           for (let [i, product] of vente.produit.entries()) {
-            const produit = await produitQueries.getProduitById(product);
+            const produit = await produitQueries.getProduitById(
+              product.productId
+            );
+
             const newQte = produit.result.quantite + Number(vente.quantite[i]);
 
             await produitQueries.updateProduit(
-              { produitId: product, session: req.session.user.travail_pour },
+              {
+                produitId: product.productId,
+                session: req.session.user.travail_pour,
+              },
               { quantite: newQte }
             );
           }
