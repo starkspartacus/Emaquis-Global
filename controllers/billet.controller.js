@@ -1,17 +1,14 @@
-const billetModel = require('../models/billet.model');
 const venteModel = require('../models/vente.model');
+const { BilletQueries } = require('../requests/BilletQueries');
 
 exports.getOneBillet = async (req, res) => {
   if (req.session.user) {
     try {
-      const billet = await billetModel.findOne({
-        employe_id: req.params.id,
-        is_closed: false,
-      });
-      if (billet) {
+      const billet = await BilletQueries.getBilletByEmployeId(req.params.id);
+      if (billet.result) {
         res.json({
           etat: true,
-          data: billet,
+          data: billet.result,
         });
       } else {
         res.json({
@@ -37,25 +34,20 @@ exports.openBillet = async (req, res) => {
     try {
       const body = req.body;
 
-      let billet = await billetModel.findOne({
-        employe_id: body.employe_id,
-        is_closed: false,
-      });
+      let billet = await BilletQueries.getBilletByEmployeId(body.employe_id);
 
-      if (!billet) {
-        billet = new billetModel({
+      if (!billet.result) {
+        billet = await BilletQueries.setBillet({
           employe_id: body.employe_id,
           open_hour: new Date(),
           travail_pour: req.session.user.travail_pour,
         });
-
-        await billet.save();
       }
 
-      if (billet) {
+      if (billet.etat) {
         res.json({
           etat: true,
-          data: billet,
+          data: billet.result,
         });
       }
     } catch (error) {
@@ -76,12 +68,11 @@ exports.closeBillet = async (req, res) => {
     try {
       const body = req.body;
 
-      let billet = await billetModel.findOne({
-        employe_id: body.employe_id,
-        is_closed: false,
-      });
+      let billetRes = await BilletQueries.getBilletByEmployeId(body.employe_id);
 
-      if (billet) {
+      if (billetRes.result) {
+        const billet = billetRes.result;
+
         const commonProperties = {
           for_employe: body.employe_id,
           createdAt: {
@@ -121,7 +112,10 @@ exports.closeBillet = async (req, res) => {
             0
           );
 
-          await billet.save();
+          const { _id, ...billetData } = billet._doc;
+
+          await BilletQueries.updateBilletById(_id, billetData);
+
           res.json({
             etat: true,
             data: billet,

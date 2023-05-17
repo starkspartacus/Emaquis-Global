@@ -2,7 +2,7 @@ const { venteQueries } = require('../requests/venteQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const { employeQueries } = require('../requests/EmployeQueries');
 const categorieModel = require('../models/categorie.model');
-const billetModel = require('../models/billet.model');
+const { BilletQueries } = require('../requests/BilletQueries');
 
 exports.emdashboard = async (req, res) => {
   try {
@@ -11,26 +11,21 @@ exports.emdashboard = async (req, res) => {
       return;
     }
 
-    let billet = await billetModel.findOne({
-      employe_id: req.session.user._id,
-      is_closed: false,
-    });
+    let billet = await BilletQueries.getBilletByEmployeId(req.session.user._id);
 
-    if (!billet) {
-      const billets = await billetModel
-        .find({
-          employe_id: req.session.user._id,
-          is_closed: true,
-          close_hour: {
-            $gte: new Date(new Date().setHours(0, 0, 0)),
-          },
-        })
-        .sort({
-          open_hour: -1,
-        });
-      if (billets && billets.length > 0) {
-        billet = billets[0];
+    if (!billet.result) {
+      const billets = await BilletQueries.getBilletByQuery({
+        employe_id: req.session.user._id,
+        is_closed: true,
+        close_hour: {
+          $gte: new Date(new Date().setHours(0, 0, 0)),
+        },
+      });
+      if (billets && billets.result.length > 0) {
+        billet = billets.result[0];
       }
+    } else {
+      billet = billet.result;
     }
 
     const Vente = await venteQueries.getVentes({
