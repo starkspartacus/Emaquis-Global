@@ -70,7 +70,11 @@ const AppRoot = () => {
 
         setVentes((prVentes) => {
           const newVentes = prVentes.map((el) => {
-            if (el._id === vente._id) {
+            if (
+              el._id === vente._id &&
+              vente.for_employe &&
+              vente.for_employe === globalUser._id
+            ) {
               return vente;
             } else {
               return el;
@@ -82,9 +86,7 @@ const AppRoot = () => {
 
         setProducts((prProducts) => {
           const newProducts = prProducts.map((product) => {
-            const index = allProducts.findIndex(
-              (el) => el.productId === product._id
-            );
+            const index = allProducts.findIndex((el) => el.id === product._id);
 
             if (index !== -1) {
               const newProduct = { ...product };
