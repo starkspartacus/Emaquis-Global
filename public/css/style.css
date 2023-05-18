@@ -2783,6 +2783,34 @@ p a:hover {
   transition: 0.5s;
 }
 
+.form-focus:focus {
+  border-color: #98ED58;
+  box-shadow: 0 0 0 0.2rem rgba(152, 237, 88, 0.25);
+  animation: animform ease-in-out 0.7s  alternate;
+
+}
+
+@keyframes animform {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+
 /* line 14, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1 i {
   font-size: 15px;
