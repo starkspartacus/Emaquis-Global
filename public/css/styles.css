@@ -1224,6 +1224,31 @@ button:focus,
   border-radius: 5px;
 }
 
+.form-focus:focus {
+  border-color: #98ED58;
+  box-shadow: 0 0 0 0.2rem rgba(152, 237, 88, 0.25);
+  animation: animform ease-in-out 0.7s  alternate;
+
+}
+
+@keyframes animform {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .testimonial .testimonial-slider .item .block .image {
   margin-top: 30px;
   margin-bottom: 5px;
