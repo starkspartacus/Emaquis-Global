@@ -15,10 +15,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>E-maquis Gestionnaire</title>
+  <script src="js/notifMano.js" type="application/javascript" defer></script>
+  <script src="js/notifManoScript.js" type="application/javascript" defer></script>
   <script src="js/confetti.js"></script>
   <%- include('partial/head.ejs') %>
 
   <!-- PLUGINS CSS STYLE -->
+  <link rel="stylesheet" href="../css/notifMano.css">
   <link rel="stylesheet" href="../plugins/bootstrap/bootstrap.min.css" />
   <link rel="stylesheet" href="../plugins/themify-icons/themify-icons.css" />
   <link rel="stylesheet" href="../plugins/slick/slick.css" />
@@ -26,6 +29,7 @@
   <link rel="stylesheet" href="../plugins/fancybox/jquery.fancybox.min.css" />
   <link rel="stylesheet" href="../plugins/aos/aos.css" />
   <link href="../css/style.css" rel="stylesheet">
+
 
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
@@ -46,7 +50,7 @@
   <section class="main_content dashboard_part large_header_bg">
     <!-- menu  -->
     <%- include('partial/notifBar.ejs') %>
-    <%- include('partial/notifMano.ejs')%>
+
     <div style="postion: absolute; inset: 0" id="confetti"></div>
     <!--/ menu  -->
     <div class="main_content_iner overly_inner admin_dashboard">
@@ -179,8 +183,8 @@
 
                     </div>
                     <div class="crm_body">
-                      <h4><%- totalemploye %></h4>
-                      <p>Employé(e)s</p>
+                      <h4 class="testt"><%- totalemploye %></h4>
+                      <p >Employé(e)s</p>
                     </div>
                   </div>
                 </div>
@@ -426,7 +430,7 @@
                         <th scope="col">taille</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="stockProduit">
                       <% Tab.forEach(el =>{%>
                       <tr>
                         <td>

@@ -1,16 +1,52 @@
 
+
+let test  = document.querySelector('.testt');
+console.log(test);
+
+
 let notyf = new Notyf({
-    duration: 5000, // Set your global Notyf configuration here
-    position: {
-        y: 'top',
-    }
+    types: [
+        {
+            type: 'success',
+            background: 'orange',
+            icon: {
+                className: 'fas fa-check',
+            },
+            position: {
+                y: 'top',
+            },
+            duration: 5000,
+            dismissible: true,
+        },
+        {
+            type: 'error',
+            background: 'red',
+            icon: {
+                className: 'fas fa-times',
+            },
+            position: {
+                y: 'top',
+            },
+            duration: 5000,
+            dismissible: true,
+        }
+
+    ]
+
 });
 
-document.getElementById('btnNotifMano')
-    .addEventListener('click', function() {
-        notyf.error('Attention votre stock est de moins de 5 articles !');
-    });
+let employeAdd = notyf.open({
+    type: 'success',
+    message: "Vous avez ajouté " + test.firstChild.data + " employés",
+});
 
-if (onload) {
-    notyf.success('Bienvenue sur le site de Mano !');
+let noEmploye = notyf.open({
+    type: 'error',
+    message: "Vous n'avez pas ajouté d'employés",
+
+});
+
+
+for (let i = 0; i < test.length; i++) {
+    console.log(test[i]);
 }
