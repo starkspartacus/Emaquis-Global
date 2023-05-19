@@ -1,7 +1,9 @@
 
 let test  = document.querySelector('.testt');
 
+let testQuantity = document.querySelectorAll('.testQuantity');
 
+console.log(testQuantity);
 
 let notyf = new Notyf({
     types: [
