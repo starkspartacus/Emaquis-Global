@@ -1,0 +1,55 @@
+<script type="application/javascript">
+  let employeLength = <%- JSON.stringify(totalemploye) %>;
+  const produits = <%- JSON.stringify(Tab) %>;
+
+  let notyf = new Notyf({
+    types: [{
+        type: 'success',
+        background: 'orange',
+      },
+      {
+        type: 'error',
+        background: 'red',
+        icon: {
+          className: 'fas fa-times',
+        },
+        position: {
+          y: 'top',
+        },
+        duration: 5000,
+        dismissible: true,
+      }
+    ]
+
+  });
+
+
+  const notifFunc = (message, type = "success") => {
+    notyf.open({
+      type,
+      message: message,
+      duration: 10000,
+      dismissible: true,
+      position: {
+        y: 'top',
+        x: 'center',
+      },
+      icon: {
+        className: 'fas fa-user',
+        tagName: 'i',
+        color: 'white',
+        fontSize: '20px'
+      }
+    });
+  }
+
+  let employeAdd = notifFunc(employeLength ? "Vous avez " + employeLength + " employés à votre charge" : ' Ajoutez un employé ')
+
+
+  for (let produit of produits) {
+    if (produit.quantite < 100) {
+      notifFunc("Le produit " + produit.produit
+        .nom_produit + " est en rupture de stock", "error")
+    }
+  }
+</script>
