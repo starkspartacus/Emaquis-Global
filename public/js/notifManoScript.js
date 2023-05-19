@@ -17,7 +17,6 @@ let notyf = new Notyf({
             },
             duration: 10000,
             dismissible: true,
-
         },
         {
             type: 'error',
@@ -46,6 +45,8 @@ let employeAdd = notyf.open({
         x: 'center',
     }
 });
+
+
 
 
 
