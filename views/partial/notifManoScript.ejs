@@ -24,15 +24,15 @@
   });
 
 
-  const notifFunc = (message, type = "success") => {
+  const notifFunc = (message, type) => {
     notyf.open({
       type,
       message: message,
-      duration: 10000,
+      duration: 100000,
       dismissible: true,
       position: {
         y: 'top',
-        x: 'center',
+        x: 'right',
       },
       icon: {
         className: 'fas fa-user',
@@ -43,13 +43,16 @@
     });
   }
 
-  let employeAdd = notifFunc(employeLength ? "Vous avez " + employeLength + " employés à votre charge" : ' Ajoutez un employé ')
+  let employeAdd = notifFunc(employeLength ? "Vous avez " + employeLength + " employés à votre charge" : ' Ajoutez un employé ', "success")
 
 
   for (let produit of produits) {
     if (produit.quantite < 100) {
       notifFunc("Le produit " + produit.produit
-        .nom_produit + " est en rupture de stock", "error")
+        .nom_produit + " est très bas " + produit.quantite, "error")
+    }else if(produit.quantite == null){
+      notifFunc("Le produit " + produit.produit
+        .nom_produit + " est en rupture de stock ", "error")
     }
   }
 </script>
