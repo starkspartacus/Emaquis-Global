@@ -15,8 +15,9 @@ let notyf = new Notyf({
             position: {
                 y: 'top',
             },
-            duration: 5000,
+            duration: 10000,
             dismissible: true,
+
         },
         {
             type: 'error',
@@ -37,7 +38,13 @@ let notyf = new Notyf({
 
 let employeAdd = notyf.open({
     type: 'success',
-    message: "Vous avez ajouté " + test.firstChild.data + " employés",
+    message: test.firstChild.data > 0 ? "Vous avez " + test.firstChild.data + "employés à votre charge": 'Ajoutez un employé ',
+    duration: 10000,
+    dismissible: true,
+    position: {
+        y: 'top',
+        x: 'center',
+    }
 });
 
 
