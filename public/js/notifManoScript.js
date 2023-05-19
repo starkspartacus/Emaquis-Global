@@ -1,7 +1,6 @@
 
-
 let test  = document.querySelector('.testt');
-console.log(test);
+
 
 
 let notyf = new Notyf({
@@ -9,15 +8,8 @@ let notyf = new Notyf({
         {
             type: 'success',
             background: 'orange',
-            icon: {
-                className: 'fas fa-check',
-            },
-            position: {
-                y: 'top',
-            },
-            duration: 10000,
-            dismissible: true,
         },
+
         {
             type: 'error',
             background: 'red',
@@ -37,17 +29,17 @@ let notyf = new Notyf({
 
 let employeAdd = notyf.open({
     type: 'success',
-    message: test.firstChild.data > 0 ? "Vous avez " + test.firstChild.data + "employés à votre charge": 'Ajoutez un employé ',
+    message: test.firstChild.data > 0 ? "Vous avez " + test.firstChild.data + " employés à votre charge": ' Ajoutez un employé ',
     duration: 10000,
     dismissible: true,
     position: {
         y: 'top',
         x: 'center',
+    },
+    icon: {
+        className: 'fas fa-user',
+        tagName: 'i',
+        color: 'white',
+        fontSize: '20px'
     }
 });
-
-
-
-
-
-
