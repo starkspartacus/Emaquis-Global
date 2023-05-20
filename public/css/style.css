@@ -50,6 +50,19 @@ body {
   border-radius: 50%;
 }
 
+#notificationData img{
+  cursor: pointer;
+}
+
+.modal-body-notyf li{
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.modal-body-notyf li:last-child{
+    border-bottom: none;
+}
+
 @media (min-width: 1200px) {
   /* line 13, G:/admin_project/8 admin/management_html/scss/_reset.scss */
   .container {

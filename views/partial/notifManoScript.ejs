@@ -3,7 +3,9 @@
   const produits = <%- JSON.stringify(Tab) %>;
   let notificationData = document.getElementById('notificationData');
   let notificationCount = document.querySelector('#notificationData .countNotif');
-  console.log(notificationCount)
+  let notificationList = document.querySelector('#notificationData img');
+  let notificationListUl = document.querySelector('.modal-body-notyf');
+
 
   let tabNotif = [];
 
@@ -65,7 +67,7 @@
     notyf.open({
       type,
       message: message,
-      duration: 1000,
+      duration: 5000,
       dismissible: true,
       position: {
         y: 'top',
@@ -129,6 +131,16 @@
     }
 
   notificationCount.innerHTML += tabNotif.length ;
+
+    notificationList.addEventListener('click', () => {
+        for (let notif of tabNotif) {
+            let li = document.createElement('li');
+            li.style.listStyle = 'none';
+            li.innerHTML = notif;
+            notificationListUl.appendChild(li);
+        }
+        tabNotif = [];
+    });
 
 
 </script>
