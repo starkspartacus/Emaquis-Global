@@ -5324,6 +5324,10 @@ body::-webkit-scrollbar {
 
 }
 
+.em_main_content{
+  padding-left: 0!important;
+}
+
 /* line 13, G:/admin_project/8 admin/management_html/scss/_main_content.scss */
 .main_content.full_main_content {
   padding-left: 136px;

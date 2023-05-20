@@ -7,7 +7,10 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'G-NT2SW8WBHT');
@@ -54,13 +57,13 @@
       display: block;
     }
   </style>
-    <!-- main content part here -->
-    <!-- sidebar  -->
+  <!-- main content part here -->
+  <!-- sidebar  -->
   <%- include('partial/emside_global.ejs') %>
   <%-include('partial/reactScript.ejs') %>
-    <!--/ sidebar  -->
+  <!--/ sidebar  -->
 
-  <section class="main_content dashboard_part large_header_bg">
+  <section class="main_content em_main_content dashboard_part large_header_bg">
     <!-- menu  -->
 
     <!--/ menu  -->
@@ -79,24 +82,24 @@
                 </ol>
               </div>
 
-                <div class="page_title_right">
+              <div class="page_title_right">
                 <div class="page_date_button d-flex align-items-center">
                   <div class="profile_author_name">
                     <p class="text-center">
                       <%= locals.user?.nom %> <%= locals.user?.prenom %>
                     </p>
                     <h5 class="emRole badge"><%= locals.user?.role %></h5>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
-        </div>
 
-        <div id="root"></div>
+        </div>
       </div>
+
+      <div id="root"></div>
+    </div>
     </div>
   </section>
 
