@@ -36,6 +36,20 @@ body {
   background: #f6f7fb;
 }
 
+#notificationData span {
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+  padding: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  background: red;
+  border-radius: 50%;
+}
+
 @media (min-width: 1200px) {
   /* line 13, G:/admin_project/8 admin/management_html/scss/_reset.scss */
   .container {
@@ -3567,12 +3581,12 @@ table.dataTable.dtr-inline.collapsed
 /******** header css here *********/
 /* line 2, G:/admin_project/8 admin/management_html/scss/_header.scss */
 .header_iner {
-  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
   top: 0;
   z-index: 99;
-  position: relative;
   border-radius: 0px;
-  margin: 0;
   background: #f6f7fb;
 }
 
@@ -5657,6 +5671,7 @@ body::-webkit-scrollbar {
 /* line 319, G:/admin_project/8 admin/management_html/scss/_main_content.scss */
 .page_title_right {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 

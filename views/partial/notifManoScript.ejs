@@ -2,7 +2,8 @@
   let employeLength = <%- JSON.stringify(totalemploye) %>;
   const produits = <%- JSON.stringify(Tab) %>;
   let notificationData = document.getElementById('notificationData');
-  console.log(notificationData)
+  let notificationCount = document.querySelector('#notificationData .countNotif');
+  console.log(notificationCount)
 
   let tabNotif = [];
 
@@ -30,7 +31,6 @@
         position: {
           y: 'top',
         },
-        duration: 5000,
         dismissible: true,
       },
         {
@@ -65,7 +65,7 @@
     notyf.open({
       type,
       message: message,
-      duration: 100000,
+      duration: 1000,
       dismissible: true,
       position: {
         y: 'top',
@@ -128,7 +128,8 @@
         tabNotif.push("Ajoutez un employé")
     }
 
-  console.log(tabNotif)
+  notificationCount.innerHTML += tabNotif.length ;
+
 
 </script>
 
