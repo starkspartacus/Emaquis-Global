@@ -362,6 +362,7 @@ exports.editventePost = async (req, res) => {
 
       if (body.update_for_collected_amount) {
         newVente.status_commande = 'Validée';
+        newVente.employe_validate_id = sess._id;
       }
 
       await venteQueries.updateVente(venteId, newVente);
