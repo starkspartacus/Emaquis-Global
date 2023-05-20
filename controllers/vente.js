@@ -360,6 +360,10 @@ exports.editventePost = async (req, res) => {
           body.amount_collected ?? oldVente.result.amount_collected,
       };
 
+      if (body.update_for_collected_amount) {
+        newVente.status_commande = 'Validée';
+      }
+
       await venteQueries.updateVente(venteId, newVente);
 
       const allProducts = body.produit
