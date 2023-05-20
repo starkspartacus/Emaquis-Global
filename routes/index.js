@@ -60,8 +60,11 @@ const {
   condition_general,
 } = require('../controllers/conditiongeneral_controller');
 const conditiongeneral_controller = require('../controllers/conditiongeneral_controller');
+const appConfigRouter = require('./app.router');
 
 var router = express.Router();
+
+router.use('/app', appConfigRouter);
 
 /* GET home page. */
 
