@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <title>E-maquis Configuration Profil</title>
 
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="E-maquis, Gestionnaire d'établissement" />
     <meta
@@ -140,10 +139,12 @@
 
     <main>
       <div class="container">
+        <p id="sess" hidden><%=user?.id%></p>
+
         <div id="wizard_container">
-          <form name="example-1" id="wrapped" method="POST">
+          <form name="example-1" id="wrapped">
             <input id="website" name="website" type="text" value="" />
-            <!-- Leave input above for security protection, read docs for details -->
+
             <div id="middle-wizard">
               <!-- First branch What Type of Project ============================== -->
               <div class="step" data-state="branchtype">
@@ -162,7 +163,7 @@
                         id="answer_1"
                         type="radio"
                         name="branch_1_group_1"
-                        value="Design"
+                        value="remboursementTotal"
                         class="required"
                       />
                       <label for="answer_1"
@@ -182,7 +183,7 @@
                         id="answer_2"
                         name="branch_1_group_1"
                         type="radio"
-                        value="Design"
+                        value="remboursementPartiel"
                         class="required"
                       />
                       <label for="answer_2"
@@ -202,7 +203,7 @@
                         id="answer_3"
                         name="branch_1_group_1"
                         type="radio"
-                        value="Design"
+                        value="avoir"
                         class="required"
                       />
                       <label for="answer_3"
@@ -267,7 +268,7 @@
                           <div class="styled-select">
                             <select class="required" name="country" disabled>
                               <option value="">Selection ton pays</option>
-                              <option value="côte d'ivoire" selected>
+                              <option value="cote_d_ivoire" selected>
                                 Côte d'ivoire
                               </option>
                             </select>
@@ -344,7 +345,11 @@
                               <option value="yopougon">Yopougon</option>
                             </select>
                           </div>
-                          <div  class="form-group add_bottom_30" id="quartier" style="display: none">
+                          <div
+                            class="form-group add_bottom_30"
+                            id="quartier"
+                            style="display: none"
+                          >
                             <input
                               type="text"
                               id="quartier"
@@ -481,19 +486,62 @@
     <!-- /Modal terms -->
 
     <%- include('partial/scriptconfigprofil.ejs') %>
+    <script src="../jquery-3.4.1.min.js"></script>
+    <script src="/socket.io/socket.io.js "></script>
+    <script>
+      const socket = io(window.location.origin + window.location.pathname);
+      console.log(window.location.origin + window.location.pathname);
+      // Récupérer tous les éléments radio avec un attribut name correspondant
+      var radios = document.querySelectorAll('input[name^="branch_1_group_1"]');
+
+      // Récupérer l'élément div par sa classe
+      var div = document.querySelector(".branch");
+
+      // Parcourir tous les éléments radio
+      for (var i = 0; i < radios.length; i++) {
+        radios[i].onclick = function () {
+          div.id = this.value;
+        };
+      }
+
+      $("form").on("submit", (e) => {
+        e.preventDefault();
+        isSucces = true;
+        console.log("aniki");
+    const objectifJournalier=  document.querySelector("#budget_slider").textContent;
+    const userid = document.querySelector("#sess").textContent;
+    
+        const data = {
+          RemboursementType: $('input[name="branch_1_group_1"]').val(),
+
+          ville: $('select[name="city"]').val(),
+          pays: $('select[name="country"]').val(),
+          square: $('select[name="square"]').val(),
+          othersquare: $('input[name="othersquare"]').val(),
+          objectifJournalier : objectifJournalier,
+          userid:userid
+        };
+
+        console.log(data);
+        socket.emit('configData',data)
+        
+        socket.on("configsuccess", () => {
+
+        setTimeout(() =>  document.getElementById("alert-sucsess").style.display = "block", 3000);
+        location.href = "/dashboard";
+
+        });
+      });
+    </script>
     <script>
       function showCommunes() {
         var ville = document.getElementById("ville").value;
         if (ville === "Abidjan") {
-          document.getElementById("communes").style.display =
-            "block";
-          document.getElementById("quartier").style.display =
-            "none";
+          document.getElementById("communes").style.display = "block";
+          document.getElementById("quartier").style.display = "none";
         } else {
-          document.getElementById("communes").style.display =
-            "none";
-          document.getElementById("quartier").style.display =
-            "block";
+          document.getElementById("communes").style.display = "none";
+          document.getElementById("quartier").style.display = "block";
         }
       }
     </script>
