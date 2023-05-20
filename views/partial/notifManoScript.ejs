@@ -62,7 +62,6 @@
 
   });
 
-
   const notifFunc = (message, type) => {
     notyf.open({
       type,
@@ -134,9 +133,24 @@
 
     notificationList.addEventListener('click', () => {
         for (let notif of tabNotif) {
+            let bgColor = '';
+            if (notif.includes('rupture')) {
+                bgColor = 'black';
+            } else if (notif.includes('très bas')) {
+                bgColor = 'red';
+            } else if (notif.includes('employés')) {
+                bgColor = 'orange';
+            } else if (notif.includes('Ajoutez')) {
+                bgColor = 'blue';
+            }
             let li = document.createElement('li');
-            li.style.listStyle = 'none';
-            li.innerHTML = notif;
+            li.innerHTML = `
+                <div class="card">
+                    <div class="card-body" style="background: ${bgColor}" >
+                        <p class="card-text text-white font-weight-bold">${notif}</p>
+                    </div>
+                </div>
+            `;
             notificationListUl.appendChild(li);
         }
         tabNotif = [];
