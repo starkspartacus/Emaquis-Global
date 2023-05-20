@@ -36,6 +36,33 @@ body {
   background: #f6f7fb;
 }
 
+#notificationData span {
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+  padding: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  background: red;
+  border-radius: 50%;
+}
+
+#notificationData img{
+  cursor: pointer;
+}
+
+.modal-body-notyf li{
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.modal-body-notyf li:last-child{
+    border-bottom: none;
+}
+
 @media (min-width: 1200px) {
   /* line 13, G:/admin_project/8 admin/management_html/scss/_reset.scss */
   .container {
@@ -3595,12 +3622,12 @@ table.dataTable.dtr-inline.collapsed
 /******** header css here *********/
 /* line 2, G:/admin_project/8 admin/management_html/scss/_header.scss */
 .header_iner {
-  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
   top: 0;
   z-index: 99;
-  position: relative;
   border-radius: 0px;
-  margin: 0;
   background: #f6f7fb;
 }
 
@@ -4358,11 +4385,10 @@ table.dataTable {
   height: 100vh;
   left: 0;
   top: 0;
-  z-index: 99;
   padding-bottom: 50px;
   position: fixed;
   width: 270px;
-  z-index: 999;
+  z-index: 1041;
   overflow: hidden;
   overflow-y: auto;
   background: #ffffff;
@@ -5685,7 +5711,22 @@ body::-webkit-scrollbar {
 /* line 319, G:/admin_project/8 admin/management_html/scss/_main_content.scss */
 .page_title_right {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.btn-menu{
+    background: #98ed58;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    min-height: 36px;
+    margin-right: 10px;
 }
 
 /* line 322, G:/admin_project/8 admin/management_html/scss/_main_content.scss */

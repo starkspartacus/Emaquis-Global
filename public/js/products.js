@@ -27,6 +27,7 @@ const ProductList = () => {
 
 const ProductCard = ({ product }) => {
   const { addProductToCart } = React.useContext(ProductsContext);
+  const { billet } = React.useContext(AppContext);
 
   return (
     <div className='product-card'>
@@ -74,9 +75,16 @@ const ProductCard = ({ product }) => {
       </div>
       <div
         className='product-card__actions'
-        onClick={() => addProductToCart(product)}
+        onClick={() =>
+          billet && !billet.is_closed ? addProductToCart(product) : null
+        }
       >
-        <button className='btn '>Ajouter</button>
+        <button
+          className='btn'
+          disabled={!billet || (billet && billet.is_closed)}
+        >
+          Ajouter
+        </button>
       </div>
       {product.quantite === 0 && <div className='product-overlay' />}
     </div>

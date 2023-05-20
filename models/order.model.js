@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const VenteSchema = new Schema(
+const OrderSchema = new Schema(
   {
     produit: [
       {
@@ -40,7 +40,6 @@ const VenteSchema = new Schema(
     somme_encaisse: { type: Number },
     employe: { type: Schema.Types.ObjectId, ref: 'employe' },
     employe_validate_id: { type: Schema.Types.ObjectId, ref: 'employe' },
-    for_employe: { type: Schema.Types.ObjectId, ref: 'employe' },
     travail_pour: { type: Schema.Types.ObjectId, ref: 'user' },
     formules: {
       type: [
@@ -62,4 +61,4 @@ const VenteSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('vente', VenteSchema);
+module.exports = mongoose.model('order', OrderSchema);

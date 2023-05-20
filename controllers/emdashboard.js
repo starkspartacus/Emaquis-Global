@@ -1,8 +1,8 @@
 const { venteQueries } = require('../requests/venteQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const { employeQueries } = require('../requests/EmployeQueries');
-const { formatAmount } = require('../utils/formatAmount');
 const categorieModel = require('../models/categorie.model');
+const { BilletQueries } = require('../requests/BilletQueries');
 
 exports.emdashboard = async (req, res) => {
   try {
@@ -11,12 +11,29 @@ exports.emdashboard = async (req, res) => {
       return;
     }
 
+    let billet = await BilletQueries.getBilletByEmployeId(req.session.user._id);
+
+    if (!billet.result) {
+      const billets = await BilletQueries.getBilletByQuery({
+        employe_id: req.session.user._id,
+        is_closed: true,
+        close_hour: {
+          $gte: new Date(new Date().setHours(0, 0, 0)),
+        },
+      });
+      if (billets && billets.result.length > 0) {
+        billet = billets.result[0];
+      }
+    } else {
+      billet = billet.result;
+    }
+
     const Vente = await venteQueries.getVentes({
       status_commande: { $in: ['Validée', 'Retour'] },
       employe_validate_id: req.session.user?._id,
       createdAt: {
-        $gte: new Date(new Date().setHours(0, 0, 0, 0)),
-        $lte: new Date(new Date().setHours(23, 59, 59, 999)),
+        $gte: new Date(new Date(billet?.open_hour)),
+        $lte: new Date(),
       },
       travail_pour: req.session?.user?.travail_pour,
     });
@@ -39,18 +56,32 @@ exports.emdashboard = async (req, res) => {
       req.session.user.travail_pour
     );
 
-    const sum = Vente.result.reduce((total, vente) => total + vente.prix, 0);
+    const ventes = Vente.result?.filter((vente) => {
+      return (
+        !vente.for_employe ||
+        '' + vente.for_employe === '' + req.session.user._id
+      );
+    });
+
+    const ventesEntente = VenteEntente.result.filter((vente) => {
+      return (
+        !vente.for_employe ||
+        '' + vente.for_employe === '' + req.session.user._id
+      );
+    });
+
+    const sum = ventes?.reduce((total, vente) => total + vente.prix, 0) || 0;
 
     if (req.session.user.role === 'Barman') {
       res.render('emdashboard', {
-        ventes: VenteEntente.result,
+        ventes: ventesEntente,
         newSave: newSave,
         user: req.session.user,
-        // Produit: produit.result,
         produits: produit.result,
         emplnum: employes.length || 0,
         sum,
         categories: Categories,
+        billet,
       });
     } else {
       res.redirect('/emconnexion');

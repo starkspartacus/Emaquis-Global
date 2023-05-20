@@ -3,6 +3,11 @@
   max-height: 490px;
 }
 
+.btn-success {
+  background-color: #98ed58 !important;
+  border: none !important;
+}
+
 .modal {
   background: rgba(0, 0, 0, 0.5);
 }

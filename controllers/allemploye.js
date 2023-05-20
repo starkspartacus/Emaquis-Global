@@ -17,6 +17,32 @@ exports.allemploye = async (req, res) => {
   }
 };
 
+exports.allBarmans = async (req, res) => {
+  if (req.session.user) {
+    const body = req.body;
+    console.log('👉 👉 👉  ~ file: allemploye.js:23 ~ body:', body);
+    try {
+      const barmans = await employeQueries.getBarmans(body.travail_pour);
+      if (barmans.result !== null) {
+        let resultat = barmans.result;
+        res.json({
+          etat: true,
+          data: resultat,
+        });
+      }
+    } catch (e) {
+      console.log('👉 👉 👉  ~ file: allemploye.js:34 ~ e:', e);
+      res.status(500).send({
+        error: 'error',
+      });
+    }
+  } else {
+    res.status(401).send({
+      error: 'error signature',
+    });
+  }
+};
+
 exports.allemployePost = async (req, res) => {
   if (req.session.user) {
     try {

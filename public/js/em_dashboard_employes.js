@@ -27,8 +27,62 @@ const formatAmount = (montant) => {
 };
 
 const EmDashboardEmployes = () => {
-  const { totalVentes } = React.useContext(AppContext);
+  const { totalVentes, billet, user, updateBillet, resetTotalVentes } =
+    React.useContext(AppContext);
+
   const { venteId } = React.useContext(ProductsContext);
+  const [loading, setLoading] = React.useState(false);
+  const [message, setMessage] = React.useState(null);
+
+  const handleToggleOpenDay = () => {
+    // open billet
+    setLoading(true);
+    fetch(
+      `/billet/${billet && !billet.is_closed ? 'closeBillet' : 'openBillet'}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          employe_id: user._id,
+        }),
+      }
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.data) {
+          if (!data.data.is_closed) {
+            resetTotalVentes();
+          }
+          updateBillet(data.data);
+        } else if (data.message) {
+          setMessage(data.message);
+          $('#modalMessage').modal('show');
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  };
+
+  const handleCloseMessage = () => {
+    $('#modalMessage').modal('hide');
+    setMessage(null);
+  };
+
+  const closeBilletText =
+    billet && !billet.is_closed
+      ? loading
+        ? 'Fermeture en cours...'
+        : 'Fermer la caisse'
+      : loading
+      ? 'Ouverture en cours...'
+      : 'Ouvrir la caisse';
 
   return (
     <div className={`col-xl-3 mt-${venteId ? '5' : '2'}`}>
@@ -89,8 +143,59 @@ const EmDashboardEmployes = () => {
                 <h4>
                   <span>{formatAmount(totalVentes)}</span>
                 </h4>
-                <p>Aujourd'hui</p>
+                <p>
+                  {billet && billet.is_closed
+                    ? 'Montant après fermeture'
+                    : "Aujourd'hui"}
+                </p>
+                <button
+                  onClick={handleToggleOpenDay}
+                  className={`btn btn-${
+                    billet && !billet.is_closed ? 'danger' : 'success'
+                  } w-100 mt-2`}
+                  disabled={loading}
+                >
+                  {closeBilletText}
+                </button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class='modal fade'
+        id='modalMessage'
+        tabindex='-1'
+        role='dialog'
+        aria-labelledby='modalMessageTitle'
+        aria-hidden='true'
+      >
+        <div class='modal-dialog modal-dialog-centered' role='document'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h5 class='modal-title' id='exampleModalLongTitle'>
+                IMPOSSIBLE DE FERMER LA CAISSE
+              </h5>
+              <button
+                type='button'
+                class='close'
+                data-dismiss='modal'
+                aria-label='Close'
+              >
+                <span aria-hidden='true'>&times;</span>
+              </button>
+            </div>
+            <div class='modal-body'>{message}</div>
+            <div class='modal-footer'>
+              <button
+                type='button'
+                class='btn btn-success'
+                data-dismiss='modal'
+                onClick={handleCloseMessage}
+              >
+                OK
+              </button>
             </div>
           </div>
         </div>

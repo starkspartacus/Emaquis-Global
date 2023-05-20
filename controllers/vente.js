@@ -1,10 +1,11 @@
 const { venteQueries } = require('../requests/venteQueries');
 const { produitQueries } = require('../requests/produitQueries');
-const { retourQueries } = require('../requests/retourQueries');
 const Produits = require('../models/produit.model');
 const Ventes = require('../models/vente.model');
 const Retours = require('../models/retourproduit.model');
 const { settingQueries } = require('../requests/settingQueries');
+const { employeQueries } = require('../requests/EmployeQueries');
+const { BilletQueries } = require('../requests/BilletQueries');
 exports.vente = async (req, res) => {
   try {
     const productRes = await produitQueries.getProduitBySession(
@@ -88,6 +89,14 @@ exports.ventePost = async (req, res) => {
       const setting = await settingQueries.getSettingByUserId(
         sess.travail_pour
       );
+      let billet = await BilletQueries.getBilletByEmployeId(vente.for_employe);
+
+      if (!billet.result) {
+        res.status(400).json({
+          message: 'la caisse de ce barman est fermée',
+        });
+        return;
+      }
 
       if (
         vente.table_number &&
@@ -107,6 +116,8 @@ exports.ventePost = async (req, res) => {
         return;
       }
 
+      const barmans = await employeQueries.getBarmans(sess.travail_pour);
+
       let newVente = {
         produit: produits,
         quantite: vente.quantite,
@@ -119,6 +130,7 @@ exports.ventePost = async (req, res) => {
         formules: formulesProduct,
         table_number: vente.table_number,
         amount_collected: vente.amount_collected,
+        for_employe: vente.for_employe || barmans.result[0]?._id,
       };
       // il fait pas l setvente or il fait update  de produit
       Vente = await venteQueries.setVente(newVente);
@@ -224,12 +236,16 @@ exports.editventePost = async (req, res) => {
           }
 
           const product_in_old_vente_index = oldVente.result.produit.findIndex(
-            (product) => '' + product._id === prodId
+            (product) => '' + product.productId === prodId
           );
 
-          if (currentProduct.result.quantite < body.quantite[index]) {
+          const qty =
+            oldVente?.result?.quantite[product_in_old_vente_index] || 0;
+
+          if (currentProduct.result.quantite + qty < body.quantite[index]) {
             if (product_in_old_vente_index !== -1) {
               const qty = oldVente.result.quantite[product_in_old_vente_index];
+
               if (qty - body.quantite[index] > 0) {
                 // return no do nothing
                 continue;
@@ -256,6 +272,15 @@ exports.editventePost = async (req, res) => {
       const setting = await settingQueries.getSettingByUserId(
         sess.travail_pour
       );
+
+      let billet = await BilletQueries.getBilletByEmployeId(body.for_employe);
+
+      if (!billet.result) {
+        res.status(400).json({
+          message: 'la caisse de ce barman est fermée',
+        });
+        return;
+      }
 
       if (
         body.table_number &&
@@ -328,6 +353,7 @@ exports.editventePost = async (req, res) => {
       };
 
       await venteQueries.updateVente(venteId, newVente);
+
       const allProducts = body.produit
         .filter((prodId) => !products.find((prod) => '' + prod.id === prodId))
         .map((prodId) => {
@@ -406,11 +432,17 @@ exports.editStatusVente = async (req, res) => {
 
         if (req.body.type === 'Annulée') {
           for (let [i, product] of vente.produit.entries()) {
-            const produit = await produitQueries.getProduitById(product);
+            const produit = await produitQueries.getProduitById(
+              product.productId
+            );
+
             const newQte = produit.result.quantite + Number(vente.quantite[i]);
 
             await produitQueries.updateProduit(
-              { produitId: product, session: req.session.user.travail_pour },
+              {
+                produitId: product.productId,
+                session: req.session.user.travail_pour,
+              },
               { quantite: newQte }
             );
           }

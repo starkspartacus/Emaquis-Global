@@ -1,0 +1,162 @@
+<script type="application/javascript">
+  let employeLength = <%- JSON.stringify(totalemploye) %>;
+  const produits = <%- JSON.stringify(Tab) %>;
+  let notificationData = document.getElementById('notificationData');
+  let notificationCount = document.querySelector('#notificationData .countNotif');
+  let notificationList = document.querySelector('#notificationData img');
+  let notificationListUl = document.querySelector('.modal-body-notyf');
+
+
+  let tabNotif = [];
+
+  let notyf = new Notyf({
+    types: [{
+        type: 'success',
+        background: 'orange',
+        icon: {
+            className: 'fas fa-user',
+            tagName: 'i',
+            color: 'white',
+            fontSize: '20px'
+        },
+      },
+      {
+        type: 'error',
+        background: 'red',
+        icon: {
+            className: 'fas fa-exclamation-triangle',
+            tagName: 'i',
+            color: 'white',
+            fontSize: '20px'
+        },
+
+        position: {
+          y: 'top',
+        },
+        dismissible: true,
+      },
+        {
+        type: 'black',
+        background: 'black',
+        icon: {
+            className: 'fas fa-frown',
+            tagName: 'i',
+            color: 'white',
+            fontSize: '20px'
+        },
+
+        },
+        {
+        type: 'info',
+        background: 'blue',
+         dismissible: true,
+        icon: {
+            className: 'fas fa-user-plus',
+            tagName: 'i',
+            color: 'white',
+            fontSize: '20px'
+        }
+        },
+
+    ]
+
+  });
+
+  const notifFunc = (message, type) => {
+    notyf.open({
+      type,
+      message: message,
+      duration: 5000,
+      dismissible: true,
+      position: {
+        y: 'top',
+        x: 'right',
+      },
+
+
+    });
+  }
+
+  if (employeLength !== 0 && employeLength > 0) {
+    notifFunc("Vous avez " + employeLength + " employés à votre charge", "success")
+  }
+
+  if (employeLength === 0) {
+    notifFunc("Vous n'avez aucun employé à votre charge", "error")
+    notifFunc("Ajoutez un employé", "info")
+  }
+
+
+
+
+  for (let rupture of produits) {
+      if (rupture.quantite === 0) {
+          notifFunc("Le produit " + rupture.produit
+              .nom_produit + " de " + rupture.taille + " est en rupture de stock " + rupture.quantite, "black")
+      }
+  }
+
+
+  for (let produit of produits) {
+    if (produit.quantite < 100 && produit.quantite !== 0) {
+      notifFunc("Le produit " + produit.produit
+        .nom_produit + " de " + produit.taille + " est très bas " + produit.quantite, "error")
+    }
+  }
+
+  //ajouter toutes les notifications dans le tableau
+
+    for (let rupture of produits) {
+        if (rupture.quantite === 0) {
+            tabNotif.push("Le produit " + rupture.produit
+                .nom_produit +  " de " + rupture.taille + " est en rupture de stock " + rupture.quantite)
+        }
+    }
+
+    for (let produit of produits) {
+        if (produit.quantite < 100 && produit.quantite !== 0) {
+            tabNotif.push("Le produit " + produit.produit
+                .nom_produit +  " de " + produit.taille + " est très bas " + produit.quantite)
+        }
+    }
+
+    if (employeLength !== 0 && employeLength > 0) {
+        tabNotif.push("Vous avez " + employeLength + " employés à votre charge")
+    }
+
+    if (employeLength === 0) {
+        tabNotif.push("Vous n'avez aucun employé à votre charge")
+        tabNotif.push("Ajoutez un employé")
+    }
+
+  notificationCount.innerHTML += tabNotif.length ;
+
+    notificationList.addEventListener('click', () => {
+        for (let notif of tabNotif) {
+            let bgColor = '';
+            if (notif.includes('rupture')) {
+                bgColor = 'black';
+            } else if (notif.includes('très bas')) {
+                bgColor = 'red';
+            } else if (notif.includes('employés')) {
+                bgColor = 'orange';
+            } else if (notif.includes('Ajoutez')) {
+                bgColor = 'blue';
+            }
+            let li = document.createElement('li');
+            li.innerHTML = `
+                <div class="card">
+                    <div class="card-body" style="background: ${bgColor}" >
+                        <p class="card-text text-white font-weight-bold">${notif}</p>
+                    </div>
+                </div>
+            `;
+            notificationListUl.appendChild(li);
+        }
+        tabNotif = [];
+    });
+
+
+</script>
+
+

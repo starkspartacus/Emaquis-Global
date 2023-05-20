@@ -1,0 +1,151 @@
+<svg id="bell-animation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2778.86 835.52">
+  <title>Logo Notyf</title>
+  <g id="full-bell">
+    <path d="M759.73,518.06V353.26c0-116.1-80.7-213.1-189-238.6a56.16,56.16,0,0,0-112.3,0c-108.3,25.5-189,122.5-189,238.6v164.8a73.75,73.75,0,0,0-73.8,73.8V644h637.9v-52.1A73.75,73.75,0,0,0,759.73,518.06Z" fill="#ffb03a"/>
+    <path id="bell-part" d="M514.63,765.36c48.9,0,89.8-32.9,102.6-77.8H411.83C424.83,732.36,465.73,765.36,514.63,765.36Z" fill="#e9a031"/>
+  </g>
+  <path d="M1320.63,178.56v464.8H1229l-164-233.7v233.7H946.13V178.56h92.3l164,233.7V178.56Z" fill=""/>
+  <path d="M1373.73,477.36c0-98.9,79-175.3,177.3-175.3,98.9,0,177.3,76.4,177.3,175.3s-78.4,175.3-177.3,175.3C1453.43,652.66,1373.73,576.36,1373.73,477.36Zm244.3,0c0-41.2-28.6-69.1-67.1-69.1-37.8,0-66.4,27.9-66.4,69.1s28.6,69.1,66.4,69.1C1589.53,546.46,1618,518.56,1618,477.36Z" fill="#FFF"/>
+  <path d="M1906.93,417v96.3c0,31.2,24.6,33.2,69.1,30.5v99.6c-135.5,16.6-179.3-25.2-179.3-127.5V417h-49.8V311.36h49.8v-59.8l110.2-33.2v93H1976V417Z" fill="#FFF"/>
+  <path d="M2364.43,311.36l-113.5,326.7c-35.2,100.9-98.3,142.8-200.5,138.1V672.66c47.1,0,67.7-10,82.3-39.8l-132.8-321.4h123.5l67.1,192.6,51.8-192.6h122.1Z" fill="#FFF"/>
+  <path d="M2526.43,311.36h57.1V417h-57.1v226.4h-110.2V417h-41.8V311.36h41.8c0-93,54.4-149.4,167.3-142.8v102.3C2548.33,268.26,2526.43,280.86,2526.43,311.36Z" fill="#FFF"/>
+
+  <style>
+  	@-webkit-keyframes shake-bell {
+      0% {
+        -webkit-transform: none;
+                transform: none;
+      }
+      4%, 14% {
+        -webkit-transform: rotate(7deg);
+                transform: rotate(7deg);
+      }
+      10%, 20% {
+        -webkit-transform: rotate(-7deg);
+                transform: rotate(-7deg);
+      }
+      26% {
+        -webkit-transform: rotate(5deg);
+                transform: rotate(5deg);
+      }
+      35% {
+        -webkit-transform: rotate(-3deg);
+                transform: rotate(-3deg);
+      }
+      46% {
+        -webkit-transform: rotate(1deg);
+                transform: rotate(1deg);
+      }
+      58%, 100% {
+        -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+      }
+    }
+
+    @keyframes shake-bell {
+      0% {
+        -webkit-transform: none;
+                transform: none;
+      }
+      4%, 14% {
+        -webkit-transform: rotate(7deg);
+                transform: rotate(7deg);
+      }
+      10%, 20% {
+        -webkit-transform: rotate(-7deg);
+                transform: rotate(-7deg);
+      }
+      26% {
+        -webkit-transform: rotate(5deg);
+                transform: rotate(5deg);
+      }
+      35% {
+        -webkit-transform: rotate(-3deg);
+                transform: rotate(-3deg);
+      }
+      46% {
+        -webkit-transform: rotate(1deg);
+                transform: rotate(1deg);
+      }
+      58%, 100% {
+        -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+      }
+    }
+
+    @-webkit-keyframes shake-part {
+      0% {
+        -webkit-transform: none;
+                transform: none;
+      }
+      6%, 16% {
+        -webkit-transform: translateX(-30px);
+                transform: translateX(-30px);
+      }
+      11%, 21% {
+        -webkit-transform: translateX(30px);
+                transform: translateX(30px)
+      }
+      27% {
+        -webkit-transform: translateX(-25px);
+                transform: translateX(-25px);
+      }
+      36% {
+        -webkit-transform: translateX(20px);
+                transform: translateX(20px);
+      }
+      47% {
+        -webkit-transform: translateX(-10px);
+                transform: translateX(-10px);
+      }
+      57%, 100% {
+        -webkit-transform: translateX(0px);
+                transform: translateX(0px);
+      }
+    }
+
+    @keyframes shake-part {
+      0% {
+        -webkit-transform: none;
+                transform: none;
+      }
+      6%, 16% {
+        -webkit-transform: translateX(-30px);
+                transform: translateX(-30px);
+      }
+      11%, 21% {
+        -webkit-transform: translateX(30px);
+                transform: translateX(30px)
+      }
+      27% {
+        -webkit-transform: translateX(-25px);
+                transform: translateX(-25px);
+      }
+      36% {
+        -webkit-transform: translateX(20px);
+                transform: translateX(20px);
+      }
+      47% {
+        -webkit-transform: translateX(-10px);
+                transform: translateX(-10px);
+      }
+      57%, 100% {
+        -webkit-transform: translateX(0px);
+                transform: translateX(0px);
+      }
+    }
+
+    #bell-animation #full-bell {
+      -webkit-transform-origin: 514.58px 100.67px;
+          -ms-transform-origin: 514.58px 100.67px;
+              transform-origin: 514.58px 100.67px;
+      -webkit-animation: shake-bell 3s ease-in-out both infinite;
+              animation: shake-bell 3s ease-in-out both infinite;
+    }
+
+    #bell-animation #bell-part {
+      -webkit-animation: shake-part 3s linear both infinite;
+              animation: shake-part 3s linear both infinite;
+    }
+  </style>
+</svg>
