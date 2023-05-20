@@ -16,8 +16,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>E-maquis Admin</title>
+  <script src="../js/bootstrap.js" defer></script>
 
+  <script src="js/confetti.js"></script>
   <%- include('partial/head.ejs') %>
+
+  <!-- PLUGINS CSS STYLE -->
+
+  <link rel="stylesheet" href="../css/bootstrap.css" />
 </head>
 
 <body class="crm_body_bg">
@@ -235,7 +241,7 @@
                                    console.log('👉 👉 👉  ~ file: listeproduit.ejs:259 ~ handleEdit ~ handleEdit')
                                    handleSelectProduct(product)
                                  }
-                                 
+
 
 
                                  return (
@@ -509,6 +515,7 @@
 
                                ReactDOM.render(<AppRoot />, document.getElementById('root'));
     </script>
+
 </body>
 
 </html>

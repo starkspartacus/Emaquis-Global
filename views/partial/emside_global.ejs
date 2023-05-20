@@ -1,8 +1,5 @@
 <link rel="icon" href="img/paresseux_sous_officiel.png" type="image/png">
 
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <link rel="stylesheet" href="vendors/themefy_icon/themify-icons.css" />
 
 <link rel="stylesheet" href="vendors/niceselect/css/nice-select.css" />
@@ -37,37 +34,87 @@
 <link rel="stylesheet" href="css/colors/default.css" id="colorSkinCSS">
 
 
-
-
-
-
-
-
-<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-  Link with href
+<a class="btn btn-primary btn-menu" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+  Menu
 </a>
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-  Button with data-bs-target
-</button>
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+  <nav class="offcanvas offcanvas-start sidebar" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="logo d-flex justify-content-between">
+      <a class="large_logo" href="/emdashboard"
+      ><img src="img/paresseux_sous_officiel.png" alt=""
+        /></a>
+
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="dropdown mt-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-        Dropdown button
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+    <ul id="sidebar_menu">
+      <!-- <li class="">
+        <a class="has-arrow" href="#" aria-expanded="false">
+          <div class="nav_icon_small">
+            <img src="img/paresseux_parasol.svg" alt="" />
+          </div>
+          <div class="nav_title">
+            <span>E-maquis </span>
+          </div>
+        </a>
+      </li> -->
+
+      <li class="">
+        <a class="has-arrow" href="#" aria-expanded="false">
+          <div class="nav_icon_small icon_anim">
+            <img src="img/menu-icon/icone_produits.png"
+                 style="height: 40px; width: 40px;"
+                 class="img-fluid " alt="img produits"
+            />
+          </div>
+          <div class="nav_title">
+            <span>Produit</span>
+          </div>
+        </a>
+        <ul>
+          <li><a href="/listeproduit"> voir mes produits</a></li>
+          <li><a href="/ajouterproduit">Enregistrer un produit</a></li>
+        </ul>
+      </li>
+      <li class="">
+        <a class="has-arrow" href="#" aria-expanded="false">
+          <div class="nav_icon_small icon_anim">
+            <img src="img/menu-icon/remarque.png"
+                 style="height: 40px; width: 40px;"
+                 class="img-fluid " alt="img remarque"
+            />
+          </div>
+          <div class="nav_title">
+            <span>Retour produit</span>
+          </div>
+        </a>
+        <ul>
+          <li><a href="/listeretour"> mes retours produits</a></li>
+          <li><a href="/retournerproduit">Enregistrer retour produit</a></li>
+        </ul>
+      </li>
+      <li class="">
+        <a class="has-arrow" href="#" aria-expanded="false">
+          <div class="nav_icon_small icon_anim">
+            <img src="img/menu-icon/reglage.png"
+                 style="height: 35px; width: 35px;"
+                 class="img-fluid " alt="img remarque"
+            />
+          </div>
+          <div class="nav_title">
+            <span>Réglages</span>
+          </div>
+        </a>
+        <ul>
+          <div class="profile_info_details">
+            <li><a href="/profile">Mon Profil </a></li>
+            <li><a href="#">Réglage</a></li>
+            <li><a href="/deconnexion">Déconnexion </a></li>
+          </div>
+        </ul>
+        <div class="profile_info_details side-deconnexion">
+          <a href="/deconnexion" class="btn btn-danger side-deconnexion  text-dark">Déconnexion </a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+    <!-- sidebar menu end -->

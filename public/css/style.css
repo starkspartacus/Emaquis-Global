@@ -4357,11 +4357,10 @@ table.dataTable {
   height: 100vh;
   left: 0;
   top: 0;
-  z-index: 99;
   padding-bottom: 50px;
   position: fixed;
   width: 270px;
-  z-index: 999;
+  z-index: 1041;
   overflow: hidden;
   overflow-y: auto;
   background: #ffffff;
@@ -5686,6 +5685,20 @@ body::-webkit-scrollbar {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.btn-menu{
+    background: #98ed58;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    min-height: 36px;
+    margin-right: 10px;
 }
 
 /* line 322, G:/admin_project/8 admin/management_html/scss/_main_content.scss */

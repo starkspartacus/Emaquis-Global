@@ -27,7 +27,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>E-maquis Barman(aid)</title>
+  <script src="../js/bootstrap.js" defer></script>
 
+  <link rel="stylesheet" href="../css/bootstrap.css" />
   <link rel="stylesheet" href="../plugins/aos/aos.css" />
   <link rel="stylesheet" href="/css/vente.css" />
 
@@ -52,15 +54,15 @@
       display: block;
     }
   </style>
-
-  <%- include('partial/emsidebar.ejs') %> <%-
-    include('partial/reactScript.ejs') %>
-
-  <!--/ sidebar  -->
+    <!-- main content part here -->
+    <!-- sidebar  -->
+  <%- include('partial/emside_global.ejs') %>
+  <%-include('partial/reactScript.ejs') %>
+    <!--/ sidebar  -->
 
   <section class="main_content dashboard_part large_header_bg">
     <!-- menu  -->
-    <%- include('partial/notifBar.ejs') %>
+
     <!--/ menu  -->
     <div class="main_content_iner overly_inner">
       <div class="container-fluid p-0">
@@ -77,7 +79,7 @@
                 </ol>
               </div>
 
-              <!--/  <div class="page_title_right">
+                <div class="page_title_right">
                 <div class="page_date_button d-flex align-items-center">
                   <div class="profile_author_name">
                     <p class="text-center">
@@ -85,11 +87,9 @@
                     </p>
                     <h5 class="emRole badge"><%= locals.user?.role %></h5>
                     </div>
-                    <%= locals.user?.role %> <%= locals.user?.travail_pour.nom %>
-
                   </div>
                 </div>
-              </div> -->
+              </div>
             </div>
 
           </div>
