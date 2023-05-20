@@ -1,24 +1,60 @@
 <script type="application/javascript">
   let employeLength = <%- JSON.stringify(totalemploye) %>;
   const produits = <%- JSON.stringify(Tab) %>;
+  let routeUser = "ajouteruser";
+
+  let tabNotif = [];
 
   let notyf = new Notyf({
     types: [{
         type: 'success',
         background: 'orange',
+        icon: {
+            className: 'fas fa-user',
+            tagName: 'i',
+            color: 'white',
+            fontSize: '20px'
+        },
       },
       {
         type: 'error',
         background: 'red',
         icon: {
-          className: 'fas fa-times',
+            className: 'fas fa-exclamation-triangle',
+            tagName: 'i',
+            color: 'white',
+            fontSize: '20px'
         },
+
         position: {
           y: 'top',
         },
         duration: 5000,
         dismissible: true,
-      }
+      },
+        {
+        type: 'black',
+        background: 'black',
+        icon: {
+            className: 'fas fa-frown',
+            tagName: 'i',
+            color: 'white',
+            fontSize: '20px'
+        },
+
+        },
+        {
+        type: 'info',
+        background: 'blue',
+         dismissible: true,
+        icon: {
+            className: 'fas fa-user-add',
+            tagName: 'i',
+            color: 'white',
+            fontSize: '20px'
+        }
+        },
+
     ]
 
   });
@@ -34,25 +70,65 @@
         y: 'top',
         x: 'right',
       },
-      icon: {
-        className: 'fas fa-user',
-        tagName: 'i',
-        color: 'white',
-        fontSize: '20px'
-      }
+
+
     });
   }
 
-  let employeAdd = notifFunc(employeLength ? "Vous avez " + employeLength + " employés à votre charge" : ' Ajoutez un employé ', "success")
+  if (employeLength !== 0 && employeLength > 0) {
+    notifFunc("Vous avez " + employeLength + " employés à votre charge", "success")
+  }
+
+  if (employeLength === 0) {
+    notifFunc("Vous n'avez aucun employé à votre charge", "error")
+    notifFunc("Ajoutez un employé", "info")
+  }
+
+
+
+
+  for (let rupture of produits) {
+      if (rupture.quantite === 0) {
+          notifFunc("Le produit " + rupture.produit
+              .nom_produit + " de " + rupture.taille + " est en rupture de stock " + rupture.quantite, "black")
+      }
+  }
 
 
   for (let produit of produits) {
-    if (produit.quantite < 100) {
+    if (produit.quantite < 100 && produit.quantite !== 0) {
       notifFunc("Le produit " + produit.produit
-        .nom_produit + " est très bas " + produit.quantite, "error")
-    }else if(produit.quantite == null){
-      notifFunc("Le produit " + produit.produit
-        .nom_produit + " est en rupture de stock ", "error")
+        .nom_produit + " de " + produit.taille + " est très bas " + produit.quantite, "error")
     }
   }
+
+  //ajouter toutes les notifications dans le tableau
+
+    for (let rupture of produits) {
+        if (rupture.quantite === 0) {
+            tabNotif.push("Le produit " + rupture.produit
+                .nom_produit +  " de " + rupture.taille + " est en rupture de stock " + rupture.quantite)
+        }
+    }
+
+    for (let produit of produits) {
+        if (produit.quantite < 100 && produit.quantite !== 0) {
+            tabNotif.push("Le produit " + produit.produit
+                .nom_produit +  " de " + produit.taille + " est très bas " + produit.quantite)
+        }
+    }
+
+    if (employeLength !== 0 && employeLength > 0) {
+        tabNotif.push("Vous avez " + employeLength + " employés à votre charge")
+    }
+
+    if (employeLength === 0) {
+        tabNotif.push("Vous n'avez aucun employé à votre charge")
+        tabNotif.push("Ajoutez un employé")
+    }
+
+  console.log(tabNotif)
+
 </script>
+
+
