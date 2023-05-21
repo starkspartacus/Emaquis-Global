@@ -130,8 +130,8 @@ const AppRoot = () => {
 
     if (
       type === 'Validée' &&
-      new Date(vente.createdAt).toLocaleDateString() ===
-        new Date().toLocaleDateString()
+      new Date(vente.createdAt).toLocaleDateString() >=
+        new Date(billet.open_hour).toLocaleDateString()
     ) {
       const total = vente.prix;
 

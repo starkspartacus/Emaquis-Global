@@ -1,7 +1,10 @@
 exports.config_profil = async(req,res)=>{
     if (req.session.user) {
     try {
-        res.render("config_profil")
+        const sess = req.session.user
+        res.render("config_profil",{
+            user :sess
+        })
 
     } catch (error) {
         res.redirect(error)

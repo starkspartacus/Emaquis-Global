@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <title>E-maquis Configuration Profil</title>
 
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="E-maquis, Gestionnaire d'établissement" />
     <meta
@@ -140,10 +139,12 @@
 
     <main>
       <div class="container">
+        <p id="sess" hidden><%=user?.id%></p>
+
         <div id="wizard_container">
-          <form name="example-1" id="wrapped" method="POST">
+          <form name="example-1" id="wrapped">
             <input id="website" name="website" type="text" value="" />
-            <!-- Leave input above for security protection, read docs for details -->
+
             <div id="middle-wizard">
               <!-- First branch What Type of Project ============================== -->
               <div class="step" data-state="branchtype">
@@ -162,7 +163,7 @@
                         id="answer_1"
                         type="radio"
                         name="branch_1_group_1"
-                        value="Design"
+                        value="remboursementTotal"
                         class="required"
                       />
                       <label for="answer_1"
@@ -182,7 +183,7 @@
                         id="answer_2"
                         name="branch_1_group_1"
                         type="radio"
-                        value="Design"
+                        value="remboursementPartiel"
                         class="required"
                       />
                       <label for="answer_2"
@@ -202,7 +203,7 @@
                         id="answer_3"
                         name="branch_1_group_1"
                         type="radio"
-                        value="Design"
+                        value="avoir"
                         class="required"
                       />
                       <label for="answer_3"
@@ -267,7 +268,7 @@
                           <div class="styled-select">
                             <select class="required" name="country" disabled>
                               <option value="">Selection ton pays</option>
-                              <option value="côte d'ivoire" selected>
+                              <option value="cote_d_ivoire" selected>
                                 Côte d'ivoire
                               </option>
                             </select>
@@ -344,7 +345,11 @@
                               <option value="yopougon">Yopougon</option>
                             </select>
                           </div>
-                          <div  class="form-group add_bottom_30" id="quartier" style="display: none">
+                          <div
+                            class="form-group add_bottom_30"
+                            id="quartier"
+                            style="display: none"
+                          >
                             <input
                               type="text"
                               id="quartier"
@@ -441,7 +446,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="termsLabel">Terms and conditions</h5>
+            <h5 class="modal-title" id="termsLabel"><a href="/condition_general">Termes et Conditions</a></h5>
             <button
               type="button"
               class="close"
@@ -452,28 +457,185 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>
-              Lorem ipsum dolor sit amet, in porro albucius qui, in
-              <strong>nec quod novum accumsan</strong>, mei ludus tamquam
-              dolores id. No sit debitis meliore postulant, per ex prompta
-              alterum sanctus, pro ne quod dicunt sensibus.
+
+            <!-- Text -->
+            <p class="fs-lg text-gray-800 mb-6 mb-md-8">
+              Note : veuillez imprimer une copie de ce
+              document et la conserver pour pouvoir la consulter à l’avenir.
             </p>
-            <p>
-              Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod
-              novum accumsan, mei ludus tamquam dolores id. No sit debitis
-              meliore postulant, per ex prompta alterum sanctus, pro ne quod
-              dicunt sensibus. Lorem ipsum dolor sit amet,
-              <strong>in porro albucius qui</strong>, in nec quod novum
-              accumsan, mei ludus tamquam dolores id. No sit debitis meliore
-              postulant, per ex prompta alterum sanctus, pro ne quod dicunt
-              sensibus.
+
+            <!-- Heading -->
+            <h3 class="mb-5">
+              Conditions Générales d'Utilisation de l'Application E-Maquis
+            </h3>
+
+            <!-- Text -->
+            <p class="text-gray-800">
+              En utilisant l'application E-Maquis,
+              vous acceptez les conditions générales d'utilisation suivantes :
             </p>
+
+            <!-- Text -->
             <p>
-              Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod
-              novum accumsan, mei ludus tamquam dolores id. No sit debitis
-              meliore postulant, per ex prompta alterum sanctus, pro ne quod
-              dicunt sensibus.
+              1. Propriété intellectuelle
             </p>
+
+            <!-- List -->
+            <div class="d-flex">
+
+              <!-- Badge -->
+              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+                    <i class="fas fa-check"></i>
+                    </span>
+
+              <!-- Text -->
+              <p class="text-gray-800">
+                Tous les droits de propriété intellectuelle de l'application E-Maquis,
+                y compris le design, le code source, les images et les textes,
+                appartiennent à l'entreprise propriétaire de l'application.
+                Il est strictement interdit de copier, reproduire ou distribuer
+                toute partie de l'application sans autorisation écrite
+                de l'entreprise propriétaire.
+              </p>
+
+            </div>
+            <p>
+              2. Utilisation de l'application
+            </p>
+
+            <!-- List -->
+            <div class="d-flex">
+
+              <!-- Badge -->
+              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+                    <i class="fas fa-check-circle"></i>
+                    </span>
+
+              <!-- Text -->
+              <p class="text-gray-800">
+                L'application E-Maquis est destinée à la gestion des stocks et à la traçabilité des
+                ventes effectuées par les employés. Elle est également utilisée pour le bilan des ventes des boissons.
+                L'utilisation de l'application est strictement réservée aux employés de l'entreprise propriétaire.
+                Tout accès non autorisé ou tentative d'accès
+                à l'application sera considéré comme une violation des conditions générales.
+                En utilisant l'Application, les Utilisateurs acceptent de se conformer aux présentes Conditions.
+                Les Utilisateurs s'engagent à utiliser l'Application conformément à toutes les lois et réglementations applicables.
+              </p>
+
+            </div>
+            <p>
+              3. Confidentialité et sécurité
+            </p>
+
+            <!-- List -->
+            <div class="d-flex">
+
+              <!-- Badge -->
+              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+                    <i class="fas fa-check-circle"></i>
+                    </span>
+
+              <!-- Text -->
+              <p class="text-gray-800">
+                L'application E-Maquis contient des informations confidentielles concernant les propriétaires ,
+                les ventes et les stocks. Les employés sont tenus de maintenir la confidentialité de ces informations et de
+                ne pas les divulguer à des tiers sans autorisation écrite de l'entreprise propriétaire.
+                Nous mettons en place des mesures de sécurité appropriées pour protéger vos données contre tout accès non autorisé,
+                divulgation ou destruction. Cependant, veuillez noter qu'aucune méthode
+                de transmission ou de stockage électronique n'est totalement sécurisée, et nous ne pouvons garantir une sécurité absolue de vos données.
+              </p>
+            </div>
+
+            <p>
+              4. Responsabilité
+            </p>
+
+            <div class="d-flex">
+
+              <!-- Badge -->
+              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+                    <i class="fas fa-check-circle"></i>
+                    </span>
+
+              <!-- Text -->
+              <p class="text-gray-800">
+                L'Application est fournie « telle quelle », sans garantie d'aucune sorte, expresse ou implicite.
+                La Société ne peut en aucun cas être tenue responsable des
+                dommages directs, indirects, spéciaux ou accessoires résultant de l'utilisation
+                de l'Application ou de l'impossibilité d'utiliser l'Application.
+              </p>
+            </div>
+
+            <p>
+              5. Protection des données
+            </p>
+
+            <div class="d-flex">
+
+              <!-- Badge -->
+              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+                    <i class="fas fa-check-circle"></i>
+                    </span>
+
+              <!-- Text -->
+              <p class="text-gray-800">
+                La Société s'engage à respecter la vie privée des Utilisateurs et à protéger les données personnelles
+                conformément à la législation en vigueur.
+                Les Utilisateurs acceptent que leurs données personnelles soient collectées, utilisées et stockées par la Société,
+                et reconnaissent que la Société peut utiliser ces données pour améliorer les services fournis aux Utilisateurs.
+                En utilisant notre application, vous consentez à la collecte, au stockage et à l'utilisation de vos données personnelles conformément
+                à notre politique de confidentialité.
+                Nous nous engageons à traiter vos données de manière sécurisée et à respecter votre vie privée.
+                Les données personnelles que vous fournissez, telles que votre nom, votre adresse e-mail et vos informations de contact,
+                peuvent être utilisées pour vous fournir des services personnalisés, répondre à vos demandes, améliorer notre application
+                et vous informer des mises à jour importantes.
+              </p>
+            </div>
+
+            <p>
+              6. Modifications des conditions générales
+            </p>
+
+            <div class="d-flex">
+
+              <!-- Badge -->
+              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+                    <i class="fas fa-check-circle"></i>
+                    </span>
+
+              <!-- Text -->
+              <p class="text-gray-800">
+                L'entreprise propriétaire se réserve le droit de
+                modifier les conditions générales d'utilisation
+                de l'application E-Maquis à tout moment sans préavis.
+                Les modifications seront publiées sur le site Web de
+                l'entreprise propriétaire. Les employés sont tenus de
+                vérifier régulièrement les conditions générales d'utilisation
+                pour prendre connaissance des modifications éventuelles.</br>
+
+              </p>
+            </div>
+
+            <p>
+              7. Droit applicable
+            </p>
+
+            <div class="d-flex">
+
+              <!-- Badge -->
+              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+                    <i class="fas fa-check-circle"></i>
+                    </span>
+
+              <!-- Text -->
+              <p class="text-gray-800">
+                Les présentes Conditions sont régies par le droit en vigueur en Côte d'Ivoire.
+                Tout litige relatif aux présentes Conditions sera soumis à la juridiction
+                des tribunaux compétents en Côte d'Ivoire.
+
+                En utilisant l'Application, les Utilisateurs reconnaissent avoir
+                lu et compris les présentes Conditions et acceptent de s'y conformer.
+              </p>
           </div>
         </div>
       </div>
@@ -481,19 +643,62 @@
     <!-- /Modal terms -->
 
     <%- include('partial/scriptconfigprofil.ejs') %>
+    <script src="../jquery-3.4.1.min.js"></script>
+    <script src="/socket.io/socket.io.js "></script>
+    <script>
+      const socket = io(window.location.origin + window.location.pathname);
+      console.log(window.location.origin + window.location.pathname);
+      // Récupérer tous les éléments radio avec un attribut name correspondant
+      var radios = document.querySelectorAll('input[name^="branch_1_group_1"]');
+
+      // Récupérer l'élément div par sa classe
+      var div = document.querySelector(".branch");
+
+      // Parcourir tous les éléments radio
+      for (var i = 0; i < radios.length; i++) {
+        radios[i].onclick = function () {
+          div.id = this.value;
+        };
+      }
+
+      $("form").on("submit", (e) => {
+        e.preventDefault();
+        isSucces = true;
+        console.log("aniki");
+    const objectifJournalier=  document.querySelector("#budget_slider").textContent;
+    const userid = document.querySelector("#sess").textContent;
+    
+        const data = {
+          RemboursementType: $('input[name="branch_1_group_1"]').val(),
+
+          ville: $('select[name="city"]').val(),
+          pays: $('select[name="country"]').val(),
+          square: $('select[name="square"]').val(),
+          othersquare: $('input[name="othersquare"]').val(),
+          objectifJournalier : objectifJournalier,
+          userid:userid
+        };
+
+        console.log(data);
+        socket.emit('configData',data)
+        
+        socket.on("configsuccess", () => {
+
+        setTimeout(() =>  document.getElementById("alert-sucsess").style.display = "block", 3000);
+        location.href = "/dashboard";
+
+        });
+      });
+    </script>
     <script>
       function showCommunes() {
         var ville = document.getElementById("ville").value;
         if (ville === "Abidjan") {
-          document.getElementById("communes").style.display =
-            "block";
-          document.getElementById("quartier").style.display =
-            "none";
+          document.getElementById("communes").style.display = "block";
+          document.getElementById("quartier").style.display = "none";
         } else {
-          document.getElementById("communes").style.display =
-            "none";
-          document.getElementById("quartier").style.display =
-            "block";
+          document.getElementById("communes").style.display = "none";
+          document.getElementById("quartier").style.display = "block";
         }
       }
     </script>

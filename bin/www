@@ -15,9 +15,11 @@ const { produitQueries } = require('../requests/produitQueries');
 const { venteQueries } = require('../requests/venteQueries');
 const { paiementQueries } = require('../requests/paiementQueries');
 const User = require('../models/user.model');
+const Setting = require('../models/settings.model');
 const dotenv = require('dotenv').config();
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express'),
   swaggerDocument = require('../swagger.json');
 
@@ -311,6 +313,61 @@ Summary.on('connection', (socket) => {
 
 
   })
+});
+
+const SaveConfigData = io.of('/config_profil').use(Serveur.getSharedSession());
+SaveConfigData.on('connection', (socket) => {
+  socket.on('configData', async (data) => {
+    const { userid, objectifJournalier, RemboursementType, pays, ville, square, othersquare } = data;
+
+    // Démarrez une session MongoDB
+    const session = await mongoose.startSession();
+    
+    try {
+      session.startTransaction();
+    
+      // Mettre à jour l'utilisateur
+      const updateUserPromise = User.findByIdAndUpdate(
+        userid,
+        {
+          country: pays,
+          city: ville,
+          square: square,
+          othersquare: othersquare
+        },
+        { new: true }
+      ).session(session);
+    
+      // Mettre à jour le modèle de configuration
+      const updateSettingPromise = Setting.findOneAndUpdate(
+        { travail_pour: userid },
+        {
+          objective: objectifJournalier,
+          product_return_type: RemboursementType
+        },
+        { new: true }
+      ).session(session);
+    
+      // Exécutez les deux opérations de mise à jour en parallèle
+      const [updatedUser, updatedSetting] = await Promise.all([updateUserPromise, updateSettingPromise]);
+    
+      await session.commitTransaction();
+    
+      console.log('Utilisateur mis à jour :', updatedUser);
+      console.log('Configuration mise à jour :', updatedSetting);
+      socket.emit('configsuccess', '/config_profil');
+    } catch (error) {
+      socket.emit('bad');
+      console.error('Erreur lors de la mise à jour :', error);
+      await session.abortTransaction();
+    } finally {
+      session.endSession();
+    }
+ 
+   
+      socket.emit('saved');
+      socket.emit('redirect', '/dashbaord');
+  });
 });
 
 server.listen(port, console.log(' le serveur ecoute sur le port', port));

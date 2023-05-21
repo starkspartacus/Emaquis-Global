@@ -38,29 +38,29 @@ body {
 
 #notificationData span {
   display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: 25px;
-    height: 25px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 25px;
+  height: 25px;
   padding: 5px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: bold;
   background: red;
   border-radius: 50%;
 }
 
-#notificationData img{
+#notificationData img {
   cursor: pointer;
 }
 
-.modal-body-notyf li{
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+.modal-body-notyf li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
-.modal-body-notyf li:last-child{
-    border-bottom: none;
+.modal-body-notyf li:last-child {
+  border-bottom: none;
 }
 
 @media (min-width: 1200px) {
@@ -2738,7 +2738,7 @@ p a:hover {
   display: block;
   color: #fff;
   line-height: 40px;
-  background: #98ED58;
+  background: #98ed58;
   font-size: 15px;
   border-radius: 30px;
   -webkit-transition: 0.3s;
@@ -2790,14 +2790,14 @@ p a:hover {
   align-items: center;
   border-radius: 10px;
   background: rgba(95, 99, 242, 0.06);
-  color: #98ED58;
+  color: #98ed58;
 }
 
 /******** base color css ********/
 /* line 2, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1 {
-  background-color: #98ED58;
-  border: 1px solid #98ED58;
+  background-color: #98ed58;
+  border: 1px solid #98ed58;
   color: #fff;
   display: inline-block;
   padding: 9px 25px;
@@ -2811,10 +2811,9 @@ p a:hover {
 }
 
 .form-focus:focus {
-  border-color: #98ED58;
+  border-color: #98ed58;
   box-shadow: 0 0 0 0.2rem rgba(152, 237, 88, 0.25);
-  animation: animform ease-in-out 0.7s  alternate;
-
+  animation: animform ease-in-out 0.7s alternate;
 }
 
 @keyframes animform {
@@ -2835,9 +2834,6 @@ p a:hover {
   }
 }
 
-
-
-
 /* line 14, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1 i {
   font-size: 15px;
@@ -2847,7 +2843,7 @@ p a:hover {
 /* line 18, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1:hover {
   color: #fff;
-  background-color: #98ED58;
+  background-color: #98ed58;
   box-shadow: 0 3px 11px rgba(136, 79, 251, 0.4);
 }
 
@@ -2867,7 +2863,7 @@ p a:hover {
 
 /* line 33, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1.orange_btn {
-  background: #98ED58;
+  background: #98ed58;
   font-size: 16px;
   border: 0;
   font-weight: 400;
@@ -2876,7 +2872,7 @@ p a:hover {
 
 /* line 39, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1.orange_btn:hover {
-  background: #98ED58;
+  background: #98ed58;
   color: #fff;
 }
 
@@ -2910,27 +2906,27 @@ p a:hover {
 
 /* line 60, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1.radius_btn {
-  background-color: #98ED58;
-  border: 1px solid #98ED58;
+  background-color: #98ed58;
+  border: 1px solid #98ed58;
   width: 60%;
   padding: 20px;
   border-radius: 5px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 14px;
   font-weight: bold;
   padding: 10px 30px;
   text-transform: uppercase;
   transition: all 0.3s ease 0s;
   margin-top: 20px;
-  transition: all 0.3s ease 0s;;
+  transition: all 0.3s ease 0s;
 }
 
 /* line 67, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .btn_1.radius_btn:hover {
-  background-color: #FFFFFF;
-  border: 1px solid #98ED58;
-  color: #98ED58;
-  letter-spacing: .25em;
+  background-color: #ffffff;
+  border: 1px solid #98ed58;
+  color: #98ed58;
+  letter-spacing: 0.25em;
 }
 
 /* line 74, G:/admin_project/8 admin/management_html/scss/_button.scss */
@@ -2947,12 +2943,12 @@ p a:hover {
   white-space: nowrap;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  color: #98ED58;
+  color: #98ed58;
 }
 
 /* line 88, G:/admin_project/8 admin/management_html/scss/_button.scss */
 .Euro_btn:hover {
-  background-color: #98ED58;
+  background-color: #98ed58;
   color: #000;
 }
 
@@ -5315,13 +5311,11 @@ body::-webkit-scrollbar {
 /******** main content css here *********/
 /* line 2, G:/admin_project/8 admin/management_html/scss/_main_content.scss */
 .main_content {
-  padding-left: 270px;
   width: 100%;
   padding-top: 0px !important;
   transition: 0.5s;
   position: relative;
   min-height: 100vh;
-
 }
 
 .em_main_content{
@@ -5719,18 +5713,18 @@ body::-webkit-scrollbar {
   flex-wrap: wrap;
 }
 
-.btn-menu{
-    background: #98ed58;
-    border: 1px solid #ebebeb;
-    border-radius: 5px;
-    padding: 5px 10px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.3s;
-    min-height: 36px;
-    margin-right: 10px;
+.btn-menu {
+  background: #98ed58;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  min-height: 36px;
+  margin-right: 10px;
 }
 
 /* line 322, G:/admin_project/8 admin/management_html/scss/_main_content.scss */
@@ -9650,22 +9644,16 @@ canvas#highlights {
   padding: 12px;
   line-height: 1;
   animation: produit_obj infinite 3s linear;
-
 }
 
 @keyframes produit_obj {
   0% {
-
     transform: scale(0.3);
   }
   100% {
-
     transform: scale(0.4);
   }
 }
-
-
-
 
 /* line 459, G:/admin_project/8 admin/management_html/scss/_byer_table.scss */
 .monthly_plan_wraper .single_plan .plan_left .thumb img {
@@ -13879,8 +13867,8 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
   white-space: nowrap;
   padding-left: 18px;
   color: #031e33;
-    font-size: 16px;
-    font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
   width: 194px;
   padding-left: 20px !important;
 }
@@ -14006,17 +13994,17 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
   padding-left: 0;
 }
 
-.side-deconnexion{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    font-family: Poppins, serif;
-    text-align: center;
-    padding: 10px 0;
-    background: #fff;
+.side-deconnexion {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-family: Poppins, serif;
+  text-align: center;
+  padding: 10px 0;
+  background: #fff;
 }
 
 /* line 171, G:/admin_project/8 admin/management_html/scss/_mini_menu.scss */
@@ -14290,7 +14278,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
   border-radius: 5px;
   margin-bottom: 5px;
   padding: 5px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   transform: scale(1);
 }
 
@@ -14301,7 +14289,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 
 /* line 11, G:/admin_project/8 admin/management_html/scss/_crm.scss */
 .user_crm_wrapper .single_crm .crm_head {
-  background: #98ED58;
+  background: #98ed58;
   padding: 8px 20px;
   border-radius: 13px;
 }
@@ -14340,7 +14328,6 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
   margin-top: 30px;
   border-radius: 5px;
   padding: 40px 30px;
-
 }
 
 /* line 43, G:/admin_project/8 admin/management_html/scss/_crm.scss */
@@ -14392,21 +14379,19 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
   max-width: 220px;
 }
 
-
-
 /*# sourceMappingURL=style.css.map */
 /*Bilan*/
-.anime-carte-bilan div{
+.anime-carte-bilan div {
   position: relative;
   transform: scale(1);
   transition: all 0.5s ease;
 }
-.anime-carte-bilan div:hover{
+.anime-carte-bilan div:hover {
   transform: scale(1.01);
   transition: all 0.5s ease;
 }
 
-.graphBox{
+.graphBox {
   position: relative;
   width: 100%;
   padding: 20px;
@@ -14416,11 +14401,11 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
   min-height: 200px;
 }
 
-.graphBox .box{
+.graphBox .box {
   position: relative;
   display: flex;
   margin-right: 20px;
-  background: #FFFFFF;
+  background: #ffffff;
   padding: 20px;
   width: 100%;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -14430,7 +14415,7 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
 /*Bilan*/
 
 @media (max-width: 991px) {
-  .graphBox{
+  .graphBox {
     grid-template-columns: 1fr;
     height: auto;
   }

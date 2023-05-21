@@ -32,6 +32,7 @@ exports.ventePost = async (req, res) => {
     const product_unavailables = [];
     let produits = [];
     let sum = 0;
+    let for_employee = vente.for_employe || null;
 
     if (vente !== null) {
       // get the price of each product
@@ -89,7 +90,14 @@ exports.ventePost = async (req, res) => {
       const setting = await settingQueries.getSettingByUserId(
         sess.travail_pour
       );
-      let billet = await BilletQueries.getBilletByEmployeId(vente.for_employe);
+
+      const barmans = await employeQueries.getBarmans(sess.travail_pour);
+
+      if (!vente.for_employe) {
+        for_employee = barmans.result[0]?._id;
+      }
+
+      let billet = await BilletQueries.getBilletByEmployeId(for_employee);
 
       if (!billet.result) {
         res.status(400).json({
@@ -116,8 +124,6 @@ exports.ventePost = async (req, res) => {
         return;
       }
 
-      const barmans = await employeQueries.getBarmans(sess.travail_pour);
-
       let newVente = {
         produit: produits,
         quantite: vente.quantite,
@@ -130,7 +136,7 @@ exports.ventePost = async (req, res) => {
         formules: formulesProduct,
         table_number: vente.table_number,
         amount_collected: vente.amount_collected,
-        for_employe: vente.for_employe || barmans.result[0]?._id,
+        for_employe: vente.for_employe || for_employee,
       };
       // il fait pas l setvente or il fait update  de produit
       Vente = await venteQueries.setVente(newVente);
@@ -273,7 +279,9 @@ exports.editventePost = async (req, res) => {
         sess.travail_pour
       );
 
-      let billet = await BilletQueries.getBilletByEmployeId(body.for_employe);
+      let billet = await BilletQueries.getBilletByEmployeId(
+        oldVente.result?.for_employe
+      );
 
       if (!billet.result) {
         res.status(400).json({
@@ -351,6 +359,11 @@ exports.editventePost = async (req, res) => {
         amount_collected:
           body.amount_collected ?? oldVente.result.amount_collected,
       };
+
+      if (body.update_for_collected_amount) {
+        newVente.status_commande = 'Validée';
+        newVente.employe_validate_id = sess._id;
+      }
 
       await venteQueries.updateVente(venteId, newVente);
 
