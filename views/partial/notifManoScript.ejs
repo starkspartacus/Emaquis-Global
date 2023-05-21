@@ -86,7 +86,9 @@
     notifFunc("Ajoutez un employé", "info")
   }
 
-
+  if (produits.length === 0) {
+    notifFunc("Vous devez ajouter des produits dans votre établissement", "error")
+  }
 
 
   for (let rupture of produits) {
@@ -124,9 +126,15 @@
         tabNotif.push("Vous avez " + employeLength + " employés à votre charge")
     }
 
+
+
     if (employeLength === 0) {
         tabNotif.push("Vous n'avez aucun employé à votre charge")
         tabNotif.push("Ajoutez un employé")
+    }
+
+    if (produits.length === 0) {
+        tabNotif.push("Vous devez ajouter des produits dans votre établissement")
     }
 
   notificationCount.innerHTML += tabNotif.length ;
@@ -138,10 +146,14 @@
                 bgColor = 'black';
             } else if (notif.includes('très bas')) {
                 bgColor = 'red';
-            } else if (notif.includes('employés')) {
+            } else if (notif.includes('aucun')) {
                 bgColor = 'orange';
             } else if (notif.includes('Ajoutez')) {
                 bgColor = 'blue';
+            }else if (notif.includes('employés')) {
+                bgColor = 'orange';
+            }else if (notif.includes('produit')) {
+                bgColor = 'red';
             }
             let li = document.createElement('li');
             li.innerHTML = `

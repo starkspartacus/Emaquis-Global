@@ -7,7 +7,7 @@ const SettingModel = new mongoose.Schema({
   },
   objective: {
     type: Number,
-    default: 20000,
+    default: 120000,
   },
   travail_pour: {
     type: String,
