@@ -4384,7 +4384,7 @@ table.dataTable {
   padding-bottom: 50px;
   position: fixed;
   width: 270px;
-  z-index: 1041;
+  z-index: 9999;
   overflow: hidden;
   overflow-y: auto;
   background: #ffffff;
