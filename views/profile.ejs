@@ -141,10 +141,10 @@
                                     <% }); %>
                                   </select>
                                 </div>
-                                <div class="col-md-6"><label class="labels">Region</label><input type="text" class="form-control" name="city" value="<%=user.city%>" placeholder="Région"></div>
+                                <div class="col-md-6"><label class="labels">Ville</label><input type="text" class="form-control" name="city" value="<%=user.city%>" placeholder="Région"></div>
                               </div>
 
-                              <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Enregistrer Profil</button></div>
+                              <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" onclick="dashRedirect()">Enregistrer Profil</button></div>
                             </div>
                           </div>
                           <div class="col-md-4">
@@ -319,8 +319,23 @@
   <!-- footer  -->
   <!-- jquery slim -->
   <%- include('partial/script.ejs') %>
+  <script src="/socket.io/socket.io.js "></script>
   <script>
+     const socket = io(window.location.origin + window.location.pathname);
+    const dashRedirect =() =>{
+      console.log("aniki")
+      socket.emit("dashredirect")
+      }
+      socket.on("finalRedict", () => {
+
+      setTimeout(() =>  document.getElementById("alert-sucsess").style.display = "block", 3000);
+      location.href = "/dashboard";
+
+      });
     $(document).ready(function() {
+      
+      console.log(window.location.origin + window.location.pathname,"dfsfsd");
+     
       //  chat box
       const inputPassword = $('input[name="newPassword"]');
       const inputConfirmPassword = $('input[name="confirmPassword"]');
@@ -343,10 +358,12 @@
       inputPassword.on('input', onChangePassword)
 
       inputConfirmPassword.on('input', onChangePassword)
-
+    
+      
 
     });
   </script>
+  
 </body>
 
 </html>
