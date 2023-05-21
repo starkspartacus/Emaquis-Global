@@ -5316,6 +5316,7 @@ body::-webkit-scrollbar {
   transition: 0.5s;
   position: relative;
   min-height: 100vh;
+  padding-left: 270px;
 }
 
 .em_main_content{
