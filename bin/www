@@ -322,10 +322,10 @@ SaveConfigData.on('connection', (socket) => {
 
     // Démarrez une session MongoDB
     const session = await mongoose.startSession();
-    
+
     try {
-      session.startTransaction();
-    
+      await session.startTransaction();
+
       // Mettre à jour l'utilisateur
       const updateUserPromise = User.findByIdAndUpdate(
         userid,
@@ -335,9 +335,9 @@ SaveConfigData.on('connection', (socket) => {
           square: square,
           othersquare: othersquare
         },
-        { new: true ,upsert:true}
+        { new: true , upsert: true }
       ).session(session);
-    
+
       // Mettre à jour le modèle de configuration
       const updateSettingPromise = Setting.findOneAndUpdate(
         { travail_pour: userid },
@@ -345,14 +345,14 @@ SaveConfigData.on('connection', (socket) => {
           objective: objectifJournalier,
           product_return_type: RemboursementType
         },
-        { new: true ,upsert: true }
+        { new: true , upsert: true }
       ).session(session);
-    
+
       // Exécutez les deux opérations de mise à jour en parallèle
       const [updatedUser, updatedSetting] = await Promise.all([updateUserPromise, updateSettingPromise]);
-    
+
       await session.commitTransaction();
-    
+
       console.log('Utilisateur mis à jour :', updatedUser);
       console.log('Configuration mise à jour :', updatedSetting);
       socket.emit('configsuccess', '/config_profil');
@@ -363,11 +363,9 @@ SaveConfigData.on('connection', (socket) => {
     } finally {
       session.endSession();
     }
- 
-   
-     
   });
 });
+
 
 const SaveProfile = io.of('/profile').use(Serveur.getSharedSession());
 SaveProfile.on('connection', (socket) => {
