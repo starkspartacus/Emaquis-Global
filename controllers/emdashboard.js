@@ -23,6 +23,8 @@ exports.emdashboard = async (req, res) => {
       });
       if (billets && billets.result.length > 0) {
         billet = billets.result[0];
+      } else {
+        billet = null;
       }
     } else {
       billet = billet.result;
