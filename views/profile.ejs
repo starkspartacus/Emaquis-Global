@@ -330,12 +330,11 @@
 
       setTimeout(() =>  document.getElementById("alert-sucsess").style.display = "block", 3000);
       location.href = "/dashboard";
-
-      });
+      }, 3000);
     $(document).ready(function() {
-      
+
       console.log(window.location.origin + window.location.pathname,"dfsfsd");
-     
+
       //  chat box
       const inputPassword = $('input[name="newPassword"]');
       const inputConfirmPassword = $('input[name="confirmPassword"]');
@@ -358,12 +357,12 @@
       inputPassword.on('input', onChangePassword)
 
       inputConfirmPassword.on('input', onChangePassword)
-    
-      
+
+
 
     });
   </script>
-  
+
 </body>
 
 </html>
