@@ -63,7 +63,7 @@
     });
 
     // Fonction pour afficher une notification
-    const showNotification = (message, type) => {
+    const showNotification = (message, type, read = false) => {
         notyf.open({
             type,
             message: message,
@@ -72,6 +72,16 @@
             position: {
                 y: 'top',
                 x: 'right',
+            },
+            callbacks: {
+                afterClose: () => {
+                    const index = tabNotif.findIndex(notif => notif.message === message);
+                    if (index !== -1) {
+                        tabNotif[index].read = true; // Marquer la notification comme lue
+                        localStorage.setItem('notifications', JSON.stringify(tabNotif)); // Mettre à jour le localStorage
+                        updateNotificationCount(); // Mettre à jour le compteur de notifications
+                    }
+                }
             }
         });
     }
@@ -80,39 +90,52 @@
     if (employeLength > 0) {
         const message = `Vous avez ${employeLength} employé(s) à votre charge`;
         showNotification(message, 'success');
-        tabNotif.push(message);
+        tabNotif.push({ message, read: false });
     } else {
         const message1 = "Vous n'avez aucun employé à votre charge";
         const message2 = "Ajoutez un employé";
         showNotification(message1, 'error');
         showNotification(message2, 'info');
-        tabNotif.push(message1, message2);
+        tabNotif.push({ message: message1, read: false }, { message: message2, read: false });
     }
 
     if (produits.length === 0) {
         const message = "Vous devez ajouter des produits dans votre établissement";
         showNotification(message, 'error');
-        tabNotif.push(message);
+        tabNotif.push({ message, read: false });
     }
 
     for (let rupture of produits) {
         if (rupture.quantite === 0) {
             const message = `Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est en rupture de stock (${rupture.quantite})`;
-            if (!tabNotif.includes(message)) {
+            if (!tabNotif.some(notif => notif.message === message)) {
                 showNotification(message, 'black');
-                tabNotif.push(message);
+                tabNotif.push({ message, read: false });
             }
         } else if (rupture.quantite < 100) {
             const message = `Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est très bas (${rupture.quantite})`;
-            if (!tabNotif.includes(message)) {
+            if (!tabNotif.some(notif => notif.message === message)) {
                 showNotification(message, 'error');
-                tabNotif.push(message);
+                tabNotif.push({ message, read: false });
             }
         }
     }
 
+    // Fonction pour mettre à jour le compteur de notifications
+    const updateNotificationCount = () => {
+        const unreadCount = tabNotif.filter(notif => !notif.read).length;
+        notificationCount.innerHTML = unreadCount;
+    }
+
+    // Récupération des notifications depuis le localStorage
+    const storedNotifications = localStorage.getItem('notifications');
+    if (storedNotifications) {
+        const parsedNotifications = JSON.parse(storedNotifications);
+        tabNotif.push(...parsedNotifications);
+    }
+
     // Affichage du nombre de notifications
-    notificationCount.innerHTML = tabNotif.length;
+    updateNotificationCount();
 
     // Gestion du clic sur l'icône de notification
     notificationList.addEventListener('click', () => {
@@ -122,27 +145,32 @@
             li.innerHTML = `
         <div class="card">
           <div class="card-body" style="background: ${bgColor}">
-            <p class="card-text text-white font-weight-bold">${notif}</p>
+            <p class="card-text text-white font-weight-bold">${notif.message}</p>
           </div>
         </div>
       `;
             notificationListUl.appendChild(li);
         }
         tabNotif = []; // Réinitialisation du tableau de notifications
+        localStorage.removeItem('notifications'); // Suppression des notifications du localStorage
+        updateNotificationCount(); // Mettre à jour le compteur de notifications
     });
 
     // Fonction pour obtenir la couleur de fond de la notification en fonction du message
-    const getNotificationColor = (message) => {
-        if (message.includes('rupture')) {
+    const getNotificationColor = (notif) => {
+        if (notif.message.includes('rupture')) {
             return 'black';
-        } else if (message.includes('très bas')) {
+        } else if (notif.message.includes('très bas')) {
             return 'red';
-        } else if (message.includes('aucun') || message.includes('employé')) {
+        } else if (notif.message.includes('aucun') || notif.message.includes('employé')) {
             return 'orange';
-        } else if (message.includes('Ajoutez')) {
+        } else if (notif.message.includes('Ajoutez')) {
             return 'blue';
         } else {
             return 'orange';
         }
     };
+
+    // Stockage des notifications dans le localStorage
+    localStorage.setItem('notifications', JSON.stringify(tabNotif));
 </script>
