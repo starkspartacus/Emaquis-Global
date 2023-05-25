@@ -14,7 +14,7 @@ const SettingModel = new mongoose.Schema({
   },
   numberOfTables: {
     type: Number,
-    default: 100,
+    default: 10000,
 
   },
 });
