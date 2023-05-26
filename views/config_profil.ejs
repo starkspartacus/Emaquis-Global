@@ -1,421 +1,319 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'G-NT2SW8WBHT');
-    </script>
-    <meta charset="utf-8" />
-    <title>E-maquis Configuration Profil</title>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="E-maquis, Gestionnaire d'établissement" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
-    />
-    <meta name="author" content="Haut Numérique et Médias" />
-    <meta name="generator" content="E-maquis, Gestionnaire d'établissement" />
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-    <!-- Favicon -->
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="../img/paresseux_sous_officiel.png"
-    />
+    gtag('config', 'G-NT2SW8WBHT');
+  </script>
+  <meta charset="utf-8" />
+  <title>E-maquis Configuration Profil</title>
 
-    <!-- Favicons-->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <link
-      rel="apple-touch-icon"
-      type="image/x-icon"
-      href="emaquisjs/img/apple-touch-icon-57x57-precomposed.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      type="image/x-icon"
-      sizes="72x72"
-      href="emaquisjs/img/apple-touch-icon-72x72-precomposed.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      type="image/x-icon"
-      sizes="114x114"
-      href="emaquisjs/img/apple-touch-icon-114x114-precomposed.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      type="image/x-icon"
-      sizes="144x144"
-      href="emaquisjs/img/apple-touch-icon-144x144-precomposed.png"
-    />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="E-maquis, Gestionnaire d'établissement" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="author" content="Haut Numérique et Médias" />
+  <meta name="generator" content="E-maquis, Gestionnaire d'établissement" />
 
-    <!-- GOOGLE WEB FONT -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
 
-    <!-- BASE CSS -->
-    <link href="emaquisjs/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="emaquisjs/css/roundslider.min.css" rel="stylesheet" />
-    <link href="emaquisjs/css/style.css" rel="stylesheet" />
-    <link href="emaquisjs/css/menu.css" rel="stylesheet" />
-    <link href="emaquisjs/css/vendors.min.css" rel="stylesheet" />
-    <link
-      href="emaquisjs/css/icon_fonts/css/all_icons.min.css"
-      rel="stylesheet"
-    />
-    <link href="emaquisjs/css/skins/square/grey.css" rel="stylesheet" />
-    <link href="emaquisjs/css/magnific-popup.min.css" rel="stylesheet" />
+  <!-- Favicons-->
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" type="image/x-icon" href="emaquisjs/img/apple-touch-icon-57x57-precomposed.png" />
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="emaquisjs/img/apple-touch-icon-72x72-precomposed.png" />
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="emaquisjs/img/apple-touch-icon-114x114-precomposed.png" />
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="emaquisjs/img/apple-touch-icon-144x144-precomposed.png" />
 
-    <!-- YOUR CUSTOM CSS -->
-    <link href="emaquisjs/css/custom.css" rel="stylesheet" />
-  </head>
+  <!-- GOOGLE WEB FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet" />
 
-  <body>
-    <div id="preloader">
-      <div data-loader="circle-side"></div>
-    </div>
-    <!-- /Preload -->
+  <!-- BASE CSS -->
+  <link href="emaquisjs/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="emaquisjs/css/roundslider.min.css" rel="stylesheet" />
+  <link href="emaquisjs/css/style.css" rel="stylesheet" />
+  <link href="emaquisjs/css/menu.css" rel="stylesheet" />
+  <link href="emaquisjs/css/vendors.min.css" rel="stylesheet" />
+  <link href="emaquisjs/css/icon_fonts/css/all_icons.min.css" rel="stylesheet" />
+  <link href="emaquisjs/css/skins/square/grey.css" rel="stylesheet" />
+  <link href="emaquisjs/css/magnific-popup.min.css" rel="stylesheet" />
 
-    <div id="loader_form">
-      <div data-loader="circle-side-2"></div>
-    </div>
-    <!-- /loader_form -->
+  <!-- YOUR CUSTOM CSS -->
+  <link href="emaquisjs/css/custom.css" rel="stylesheet" />
+</head>
 
-    <header>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-3">
-            <div id="logo_home">
-              <h1><a href="/config_profil"></a></h1>
-            </div>
-          </div>
-          <div class="col-9">
-            <div id="social">
-              <ul>
-                <li>
-                  <a href="https://www.facebook.com/profile.php?id=100092243106487"><i class="icon-facebook"></i></a>
-                </li>
-                <li>
-                  <a href="https://www.youtube.com/playlist?list=PL4bakAQbvNJT-4JdBIocZRg6Uj6JTG2bm"><i class="icon-youtube"></i></a>
-                </li>
-                <li>
-                  <a href="#0"><i class="icon-tok"></i></a>
-                </li>
-                <li>
-                  <a href="#0"><i class="icon-linkedin"></i></a>
-                </li>
-              </ul>
-            </div>
-            <!-- /social -->
-            <nav>
-              <ul class="cd-primary-nav">
-                <li>
-                  <a href="/" class="animated_link"
-                    ><i class="icon-home"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="https://www.youtube.com/playlist?list=PL4bakAQbvNJT-4JdBIocZRg6Uj6JTG2bm" class="animated_link"
-                    ><i class="icon-youtube-4"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="https://www.facebook.com/profile.php?id=100092243106487" class="animated_link"
-                    ><i class="icon-facebook"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="#" class="animated_link"
-                    ><i class="icon-instagram"></i
-                  ></a>
-                </li>
-              </ul>
-            </nav>
+<body>
+  <div id="preloader">
+    <div data-loader="circle-side"></div>
+  </div>
+  <!-- /Preload -->
+
+  <div id="loader_form">
+    <div data-loader="circle-side-2"></div>
+  </div>
+  <!-- /loader_form -->
+
+  <header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3">
+          <div id="logo_home">
+            <h1><a href="/config_profil"></a></h1>
           </div>
         </div>
+        <div class="col-9">
+          <div id="social">
+            <ul>
+              <li>
+                <a href="https://www.facebook.com/profile.php?id=100092243106487"><i class="icon-facebook"></i></a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/playlist?list=PL4bakAQbvNJT-4JdBIocZRg6Uj6JTG2bm"><i class="icon-youtube"></i></a>
+              </li>
+              <li>
+                <a href="#0"><i class="icon-tok"></i></a>
+              </li>
+              <li>
+                <a href="#0"><i class="icon-linkedin"></i></a>
+              </li>
+            </ul>
+          </div>
+          <!-- /social -->
+          <nav>
+            <ul class="cd-primary-nav">
+              <li>
+                <a href="/" class="animated_link"><i class="icon-home"></i></a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/playlist?list=PL4bakAQbvNJT-4JdBIocZRg6Uj6JTG2bm" class="animated_link"><i class="icon-youtube-4"></i></a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/profile.php?id=100092243106487" class="animated_link"><i class="icon-facebook"></i></a>
+              </li>
+              <li>
+                <a href="#" class="animated_link"><i class="icon-instagram"></i></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
-      <!-- /container -->
-    </header>
-    <!-- /Header -->
+    </div>
+    <!-- /container -->
+  </header>
+  <!-- /Header -->
 
-    <main>
-      <div class="container">
-        <p id="sess" hidden><%=user?.id%></p>
+  <main>
+    <div class="container">
+      <p id="sess" hidden><%=user?.id%></p>
 
-        <div id="wizard_container">
-          <form name="example-1" id="wrapped">
-            <input id="website" name="website" type="text" value="" />
+      <div id="wizard_container">
+        <form name="example-1" id="wrapped">
+          <input id="website" name="website" type="text" value="" />
 
-            <div id="middle-wizard">
-              <!-- First branch What Type of Project ============================== -->
-              <div class="step" data-state="branchtype">
+          <div id="middle-wizard">
+            <!-- First branch What Type of Project ============================== -->
+            <div class="step" data-state="branchtype">
+              <div class="question_title">
+                <h3>Choisissez votre mode retour produit</h3>
+                <p>
+                  La politique de votre établissement lorsque le client ne
+                  peut plus consommer le produit déjà acheté
+                  <strong></strong>.
+                </p>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="item">
+                    <input id="answer_1" type="radio" name="branch_1_group_1" value="full" class="required" />
+                    <label for="answer_1"><img src="emaquisjs/img/remboursement1.png" class="img-mode-retour" alt="" /><strong>Remboursement total</strong>Vous remboursez
+                      l'intégralité des sous selon le prix d'achat du produit
+                      au depart et vous récupérez le ou les produit(s)</label>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="item">
+                    <input id="answer_2" name="branch_1_group_1" type="radio" value="half" class="required" />
+                    <label for="answer_2"><img src="emaquisjs/img/remboursement50.png" class="img-mode-retour50" alt="" /><strong>remboursement partiel</strong>Vous remboursez
+                      la moitié des sous selon le prix d'achat du produit au
+                      depart et vous récupérez le ou les produit(s)</label>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="item">
+                    <input id="answer_3" name="branch_1_group_1" type="radio" value="tip" class="required" />
+                    <label for="answer_3"><img src="emaquisjs/img/avoir.png" class="img-mode-retour" alt="" /><strong>Avoir</strong>Vous faites un avoir du ou des
+                      produit(s) restant en définissant une date limite de
+                      consommation</label>
+                  </div>
+                </div>
+              </div>
+              <!-- /row-->
+            </div>
+            <!-- /First branch What Type of Project ============================== -->
+
+            <!-- /Web-Development > HTML-Development ============================== -->
+
+            <!-- /Web-Development > CMS-Development ============================== -->
+
+            <!-- /Web-Development > FrontEnd-Development ============================== -->
+
+            <!-- Design > What Type of Design do you need ============================== -->
+            <div class="branch" id="Design">
+              <!-- /Design > What Type of Design do you need ============================== -->
+
+              <!-- Budget ============================== -->
+              <div class="step" id="budget" data-state="end">
                 <div class="question_title">
-                  <h3>Choisissez votre mode retour produit</h3>
-                  <p>
-                    La politique de votre établissement lorsque le client ne
-                    peut plus consommer le produit déjà acheté
-                    <strong></strong>.
-                  </p>
+                  <h3>Objectif à atteindre par journalier?</h3>
+                  <p>Vous pouvez définir un objectif journalier</p>
                 </div>
-                <div class="row">
-                  <div class="col-lg-4">
-                    <div class="item">
-                      <input
-                        id="answer_1"
-                        type="radio"
-                        name="branch_1_group_1"
-                        value="remboursementTotal"
-                        class="required"
-                      />
-                      <label for="answer_1"
-                        ><img
-                          src="emaquisjs/img/remboursement1.png"
-                          class="img-mode-retour"
-                          alt=""
-                        /><strong>Remboursement total</strong>Vous remboursez
-                        l'intégralité des sous selon le prix d'achat du produit
-                        au depart et vous récupérez le ou les produit(s)</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="item">
-                      <input
-                        id="answer_2"
-                        name="branch_1_group_1"
-                        type="radio"
-                        value="remboursementPartiel"
-                        class="required"
-                      />
-                      <label for="answer_2"
-                        ><img
-                          src="emaquisjs/img/remboursement50.png"
-                          class="img-mode-retour50"
-                          alt=""
-                        /><strong>remboursement partiel</strong>Vous remboursez
-                        la moitié des sous selon le prix d'achat du produit au
-                        depart et vous récupérez le ou les produit(s)</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="item">
-                      <input
-                        id="answer_3"
-                        name="branch_1_group_1"
-                        type="radio"
-                        value="avoir"
-                        class="required"
-                      />
-                      <label for="answer_3"
-                        ><img
-                          src="emaquisjs/img/avoir.png"
-                          class="img-mode-retour"
-                          alt=""
-                        /><strong>Avoir</strong>Vous faites un avoir du ou des
-                        produit(s) restant en définissant une date limite de
-                        consommation</label
-                      >
-                    </div>
-                  </div>
-                </div>
-                <!-- /row-->
-              </div>
-              <!-- /First branch What Type of Project ============================== -->
-
-              <!-- /Web-Development > HTML-Development ============================== -->
-
-              <!-- /Web-Development > CMS-Development ============================== -->
-
-              <!-- /Web-Development > FrontEnd-Development ============================== -->
-
-              <!-- Design > What Type of Design do you need ============================== -->
-              <div class="branch" id="Design">
-                <!-- /Design > What Type of Design do you need ============================== -->
-
-                <!-- Budget ============================== -->
-                <div class="step" id="budget" data-state="end">
-                  <div class="question_title">
-                    <h3>Objectif à atteindre par journalier?</h3>
-                    <p>Vous pouvez définir un objectif journalier</p>
-                  </div>
-                  <div class="row justify-content-center">
-                    <div class="col-lg-5">
-                      <div class="box_general">
-                        <div class="rounded_slider">
-                          <div
-                            id="budget_slider"
-                            style="margin: 0 auto 20px"
-                          ></div>
-                          <p>Renseigner un objectif à atteindre</p>
-                        </div>
+                <div class="row justify-content-center">
+                  <div class="col-lg-5">
+                    <div class="box_general">
+                      <div class="rounded_slider">
+                        <div id="budget_slider" style="margin: 0 auto 20px"></div>
+                        <p>Renseigner un objectif à atteindre</p>
                       </div>
                     </div>
                   </div>
-                  <!-- /row -->
                 </div>
-                <!-- /Budget ============================== -->
+                <!-- /row -->
+              </div>
+              <!-- /Budget ============================== -->
 
-                <!-- Last step ============================== -->
-                <div class="submit step" id="end">
-                  <div class="question_title">
-                    <h3>Veuillez compléter vos coordonnées</h3>
-                    <p></p>
-                  </div>
-                  <div class="row justify-content-center">
-                    <div class="col-lg-5">
-                      <div class="box_general">
-                        <div class="form-group add_bottom_30">
-                          <div class="styled-select">
-                            <select class="required" name="country" disabled>
-                              <option value="">Selection ton pays</option>
-                              <option value="cote_d_ivoire" selected>
-                                Côte d'ivoire
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="form-group add_bottom_30">
-                          <div class="styled-select">
-                            <select
-                              class="required"
-                              name="city"
-                              id="ville"
-                              onchange="showCommunes()"
-                            >
-                              <option value="" selected>
-                                Selection ta ville
-                              </option>
-                              <option value="Abengourou">Abengourou</option>
-                              <option value="Abidjan">Abidjan</option>
-                              <option value="Aboisso">Aboisso</option>
-                              <option value="Adiaké">Adiaké</option>
-                              <option value="Adzopé">Adzopé</option>
-                              <option value="Agboville">Agboville</option>
-                              <option value="Akoupé">Akoupé</option>
-                              <option value="Anyama">Anyama</option>
-                              <option value="Bondoukou">Bondoukou</option>
-                              <option value="Bongouanou">Bongouanou</option>
-                              <option value="Bouaflé">Bouaflé</option>
-                              <option value="Bouaké">Bouaké</option>
-                              <option value="Boundiali">Boundiali</option>
-                              <option value="Dabou">Dabou</option>
-                              <option value="Daloa">Daloa</option>
-                              <option value="Danané">Danané</option>
-                              <option value="Dimbokro">Dimbokro</option>
-                              <option value="Divo">Divo</option>
-                              <option value="Ferkessédougou">
-                                Ferkessédougou
-                              </option>
-                              <option value="Gagnoa">Gagnoa</option>
-                              <option value="Grand-Bassam">Grand-Bassam</option>
-                              <option value="Guiglo">Guiglo</option>
-                              <option value="Issia">Issia</option>
-                              <option value="Katiola">Katiola</option>
-                              <option value="Korhogo">Korhogo</option>
-                              <option value="Lakota">Lakota</option>
-                              <option value="Man">Man</option>
-                              <option value="Odienné">Odienné</option>
-                              <option value="San-Pédro">San-Pédro</option>
-                              <option value="Sassandra">Sassandra</option>
-                              <option value="Séguéla">Séguéla</option>
-                              <option value="Sinfra">Sinfra</option>
-                              <option value="Soubré">Soubré</option>
-                              <option value="Tiassalé">Tiassalé</option>
-                              <option value="Toumodi">Toumodi</option>
-                              <option value="Vavoua">Vavoua</option>
-                              <option value="Yamoussoukro">Yamoussoukro</option>
-                              <option value="Zuénoula">Zuénoula</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="form-group add_bottom_30">
-                          <div class="styled-select" id="communes">
-                            <select class="required" name="square" id="commune">
-                              <option value="" selected>
-                                Selection ta commune
-                              </option>
-                              <option value="adjame">Adjamé</option>
-                              <option value="attecoubé">Attécoubé</option>
-                              <option value="cocody">Cocody</option>
-                              <option value="kooumassi">Koumassi</option>
-                              <option value="marcory">Marcory</option>
-                              <option value="plateau">Plateau</option>
-                              <option value="port-bouet">Port-Bouët</option>
-                              <option value="treichville">Treichville</option>
-                              <option value="yopougon">Yopougon</option>
-                            </select>
-                          </div>
-                          <div
-                            class="form-group add_bottom_30"
-                            id="quartier"
-                            style="display: none"
-                          >
-                            <input
-                              type="text"
-                              id="quartier"
-                              class="form-control main"
-                              name="othersquare"
-                              placeholder="quartier"
-                            />
-                          </div>
-                        </div>
-                        <div class="checkbox_questions">
-                          <input
-                            name="terms"
-                            type="checkbox"
-                            class="icheck required"
-                            value="yes"
-                          />
-                          <label
-                            >Please accept
-                            <a
-                              href="#"
-                              data-toggle="modal"
-                              data-target="#terms-txt"
-                              >terms and conditions</a
-                            >.</label
-                          >
+              <!-- Last step ============================== -->
+              <div class="submit step" id="end">
+                <div class="question_title">
+                  <h3>Veuillez compléter vos coordonnées</h3>
+                  <p></p>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="col-lg-5">
+                    <div class="box_general">
+                      <div class="form-group add_bottom_30">
+                        <div class="styled-select">
+                          <select class="required" name="country" disabled>
+                            <option value="">Selection ton pays</option>
+                            <option value="cote_d_ivoire" selected>
+                              Côte d'ivoire
+                            </option>
+                          </select>
                         </div>
                       </div>
-                      <!-- /box_general -->
+                      <div class="form-group add_bottom_30">
+                        <div class="styled-select">
+                          <select class="required" name="city" id="ville" onchange="showCommunes()">
+                            <option value="" selected>
+                              Selection ta ville
+                            </option>
+                            <option value="Abengourou">Abengourou</option>
+                            <option value="Abidjan">Abidjan</option>
+                            <option value="Aboisso">Aboisso</option>
+                            <option value="Adiaké">Adiaké</option>
+                            <option value="Adzopé">Adzopé</option>
+                            <option value="Agboville">Agboville</option>
+                            <option value="Akoupé">Akoupé</option>
+                            <option value="Anyama">Anyama</option>
+                            <option value="Bondoukou">Bondoukou</option>
+                            <option value="Bongouanou">Bongouanou</option>
+                            <option value="Bouaflé">Bouaflé</option>
+                            <option value="Bouaké">Bouaké</option>
+                            <option value="Boundiali">Boundiali</option>
+                            <option value="Dabou">Dabou</option>
+                            <option value="Daloa">Daloa</option>
+                            <option value="Danané">Danané</option>
+                            <option value="Dimbokro">Dimbokro</option>
+                            <option value="Divo">Divo</option>
+                            <option value="Ferkessédougou">
+                              Ferkessédougou
+                            </option>
+                            <option value="Gagnoa">Gagnoa</option>
+                            <option value="Grand-Bassam">Grand-Bassam</option>
+                            <option value="Guiglo">Guiglo</option>
+                            <option value="Issia">Issia</option>
+                            <option value="Katiola">Katiola</option>
+                            <option value="Korhogo">Korhogo</option>
+                            <option value="Lakota">Lakota</option>
+                            <option value="Man">Man</option>
+                            <option value="Odienné">Odienné</option>
+                            <option value="San-Pédro">San-Pédro</option>
+                            <option value="Sassandra">Sassandra</option>
+                            <option value="Séguéla">Séguéla</option>
+                            <option value="Sinfra">Sinfra</option>
+                            <option value="Soubré">Soubré</option>
+                            <option value="Tiassalé">Tiassalé</option>
+                            <option value="Toumodi">Toumodi</option>
+                            <option value="Vavoua">Vavoua</option>
+                            <option value="Yamoussoukro">Yamoussoukro</option>
+                            <option value="Zuénoula">Zuénoula</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group add_bottom_30">
+                        <div class="styled-select" id="communes">
+                          <select class="required" name="square" id="commune">
+                            <option value="" selected>
+                              Selection ta commune
+                            </option>
+                            <option value="adjame">Adjamé</option>
+                            <option value="attecoubé">Attécoubé</option>
+                            <option value="cocody">Cocody</option>
+                            <option value="kooumassi">Koumassi</option>
+                            <option value="marcory">Marcory</option>
+                            <option value="plateau">Plateau</option>
+                            <option value="port-bouet">Port-Bouët</option>
+                            <option value="treichville">Treichville</option>
+                            <option value="yopougon">Yopougon</option>
+                          </select>
+                        </div>
+                        <div class="form-group add_bottom_30" id="quartier" style="display: none">
+                          <input type="text" id="quartier" class="form-control main" name="othersquare" placeholder="quartier" />
+                        </div>
+                      </div>
+                      <div class="checkbox_questions">
+                        <input name="terms" type="checkbox" class="icheck required" value="yes" />
+                        <label>Please accept
+                          <a href="#" data-toggle="modal" data-target="#terms-txt">terms and conditions</a>.</label>
+                      </div>
                     </div>
+                    <!-- /box_general -->
                   </div>
-                  <!-- /row -->
                 </div>
-                <!-- /Last step ============================== -->
+                <!-- /row -->
               </div>
+              <!-- /Last step ============================== -->
             </div>
-            <!-- /middle-wizard -->
-            <div id="bottom-wizard">
-              <button type="button" name="backward" class="backward">
-                Arrière
-              </button>
-              <button type="button" name="forward" class="forward">
-                suivant
-              </button>
-              <button type="submit" name="process" class="submit">
-                Soumettre
-              </button>
-            </div>
-            <!-- /bottom-wizard -->
-          </form>
-        </div>
-        <!-- /Wizard container -->
+          </div>
+          <!-- /middle-wizard -->
+          <div id="bottom-wizard">
+            <button type="button" name="backward" class="backward">
+              Arrière
+            </button>
+            <button type="button" name="forward" class="forward">
+              suivant
+            </button>
+            <button type="submit" name="process" class="submit">
+              Soumettre
+            </button>
+          </div>
+          <!-- /bottom-wizard -->
+        </form>
       </div>
-      <!-- /Container -->
-    </main>
-    <!-- /main -->
+      <!-- /Wizard container -->
+    </div>
+    <!-- /Container -->
+  </main>
+  <!-- /main -->
 
-    <!--<footer>
+  <!--<footer>
 		<div class="container clearfix">
 			<ul>
 				<li><a href="index.html" class="animated_link active">Multiple Branch</a></li>
@@ -428,223 +326,211 @@
 			<p>© 2021 Steps</p>
 		</div>
 	</footer>-->
-    <!-- /footer -->
+  <!-- /footer -->
 
-    <div class="cd-overlay-nav">
-      <span></span>
-    </div>
-    <!-- /cd-overlay-nav -->
+  <div class="cd-overlay-nav">
+    <span></span>
+  </div>
+  <!-- /cd-overlay-nav -->
 
-    <div class="cd-overlay-content">
-      <span></span>
-    </div>
-    <!-- /cd-overlay-content -->
+  <div class="cd-overlay-content">
+    <span></span>
+  </div>
+  <!-- /cd-overlay-content -->
 
-    <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
-    <!-- /cd-nav-trigger -->
+  <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
+  <!-- /cd-nav-trigger -->
 
-    <!-- Modal terms -->
-    <div
-      class="modal fade"
-      id="terms-txt"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="termsLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="termsLabel"><a href="/condition_general">Termes et Conditions</a></h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
+  <!-- Modal terms -->
+  <div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="termsLabel"><a href="/condition_general">Termes et Conditions</a></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
 
-            <!-- Text -->
-            <p class="fs-lg text-gray-800 mb-6 mb-md-8">
-              Note : veuillez imprimer une copie de ce
-              document et la conserver pour pouvoir la consulter à l’avenir.
-            </p>
+          <!-- Text -->
+          <p class="fs-lg text-gray-800 mb-6 mb-md-8">
+            Note : veuillez imprimer une copie de ce
+            document et la conserver pour pouvoir la consulter à l’avenir.
+          </p>
 
-            <!-- Heading -->
-            <h3 class="mb-5">
-              Conditions Générales d'Utilisation de l'Application E-Maquis
-            </h3>
+          <!-- Heading -->
+          <h3 class="mb-5">
+            Conditions Générales d'Utilisation de l'Application E-Maquis
+          </h3>
+
+          <!-- Text -->
+          <p class="text-gray-800">
+            En utilisant l'application E-Maquis,
+            vous acceptez les conditions générales d'utilisation suivantes :
+          </p>
+
+          <!-- Text -->
+          <p>
+            1. Propriété intellectuelle
+          </p>
+
+          <!-- List -->
+          <div class="d-flex">
+
+            <!-- Badge -->
+            <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+              <i class="fas fa-check"></i>
+            </span>
 
             <!-- Text -->
             <p class="text-gray-800">
-              En utilisant l'application E-Maquis,
-              vous acceptez les conditions générales d'utilisation suivantes :
+              Tous les droits de propriété intellectuelle de l'application E-Maquis,
+              y compris le design, le code source, les images et les textes,
+              appartiennent à l'entreprise propriétaire de l'application.
+              Il est strictement interdit de copier, reproduire ou distribuer
+              toute partie de l'application sans autorisation écrite
+              de l'entreprise propriétaire.
             </p>
+
+          </div>
+          <p>
+            2. Utilisation de l'application
+          </p>
+
+          <!-- List -->
+          <div class="d-flex">
+
+            <!-- Badge -->
+            <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+              <i class="fas fa-check-circle"></i>
+            </span>
 
             <!-- Text -->
-            <p>
-              1. Propriété intellectuelle
+            <p class="text-gray-800">
+              L'application E-Maquis est destinée à la gestion des stocks et à la traçabilité des
+              ventes effectuées par les employés. Elle est également utilisée pour le bilan des ventes des boissons.
+              L'utilisation de l'application est strictement réservée aux employés de l'entreprise propriétaire.
+              Tout accès non autorisé ou tentative d'accès
+              à l'application sera considéré comme une violation des conditions générales.
+              En utilisant l'Application, les Utilisateurs acceptent de se conformer aux présentes Conditions.
+              Les Utilisateurs s'engagent à utiliser l'Application conformément à toutes les lois et réglementations applicables.
             </p>
 
-            <!-- List -->
-            <div class="d-flex">
+          </div>
+          <p>
+            3. Confidentialité et sécurité
+          </p>
 
-              <!-- Badge -->
-              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
-                    <i class="fas fa-check"></i>
-                    </span>
+          <!-- List -->
+          <div class="d-flex">
 
-              <!-- Text -->
-              <p class="text-gray-800">
-                Tous les droits de propriété intellectuelle de l'application E-Maquis,
-                y compris le design, le code source, les images et les textes,
-                appartiennent à l'entreprise propriétaire de l'application.
-                Il est strictement interdit de copier, reproduire ou distribuer
-                toute partie de l'application sans autorisation écrite
-                de l'entreprise propriétaire.
-              </p>
+            <!-- Badge -->
+            <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+              <i class="fas fa-check-circle"></i>
+            </span>
 
-            </div>
-            <p>
-              2. Utilisation de l'application
+            <!-- Text -->
+            <p class="text-gray-800">
+              L'application E-Maquis contient des informations confidentielles concernant les propriétaires ,
+              les ventes et les stocks. Les employés sont tenus de maintenir la confidentialité de ces informations et de
+              ne pas les divulguer à des tiers sans autorisation écrite de l'entreprise propriétaire.
+              Nous mettons en place des mesures de sécurité appropriées pour protéger vos données contre tout accès non autorisé,
+              divulgation ou destruction. Cependant, veuillez noter qu'aucune méthode
+              de transmission ou de stockage électronique n'est totalement sécurisée, et nous ne pouvons garantir une sécurité absolue de vos données.
             </p>
+          </div>
 
-            <!-- List -->
-            <div class="d-flex">
+          <p>
+            4. Responsabilité
+          </p>
 
-              <!-- Badge -->
-              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
-                    <i class="fas fa-check-circle"></i>
-                    </span>
+          <div class="d-flex">
 
-              <!-- Text -->
-              <p class="text-gray-800">
-                L'application E-Maquis est destinée à la gestion des stocks et à la traçabilité des
-                ventes effectuées par les employés. Elle est également utilisée pour le bilan des ventes des boissons.
-                L'utilisation de l'application est strictement réservée aux employés de l'entreprise propriétaire.
-                Tout accès non autorisé ou tentative d'accès
-                à l'application sera considéré comme une violation des conditions générales.
-                En utilisant l'Application, les Utilisateurs acceptent de se conformer aux présentes Conditions.
-                Les Utilisateurs s'engagent à utiliser l'Application conformément à toutes les lois et réglementations applicables.
-              </p>
+            <!-- Badge -->
+            <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+              <i class="fas fa-check-circle"></i>
+            </span>
 
-            </div>
-            <p>
-              3. Confidentialité et sécurité
+            <!-- Text -->
+            <p class="text-gray-800">
+              L'Application est fournie « telle quelle », sans garantie d'aucune sorte, expresse ou implicite.
+              La Société ne peut en aucun cas être tenue responsable des
+              dommages directs, indirects, spéciaux ou accessoires résultant de l'utilisation
+              de l'Application ou de l'impossibilité d'utiliser l'Application.
             </p>
+          </div>
 
-            <!-- List -->
-            <div class="d-flex">
+          <p>
+            5. Protection des données
+          </p>
 
-              <!-- Badge -->
-              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
-                    <i class="fas fa-check-circle"></i>
-                    </span>
+          <div class="d-flex">
 
-              <!-- Text -->
-              <p class="text-gray-800">
-                L'application E-Maquis contient des informations confidentielles concernant les propriétaires ,
-                les ventes et les stocks. Les employés sont tenus de maintenir la confidentialité de ces informations et de
-                ne pas les divulguer à des tiers sans autorisation écrite de l'entreprise propriétaire.
-                Nous mettons en place des mesures de sécurité appropriées pour protéger vos données contre tout accès non autorisé,
-                divulgation ou destruction. Cependant, veuillez noter qu'aucune méthode
-                de transmission ou de stockage électronique n'est totalement sécurisée, et nous ne pouvons garantir une sécurité absolue de vos données.
-              </p>
-            </div>
+            <!-- Badge -->
+            <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+              <i class="fas fa-check-circle"></i>
+            </span>
 
-            <p>
-              4. Responsabilité
+            <!-- Text -->
+            <p class="text-gray-800">
+              La Société s'engage à respecter la vie privée des Utilisateurs et à protéger les données personnelles
+              conformément à la législation en vigueur.
+              Les Utilisateurs acceptent que leurs données personnelles soient collectées, utilisées et stockées par la Société,
+              et reconnaissent que la Société peut utiliser ces données pour améliorer les services fournis aux Utilisateurs.
+              En utilisant notre application, vous consentez à la collecte, au stockage et à l'utilisation de vos données personnelles conformément
+              à notre politique de confidentialité.
+              Nous nous engageons à traiter vos données de manière sécurisée et à respecter votre vie privée.
+              Les données personnelles que vous fournissez, telles que votre nom, votre adresse e-mail et vos informations de contact,
+              peuvent être utilisées pour vous fournir des services personnalisés, répondre à vos demandes, améliorer notre application
+              et vous informer des mises à jour importantes.
             </p>
+          </div>
 
-            <div class="d-flex">
+          <p>
+            6. Modifications des conditions générales
+          </p>
 
-              <!-- Badge -->
-              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
-                    <i class="fas fa-check-circle"></i>
-                    </span>
+          <div class="d-flex">
 
-              <!-- Text -->
-              <p class="text-gray-800">
-                L'Application est fournie « telle quelle », sans garantie d'aucune sorte, expresse ou implicite.
-                La Société ne peut en aucun cas être tenue responsable des
-                dommages directs, indirects, spéciaux ou accessoires résultant de l'utilisation
-                de l'Application ou de l'impossibilité d'utiliser l'Application.
-              </p>
-            </div>
+            <!-- Badge -->
+            <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+              <i class="fas fa-check-circle"></i>
+            </span>
 
-            <p>
-              5. Protection des données
+            <!-- Text -->
+            <p class="text-gray-800">
+              L'entreprise propriétaire se réserve le droit de
+              modifier les conditions générales d'utilisation
+              de l'application E-Maquis à tout moment sans préavis.
+              Les modifications seront publiées sur le site Web de
+              l'entreprise propriétaire. Les employés sont tenus de
+              vérifier régulièrement les conditions générales d'utilisation
+              pour prendre connaissance des modifications éventuelles.</br>
+
             </p>
+          </div>
 
-            <div class="d-flex">
+          <p>
+            7. Droit applicable
+          </p>
 
-              <!-- Badge -->
-              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
-                    <i class="fas fa-check-circle"></i>
-                    </span>
+          <div class="d-flex">
 
-              <!-- Text -->
-              <p class="text-gray-800">
-                La Société s'engage à respecter la vie privée des Utilisateurs et à protéger les données personnelles
-                conformément à la législation en vigueur.
-                Les Utilisateurs acceptent que leurs données personnelles soient collectées, utilisées et stockées par la Société,
-                et reconnaissent que la Société peut utiliser ces données pour améliorer les services fournis aux Utilisateurs.
-                En utilisant notre application, vous consentez à la collecte, au stockage et à l'utilisation de vos données personnelles conformément
-                à notre politique de confidentialité.
-                Nous nous engageons à traiter vos données de manière sécurisée et à respecter votre vie privée.
-                Les données personnelles que vous fournissez, telles que votre nom, votre adresse e-mail et vos informations de contact,
-                peuvent être utilisées pour vous fournir des services personnalisés, répondre à vos demandes, améliorer notre application
-                et vous informer des mises à jour importantes.
-              </p>
-            </div>
+            <!-- Badge -->
+            <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
+              <i class="fas fa-check-circle"></i>
+            </span>
 
-            <p>
-              6. Modifications des conditions générales
+            <!-- Text -->
+            <p class="text-gray-800">
+              Les présentes Conditions sont régies par le droit en vigueur en Côte d'Ivoire.
+              Tout litige relatif aux présentes Conditions sera soumis à la juridiction
+              des tribunaux compétents en Côte d'Ivoire.
+
+              En utilisant l'Application, les Utilisateurs reconnaissent avoir
+              lu et compris les présentes Conditions et acceptent de s'y conformer.
             </p>
-
-            <div class="d-flex">
-
-              <!-- Badge -->
-              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
-                    <i class="fas fa-check-circle"></i>
-                    </span>
-
-              <!-- Text -->
-              <p class="text-gray-800">
-                L'entreprise propriétaire se réserve le droit de
-                modifier les conditions générales d'utilisation
-                de l'application E-Maquis à tout moment sans préavis.
-                Les modifications seront publiées sur le site Web de
-                l'entreprise propriétaire. Les employés sont tenus de
-                vérifier régulièrement les conditions générales d'utilisation
-                pour prendre connaissance des modifications éventuelles.</br>
-
-              </p>
-            </div>
-
-            <p>
-              7. Droit applicable
-            </p>
-
-            <div class="d-flex">
-
-              <!-- Badge -->
-              <span class="badge badge-rounded-circle bg-success-soft mt-1 me-4">
-                    <i class="fas fa-check-circle"></i>
-                    </span>
-
-              <!-- Text -->
-              <p class="text-gray-800">
-                Les présentes Conditions sont régies par le droit en vigueur en Côte d'Ivoire.
-                Tout litige relatif aux présentes Conditions sera soumis à la juridiction
-                des tribunaux compétents en Côte d'Ivoire.
-
-                En utilisant l'Application, les Utilisateurs reconnaissent avoir
-                lu et compris les présentes Conditions et acceptent de s'y conformer.
-              </p>
           </div>
         </div>
       </div>
@@ -665,7 +551,7 @@
 
       // Parcourir tous les éléments radio
       for (var i = 0; i < radios.length; i++) {
-        radios[i].onclick = function () {
+        radios[i].onclick = function() {
           div.id = this.value;
         };
       }
@@ -674,8 +560,8 @@
         e.preventDefault();
         isSucces = true;
         console.log("aniki");
-    const objectifJournalier=  document.querySelector("#budget_slider").textContent;
-    const userid = document.querySelector("#sess").textContent;
+        const objectifJournalier = document.querySelector("#budget_slider").textContent;
+        const userid = document.querySelector("#sess").textContent;
 
         const data = {
           RemboursementType: $('input[name="branch_1_group_1"]').val(),
@@ -684,17 +570,17 @@
           pays: $('select[name="country"]').val(),
           square: $('select[name="square"]').val(),
           othersquare: $('input[name="othersquare"]').val(),
-          objectifJournalier : objectifJournalier,
-          userid:userid
+          objectifJournalier: objectifJournalier,
+          userid: userid
         };
 
         console.log(data);
-        socket.emit('configData',data)
+        socket.emit('configData', data)
 
         socket.on("configsuccess", () => {
 
-        setTimeout(() =>  document.getElementById("alert-sucsess").style.display = "block", 3000);
-        location.href = "/profile";
+          setTimeout(() => document.getElementById("alert-sucsess").style.display = "block", 3000);
+          location.href = "/profile";
 
         });
       });
@@ -712,5 +598,6 @@
       }
     </script>
 
-  </body>
+</body>
+
 </html>
