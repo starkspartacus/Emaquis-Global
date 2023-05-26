@@ -76,7 +76,31 @@
         });
     }
 
-    showNotification('Bienvenue sur votre espace de travail', 'success')
+    const addEmploye = () => {
+        if (employeLength === 0) {
+            showNotification("Vous n'avez aucun employé à votre charge", 'black');
+            showNotification("Ajoutez un employé", 'info');
+        } else if(employeLength > 0) {
+            showNotification(`Vous avez ${employeLength} employé(s) à votre charge`, 'success');
+        }
+    }
+
+    const addProduit = () => {
+        if (produits.length === 0) {
+            showNotification("Vous devez ajouter des produits dans votre établissement", 'error');
+        } else {
+            for (let rupture of produits) {
+                if (rupture.quantite === 0) {
+                    showNotification(`Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est en rupture de stock (${rupture.quantite})`, 'black');
+                } else if (rupture.quantite < 100) {
+                    showNotification(`Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est très bas (${rupture.quantite})`, 'black');
+                }
+            }
+        }
+    }
+
+    addEmploye();
+    addProduit();
 
     // Vérification des conditions et ajout des notifications
     if (employeLength > 0) {
@@ -129,7 +153,7 @@
         } else if (message.includes('Ajoutez')) {
             return 'blue';
         } else {
-            return 'orange';
+            return 'green';
         }
     };
 </script>
