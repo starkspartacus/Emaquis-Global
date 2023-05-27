@@ -87,6 +87,10 @@ exports.addbackPost = async (req, res) => {
             produit.quantite += parseInt(body.quantite[index]);
             sum += produit.prix_vente * parseInt(body.quantite[index]);
             await produit.save();
+            body.produit[index] = {
+              ...produit._doc,
+              productId: produit._id,
+            };
           }
         }
 
