@@ -70,7 +70,7 @@ exports.editUserProfile = async (req, res) => {
     }
 
     if (userUpdate.etat) {
-      res.redirect('/profile');
+      res.redirect('/dashboard');
     }
   } catch (error) {
     res.redirect('/connexion');

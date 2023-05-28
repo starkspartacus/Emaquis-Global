@@ -200,60 +200,24 @@
                     <div class="box_general">
                       <div class="form-group add_bottom_30">
                         <div class="styled-select">
-                          <select class="required" name="country" disabled>
-                            <option value="">Selection ton pays</option>
-                            <option value="cote_d_ivoire" selected>
-                              Côte d'ivoire
+                          <select class="required country" required name="country">
+                            <option value="" selected>Selection ton pays</option>
+                            <% for (let country of pays) {%>
+
+                            <option value="<%= country.code %>">
+                              <%= country.nom %>
                             </option>
+                            <% } %>
                           </select>
                         </div>
                       </div>
                       <div class="form-group add_bottom_30">
                         <div class="styled-select">
-                          <select class="required" name="city" id="ville" onchange="showCommunes()">
+                          <select class="required city" required name="city" id="ville" onchange="showCommunes()">
                             <option value="" selected>
                               Selection ta ville
                             </option>
-                            <option value="Abengourou">Abengourou</option>
-                            <option value="Abidjan">Abidjan</option>
-                            <option value="Aboisso">Aboisso</option>
-                            <option value="Adiaké">Adiaké</option>
-                            <option value="Adzopé">Adzopé</option>
-                            <option value="Agboville">Agboville</option>
-                            <option value="Akoupé">Akoupé</option>
-                            <option value="Anyama">Anyama</option>
-                            <option value="Bondoukou">Bondoukou</option>
-                            <option value="Bongouanou">Bongouanou</option>
-                            <option value="Bouaflé">Bouaflé</option>
-                            <option value="Bouaké">Bouaké</option>
-                            <option value="Boundiali">Boundiali</option>
-                            <option value="Dabou">Dabou</option>
-                            <option value="Daloa">Daloa</option>
-                            <option value="Danané">Danané</option>
-                            <option value="Dimbokro">Dimbokro</option>
-                            <option value="Divo">Divo</option>
-                            <option value="Ferkessédougou">
-                              Ferkessédougou
-                            </option>
-                            <option value="Gagnoa">Gagnoa</option>
-                            <option value="Grand-Bassam">Grand-Bassam</option>
-                            <option value="Guiglo">Guiglo</option>
-                            <option value="Issia">Issia</option>
-                            <option value="Katiola">Katiola</option>
-                            <option value="Korhogo">Korhogo</option>
-                            <option value="Lakota">Lakota</option>
-                            <option value="Man">Man</option>
-                            <option value="Odienné">Odienné</option>
-                            <option value="San-Pédro">San-Pédro</option>
-                            <option value="Sassandra">Sassandra</option>
-                            <option value="Séguéla">Séguéla</option>
-                            <option value="Sinfra">Sinfra</option>
-                            <option value="Soubré">Soubré</option>
-                            <option value="Tiassalé">Tiassalé</option>
-                            <option value="Toumodi">Toumodi</option>
-                            <option value="Vavoua">Vavoua</option>
-                            <option value="Yamoussoukro">Yamoussoukro</option>
-                            <option value="Zuénoula">Zuénoula</option>
+
                           </select>
                         </div>
                       </div>
@@ -280,8 +244,8 @@
                       </div>
                       <div class="checkbox_questions">
                         <input name="terms" type="checkbox" class="icheck required" value="yes" />
-                        <label>Please accept
-                          <a href="#" data-toggle="modal" data-target="#terms-txt">terms and conditions</a>.</label>
+                        <label>Veuillez accepter les
+                          <a href="#" data-toggle="modal" data-target="#terms-txt">terms et conditions</a>.</label>
                       </div>
                     </div>
                     <!-- /box_general -->
@@ -545,6 +509,7 @@
       console.log(window.location.origin + window.location.pathname);
       // Récupérer tous les éléments radio avec un attribut name correspondant
       var radios = document.querySelectorAll('input[name^="branch_1_group_1"]');
+      const countries = <%- JSON.stringify(pays) %>
 
       // Récupérer l'élément div par sa classe
       var div = document.querySelector(".branch");
@@ -564,7 +529,7 @@
         const userid = document.querySelector("#sess").textContent;
 
         const data = {
-          RemboursementType: $('input[name="branch_1_group_1"]').val(),
+          RemboursementType: $('input[name="branch_1_group_1"]:checked').val(),
 
           ville: $('select[name="city"]').val(),
           pays: $('select[name="country"]').val(),
@@ -584,6 +549,21 @@
 
         });
       });
+
+      $('.country').change(() => {
+        const countryValue = $('.country').val();
+        document.getElementById("communes").style.display = "none";
+        document.getElementById("quartier").style.display = "block";
+
+        const country = countries.find((c) => c.code === countryValue);
+        if (country) {
+          $('.city').html('<option value="" selected>Selection ta ville</option>');
+          country.cities.forEach((ville) => {
+            $('.city').append(`<option value="${ville}">${ville}</option>`)
+          })
+        }
+
+      })
     </script>
     <script>
       function showCommunes() {

@@ -58,7 +58,6 @@ const SaveUSer = io.of('/inscription').use(Serveur.getSharedSession());
 SaveUSer.on('connection', (socket) => {
   socket.on('setUser', async (data) => {
     const Result = await userQueries.setUser(data);
-    console.log(Result,'mouss')
     if (Result.etat == false) {
       socket.emit('bad');
     } else {
@@ -85,7 +84,6 @@ SaveUSer.on('connection', (socket) => {
         socket.emit('saved');
 
         socket.emit('signupsuccess', '/config_profil');
-
       }
     }
   });
@@ -97,18 +95,22 @@ UserLogin.on('connection', (socket) => {
   try {
     socket.on('login', async (data) => {
       const { emailOrPhoneNumber, password } = data;
-      console.log(emailOrPhoneNumber,password,"data")
+      console.log(emailOrPhoneNumber, password, 'data');
       if (!(emailOrPhoneNumber && password)) {
         console.log('Veuillez remplir tous les champs');
       }
       const userlogin = await User.findOne({
         $or: [{ email: emailOrPhoneNumber }, { numero: emailOrPhoneNumber }],
       });
-       console.log(userlogin, 'userlogin');
+      console.log(userlogin, 'userlogin');
 
       if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
         const token = jwt.sign(
-          { user_id: userlogin._id, emailOrPhoneNumber, isAdmin: userlogin.isAdmin },
+          {
+            user_id: userlogin._id,
+            emailOrPhoneNumber,
+            isAdmin: userlogin.isAdmin,
+          },
           process.env.SECRET,
           {
             expiresIn: '1h',
@@ -244,8 +246,18 @@ Summary.on('connection', (socket) => {
       const beneficeParBouteille = 5;
       let totalPrix = 0;
       const bouteillesVendues = {};
-      const semaineVentes = { semaine1: 0, semaine2: 0, semaine3: 0, semaine4: 0 };
-      const semaineBenefice = { semaine1: 0, semaine2: 0, semaine3: 0, semaine4: 0 };
+      const semaineVentes = {
+        semaine1: 0,
+        semaine2: 0,
+        semaine3: 0,
+        semaine4: 0,
+      };
+      const semaineBenefice = {
+        semaine1: 0,
+        semaine2: 0,
+        semaine3: 0,
+        semaine4: 0,
+      };
       let totalBenefice = 0;
 
       Result.result.forEach((vente) => {
@@ -268,10 +280,14 @@ Summary.on('connection', (socket) => {
           if (semaineVente === moment(startOfMonth).isoWeek()) {
             semaineVentes.semaine1 += prixTotal;
             semaineBenefice.semaine1 += quantiteVendue * beneficeParBouteille;
-          } else if (semaineVente === moment(startOfMonth).add(1, 'week').isoWeek()) {
+          } else if (
+            semaineVente === moment(startOfMonth).add(1, 'week').isoWeek()
+          ) {
             semaineVentes.semaine2 += prixTotal;
             semaineBenefice.semaine2 += quantiteVendue * beneficeParBouteille;
-          } else if (semaineVente === moment(startOfMonth).add(2, 'week').isoWeek()) {
+          } else if (
+            semaineVente === moment(startOfMonth).add(2, 'week').isoWeek()
+          ) {
             semaineVentes.semaine3 += prixTotal;
             semaineBenefice.semaine3 += quantiteVendue * beneficeParBouteille;
           } else {
@@ -289,69 +305,75 @@ Summary.on('connection', (socket) => {
       // console.log('Bénéfice par semaine:', semaineBenefice);
       // console.log('Total des ventes:', totalPrix);
       // console.log('Total du bénéfice:', totalBenefice);
-       let data = {
+      let data = {
         semaineVentes,
         semaineBenefice,
         totalPrix,
-        totalBenefice
-       }
+        totalBenefice,
+      };
       socket.emit('saved', data);
     } else {
       socket.emit('bad');
     }
   });
 
-
-  socket.on('paiementdataDB', async (data)=>{
-    console.log(data,'data')
+  socket.on('paiementdataDB', async (data) => {
+    console.log(data, 'data');
     // const Result = await paiementQueries.setPaiement(data);
     // if(Result){
     //   socket.emit('paymentsaved')
     // }else{
     //   socket.emit('paymentbad');
     // }
-
-
-  })
+  });
 });
 
 const SaveConfigData = io.of('/config_profil').use(Serveur.getSharedSession());
 SaveConfigData.on('connection', (socket) => {
   socket.on('configData', async (data) => {
-    const { userid, objectifJournalier, RemboursementType, pays, ville, square, othersquare } = data;
+    const {
+      userid,
+      objectifJournalier,
+      RemboursementType,
+      pays,
+      ville,
+      square,
+      othersquare,
+    } = data;
 
+    console.log(data);
     // Démarrez une session MongoDB
-    const session = await mongoose.startSession();
+    // const session = await mongoose.startSession();
 
     try {
-      await session.startTransaction();
+      // await session.startTransaction();
 
       // Mettre à jour l'utilisateur
-      const updateUserPromise = User.findByIdAndUpdate(
+      const updatedUser = await User.findByIdAndUpdate(
         userid,
         {
           country: pays,
           city: ville,
           square: square,
-          othersquare: othersquare
+          othersquare: othersquare,
         },
-        { new: true , upsert: true }
-      ).session(session);
+        { new: true, upsert: true }
+      );
 
       // Mettre à jour le modèle de configuration
-      const updateSettingPromise = Setting.findOneAndUpdate(
+      const updatedSetting = await Setting.findOneAndUpdate(
         { travail_pour: userid },
         {
           objective: objectifJournalier,
-          product_return_type: RemboursementType
+          product_return_type: RemboursementType,
         },
-        { new: true , upsert: true }
-      ).session(session);
+        { new: true, upsert: true }
+      );
 
       // Exécutez les deux opérations de mise à jour en parallèle
-      const [updatedUser, updatedSetting] = await Promise.all([updateUserPromise, updateSettingPromise]);
+      // const [updatedUser, updatedSetting] = await Promise.all([updateUserPromise, updateSettingPromise]);
 
-      await session.commitTransaction();
+      // await session.commitTransaction();
 
       console.log('Utilisateur mis à jour :', updatedUser);
       console.log('Configuration mise à jour :', updatedSetting);
@@ -359,18 +381,17 @@ SaveConfigData.on('connection', (socket) => {
     } catch (error) {
       socket.emit('bad');
       console.error('Erreur lors de la mise à jour :', error);
-      await session.abortTransaction();
+      // await session.abortTransaction();
     } finally {
-      session.endSession();
+      // session.endSession();
     }
   });
 });
 
-
 const SaveProfile = io.of('/profile').use(Serveur.getSharedSession());
 SaveProfile.on('connection', (socket) => {
   socket.on('dashredirect', async () => {
-    socket.emit("finalRedict")
+    socket.emit('finalRedict');
   });
 });
 server.listen(port, console.log(' le serveur ecoute sur le port', port));
