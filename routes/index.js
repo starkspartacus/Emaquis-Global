@@ -34,7 +34,6 @@ const summarycontroller = require('../controllers/summary');
 const summaryadmincontroller = require('../controllers/summary_admin');
 const bilan_controller = require('../controllers/bilan_controller');
 const config_profil = require('../controllers/config_profil');
-
 const billetRouter = require('./billet.router');
 
 const multer = require('multer');
@@ -60,11 +59,8 @@ const {
   condition_general,
 } = require('../controllers/conditiongeneral_controller');
 const conditiongeneral_controller = require('../controllers/conditiongeneral_controller');
-const appConfigRouter = require('./app.router');
 
 var router = express.Router();
-
-router.use('/app', appConfigRouter);
 
 /* GET home page. */
 
@@ -121,6 +117,7 @@ router.get('/listeproduit', listeproduitcontroller.produit);
 router.post('/listeproduit', listeproduitcontroller.produitPost);
 
 router.get('/vente', checkAuthUser, ventecontroller.vente);
+router.get('/vente/bilan', ventecontroller.venteBilan);
 router.post('/vente', ventecontroller.ventePost);
 router.put('/editvente/:id', ventecontroller.editventePost);
 router.post('/vente/status/:venteId', ventecontroller.editStatusVente);

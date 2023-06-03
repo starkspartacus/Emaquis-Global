@@ -15,11 +15,9 @@ const { produitQueries } = require('../requests/produitQueries');
 const { venteQueries } = require('../requests/venteQueries');
 const { paiementQueries } = require('../requests/paiementQueries');
 const User = require('../models/user.model');
-const Setting = require('../models/settings.model');
 const dotenv = require('dotenv').config();
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
 const swaggerUi = require('swagger-ui-express'),
   swaggerDocument = require('../swagger.json');
 
@@ -58,16 +56,14 @@ const SaveUSer = io.of('/inscription').use(Serveur.getSharedSession());
 SaveUSer.on('connection', (socket) => {
   socket.on('setUser', async (data) => {
     const Result = await userQueries.setUser(data);
+    console.log(Result, 'mouss');
     if (Result.etat == false) {
       socket.emit('bad');
     } else {
       if (Result !== null) {
         const token = jwt.sign(
           { user_id: Result._id, isAdmin: Result.isAdmin },
-          process.env.SECRET,
-          {
-            expiresIn: '1h',
-          }
+          process.env.SECRET
         );
 
         Result.token = token;
@@ -83,7 +79,7 @@ SaveUSer.on('connection', (socket) => {
         console.log({ token: token });
         socket.emit('saved');
 
-        socket.emit('signupsuccess', '/config_profil');
+        socket.emit('redirect', '/config_profil');
       }
     }
   });
@@ -111,10 +107,7 @@ UserLogin.on('connection', (socket) => {
             emailOrPhoneNumber,
             isAdmin: userlogin.isAdmin,
           },
-          process.env.SECRET,
-          {
-            expiresIn: '1h',
-          }
+          process.env.SECRET
         );
 
         userlogin.token = token;
@@ -124,11 +117,10 @@ UserLogin.on('connection', (socket) => {
           nom_etablissement: userlogin.nom_etablissement,
           isAdmin: userlogin.isAdmin,
           ...userlogin._doc,
+          token,
         };
         socket.handshake.session.save();
         socket.emit('loginsuccess', '/dashboard');
-        console.log(socket.handshake.session);
-        console.log({ token: token });
       } else {
         socket.emit('bad');
       }
@@ -328,72 +320,6 @@ Summary.on('connection', (socket) => {
   });
 });
 
-const SaveConfigData = io.of('/config_profil').use(Serveur.getSharedSession());
-SaveConfigData.on('connection', (socket) => {
-  socket.on('configData', async (data) => {
-    const {
-      userid,
-      objectifJournalier,
-      RemboursementType,
-      pays,
-      ville,
-      square,
-      othersquare,
-    } = data;
-
-    console.log(data);
-    // Démarrez une session MongoDB
-    // const session = await mongoose.startSession();
-
-    try {
-      // await session.startTransaction();
-
-      // Mettre à jour l'utilisateur
-      const updatedUser = await User.findByIdAndUpdate(
-        userid,
-        {
-          country: pays,
-          city: ville,
-          square: square,
-          othersquare: othersquare,
-        },
-        { new: true, upsert: true }
-      );
-
-      // Mettre à jour le modèle de configuration
-      const updatedSetting = await Setting.findOneAndUpdate(
-        { travail_pour: userid },
-        {
-          objective: objectifJournalier,
-          product_return_type: RemboursementType,
-        },
-        { new: true, upsert: true }
-      );
-
-      // Exécutez les deux opérations de mise à jour en parallèle
-      // const [updatedUser, updatedSetting] = await Promise.all([updateUserPromise, updateSettingPromise]);
-
-      // await session.commitTransaction();
-
-      console.log('Utilisateur mis à jour :', updatedUser);
-      console.log('Configuration mise à jour :', updatedSetting);
-      socket.emit('configsuccess', '/config_profil');
-    } catch (error) {
-      socket.emit('bad');
-      console.error('Erreur lors de la mise à jour :', error);
-      // await session.abortTransaction();
-    } finally {
-      // session.endSession();
-    }
-  });
-});
-
-const SaveProfile = io.of('/profile').use(Serveur.getSharedSession());
-SaveProfile.on('connection', (socket) => {
-  socket.on('dashredirect', async () => {
-    socket.emit('finalRedict');
-  });
-});
 server.listen(port, console.log(' le serveur ecoute sur le port', port));
 server.on('error', onError);
 server.on('listening', onListening);

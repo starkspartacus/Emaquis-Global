@@ -32,7 +32,6 @@ exports.ventePost = async (req, res) => {
     const product_unavailables = [];
     let produits = [];
     let sum = 0;
-    let for_employee = vente.for_employe || null;
 
     if (vente !== null) {
       // get the price of each product
@@ -90,14 +89,7 @@ exports.ventePost = async (req, res) => {
       const setting = await settingQueries.getSettingByUserId(
         sess.travail_pour
       );
-
-      const barmans = await employeQueries.getBarmans(sess.travail_pour);
-
-      if (!vente.for_employe) {
-        for_employee = barmans.result[0]?._id;
-      }
-
-      let billet = await BilletQueries.getBilletByEmployeId(for_employee);
+      let billet = await BilletQueries.getBilletByEmployeId(vente.for_employe);
 
       if (!billet.result) {
         res.status(400).json({
@@ -124,6 +116,8 @@ exports.ventePost = async (req, res) => {
         return;
       }
 
+      const barmans = await employeQueries.getBarmans(sess.travail_pour);
+
       let newVente = {
         produit: produits,
         quantite: vente.quantite,
@@ -136,7 +130,7 @@ exports.ventePost = async (req, res) => {
         formules: formulesProduct,
         table_number: vente.table_number,
         amount_collected: vente.amount_collected,
-        for_employe: vente.for_employe || for_employee,
+        for_employe: vente.for_employe || barmans.result[0]?._id,
       };
       // il fait pas l setvente or il fait update  de produit
       Vente = await venteQueries.setVente(newVente);
@@ -279,9 +273,7 @@ exports.editventePost = async (req, res) => {
         sess.travail_pour
       );
 
-      let billet = await BilletQueries.getBilletByEmployeId(
-        oldVente.result?.for_employe
-      );
+      let billet = await BilletQueries.getBilletByEmployeId(body.for_employe);
 
       if (!billet.result) {
         res.status(400).json({
@@ -359,11 +351,6 @@ exports.editventePost = async (req, res) => {
         amount_collected:
           body.amount_collected ?? oldVente.result.amount_collected,
       };
-
-      if (body.update_for_collected_amount) {
-        newVente.status_commande = 'Validée';
-        newVente.employe_validate_id = sess._id;
-      }
 
       await venteQueries.updateVente(venteId, newVente);
 
@@ -505,6 +492,106 @@ exports.retourListe = async (req, res) => {
     res.json({
       etat: false,
       data: 'Error',
+    });
+  }
+};
+
+exports.venteBilan = async (req, res) => {
+  if (req.session.user) {
+    const query = req.query;
+
+    const start =
+      query.from !== 'null'
+        ? new Date(new Date(query.from).setHours(0, 0, 0))
+        : null;
+    const end =
+      query.to !== 'null'
+        ? new Date(new Date(query.to).setHours(23, 59, 59))
+        : null;
+
+    const users = query.users
+      ? query.users?.includes('[')
+        ? JSON.parse(query.users || '[]')
+        : [query.users]
+      : null;
+
+    let filter = {
+      travail_pour: req.session.user._id,
+    };
+
+    if (start) {
+      filter.createdAt = {
+        $gte: start,
+      };
+    }
+
+    if (end) {
+      if (!filter.createdAt) {
+        filter.createdAt = {};
+      }
+
+      filter.createdAt.$lte = end;
+    }
+
+    if (users?.length > 0) {
+      filter.employe = {
+        $in: users,
+      };
+    }
+
+    const ventes = await venteQueries.getVentes(filter);
+
+    let produits = [];
+
+    // recupere les produits vendus
+    for (let vente of ventes.result) {
+      // tous produit dans chaque vente(par index et produit)
+      for (let [produitIndex, produit] of vente.produit.entries()) {
+        // fait un nouveau formatage de produit pour le bilan
+        const product = {
+          nom: produit.produit.nom_produit,
+          categorie: produit.produit.categorie.nom,
+          prix_vente: produit.prix_vente,
+          prix_achat: produit.prix_achat,
+          quantite: vente.quantite[produitIndex],
+          taille: produit.taille,
+          _id: produit._id,
+          productId: produit.productId,
+          total_vente: produit.prix_vente * vente.quantite[produitIndex],
+          benefice:
+            produit.prix_vente * vente.quantite[produitIndex] -
+            produit.prix_achat * vente.quantite[produitIndex],
+          employe: vente.employe,
+          createdAt: vente.createdAt,
+        };
+
+        // verifier si le produit existe et calculer son benefice
+
+        const productFind = produits.find(
+          (prod) => '' + prod.productId === '' + product.productId
+        );
+
+        if (productFind) {
+          productFind.quantite += vente.quantite[produitIndex];
+          productFind.total_vente +=
+            produit.prix_vente * vente.quantite[produitIndex];
+          productFind.benefice +=
+            produit.prix_vente * vente.quantite[produitIndex] -
+            produit.prix_achat * vente.quantite[produitIndex];
+        } else {
+          produits.push(product);
+        }
+      }
+    }
+
+    res.send({
+      etat: true,
+      data: produits,
+    });
+  } else {
+    res.status(401).send({
+      etat: false,
+      data: 'error signature',
     });
   }
 };
