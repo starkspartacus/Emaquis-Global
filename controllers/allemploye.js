@@ -1,14 +1,24 @@
 const { employeQueries } = require('../requests/EmployeQueries');
 exports.allemploye = async (req, res) => {
   try {
-    const employe = await employeQueries.getAllEmploye();
+    const user = req.session.user;
+    if (user) {
+      const employe = await employeQueries.getEmployeByEtablissement(
+        user.id || user._id || user.travail_pour
+      );
 
-    if (employe.result !== null) {
-      let resultat = employe.result;
-      res.json({
-        etat: true,
-        data: resultat,
-        user: req.session.user,
+      if (employe.result !== null) {
+        let resultat = employe.result;
+        res.json({
+          etat: true,
+          data: resultat,
+          user: req.session.user,
+        });
+      }
+    } else {
+      res.status(401).send({
+        etat: false,
+        data: 'error',
       });
     }
   } catch (e) {
