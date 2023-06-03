@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const employeModel = require('../models/employe.model');
 const secret = process.env.SECRET;
 const User = require('../models/user.model');
+const userModel = require('../models/user.model');
 
 exports.authUser = async (req, res, next) => {
   const token = req.headers.token;
@@ -89,18 +90,29 @@ exports.forceSession = async (req, res, next) => {
   const authorization = req.headers.authorization;
 
   if (authorization && !req.session.user) {
-    const token = authorization.split(' ')[1];
-    const data = jwt.verify(token, secret);
-    const employe = await employeModel.findOne({
-      _id: data?.employe_id,
-      deleted: false,
-    });
+    try {
+      const token = authorization.split(' ')[1];
+      const data = jwt.verify(token, secret);
+      let employe = await employeModel.findOne({
+        _id: data?.employe_id,
+        deleted: false,
+      });
 
-    if (!employe) {
+      if (data && !employe) {
+        employe = await userModel.findOne({
+          _id: data?.user_id,
+        });
+      }
+
+      if (!employe) {
+        res.status(401).send({ error: 'error signature' });
+        return;
+      }
+      req.session.user = employe;
+    } catch (e) {
       res.status(401).send({ error: 'error signature' });
       return;
     }
-    req.session.user = employe;
   } else if (req.session.user && req.session.user.deleted) {
     res.status(401).send({ error: 'error signature' });
     return;
