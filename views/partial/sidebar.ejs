@@ -1,8 +1,6 @@
 <nav class="sidebar">
   <div class="logo d-flex justify-content-between">
-    <a class="large_logo" href="/dashboard"
-      ><img src="../img/paresseux_sous_officiel.png" alt=""
-    /></a>
+    <a class="large_logo" href="/dashboard"><img src="../img/paresseux_sous_officiel.png" alt="" /></a>
     <div class="sidebar_close_icon d-lg-none">
       <i class="ti-close"></i>
     </div>
@@ -17,20 +15,16 @@
           <span>E-maquis </span>
         </div>
       </a>
-       <ul class="list-group">
-         <li class="list-group-item disabled"><a href="/bilan" >Bilan <span class="badge badge-info">Bêta</span></a></li>
+      <ul class="list-group">
+        <li class="list-group-item"><a href="http://127.0.0.1:5173/bilan?token=<%=locals.user.token%>">Bilan <span class="badge badge-info">Bêta</span></a></li>
 
-       </ul>
+      </ul>
     </li>
 
     <li class="">
       <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
-          <img
-            src="../img/icone_employee.png"
-            alt=""
-            style="height: 29px; width: 29px;"
-          />
+          <img src="../img/icone_employee.png" alt="" style="height: 29px; width: 29px;" />
         </div>
         <div class="nav_title">
           <span>Employé</span>
@@ -45,11 +39,7 @@
     <li class="">
       <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
-          <img
-            src="../img/icone_ventes.png"
-            style="height: 22px; width: 37px; transform: rotate(-20deg)"
-            alt=""
-          />
+          <img src="../img/icone_ventes.png" style="height: 22px; width: 37px; transform: rotate(-20deg)" alt="" />
         </div>
         <div class="nav_title">
           <span>Vente</span>
@@ -63,10 +53,7 @@
     <li class="">
       <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
-          <img src="img/menu-icon/icone_produits.png"
-               style="height: 40px; width: 40px;"
-               class="img-fluid " alt="img produits"
-          />
+          <img src="img/menu-icon/icone_produits.png" style="height: 40px; width: 40px;" class="img-fluid " alt="img produits" />
         </div>
         <div class="nav_title">
           <span>Produit</span>
@@ -77,17 +64,16 @@
         <li><a href="/ajouterproduit">Enregistrer un produit</a></li>
 
         <% if(locals.user?.isAdmin){ %>
-          <li>
-            <a href="/ajouter-produit-global">Enregistrer un produit global</a>
-          </li>
+        <li>
+          <a href="/ajouter-produit-global">Enregistrer un produit global</a>
+        </li>
         <% } %>
       </ul>
     </li>
     <li class="">
       <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small">
-          <img src="../img/categorie.svg" alt=""
-               style="height: 29px; width: 29px;"/>
+          <img src="../img/categorie.svg" alt="" style="height: 29px; width: 29px;" />
         </div>
         <div class="nav_title">
           <span>Catégories</span>
@@ -124,10 +110,7 @@
     <li class="">
       <a class="has-arrow" href="#" aria-expanded="false">
         <div class="nav_icon_small icon_anim">
-          <img src="img/menu-icon/reglage.png"
-               style="height: 35px; width: 35px;"
-               class="img-fluid " alt="img remarque"
-          />
+          <img src="img/menu-icon/reglage.png" style="height: 35px; width: 35px;" class="img-fluid " alt="img remarque" />
         </div>
         <div class="nav_title">
           <span>Paramètres</span>
