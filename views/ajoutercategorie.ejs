@@ -9,7 +9,10 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'G-NT2SW8WBHT');
@@ -85,21 +88,21 @@
                       var date = jour + "/" + (mois + 1) + "/" + annee;
                       document.getElementById("date").innerHTML = date;
                       //affichage de l'heure dynamique
-                      function heure(){
+                      function heure() {
                         var d = new Date();
                         var h = d.getHours();
                         var m = d.getMinutes();
                         var s = d.getSeconds();
-                        if(h<10){
-                          h = "0"+h;
+                        if (h < 10) {
+                          h = "0" + h;
                         }
-                        if(m<10){
-                          m = "0"+m;
+                        if (m < 10) {
+                          m = "0" + m;
                         }
-                        if(s<10){
-                          s = "0"+s;
+                        if (s < 10) {
+                          s = "0" + s;
                         }
-                        document.getElementById("heure").innerHTML = h+":"+m+":"+s;
+                        document.getElementById("heure").innerHTML = h + ":" + m + ":" + s;
                       }
                     </script>
 
@@ -136,37 +139,42 @@
                       </div>
                     </div>
 
-
                     <div class="col-lg-6">
 
-
-                      <!-- image -->
                       <input type="file" name="image" id="image" accept="image/*" onchange="loadFile(event)">
 
-
                     </div>
 
-                    <div class="col-lg-6">
-                      <!-- preview image -->
 
-                      <img id="output" src='<%=categorie?.image%>' width="100" />
-
-
+                    <div class="col-lg-6 mb-4">
+                      <input type="color" value='<%=categorie.color.slice(0,7)%>' name='color' colorformat="rgba">
                     </div>
+
+                    <!-- image -->
 
                   </div>
-                  <div class="col-6">
-                    <div class="create_report_btn mt_30">
 
-                      <button type="submit" class="btn_1 radius_btn d-block text-center"><%= categorie ?"Modifier categorie":"Ajotuer Categorie" %> </button>
-                    </div>
+                  <div class="col-lg-6">
+                    <!-- preview image -->
+
+                    <img id="output" src='<%=categorie?.image%>' width="100" />
+
+
+                  </div>
+
+                </div>
+                <div class="col-6">
+                  <div class="create_report_btn mt_30">
+
+                    <button type="submit" class="btn_1 radius_btn d-block text-center"><%= categorie ?"Modifier categorie":"Ajotuer Categorie" %> </button>
                   </div>
                 </div>
-              </form>
             </div>
+            </form>
           </div>
         </div>
       </div>
+    </div>
     </div>
 
     <!-- footer part -->
@@ -330,7 +338,9 @@
       const data = {
         nom: $('input[name="nom"]').val(),
         categorie_pour: $('input[name="session"]').val(),
-        image: $('input[name="image"]').prop('files')[0]
+        image: $('input[name="image"]').prop('files')[0],
+        // with opacity 0.5
+        color: $('input[name="color"]').val() + '80'
       };
       // change text ajouter categorie by chargement
 

@@ -7,6 +7,7 @@ exports.categorieQueries = class {
         nom: data.nom,
         categorie_pour: data.categorie_pour,
         image: data.image,
+        color: data.color,
       });
       await categorie
         .save()
@@ -80,6 +81,7 @@ exports.categorieQueries = class {
             nom: data.nom,
             categorie_pour: data.categorie_pour,
             image: data.image,
+            color: data.color,
           },
         }
       )

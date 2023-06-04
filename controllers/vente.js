@@ -550,7 +550,7 @@ exports.venteBilan = async (req, res) => {
         // fait un nouveau formatage de produit pour le bilan
         const product = {
           nom: produit.produit.nom_produit,
-          categorie: produit.produit.categorie.nom,
+          categorie: produit.produit.categorie,
           prix_vente: produit.prix_vente,
           prix_achat: produit.prix_achat,
           quantite: vente.quantite[produitIndex],

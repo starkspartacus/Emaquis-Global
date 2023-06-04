@@ -12,6 +12,10 @@ const CategorieSchema = new Schema(
       type: String,
       default: null,
     },
+    color: {
+      type: String,
+      default: null,
+    },
   },
   { timestamps: true }
 );
