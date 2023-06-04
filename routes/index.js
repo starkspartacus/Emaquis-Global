@@ -32,9 +32,9 @@ const profilecontroller = require('../controllers/profilecontroller');
 const reglagecontroller = require('../controllers/reglagecontroller');
 const summarycontroller = require('../controllers/summary');
 const summaryadmincontroller = require('../controllers/summary_admin');
-const bilan_controller = require('../controllers/bilan_controller');
 const config_profil = require('../controllers/config_profil');
 const billetRouter = require('./billet.router');
+const path = require('path');
 
 const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
@@ -96,9 +96,6 @@ router.post('/emconnexion', emconnexioncontroller.emconnexionPost);
 router.get('/dashboard', dashboardcontroller.dashboard);
 router.post('/dashboard', dashboardcontroller.dashboardPost);
 
-router.get('/bilan', bilan_controller.bilan);
-router.post('/bilan', bilan_controller.bilanPost);
-
 router.get('/emdashboard', emdashboardcontroller.emdashboard);
 router.post('/emdashboard', emdashboardcontroller.emdashboardPost);
 
@@ -115,6 +112,22 @@ router.post('/listcategorie', listcategoriecontroller.seecatPost);
 
 router.get('/listeproduit', listeproduitcontroller.produit);
 router.post('/listeproduit', listeproduitcontroller.produitPost);
+
+router.get('/bilan', (req, res) => {
+  if (req.session.user) {
+    res.setHeader('Content-Type', 'text/html');
+
+    // react build folder
+
+    res.sendFile(path.join(__dirname, '../reactBilan/index.html'));
+  } else {
+    res.redirect('/connexion');
+  }
+  // req header
+  // res header
+  // res status
+  // res body
+});
 
 router.get('/vente', checkAuthUser, ventecontroller.vente);
 router.get('/vente/bilan', ventecontroller.venteBilan);

@@ -44,10 +44,10 @@ const Serveur = class {
 
   middleware() {
     //MIDDLEWARES
-  
+
     this.app.use(
       cors({
-        origin: ["http://localhost:3000"],
+        origin: ['http://localhost:3000'],
       })
     );
     this.app.use(logger('dev'));
