@@ -7,7 +7,10 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'G-NT2SW8WBHT');
@@ -63,14 +66,14 @@
                 <h3 class="f_s_25 f_w_700 dark_text mr_30">
                   Tableau de bord
                 </h3>
-               <!-- <ol class="breadcrumb page_bradcam mb-0">
+                <!-- <ol class="breadcrumb page_bradcam mb-0">
                   <li class="breadcrumb-item">
                     <a href="javascript:void(0);">Acceuil</a>
                   </li>
                   <li class="breadcrumb-item active">Analyse</li>
                 </ol> -->
               </div>
-             <!-- <div class="page_title_right">
+              <!-- <div class="page_title_right">
                 <div class="page_title_right d-flex">
                   <div class="page_date d-flex align-items-center">
 
@@ -184,7 +187,7 @@
                     </div>
                     <div class="crm_body">
                       <h4 class="testt"><%- totalemploye %></h4>
-                      <p >Employé(e)s</p>
+                      <p>Employé(e)s</p>
                     </div>
                   </div>
                 </div>
@@ -366,9 +369,7 @@
                       <div class="single_plan d-flex align-items-center justify-content-between">
                         <div class="plan_left d-flex align-items-center">
                           <div class="thumb">
-                            <img src="<%= product.produit.image %>" alt=""
-                                 style="height: 100%; object-fit: contain"
-                            />
+                            <img src="<%= product.produit.image %>" alt="" style="height: 100%; object-fit: contain" />
                           </div>
                           <div>
                             <h5><%= product.prix_vente %> FCFA</h5>
@@ -713,11 +714,11 @@
 
     socket.on('connect', () => {
 
-      socket.on(`${user_travail_pour}-editvente`, (data) => {
-        alert('Edit');
-        console.log("chart management 22")
+      // socket.on(`${user_travail_pour}-editvente`, (data) => {
+      //   alert('Edit');
+      //   console.log("chart management 22")
 
-      })
+      // })
     })
     console.log("chart management 33")
     $('#chart_month').on('change', function() {
