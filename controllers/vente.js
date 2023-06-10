@@ -517,6 +517,7 @@ exports.venteBilan = async (req, res) => {
 
     let filter = {
       travail_pour: req.session.user._id,
+      status_commande: 'Validée',
     };
 
     if (start) {
