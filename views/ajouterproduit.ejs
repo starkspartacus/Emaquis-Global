@@ -7,7 +7,10 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'G-NT2SW8WBHT');
@@ -295,8 +298,10 @@
                 setPromoQuantity('');
                 setPromo(false);
 
-                $('select').val('');
-                $('select').niceSelect('update');
+                $('select:not(#stockType)').val('');
+                $('select:not(#stockType)').niceSelect('update');
+
+
               }
 
 
@@ -344,7 +349,11 @@
           $('#stockType').on('change', (e) => {
             const id = e.target.value;
 
-            setStockType(id);
+            if(id){
+              setStockType(id);
+
+            }
+
           })
 
         }, []);
@@ -376,6 +385,9 @@
           }
         },[productId, categoryId,allProducts])
 
+        React.useEffect(()=>{
+          setStockType(updateProduct?'bottle':'locker')
+        },[])
         return (
           <div className='white_card card_height_100 mb_30'>
             <div className='white_card_header'>
@@ -533,20 +545,17 @@
                         id="stockType"
                         required
                         value={stockType}
-
+                       
                       >
 
+                        
                         {
-                          ['locker','bottle'].map(type =>(
-                            <option value={type}>{type ==="locker"?"Casier":"Bouteille"}</option>
+                          ['locker','carton','bottle'].map(type =>(
+                            <option value={type === "carton"?"locker":type}>{type ==="locker"?"Casier": type === "carton"? "Carton": "Bouteille"}</option>
                             ))
                         }
 
-                        {
-                          ['locker','bottle'].map(type =>(
-                                  <option value={type}>{type ==="locker"?"Carton":""}</option>
-                          ))
-                        }
+                      
 
 
                       </select>
@@ -556,11 +565,11 @@
                   </div>
 
                    <div className="col-lg-12 pl-4">
-                    <div class="form-check">
-                        <input class="form-check-input" checked={promo} onChange={(e)=>setPromo(e.target.checked)} type="checkbox" value="" id="flexCheckDefault"
+                    <div className="form-check">
+                        <input className="form-check-input" checked={promo} onChange={(e)=>setPromo(e.target.checked)} type="checkbox" value="" id="flexCheckDefault"
 
                         />
-                        <p class="form-check-label" for="flexSwitchCheckDefault">Voulez-vous ajouter cette boisson en formule ?</p>
+                        <p className="form-check-label" for="flexSwitchCheckDefault">Voulez-vous ajouter cette boisson en formule ?</p>
                     </div>
 
                    </div>

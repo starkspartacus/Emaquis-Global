@@ -21,6 +21,7 @@ const VenteRoot = () => {
           {!billet
             ? 'Veuillez ouvrir la caisse en cliquant sur le button tout en bas svp'
             : 'La caisse est fermée'}
+          {!billet && <a href='#openCash'> ici</a>}
         </h4>
       )}
       <AddVente />
