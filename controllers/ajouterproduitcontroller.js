@@ -63,13 +63,22 @@ exports.addproduitPost = async (req, res) => {
   try {
     if (user) {
       const session = req.body.session || user.travail_pour;
+
+      const produit = await produitQueries.getGlobalProduitById(
+        req.body.produit
+      );
+
       const data = {
         produit: req.body.produit,
         prix_vente: parseInt(req.body.prix_vente),
         prix_achat: parseInt(req.body.prix_achat),
         quantite: parseInt(
           req.body.stockType === 'locker'
-            ? generateQuantityByLocker(req.body.quantite, req.body.taille)
+            ? generateQuantityByLocker(
+                req.body.quantite,
+                req.body.taille,
+                produit.result
+              )
             : req.body.quantite
         ),
         taille: req.body.taille,
@@ -160,13 +169,21 @@ exports.editproduitPost = async (req, res) => {
   const user = req.session.user;
   if (user) {
     const session = req.body.session || user.travail_pour;
+    // const produit = await produitglobalModel
+
+    const produit = await produitQueries.getGlobalProduitById(req.body.produit);
+
     const data = {
       produit: req.body.produit,
       prix_vente: parseInt(req.body.prix_vente),
       prix_achat: parseInt(req.body.prix_achat),
       quantite: parseInt(
         req.body.stockType === 'locker'
-          ? generateQuantityByLocker(req.body.quantite, req.body.taille)
+          ? generateQuantityByLocker(
+              req.body.quantite,
+              req.body.taille,
+              produit.result
+            )
           : req.body.quantite
       ),
       taille: req.body.taille,

@@ -84,6 +84,30 @@ exports.produitQueries = class {
     }
   }
 
+  static getGlobalProduitById(id) {
+    try {
+      return new Promise(async (next) => {
+        produitGlobal
+          .findOne({ _id: id })
+          .populate('categorie')
+          .then((data) => {
+            next({
+              etat: true,
+              result: data,
+            });
+          })
+          .catch((err) => {
+            next({
+              etat: false,
+              err: err,
+            });
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   static getProduit() {
     try {
       return new Promise(async (next) => {

@@ -7,7 +7,10 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'G-NT2SW8WBHT');
@@ -370,15 +373,19 @@
         })
           .then((res) => res.json())
           .then((data) => {
+            console.log('👉 👉 👉  ~ file: listeproduit.ejs:259 ~ handleDelete ~ data', data);
             setLoading(false)
             handleRemoveProduct(productSelected._id)
+            $('.modal-backdrop').remove();
             $('#deleteModal').modal('hide');
         })
-
-
-
-
        }
+
+
+       if(!productSelected) return  null;
+
+
+       
 
 
 
@@ -388,7 +395,7 @@
        id="deleteModal"
        tabindex="-1"
        role="dialog"
-       aria-labelledby="myModalTitle"
+       aria-labelledby="myModalDeleteTitle"
        >
        <div className="modal-dialog modal-dialog-centered" style={{
        maxWidth: '600px',
@@ -504,6 +511,7 @@
 
                            const handleRemoveProduct = (id) => {
                             setProducts(products.filter((el) => el._id !== id));
+                            setProductSelected(null);
                            };
 
                            return (

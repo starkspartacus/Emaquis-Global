@@ -15,6 +15,7 @@ const { produitQueries } = require('../requests/produitQueries');
 const { venteQueries } = require('../requests/venteQueries');
 const { paiementQueries } = require('../requests/paiementQueries');
 const User = require('../models/user.model');
+const Setting = require('../models/settings.model');
 const dotenv = require('dotenv').config();
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -317,6 +318,74 @@ Summary.on('connection', (socket) => {
     // }else{
     //   socket.emit('paymentbad');
     // }
+  });
+});
+
+const SaveConfigData = io.of('/config_profil').use(Serveur.getSharedSession());
+SaveConfigData.on('connection', (socket) => {
+  socket.on('configData', async (data) => {
+    console.log('👉 👉 👉  ~ file: www:326 ~ data:', data);
+    const {
+      userid,
+      objectifJournalier,
+      RemboursementType,
+      pays,
+      ville,
+      square,
+      othersquare,
+    } = data;
+
+    console.log(data);
+    // Démarrez une session MongoDB
+    // const session = await mongoose.startSession();
+
+    try {
+      // await session.startTransaction();
+
+      // Mettre à jour l'utilisateur
+      const updatedUser = await User.findByIdAndUpdate(
+        userid,
+        {
+          country: pays,
+          city: ville,
+          square: square,
+          othersquare: othersquare,
+        },
+        { new: true, upsert: true }
+      );
+
+      // Mettre à jour le modèle de configuration
+      const updatedSetting = await Setting.findOneAndUpdate(
+        { travail_pour: userid },
+        {
+          objective: objectifJournalier,
+          product_return_type: RemboursementType,
+        },
+        { new: true, upsert: true }
+      );
+
+      // Exécutez les deux opérations de mise à jour en parallèle
+      // const [updatedUser, updatedSetting] = await Promise.all([updateUserPromise, updateSettingPromise]);
+
+      // await session.commitTransaction();
+
+      console.log('Utilisateur mis à jour :', updatedUser);
+      console.log('Configuration mise à jour :', updatedSetting);
+      socket.emit('configsuccess', '/config_profil');
+    } catch (error) {
+      socket.emit('bad');
+      console.error('Erreur lors de la mise à jour :', error);
+      // await session.abortTransaction();
+    } finally {
+      // session.endSession();
+    }
+  });
+});
+
+const SaveProfile = io.of('/profile').use(Serveur.getSharedSession());
+SaveProfile.on('connection', (socket) => {
+  socket.on('dashredirect', async () => {
+    socket.emit('finalRedict');
   });
 });
 

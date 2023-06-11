@@ -273,7 +273,9 @@ exports.editventePost = async (req, res) => {
         sess.travail_pour
       );
 
-      let billet = await BilletQueries.getBilletByEmployeId(body.for_employe);
+      let billet = await BilletQueries.getBilletByEmployeId(
+        oldVente.result?.for_employe
+      );
 
       if (!billet.result) {
         res.status(400).json({
@@ -351,6 +353,11 @@ exports.editventePost = async (req, res) => {
         amount_collected:
           body.amount_collected ?? oldVente.result.amount_collected,
       };
+
+      if (body.update_for_collected_amount) {
+        newVente.status_commande = 'Validée';
+        newVente.employe_validate_id = sess._id;
+      }
 
       await venteQueries.updateVente(venteId, newVente);
 

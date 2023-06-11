@@ -107,8 +107,8 @@
                                 <h4 class="text-right">Parametre </h4>
                               </div>
                               <div class="row mt-2">
-                                <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" placeholder="Nom" name='nom' value="<%= user.nom %>"></div>
-                                <div class="col-md-6"><label class="labels">Prenom</label><input type="text" class="form-control" name='prenoms' value="<%= user.prenoms %>" placeholder="Prenom"></div>
+                                <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" placeholder="Nom" name='nom' value="<%= user.nom %>" required></div>
+                                <div class="col-md-6"><label class="labels">Prenom</label><input type="text" class="form-control" name='prenoms' value="<%= user.prenoms %>" placeholder="Prenom" required></div>
                               </div>
                               <div class="row mt-3">
                                 <div class="col-md-12"><label class="labels">Nom de l'établissement</label><input type="text" class="form-control" name='nom_etablissement' placeholder="Entrer le nom de l'établissement" value="<%= user.nom_etablissement %>"></div>
