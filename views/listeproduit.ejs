@@ -251,7 +251,7 @@
                                    <tbody>
                                      {products.map((el, prodId) => {
                                        return (
-                                         <tr>
+                                         <tr key={prodId}>
                                            <td>{el.produit.nom_produit}</td>
                                            <td style={{
                                              maxWidth: '200px',
@@ -325,7 +325,7 @@
                                <div className="modal-body">
                                  <h4> {productSelected.produit.nom_produit} {productSelected.taille}</h4>
                                  {productSelected.historiques && productSelected.historiques.reverse().map((el, index)=>{
-                                   return <p>{el.add_by} a {el.update?`modifiée la quantité de ${el.prev_quantite} à ${el.stockType === "locker"?`${el.lockerQty} casier(s) de ${el.quantite} bouteilles`:el.quantite}`:`ajoutée ${el.stockType === "locker"?`${el.lockerQty} casier(s) de ${el.quantite} bouteilles`:`${el.quantite} quantité(s)`}`} le {new Date(el.date).toLocaleDateString('fr-FR',{
+                                   return <p key={index}>{el.add_by} a {el.update?`modifiée la quantité de ${el.prev_quantite} à ${el.stockType === "locker"?`${el.lockerQty} casier(s) de ${el.quantite} bouteilles`:el.quantite}`:`ajoutée ${el.stockType === "locker"?`${el.lockerQty} casier(s) de ${el.quantite} bouteilles`:`${el.quantite} quantité(s)`}`} le {new Date(el.date).toLocaleDateString('fr-FR',{
                                      year: 'numeric',
                                      month: 'long',
                                      day: 'numeric',
@@ -365,6 +365,8 @@
 
         setLoading(true)
 
+      
+
         fetch('/deleteproduit/'+productSelected._id, {
           method: 'DELETE',
           headers: {
@@ -373,16 +375,19 @@
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log('👉 👉 👉  ~ file: listeproduit.ejs:259 ~ handleDelete ~ data', data);
+            $('.close-modal').each(function () {
+           
+            $(this).trigger('click');
+              });
             setLoading(false)
             handleRemoveProduct(productSelected._id)
-            $('.modal-backdrop').remove();
-            $('#deleteModal').modal('hide');
+         
+          
         })
        }
 
 
-       if(!productSelected) return  null;
+     
 
 
        
@@ -410,7 +415,7 @@
          className="close close-modal"
          data-dismiss="modal"
          aria-label="Close"
-         id="close-modal"
+         id="close-delete-modal"
        >
          <span aria-hidden="true">&times;</span>
        </button>

@@ -149,6 +149,7 @@ const EmDashboardEmployes = () => {
                     : "Aujourd'hui"}
                 </p>
                 <button
+                  id='openCash'
                   onClick={handleToggleOpenDay}
                   className={`btn btn-${
                     billet && !billet.is_closed ? 'danger' : 'success'
