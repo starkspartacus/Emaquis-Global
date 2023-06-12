@@ -524,7 +524,9 @@ exports.venteBilan = async (req, res) => {
 
     let filter = {
       travail_pour: req.session.user._id,
-      status_commande: 'Validée',
+      status_commande: {
+        $in: ['Validée', 'Retour'],
+      },
     };
 
     if (start) {
@@ -556,6 +558,13 @@ exports.venteBilan = async (req, res) => {
       // tous produit dans chaque vente(par index et produit)
       for (let [produitIndex, produit] of vente.produit.entries()) {
         // fait un nouveau formatage de produit pour le bilan
+        const total_vente =
+          vente.quantite[produitIndex] < 0
+            ? vente.prix
+            : produit.prix_vente * vente.quantite[produitIndex];
+
+        const total_achat = produit.prix_achat * vente.quantite[produitIndex];
+
         const product = {
           nom: produit.produit.nom_produit,
           categorie: produit.produit.categorie,
@@ -565,12 +574,12 @@ exports.venteBilan = async (req, res) => {
           taille: produit.taille,
           _id: produit._id,
           productId: produit.productId,
-          total_vente: produit.prix_vente * vente.quantite[produitIndex],
-          benefice:
-            produit.prix_vente * vente.quantite[produitIndex] -
-            produit.prix_achat * vente.quantite[produitIndex],
+          total_vente,
+          benefice: total_vente - total_achat,
           employe: vente.employe,
           createdAt: vente.createdAt,
+          retour_quantite:
+            vente.quantite[produitIndex] < 0 ? vente.quantite[produitIndex] : 0,
         };
 
         // verifier si le produit existe et calculer son benefice
@@ -581,11 +590,11 @@ exports.venteBilan = async (req, res) => {
 
         if (productFind) {
           productFind.quantite += vente.quantite[produitIndex];
-          productFind.total_vente +=
-            produit.prix_vente * vente.quantite[produitIndex];
-          productFind.benefice +=
-            produit.prix_vente * vente.quantite[produitIndex] -
-            produit.prix_achat * vente.quantite[produitIndex];
+          productFind.total_vente += total_vente;
+          productFind.benefice += total_vente - total_achat;
+
+          productFind.retour_quantite +=
+            vente.quantite[produitIndex] < 0 ? vente.quantite[produitIndex] : 0;
         } else {
           produits.push(product);
         }

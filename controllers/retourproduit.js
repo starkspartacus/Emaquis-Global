@@ -36,10 +36,15 @@ exports.addback = async (req, res) => {
         delete req.session.retournData;
       }
 
+      const return_product_label = TYPE_RETOUR_PRDUITS.find(
+        (item) => item.type === setting.product_return_type
+      )?.nom;
+
       res.render('retour', {
         user: req.session.user,
         products,
         setting,
+        return_product_label,
         retournData,
         code: retournData?._id?.slice(-6).toUpperCase(),
       });
