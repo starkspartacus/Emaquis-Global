@@ -4455,6 +4455,40 @@ table.dataTable {
   margin-bottom: 20px;
 }
 
+.quality_Connexion {
+  width: 25px;
+  height: 12px;
+  border-radius: 50%;
+  background: #98ED58;
+  animation: ease-in-out 1s infinite pulse 1s alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+}
+
+.quality_Connexion_lente{
+    width: 25px;
+    height: 12px;
+    border-radius: 50%;
+    background: #FF9C2C;
+    animation: ease-in-out 1s infinite pulse2 1s alternate;
+}
+
+@keyframes pulse2 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+}
+
 /* line 46, G:/admin_project/8 admin/management_html/scss/_sidebar.scss */
 .sidebar .logo .large_logo img {
   width: 77%;
