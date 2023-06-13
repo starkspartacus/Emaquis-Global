@@ -5,7 +5,7 @@ function checkInternetConnection() {
         const xhr = new XMLHttpRequest();
         const timeout = 5000; // Temps d'attente en millisecondes
 
-        xhr.open('GET', 'http://localhost:3000/', true); // URL pour le test de connexion
+        xhr.open('GET', 'https://www.e-maquis.com/dashboard', true); // URL pour le test de connexion
 
         xhr.onload = function() {
             if (xhr.status === 200 && xhr.timeout <= 5000) {
