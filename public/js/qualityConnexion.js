@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     checkInternetConnection()
         .then((result) => {
 
-            if (result.isConnected) {
+            if (result.isConnected && result.timeout <= 5000) {
                 qualityConnexion.classList.add('quality_Connexion');
                 qualityConnexion.classList.remove('quality_Connexion_lente');
             } else  {
