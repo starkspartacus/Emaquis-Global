@@ -44,9 +44,9 @@ h6 {
   height: 50px;
 }
 
-.img_footer {
-  width: 155px;
-  height: 150px;
+#img_footer {
+  width: 109px;
+  height: 100px;
 }
 
 h1 {
@@ -1179,8 +1179,19 @@ button:focus,
 }
 
 .video-promo {
-  padding: 150px 0;
+  height: 450px; /* Ajustez la hauteur selon vos besoins */
+  overflow: hidden;
 }
+
+.video-promo .container {
+  position: relative;
+}
+
+.video-promo .container video {
+  position: relative;
+  z-index: 1;
+}
+
 
 .video-promo .content-block {
   width: 60%;
@@ -2686,5 +2697,21 @@ button.btn-valider {
   margin-top: 20px;
 }
 
-.contact_general {
+.video-promo {
+  height: 450px; /* Ajustez la hauteur selon vos besoins */
+  overflow: hidden;
+}
+
+/* Media query pour les écrans de taille maximale de 768 pixels */
+@media (max-width: 768px) {
+  .video-promo {
+    height: 300px; /* Nouvelle hauteur pour les écrans plus petits */
+  }
+}
+
+/* Media query pour les écrans de taille maximale de 576 pixels */
+@media (max-width: 576px) {
+  .video-promo {
+    height: 200px; /* Nouvelle hauteur pour les écrans encore plus petits */
+  }
 }
