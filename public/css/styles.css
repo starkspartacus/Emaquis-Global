@@ -2473,6 +2473,10 @@ hr {
   transform: skew(25deg);
 }
 
+.rounded-rect {
+  border-radius: 55px;
+}
+
 /*Fin Landing page**/
 
 /* inscription page**/
