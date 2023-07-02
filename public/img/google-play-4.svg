@@ -6,7 +6,7 @@
         border-radius: 155px;
         }
     </style>
-    <rect class="rounded-rect" x="-220" y="-400" width="18137.4" height="25200" fill="black" />
+    <rect class="rounded-rect" x="-220" y="-400" rx="15" ry="15" width="18137.4" height="25200" fill="black" />
     <linearGradient id="a"
                     gradientTransform="matrix(11.64 0 0 -22.55 -32777 34043.164)"
                     gradientUnits="userSpaceOnUse"
