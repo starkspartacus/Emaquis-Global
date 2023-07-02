@@ -1363,9 +1363,9 @@ button:focus,
   border-radius: 50%;
   background-image: linear-gradient(
     45deg,
-    #009ec5 0%,
-    rgba(46, 126, 237, 0.77) 20%,
-    #02225b 50%
+    #98ed58 0%,
+    rgba(153, 208, 113, 0.77) 20%,
+    #398a04 55%
   );
 }
 
