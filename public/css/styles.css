@@ -2686,7 +2686,9 @@ button.btn-valider {
 .google-play {
   width: 250px;
   height: 70px;
+  border-radius: 10px;
 }
+
 
 .block-2 .google-play {
   width: 250px;
