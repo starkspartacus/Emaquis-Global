@@ -511,7 +511,7 @@
                     <div className='common_input mb_15'>
                       <input
                         type='number'
-                        placeholder="prix d'achat  ex: 500"
+                        placeholder="prix d'achat  ex: 320"
                         name='prix_achat'
                         required
                         value={prix_achat}
@@ -520,6 +520,12 @@
                           setPrixAchat(value);
                         }}
                       />
+                      <small class="text-info">
+                          le prix d'achat d'une bouteille se calcule
+                           en divisant le prix d'achat du
+                           carton ou du casier par le nombre de bouteille dans 
+                           le carton ou du casier
+                        </small>
                     </div>
                   </div>
 
