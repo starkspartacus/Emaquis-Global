@@ -522,9 +522,9 @@
                       />
                     </div>
                     <small class="text-info">
-                      Le prix d'achat d'une bouteille se calcule en 
-                      divisant le prix d'achat d'un carton ou d'un casier par 
-                      le nombre de bouteille dans le carton ou le casier
+                      Le prix d'achat d'une bouteille, se calcule en
+                      divisant le prix d'achat d'un carton ou d'un casier par
+                      le nombre de bouteille dans le carton ou le casier.
                     </small>
 
                   </div>
@@ -551,17 +551,17 @@
                         id="stockType"
                         required
                         value={stockType}
-                       
+
                       >
 
-                        
+
                         {
                           ['locker','carton','bottle'].map(type =>(
                             <option value={type === "carton"?"locker":type}>{type ==="locker"?"Casier": type === "carton"? "Carton": "Bouteille"}</option>
                             ))
                         }
 
-                      
+
 
 
                       </select>
