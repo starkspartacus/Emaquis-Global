@@ -44,6 +44,54 @@
       width: 70%;
       margin-left: 15%;
     }
+
+    .white_card_body {
+      position: relative;
+    }
+
+    .loader_container {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(255, 255, 255, 0.5);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      display: none;
+    }
+
+    .loader {
+      border: 10px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 10px solid #FF9C2C;
+      width: 50px;
+      height: 50px;
+      -webkit-animation: spin 0.8s linear infinite;
+      /* Safari */
+      animation: spin 0.8s linear infinite;
+    }
+
+    /* Safari */
+
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 
   <%- include('partial/sidebar.ejs') %>
@@ -139,6 +187,20 @@
                   </div>
 
                   <div class="col-lg-4 text-right d-flex justify-content-end">
+                    <select class="nice_Select2 max-width-220 mr-2" id="chart_week">
+                      <option value="">choisir la semaine</option>
+                      <% for( week of [1,2,3,4]) { %> <% if(week === currentWeekIndex) { %>
+                      <option value="<%= week %>" selected>
+                        Semaine <%= week %>
+                      </option>
+                      <% } else { %>
+
+                      <option value="<%= week %>">Semaine <%= week %></option>
+                      <% } %> <% } %>
+
+
+                    </select>
+
                     <label for="chart_month"></label><select class="nice_Select2 max-width-220 mr-2" id="chart_month">
                       <option value="1">choisir le mois</option>
                       <% for( month of months) { %> <% if (month.code === new
@@ -170,6 +232,9 @@
               </div>
               <div class="white_card_body">
                 <div id="management_bar"></div>
+                <div class='loader_container'>
+                  <div class="loader"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -557,16 +622,16 @@
     }
 
 
-    const filterLabelsByMonth = (month, year) => {
-      return Object.keys(ventes).filter(label => {
+    const filterLabelsByMonth = (data, month, year) => {
+      return Object.keys(data).filter(label => {
         const dateSplit = label.split('/');
         return Number(dateSplit[0]) == month && dateSplit[2] == year;
       });
     }
 
 
-    const filterVentesValuesByMonth = (month, year) => {
-      return Object.entries(ventes).map((vente) => {
+    const filterVentesValuesByMonth = (data, month, year) => {
+      return Object.entries(data).map((vente) => {
         return [vente[0], vente[1].reduce((acc, val) => acc + val.prix, 0)]
       }).filter(vente => {
         const dateSplit = vente[0].split('/');
@@ -579,10 +644,56 @@
     }
 
 
-    const ventesLabels = filterLabelsByMonth(month, year);
+    const fetchData = async () => {
+      const week = $('#chart_week').val();
+      const month = $('#chart_month').val();
+      const year = $('#chart_year').val();
+
+      $('.loader_container').css('display', 'flex');
+
+      // loading chart
+
+      chart_management.updateOptions({
+        labels: [],
+        series: [{
+          name: 'total',
+          type: 'column',
+          data: [],
+        }]
+      })
 
 
-    const ventesValues = filterVentesValuesByMonth(month, year);
+
+
+      const res = await fetch(`vente-by-month?month=${month>9?month:'0'+month}&year=${year}&week=${week}`);
+      const data = await res.json();
+      console.log('👉 👉 👉  ~ file: dashboard.ejs:603 ~ data:', data)
+
+      if (data.success) {
+        const ventesLabels = filterLabelsByMonth(data?.data, month, year);
+
+        const ventesValues = filterVentesValuesByMonth(data?.data, month, year);
+
+
+        chart_management.updateOptions({
+          labels: ventesLabels.reverse(),
+          series: [{
+            name: 'total',
+            type: 'column',
+            data: ventesValues.reverse(),
+          }]
+        })
+      }
+
+      $('.loader_container').css('display', 'none');
+
+    }
+
+
+    const ventesLabels = filterLabelsByMonth(ventes, month, year);
+
+
+    const ventesValues = filterVentesValuesByMonth(ventes, month, year);
 
     var options = {
       series: [objectivePercent],
@@ -712,41 +823,46 @@
     console.log("chart management 11")
 
 
-    socket.on('connect', () => {
+    // socket.on('connect', () => {
 
-      // socket.on(`${user_travail_pour}-editvente`, (data) => {
-      //   alert('Edit');
-      //   console.log("chart management 22")
+    //   //      socket.on(`
+    //   //     $ {
+    //   //       user_travail_pour
+    //   //     } - editvente`, (data) => {
+    //   // //   alert('Edit');
+    //   // //   console.log("chart management 22")
 
-      // })
-    })
+    //   // // })
+    // })
     console.log("chart management 33")
-    $('#chart_month').on('change', function() {
-      const year = $('#chart_year').val();
+    //chart_week
 
-      chart_management.updateOptions({
-        labels: filterLabelsByMonth(this.value, year).reverse(),
-        series: [{
-          name: 'total',
-          type: 'column',
-          data: filterVentesValuesByMonth(this.value, year).reverse(),
-        }]
-      })
+    $('#chart_week').on('change', async function() {
+      const {
+        ventesLabels,
+        ventesValues
+      } = await fetchData();
+
     })
 
 
-    $('#chart_year').on('change', function() {
+    $('#chart_month').on('change', async function() {
+      const {
+        ventesLabels,
+        ventesValues
+      } = await fetchData();
 
-      console.log(this.value)
-      const month = $('#chart_month').val();
-      chart_management.updateOptions({
-        labels: filterLabelsByMonth(month, this.value).reverse(),
-        series: [{
-          name: 'total',
-          type: 'column',
-          data: filterVentesValuesByMonth(month, this.value).reverse(),
-        }]
-      })
+
+    })
+
+
+    $('#chart_year').on('change', async function() {
+      const {
+        ventesLabels,
+        ventesValues
+      } = await fetchData();
+
+
     })
 
     // cart area

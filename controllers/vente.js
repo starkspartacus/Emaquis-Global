@@ -6,6 +6,63 @@ const Retours = require('../models/retourproduit.model');
 const { settingQueries } = require('../requests/settingQueries');
 const { employeQueries } = require('../requests/EmployeQueries');
 const { BilletQueries } = require('../requests/BilletQueries');
+const { formatDate } = require('../utils/generateYear');
+const moment = require('moment');
+const { getDateByWeekendMonthYear } = require('../utils/generateWeekly');
+
+exports.venteByMonth = async (req, res) => {
+  try {
+    if (req.session.user) {
+      console.log('ici', req.session.user);
+      const userId = req.session.user._id;
+      const { month, year, week } = req.query;
+
+      // startDate with month and year with moment
+
+      const { start, end } = getDateByWeekendMonthYear(week, month, year);
+
+      const Vente = await venteQueries.getVentes({
+        createdAt: {
+          $gte: start,
+          $lt: end,
+        },
+        travail_pour: userId,
+        status_commande: { $in: ['Validée', 'Retour'] },
+      });
+
+      // let employe = Employe.result;
+      // let prod = Produit.result;
+      let vente = Vente.result;
+
+      let venteByDay = vente.reduce((acc, item) => {
+        const date = new Date(item.createdAt);
+
+        const key = formatDate(date);
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(item);
+        return acc;
+      }, {});
+
+      res.send({
+        success: true,
+        data: venteByDay,
+      });
+    } else {
+      res.status(401).send({
+        etat: false,
+        data: 'error signature',
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      etat: false,
+    });
+  }
+};
+
 exports.vente = async (req, res) => {
   try {
     const productRes = await produitQueries.getProduitBySession(

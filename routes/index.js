@@ -130,6 +130,7 @@ router.get('/bilan', (req, res) => {
 });
 
 router.get('/vente', checkAuthUser, ventecontroller.vente);
+router.get('/vente-by-month', ventecontroller.venteByMonth);
 router.get('/vente/bilan', ventecontroller.venteBilan);
 router.post('/vente', ventecontroller.ventePost);
 router.put('/editvente/:id', ventecontroller.editventePost);

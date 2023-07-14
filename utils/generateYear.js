@@ -1,12 +1,13 @@
 const { formatTime } = require('./formatTime');
 
 exports.generateYears = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-  let years = [];
+  const currentYear = new Date().getFullYear();
+  let years = [2023];
 
-  for (let i = 0; i < 10; i++) {
-    years.push(year + i);
+  if (!years.includes(currentYear) && years.at(-1) < currentYear) {
+    while (years.at(-1) < currentYear) {
+      years.push(years.at(-1) + 1);
+    }
   }
 
   return years;
