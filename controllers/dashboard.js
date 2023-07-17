@@ -28,11 +28,10 @@ exports.dashboard = async (req, res) => {
         .startOf('month');
       const currentDate = moment();
 
-      const numWeeks = currentDate.diff(startDate, 'weeks') + 1;
       const currentWeekIndex =
-        numWeeks > 0 ? (numWeeks % 4 === 0 ? 4 : numWeeks % 4) : 1;
-
-      // const week = Math.ceil(currentWeek / numWeeks);
+        currentDate.isoWeek() -
+        moment(currentDate).startOf('month').isoWeek() +
+        1;
 
       const { start, end } = getDateByWeekendMonthYear(
         currentWeekIndex,
