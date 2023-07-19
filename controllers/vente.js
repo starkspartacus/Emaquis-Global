@@ -7,7 +7,6 @@ const { settingQueries } = require('../requests/settingQueries');
 const { employeQueries } = require('../requests/EmployeQueries');
 const { BilletQueries } = require('../requests/BilletQueries');
 const { formatDate } = require('../utils/generateYear');
-const moment = require('moment');
 const { getDateByWeekendMonthYear } = require('../utils/generateWeekly');
 
 exports.venteByMonth = async (req, res) => {
@@ -16,10 +15,15 @@ exports.venteByMonth = async (req, res) => {
       console.log('ici', req.session.user);
       const userId = req.session.user._id;
       const { month, year, week } = req.query;
+      console.log('👉 👉 👉  ~ file: vente.js:19 ~ week:', week);
+      console.log('👉 👉 👉  ~ file: vente.js:19 ~ year:', year);
+      console.log('👉 👉 👉  ~ file: vente.js:19 ~ month:', month);
 
       // startDate with month and year with moment
 
       const { start, end } = getDateByWeekendMonthYear(week, month, year);
+      console.log('👉 👉 👉  ~ file: vente.js:23 ~ end:', end);
+      console.log('👉 👉 👉  ~ file: vente.js:23 ~ start:', start);
 
       const Vente = await venteQueries.getVentes({
         createdAt: {
@@ -637,6 +641,7 @@ exports.venteBilan = async (req, res) => {
           createdAt: vente.createdAt,
           retour_quantite:
             vente.quantite[produitIndex] < 0 ? vente.quantite[produitIndex] : 0,
+          prix: vente.prix,
         };
 
         // verifier si le produit existe et calculer son benefice

@@ -189,14 +189,16 @@
                   <div class="col-lg-4 text-right d-flex justify-content-end">
                     <select class="nice_Select2 max-width-220 mr-2" id="chart_week">
                       <option value="">choisir la semaine</option>
-                      <% for( week of [1,2,3,4]) { %> <% if(week === currentWeekIndex) { %>
+                      <% for( let week = 1; week <= weeksInMonth; week++) { %>
+                      <% if(week === currentWeekIndex) { %>
                       <option value="<%= week %>" selected>
                         Semaine <%= week %>
                       </option>
                       <% } else { %>
 
                       <option value="<%= week %>">Semaine <%= week %></option>
-                      <% } %> <% } %>
+                      <% } %>
+                      <% } %>
 
 
                     </select>

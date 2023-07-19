@@ -22,10 +22,15 @@ exports.dashboard = async (req, res) => {
       const month = new Date().getMonth();
       const year = new Date().getFullYear();
       // Définir la date de référence pour le mois
-      const startDate = moment()
-        .year(year)
-        .month(month - 1)
-        .startOf('month');
+      // Obtenez le premier jour du mois
+      const firstDayOfMonth = moment(`${year}-${month + 1}-01`, 'YYYY-MM-DD');
+
+      // Obtenez le dernier jour du mois
+      const lastDayOfMonth = moment(firstDayOfMonth).endOf('month');
+
+      // Calculez le nombre de semaines entre le premier et le dernier jour du mois
+      const weeksInMonth = lastDayOfMonth.week() - firstDayOfMonth.week() + 1;
+
       const currentDate = moment();
 
       const currentWeekIndex =
@@ -188,6 +193,7 @@ exports.dashboard = async (req, res) => {
         productMostSold,
         totalVenteWeek: formatAmount(totalVenteWeek || 0),
         currentWeekIndex,
+        weeksInMonth,
       });
     } catch (e) {
       console.log('err', e);
