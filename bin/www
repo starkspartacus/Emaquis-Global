@@ -96,11 +96,17 @@ UserLogin.on('connection', (socket) => {
       if (!(emailOrPhoneNumber && password)) {
         console.log('Veuillez remplir tous les champs');
       }
-      const userlogin = await User.findOne({
+      let userlogin = await User.findOne({
         $or: [{ email: emailOrPhoneNumber }, { numero: emailOrPhoneNumber }],
+         // Ajouter la condition de rôle "gestionnaire"
       });
-      console.log(userlogin, 'userlogin');
-
+    
+      if (!userlogin) {
+        userlogin = await Employe.findOne({
+          $or: [{ numero: emailOrPhoneNumber }, { numero: emailOrPhoneNumber }],
+          role: 'gestionnaire' // Ajouter la condition de rôle "gestionnaire"
+        });
+      }
       if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
         const token = jwt.sign(
           {
