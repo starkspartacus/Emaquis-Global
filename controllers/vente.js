@@ -641,7 +641,7 @@ exports.venteBilan = async (req, res) => {
           createdAt: vente.createdAt,
           retour_quantite:
             vente.quantite[produitIndex] < 0 ? vente.quantite[produitIndex] : 0,
-          prix: vente.prix,
+          prix: vente.quantite[produitIndex] < 0 ? vente.prix : 0,
         };
 
         // verifier si le produit existe et calculer son benefice
@@ -657,6 +657,8 @@ exports.venteBilan = async (req, res) => {
 
           productFind.retour_quantite +=
             vente.quantite[produitIndex] < 0 ? vente.quantite[produitIndex] : 0;
+
+          productFind.prix += vente.quantite[produitIndex] < 0 ? vente.prix : 0;
         } else {
           produits.push(product);
         }
