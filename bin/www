@@ -14,6 +14,7 @@ const { fournisseurQueries } = require('../requests/fournisseurQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const { venteQueries } = require('../requests/venteQueries');
 const { paiementQueries } = require('../requests/paiementQueries');
+const Employe = require('../models/employe.model');
 const User = require('../models/user.model');
 const Setting = require('../models/settings.model');
 const dotenv = require('dotenv').config();
