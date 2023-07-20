@@ -14,7 +14,6 @@ const { fournisseurQueries } = require('../requests/fournisseurQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const { venteQueries } = require('../requests/venteQueries');
 const { paiementQueries } = require('../requests/paiementQueries');
-const Employe = require('../models/employe.model');
 const User = require('../models/user.model');
 const Setting = require('../models/settings.model');
 const dotenv = require('dotenv').config();
@@ -97,17 +96,11 @@ UserLogin.on('connection', (socket) => {
       if (!(emailOrPhoneNumber && password)) {
         console.log('Veuillez remplir tous les champs');
       }
-      let userlogin = await User.findOne({
+      const userlogin = await User.findOne({
         $or: [{ email: emailOrPhoneNumber }, { numero: emailOrPhoneNumber }],
-         // Ajouter la condition de rôle "gestionnaire"
       });
-    
-      if (!userlogin) {
-        userlogin = await Employe.findOne({
-          $or: [{ numero: emailOrPhoneNumber }, { numero: emailOrPhoneNumber }],
-          role: 'gestionnaire' // Ajouter la condition de rôle "gestionnaire"
-        });
-      }
+      console.log(userlogin, 'userlogin');
+
       if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
         const token = jwt.sign(
           {
