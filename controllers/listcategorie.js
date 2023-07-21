@@ -1,4 +1,15 @@
 const { categorieQueries } = require('../requests/categorieQueries');
+
+exports.categoriesList = async (req, res) => {
+  const user = req.session.user;
+  if (user) {
+    const result = await categorieQueries.getCategorie();
+    res.send({ data: result.result, success: result.etat });
+  } else {
+    res.send({ data: [], success: false });
+  }
+};
+
 exports.seecat = async (req, res) => {
   if (req.session.user) {
     try {

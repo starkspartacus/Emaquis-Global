@@ -55,10 +55,10 @@ const fs = require('fs');
 const S3 = require('aws-sdk/clients/s3');
 const { authSuperAdmin, checkAuthUser } = require('../middleware/auth');
 const { uploadFile } = require('../utils/uploadFile');
-const {
-  condition_general,
-} = require('../controllers/conditiongeneral_controller');
 const conditiongeneral_controller = require('../controllers/conditiongeneral_controller');
+const { produitsList } = require('../controllers/produit');
+const { PRODUCT_SIZE } = require('../constants');
+const { stocksList, addStock } = require('../controllers/stock.controller');
 
 var router = express.Router();
 
@@ -112,6 +112,15 @@ router.post('/listcategorie', listcategoriecontroller.seecatPost);
 
 router.get('/listeproduit', listeproduitcontroller.produit);
 router.post('/listeproduit', listeproduitcontroller.produitPost);
+
+router.get('/products', produitsList);
+router.get('/categories', listcategoriecontroller.categoriesList);
+router.get('/products-sizes', (req, res) => {
+  res.send({
+    data: PRODUCT_SIZE,
+    success: true,
+  });
+});
 
 router.get('/bilan', (req, res) => {
   if (req.session.user) {
@@ -196,6 +205,11 @@ router.get('/test/paiement', summarycontroller.paiement);
 router.get('/summaryadmin', summaryadmincontroller.summaryadmin);
 router.post('/summaryadmin', summaryadmincontroller.summaryadmin);
 // router.post("/ajouterproduit", ajouterproduitcontroller.addproduitPost);
+
+//STOCKS
+
+router.get('/stocks', stocksList);
+router.post('/add-stock', upload.single('image'), addStock);
 
 router.post(
   '/ajouter-produit-global',
