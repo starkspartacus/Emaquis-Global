@@ -73,12 +73,12 @@ exports.addproduitPost = async (req, res) => {
         prix_vente: parseInt(req.body.prix_vente),
         prix_achat: parseInt(req.body.prix_achat),
         quantite: parseInt(
-          req.body.stockType === 'locker'
-            ? generateQuantityByLocker(
-                req.body.quantite,
-                req.body.taille,
-                produit.result
-              )
+          ['cardboard', 'locker'].includes(req.body.stockType)
+            ? generateQuantityByLocker({
+                locker: req.body.quantite,
+                size: req.body.taille,
+                produit: produit.result,
+              })
             : req.body.quantite
         ),
         taille: req.body.taille,
@@ -178,12 +178,13 @@ exports.editproduitPost = async (req, res) => {
       prix_vente: parseInt(req.body.prix_vente),
       prix_achat: parseInt(req.body.prix_achat),
       quantite: parseInt(
-        req.body.stockType === 'locker'
-          ? generateQuantityByLocker(
-              req.body.quantite,
-              req.body.taille,
-              produit.result
-            )
+        ['cardboard', 'locker'].includes(req.body.stockType)
+          ? generateQuantityByLocker({
+              locker: req.body.quantite,
+              size: req.body.taille,
+              produit: produit.result,
+              stockType: req.body.stockType,
+            })
           : req.body.quantite
       ),
       taille: req.body.taille,

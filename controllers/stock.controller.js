@@ -3,7 +3,6 @@ const { produitQueries } = require('../requests/produitQueries');
 const {
   generateQuantityByLocker,
 } = require('../utils/generateQuantityByLocker');
-const { uploadFile } = require('../utils/uploadFile');
 
 exports.stocksList = async (req, res) => {
   const user = req.session.user;
@@ -30,22 +29,11 @@ exports.addStock = async (req, res) => {
     if (user) {
       const body = req.body;
 
-      let image = '';
+      const { produit, categorie, size, productId, stockType } = body;
 
-      if (req.file) {
-        const file = req.file;
-        const result = await uploadFile(file);
+      const findProduct = await produitQueries.getProduitById(productId);
 
-        if (result) {
-          image = result.Location;
-        }
-      } else {
-        image = body.image;
-      }
-
-      const { produit, categorie, size } = body;
-
-      const findProduct = await produitQueries.getProduitById(produit);
+      // verifier si le produit existe sinon on renvoie une erreur
 
       if (!findProduct.result) {
         res.send({
@@ -55,11 +43,16 @@ exports.addStock = async (req, res) => {
         return;
       }
 
-      const quantity = generateQuantityByLocker(
-        body.quantity,
+      // verifier si le stock est de type locker
+
+      const quantity = generateQuantityByLocker({
+        locker: body.quantity,
         size,
-        findProduct.result
-      );
+        produit: findProduct.result?.produit,
+        stockType,
+      });
+
+      // verifier si le stock existe
 
       const stock = await stockQueries.getOneStockByQuery({
         produit,
@@ -67,10 +60,11 @@ exports.addStock = async (req, res) => {
         size,
       });
 
+      // si le stock existe, on met a jour la quantite
+
       if (stock.result) {
         const result = await stockQueries.updateStock(stock.result._id, {
           ...body,
-          image,
           quantity: stock.result.quantity + quantity,
         });
 
@@ -82,12 +76,13 @@ exports.addStock = async (req, res) => {
         return;
       }
 
+      // si le stock n'existe pas, on le cree
+
       const result = await stockQueries.setStock({
         ...body,
         quantity,
         user: user.id || user._id,
         travail_pour: user.id || user.travail_pour,
-        image,
       });
 
       res.send({

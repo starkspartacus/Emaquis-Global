@@ -1,5 +1,12 @@
-exports.generateQuantityByLocker = (locker, size, produit) => {
+exports.generateQuantityByLocker = ({ locker, size, produit, stockType }) => {
   if (!locker || !size) return 1;
+
+  if (
+    stockType === 'cardboard' &&
+    produit.nom_produit?.toLowerCase()?.includes('canette')
+  ) {
+    return locker * 24;
+  }
 
   if (['50cl', '60cl', '65cl'].includes(size)) {
     return locker * 12;

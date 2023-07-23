@@ -556,8 +556,8 @@
 
                         
                         {
-                          ['locker','carton','bottle'].map(type =>(
-                            <option value={type === "carton"?"locker":type}>{type ==="locker"?"Casier": type === "carton"? "Carton": "Bouteille"}</option>
+                          ['locker','cardboard','bottle'].map(type =>(
+                            <option value={type}>{type ==="locker"?"Casier": type === "cardboard"? "Carton": "Bouteille"}</option>
                             ))
                         }
 

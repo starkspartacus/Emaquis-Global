@@ -1,6 +1,22 @@
 const { PRODUCT_SIZE } = require('../constants');
 const { categorieQueries } = require('../requests/categorieQueries');
 const { produitQueries } = require('../requests/produitQueries');
+
+exports.getProductsGlobalList = async (req, res) => {
+  if (req.session.user && req.session.user.isAdmin) {
+    const resProduits = await produitQueries.getGlobalProduit();
+
+    res.send({
+      success: true,
+      data: resProduits?.result || [],
+    });
+  } else {
+    res.status(401).send({
+      success: false,
+    });
+  }
+};
+
 exports.addproduit = async (req, res) => {
   // if (req.session.user) {
   try {

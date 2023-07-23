@@ -59,6 +59,10 @@ const conditiongeneral_controller = require('../controllers/conditiongeneral_con
 const { produitsList } = require('../controllers/produit');
 const { PRODUCT_SIZE } = require('../constants');
 const { stocksList, addStock } = require('../controllers/stock.controller');
+const {
+  stocksImageList,
+  addStockImage,
+} = require('../controllers/stock-img.controller');
 
 var router = express.Router();
 
@@ -206,10 +210,37 @@ router.get('/summaryadmin', summaryadmincontroller.summaryadmin);
 router.post('/summaryadmin', summaryadmincontroller.summaryadmin);
 // router.post("/ajouterproduit", ajouterproduitcontroller.addproduitPost);
 
+// user session
+
+router.get('/get-user-session', (req, res) => {
+  if (req.session.user) {
+    const { password, ...data } = req.session.user?._doc;
+    res.send({
+      success: true,
+      data,
+    });
+  } else {
+    res.send({
+      success: false,
+      data: null,
+    });
+  }
+});
+
+// Produits
+
+router.get(
+  '/get-products-global',
+  emajouterproduitcontroller.getProductsGlobalList
+);
+
 //STOCKS
 
 router.get('/stocks', stocksList);
-router.post('/add-stock', upload.single('image'), addStock);
+router.post('/add-stock', addStock);
+
+router.get('/stocks-images', stocksImageList);
+router.post('/add-stock-image', upload.single('image'), addStockImage);
 
 router.post(
   '/ajouter-produit-global',
