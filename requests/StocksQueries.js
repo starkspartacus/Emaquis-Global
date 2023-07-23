@@ -95,6 +95,14 @@ exports.stockQueries = class {
         .find({
           travail_pour: id,
         })
+        .populate({
+          path: 'produit',
+          populate: {
+            path: 'produit',
+          },
+        })
+        .populate('categorie')
+        .populate('user')
         .then((res) => {
           next({
             etat: true,
