@@ -7,7 +7,10 @@ const { generateYears, formatDate } = require('../utils/generateYear');
 const moment = require('moment');
 const { getPercent } = require('../utils/getPercent');
 const { settingQueries } = require('../requests/settingQueries');
-const { getDateByWeekendMonthYear } = require('../utils/generateWeekly');
+const {
+  getDateByWeekendMonthYear,
+  getWeeksInMonth,
+} = require('../utils/generateWeekly');
 
 exports.dashboard = async (req, res) => {
   if (req.session.user) {
@@ -22,14 +25,9 @@ exports.dashboard = async (req, res) => {
       const month = new Date().getMonth();
       const year = new Date().getFullYear();
       // Définir la date de référence pour le mois
-      // Obtenez le premier jour du mois
-      const firstDayOfMonth = moment(`${year}-${month + 1}-01`, 'YYYY-MM-DD');
-
-      // Obtenez le dernier jour du mois
-      const lastDayOfMonth = moment(firstDayOfMonth).endOf('month');
 
       // Calculez le nombre de semaines entre le premier et le dernier jour du mois
-      const weeksInMonth = lastDayOfMonth.week() - firstDayOfMonth.week() + 1;
+      const weeksInMonth = getWeeksInMonth(month, year);
 
       const currentDate = moment();
 
