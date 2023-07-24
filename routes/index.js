@@ -126,22 +126,6 @@ router.get('/products-sizes', (req, res) => {
   });
 });
 
-router.get('/bilan', (req, res) => {
-  if (req.session.user) {
-    res.setHeader('Content-Type', 'text/html');
-
-    // react build folder
-
-    res.sendFile(path.join(__dirname, '../reactBilan/index.html'));
-  } else {
-    res.redirect('/connexion');
-  }
-  // req header
-  // res header
-  // res status
-  // res body
-});
-
 router.get('/vente', checkAuthUser, ventecontroller.vente);
 router.get('/vente-by-month', ventecontroller.venteByMonth);
 router.get('/vente/bilan', ventecontroller.venteBilan);
@@ -214,7 +198,8 @@ router.post('/summaryadmin', summaryadmincontroller.summaryadmin);
 
 router.get('/get-user-session', (req, res) => {
   if (req.session.user) {
-    const { password, ...data } = req.session.user?._doc;
+    let user = req.session.user?._doc || req.session.user;
+    const { password, ...data } = user;
     res.send({
       success: true,
       data,
@@ -324,5 +309,21 @@ router.post('/emajouterproduit', upload.single('image'), async (req, res) => {
 });
 
 router.use('/billet', billetRouter);
+
+router.get('*', (req, res) => {
+  if (req.session.user) {
+    res.setHeader('Content-Type', 'text/html');
+
+    // react build folder
+
+    res.sendFile(path.join(__dirname, '../reactBilan/index.html'));
+  } else {
+    res.redirect('/connexion');
+  }
+  // req header
+  // res header
+  // res status
+  // res body
+});
 
 module.exports = router;
