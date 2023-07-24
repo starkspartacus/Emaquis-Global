@@ -79,13 +79,13 @@ exports.addproduitPost = async (req, res) => {
         size: req.body.taille,
       });
 
-      if (!stock.result) {
+      if (!stock.result && req.body.quantite > 0) {
         res.status(401).send({
           message: "Le stock n'existe pas",
           success: false,
         });
         return;
-      } else if (stock.result.quantity < req.body.quantite) {
+      } else if (stock.result?.quantity < req.body.quantite) {
         res.status(401).send({
           message: 'Le stock est insuffisant',
           success: false,
@@ -211,13 +211,13 @@ exports.editproduitPost = async (req, res) => {
       size: req.body.taille,
     });
 
-    if (!stock.result) {
+    if (!stock.result && req.body.quantite > 0) {
       res.status(401).send({
         message: "Le stock n'existe pas",
         success: false,
       });
       return;
-    } else if (stock.result.quantity < req.body.quantite) {
+    } else if (stock.result?.quantity < req.body.quantite) {
       res.status(401).send({
         message: 'Le stock est insuffisant',
         success: false,
