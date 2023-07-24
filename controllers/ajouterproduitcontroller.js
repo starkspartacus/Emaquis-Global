@@ -1,4 +1,5 @@
 const { PRODUCT_SIZE } = require('../constants');
+const { stockQueries } = require('../requests/StocksQueries');
 const { categorieQueries } = require('../requests/categorieQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const {
@@ -67,6 +68,30 @@ exports.addproduitPost = async (req, res) => {
       const produit = await produitQueries.getGlobalProduitById(
         req.body.produit
       );
+      console.log(
+        '👉 👉 👉  ~ file: ajouterproduitcontroller.js:71 ~ produit:',
+        produit
+      );
+
+      const stock = await stockQueries.getOneStockByQuery({
+        produit: req.body.produit,
+        categorie: produit.result?.categorie?._id,
+        size: req.body.taille,
+      });
+
+      if (!stock.result) {
+        res.status(401).send({
+          message: "Le stock n'existe pas",
+          success: false,
+        });
+        return;
+      } else if (stock.result.quantity < req.body.quantite) {
+        res.status(401).send({
+          message: 'Le stock est insuffisant',
+          success: false,
+        });
+        return;
+      }
 
       const data = {
         produit: req.body.produit,
@@ -96,6 +121,14 @@ exports.addproduitPost = async (req, res) => {
       });
 
       let result = null;
+
+      if (stock.result) {
+        await stock.result.updateOne({
+          $inc: {
+            quantity: -data.quantite,
+          },
+        });
+      }
 
       const newHistorique = {
         quantite: data.quantite,
@@ -169,9 +202,30 @@ exports.editproduitPost = async (req, res) => {
   const user = req.session.user;
   if (user) {
     const session = req.body.session || user.travail_pour;
-    // const produit = await produitglobalModel
 
     const produit = await produitQueries.getGlobalProduitById(req.body.produit);
+
+    const stock = await stockQueries.getOneStockByQuery({
+      produit: req.body.produit,
+      categorie: produit.result?.categorie?._id,
+      size: req.body.taille,
+    });
+
+    if (!stock.result) {
+      res.status(401).send({
+        message: "Le stock n'existe pas",
+        success: false,
+      });
+      return;
+    } else if (stock.result.quantity < req.body.quantite) {
+      res.status(401).send({
+        message: 'Le stock est insuffisant',
+        success: false,
+      });
+      return;
+    }
+
+    // casier passe, mais ça fait en 12 ou 24 ?? ok
 
     const data = {
       produit: req.body.produit,
@@ -194,6 +248,16 @@ exports.editproduitPost = async (req, res) => {
       session: session,
       historiques: [],
     };
+
+    // ok on fait le test maintenant
+
+    if (stock.result) {
+      await stock.result.update({
+        $inc: {
+          quantity: -data.quantite,
+        },
+      });
+    }
 
     const produit_exist = await produitQueries.getProduitByData({
       produit: data.produit,

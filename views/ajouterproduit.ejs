@@ -217,6 +217,35 @@
         const [loading, setLoading] = React.useState(false);
         const [showSuccess, setShowSuccess] = React.useState(false);
         const [showError, setShowError] = React.useState(false);
+        const [stocks,setStocks] = React.useState([]);
+
+
+        const maquisUseStock = stocks.length > 0;
+
+        const productInStock =  stocks.find(s => s.produit._id == productId && s.size == selectedSize);
+       
+
+        const generateQuantityByLocker = ({ locker, size, produit, stockType }) => {
+            if (!locker || !size) return 1;
+
+            if (
+              produit.nom_produit.toLowerCase().includes('canette')
+            ) {
+              return locker * 24;
+            }
+
+            if (['50cl', '60cl', '65cl'].includes(size)) {
+              return locker * 12;
+            } else if (['30cl', '33cl', '25cl'].includes(size)) {
+              return locker * 24;
+            } else {
+              if (produit.nom_produit === 'VALPIERRE') {
+                return locker * 12;
+              } else {
+                return locker * 6;
+              }
+            }
+        };
 
 
         const handleSubmit = ()=>{
@@ -231,8 +260,29 @@
             promo_quantity: promoQuantity,
             promo_price: promoPrice,
             stockType
-
           }
+
+
+          if(maquisUseStock){
+            if(productInStock){
+              const qty = ['cardboard','locker'].includes(stockType)?  generateQuantityByLocker({
+              locker: quantite,
+              size: selectedSize,
+              produit: productSelected,
+              stockType
+            }) : quantite;
+
+          
+
+            if(qty > productInStock.quantity){
+              return alert("La quantité en stock est insuffisante");
+            }
+            }else{
+              return alert('Ce produit n\'est pas en stock')
+            }
+          
+          }
+         
 
           setShowSuccess(false)
           setShowError(false)
@@ -245,6 +295,8 @@
               return alert("Veuillez remplir tous les champs");
             }
           }
+
+        
 
           setLoading(true);
 
@@ -300,6 +352,11 @@
 
                 $('select:not(#stockType)').val('');
                 $('select:not(#stockType)').niceSelect('update');
+              
+                // refetch stocks 
+                fetch('/stocks').then(res=>res.json()).then(data=>{
+                  setStocks(data.data);
+                })
 
 
               }
@@ -388,6 +445,13 @@
         React.useEffect(()=>{
           setStockType(updateProduct?'bottle':'locker')
         },[])
+        
+        React.useEffect(()=>{
+          fetch('/stocks').then(res=>res.json()).then(data=>{
+            setStocks(data.data);
+          })
+        },[])
+
         return (
           <div className='white_card card_height_100 mb_30'>
             <div className='white_card_header'>
@@ -619,7 +683,8 @@
 
 
                   <div className='col-lg-6'>
-                    {productSelected &&  <p>Quantité en stock: {quantiteStock || 0}</p>}
+                    {!!productSelected &&  <p>Quantité total du produit: {quantiteStock || 0}</p>}
+                    {maquisUseStock &&  <p>Quantité en stock: {productInStock ? productInStock.quantity : 0}</p>}
                    {!!productSelected &&  <img src={productSelected.image} id="preview-image" alt="" width="150px" height="150px" style={{
                       objectFit:'contain'
                      }} />
