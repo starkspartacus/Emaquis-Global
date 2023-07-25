@@ -117,4 +117,26 @@ exports.stockQueries = class {
         });
     });
   }
+
+  static getStocksCountBySession(id) {
+    return new Promise(async (next) => {
+      await stocksModel
+        .find({
+          travail_pour: id,
+        })
+        .countDocuments()
+        .then((res) => {
+          next({
+            etat: true,
+            result: res,
+          });
+        })
+        .catch((err) => {
+          next({
+            etat: false,
+            err: err,
+          });
+        });
+    });
+  }
 };
