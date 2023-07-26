@@ -73,7 +73,7 @@ exports.addproduitPost = async (req, res) => {
         session
       );
 
-      if (maquisUseStock) {
+      if (maquisUseStock.result) {
         const stock = await stockQueries.getOneStockByQuery({
           produit: req.body.produit,
           categorie: produit.result?.categorie?._id,
@@ -124,7 +124,7 @@ exports.addproduitPost = async (req, res) => {
 
       let result = null;
 
-      if (stock.result && maquisUseStock) {
+      if (stock.result && maquisUseStock.result) {
         await stock.result.updateOne({
           $inc: {
             quantity: -data.quantite,
@@ -209,7 +209,7 @@ exports.editproduitPost = async (req, res) => {
 
     const maquisUseStock = await stockQueries.getStocksCountBySession(session);
 
-    if (maquisUseStock) {
+    if (maquisUseStock.result) {
       const stock = await stockQueries.getOneStockByQuery({
         produit: req.body.produit,
         categorie: produit.result?.categorie?._id,
@@ -257,7 +257,7 @@ exports.editproduitPost = async (req, res) => {
 
     // ok on fait le test maintenant
 
-    if (stock.result && maquisUseStock) {
+    if (stock.result && maquisUseStock.result) {
       await stock.result.updateOne({
         $inc: {
           quantity: -data.quantite,
