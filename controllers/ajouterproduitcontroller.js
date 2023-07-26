@@ -73,12 +73,14 @@ exports.addproduitPost = async (req, res) => {
         session
       );
 
+      const stock = await stockQueries.getOneStockByQuery({
+        produit: req.body.produit,
+        categorie: produit.result?.categorie?._id,
+        size: req.body.taille,
+      });
+
       if (maquisUseStock.result) {
-        const stock = await stockQueries.getOneStockByQuery({
-          produit: req.body.produit,
-          categorie: produit.result?.categorie?._id,
-          size: req.body.taille,
-        });
+        
 
         if (!stock.result && req.body.quantite > 0) {
           res.status(401).send({
@@ -209,12 +211,14 @@ exports.editproduitPost = async (req, res) => {
 
     const maquisUseStock = await stockQueries.getStocksCountBySession(session);
 
+    const stock = await stockQueries.getOneStockByQuery({
+      produit: req.body.produit,
+      categorie: produit.result?.categorie?._id,
+      size: req.body.taille,
+    });
+
     if (maquisUseStock.result) {
-      const stock = await stockQueries.getOneStockByQuery({
-        produit: req.body.produit,
-        categorie: produit.result?.categorie?._id,
-        size: req.body.taille,
-      });
+      
 
       if (!stock.result && req.body.quantite > 0) {
         res.status(401).send({
