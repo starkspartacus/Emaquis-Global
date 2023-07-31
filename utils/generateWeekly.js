@@ -35,7 +35,9 @@ function getWeeksInMonth(month, year) {
   const lastDayOfMonth = moment(firstDayOfMonth).endOf('month');
   // Calculate the number of weeks between the first and last day of the month
   const weeksInMonth = lastDayOfMonth.isoWeek() - firstDayOfMonth.isoWeek() + 1;
-  return weeksInMonth;
+  return weeksInMonth ;
 }
+
+console.log(getDateByWeekendMonthYear(1, 1, 2021));
 
 module.exports = { getDateByWeekendMonthYear, getWeeksInMonth };
