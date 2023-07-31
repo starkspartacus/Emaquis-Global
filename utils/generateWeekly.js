@@ -1,43 +1,42 @@
 const moment = require('moment');
 
-function getDateByWeekendMonthYear(weekend, month, year) {
+function getDateByWeekendMonthYear(weekend, mois, année) {
   const startDate = moment()
-    .year(year)
-    .month(month - 1)
+    .year(année)
+    .month(mois - 1)
     .startOf('month')
-    .isoWeekday(1); // Set the first day of the week to Monday
+    .isoWeekday(1); // Définir le premier jour de la semaine comme lundi
 
-  // Calculate the number of weeks between the first and last day of the month
-  const numWeeks = getWeeksInMonth(month, year);
+  // Calculer le nombre de semaines entre le premier et le dernier jour du mois
+  const numWeeks = getWeeksInMonth(mois, année);
 
-  const weeks = [];
-  let currentWeekStart = startDate.clone();
+  const semaines = [];
+  let débutSemaineCourante = startDate.clone();
 
   for (let i = 0; i < numWeeks; i++) {
-    const currentWeekEnd = currentWeekStart.clone().isoWeekday(7); // Set to Sunday, the end of the week
-    weeks.push({ start: currentWeekStart.toDate(), end: currentWeekEnd.toDate() });
-    currentWeekStart.add(1, 'week');
+    const finSemaineCourante = débutSemaineCourante.clone().isoWeekday(7); // Définir le dimanche, fin de la semaine
+    semaines.push({ début: débutSemaineCourante.toDate(), fin: finSemaineCourante.toDate() });
+    débutSemaineCourante.add(1, 'week');
   }
 
-  // Get the specific week
-  const week = weeks[Number(weekend) - 1];
-  // Get the start of the week
-  const start = new Date(week.start.setHours(0, 0, 0, 0));
-  // Get the end of the week
-  const end = new Date(week.end.setHours(23, 59, 59, 999));
+  // Obtenir la semaine spécifique
+  const semaine = semaines[Number(weekend) - 1];
+  // Obtenir le début de la semaine
+  const début = new Date(semaine.début.setHours(0, 0, 0, 0));
+  // Obtenir la fin de la semaine
+  const fin = new Date(semaine.fin.setHours(23, 59, 59, 999));
 
-  return { start, end };
+  return { début, fin };
 }
 
-function getWeeksInMonth(month, year) {
-  const firstDayOfMonth = moment({ year, month: month - 1, day: 1 });
-  // Get the last day of the month
-  const lastDayOfMonth = moment(firstDayOfMonth).endOf('month');
-  // Calculate the number of weeks between the first and last day of the month
-  const weeksInMonth = lastDayOfMonth.isoWeek() - firstDayOfMonth.isoWeek() + 1;
-  return weeksInMonth ;
+function getWeeksInMonth(mois, année) {
+  const premierJourDuMois = moment({ year: année, month: mois - 1, day: 1 });
+  // Obtenir le dernier jour du mois
+  const dernierJourDuMois = moment(premierJourDuMois).endOf('month');
+  // Calculer le nombre de semaines entre le premier et le dernier jour du mois
+  const semainesDansLeMois = dernierJourDuMois.isoWeek() - premierJourDuMois.isoWeek() + 1;
+  return semainesDansLeMois;
 }
-
-console.log(getDateByWeekendMonthYear(1, 1, 2021));
 
 module.exports = { getDateByWeekendMonthYear, getWeeksInMonth };
+
