@@ -22,7 +22,7 @@ function getDateByWeekendMonthYear(weekend, mois, année) {
   // Obtenir la semaine spécifique
   const semaine = semaines[Number(weekend) - 1];
   // Obtenir le début de la semaine
-  const début = new Date(semaine.début.setHours(0, 0, 0, 0));
+  const start  = new Date(semaine.début.setHours(0, 0, 0, 0));
   // Obtenir la fin de la semaine
   const fin = new Date(semaine.fin.setHours(23, 59, 59, 999));
 
