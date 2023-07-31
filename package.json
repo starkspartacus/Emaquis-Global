@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "aws-sdk": "^2.1010.0",
@@ -55,5 +56,8 @@
     "swagger-ui-express": "^4.6.0",
     "transporter": "0.0.1",
     "typed.js": "^2.0.12"
+  },
+  "devDependencies": {
+    "jest": "^29.6.2"
   }
 }
