@@ -121,7 +121,7 @@ UserLogin.on('connection', (socket) => {
           token,
         };
         socket.handshake.session.save();
-        socket.emit('loginsuccess', '/dashboard');
+        socket.emit('loginsuccess', '/tableau');
       } else {
         socket.emit('bad');
       }

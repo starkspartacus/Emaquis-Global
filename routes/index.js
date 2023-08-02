@@ -9,6 +9,7 @@ const landingcontroller = require('../controllers/landing');
 const connexioncontroller = require('../controllers/connexion');
 const emconnexioncontroller = require('../controllers/emconnexion');
 const dashboardcontroller = require('../controllers/dashboard');
+const dashboardController = require('../controllers/dashboardController');
 const emdashboardcontroller = require('../controllers/emdashboard');
 const deconnexioncontroller = require('../controllers/deconnexion');
 const ajoutercategoriecontroller = require('../controllers/ajoutercategorie');
@@ -99,6 +100,9 @@ router.post('/emconnexion', emconnexioncontroller.emconnexionPost);
 
 router.get('/dashboard', dashboardcontroller.dashboard);
 router.post('/dashboard', dashboardcontroller.dashboardPost);
+
+router.get('/tableau', dashboardController.dashboard);
+router.post('/tableau', dashboardController.dashboardPost);
 
 router.get('/emdashboard', emdashboardcontroller.emdashboard);
 router.post('/emdashboard', emdashboardcontroller.emdashboardPost);
