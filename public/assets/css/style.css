@@ -1,0 +1,21 @@
+.custom-scroll{
+    max-height: 400px;
+    overflow: auto;
+    padding-right: 17px;
+    box-sizing: content-box;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.thumb{
+    background-color: #e9ecef;
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    display: inline-block;
+    position: relative;
+
+}
