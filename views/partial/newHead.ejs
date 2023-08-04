@@ -106,12 +106,12 @@
                     </div>
                 </div>
 
-                <div class="dropdown d-inline-block">
-                    <button type="button" class="btn header-item noti-icon waves-effect"
+                <div class="dropdown d-inline-block" id ="notificationData">
+                    <button type="button"  class="btn header-item noti-icon waves-effect"
                         id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         <i class="mdi mdi-bell"></i>
-                        <span class="badge badge-danger badge-pill">3</span>
+                        <span class="badge badge-danger badge-pill countNotif">3</span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
                         aria-labelledby="page-header-notifications-dropdown">
@@ -218,3 +218,161 @@
     </header>
 </div>
 
+<script type="application/javascript">
+    // Récupération des données depuis le serveur
+    let employeLength = <%- JSON.stringify(totalemploye) %>;
+    const produits = <%- JSON.stringify(Tab) %>;
+
+    // Sélection des éléments du DOM
+    let notificationCount = document.querySelector('#notificationData .countNotif');
+    let notificationList = document.querySelector('#notificationData img');
+    let notificationListUl = document.querySelector('.modal-body-notyf');
+    
+
+    // Tableau des notifications
+    let notifications = [];
+
+    // Initialisation de l'objet Notyf
+    let notyf = new Notyf({
+        types: [
+            {
+                type: 'success',
+                background: 'orange',
+                icon: {
+                    className: 'fas fa-user',
+                    tagName: 'i',
+                    color: 'white',
+                    fontSize: '20px'
+                }
+            },
+            {
+                type: 'error',
+                background: 'red',
+                icon: {
+                    className: 'fas fa-exclamation-triangle',
+                    tagName: 'i',
+                    color: 'white',
+                    fontSize: '20px'
+                },
+                position: {
+                    y: 'top',
+                },
+                dismissible: true,
+            },
+            {
+                type: 'black',
+                background: 'black',
+                icon: {
+                    className: 'fas fa-frown',
+                    tagName: 'i',
+                    color: 'white',
+                    fontSize: '20px'
+                }
+            },
+            {
+                type: 'info',
+                background: 'blue',
+                dismissible: true,
+                icon: {
+                    className: 'fas fa-user-plus',
+                    tagName: 'i',
+                    color: 'white',
+                    fontSize: '20px'
+                }
+            }
+        ]
+    });
+
+    // Fonction pour afficher une notification
+    const showNotification = (message, type) => {
+        notyf.open({
+            type,
+            message: message,
+            duration: 5000,
+            dismissible: true,
+            position: {
+                y: 'top',
+                x: 'right',
+            }
+        });
+    }
+
+    const addEmploye = () => {
+        if (employeLength === 0) {
+            showNotification("Vous n'avez aucun employé à votre charge", 'black');
+            showNotification("Ajoutez un employé", 'info');
+        }
+    }
+
+    const addProduit = () => {
+        if (produits.length === 0) {
+            showNotification("Vous devez ajouter des produits dans votre établissement", 'error');
+        } else {
+            for (let rupture of produits) {
+                if (rupture.quantite === 0) {
+                    showNotification(`Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est en rupture de stock (${rupture.quantite})`, 'black');
+                } else if (rupture.quantite < 100) {
+                    showNotification(`Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est très bas (${rupture.quantite})`, 'black');
+                }
+            }
+        }
+    }
+
+    addEmploye();
+    addProduit();
+
+    // Vérification des conditions et ajout des notifications
+    if (employeLength > 0) {
+        notifications.push(`Vous avez ${employeLength} employé(s) à votre charge`);
+    } else {
+        notifications.push("Vous n'avez aucun employé à votre charge");
+        notifications.push("Ajoutez un employé");
+    }
+
+    if (produits.length === 0) {
+        notifications.push("Vous devez ajouter des produits dans votre établissement");
+    }
+
+    for (let rupture of produits) {
+        if (rupture.quantite === 0) {
+            notifications.push(`Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est en rupture de stock (${rupture.quantite})`);
+        } else if (rupture.quantite < 100) {
+            notifications.push(`Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est très bas (${rupture.quantite})`);
+        }
+    }
+
+    // Affichage du nombre de notifications
+    notificationCount.innerHTML = notifications.length;
+
+    // Gestion du clic sur l'icône de notification
+    notificationList.addEventListener('click', () => {
+        for (let notif of notifications) {
+            let bgColor = getNotificationColor(notif);
+            let li = document.createElement('li');
+            li.innerHTML = `
+        <div class="card">
+          <div class="card-body" style="background: ${bgColor}">
+            <p class="card-text text-white font-weight-bold">${notif}</p>
+          </div>
+        </div>
+      `;
+            notificationListUl.appendChild(li);
+        }
+        notifications = []; // Réinitialisation du tableau de notifications
+    });
+
+    // Fonction pour obtenir la couleur de fond de la notification en fonction du message
+    const getNotificationColor = (message) => {
+        if (message.includes('rupture')) {
+            return 'black';
+        } else if (message.includes('très bas')) {
+            return 'red';
+        } else if (message.includes('aucun') || message.includes('employé')) {
+            return 'orange';
+        } else if (message.includes('Ajoutez')) {
+            return 'blue';
+        } else {
+            return 'green';
+        }
+    };
+</script>
