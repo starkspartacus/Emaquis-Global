@@ -20,7 +20,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>E-maquis Admin</title>
 
-  <%- include('partial/head.ejs') %>
+  <!-- App css -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+
+  <%- include('partial/newHead.ejs') %>
+
+  
 </head>
 
 <body class="crm_body_bg">
@@ -70,7 +78,7 @@
     }
   </style>
 
-  <%- include('partial/sidebar.ejs') %>
+  <%- include('partial/newSideBar.ejs') %>
   <!--/ sidebar  -->
 
   <section class="main_content dashboard_part large_header_bg">
@@ -339,6 +347,7 @@
   <!-- footer  -->
   <!-- jquery slim -->
   <%- include('partial/script.ejs') %>
+  <%- include('partial/scriptNewTemp.ejs') %>
   <script src="/socket.io/socket.io.js "></script>
   <script>
     const socket = io(window.location.origin + window.location.pathname);

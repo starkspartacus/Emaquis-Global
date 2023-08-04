@@ -19,12 +19,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Ajout employé(es)</title>
+  <!-- App css -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
 
   <%- include('partial/head.ejs') %>
 </head>
 
 <body class="crm_body_bg">
-  <%- include('partial/sidebar.ejs') %>
+  <%- include('partial/newSideBar.ejs') %>
+
   <!--/ sidebar  -->
 
   <section class="main_content dashboard_part large_header_bg">
@@ -240,6 +246,7 @@
 
   <!-- footer  -->
   <%- include('partial/script.ejs') %>
+  <%- include('partial/scriptNewTemp.ejs') %>
   <script src="../jquery-3.4.1.min.js"></script>
   <script src="/socket.io/socket.io.js "></script>
   <script>
