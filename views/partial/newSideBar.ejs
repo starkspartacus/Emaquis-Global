@@ -10,24 +10,36 @@
 
         <div data-simplebar class="h-100">
 
-            <div class="navbar-brand-box">
-                <a href="index.html" class="logo">
-                    <i class="mdi mdi-alpha-x-circle"></i>
-                    <span>
-                        Xacton
-                    </span>
-                </a>
+            <div class="navbar-brand-box mt-10 logo_sidebar">
+                <a href="/tableau">
+                    <img src="../img/paresseux_sous_officiel.png" alt="" 
+                    
+                    
+                    />
+                  </a>
             </div>
 
             <!--- Sidemenu -->
             <div id="sidebar-menu">
                 <!-- Left Menu Start -->
                 <ul class="metismenu list-unstyled" id="side-menu">
-                    <li class="menu-title">Menu</li>
+                    
 
                     <li>
-                        <a href="index.html" class="waves-effect"><i class="feather-airplay"></i><span
-                                class="badge badge-pill badge-primary float-right">7</span><span>Dashboard</span></a>
+                        <a href="javascript: void(0);" class=" has-arrow waves-effect" aria-expanded="false">
+                            <div class="nav_icon_small">
+                                <img src="../img/paresseux_sous_officiel.png" style="height: 22px; width: 25px;" alt="" />
+                                <span>E-Maquis-Bilan</span>
+                            </div>
+                            
+                          </a>
+                        
+                            
+                        
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li class=""><a href="/bilan">Bilan</a></li>
+
+                        </ul>
                     </li>
 
                     <li>
@@ -87,62 +99,47 @@
                     </li>
 
                     <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect"><i
-                                class="feather-list"></i><span>Tables</span></a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="tables-basic.html">Basic Tables</a></li>
-                            <li><a href="tables-datatables.html">Data Tables</a></li>
-                        </ul>
+                        <a href="javascript: void(0);" class=" has-arrow waves-effect" aria-expanded="false">
+                            <div class="nav_icon_small">
+                                <img src="../img/categorie.svg" style="height: 22px; width: 37px; transform: rotate(-20deg)" alt="" />
+                                <span>Catégories</span>
+                            </div>
+                            
+                          </a>
+                        
+                            
+                        
+                          <ul>
+                            <li><a href="/listcategorie"> Mes catégories</a></li>
+                            <% if(locals.user?.isAdmin){ %>
+                            <li><a href="/ajoutercategorie">ajouter</a></li>
+                            <% } %>
+                          </ul>
                     </li>
 
                     <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect"><i
-                                class="feather-bar-chart-2"></i><span>Charts</span></a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="charts-morris.html">Morris</a></li>
-                            <li><a href="charts-google.html">Google</a></li>
-                            <li><a href="charts-chartjs.html">Chartjs</a></li>
-                            <li><a href="charts-sparkline.html">Sparkline</a></li>
-                            <li><a href="charts-knob.html">Jquery Knob</a></li>
-                        </ul>
+                        <a href="javascript: void(0);" class=" has-arrow waves-effect" aria-expanded="false">
+                            <div class="nav_icon_small">
+                                <img src="img/menu-icon/reglage.png" style="height: 22px; width: 30px; " alt="" />
+                                <span>Paramètres</span>
+                            </div>
+                            
+                          </a>
+                        
+                            
+                        
+                          <ul class="sub-menu" aria-expanded="false">
+                            <div class="profile_info_details">
+                              <li><a href="/profile">Mon Profil </a></li>
+                    <!--          <li><a href="/reglage" class="list-group-item disabled">Réglage<span class="badge badge-info">Bêta</span></a></li>-->
+                              <li><a href="/deconnexion">Déconnexion </a></li>
+                            </div>
+                          </ul>
                     </li>
 
-                    <li>
-                        <a href="javascript: void(0);" class="waves-effect"><i class="feather-book"></i><span
-                                class="badge badge-pill badge-danger float-right">6</span><span>Forms</span></a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="forms-elements.html">Elements</a></li>
-                            <li><a href="forms-plugins.html">Plugins</a></li>
-                            <li><a href="forms-validation.html">Validation</a></li>
-                            <li><a href="forms-mask.html">Masks</a></li>
-                            <li><a href="forms-quilljs.html">Quilljs</a></li>
-                            <li><a href="forms-uploads.html">File Uploads</a></li>
-                        </ul>
-                    </li>
+                    
 
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect"><i
-                                class="feather-box"></i><span>Icons</span></a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="icons-materialdesign.html">Material Design</a></li>
-                            <li><a href="icons-fontawesome.html">Font awesome</a></li>
-                            <li><a href="icons-dripicons.html">Dripicons</a></li>
-                            <li><a href="icons-feather.html">Feather Icons</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-title">More</li>
-
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect"><i
-                                class="feather-map"></i><span>Maps</span></a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="maps-google.html">Google Maps</a></li>
-                            <li><a href="maps-vector.html">Vector Maps</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
+                    <!--<li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect"><i
                                 class="mdi mdi-share-variant"></i><span>Multi Level</span></a>
                         <ul class="sub-menu" aria-expanded="true">
@@ -154,7 +151,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>

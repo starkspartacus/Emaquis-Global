@@ -19,3 +19,33 @@
     position: relative;
 
 }
+
+.logo_sidebar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+}
+
+.logo_sidebar img {
+    width: 77%;
+    height: 77%;
+    object-fit: contain;
+    margin-top: 20px;
+}
+
+.enable-vertical-menu{
+     
+    animation: fadeIn 0.3s ease-in-out 1 forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
