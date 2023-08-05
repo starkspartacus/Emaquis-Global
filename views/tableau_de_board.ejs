@@ -200,9 +200,9 @@
                                             <li><a href="#" class="dropdown-item">Separated link</a></li>
                                         </ul>
                                     </div>
-                                    <h4 class="card-title d-inline-block">Statistics</h4>
+                                    <h4 class="card-title d-inline-block">Ventes</h4>
 
-                                    <div id="morris-bar-example" class="morris-chart" style="height: 260px;"></div>
+                                    
 
                                     <div class="row text-center mt-4">
                                         <select class="nice_Select2 max-width-220 mr-2" id="chart_week">
@@ -250,6 +250,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="white_card_body">
+                              <div id="management_bar"></div>
+                              <div class='loader_container'>
+                                <div class="loader"></div>
+                </div>
+              </div>
                         </div> <!-- end col -->
 
                         <div class="col-lg-4">
@@ -717,7 +723,7 @@
     );
     chart.render();
 
-    /* -------------------------------------------------------------------------- */
+     /* -------------------------------------------------------------------------- */
     /*                                     chart                                    */
     /* -------------------------------------------------------------------------- */
 
@@ -788,9 +794,9 @@
 
 
     chart_management.render();
-    
+    console.log("chart management")
     //
-    
+    console.log("chart management 11")
 
 
     // socket.on('connect', () => {
@@ -800,11 +806,11 @@
     //   //       user_travail_pour
     //   //     } - editvente`, (data) => {
     //   // //   alert('Edit');
-    //   // //   
+    //   // //   console.log("chart management 22")
 
     //   // // })
     // })
-    
+    console.log("chart management 33")
     //chart_week
 
     $('#chart_week').on('change', async function() {
@@ -835,134 +841,8 @@
 
     })
 
-    // cart area
 
-    // currently sale
-    var options = {
-      series: [{
-        name: 'Net Profit',
-        data: [30, 25, 45, 30, 55, 55],
-      }, ],
-      chart: {
-        type: 'area',
-        height: 270,
-        offsetY: 0,
-        toolbar: {
-          show: false,
-        },
-        zoom: {
-          enabled: false,
-        },
-        sparkline: {
-          enabled: true,
-        },
-      },
-      plotOptions: {},
-      legend: {
-        show: false,
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      fill: {
-        type: 'solid',
-        opacity: 0.2,
-      },
-      stroke: {
-        curve: 'smooth',
-        show: true,
-        width: 3,
-        colors: ['#a2ff00', '#E5ECFF'],
-      },
-      xaxis: {
-        categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-        labels: {
-          show: false,
-          style: {
-            // colors: KTApp.getSettings()['colors']['gray']['gray-500'],
-            fontSize: '12px',
-            // fontFamily: KTApp.getSettings()['font-family']
-          },
-        },
-        crosshairs: {
-          show: false,
-          position: 'front',
-          stroke: {
-            color: ['#a2ff00', '#747679'],
-            width: 1,
-            dashArray: 3,
-          },
-        },
-        tooltip: {
-          enabled: true,
-          formatter: undefined,
-          offsetY: 0,
-          style: {
-            fontSize: '12px',
-            // fontFamily: KTApp.getSettings()['font-family']
-          },
-        },
-      },
-      yaxis: {
-        min: 0,
-        max: 60,
-        labels: {
-          show: false,
-          style: {
-            // colors: KTApp.getSettings()['c^olors']['gray']['gray-500'],
-            fontSize: '12px',
-            // fontFamily: KTApp.getSettings()['font-family']
-          },
-        },
-      },
-      states: {
-        normal: {
-          filter: {
-            type: 'none',
-            value: 0,
-          },
-        },
-        hover: {
-          filter: {
-            type: 'none',
-            value: 0,
-          },
-        },
-        active: {
-          allowMultipleDataPointsSelection: false,
-          filter: {
-            type: 'none',
-            value: 0,
-          },
-        },
-      },
-      tooltip: {
-        style: {
-          fontSize: '12px',
-          // fontFamily: KTApp.getSettings()['font-family']
-        },
-        y: {
-          formatter: function(val) {
-            return '$' + val + ' thousands';
-          },
-        },
-      },
-      colors: ['#98ED58', '#747679'],
-      markers: {
-        colors: ['#98ED58', '#747679'],
-        strokeColor: ['#98ED58', '#747679'],
-        strokeWidth: 3,
-      },
-    };
-
-    var chart = new ApexCharts(document.querySelector('#chart4'), options);
-    chart.render();
+    
   </script>
   
  
