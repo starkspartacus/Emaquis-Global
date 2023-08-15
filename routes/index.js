@@ -34,6 +34,7 @@ const summarycontroller = require('../controllers/summary');
 const summaryadmincontroller = require('../controllers/summary_admin');
 const config_profil = require('../controllers/config_profil');
 const billetRouter = require('./billet.router');
+const appConfigRouter = require('./app.router');
 const path = require('path');
 
 const multer = require('multer');
@@ -279,5 +280,6 @@ router.post('/emajouterproduit', upload.single('image'), async (req, res) => {
 });
 
 router.use('/billet', billetRouter);
+router.use('/app',appConfigRouter)
 
 module.exports = router;
