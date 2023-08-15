@@ -20,6 +20,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>E-maquis Admin</title>
 
+  <!-- App css -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
   
 
   <%- include('partial/newHead.ejs') %>
@@ -343,7 +348,7 @@
   <!-- footer  -->
   <!-- jquery slim -->
   <%- include('partial/script.ejs') %>
-  <%- include('partial/scriptNewTemp.ejs') %>
+  
   <script src="/socket.io/socket.io.js "></script>
   <script>
     const socket = io(window.location.origin + window.location.pathname);
@@ -404,6 +409,7 @@
     })
   </script>
 
+  <%- include('partial/scriptNewTemp.ejs') %>
 </body>
 
 </html>
