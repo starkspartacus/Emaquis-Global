@@ -30,8 +30,10 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-
+    
+    <%- include('partial/head.ejs') %>
     <%- include('partial/newHead.ejs') %>
+    <%- include('partial/scriptNewTemp.ejs') %>
 
 
   <!-- Favicon -->
@@ -251,13 +253,14 @@
                                           </select>
                                     </div>
                                 </div>
+                                <div class="white_card_body">
+                                  <div id="management_bar"></div>
+                                  <div class='loader_container'>
+                                    <div class="loader"></div>
+                                </div>
+                  </div>
                             </div>
-                            <div class="white_card_body">
-                              <div id="management_bar"></div>
-                              <div class='loader_container'>
-                                <div class="loader"></div>
-                </div>
-              </div>
+              
                         </div> <!-- end col -->
 
                         <div class="col-lg-4">
@@ -540,7 +543,7 @@
   <script>
     // currently sale
 
-    const socket = io();
+    //const socket = io();
     const date = new Date();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
@@ -848,7 +851,9 @@
   </script>
   
  
-  <%- include('partial/scriptNewTemp.ejs') %>
+  
+  
+
   
 </body>
 
