@@ -21,7 +21,7 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="MyraStudio" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
+    <script src="vendors/apex_chart/apex-chart2.js"></script>
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -33,7 +33,7 @@
     
     
     <%- include('partial/newHead.ejs') %>
-    <%- include('partial/scriptNewTemp.ejs') %>
+    
 
 
   <!-- Favicon -->
@@ -713,7 +713,7 @@
         intersect: !1,
         y: {
           formatter: function(e) {
-            return void 0 !== e ? e.toFixed(0) + ' FCFA' : e;
+            return void 0 !== e ? e.toFixed(0) + ' fcfa' : e;
           },
         },
       },
@@ -778,7 +778,7 @@
 
     
   </script>
-  
+  <%- include('partial/scriptNewTemp.ejs') %>
  
   
   
