@@ -221,7 +221,7 @@ exports.ventePost = async (req, res) => {
         data: vente,
       });
     } else {
-      console.log('iiiiicccciiiiii');
+      
       res.json({
         etat: false,
         data: 'erreur',
@@ -461,7 +461,7 @@ exports.editventePost = async (req, res) => {
         data: venteRes?.result,
       });
     } else {
-      console.log('iiiiicccciiiiii');
+      
       res.json({
         etat: false,
         data: 'erreur',
