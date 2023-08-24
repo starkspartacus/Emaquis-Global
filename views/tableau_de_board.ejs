@@ -116,7 +116,18 @@
                                             </h2>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <span class="text-white-50">18.71% <i class="mdi mdi-arrow-down"></i></span>
+                                            <span class="text-white-50"><% if(toDayPercent>0) { %>
+                                              <a href="#" class="text_color_5">
+                                                <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
+                                                <i class="mdi mdi-arrow-up"></i>
+                                              </a>
+                                              <% } else { %>
+                                              <a href="#" style="color: rgb(237, 47, 47)">
+                                                <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
+                                                <i class="mdi mdi-arrow-down"></i>
+                                              </a>
+                                              <% } %> 
+                                            </span>
                                         </div>
                                     </div>
 
