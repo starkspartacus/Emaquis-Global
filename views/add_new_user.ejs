@@ -24,18 +24,22 @@
   <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" />
 
-  <%- include('partial/head.ejs') %>
+  <%- include('partial/newHead.ejs') %>
+  <%- include('partial/scriptNewTemp.ejs') %>
+
 </head>
 
 <body class="crm_body_bg">
   <%- include('partial/newSideBar.ejs') %>
+  
 
   <!--/ sidebar  -->
 
   <section class="main_content dashboard_part large_header_bg">
     <!-- menu  -->
-    <%- include('partial/notif.ejs') %>
+    
     <!--/ menu  -->
     <div class="main_content_iner overly_inner">
       <div class="container-fluid p-0">
@@ -45,15 +49,17 @@
           <div class="col-12">
             <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
               <div class="page_title_left d-flex align-items-center">
+                <!--
                 <h3 class="f_s_25 f_w_700 dark_text mr_30">
                   Tableau de bord
                 </h3>
-                <!--  <ol class="breadcrumb page_bradcam mb-0">
+                  <ol class="breadcrumb page_bradcam mb-0">
                     <li class="breadcrumb-item">
                       <a href="javascript:void(0);">Acceuil</a>
                     </li>
                     <li class="breadcrumb-item active">Analyse</li>
-                  </ol> -->
+                  </ol> 
+                  -->
               </div>
               <div class="page_title_right">
                 <div class="page_title_right d-flex">
@@ -231,12 +237,7 @@
     </div>
   </section>
   <!-- main content part end -->
-
-  <!-- ### CHAT_MESSAGE_BOX   ### -->
-
-
-
-  <!--/### CHAT_MESSAGE_BOX  ### -->
+  <div class="menu-overlay"></div>
 
   <div id="back-top" style="display: none">
     <a title="Go to Top" href="#">
@@ -321,6 +322,7 @@
   </script>
 
   <script src="../js/verifInput.js" defer></script>
+  
 </body>
 
 <!-- Mirrored from demo.dashboardpack.com/user-management-html/add_new_user.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 17:20:09 GMT -->
