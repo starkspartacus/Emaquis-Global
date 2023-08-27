@@ -20,14 +20,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <title>Management Admin</title>
+  <!-- App css -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+
+  <title>Ajouter un produit</title>
 
   <%- include('partial/head.ejs') %>
+  <%- include('partial/scriptNewTemp.ejs') %>
+  
+  
+  
+  
 </head>
 
 <body class="crm_body_bg">
   <%- include(user.role ===
-    "Barman"?'partial/emsidebar.ejs':'partial/sidebar.ejs') %>
+    "Barman"?'partial/emsidebar.ejs':'partial/newSideBar.ejs') %>
 
   <!-- React -->
 
@@ -37,9 +48,9 @@
 
   <section class="main_content dashboard_part large_header_bg">
     <!-- menu  -->
-    <%- include('partial/notif.ejs') %>
+    <%- include('partial/newHead.ejs') %>
     <!--/ menu  -->
-    <div class="main_content_iner overly_inner">
+    <div class="main_content_iner overly_inner mt-10">
       <div class="container-fluid p-0">
         <!-- page title  -->
         <!-- page title  -->
@@ -48,7 +59,7 @@
             <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
               <div class="page_title_left d-flex align-items-center">
                 <h3 class="f_s_25 f_w_700 dark_text mr_30">
-                  Tableau de bord
+                  Ajouter un produit
                 </h3>
                 <!--  <ol class="breadcrumb page_bradcam mb-0">
                    <li class="breadcrumb-item">
@@ -137,6 +148,7 @@
       </div>
     </div>
   </section>
+  <div class="menu-overlay"></div>
   <!-- main content part end -->
 
   <!-- ### CHAT_MESSAGE_BOX   ### -->
@@ -188,6 +200,7 @@
 
   })
 </script> -->
+
 
   <script type="text/babel">
     const AddProduct = () => {
@@ -711,7 +724,9 @@
       };
 
       ReactDOM.render(<AddProduct />, document.getElementById('add_product'));
+      
     </script>
+    
 </body>
 
 <!-- Mirrored from demo.dashboardpack.com/user-management-html/add_new_user.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 17:20:09 GMT -->
