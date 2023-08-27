@@ -31,8 +31,11 @@
   <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
 
+    <%- include('partial/NewHead.ejs') %>
     <%- include('partial/head.ejs') %>
-    <%- include('partial/head.ejs') %>
+    <%- include('partial/scriptNewTemp.ejs') %>
+    
+    
   </head>
 
 
@@ -47,10 +50,10 @@
 
   <%- include('partial/newSideBar.ejs') %>
   <!--/ sidebar  -->
-
+  
   <section class="main_content dashboard_part large_header_bg">
     <!-- menu  -->
-    <%- include('partial/notif.ejs') %>
+    
 
     <!--/ menu  -->
     <div class="main_content_iner overly_inner">
@@ -206,9 +209,7 @@
       </div>
     </div>
   </section>
-  <!-- main content part end -->
-
-  <!-- ### CHAT_MESSAGE_BOX   ### -->
+  <div class="menu-overlay"></div>
 
   
   <div id="back-top" style="display: none">
