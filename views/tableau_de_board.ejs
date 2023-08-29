@@ -22,7 +22,11 @@
     <meta content="MyraStudio" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <script src="vendors/apex_chart/apex-chart2.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
     <script src="js/confetti.js"></script>
+    
+    
+    
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -32,22 +36,18 @@
     <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
 
-    
-    
-    
-    
-
-
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
+
+  <%- include('partial/newHead.ejs') %>
+
 </head>
 
 <body class="crm_body_bg">
     <div id="layout-wrapper">
 
-        
-
-       
+      
+      
 
         <!-- ============================================================== -->
         <!-- Start right Content here -->
@@ -876,9 +876,25 @@
     
   </script>
   
-  <%- include('partial/scriptNewTemp.ejs') %>
-  <%- include('partial/notifManoScript.ejs') %>
-  <%- include('partial/newHead.ejs') %>
+   <!-- jQuery  -->
+   
+   <script src="assets/js/bootstrap.bundle.min.js"></script>
+   <script src="assets/js/metismenu.min.js"></script>
+   <script src="assets/js/waves.js"></script>
+   <script src="assets/js/simplebar.min.js"></script>
+ 
+   
+ 
+   <!-- Morris Js-->
+   <script src="../plugins/morris-js/morris.min.js"></script>
+   <!-- Raphael Js-->
+   <script src="../plugins/raphael/raphael.min.js"></script>
+ 
+   <!-- Morris Custom Js-->
+   <script src="assets/pages/dashboard-demo.js"></script>
+ 
+   <!-- App js -->
+   <script src="assets/js/theme.js"></script>
   
 
   
