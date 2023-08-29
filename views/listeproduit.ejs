@@ -18,11 +18,18 @@
   <!-- End Google tag (gtag.js) -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <script src="assets/js/jquery.min.js"></script>
+
   <title>E-maquis Admin</title>
-  <script src="../js/bootstrap.js" defer></script>
+  <!-- App css -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
 
   <script src="js/confetti.js"></script>
   <%- include('partial/head.ejs') %>
+  
 
   <!-- PLUGINS CSS STYLE -->
 
@@ -78,13 +85,13 @@
   <!--  -->
 
   <%- include(user.role ===
-    "Barman"?'partial/emsidebar.ejs':'partial/sidebar.ejs') %>
+    "Barman"?'partial/emsidebar.ejs':'partial/newSideBar.ejs') %>
 
   <!--/ sidebar  -->
 
   <section class="main_content dashboard_part large_header_bg">
     <!-- menu  -->
-    <%- include('partial/notif.ejs') %>
+    <%- include('partial/newHead.ejs') %>
 
     <div id="root"></div>
 
@@ -209,7 +216,7 @@
       </div>
     </div>
   </div>
-
+  <div class="menu-overlay"></div>
   <!--/### CHAT_MESSAGE_BOX  ### -->
   <div id="back-top" style="display: none">
     <a title="Go to Top" href="#">
@@ -529,6 +536,23 @@
                                ReactDOM.render(<AppRoot />, document.getElementById('root'));
     </script>
 
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+   <script src="assets/js/metismenu.min.js"></script>
+   <script src="assets/js/waves.js"></script>
+   <script src="assets/js/simplebar.min.js"></script>
+ 
+   
+ 
+   <!-- Morris Js-->
+   <script src="../plugins/morris-js/morris.min.js"></script>
+   <!-- Raphael Js-->
+   <script src="../plugins/raphael/raphael.min.js"></script>
+ 
+   <!-- Morris Custom Js-->
+   <script src="assets/pages/dashboard-demo.js"></script>
+ 
+   <!-- App js -->
+   <script src="assets/js/theme.js"></script>
 </body>
 
 </html>
