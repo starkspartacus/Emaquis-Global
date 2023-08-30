@@ -24,6 +24,7 @@
     <script src="vendors/apex_chart/apex-chart2.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="js/confetti.js"></script>
+    <script src="js/notifMano.js" type="application/javascript"></script>
     
     
     
@@ -306,7 +307,7 @@
                                 <% if(productMostSold?.produit) { %>
                                 <div class="single_plan d-flex align-items-center justify-content-between">
                                   <div class="plan_left d-flex align-items-center">
-                                    <div class="thumb">
+                                    <div class="thumb obj_prod">
                                       <img src="<%= productMostSold?.produit.image %>" alt="img boisson" 
                                       style="
                                         width: 40px;
@@ -897,7 +898,7 @@
    <script src="assets/js/theme.js"></script>
   
 
-  
+   <%- include('partial/notifManoScript.ejs') %>
 </body>
 
 </html>
