@@ -2,118 +2,55 @@
 <html lang="en">
 
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+	<meta charset="utf-8">
+	<title>E-maquis</title>
+	<!-- Stylesheets -->
+    <link rel="stylesheet" href="newAssets/css/login.css">
+    
 
-    gtag('config', 'G-NT2SW8WBHT');
-  </script>
+	<link rel="shortcut icon" href="newAssets/images/logo/emaquisLogo2.png" type="image/x-icon">
+	<link rel="icon" href="newAssets/images/logo/emaquisLogo2.png" type="image/x-icon">
+    
 
-  <!-- Basic Page Needs
-  ================================================== -->
-  <meta charset="utf-8">
-  <title>E-maquis Gestionnaire</title>
+	<!-- Responsive -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-    <!-- Mobile Specific Metas
-    ================================================== -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="E-maquis, Gestionnaire d'établissement">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="author" content="Haut Numérique et Médias">
-    <meta name="generator" content="E-maquis, Gestionnaire d'établissement">
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
-
-    <!-- App css -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../plugins/aos/aos.css">
-
+	<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+	<!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
 </head>
 
 <body>
+    <div class="wrapper">
+        <form action="">
+            <a href="/"><img src="newAssets/images/logo/emaquisLogo2.png" width="100" alt="" srcset=""></a>
+            <h1>Espace Gestionnaire</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Email ou N° de Téléphone" name="emailOrPhoneNumber" required>
+                <span class="icon flaticon-user"></span>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Mot de passe" name="password" required>
+                <span class="icon flaticon-user"></span>
+            </div>
 
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex align-items-center min-vh-100">
-                        <div class="w-100 d-block bg-white shadow-lg rounded my-5">
-                            <div class="row">
-                                <div class="col-lg-5 d-none d-lg-block bg-login rounded-left"></div>
-                                <div class="col-lg-7">
-                                    <div class="p-5">
-                                        <div class="text-center mb-5">
-                                            <a href="index.html" class="text-dark font-size-22 font-family-secondary">
-                                                <i class="mdi mdi-alpha-x-circle"></i> <b>XACTON</b>
-                                            </a>h
-                                        </div>
-                                        <h1 class="h5 mb-1">Welcome Back!</h1>
-                                        <p class="text-muted mb-4">Enter your email address and password to access admin panel.</p>
-                                        <form class="user">
-                                            <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
-                                            </div>
-                                            <a href="" class="btn btn-success btn-block waves-effect waves-light"> Log In </a>
-
-                                            <div class="text-center mt-4">
-                                                <h5 class="text-muted font-size-16">Sign in using</h5>
-                                            
-                                                <ul class="list-inline mt-3 mb-0">
-                                                    <li class="list-inline-item">
-                                                        <a href="javascript: void(0);" class="social-list-item border-primary text-primary"><i class="mdi mdi-facebook"></i></a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a href="javascript: void(0);" class="social-list-item border-danger text-danger"><i class="mdi mdi-google"></i></a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a href="javascript: void(0);" class="social-list-item border-info text-info"><i class="mdi mdi-twitter"></i></a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a href="javascript: void(0);" class="social-list-item border-secondary text-secondary"><i class="mdi mdi-github-circle"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            
-                                        </form>
-
-                                        <div class="row mt-4">
-                                            <div class="col-12 text-center">
-                                                <p class="text-muted mb-2"><a href="pages-recoverpw.html" class="text-muted font-weight-medium ml-1">Forgot your password?</a></p>
-                                                <p class="text-muted mb-0">Don't have an account? <a href="pages-register.html" class="text-muted font-weight-medium ml-1"><b>Sign Up</b></a></p>
-                                            </div> <!-- end col -->
-                                        </div>
-                                        <!-- end row -->
-                                    </div> <!-- end .padding-5 -->
-                                </div> <!-- end col -->
-                            </div> <!-- end row -->
-                        </div> <!-- end .w-100 -->
-                    </div> <!-- end .d-flex -->
-                </div> <!-- end col-->
-            </div> <!-- end row -->
-        </div>
-        <!-- end container -->
+            <div class="remember-forget">
+                <!-- <label for="">
+                    <input type="checkbox">
+                    Se souvenir
+                </label> -->
+                <a href="">Mot de passe oublié</a>
+            </div>
+            <button type="submit" class="btn">Se connecter</button>
+            <div class="register-link">
+                <p>Vous n'avez pas de compte? <a href="/inscription">Créer un compte</a></p>
+            </div>
+        </form>
     </div>
-    <!-- end page -->
 
-    <!-- jQuery  -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/metismenu.min.js"></script>
-    <script src="assets/js/waves.js"></script>
-    <script src="assets/js/simplebar.min.js"></script>
-    <script src="plugins/aos/aos.js"></script>
+      <!-- JAVASCRIPTS -->
+  <script src="plugins/jquery/jquery.min.js"></script>
 
-    <!-- App js -->
-    <script src="assets/js/theme.js"></script>
 
     <script src="js/script.js"></script>
     <script src="/socket.io/socket.io.js"></script>
