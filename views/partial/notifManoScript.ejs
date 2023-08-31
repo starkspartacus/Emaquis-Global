@@ -5,7 +5,7 @@
 
     // Sélection des éléments du DOM
     let notificationCount = document.querySelector('#notificationData .countNotif');
-    let notificationList = document.querySelector('#notificationData button');
+    let notificationList = document.querySelector('#notificationData .cloche');
     let notificationListUl = document.querySelector('.modal-body-notyf');
 
     // Tableau des notifications
@@ -97,8 +97,7 @@
         }
     }
 
-    addEmploye();
-    addProduit();
+    
 
     // Vérification des conditions et ajout des notifications
     if (employeLength > 0) {
@@ -120,8 +119,7 @@
         }
     }
 
-    // Affichage du nombre de notifications
-    notificationCount.innerHTML = notifications.length;
+
 
     // Gestion du clic sur l'icône de notification
     notificationList.addEventListener('click', () => {
@@ -140,6 +138,8 @@
         notifications = []; // Réinitialisation du tableau de notifications
     });
 
+    
+    
     // Fonction pour obtenir la couleur de fond de la notification en fonction du message
     const getNotificationColor = (message) => {
         if (message.includes('rupture')) {
@@ -154,4 +154,7 @@
             return 'green';
         }
     };
+
+    // Affichage du nombre de notifications
+    notificationCount.innerHTML = notifications.length;
 </script>
