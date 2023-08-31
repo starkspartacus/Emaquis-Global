@@ -164,7 +164,7 @@
 									<div class="inner-box">
 										<div class="banner-pager clearfix" id="banner-pager">
 											<a class="pager one wow zoomIn active animated" data-wow-delay="100ms"
-												data-wow-duration="1500ms" data-slide-index="0" href=""
+												data-wow-duration="1500ms" data-slide-index="0" href="/connexion"
 												style="visibility: visible; animation-duration: 1500ms; animation-delay: 100ms; animation-name: zoomIn;">
 												<div class="image img-circle">1</div>
 											</a>
@@ -258,7 +258,7 @@
 								<li>E-maquis, pour une comptabilité transparente.</li>
 								<li>E-maquis, pour plus d'efficacité dans votre etablissement.</li>
 							</ul>
-							<a href="signUp.html" class="theme-btn btn-style-two"><span
+							<a href="/inscription" class="theme-btn btn-style-two"><span
 									class="txt">Inscrivez-vous</span></a>
 						</div>
 					</div>
@@ -615,9 +615,10 @@
 									voulons vous montrer!</h2>
 							</div>
 							<div class="text">Faites comme nos differents clients satisfaits par notre produit
-								n'attendez pas rendez-vous sur play-store ou sur app-store.
+								qui ont équipé leurs employés de l'application mobile E-maquis. Vous aussi,
+								n'attendez pas incrivez vous et télécharger l'application mobile pour vos serveuses sur le play-store.
 							</div>
-							<div class="download">Téléchargez l'application E-maquis pour vous faciliter la vie!</div>
+							<div class="download">Téléchargez l'application E-maquis pour vous faciliter la vie de vos serveur(se)s!</div>
 							<div class="google-btns">
 								<a href="https://play.google.com/store/apps/details?id=com.hnm.emaquisapp"
 									target="_blank"><img src="newAssets/images/icons/google-play.png" width="150" alt="" /></a>
@@ -823,13 +824,13 @@
 								<div class="row clearfix">
 									<div class="column">
 										<ul>
-											<li><a class="scroll-to-target" data-target="html">Accueil</a></li>
+											<li><a href="/" class="scroll-to-target" data-target="html">Accueil</a></li>
 											<li><a class="scroll-to-target"
 													data-target=".featured-section">Fonctionnalité</a></li>
 											<li><a class="scroll-to-target" data-target=".steps-section">Procédure</a>
 											</li>
 
-											<li><a href="faq.html">FAQ</a></li>
+											<li><a href="/faq">FAQ</a></li>
 											<li><a href="conditions.html">Conditions générales</a>
 
 											<li><a href="police.html">Termes &amp; Conditions</a></li>
@@ -870,7 +871,15 @@
 									<li><a href="mailto:hostmaster@e-maquis.com">Email : hostmaster@e-maquis.com</a>
 									</li>
 
-									<li><a href="tel:+2250709454685">Support : +225 0709454685</a></li>
+									<li>
+										support
+										<ul>
+											<li><a href="https://wa.me/2250709454685">+225 0709454685</a></li>
+											<li><a href="https://wa.me/2250709031399">+225 0709031399</a></li>
+											<li><a href="https://wa.me/2250777129951">+225 0777129951</a></li>
+											<li><a href="https://wa.me/33760484911">+33 0760484911</a></li>
+										</ul>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -881,7 +890,7 @@
 				<div class="footer-bottom">
 					<div class="clearfix">
 						<div class="pull-left">
-							<div class="copyright">&copy; 2023 Haut Numeriques Medias</div>
+							<div class="copyright">&copy; <%= year %> Haut Numeriques Medias</div>
 						</div>
 						<div class="pull-right">
 							<ul class="social-icon-one">
@@ -905,6 +914,11 @@
 
 	<!--Scroll to top-->
 	<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-up"></span></div>
+
+	<script>
+		const date = new Date();
+		const year = date.getFullYear();
+	</script>
 
 	<script src="newAssets/js/jquery.js"></script>
 	<script src="newAssets/js/popper.min.js"></script>

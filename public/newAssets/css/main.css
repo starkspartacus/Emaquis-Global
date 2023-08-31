@@ -3118,8 +3118,9 @@ transition: all 1s ease-in-out;
 }
 
 .fact-counter .column:nth-child(4) .inner .content .icon {
-	color: #9426d5;
-	background-color: #fcd9fa;
+	color: #f1f1f1;
+	background-color: #c71414;
+	;
 }
 
 .fact-counter .count-outer .percentage {
@@ -3154,7 +3155,7 @@ transition: all 1s ease-in-out;
 }
 
 .fact-counter .column:nth-child(4) .inner .count-outer {
-	color: #c838d9;
+	color: #c71414;
 }
 
 .fact-counter .column .inner .counter-title {
