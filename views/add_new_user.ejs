@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="css/style.css" />
 
   <%- include('partial/newHead.ejs') %>
+  <%- include('partial/head.ejs') %>
   
 
 </head>
@@ -249,7 +250,7 @@
   <!-- footer  -->
   <%- include('partial/script.ejs') %>
   <%- include('partial/scriptNewTemp.ejs') %>
-  <script src="../jquery-3.4.1.min.js"></script>
+  
   <script src="/socket.io/socket.io.js "></script>
   <script>
     const socket = io(window.location.origin + window.location.pathname);
