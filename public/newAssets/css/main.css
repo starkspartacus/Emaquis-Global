@@ -1475,7 +1475,7 @@ img {
 	top: 0px;
 	right: 0px;
 	bottom: 0px;
-	display: none;
+	/* display: none; */
 	background-size: cover;
 	background-repeat: no-repeat;
 }
