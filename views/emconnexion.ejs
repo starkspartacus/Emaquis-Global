@@ -1,62 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	 <!-- Google tag (gtag.js) -->
-     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
-     <script>
-       window.dataLayer = window.dataLayer || [];
-       function gtag(){dataLayer.push(arguments);}
-       gtag('js', new Date());
- 
-       gtag('config', 'G-NT2SW8WBHT');
-     </script>
-     <!-- Basic Page Needs
-   ================================================== -->
-     <meta charset="utf-8" />
-     <title>E-Maquis Barman(aid)</title>
- 
-     <!-- Mobile Specific Metas
-     ================================================== -->
-     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-     <meta name="description" content="E-maquis, Gestionnaire d'établissement" />
-     <meta
-       name="viewport"
-       content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
-     />
-     <meta name="author" content="Haut Numérique et Médias" />
-     <meta name="generator" content="E-maquis, Gestionnaire d'établissement" />
-	<title>E-maquis</title>
-	<!-- Stylesheets -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-NT2SW8WBHT');
+    </script>
+    <!-- Basic Page Needs ================================================== -->
+    <meta charset="utf-8" />
+    <title>E-Maquis Barman(aid)</title>
+
+    <!-- Mobile Specific Metas ================================================== -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="E-maquis, Gestionnaire d'établissement" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="author" content="Haut Numérique et Médias" />
+    <meta name="generator" content="E-maquis, Gestionnaire d'établissement" />
+    
+    <title>E-maquis</title>
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="newAssets/css/login.css">
     
-
-	<link rel="shortcut icon" href="newAssets/images/logo/emaquisLogo2.png" type="image/x-icon">
-	<link rel="icon" href="newAssets/images/logo/emaquisLogo2.png" type="image/x-icon">
     
+    <link rel="shortcut icon" href="newAssets/images/logo/emaquisLogo2.png" type="image/x-icon">
+    <link rel="icon" href="newAssets/images/logo/emaquisLogo2.png" type="image/x-icon">
 
-	<!-- Responsive -->
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-	<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
-	<!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+    
+    
 </head>
-  <body >
+<body>
     <div class="wrapper">
         <a href="/"><img src="newAssets/images/logo/emaquisLogo2.png" width="100" alt="" srcset=""></a>
-            <h1>Espace Barman(aid)</h1>
-            <%if (locals.success){%>
-                <div class="alert alert-success animSuccessConnect" role="alert" style="text-align: center" id="alert-success">
-                  Connexion réussie !
-                </div>
-                <%}%> <%if (locals.error) { %>
-                <div class="alert alert-danger animFailConnect" role="alert" style="text-align: center" id="alert-danger">
-                  <%= locals.error %> 😢
-                </div>
-                <% } %>
+        <h1>Espace Barman(aid)</h1>
+        <% if (locals.success) { %>
+            <div class="alert alert-success animSuccessConnect" role="alert" style="text-align: center" id="alert-success">
+                Connexion réussie !
+            </div>
+        <% } %>
+        <% if (locals.error) { %>
+            <div class="alert alert-danger animFailConnect" role="alert" style="text-align: center" id="alert-danger">
+                <%= locals.error %> 😢
+            </div>
+        <% } %>
         <form action="/emconnexion" method="post">
-            
             <div class="input-box">
                 <input placeholder="N° de Téléphone" type="number" name="numero" value="<%= locals.numero %>" required>
                 <span class="icon flaticon-user"></span>
@@ -65,7 +61,6 @@
                 <input type="password" placeholder="mot de passe" name="password" required>
                 <span class="icon flaticon-user"></span>
             </div>
-
             <div class="remember-forget">
                 <!-- <label for="">
                     <input type="checkbox">
@@ -80,24 +75,34 @@
         </form>
     </div>
 
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <script src="plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="plugins/slick/slick.min.js"></script>
-    <script src="plugins/fancybox/jquery.fancybox.min.js"></script>
-    <script src="plugins/syotimer/jquery.syotimer.min.js"></script>
-    <script src="plugins/aos/aos.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
-    <script src="plugins/google-map/gmap.js"></script>
-    <script src="js/script.js"></script>
-    <script src="/socket.io/socket.io.js "></script>
+    <!-- Condition pour afficher le preloader uniquement si loginSuccess est true -->
     <script>
-      const loginSuccess = '<%= locals.success %>';
-      if (JSON.parse(loginSuccess) === true) {
-        setTimeout(() => {
-          window.location.href = '/emdashboard';
-        }, 1000);
-      }
-    </script>
-  </body>
+        const loginSuccess = '<%= locals.success %>';
+        if (JSON.parse(loginSuccess) === true) {
+            document.addEventListener("DOMContentLoaded", function () {
+                // Créez le preloader et ajoutez-le au body
+                const preloader = document.createElement("div");
+                preloader.classList.add("preloader");
+                preloader.innerHTML = `
+                    <div class="pathOne"></div>
+                    <div class="pathTwo"></div>
+                    <div class="pathThree"></div>
+                    <div class="ldrOne"></div>
+                    <div class="ldrTwo"></div>
+                    <div class="ldrThree"></div>
+                    <div class="">
+                        <img src="newAssets/images/logo/emaquisLogo2.png" alt="" srcset="">
+                    </div>
+                `;
+                document.body.appendChild(preloader);
 
+                // Masquez le preloader après un certain délai
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    window.location.href = '/emdashboard';
+                }, 1000);
+            });
+        }
+    </script>
+</body>
 </html>

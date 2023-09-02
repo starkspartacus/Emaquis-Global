@@ -189,7 +189,168 @@ body{
     background-color: #2e7d32;
 }
 
+/* CSS pour le preloader */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
+.preloader img{
+	width: 100px;
+	animation: spin 1s ease-in-out infinite;
+}
+.pathOne {
+    background-color: transparent !important;
+    /* border: 3px solid #19112d; */
+    border-radius: 50%;
+    height: 250px;
+    position: absolute;
+    width: 250px;
+}
+
+.pathTwo {
+    background-color: transparent !important;
+    /* border: 3px solid #19112d; */
+    border-radius: 50%;
+    height: 130px;
+    /* left: 132px; */
+    position: absolute;
+    /* top: 132px; */
+    width: 130px;
+}
+
+.pathThree {
+    background-color: transparent !important;
+    /* border: 3px solid #19112d; */
+    border-radius: 50%;
+    height: 110px;
+    /* left: 142px; */
+    position: absolute;
+    /* top: 142px; */
+    width: 110px;
+}
+
+.ldrOne {
+    background-color: transparent !important;
+    border: 4px solid;
+    border-color: transparent #ff9c2c #ff9c2c transparent;
+    border-radius: 50%;
+    height: 150px;
+    /* left: 122px; */
+    position: absolute;
+    /* top: 122px; */
+    width: 150px;
+    -webkit-animation: aniOne 3s linear infinite;
+            animation: aniOne 3s linear infinite;
+}
+
+.ldrTwo {
+    background-color: transparent !important;
+    border: 4px solid;
+    border-color: #98ED58 #98ED58 transparent transparent;
+    border-radius: 50%;
+    height: 130px;
+    /* left: 131px; */
+    position: absolute;
+    /* top: 131px; */
+    width: 130px;
+    transform: rotateZ(360deg);
+    -webkit-animation: aniTwo 3s linear infinite;
+            animation: aniTwo 3s linear infinite;
+}
+
+.ldrThree {
+    border: 4px solid;
+    border-color: #20deff transparent transparent #20deff;
+    border-radius: 50%;
+    height: 110px;
+    /* left: 141px; */
+    position: absolute;
+    /* top: 141px; */
+    width: 110px;
+    -webkit-animation: aniThree 3s linear infinite;
+            animation: aniThree 3s linear infinite;
+}
+
+
+@-webkit-keyframes aniOne {
+    0% {transform: rotateZ(0deg)}
+    20% {transform: rotateZ(72deg)}
+    40% {transform: rotateZ(120deg)}
+    60% {transform: rotateZ(160deg)}
+    80% {transform: rotateZ(260deg)}
+    100% {transform: rotateZ(360deg)}
+}
+
+@-webkit-keyframes aniTwo {
+    0% {transform: rotateZ(360deg)}
+    20% {transform: rotateZ(260deg)}
+    40% {transform: rotateZ(160deg)}
+    60% {transform: rotateZ(120deg)}
+    80% {transform: rotateZ(72deg)}
+    100% {transform: rotateZ(0deg)}
+}
+
+@-webkit-keyframes aniThree {
+    0% {transform: rotateZ(0deg)}
+    20% {transform: rotateZ(100deg)}
+    40% {transform: rotateZ(200deg)}
+    60% {transform: rotateZ(260deg)}
+    80% {transform: rotateZ(320deg)}
+    100% {transform: rotateZ(360deg)}
+}
+
+@-webkit-keyframes aniFour {
+    from{transform: scale(0.6);opacity: 0}
+    to{transform: scale(0.8);opacity: 1}
+}
+
+@keyframes aniOne {
+    0% {transform: rotateZ(0deg)}
+    20% {transform: rotateZ(72deg)}
+    40% {transform: rotateZ(120deg)}
+    60% {transform: rotateZ(160deg)}
+    80% {transform: rotateZ(260deg)}
+    100% {transform: rotateZ(360deg)}
+}
+
+@keyframes aniTwo {
+    0% {transform: rotateZ(360deg)}
+    20% {transform: rotateZ(260deg)}
+    40% {transform: rotateZ(160deg)}
+    60% {transform: rotateZ(120deg)}
+    80% {transform: rotateZ(72deg)}
+    100% {transform: rotateZ(0deg)}
+}
+
+@keyframes aniThree {
+    0% {transform: rotateZ(0deg)}
+    20% {transform: rotateZ(100deg)}
+    40% {transform: rotateZ(200deg)}
+    60% {transform: rotateZ(260deg)}
+    80% {transform: rotateZ(320deg)}
+    100% {transform: rotateZ(360deg)}
+}
+
+@keyframes aniFour {
+    from{transform: scale(0.6);opacity: 0}
+    to{transform: scale(0.8);opacity: 1}
+}
+
+
+img {
+	display: inline-block;
+	max-width: 100%;
+	height: auto;
+}
 
 @media screen and (max-width: 480px)  {
     
