@@ -86,7 +86,7 @@
                                         <h5 class="card-title mb-0 text-white">Total employé(es)</h5>
                                     </div>
                                     <div class="row d-flex align-items-center mb-4">
-                                        <div class="col-8">
+                                        <div class="col-12">
                                             <h2 class="d-flex align-items-center mb-0 text-white">
                                                 <%- totalemploye %>
                                             </h2>
@@ -112,7 +112,7 @@
                                         <span class="badge badge-soft-light float-right">Aujourd'hui</span>
                                         <h5 class="card-title mb-0 text-white">Ventes</h5>
                                     </div>
-                                    <div class="row d-flex align-items-center mb-4">
+                                    <div class="row d-flex  align-items-center mb-4">
                                         <div class="col-8">
                                             <h2 class="d-flex align-items-center text-white mb-0">
                                                 <%= totalVente %>
@@ -150,7 +150,7 @@
                                         <h5 class="card-title mb-0 text-white">Evolution</h5>
                                     </div>
                                     <div class="row d-flex align-items-center mb-4">
-                                        <div class="col-8">
+                                        <div class="col-12">
                                             <h2 class="d-flex align-items-center text-white mb-0">
                                                 <% if(toDayPercent>0) { %>
                                                     <a href="#" class="text_color_5">
@@ -182,7 +182,7 @@
                                         <h5 class="card-title mb-0 text-white">Chiffre d'affaires</h5>
                                     </div>
                                     <div class="row d-flex align-items-center mb-4">
-                                        <div class="col-8">
+                                        <div class="col-12">
                                             <h2 class="d-flex align-items-center text-white mb-0">
                                                 <%= totalVenteWeek %>
                                             </h2>
@@ -811,7 +811,7 @@
         intersect: !1,
         y: {
           formatter: function(e) {
-            return void 0 !== e ? e.toFixed(0) + ' fcfa' : e;
+            return void 0 !== e ? e.toFixed(0) + ' FCFA' : e;
           },
         },
       },
