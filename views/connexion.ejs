@@ -25,6 +25,12 @@
         <form action="">
             <a href="/"><img src="newAssets/images/logo/emaquisLogo2.png" width="100" alt="" srcset=""></a>
             <h1>Espace Gestionnaire</h1>
+            <div class="alert alert-success animSuccessConnect" role="alert" style="text-align: center; display: none;" id="alert-success">
+                Connexion réussie !
+              </div>
+              <div class="alert alert-danger animFailConnect" role="alert" style="text-align: center; display: none;" id="alert-danger">
+                Email ou mot de passe incorrecte
+              </div>
             <div class="input-box">
                 <input type="text" placeholder="Email ou N° de Téléphone" name="emailOrPhoneNumber" required>
                 <span class="icon flaticon-user"></span>
@@ -67,17 +73,37 @@
              emailOrPhoneNumber: $('input[name="emailOrPhoneNumber"]').val(),
                password: $('input[name="password"]').val(),
            };
-          console.log(data)
+          
            socket.emit('login',data)
          })
          socket.on("loginsuccess", () => {
-   
-           setTimeout(() =>  document.getElementById("alert-sucsess").style.display = "block", 2000);
-           location.href = "/dashboard ";
-           });
+            setTimeout(() => {
+                // Ajoutez la classe 'success-animation' à l'élément du formulaire ou à l'élément de confirmation
+                document.querySelector('.animSuccessConnect').classList.add('success-animation');
+                document.querySelector(".animSuccessConnect").style.display = "block";
+            }, 2000);
+        
+            // Redirigez l'utilisateur vers la page de tableau de bord après l'animation
+            setTimeout(() => {
+                location.href = "/dashboard";
+            }, 3000);
+        });
+
            socket.on("bad", () => {
-                   setTimeout(() =>  document.getElementById("alert-danger").style.display = "block", 2000);
-               });
+            setTimeout(() => {
+                document.querySelector(".animFailConnect").style.display = "block";
+                // Ajoutez la classe 'shake' à l'élément du formulaire
+                document.querySelector('.animFailConnect').classList.add('shake');
+            }, 1000);
+        });
+
+        // Supprimez la classe 'shake' lorsque l'animation est terminée
+document.querySelector('.animFailConnect').addEventListener('animationend', () => {
+    document.querySelector('.animFailConnect').classList.remove('shake');
+});
+
+
+        
      </script>
 
 </body>

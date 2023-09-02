@@ -156,6 +156,41 @@ body{
 
 }
 
+/* CSS pour l'animation d'erreur */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+.shake {
+    background-color: #a42e04;
+    animation: shake 0.5s ease-in-out;
+    animation-iteration-count: 1;
+    color: #fff;
+}
+
+/* Appliquez l'animation aux éléments que vous souhaitez faire bouger */
+
+
+/* CSS pour l'animation d'erreur */
+
+/* CSS pour l'animation de succès */
+@keyframes success {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Appliquez l'animation aux éléments que vous souhaitez animer en cas de succès */
+.success-animation {
+    animation: success 0.5s ease-in-out;
+    animation-iteration-count: 1;
+    color: #fff;
+    background-color: #2e7d32;
+}
+
+
+
 @media screen and (max-width: 480px)  {
     
     .wrapper{
