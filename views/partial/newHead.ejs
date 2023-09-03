@@ -1,0 +1,200 @@
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    <header id="page-topbar">
+        <div class="navbar-header">
+
+            
+            <div class="d-flex align-items-left">
+                <button type="button" class="btn btn-sm mr-2 d-lg-none px-3 font-size-16 header-item waves-effect"
+                    id="vertical-menu-btn">
+                    <i class="fa fa-fw fa-bars"></i>
+                </button>
+
+                <div class="dropdown d-none d-sm-inline-block">
+                    <!--
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="mdi mdi-plus"></i> Create New
+                        <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                    </button>
+                    
+                    <div class="dropdown-menu">
+
+                        
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            Application
+                        </a>
+
+                        
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            Software
+                        </a>
+
+                        
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            EMS System
+                        </a>
+
+                        
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            CRM App
+                        </a>
+                    </div>
+                    -->
+                </div>
+            </div>
+            
+
+            <div class="d-flex align-items-center">
+                
+                <!--
+                <div class="dropdown d-none d-sm-inline-block ml-2">
+                    <button type="button" class="btn header-item noti-icon waves-effect"
+                        id="page-header-search-dropdown" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="mdi mdi-magnify"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+                        aria-labelledby="page-header-search-dropdown">
+
+                        <form class="p-3">
+                            <div class="form-group m-0">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search ..."
+                                        aria-label="Recipient's username">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"><i
+                                                class="mdi mdi-magnify"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="" src="assets/images/flags/us.jpg" alt="Header Language" height="16">
+                        <span class="d-none d-sm-inline-block ml-1">English</span>
+                        <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+
+                        
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <img src="assets/images/flags/spain.jpg" alt="user-image" class="mr-1" height="12">
+                            <span class="align-middle">Spanish</span>
+                        </a>
+
+                        
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <img src="assets/images/flags/germany.jpg" alt="user-image" class="mr-1" height="12">
+                            <span class="align-middle">German</span>
+                        </a>
+
+                        
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <img src="assets/images/flags/italy.jpg" alt="user-image" class="mr-1" height="12">
+                            <span class="align-middle">Italian</span>
+                        </a>
+
+                        
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <img src="assets/images/flags/russia.jpg" alt="user-image" class="mr-1" height="12">
+                            <span class="align-middle">Russian</span>
+                        </a>
+                    </div>
+                </div>
+                -->
+                
+
+                <div class="dropdown d-inline-block d-flex align-items-end" id ="notificationData">
+                    <button type="button"  class="btn header-item noti-icon waves-effect"
+                        id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <span class="badge badge-danger badge-pill countNotif"></span>
+                        <i class="mdi mdi-bell cloche"></i>
+                        
+                    </button>
+                    
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 "
+                            aria-labelledby="page-header-notifications-dropdown">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h6 class="m-0"> Notifications </h6>
+                                    </div>
+                                    <!--
+                                    <div class="col-auto">
+                                        <a href="#!" class="small"> View All</a>
+                                    </div>
+                                    -->
+                                </div>
+                            </div>
+                            <div class="modal-body-notyf"></div>
+
+                            <!--
+                            <div class="p-2 border-top">
+                                <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
+                                    <i class="mdi mdi-arrow-down-circle mr-1"></i> Load More..
+                                </a>
+                            </div>
+                            -->
+                            
+                    </div>
+                    
+                </div>
+
+                                <!-- Modal Notyf-->
+                
+                
+
+                <div class="dropdown d-inline-block ml-2">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <!--  <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-3.jpg"
+                            alt="Header Avatar"> 
+                        -->
+                        <span class="d-none d-sm-inline-block ml-1">
+                            <%= locals.user?.nom %> <%= locals.user?.prenom ||
+                            locals.user?.prenoms %>
+                        </span>
+                        
+                        <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                        <h5><%= locals.user?.role %></h5>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        
+                       <a class="dropdown-item d-flex align-items-center justify-content-between"
+                            href="/profile">
+                            <span>Profile</span>
+                            <span>
+                                <span class="badge badge-pill badge-warning"></span>
+                            </span>
+                        </a>
+                        <!-- 
+                        
+                        <a class="dropdown-item d-flex align-items-center justify-content-between"
+                            href="javascript:void(0)">
+                            Settings
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center justify-content-between"
+                            href="javascript:void(0)">
+                            <span>Lock Account</span>
+                        </a>
+                        -->
+                        <a class="dropdown-item d-flex align-items-center justify-content-between"
+                            href="/deconnexion">
+                            <span>Déconnexion</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+</div>
+

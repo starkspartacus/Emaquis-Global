@@ -1,3 +1,4 @@
+
 /* Normal desktop :1200px. */
 /* Normal desktop :992px. */
 /* Tablet desktop :768px. */
@@ -36,7 +37,7 @@ body {
   background: #f6f7fb;
 }
 
-#notificationData {
+/* #notificationData {
   position: relative;
     cursor: pointer;
     margin-left: auto;
@@ -78,7 +79,7 @@ body {
 
 .modal-body-notyf li:last-child {
   border-bottom: none;
-}
+} */
 
 @media (min-width: 1200px) {
   /* line 13, G:/admin_project/8 admin/management_html/scss/_reset.scss */
@@ -11840,211 +11841,6 @@ a.pswp__share--download:hover {
   margin-bottom: 12px;
 }
 
-/* line 125, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_HEADER ul {
-  display: flex;
-  align-items: center;
-}
-
-/* line 128, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_HEADER ul li {
-  margin-right: 5.5px;
-}
-
-/* line 132, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_HEADER ul li a .member_thumb img {
-  width: 27px;
-  height: 27px;
-  transition: 0.3s;
-  border-radius: 50%;
-}
-
-/* line 138, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX
-  .CHAT_POPUP_HEADER
-  ul
-  li
-  a
-  .member_thumb
-  .more_member_count {
-  background: rgba(255, 255, 255, 0.2);
-  width: 27px;
-  height: 27px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 27px;
-}
-
-/* line 145, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX
-  .CHAT_POPUP_HEADER
-  ul
-  li
-  a
-  .member_thumb
-  .more_member_count
-  span {
-  font-size: 12px;
-  font-weight: 400;
-  color: #fff;
-}
-
-/* line 153, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_HEADER ul li a:hover img {
-  transform: translateY(-5px);
-}
-
-/* line 161, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .chat_input_box {
-  background: #f5f7fb;
-  border-radius: 0px 0px 5px 5px;
-  padding-right: 10px;
-}
-
-/* line 165, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .chat_input_box input {
-  background: #f5f7fb;
-  height: 50px;
-  border: 0;
-  padding-left: 20px;
-  font-size: 13px;
-}
-
-/* line 171, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .chat_input_box input::placeholder {
-  color: #707db7;
-  font-size: 13px;
-  font-weight: 400;
-}
-
-/* line 177, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .chat_input_box .input-group-append {
-  border-radius: 0 0 10px 10px;
-}
-
-/* line 178, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .chat_input_box .input-group-append .btn {
-  background: #f5f7fb;
-  font-size: 20px;
-  color: #a0a7c9;
-  padding: 0;
-  line-height: 40px;
-  position: relative;
-  height: 50px;
-}
-
-/* line 186, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .chat_input_box .input-group-append .btn input {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  right: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-
-/* line 196, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX
-  .chat_input_box
-  .input-group-append
-  .btn
-  input::placeholder {
-  color: #707db7;
-  font-size: 13px;
-  font-weight: 400;
-}
-
-/* line 202, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .chat_input_box .input-group-append .btn i {
-  font-size: 20px;
-}
-
-/* line 205, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .chat_input_box .input-group-append .btn:last-child {
-  padding-right: 11px;
-  padding-left: 11px;
-  border-radius: 0px 10px 10px 0px;
-}
-
-/* line 214, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_BODY {
-  padding: 20px;
-  height: 354px;
-  overflow: auto;
-}
-
-/* line 218, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_BODY .mesaged_send_date {
-  font-size: 13px;
-  font-weight: 400;
-  color: #415094;
-  text-align: center;
-  margin-bottom: 12px;
-  line-height: 1;
-}
-
-/* line 226, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_BODY .CHATING_SENDER {
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 20px;
-  padding-right: 70px;
-}
-
-/* line 231, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_BODY .CHATING_SENDER.CHATING_RECEIVEr {
-  justify-content: flex-end;
-  padding-right: 0px;
-  padding-left: 60px;
-}
-
-/* line 235, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX
-  .CHAT_POPUP_BODY
-  .CHATING_SENDER.CHATING_RECEIVEr
-  .SMS_thumb {
-  margin-right: 0;
-  margin-left: 9.55px;
-}
-
-/* line 239, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX
-  .CHAT_POPUP_BODY
-  .CHATING_SENDER.CHATING_RECEIVEr
-  .SEND_SMS_VIEW {
-  background: #8950fc;
-}
-
-/* line 243, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_BODY .CHATING_SENDER .SMS_thumb {
-  margin-right: 9.55px;
-}
-
-/* line 245, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_BODY .CHATING_SENDER .SMS_thumb img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
-
-/* line 251, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_BODY .CHATING_SENDER .SEND_SMS_VIEW {
-  background: #4567ee;
-  border-radius: 5px;
-  padding: 10px 15px;
-}
-
-/* line 255, G:/admin_project/8 admin/management_html/scss/_notification_menu.scss */
-.CHAT_MESSAGE_POPUPBOX .CHAT_POPUP_BODY .CHATING_SENDER .SEND_SMS_VIEW p {
-  font-size: 13px;
-  color: #ffffff;
-  font-weight: 400;
-  line-height: 23px;
-}
-
 /* Spinner */
 /* line 3, G:/admin_project/8 admin/management_html/scss/_loadsers.scss */
 .theme_loder_1 div::after {
@@ -14472,3 +14268,5 @@ table.lms_table_active3.dataTable thead .sorting_desc::after {
     height: auto;
   }
 }
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhaWx3aW5kLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsImZpbGUiOiJzdHlsZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAdGFpbHdpbmQgYmFzZTtcclxuQHRhaWx3aW5kIGNvbXBvbmVudHM7XHJcbkB0YWlsd2luZCB1dGlsaXRpZXM7Il19 */

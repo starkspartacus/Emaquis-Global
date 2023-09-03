@@ -1,4 +1,5 @@
 const { PRODUCT_SIZE } = require('../constants');
+const { stockQueries } = require('../requests/StocksQueries');
 const { categorieQueries } = require('../requests/categorieQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const {
@@ -68,17 +69,45 @@ exports.addproduitPost = async (req, res) => {
         req.body.produit
       );
 
+      const maquisUseStock = await stockQueries.getStocksCountBySession(
+        session
+      );
+
+      const stock = await stockQueries.getOneStockByQuery({
+        produit: req.body.produit,
+        categorie: produit.result?.categorie?._id,
+        size: req.body.taille,
+      });
+
+      if (maquisUseStock.result) {
+        
+
+        if (!stock.result && req.body.quantite > 0) {
+          res.status(401).send({
+            message: "Le stock n'existe pas",
+            success: false,
+          });
+          return;
+        } else if (stock.result?.quantity < req.body.quantite) {
+          res.status(401).send({
+            message: 'Le stock est insuffisant',
+            success: false,
+          });
+          return;
+        }
+      }
+
       const data = {
         produit: req.body.produit,
         prix_vente: parseInt(req.body.prix_vente),
         prix_achat: parseInt(req.body.prix_achat),
         quantite: parseInt(
-          req.body.stockType === 'locker'
-            ? generateQuantityByLocker(
-                req.body.quantite,
-                req.body.taille,
-                produit.result
-              )
+          ['cardboard', 'locker'].includes(req.body.stockType)
+            ? generateQuantityByLocker({
+                locker: req.body.quantite,
+                size: req.body.taille,
+                produit: produit.result,
+              })
             : req.body.quantite
         ),
         taille: req.body.taille,
@@ -96,6 +125,14 @@ exports.addproduitPost = async (req, res) => {
       });
 
       let result = null;
+
+      if (stock.result && maquisUseStock.result) {
+        await stock.result.updateOne({
+          $inc: {
+            quantity: -data.quantite,
+          },
+        });
+      }
 
       const newHistorique = {
         quantite: data.quantite,
@@ -169,21 +206,49 @@ exports.editproduitPost = async (req, res) => {
   const user = req.session.user;
   if (user) {
     const session = req.body.session || user.travail_pour;
-    // const produit = await produitglobalModel
 
     const produit = await produitQueries.getGlobalProduitById(req.body.produit);
+
+    const maquisUseStock = await stockQueries.getStocksCountBySession(session);
+
+    const stock = await stockQueries.getOneStockByQuery({
+      produit: req.body.produit,
+      categorie: produit.result?.categorie?._id,
+      size: req.body.taille,
+    });
+
+    if (maquisUseStock.result) {
+      
+
+      if (!stock.result && req.body.quantite > 0) {
+        res.status(401).send({
+          message: "Le stock n'existe pas",
+          success: false,
+        });
+        return;
+      } else if (stock.result?.quantity < req.body.quantite) {
+        res.status(401).send({
+          message: 'Le stock est insuffisant',
+          success: false,
+        });
+        return;
+      }
+    }
+
+    // casier passe, mais ça fait en 12 ou 24 ?? ok
 
     const data = {
       produit: req.body.produit,
       prix_vente: parseInt(req.body.prix_vente),
       prix_achat: parseInt(req.body.prix_achat),
       quantite: parseInt(
-        req.body.stockType === 'locker'
-          ? generateQuantityByLocker(
-              req.body.quantite,
-              req.body.taille,
-              produit.result
-            )
+        ['cardboard', 'locker'].includes(req.body.stockType)
+          ? generateQuantityByLocker({
+              locker: req.body.quantite,
+              size: req.body.taille,
+              produit: produit.result,
+              stockType: req.body.stockType,
+            })
           : req.body.quantite
       ),
       taille: req.body.taille,
@@ -193,6 +258,16 @@ exports.editproduitPost = async (req, res) => {
       session: session,
       historiques: [],
     };
+
+    // ok on fait le test maintenant
+
+    if (stock.result && maquisUseStock.result) {
+      await stock.result.updateOne({
+        $inc: {
+          quantity: -data.quantite,
+        },
+      });
+    }
 
     const produit_exist = await produitQueries.getProduitByData({
       produit: data.produit,

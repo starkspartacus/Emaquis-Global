@@ -18,18 +18,30 @@
   <!-- End Google tag (gtag.js) -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <script src="assets/js/jquery.min.js"></script>
   <title>Ajout employé(es)</title>
+  <!-- App css -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" />
 
+  <%- include('partial/newHead.ejs') %>
   <%- include('partial/head.ejs') %>
+  
+
 </head>
 
 <body class="crm_body_bg">
-  <%- include('partial/sidebar.ejs') %>
+  <%- include('partial/newSideBar.ejs') %>
+  
+
   <!--/ sidebar  -->
 
   <section class="main_content dashboard_part large_header_bg">
     <!-- menu  -->
-    <%- include('partial/notif.ejs') %>
+    
     <!--/ menu  -->
     <div class="main_content_iner overly_inner">
       <div class="container-fluid p-0">
@@ -39,15 +51,17 @@
           <div class="col-12">
             <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
               <div class="page_title_left d-flex align-items-center">
+                <!--
                 <h3 class="f_s_25 f_w_700 dark_text mr_30">
                   Tableau de bord
                 </h3>
-                <!--  <ol class="breadcrumb page_bradcam mb-0">
+                  <ol class="breadcrumb page_bradcam mb-0">
                     <li class="breadcrumb-item">
                       <a href="javascript:void(0);">Acceuil</a>
                     </li>
                     <li class="breadcrumb-item active">Analyse</li>
-                  </ol> -->
+                  </ol> 
+                  -->
               </div>
               <div class="page_title_right">
                 <div class="page_title_right d-flex">
@@ -225,12 +239,7 @@
     </div>
   </section>
   <!-- main content part end -->
-
-  <!-- ### CHAT_MESSAGE_BOX   ### -->
-
-
-
-  <!--/### CHAT_MESSAGE_BOX  ### -->
+  <div class="menu-overlay"></div>
 
   <div id="back-top" style="display: none">
     <a title="Go to Top" href="#">
@@ -240,7 +249,8 @@
 
   <!-- footer  -->
   <%- include('partial/script.ejs') %>
-  <script src="../jquery-3.4.1.min.js"></script>
+  <%- include('partial/scriptNewTemp.ejs') %>
+  
   <script src="/socket.io/socket.io.js "></script>
   <script>
     const socket = io(window.location.origin + window.location.pathname);
@@ -314,6 +324,25 @@
   </script>
 
   <script src="../js/verifInput.js" defer></script>
+   <!-- jQuery  -->
+  
+   <script src="assets/js/bootstrap.bundle.min.js"></script>
+   <script src="assets/js/metismenu.min.js"></script>
+   <script src="assets/js/waves.js"></script>
+   <script src="assets/js/simplebar.min.js"></script>
+ 
+   
+ 
+   <!-- Morris Js-->
+   <script src="../plugins/morris-js/morris.min.js"></script>
+   <!-- Raphael Js-->
+   <script src="../plugins/raphael/raphael.min.js"></script>
+ 
+   <!-- Morris Custom Js-->
+   <script src="assets/pages/dashboard-demo.js"></script>
+ 
+   <!-- App js -->
+   <script src="assets/js/theme.js"></script>
 </body>
 
 <!-- Mirrored from demo.dashboardpack.com/user-management-html/add_new_user.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 17:20:09 GMT -->

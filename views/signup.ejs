@@ -1,116 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+    <meta charset="utf-8">
+    <meta name="description" content="E-maquis, Gestionnaire d'établissement">
+    <meta name="author" content="Haut Numérique et Médias">
+    <meta name="keywords" content="E-maquis, Gestionnaire d'établissement">
+    <meta name="generator" content="E-maquis, Gestionnaire d'établissement">
+    <title>E-maquis</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="newAssets/css/signUp.css">
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
 
-    gtag('config', 'G-NT2SW8WBHT');
-  </script>
-  <!-- End Google tag (gtag.js) -->
-  <!-- Basic Page Needs
-================================================== -->
-  <meta charset="utf-8" />
-  <title>E-Maquis | Inscription</title>
+    <link rel="shortcut icon" href="newAssets/images/logo/emaquisLogo2.png" type="image/x-icon">
+    <link rel="icon" href="newAssets/images/logo/emaquisLogo2.png" type="image/x-icon">
+    <link href="newAssets/css/bootstrap.css" rel="stylesheet">
 
-  <!-- Mobile Specific Metas
-================================================== -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="description" content="E-maquis, Gestionnaire d'établissement" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <meta name="author" content="Haut Numérique et Médias" />
-  <meta name="generator" content="E-maquis, Gestionnaire d'établissement" />
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
 
-  <!-- PLUGINS CSS STYLE -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="../pugins/bootstrap/bootstrap.min.css" />
-  <link rel="stylesheet" href="../plugins/themify-icons/themify-icons.css" />
-  <link rel="stylesheet" href="../plugins/slick/slick.css" />
-  <link rel="stylesheet" href="../plugins/slick/slick-theme.css" />
-  <link rel="stylesheet" href="../plugins/fancybox/jquery.fancybox.min.css" />
-  <link rel="stylesheet" href="../plugins/aos/aos.css" />
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-  <!-- CUSTOM CSS -->
-  <link href="../css/styles.css" rel="stylesheet" />
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
 </head>
 
-<body class="body-wrapper body-wallpper" data-spy="scroll" data-target=".privacy-nav">
-  <!--=============================
-=            Sign Up            =
-==============================-->
+<body>
+    <div class="wrapper">
 
-  <section class="section">
-    <div class="container col-lg-7 col-md-12 col-sm-4 m-auto m-md-auto m-lg-auto m-sm-auto">
-      <div class="row overflow-auto">
-        <div>
-          <div class="block col-lg-12 col-md-7 col-sm-4">
-            <div class="content text-center bg-singup p-4 col-lg-8 col-md-7">
-              <div class="logo" data-aos="zoom-in" data-aos-duration="3000">
-                <a href="/"><img class="img-incription" src="../img/_logo_.png" alt="logo Emaquis" /></a>
-              </div>
-              <div class="title-text">
-                <h3>Inscrivez vous !</h3>
-              </div>
-              <div class="alert alert-success" role="alert" style="text-align: center; display: none" id="alert-success">
-                L'opération s'est terminée avec succès !
-              </div>
-              <div class="alert alert-danger" role="alert" style="text-align: center; display: none" id="alert-danger">
-                Echec de l'opération, nom de l'établissement ou email déjà
-                utilisé!
-              </div>
-              <form action="#" class="mb-6">
-                <input class="form-control main" type="text" placeholder="nom d'utilisateur " name="username" required />
-
-                <input class="form-control main" type="text" placeholder="nom de l'établissement " name="nom_etablissement" required />
-
-                <input class="form-control main" type="email" placeholder="email" name="email" required />
-
-                <input class="form-control main" type="text" placeholder="adresse" name="adresse" required />
-                <input class="form-control main" type="tel" id="numericInput" oninput="validateNumericInput(this)" placeholder="Entrez votre numéro de téléphone" name="numero" required />
-
-                <input class="form-control main" type="password" placeholder="mot de passe" name="password" required />
-
-                <input class="form-control main" type="password" placeholder="confirmer le mot de passe" name="confirm_password" required />
-
-                <button type="submit" class="btn btn-main-sm btn-lg p-3" id="btn-validate">
-                  valider
-                </button>
-              </form>
-              <div class="new-acount">
-                <p>
-                  En cliquant sur "S'inscrire", j'accepte
-                  <a href="/condition_general" style="text-decoration: none">Conditions d'utilisation.</a>
-                </p>
-                <p>
-                  Avez-vous un compte ?
-                  <a href="/connexion" style="text-decoration: none">connectez-vous</a>
-                </p>
-              </div>
-            </div>
+        <div class="alert alert-success" role="alert" style="text-align: center; display: none" id="alert-success">
+            L'opération s'est terminée avec succès !
           </div>
-        </div>
-      </div>
+          <div class="alert alert-danger" role="alert" style="text-align: center; display: none" id="alert-danger">
+            Echec de l'opération, nom de l'établissement ou email déjà
+            utilisé!
+          </div>
+
+        <form action="">
+            <div class="auto-container">
+
+                <div class="row clearfix justify-content-center align-items-center">
+                  <a href="/"><img src="newAssets/images/logo/emaquisLogo2.png" width="100" alt="" srcset=""></a>  
+                </div>
+                <h1>Inscrivez-vous</h1>
+                <div class="row clearfix">
+
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="input-box">
+                            <input type="text" placeholder="Nom d'utilisateur " name="username" required>
+                            <span class="icon flaticon-user"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="input-box">
+                            <input type="text" placeholder="Nom de l'établissement " name="nom_etablissement" required>
+                            <span class="icon flaticon-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="input-box">
+                            <input type="text" placeholder="Email" name="email" required>
+                            <span class="icon flaticon-user"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="input-box">
+                            <input type="text" placeholder="Adresse" name="adresse" required>
+                            <span class="icon flaticon-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="input-box">
+                            <input type="tel" id="numericInput" oninput="validateNumericInput(this)" placeholder="N° de Téléphone" name="numero" required>
+                            <span class="icon flaticon-user"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="input-box">
+                            <input type="password" placeholder="Mot de passe" name="password" required>
+                            <span class="icon flaticon-user"></span>
+                        </div>
+                        <div class="input-box">
+                            <input type="password" placeholder="confirmer le mot de passe" name="confirm_password" required>
+                            <span class="icon flaticon-user"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row clearfix justify-content-center align-items-center">
+                <button type="submit" class="btn">S'inscrire</button>
+            </div>
+             <div class="register-link">
+                <p>Avez-vous déjà un compte? <a href="/connexion">Connectez-vous ici</a></p>
+            </div>
+        </form>
     </div>
-  </section>
 
-  <!--====  End of Sign Up  ====-->
-
-  <!-- To Top -->
-  <div class="scroll-top-to">
-    <i class="ti-angle-up"></i>
-  </div>
+  
 
   <!-- JAVASCRIPTS -->
+  <script src="../jquery-3.4.1.min.js"></script>
   <script src="../plugins/country/src/js/countrySelect.js"></script>
   <script src="../emaquisjs/emaquis.js"></script>
   <script src="../plugins/jquery/jquery.min.js"></script>
@@ -124,7 +128,7 @@
   <script src="../plugins/google-map/gmap.js"></script>
 
   <script src="../js/script.js"></script>
-  <script src="../jquery-3.4.1.min.js"></script>
+  
   <script src="/socket.io/socket.io.js "></script>
   <script>
     const socket = io(window.location.origin + window.location.pathname);

@@ -65,6 +65,17 @@ exports.dashboard = async (req, res) => {
         return acc;
       }, {});
 
+      // afficher l'employe qui a fait le plus de vente
+
+      const venteByEmploye = vente.reduce((acc, item) => {
+        const key = item.travail_pour;
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(item);
+        return acc;
+      }, {});
+
       const yesterdayKey = formatDate(
         moment(new Date()).subtract(1, 'days').toDate()
       );
@@ -87,6 +98,8 @@ exports.dashboard = async (req, res) => {
         venteByDay[toDayKey]?.reduce((acc, item) => {
           return acc + item.prix;
         }, 0) || 0;
+      
+      
 
       // const toDay = new Date().getDay();
       // const time = new Date().getTime();

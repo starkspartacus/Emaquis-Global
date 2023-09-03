@@ -1,0 +1,127 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+.collapsible-link {
+    width: 100%;
+    position: relative;
+    text-align: left;
+    /* background-color: #ff9c2c; */
+
+  }
+  
+  .collapsible-link::before {
+    content: "\f107";
+    position: absolute;
+    top: 50%;
+    right: 0.8rem;
+    transform: translateY(-50%);
+    display: block;
+    font-family: "FontAwesome";
+    font-size: 1.1rem;
+  }
+  
+  .collapsible-link[aria-expanded="true"]::before {
+    content: "\f106";
+  }
+  .list-style-one {
+    position: relative;
+  }
+  
+  .list-style-one li {
+    position: relative;
+    color: #373a5b;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    padding-left: 25px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .list-style-one li:last-child {
+    margin-bottom: 0px;
+  }
+  
+  .list-style-one li:before {
+    position: absolute;
+    content: "\f00c";
+    left: 0px;
+    top: 0px;
+    color: #98ED58;
+    font-weight: 400;
+    font-family: 'FontAwesome';
+  }
+
+  p{
+    color: #373a5b;
+  }
+  
+  /*
+  *
+  * ==========================================
+  * FOR DEMO PURPOSES
+  * ==========================================
+  *
+  */
+  .faq {
+    /* background: #654ea3;
+    background: -webkit-linear-gradient(to left, #654ea3, #eaafc8);
+    background: linear-gradient(to left, #654ea3, #eaafc8); */
+    min-height: 100vh;
+    padding-bottom: 5rem;
+  }
+  .accordion{
+
+	/* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.10); */
+
+   
+  }
+  .card{
+    margin-bottom: 20px;
+   
+  }
+  h2 {
+	position: relative;
+	color: #373a5b;
+	font-weight: 700;
+	font-size: 30px;
+	line-height: 1.4em;
+	margin-top: 12px;
+	margin-bottom: 22px;
+	z-index: 1;
+}
+
+#btn-validate{
+	background-color: #98ED58;
+	border: 1px solid #98ED58;
+	width: 60%;
+	padding: 20px;
+	border-radius: 5px;
+	color: #FFFFFF;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 10px 30px;
+	text-transform: uppercase;
+	transition: all 0.3s ease 0s;
+	margin-top: 20px;
+	transition: all 0.3s ease 0s;
+}
+/* animation button **/
+
+#btn-validate:hover{
+	background-color: #FFFFFF;
+	border: 1px solid #98ED58;
+	color: #98ED58;
+	letter-spacing: .25em;
+}
+
+@media screen and (max-width: 768px)  {
+    body{
+      
+    }
+  
+     .collapsible-link{
+        font-size: 10px;
+     }
+}

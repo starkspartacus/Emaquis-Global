@@ -50,7 +50,7 @@ const AppRoot = () => {
             const index = vente.produit.findIndex(
               (el) => el.productId === product._id
             );
-
+            
             if (index !== -1) {
               const newProduct = { ...product };
               newProduct.quantite -= vente.quantite[index];

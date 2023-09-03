@@ -53,7 +53,7 @@ const ProductCard = ({ product }) => {
         </h4>
         <p className='emPriceproduct'>
           {product.prix_vente}
-          FCFA
+          fcfa
         </p>
 
         {product.quantite > 0 && (

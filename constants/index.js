@@ -8,6 +8,7 @@ exports.PRODUCT_SIZE = [
   '70cl',
   '75cl',
   '80cl',
+  '85cl',
   '90cl',
   '95cl',
   '100cl',
