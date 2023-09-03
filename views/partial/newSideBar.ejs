@@ -42,7 +42,7 @@
                         </ul>
                     </li>
 
-                    <li>
+                    <li class="tutoNewAddEmploye">
                         <a href="javascript: void(0);" class=" has-arrow waves-effect" aria-expanded="false">
                             <div class="nav_icon_small">
                               <img src="../img/icone_employee.png" alt="" style="height: 29px; width: 29px;" />
@@ -50,12 +50,10 @@
                             </div>
                             
                           </a>
-                        
-                            
-                        
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="/utilisateur"> Liste des employés</a></li>
+
+                        <ul class="sub-menu " aria-expanded="false">
                             <li><a href="/ajouteruser">ajouter</a></li>
+                            <li><a href="/utilisateur"> Liste des employés</a></li>
                             
                         </ul>
                     </li>
@@ -77,7 +75,7 @@
                         </ul>
                     </li>
 
-                    <li>
+                    <li class="tutoNewCompte">
                         <a href="javascript: void(0);" class="has-arrow waves-effect" aria-expanded="false">
                             <div class="nav_icon_small">
                                 <img src="img/menu-icon/bouteille.png" style="height: 22px; width: 37px; transform: rotate(-20deg)" alt="" />
@@ -87,9 +85,9 @@
                           </a>
 
                           <ul>
-                            <li><a href="/listeproduit"> voir mes produits</a></li>
                             <li><a href="/ajouterproduit">Enregistrer un produit</a></li>
-                    
+                            <li><a href="/listeproduit"> voir mes produits</a></li>
+                            
                             <% if(locals.user?.isAdmin){ %>
                             <li>
                               <a href="/ajouter-produit-global">Enregistrer un produit global</a>

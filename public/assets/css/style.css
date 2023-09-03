@@ -110,3 +110,135 @@
     justify-content: center;
     align-items: center;
 }
+
+.tutorial{
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: #dc3545;
+    border: solid 2px white;
+    color: white;
+    border-radius: 20px;
+    padding: 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 20px;
+    min-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tutorial::after{
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: solid 10px transparent;
+    border-top-color: #dc3545;
+}
+
+.tutorial::before{
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: solid 10px transparent;
+    border-top-color: white;
+}
+
+/*  animation .tutorial*/
+
+.tutorial{
+    animation: pulse 2s infinite;
+    transform: scale(1);
+}
+
+@keyframes pulse {
+    0% {
+        
+        transform: scale(0.95);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        
+        transform: scale(0.95);
+    }
+}
+
+.tutorialEmploye{
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: #b57225;
+    border: solid 2px white;
+    color: white;
+    border-radius: 20px;
+    padding: 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 20px;
+    min-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tutorialEmploye::after{
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: solid 10px transparent;
+    border-top-color: #c38742;
+}
+
+.tutorialEmploye::before{
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: solid 10px transparent;
+    border-top-color: white;
+}
+
+/*  animation .tutorialEmploye*/
+
+.tutorialEmploye{
+    animation: pulse 2s infinite;
+    transform: scale(1);
+}
+
+@keyframes pulse {
+    0% {
+        
+        transform: scale(0.95);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        
+        transform: scale(0.95);
+    }
+}
+
+
+.tutorial_body{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(61,66,85,0.3);
+    z-index: 1000;
+    
+}

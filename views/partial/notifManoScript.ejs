@@ -83,6 +83,23 @@ const addEmploye = () => {
     }
 }
 
+if (employeLength === 0) {
+    
+    let tutoNewAddEmploye = document.querySelector('.tutoNewAddEmploye');
+    if(tutoNewAddEmploye){
+        tutoNewAddEmploye.classList.add('tutorialEmploye');
+    }
+} else if (employeLength > 0) {
+    let tutoNewAddEmploye = document.querySelector('.tutoNewAddEmploye');
+    if(tutoNewAddEmploye){
+        tutoNewAddEmploye.classList.remove('tutorialEmploye');
+    }
+}
+
+
+
+
+
 const addProduit = () => {
     if (produits.length === 0) {
         showNotification("Vous devez ajouter des produits dans votre établissement", 'error');
@@ -97,8 +114,7 @@ const addProduit = () => {
     }
 }
 
-addEmploye();
-addProduit();
+
 
 
 // Vérification des conditions et ajout des notifications
@@ -107,10 +123,21 @@ if (employeLength > 0) {
 } else {
     notifications.push("Vous n'avez aucun employé à votre charge");
     notifications.push("Ajoutez un employé");
+    // ajouter une class pour le bouton
+    
 }
 
 if (produits.length === 0) {
     notifications.push("Vous devez ajouter des produits dans votre établissement");
+    let tutoNewCompte = document.querySelector('.tutoNewCompte');
+    if(tutoNewCompte){
+        tutoNewCompte.classList.add('tutorial');
+    }
+}else if(produits.length > 0){
+    let tutoNewCompte = document.querySelector('.tutoNewCompte');
+    if(tutoNewCompte){
+        tutoNewCompte.classList.remove('tutorial');
+    }
 }
 
 for (let rupture of produits) {
@@ -187,6 +214,6 @@ notificationList.addEventListener('click', () => {
     }
 });
 
-// ...
+
 
 </script>
