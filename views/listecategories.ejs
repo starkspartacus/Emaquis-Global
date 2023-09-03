@@ -15,18 +15,9 @@
   <!-- End Google tag (gtag.js) -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <script src="assets/js/jquery.min.js"></script>
-  <title>Liste des categories</title>
+  <title>E-maquis Admin</title>
 
-   <!-- App css -->
-   <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-   <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-   <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
-   <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
- 
-     <%- include('partial/NewHead.ejs') %>
-     <%- include('partial/head.ejs') %>
-     
+  <%- include('partial/head.ejs') %>
 </head>
 
 <body class="crm_body_bg">
@@ -66,12 +57,12 @@
     }
   </style>
 
-  <%- include('partial/newSideBar.ejs') %>
+  <%- include('partial/sidebar.ejs') %>
   <!--/ sidebar  -->
 
   <section class="main_content dashboard_part large_header_bg">
     <!-- menu  -->
-    
+    <%- include('partial/notif.ejs') %>
 
     <div class="main_content_iner">
       <div class="container-fluid p-0">
@@ -81,14 +72,14 @@
               <div class="white_card_header">
                 <div class="box_header m-0">
                   <div class="main-title">
-                    <h3 class="m-0"></h3>
+                    <h3 class="m-0">Liste des categories</h3>
                   </div>
                 </div>
               </div>
               <div class="white_card_body">
                 <div class="QA_section">
                   <div class="white_box_tittle list_header">
-                    <h4>Liste des categories</h4>
+                    <h4>recap</h4>
                     <%- include('partial/inputSearch.ejs') %>
                   </div>
 
@@ -118,7 +109,6 @@
       </div>
     </div>
   </section>
-  <div class="menu-overlay"></div>
 
   
 
@@ -131,13 +121,9 @@
   <!-- footer  -->
   <!-- footer  -->
   <!-- jquery slim -->
-  
+  <%- include('partial/script.ejs') %>
   <%- include('partial/reactScript.ejs') %>
 
-  <%- include('partial/script.ejs') %>
-  <%- include('partial/scriptNewTemp.ejs') %>
-  
-  <script src="/socket.io/socket.io.js "></script>
   <script type='text/babel'>
 
 
@@ -321,26 +307,6 @@
             document.getElementById('root')
           );
         </script>
-
-        <!-- jQuery  -->
-   
-   <script src="assets/js/bootstrap.bundle.min.js"></script>
-   <script src="assets/js/metismenu.min.js"></script>
-   <script src="assets/js/waves.js"></script>
-   <script src="assets/js/simplebar.min.js"></script>
- 
-   
- 
-   <!-- Morris Js-->
-   <script src="../plugins/morris-js/morris.min.js"></script>
-   <!-- Raphael Js-->
-   <script src="../plugins/raphael/raphael.min.js"></script>
- 
-   <!-- Morris Custom Js-->
-   <script src="assets/pages/dashboard-demo.js"></script>
- 
-   <!-- App js -->
-   <script src="assets/js/theme.js"></script>
 </body>
 
 <!-- Mirrored from demo.dashboardpack.com/user-management-html/data_table.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 17:20:14 GMT -->
