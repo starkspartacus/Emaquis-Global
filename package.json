@@ -48,6 +48,7 @@
     "nodemailer": "^6.8.0",
     "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^2.0.7",
+    "notyf": "^3.10.0",
     "path": "^0.12.7",
     "postcss": "^8.4.27",
     "postcss-cli": "^10.1.0",
