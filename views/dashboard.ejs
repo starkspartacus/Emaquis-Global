@@ -45,6 +45,7 @@
 </head>
 
 <body class="crm_body_bg">
+
     <div id="layout-wrapper">
 
         <!-- ============================================================== -->
@@ -59,7 +60,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Dashboard</h4>
+                                <h4 class="mb-0 font-size-18">Tableau de board</h4>
 
                                <!-- <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
@@ -143,23 +144,30 @@
                             <div class="card bg-warning border-warning">
                                 <div class="card-body">
                                     <div class="mb-4">
-                                        <span class="badge badge-soft-light float-right">Evolution des ventes J - 1</span>
-                                        <h5 class="card-title mb-0 text-white">Evolution</h5>
+                                        <span class="badge badge-soft-light float-right">Produit le plus vendu</span>
+                                        <h5 class="card-title mb-0 text-white"></h5>
                                     </div>
                                     <div class="row d-flex align-items-center mb-4">
-                                        <div class="col-12">
-                                            <h2 class="d-flex align-items-center text-white mb-0">
-                                                <% if(toDayPercent>0) { %>
-                                                    <a href="#" class="text_color_5">
-                                                      <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
-                                                    </a>
-                                                    <% } else { %>
-                                                    <a href="#" style="color: rgb(237, 47, 47)">
-                                                      <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
-                                                    </a>
-                                                    <% } %>
-                                            </h2>
+                                      <% if(productMostSold?.produit) { %>
+                                        <div class="single_plan d-flex align-items-center justify-content-between">
+                                          <div class="plan_left d-flex align-items-center">
+                                            <div class="thumb obj_prod">
+                                              <img src="<%= productMostSold?.produit.image %>" alt="img boisson" 
+                                              style="
+                                                width: 40px;
+                                                height: 40px;
+                                                object-fit: contain;
+                                                "
+                                              />
+                                            </div>
+                                            <div>
+                                              
+                                              <span class="text-white"><%= productMostSold?.produit?.nom_produit %> <%= productMostSold?.taille %> x <%=
+                                                  productMostSold?.quantite %></span>
+                                            </div>
+                                          </div>
                                         </div>
+                                        <% } %>
                                         
                                     </div>
                                     <!--
@@ -199,13 +207,17 @@
                         <div class="col-lg-7">
                             <div class="card">
                                 <div class="card-body">
+                                    <!--
                                     <div class="dropdown float-right position-relative">
                                         <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
                                             aria-expanded="false">
                                             <i class="mdi mdi-dots-vertical"></i>
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="#" class="dropdown-item" id="imprimer">Imprimer</a></li>
+                                            <li><a href="#" class="dropdown-item" id="imprimer">
+                                              <i class="ti-printer"></i>
+                                              Imprimer</a>
+                                            </li>
                                             <ul class="dropdown-item">
                                               <li><a href="https://api.whatsapp.com/send?text=Bonjour%20à%20tous%21" target="_blank">Partager sur WhatsApp</a></li>
                                               <li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2F" target="_blank">Partager sur Facebook</a></li>
@@ -215,6 +227,7 @@
                                             <li><a href="#" class="dropdown-item">Separated link</a></li>
                                         </ul>
                                     </div>
+                                    -->
                                     <h4 class="card-title d-inline-block">Ventes</h4>
 
                                     
@@ -304,6 +317,7 @@
                             <div class="white_card_body">
                               <div id="chart-currently"></div>
                               <div class="monthly_plan_wraper">
+                                <!--
                                 <% if(productMostSold?.produit) { %>
                                 <div class="single_plan d-flex align-items-center justify-content-between">
                                   <div class="plan_left d-flex align-items-center">
@@ -324,6 +338,7 @@
                                   </div>
                                 </div>
                                 <% } %>
+                                -->
                                 <!-- <div
                                     class="single_plan d-flex align-items-center justify-content-between"
                                   >

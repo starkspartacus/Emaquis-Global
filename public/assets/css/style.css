@@ -7,6 +7,16 @@
     scrollbar-width: none;  /* Firefox */
 }
 
+.card{
+    min-height: 150px;
+}
+
+.card:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.01);
+}
+
 .thumb{
     background-color: #e9ecef;
     height: 50px;
@@ -30,8 +40,8 @@
 /*  animation .thumb*/
 
 .thumb img{
-    animation: pulse 2s infinite;
-    transform: scale(1);
+    animation: pulse 0.7s infinite;
+    transform: scale(1.6);
     
 }
 
