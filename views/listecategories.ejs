@@ -26,7 +26,7 @@
  
      <%- include('partial/NewHead.ejs') %>
      <%- include('partial/head.ejs') %>
-     <%- include('partial/script.ejs') %>
+     
 </head>
 
 <body class="crm_body_bg">
@@ -131,9 +131,13 @@
   <!-- footer  -->
   <!-- footer  -->
   <!-- jquery slim -->
-  <%- include('partial/script.ejs') %>
+  
   <%- include('partial/reactScript.ejs') %>
 
+  <%- include('partial/script.ejs') %>
+  <%- include('partial/scriptNewTemp.ejs') %>
+  
+  <script src="/socket.io/socket.io.js "></script>
   <script type='text/babel'>
 
 

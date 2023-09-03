@@ -34,7 +34,7 @@
 
     <%- include('partial/NewHead.ejs') %>
     <%- include('partial/head.ejs') %>
-    <%- include('partial/script.ejs') %>
+    
     
     
     
@@ -164,7 +164,8 @@
   </section>
   <div class="menu-overlay"></div>
 
-  
+ 
+
   <div id="back-top" style="display: none">
     <a title="Go to Top" href="#">
       <i class="ti-angle-up"></i>
@@ -201,6 +202,9 @@
   </div>
 
   <%- include('partial/script.ejs') %>
+  <%- include('partial/scriptNewTemp.ejs') %>
+  
+  <script src="/socket.io/socket.io.js "></script>
   
   <script>
     const btns = $('.action_btn');
