@@ -52,8 +52,9 @@ const ProductCard = ({ product }) => {
           {product.produit.nom_produit}
         </h4>
         <p className='emPriceproduct'>
-          {product.prix_vente}
-          fcfa
+          
+          {`${product.prix_vente} FCFA`}
+           
         </p>
 
         {product.quantite > 0 && (
