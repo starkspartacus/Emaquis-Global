@@ -1376,6 +1376,7 @@ table.dataTable tbody td {
 /* line 922, G:/admin_project/8 admin/management_html/scss/_reset.scss */
 .mb_30 {
   margin-bottom: 30px !important;
+  margin-top: 100px;
 }
 
 @media (max-width: 575.98px) {
