@@ -358,7 +358,7 @@ const ModalCollectedAmount = ({ vente, onClose }) => {
             </div>
             <div className='modal-body'>
               <h4>
-                Prix: <b>{vente.prix} Fcfa</b>
+                Prix: <b>{vente.prix} FCFA</b>
               </h4>
               <input
                 type='number'
@@ -371,7 +371,7 @@ const ModalCollectedAmount = ({ vente, onClose }) => {
                 Monnaie à rendre:{' '}
                 <b>
                   {vente.prix < sommeEncaisse ? sommeEncaisse - vente.prix : 0}{' '}
-                  Fcfa
+                  FCFA
                 </b>
               </p>
             </div>
