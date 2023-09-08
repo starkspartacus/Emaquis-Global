@@ -2,6 +2,7 @@ const { PRODUCT_SIZE } = require('../constants');
 const { stockQueries } = require('../requests/StocksQueries');
 const { categorieQueries } = require('../requests/categorieQueries');
 const { produitQueries } = require('../requests/produitQueries');
+const { settingQueries } = require('../requests/settingQueries');
 const {
   generateQuantityByLocker,
 } = require('../utils/generateQuantityByLocker');
@@ -15,6 +16,9 @@ exports.addproduit = async (req, res) => {
       const resProduitsBySession = await produitQueries.getProduitBySession(
         sess.id || sess.travail_pour
       );
+      const setting = await settingQueries.getSettingByUserId(
+        sess.id || sess._id
+      );
 
       if (Categorie.result !== null) {
         const categories = Categorie.result;
@@ -23,7 +27,11 @@ exports.addproduit = async (req, res) => {
           categories: categories,
           globalProduits: resProduits.result,
           produits: resProduitsBySession.result,
-          user: { ...sess, id: sess.id || sess._id },
+          user: {
+            ...sess,
+            id: sess.id || sess._id,
+            hasStock: setting.result.hasStock,
+          },
           product_sizes: PRODUCT_SIZE,
           update: false,
           product: null,
@@ -69,8 +77,8 @@ exports.addproduitPost = async (req, res) => {
         req.body.produit
       );
 
-      const maquisUseStock = await stockQueries.getStocksCountBySession(
-        session
+      const setting = await settingQueries.getSettingByUserId(
+        session || user.id
       );
 
       const stock = await stockQueries.getOneStockByQuery({
@@ -79,16 +87,17 @@ exports.addproduitPost = async (req, res) => {
         size: req.body.taille,
       });
 
-      if (maquisUseStock.result) {
-        
-
+      if (setting.result.hasStock) {
         if (!stock.result && req.body.quantite > 0) {
           res.status(401).send({
             message: "Le stock n'existe pas",
             success: false,
           });
           return;
-        } else if (stock.result?.quantity < req.body.quantite) {
+        } else if (
+          setting.result.hasStock &&
+          stock.result?.quantity < req.body.quantite
+        ) {
           res.status(401).send({
             message: 'Le stock est insuffisant',
             success: false,
@@ -182,6 +191,9 @@ exports.editProduit = async (req, res) => {
     );
 
     const produit = await produitQueries.getProduitById(produitId);
+    const setting = await settingQueries.getSettingByUserId(
+      sess.id || sess._id
+    );
 
     if (!produit.result) {
       res.redirect('/listeproduit');
@@ -193,7 +205,11 @@ exports.editProduit = async (req, res) => {
       product: produit.result,
       globalProduits: resProduits.result,
       produits: resProduitsBySession.result,
-      user: { ...sess, id: sess.id || sess._id },
+      user: {
+        ...sess,
+        id: sess.id || sess._id,
+        hasStock: setting.result.hasStock,
+      },
       product_sizes: PRODUCT_SIZE,
       update: true,
     });
@@ -209,7 +225,7 @@ exports.editproduitPost = async (req, res) => {
 
     const produit = await produitQueries.getGlobalProduitById(req.body.produit);
 
-    const maquisUseStock = await stockQueries.getStocksCountBySession(session);
+    const setting = await settingQueries.getSettingByUserId(session || user.id);
 
     const stock = await stockQueries.getOneStockByQuery({
       produit: req.body.produit,
@@ -217,16 +233,17 @@ exports.editproduitPost = async (req, res) => {
       size: req.body.taille,
     });
 
-    if (maquisUseStock.result) {
-      
-
+    if (setting.result.hasStock) {
       if (!stock.result && req.body.quantite > 0) {
         res.status(401).send({
           message: "Le stock n'existe pas",
           success: false,
         });
         return;
-      } else if (stock.result?.quantity < req.body.quantite) {
+      } else if (
+        setting.result.hasStock &&
+        stock.result?.quantity < req.body.quantite
+      ) {
         res.status(401).send({
           message: 'Le stock est insuffisant',
           success: false,

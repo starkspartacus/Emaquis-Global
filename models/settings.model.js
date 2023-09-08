@@ -15,7 +15,10 @@ const SettingModel = new mongoose.Schema({
   numberOfTables: {
     type: Number,
     default: 10000,
-
+  },
+  hasStock: {
+    type: Boolean,
+    default: false,
   },
 });
 
