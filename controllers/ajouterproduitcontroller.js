@@ -135,7 +135,7 @@ exports.addproduitPost = async (req, res) => {
 
       let result = null;
 
-      if (stock.result && maquisUseStock.result) {
+      if (stock.result && setting.result.hasStock) {
         await stock.result.updateOne({
           $inc: {
             quantity: -data.quantite,
@@ -278,7 +278,7 @@ exports.editproduitPost = async (req, res) => {
 
     // ok on fait le test maintenant
 
-    if (stock.result && maquisUseStock.result) {
+    if (stock.result && setting.result.hasStock) {
       await stock.result.updateOne({
         $inc: {
           quantity: -data.quantite,
