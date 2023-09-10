@@ -60,11 +60,6 @@ exports.settingQueries = class {
   }
 
   static updateSetting(travail_pour, data) {
-    console.log(
-      '👉 👉 👉  ~ file: settingQueries.js:62 ~ travail_pour',
-      travail_pour,
-      data
-    );
     return new Promise(async (next) => {
       settingsModel
         .updateOne(

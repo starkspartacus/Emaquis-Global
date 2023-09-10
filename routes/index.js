@@ -65,6 +65,7 @@ const {
   stocksImageList,
   addStockImage,
 } = require('../controllers/stock-img.controller');
+const { settingQueries } = require('../requests/settingQueries');
 
 var router = express.Router();
 
@@ -201,13 +202,20 @@ router.post('/summaryadmin', summaryadmincontroller.summaryadmin);
 
 // user session
 
-router.get('/get-user-session', (req, res) => {
+router.get('/get-user-session', async (req, res) => {
   if (req.session.user) {
     let user = req.session.user?._doc || req.session.user;
     const { password, ...data } = user;
+    const setting = await settingQueries.getSettingByUserId(user._id);
     res.send({
       success: true,
-      data,
+      data: {
+        ...data,
+        product_return_type: setting.result.product_return_type,
+        objective: setting.result.objective,
+        numberOfTables: setting.result.numberOfTables,
+        hasStock: setting.result.hasStock,
+      },
     });
   } else {
     res.send({
@@ -314,7 +322,7 @@ router.post('/emajouterproduit', upload.single('image'), async (req, res) => {
 });
 
 router.use('/billet', billetRouter);
-router.use('/app',appConfigRouter)
+router.use('/app', appConfigRouter);
 
 router.get('*', (req, res) => {
   if (req.session.user) {

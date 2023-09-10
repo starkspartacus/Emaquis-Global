@@ -30,11 +30,11 @@
   <title>Ajouter un produit</title>
 
   <%- include('partial/head.ejs') %>
-  
-  
-  
-  
-  
+
+
+
+
+
 </head>
 
 <body class="crm_body_bg">
@@ -212,6 +212,7 @@
         const [sizesProduct, setSizesProduct] = React.useState(<%- JSON.stringify(product_sizes) %>);
         const adminSession = <%- JSON.stringify(user?.id) %>;
         const updateProduct = <%- JSON.stringify(update) %>;
+        const hasStock = <%- JSON.stringify(user?.hasStock) %>;
 
         const [productSelected,setProductSelected] = React.useState(<%- JSON.stringify(product) %>);
         const [productId, setProductId] = React.useState(<%- JSON.stringify(product?.produit?._id) %>);
@@ -234,7 +235,6 @@
         const [stocks,setStocks] = React.useState([]);
 
 
-        const maquisUseStock = stocks.length > 0;
 
         const productInStock =  stocks.find(s => s.produit._id == productId && s.size == selectedSize);
        
@@ -277,7 +277,7 @@
           }
 
 
-          if(maquisUseStock && quantite > 0){
+          if(hasStock && quantite > 0){
             if(productInStock){
               const qty = ['cardboard','locker'].includes(stockType)?  generateQuantityByLocker({
               locker: quantite,
@@ -697,7 +697,7 @@
 
                   <div className='col-lg-6'>
                     {!!productSelected &&  <p>Quantité total du produit: {quantiteStock || 0}</p>}
-                    {maquisUseStock &&  <p>Quantité en stock: {productInStock ? productInStock.quantity : 0}</p>}
+                    {productSelected && hasStock &&  <p>Quantité en stock: {productInStock ? productInStock.quantity : 0}</p>}
                    {!!productSelected &&  <img src={productSelected.image} id="preview-image" alt="" width="150px" height="150px" style={{
                       objectFit:'contain'
                      }} />
@@ -727,24 +727,24 @@
       ReactDOM.render(<AddProduct />, document.getElementById('add_product'));
       
     </script>
-    
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-   <script src="assets/js/metismenu.min.js"></script>
-   <script src="assets/js/waves.js"></script>
-   <script src="assets/js/simplebar.min.js"></script>
- 
-   
- 
-   <!-- Morris Js-->
-   <script src="../plugins/morris-js/morris.min.js"></script>
-   <!-- Raphael Js-->
-   <script src="../plugins/raphael/raphael.min.js"></script>
- 
-   <!-- Morris Custom Js-->
-   <script src="assets/pages/dashboard-demo.js"></script>
- 
-   <!-- App js -->
-   <script src="assets/js/theme.js"></script>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/metismenu.min.js"></script>
+  <script src="assets/js/waves.js"></script>
+  <script src="assets/js/simplebar.min.js"></script>
+
+
+
+  <!-- Morris Js-->
+  <script src="../plugins/morris-js/morris.min.js"></script>
+  <!-- Raphael Js-->
+  <script src="../plugins/raphael/raphael.min.js"></script>
+
+  <!-- Morris Custom Js-->
+  <script src="assets/pages/dashboard-demo.js"></script>
+
+  <!-- App js -->
+  <script src="assets/js/theme.js"></script>
 </body>
 
 <!-- Mirrored from demo.dashboardpack.com/user-management-html/add_new_user.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 17:20:09 GMT -->

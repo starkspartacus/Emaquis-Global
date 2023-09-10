@@ -20,6 +20,7 @@ exports.profile = async (req, res) => {
         product_return_type: userSetting.result.product_return_type,
         objective: userSetting.result.objective,
         numberOfTables: userSetting.result.numberOfTables,
+        hasStock: userSetting.result.hasStock,
       },
       pays: PAYS,
       retour_produits_types: TYPE_RETOUR_PRDUITS,
@@ -66,6 +67,7 @@ exports.editUserProfile = async (req, res) => {
         product_return_type: req.body.product_return_type,
         objective: req.body.objective || 0,
         numberOfTables: req.body.numberOfTables || 0,
+        hasStock: !!req.body.hasStock,
       });
     }
 
