@@ -19,14 +19,23 @@
   <!-- End Google tag (gtag.js) -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>E-maquis Admin</title>
+  <script src="assets/js/jquery.min.js"></script>
+  <title>Liste employés</title>
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>E-maquis Admin</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+    <%- include('partial/newHead.ejs') %>
 
     <%- include('partial/head.ejs') %>
+    <%- include('partial/script.ejs') %>
     
   </head>
 
@@ -40,12 +49,12 @@
   </style>
 
 
-  <%- include('partial/sidebar.ejs') %>
+  <%- include('partial/newSideBar.ejs') %>
   <!--/ sidebar  -->
 
   <section class="main_content dashboard_part large_header_bg">
     <!-- menu  -->
-    <%- include('partial/notif.ejs') %>
+    
 
     <!--/ menu  -->
     <div class="main_content_iner overly_inner">
@@ -242,7 +251,7 @@
     </div>
   </div>
 
-  <%- include('partial/script.ejs') %>
+  
   <script>
     const btns = $('.action_btn');
 
@@ -268,6 +277,24 @@
       $(btn).on('click', buttonClick);
     });
   </script>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/metismenu.min.js"></script>
+    <script src="assets/js/waves.js"></script>
+    <script src="assets/js/simplebar.min.js"></script>
+  
+    
+  
+    <!-- Morris Js-->
+    <script src="../plugins/morris-js/morris.min.js"></script>
+    <!-- Raphael Js-->
+    <script src="../plugins/raphael/raphael.min.js"></script>
+  
+    <!-- Morris Custom Js-->
+    <script src="assets/pages/dashboard-demo.js"></script>
+  
+    <!-- App js -->
+    <script src="assets/js/theme.js"></script>
 </body>
 
 </html>
