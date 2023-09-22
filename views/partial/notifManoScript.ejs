@@ -1,13 +1,12 @@
 <script type="application/javascript">
+    
 // Récupération des données depuis le serveur
 let employeLength = <%- JSON.stringify(totalemploye) %>;
 const produits = <%- JSON.stringify(Tab) %>;
 
 // Sélection des éléments du DOM
 let notificationCount = document.querySelector('.containerBell #countNotyf');
-let notificationList = document.querySelector('#notificationData .cloche');
 let notificationListUl = document.querySelector('.modal-body-notyf');
-
 let belleRegular = document.querySelector('.containerBell .bell2');
 
 
@@ -44,7 +43,7 @@ let notyf = new Notyf({
             dismissible: true,
         },
         {
-            type: 'black',
+            type: 'black',  
             background: 'black',
             icon: {
                 className: 'fas fa-frown',
@@ -80,20 +79,61 @@ const showNotification = (message, type) => {
     });
 }
 
-const addEmploye = () => {
-    if (employeLength === 0) {
-        showNotification("Vous n'avez aucun employé à votre charge", 'black');
-        showNotification("Ajoutez un employé", 'info');
+const notyfEmploye = () => {
+    if (employeLength.length < 0) {
+        showNotification(`Ajouter vos employés`, 'black');
+        
     }
 }
 
-const quantityProducts = ()=>{
-    if(produiuts < 100){
-        showNotification("Vous n'avez pas assez de produits en stock", 'black');
-        showNotification("Ajoutez des produits", 'info');
+const notyfProduit = () => {
+    if (produits.length < 0) {
+        showNotification(`Ajouter vos produits`, 'black');
+        
     }
 }
-console.log(quantityProducts);
+
+// Fonction pour afficher le nombre de notifications
+const showNotificationCount = () => {
+    notificationCount.innerHTML = notifications.length;
+    belleRegular.classList.add('active');
+}
+
+// Fonction pour afficher la liste des notifications
+const showNotificationList = () => {
+    notificationListUl.innerHTML = '';
+    notifications.forEach(notification => {
+        let li = document.createElement('li');
+        li.classList.add('notification');
+        li.innerHTML = notification;
+        notificationListUl.appendChild(li);
+    });
+}
+
+// Fonction pour ajouter une notification
+
+const addNotification = (message, type) => {
+    notifications.push(message);
+    showNotificationCount();
+    showNotificationList();
+    showNotification(message, type);
+}
+
+// Fonction pour supprimer une notification
+
+const removeNotification = () => {
+    notifications.pop();
+    showNotificationCount();
+    showNotificationList();
+}
+
+// Fonction pour supprimer toutes les notifications
+
+const removeAllNotifications = () => {
+    notifications = [];
+    showNotificationCount();
+    showNotificationList();
+}
 
 
 
