@@ -4,9 +4,14 @@ let employeLength = <%- JSON.stringify(totalemploye) %>;
 const produits = <%- JSON.stringify(Tab) %>;
 
 // Sélection des éléments du DOM
-let notificationCount = document.querySelector('#notificationData .countNotif');
+let notificationCount = document.querySelector('.containerBell #countNotyf');
 let notificationList = document.querySelector('#notificationData .cloche');
 let notificationListUl = document.querySelector('.modal-body-notyf');
+
+let belleRegular = document.querySelector('.containerBell .bell2');
+
+
+
 
 // Tableau des notifications
 let notifications = [];
@@ -61,7 +66,6 @@ let notyf = new Notyf({
         }
     ]
 });
-
 // Fonction pour afficher une notification
 const showNotification = (message, type) => {
     notyf.open({
@@ -83,137 +87,21 @@ const addEmploye = () => {
     }
 }
 
-if (employeLength === 0) {
-    
-    let tutoNewAddEmploye = document.querySelector('.tutoNewAddEmploye');
-    if(tutoNewAddEmploye){
-        tutoNewAddEmploye.classList.add('tutorialEmploye');
-    }
-} else if (employeLength > 0) {
-    let tutoNewAddEmploye = document.querySelector('.tutoNewAddEmploye');
-    if(tutoNewAddEmploye){
-        tutoNewAddEmploye.classList.remove('tutorialEmploye');
+const quantityProducts = ()=>{
+    if(produiuts < 100){
+        showNotification("Vous n'avez pas assez de produits en stock", 'black');
+        showNotification("Ajoutez des produits", 'info');
     }
 }
+console.log(quantityProducts);
 
-
-
-
-
-const addProduit = () => {
-    if (produits.length === 0) {
-        showNotification("Vous devez ajouter des produits dans votre établissement", 'error');
-    } else {
-        for (let rupture of produits) {
-            if (rupture.quantite === 0) {
-                showNotification(`Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est en rupture de stock (${rupture.quantite})`, 'black');
-            } else if (rupture.quantite < 100) {
-                showNotification(`Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est très bas (${rupture.quantite})`, 'black');
-            }
-        }
-    }
-}
-
-
-
-
-// Vérification des conditions et ajout des notifications
-if (employeLength > 0) {
-    notifications.push(`Vous avez ${employeLength} employé(s) à votre charge`);
-} else {
-    notifications.push("Vous n'avez aucun employé à votre charge");
-    notifications.push("Ajoutez un employé");
-    // ajouter une class pour le bouton
-    
-}
-
-if (produits.length === 0) {
-    notifications.push("Vous devez ajouter des produits dans votre établissement");
-    let tutoNewCompte = document.querySelector('.tutoNewCompte');
-    if(tutoNewCompte){
-        tutoNewCompte.classList.add('tutorial');
-    }
-}else if(produits.length > 0){
-    let tutoNewCompte = document.querySelector('.tutoNewCompte');
-    if(tutoNewCompte){
-        tutoNewCompte.classList.remove('tutorial');
-    }
-}
-
-for (let rupture of produits) {
-    if (rupture.quantite === 0) {
-        notifications.push(`Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est en rupture de stock (${rupture.quantite})`);
-    } else if (rupture.quantite < 100) {
-        notifications.push(`Le produit ${rupture.produit.nom_produit} de ${rupture.taille} est très bas (${rupture.quantite})`);
-    }
-}
-
-// Affichage du nombre de notifications
-notificationCount.innerHTML = notifications.length;
-
-// Fonction pour obtenir la couleur de fond de la notification en fonction du message
-const getNotificationColor = (message) => {
-    if (message.includes('rupture')) {
-        return 'black';
-    } else if (message.includes('très bas')) {
-        return 'red';
-    } else if (message.includes('aucun') || message.includes('employé')) {
-        return 'orange';
-    } else if (message.includes('Ajoutez')) {
-        return 'blue';
-    } else {
-        return 'green';
-    }
-};
-
-// Fonction pour afficher les notifications par groupe de 5
-const showNextNotificationsGroup = () => {
-    const group = notifications.slice(0, 5); // Prend les 5 prochaines notifications
-    group.forEach((message) => {
-        let bgColor = getNotificationColor(message);
-        let li = document.createElement('li');
-        li.innerHTML = `
-            <div class="card">
-                <div class="card-body" style="background: ${bgColor}">
-                    <p class="card-text text-white font-weight-bold">${message}</p>
-                </div>
-            </div>
-        `;
-        notificationListUl.appendChild(li);
-    });
-
-    notifications = notifications.slice(5); // Retire les 5 notifications affichées
-
-    if (notifications.length === 0) {
-        // S'il n'y a plus de notifications, supprime le bouton "Charger plus"
-        let loadMoreButton = document.querySelector('.load-more-button');
-        if (loadMoreButton) {
-            notificationListUl.removeChild(loadMoreButton);
-        }
-    }
-};
-
-// Gestion du clic sur l'icône de notification
-notificationList.addEventListener('click', () => {
-    // Réinitialiser la liste des notifications
-    notificationListUl.innerHTML = "";
-    // Afficher les 5 premières notifications
-    showNextNotificationsGroup();
-    if (notifications.length > 0) {
-        // Afficher le bouton "Charger plus" s'il reste des notifications
-        let loadMoreButton = document.createElement('button');
-        loadMoreButton.classList.add('btn', 'btn-sm', 'btn-light', 'btn-block', 'text-center', 'load-more-button');
-        loadMoreButton.innerHTML = `
-            <i class="mdi mdi-arrow-down-circle mr-1"></i> Charger plus..
-        `;
-        loadMoreButton.addEventListener('click', () => {
-            // Afficher les 5 prochaines notifications
-            showNextNotificationsGroup();
-        });
-        notificationListUl.appendChild(loadMoreButton);
-    }
-});
 
 
 
 </script>
+
+
+
+
+
+

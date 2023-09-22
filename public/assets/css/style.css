@@ -131,17 +131,16 @@ td{
     top: 0;
     right: 0;
     background-color: #dc3545;
+    border: solid 2px white;
     color: white;
-    border-radius: 50%;
+    border-radius: 50px;
     padding: 0 5px;
     font-size: 12px;
     font-weight: bold;
     line-height: 1;
     min-width: 20px;
     min-height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    
 }
 
 #notificationData img{
