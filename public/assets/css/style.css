@@ -9,6 +9,12 @@
 
 .card_custom{
     min-height: 90%;
+    cursor: pointer;
+}
+
+.card_custom a{
+    text-decoration: none;
+    color: #fff;
 }
 
 .card_custom:hover{
@@ -62,7 +68,24 @@
     }
 }
 
+/*  faire apparaitre les td en animation*/
 
+td{
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in-out 1 forwards;
+    transition: all 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
 
 

@@ -79,6 +79,7 @@
                     <!-- end page title -->
 
                     <div class="row">
+                        
                         <div class="col-md-6 col-xl-3">
                             <div class="card bg-primary border-primary card_custom">
                                 <div class="card-body">
@@ -86,10 +87,10 @@
                                         <span class="badge badge-soft-light float-right"></span>
                                         <h5 class="card-title mb-0 text-white">Total employé(es)</h5>
                                     </div>
-                                    <div class="row d-flex align-items-center mb-4">
+                                    <div class="row d-flex align-items-center mb-4 ">
                                         <div class="col-12">
                                             <h2 class="d-flex align-items-center mb-0 text-white">
-                                                <%- totalemploye %>
+                                             <a href="/utilisateur"><%- totalemploye %></a>
                                             </h2>
                                         </div>
                                        <!-- <div class="col-4 text-right">
@@ -116,7 +117,7 @@
                                     <div class="row d-flex  align-items-center mb-4">
                                         <div class="col-8">
                                             <h2 class="d-flex align-items-center text-white mb-0">
-                                                <%= totalVente %>
+                                                <a href="/data_table"><%= totalVente %></a>
                                             </h2>
                                         </div>
                                         <div class="col-4 text-right">
@@ -155,13 +156,13 @@
                                         <div class="single_plan d-flex align-items-center justify-content-between">
                                           <div class="plan_left d-flex align-items-center">
                                             <div class="thumb obj_prod">
-                                              <img src="<%= productMostSold?.produit.image %>" alt="img boisson" 
+                                             <a href="/bilan"><img src="<%= productMostSold?.produit.image %>" alt="img boisson" 
                                               style="
                                                 width: 40px;
                                                 height: 40px;
                                                 object-fit: contain;
                                                 "
-                                              />
+                                              /> </a>
                                             </div>
                                             <div>
                                               
@@ -192,7 +193,7 @@
                                     <div class="row d-flex align-items-center mb-4">
                                         <div class="col-12">
                                             <h2 class="d-flex align-items-center text-white mb-0">
-                                                <%= totalVenteWeek %>
+                                              <a href="/bilan"><%= totalVenteWeek %></a>
                                             </h2>
                                         </div>
                                         
@@ -458,10 +459,10 @@
                                       <% for (product of allProductsByDayGrouped) { %>
                                       <table class="table table-borderless table-hover table-centered table-nowrap mb-0">
                                           <tbody>
-                                              <tr>
+                                              <tr class="thumb_vente">
                                                   <td>
-                                                      <div class="product-image">
-                                                          <img src="<%= product.produit.image %>" alt="" class="thumb" />
+                                                      <div class="product-image ">
+                                                          <img src="<%= product.produit.image %>" alt="" class="thumb " />
                                                       </div>
                                                       <span class="text-muted font-size-12"></span>
                                                   </td>
