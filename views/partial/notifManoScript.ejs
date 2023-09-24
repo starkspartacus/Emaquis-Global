@@ -1,12 +1,16 @@
 <script type="application/javascript">
+    
 // Récupération des données depuis le serveur
 let employeLength = <%- JSON.stringify(totalemploye) %>;
 const produits = <%- JSON.stringify(Tab) %>;
 
 // Sélection des éléments du DOM
-let notificationCount = document.querySelector('#notificationData .countNotif');
-let notificationList = document.querySelector('#notificationData .cloche');
+let notificationCount = document.querySelector('.containerBell #countNotyf');
 let notificationListUl = document.querySelector('.modal-body-notyf');
+let belleRegular = document.querySelector('.containerBell .bell2');
+
+
+
 
 // Tableau des notifications
 let notifications = [];
@@ -39,7 +43,7 @@ let notyf = new Notyf({
             dismissible: true,
         },
         {
-            type: 'black',
+            type: 'black',  
             background: 'black',
             icon: {
                 className: 'fas fa-frown',
@@ -61,7 +65,6 @@ let notyf = new Notyf({
         }
     ]
 });
-
 // Fonction pour afficher une notification
 const showNotification = (message, type) => {
     notyf.open({
@@ -216,4 +219,11 @@ notificationList.addEventListener('click', () => {
 
 
 
+
 </script>
+
+
+
+
+
+

@@ -21,9 +21,12 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="MyraStudio" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="vendors/apex_chart/apex-chart2.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="js/confetti.js"></script>
+   
     <script src="js/notifMano.js" type="application/javascript"></script>
     
     
@@ -43,11 +46,12 @@
   <link rel="shortcut icon" type="image/x-icon" href="../img/paresseux_sous_officiel.png" />
 
   <%- include('partial/newHead.ejs') %>
-  
+  <%- include('partial/notifManoScript.ejs') %>
 
 </head>
 
 <body class="crm_body_bg">
+
 
     <div id="layout-wrapper">
 
@@ -79,6 +83,9 @@
                     <!-- end page title -->
 
                     <div class="row">
+                              <!-- Button trigger modal -->
+
+
                         <div class="col-md-6 col-xl-3">
                             <div class="card bg-primary border-primary card_custom">
                                 <div class="card-body">
@@ -86,10 +93,10 @@
                                         <span class="badge badge-soft-light float-right"></span>
                                         <h5 class="card-title mb-0 text-white">Total employé(es)</h5>
                                     </div>
-                                    <div class="row d-flex align-items-center mb-4">
+                                    <div class="row d-flex align-items-center mb-4 ">
                                         <div class="col-12">
                                             <h2 class="d-flex align-items-center mb-0 text-white">
-                                                <%- totalemploye %>
+                                             <a href="/utilisateur"><%- totalemploye %></a>
                                             </h2>
                                         </div>
                                        <!-- <div class="col-4 text-right">
@@ -116,7 +123,7 @@
                                     <div class="row d-flex  align-items-center mb-4">
                                         <div class="col-8">
                                             <h2 class="d-flex align-items-center text-white mb-0">
-                                                <%= totalVente %>
+                                                <a href="/data_table"><%= totalVente %></a>
                                             </h2>
                                         </div>
                                         <div class="col-4 text-right">
@@ -155,13 +162,13 @@
                                         <div class="single_plan d-flex align-items-center justify-content-between">
                                           <div class="plan_left d-flex align-items-center">
                                             <div class="thumb obj_prod">
-                                              <img src="<%= productMostSold?.produit.image %>" alt="img boisson" 
+                                             <a href="/bilan"><img src="<%= productMostSold?.produit.image %>" alt="img boisson" 
                                               style="
                                                 width: 40px;
                                                 height: 40px;
                                                 object-fit: contain;
                                                 "
-                                              />
+                                              /> </a>
                                             </div>
                                             <div>
                                               
@@ -192,7 +199,7 @@
                                     <div class="row d-flex align-items-center mb-4">
                                         <div class="col-12">
                                             <h2 class="d-flex align-items-center text-white mb-0">
-                                                <%= totalVenteWeek %>
+                                              <a href="/bilan"><%= totalVenteWeek %></a>
                                             </h2>
                                         </div>
                                         
@@ -458,10 +465,10 @@
                                       <% for (product of allProductsByDayGrouped) { %>
                                       <table class="table table-borderless table-hover table-centered table-nowrap mb-0">
                                           <tbody>
-                                              <tr>
+                                              <tr class="thumb_vente">
                                                   <td>
-                                                      <div class="product-image">
-                                                          <img src="<%= product.produit.image %>" alt="" class="thumb" />
+                                                      <div class="product-image ">
+                                                          <img src="<%= product.produit.image %>" alt="" class="thumb " />
                                                       </div>
                                                       <span class="text-muted font-size-12"></span>
                                                   </td>
@@ -903,7 +910,7 @@
     })
   </script>
   
-  <%- include('partial/notifManoScript.ejs') %>
+  
   
    <!-- jQuery  -->
    
