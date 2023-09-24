@@ -368,12 +368,10 @@ SaveConfigData.on('connection', (socket) => {
 
       // await session.commitTransaction();
 
-      console.log('Utilisateur mis à jour :', updatedUser);
-      console.log('Configuration mise à jour :', updatedSetting);
+      
       socket.emit('configsuccess', '/config_profil');
     } catch (error) {
       socket.emit('bad');
-      console.error('Erreur lors de la mise à jour :', error);
       // await session.abortTransaction();
     } finally {
       // session.endSession();

@@ -310,8 +310,6 @@ router.post('/emajouterproduit', upload.single('image'), async (req, res) => {
       image: result.Location,
       session: req.body.session,
     };
-    console.log(data);
-    console.log('okokokok');
     const Result = await produitQueries.setProduit(data);
     console.log(Result);
     res.send(200);
