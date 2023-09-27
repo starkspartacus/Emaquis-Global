@@ -78,3 +78,24 @@ exports.editUserProfile = async (req, res) => {
     res.redirect('/connexion');
   }
 };
+
+exports.editUserTimings = async (req, res) => {
+  try {
+    const timings = req.body.timings;
+    const userId = req.query.userId || req.session.user.id;
+    if (Array.isArray(timings)) {
+      await userQueries.updateUser(userId, { timings });
+      res.status(200).send({
+        message: 'success',
+      });
+    } else {
+      res.status(500).send({
+        message: 'timings must be an array',
+      });
+    }
+  } catch (err) {
+    res.status(401).send({
+      message: 'error signature',
+    });
+  }
+};

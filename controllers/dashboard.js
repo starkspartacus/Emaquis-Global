@@ -11,6 +11,7 @@ const {
   getDateByWeekendMonthYear,
   getWeeksInMonth,
 } = require('../utils/generateWeekly');
+const { helperCurrentTime } = require('../utils/helperCurrentTime');
 
 exports.dashboard = async (req, res) => {
   if (req.session.user) {
@@ -41,6 +42,16 @@ exports.dashboard = async (req, res) => {
         month + 1,
         year
       );
+
+      const { startDate, endDate } = helperCurrentTime({
+        timings: session.timings,
+      });
+
+      const VenteToDay = await venteQueries.getVentes({
+        createdAt: { $gte: startDate, $lte: endDate },
+        travail_pour: userId,
+        status_commande: { $in: ['Validée', 'Retour'] },
+      });
 
       const Vente = await venteQueries.getVentes({
         createdAt: { $gte: start, $lte: end },
@@ -79,10 +90,9 @@ exports.dashboard = async (req, res) => {
       const yesterdayKey = formatDate(
         moment(new Date()).subtract(1, 'days').toDate()
       );
-      const toDayKey = formatDate(new Date());
 
       const yesterday = venteByDay[yesterdayKey] || [];
-      const today = venteByDay[toDayKey] || [];
+      const today = VenteToDay.result || [];
 
       const yesterdayTotal = yesterday.reduce((acc, item) => {
         return acc + item.prix;
@@ -95,11 +105,9 @@ exports.dashboard = async (req, res) => {
       const toDayPercent = getPercent(yesterdayTotal, todayTotal);
 
       const totalVente =
-        venteByDay[toDayKey]?.reduce((acc, item) => {
+        today?.reduce((acc, item) => {
           return acc + item.prix;
         }, 0) || 0;
-      
-      
 
       // const toDay = new Date().getDay();
       // const time = new Date().getTime();
@@ -126,7 +134,7 @@ exports.dashboard = async (req, res) => {
         })
         .reduce((acc, item) => acc + item, 0);
 
-      const allProductsByDay = venteByDay[toDayKey]?.reduce((acc, item) => {
+      const allProductsByDay = today?.reduce((acc, item) => {
         let products = [];
         for (let [key, value] of Object.entries(item.produit)) {
           products.push({

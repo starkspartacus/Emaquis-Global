@@ -182,6 +182,8 @@ router.get('/condition_general', conditiongeneral_controller.condition_general);
 router.get('/copyright', copyrightcontroller.copyright);
 router.get('/profile', profilecontroller.profile);
 router.post('/profile', profilecontroller.editUserProfile);
+router.put('/profile/timings', profilecontroller.editUserTimings);
+
 router.get('/reglage', reglagecontroller.reglage);
 router.post('/reglage', reglagecontroller.editUserReglage);
 
