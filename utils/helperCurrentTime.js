@@ -2,6 +2,14 @@ const { formatTime } = require('./formatTime');
 const moment = require('moment');
 
 exports.helperCurrentTime = ({ date = new Date(), timings }) => {
+  if (timings.length === 0) {
+    return {
+      startDate: null,
+      endDate: null,
+      currentTime: null,
+    };
+  }
+
   let startDate = null;
   let endDate = null;
 
