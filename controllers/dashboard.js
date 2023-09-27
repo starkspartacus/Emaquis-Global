@@ -12,6 +12,7 @@ const {
   getWeeksInMonth,
 } = require('../utils/generateWeekly');
 const { helperCurrentTime } = require('../utils/helperCurrentTime');
+const { userQueries } = require('../requests/UserQueries');
 
 exports.dashboard = async (req, res) => {
   if (req.session.user) {
@@ -43,8 +44,10 @@ exports.dashboard = async (req, res) => {
         year
       );
 
+      const userAdmin = await userQueries.getUserById(userId);
+
       const { startDate, endDate } = helperCurrentTime({
-        timings: session.timings,
+        timings: userAdmin?.result?.timings || [],
       });
 
       const VenteToDay = await venteQueries.getVentes({
