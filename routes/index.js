@@ -66,6 +66,7 @@ const {
   addStockImage,
 } = require('../controllers/stock-img.controller');
 const { settingQueries } = require('../requests/settingQueries');
+const { userQueries } = require('../requests/UserQueries');
 
 var router = express.Router();
 
@@ -207,7 +208,9 @@ router.post('/summaryadmin', summaryadmincontroller.summaryadmin);
 router.get('/get-user-session', async (req, res) => {
   if (req.session.user) {
     let user = req.session.user?._doc || req.session.user;
-    const { password, ...data } = user;
+    const newUserData = await userQueries.getUserById(user._id || user.id);
+    const { password, ...data } = newUserData.result._doc;
+
     const setting = await settingQueries.getSettingByUserId(user._id);
     res.send({
       success: true,
