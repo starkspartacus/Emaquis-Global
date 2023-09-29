@@ -3,6 +3,7 @@ const { produitQueries } = require('../requests/produitQueries');
 const { employeQueries } = require('../requests/EmployeQueries');
 const categorieModel = require('../models/categorie.model');
 const { BilletQueries } = require('../requests/BilletQueries');
+const { settingQueries } = require('../requests/settingQueries');
 
 exports.emdashboard = async (req, res) => {
   try {
@@ -45,6 +46,10 @@ exports.emdashboard = async (req, res) => {
       travail_pour: req.session?.user?.travail_pour,
     });
 
+    const parentSetting = await settingQueries.getSettingByUserId(
+      req.session.user.travail_pour
+    );
+
     const Categories = await categorieModel.find({});
 
     const newSave = req.session.newSave;
@@ -75,10 +80,14 @@ exports.emdashboard = async (req, res) => {
     const sum = ventes?.reduce((total, vente) => total + vente.prix, 0) || 0;
 
     if (req.session.user.role === 'Barman') {
+      const { password, ...data } = req.session.user;
       res.render('emdashboard', {
         ventes: ventesEntente,
         newSave: newSave,
-        user: req.session.user,
+        user: {
+          ...data,
+          product_return_type: parentSetting?.result?.product_return_type,
+        },
         produits: produit.result,
         emplnum: employes.length || 0,
         sum,

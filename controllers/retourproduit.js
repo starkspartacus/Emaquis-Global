@@ -5,6 +5,9 @@ const Produits = require('../models/produit.model');
 const { helperConverStrToArr } = require('../utils/helperConvertStrToArr');
 const { TYPE_RETOUR_PRDUITS } = require('../constants');
 const { venteQueries } = require('../requests/venteQueries');
+const {
+  helperFormatReturnProducts,
+} = require('../utils/helperFormatReturnProducts');
 
 exports.addback = async (req, res) => {
   try {
@@ -235,6 +238,38 @@ exports.getProductReturn = async (req, res) => {
     res.status(500).json({
       etat: false,
       message: error.message,
+    });
+  }
+};
+
+exports.getProductsReturnValid = async (req, res) => {
+  try {
+    if (req.session.user) {
+      const productsReturn = await retourQueries.getRetour({
+        stock_return: false,
+        confirm: false,
+        dateline: {
+          $gte: new Date(),
+        },
+        product_return_type: 'tip',
+        travail_pour: req.session.user.travail_pour,
+      });
+
+      const data = productsReturn?.result;
+
+      const products = helperFormatReturnProducts(data);
+
+      res?.send({
+        data: products || [],
+      });
+    } else {
+      res.status(401).send({
+        message: 'Unauthorized',
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message,
     });
   }
 };

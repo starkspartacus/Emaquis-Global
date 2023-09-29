@@ -3,7 +3,7 @@ const Categories = () => {
   const { categorySelectedId, handleSelectCategory } =
     React.useContext(ProductsContext);
 
-  const { products: allProducts } = React.useContext(AppContext);
+  const { products: allProducts, user } = React.useContext(AppContext);
 
   React.useEffect(() => {
     const cats = globalCategories;
@@ -17,6 +17,15 @@ const Categories = () => {
     <div className='categories'>
       <h4>Categories</h4>
       <ul>
+        {user && user.product_return_type === 'tip' && (
+          <li
+            className={categorySelectedId === 'tip' ? 'active' : ''}
+            onClick={() => handleSelectCategory('tip')}
+          >
+            Avoirs
+          </li>
+        )}
+
         {!!allProducts.some((prod) => prod.promo) && (
           <li
             className={categorySelectedId === 'formule' ? 'active' : ''}

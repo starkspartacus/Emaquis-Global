@@ -1,8 +1,13 @@
 const { stockQueries } = require('../requests/StocksQueries');
 const { produitQueries } = require('../requests/produitQueries');
+const { retourQueries } = require('../requests/retourQueries');
+const { settingQueries } = require('../requests/settingQueries');
 const {
   generateQuantityByLocker,
 } = require('../utils/generateQuantityByLocker');
+const {
+  helperFormatReturnProducts,
+} = require('../utils/helperFormatReturnProducts');
 
 exports.stocksList = async (req, res) => {
   const user = req.session.user;
@@ -93,5 +98,72 @@ exports.addStock = async (req, res) => {
   } catch (e) {
     console.log(e);
     res.status(500).send({ success: false });
+  }
+};
+
+exports.returnStock = async (req) => {
+  try {
+    const session = req.session.user;
+
+    if (session) {
+      const userId = session.travail_pour || session.id || session._id;
+      const settingAdmin = await settingQueries.getSettingByUserId(userId);
+
+      if (settingAdmin.result.product_return_type === 'tip') {
+        const result = await retourQueries.getRetour({
+          stock_return: false,
+          confirm: false,
+          dateline: {
+            $lte: new Date(),
+          },
+          product_return_type: 'tip',
+          travail_pour: userId,
+        });
+
+        const productsReturn = helperFormatReturnProducts(result.result);
+
+        const products = [];
+
+        for (let productReturn of productsReturn) {
+          const findProduct = await produitQueries.getProduitById(
+            productReturn._id
+          );
+
+          if (findProduct.result) {
+            products.push({
+              ...findProduct.result._doc,
+              oldQuantite: findProduct.result.quantite,
+              quantite:
+                Number(productReturn.quantite) +
+                Number(findProduct.result.quantite),
+              tipQuantite: productReturn.quantite,
+              dateline: productReturn.dateline,
+              product_return_type: productReturn.product_return_type,
+              client_name: productReturn.client_name,
+              code: productReturn.code,
+            });
+
+            await findProduct.result.updateOne({
+              $inc: {
+                quantite: Number(productReturn.quantite),
+              },
+            });
+
+            await retourQueries.updateRetour(productReturn.tipId, {
+              stock_return: true,
+              stock_return_date: new Date(),
+            });
+          }
+        }
+
+        return products;
+      } else {
+        return [];
+      }
+    } else {
+      return [];
+    }
+  } catch (err) {
+    return [];
   }
 };

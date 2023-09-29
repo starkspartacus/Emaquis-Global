@@ -83,8 +83,10 @@ exports.editUserTimings = async (req, res) => {
   try {
     const timings = req.body.timings;
     const userId = req.query.userId || req.session.user.id;
+
     if (Array.isArray(timings)) {
       await userQueries.updateUser(userId, { timings });
+
       res.status(200).send({
         message: 'success',
       });
