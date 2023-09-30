@@ -1,5 +1,6 @@
 const venteModel = require('../models/vente.model');
 const { BilletQueries } = require('../requests/BilletQueries');
+const { returnStock } = require('./stock.controller');
 
 exports.getOneBillet = async (req, res) => {
   if (req.session.user) {
@@ -45,9 +46,11 @@ exports.openBillet = async (req, res) => {
       }
 
       if (billet.etat) {
+        const productsReturn = await returnStock(req);
         res.json({
           etat: true,
           data: billet.result,
+          productsReturn,
         });
       }
     } catch (error) {

@@ -66,6 +66,7 @@ const {
   addStockImage,
 } = require('../controllers/stock-img.controller');
 const { settingQueries } = require('../requests/settingQueries');
+const { userQueries } = require('../requests/UserQueries');
 
 var router = express.Router();
 
@@ -148,6 +149,7 @@ router.post(
 router.get('/retournerproduit', retourcontroller.addback);
 router.get('/listeRetour', retourcontroller.listeRetour);
 router.get('/retournerproduit/:code', retourcontroller.getProductReturn);
+router.get('/retourner-produit-valid', retourcontroller.getProductsReturnValid);
 
 router.post('/historiquevente', ventecontroller.venteListe);
 
@@ -182,6 +184,8 @@ router.get('/condition_general', conditiongeneral_controller.condition_general);
 router.get('/copyright', copyrightcontroller.copyright);
 router.get('/profile', profilecontroller.profile);
 router.post('/profile', profilecontroller.editUserProfile);
+router.put('/profile/timings', profilecontroller.editUserTimings);
+
 router.get('/reglage', reglagecontroller.reglage);
 router.post('/reglage', reglagecontroller.editUserReglage);
 
@@ -205,7 +209,9 @@ router.post('/summaryadmin', summaryadmincontroller.summaryadmin);
 router.get('/get-user-session', async (req, res) => {
   if (req.session.user) {
     let user = req.session.user?._doc || req.session.user;
-    const { password, ...data } = user;
+    const newUserData = await userQueries.getUserById(user._id || user.id);
+    const { password, ...data } = newUserData.result._doc;
+
     const setting = await settingQueries.getSettingByUserId(user._id);
     res.send({
       success: true,

@@ -8,6 +8,8 @@ const { employeQueries } = require('../requests/EmployeQueries');
 const { BilletQueries } = require('../requests/BilletQueries');
 const { formatDate } = require('../utils/generateYear');
 const { getDateByWeekendMonthYear } = require('../utils/generateWeekly');
+const { userQueries } = require('../requests/UserQueries');
+const { helperCurrentTime } = require('../utils/helperCurrentTime');
 
 exports.venteByMonth = async (req, res) => {
   try {
@@ -15,15 +17,10 @@ exports.venteByMonth = async (req, res) => {
       console.log('ici', req.session.user);
       const userId = req.session.user._id;
       const { month, year, week } = req.query;
-      console.log('👉 👉 👉  ~ file: vente.js:19 ~ week:', week);
-      console.log('👉 👉 👉  ~ file: vente.js:19 ~ year:', year);
-      console.log('👉 👉 👉  ~ file: vente.js:19 ~ month:', month);
 
       // startDate with month and year with moment
 
       const { start, end } = getDateByWeekendMonthYear(week, month, year);
-      console.log('👉 👉 👉  ~ file: vente.js:23 ~ end:', end);
-      console.log('👉 👉 👉  ~ file: vente.js:23 ~ start:', start);
 
       const Vente = await venteQueries.getVentes({
         createdAt: {
@@ -80,6 +77,22 @@ exports.vente = async (req, res) => {
   } catch (error) {
     res.redirect(error);
   }
+};
+
+const checkMaquisIsOpen = async (userId) => {
+  const userAdmin = await userQueries.getUserById(userId);
+
+  if (userAdmin.result) {
+    const { startDate, endDate } = helperCurrentTime({
+      timings: userAdmin.result.timings,
+    });
+
+    if (!startDate || !endDate) {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 exports.ventePost = async (req, res) => {
@@ -152,6 +165,14 @@ exports.ventePost = async (req, res) => {
       );
       let billet = await BilletQueries.getBilletByEmployeId(vente.for_employe);
 
+      const maquisIsOpen = await checkMaquisIsOpen(sess.travail_pour);
+
+      if (!maquisIsOpen) {
+        return res.status(400).json({
+          message: 'Le maquis est fermé',
+        });
+      }
+
       if (!billet.result) {
         res.status(400).json({
           message: 'la caisse de ce barman est fermée',
@@ -221,7 +242,6 @@ exports.ventePost = async (req, res) => {
         data: vente,
       });
     } else {
-      
       res.json({
         etat: false,
         data: 'erreur',
@@ -337,6 +357,14 @@ exports.editventePost = async (req, res) => {
       let billet = await BilletQueries.getBilletByEmployeId(
         oldVente.result?.for_employe
       );
+
+      const maquisIsOpen = await checkMaquisIsOpen(sess.travail_pour);
+
+      if (!maquisIsOpen) {
+        return res.status(400).json({
+          message: 'Le maquis est fermé',
+        });
+      }
 
       if (!billet.result) {
         res.status(400).json({
@@ -461,7 +489,6 @@ exports.editventePost = async (req, res) => {
         data: venteRes?.result,
       });
     } else {
-      
       res.json({
         etat: false,
         data: 'erreur',

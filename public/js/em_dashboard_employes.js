@@ -33,6 +33,7 @@ const EmDashboardEmployes = () => {
   const { venteId } = React.useContext(ProductsContext);
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState(null);
+  const [productsReturn, setProductsReturn] = React.useState([]);
 
   const handleToggleOpenDay = () => {
     // open billet
@@ -57,6 +58,12 @@ const EmDashboardEmployes = () => {
           if (!data.data.is_closed) {
             resetTotalVentes();
           }
+
+          if (data.productsReturn && data.productsReturn.length > 0) {
+            setProductsReturn(data.productsReturn);
+            $('#modalMessageProductsReturn').modal('show');
+          }
+
           updateBillet(data.data);
         } else if (data.message) {
           setMessage(data.message);
@@ -73,6 +80,12 @@ const EmDashboardEmployes = () => {
   const handleCloseMessage = () => {
     $('#modalMessage').modal('hide');
     setMessage(null);
+  };
+
+  const handleCloseProductReturnModal = () => {
+    $('#modalMessageProductsReturn').modal('hide');
+    setProductsReturn([]);
+    window.location.reload();
   };
 
   const closeBilletText =
@@ -165,35 +178,91 @@ const EmDashboardEmployes = () => {
       </div>
 
       <div
-        class='modal fade'
+        className='modal fade'
         id='modalMessage'
         tabindex='-1'
         role='dialog'
         aria-labelledby='modalMessageTitle'
         aria-hidden='true'
       >
-        <div class='modal-dialog modal-dialog-centered' role='document'>
-          <div class='modal-content'>
-            <div class='modal-header'>
-              <h5 class='modal-title' id='exampleModalLongTitle'>
+        <div className='modal-dialog modal-dialog-centered' role='document'>
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <h5 className='modal-title' id='exampleModalLongTitle'>
                 IMPOSSIBLE DE FERMER LA CAISSE
               </h5>
               <button
                 type='button'
-                class='close'
+                className='close'
                 data-dismiss='modal'
                 aria-label='Close'
               >
                 <span aria-hidden='true'>&times;</span>
               </button>
             </div>
-            <div class='modal-body'>{message}</div>
-            <div class='modal-footer'>
+            <div className='modal-body'>{message}</div>
+            <div className='modal-footer'>
               <button
                 type='button'
-                class='btn btn-success'
+                className='btn btn-success'
                 data-dismiss='modal'
                 onClick={handleCloseMessage}
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className='modal fade'
+        id='modalMessageProductsReturn'
+        tabindex='-1'
+        role='dialog'
+        aria-labelledby='modalMessageProductsReturnTitle'
+        aria-hidden='true'
+      >
+        <div
+          className='modal-dialog modal-dialog-centered'
+          role='document'
+          style={{
+            maxWidth: '50%',
+          }}
+        >
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <h5 className='modal-title' id='exampleModalLongTitle'>
+                INFORMATIONS
+              </h5>
+              <button
+                type='button'
+                className='close'
+                data-dismiss='modal'
+                aria-label='Close'
+              >
+                <span aria-hidden='true'>&times;</span>
+              </button>
+            </div>
+            <div className='modal-body'>
+              {productsReturn &&
+                productsReturn.map((productReturn) => {
+                  return (
+                    <p>
+                      la quantité du {productReturn.produit.nom_produit}{' '}
+                      {productReturn.taille} est passée de{' '}
+                      {productReturn.oldQuantite} à {productReturn.quantite}{' '}
+                      suite à l'expiration du code {productReturn.code}
+                    </p>
+                  );
+                })}
+            </div>
+            <div className='modal-footer'>
+              <button
+                type='button'
+                className='btn btn-success'
+                data-dismiss='modal'
+                onClick={handleCloseProductReturnModal}
               >
                 OK
               </button>

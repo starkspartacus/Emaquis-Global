@@ -10,7 +10,6 @@ const RetourSchema = new Schema(
         required: true,
       },
     ],
-
     remboursement: {
       type: Number,
       required: true,
@@ -43,6 +42,10 @@ const RetourSchema = new Schema(
     dateline: {
       type: Date,
       default: new Date(),
+    },
+    stock_return_date: {
+      type: Date,
+      default: null,
     },
   },
   { timestamps: true }

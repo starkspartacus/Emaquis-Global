@@ -1,10 +1,27 @@
 const ProductList = () => {
   const [products, setProducts] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
   const { categorySelectedId } = React.useContext(ProductsContext);
   const { products: allProducts } = React.useContext(AppContext);
 
   React.useEffect(() => {
+    if (categorySelectedId === 'tip') {
+      (async () => {
+        setLoading(true);
+        const res = await fetch('/retourner-produit-valid');
+        const data = await res.json();
+
+        if (data.data) {
+          setProducts(data.data);
+        } else {
+          setProducts([]);
+        }
+        setLoading(false);
+      })();
+      return;
+    }
+
     const prods = (allProducts || []).filter((prod) =>
       categorySelectedId === 'formule'
         ? prod.promo
@@ -17,9 +34,11 @@ const ProductList = () => {
     <div className='product-list'>
       <h4>Produits</h4>
       <div className='product-list__grid'>
-        {products.map((product) => {
-          return <ProductCard key={product._id} product={product} />;
-        })}
+        {loading && <p>Chargement...</p>}
+        {!loading &&
+          products.map((product) => {
+            return <ProductCard key={product._id} product={product} />;
+          })}
       </div>
     </div>
   );
@@ -51,15 +70,13 @@ const ProductCard = ({ product }) => {
         >
           {product.produit.nom_produit}
         </h4>
-        <p className='emPriceproduct'>
-          
-          {`${product.prix_vente} FCFA`}
-           
-        </p>
+        {!product.isReturnProduct && (
+          <p className='emPriceproduct'>{`${product.prix_vente} FCFA`}</p>
+        )}
 
         {product.quantite > 0 && (
           <p>
-            Stock:{' '}
+            {product.isReturnProduct ? 'Quantité' : 'Stock'}:{' '}
             <span
               style={{
                 color:
@@ -72,21 +89,34 @@ const ProductCard = ({ product }) => {
             </span>
           </p>
         )}
-        {product.quantite === 0 && <p className=''>Rupture de stock</p>}
+        {!product.isReturnProduct && product.quantite === 0 && (
+          <p className=''>Rupture de stock</p>
+        )}
+        {product.isReturnProduct && (
+          <p className=''>Expire: le {product.dateline}</p>
+        )}
+        {product.isReturnProduct && !!product.client_name && (
+          <p className=''>Client: {product.client_name}</p>
+        )}
+        {product.isReturnProduct && !!product.client_name && (
+          <p className=''>Code: {product.code}</p>
+        )}
       </div>
-      <div
-        className='product-card__actions'
-        onClick={() =>
-          billet && !billet.is_closed ? addProductToCart(product) : null
-        }
-      >
-        <button
-          className='btn'
-          disabled={!billet || (billet && billet.is_closed)}
+      {!product.isReturnProduct && (
+        <div
+          className='product-card__actions'
+          onClick={() =>
+            billet && !billet.is_closed ? addProductToCart(product) : null
+          }
         >
-          Ajouter
-        </button>
-      </div>
+          <button
+            className='btn'
+            disabled={!billet || (billet && billet.is_closed)}
+          >
+            Ajouter
+          </button>
+        </div>
+      )}
       {product.quantite === 0 && <div className='product-overlay' />}
     </div>
   );

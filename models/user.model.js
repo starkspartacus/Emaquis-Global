@@ -14,10 +14,21 @@ const UserSchema = new Schema(
     country: { type: String },
     city: { type: String },
     square: { type: String },
-    othersquare :{type:String},
+    othersquare: { type: String },
     isAdmin: {
       type: Boolean,
       default: false,
+    },
+    timings: {
+      type: [
+        {
+          day: { type: Number },
+          name: { type: String },
+          start: { type: String },
+          end: { type: String },
+        },
+      ],
+      default: [],
     },
   },
   { timestamps: true }
