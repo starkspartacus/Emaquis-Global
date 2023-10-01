@@ -1054,3 +1054,5 @@ exports.MONTHS = [
   { code: 11, nom: 'Novembre' },
   { code: 12, nom: 'Décembre' },
 ];
+
+exports.START_TIP_DAY = new Date('2023-10-01T00:00:00.000Z');

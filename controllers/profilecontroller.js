@@ -2,6 +2,7 @@ const { PAYS, TYPE_RETOUR_PRDUITS } = require('../constants');
 const { settingQueries } = require('../requests/settingQueries');
 const { userQueries } = require('../requests/UserQueries');
 const bcrypt = require('bcryptjs');
+const { helperCurrentTime } = require('../utils/helperCurrentTime');
 
 exports.profile = async (req, res) => {
   try {
@@ -86,6 +87,10 @@ exports.editUserTimings = async (req, res) => {
 
     if (Array.isArray(timings)) {
       await userQueries.updateUser(userId, { timings });
+
+      const currentTime = helperCurrentTime({ timings });
+
+      req.app.io.emit(`${userId}-current-time`, currentTime);
 
       res.status(200).send({
         message: 'success',

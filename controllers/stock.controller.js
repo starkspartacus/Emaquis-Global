@@ -1,3 +1,4 @@
+const { START_TIP_DAY } = require('../constants');
 const { stockQueries } = require('../requests/StocksQueries');
 const { produitQueries } = require('../requests/produitQueries');
 const { retourQueries } = require('../requests/retourQueries');
@@ -115,6 +116,7 @@ exports.returnStock = async (req) => {
           confirm: false,
           dateline: {
             $lte: new Date(),
+            $gte: START_TIP_DAY,
           },
           product_return_type: 'tip',
           travail_pour: userId,

@@ -82,7 +82,7 @@ exports.vente = async (req, res) => {
 const checkMaquisIsOpen = async (userId) => {
   const userAdmin = await userQueries.getUserById(userId);
 
-  if (userAdmin.result) {
+  if (userAdmin.result && userAdmin.result.timings?.length > 0) {
     const { startDate, endDate } = helperCurrentTime({
       timings: userAdmin.result.timings,
     });
