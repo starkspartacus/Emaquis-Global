@@ -98,9 +98,12 @@ exports.emdashboard = async (req, res) => {
         sum,
         categories: Categories,
         billet,
-        currentTiming: helperCurrentTime({
-          timings: parentInfo?.result?.timings || [],
-        }),
+        currentTiming:
+          parentInfo?.result?.timings?.length > 0
+            ? helperCurrentTime({
+                timings: parentInfo?.result?.timings || [],
+              })
+            : null,
       });
     } else {
       res.redirect('/emconnexion');
