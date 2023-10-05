@@ -150,6 +150,10 @@ router.get('/retournerproduit', retourcontroller.addback);
 router.get('/listeRetour', retourcontroller.listeRetour);
 router.get('/retournerproduit/:code', retourcontroller.getProductReturn);
 router.get('/retourner-produit-valid', retourcontroller.getProductsReturnValid);
+router.get(
+  '/retourner-produit-filtered',
+  retourcontroller.getProductReturnByQuery
+);
 
 router.post('/historiquevente', ventecontroller.venteListe);
 

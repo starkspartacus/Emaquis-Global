@@ -8,6 +8,7 @@ const { venteQueries } = require('../requests/venteQueries');
 const {
   helperFormatReturnProducts,
 } = require('../utils/helperFormatReturnProducts');
+const { formatQuery } = require('../utils/formatQuery');
 
 exports.addback = async (req, res) => {
   try {
@@ -270,6 +271,72 @@ exports.getProductsReturnValid = async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: err.message,
+    });
+  }
+};
+
+exports.getProductReturnByQuery = async (req, res) => {
+  const user = req.session.user;
+
+  if (user) {
+    const travail_pour = user.travail_pour || user.id || user._id;
+    const { start, end, users } = formatQuery(req.query);
+
+    let filter = {
+      travail_pour: travail_pour,
+      product_return_type: 'tip',
+    };
+
+    if (start) {
+      filter.dateline = {
+        $gte: start,
+      };
+    }
+
+    if (end) {
+      if (!filter.dateline) {
+        filter.dateline = {};
+      }
+
+      filter.dateline.$lte = end;
+    }
+
+    if (users?.length > 0) {
+      filter.employe = {
+        $in: users,
+      };
+    }
+
+    const productsReturnExpired = await retourQueries.getRetour({
+      $and: [
+        filter,
+        {
+          dateline: {
+            $lt: new Date(),
+          },
+        },
+      ],
+    });
+
+    const productsReturnPending = await retourQueries.getRetour({
+      travail_pour: travail_pour,
+      product_return_type: 'tip',
+      dateline: {
+        $gte: new Date(),
+      },
+      stock_return: false,
+      confirm: false,
+    });
+
+    res?.send({
+      data: {
+        tipsPending: productsReturnPending?.result || [],
+        tipsExpired: productsReturnExpired?.result || [],
+      },
+    });
+  } else {
+    res.status(401).send({
+      message: 'Unauthorized',
     });
   }
 };
