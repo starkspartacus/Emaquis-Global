@@ -87,14 +87,11 @@ SaveUSer.on("connection", (socket) => {
 //connexion admin
 const UserLogin = io.of("/connexion").use(Serveur.getSharedSession());
 UserLogin.on("connection", (socket) => {
-  console.log("connexion utilisateur");
   try {
     socket.on("login", async (data) => {
       const { emailOrPhoneNumber, password } = data;
       //console.log(emailOrPhoneNumber, password, 'data');
-      if (!(emailOrPhoneNumber && password)) {
-        console.log("Veuillez remplir tous les champs");
-      }
+
       const userlogin = await User.findOne({
         $or: [{ email: emailOrPhoneNumber }, { numero: emailOrPhoneNumber }],
       });
@@ -111,6 +108,7 @@ UserLogin.on("connection", (socket) => {
         );
 
         userlogin.token = token;
+
         socket.handshake.session.user = {
           id: userlogin._id,
           username: userlogin.username,
