@@ -5,21 +5,14 @@ exports.produit = async (req, res) => {
     const session = req.session.user;
 
     try {
-      const Produit = await produitQueries.getProduit();
+      const products = await produitQueries.getProduitBySession(
+        session.id || session.travail_pour
+      );
 
-      const Produitid = await produitQueries.getProduitById(req.query.id);
-      let Result = [];
-      if (Produit.result !== null) {
-        const produit = await produitQueries.getProduit(Produitid);
-        let prod = produit.result;
-        prod.forEach(async (el) => {
-          if (session.id == el.session || session.travail_pour == el.session) {
-            Result.push(el);
-          }
-        });
-      }
-
-      res.render('listeproduit', { Result, user: req.session.user });
+      res.render('listeproduit', {
+        Result: products.result,
+        user: req.session.user,
+      });
     } catch (e) {
       console.log('err', e);
       res.redirect(e);

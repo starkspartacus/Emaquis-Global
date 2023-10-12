@@ -108,6 +108,37 @@ exports.produitQueries = class {
     }
   }
 
+  static getProduitBySession(sessionId) {
+    try {
+      return new Promise(async (next) => {
+        Produit.find({
+          session: sessionId,
+        })
+          .populate({
+            path: 'produit',
+            populate: {
+              path: 'categorie',
+            },
+          })
+
+          .then((data) => {
+            next({
+              etat: true,
+              result: data,
+            });
+          })
+          .catch((err) => {
+            next({
+              etat: false,
+              err: err,
+            });
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   static getProduit() {
     try {
       return new Promise(async (next) => {
