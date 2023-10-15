@@ -95,14 +95,14 @@ const TablesItem = ({
       )
     ) {
       return (
-        <span className='product-formule'>
+        <span className='product-formule' key={el._id}>
           {el.produit.nom_produit}
           {text}
         </span>
       );
     } else {
       return (
-        <span>
+        <span key={el._id}>
           {el.produit.nom_produit}
           {text}
         </span>

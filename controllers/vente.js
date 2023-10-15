@@ -82,7 +82,7 @@ exports.vente = async (req, res) => {
 const checkMaquisIsOpen = async (userId) => {
   const userAdmin = await userQueries.getUserById(userId);
 
-  if (userAdmin.result) {
+  if (userAdmin.result && userAdmin.result.timings?.length > 0) {
     const { startDate, endDate } = helperCurrentTime({
       timings: userAdmin.result.timings,
     });
@@ -671,24 +671,7 @@ exports.venteBilan = async (req, res) => {
           prix: vente.quantite[produitIndex] < 0 ? vente.prix : 0,
         };
 
-        // verifier si le produit existe et calculer son benefice
-
-        const productFind = produits.find(
-          (prod) => '' + prod.productId === '' + product.productId
-        );
-
-        if (productFind) {
-          productFind.quantite += vente.quantite[produitIndex];
-          productFind.total_vente += total_vente;
-          productFind.benefice += total_vente - total_achat;
-
-          productFind.retour_quantite +=
-            vente.quantite[produitIndex] < 0 ? vente.quantite[produitIndex] : 0;
-
-          productFind.prix += vente.quantite[produitIndex] < 0 ? vente.prix : 0;
-        } else {
-          produits.push(product);
-        }
+        produits.push(product);
       }
     }
 

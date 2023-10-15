@@ -11,6 +11,7 @@ const AppRoot = () => {
   const [productUnvailable, setProductUnvailable] = React.useState([]);
   const [billet, setBillet] = React.useState(null);
   const [user, setUser] = React.useState(null);
+  const [currentTiming, setCurrentTiming] = React.useState(null);
 
   const handleSelectCategory = (id) => {
     setCategorySelectedId(id);
@@ -50,7 +51,7 @@ const AppRoot = () => {
             const index = vente.produit.findIndex(
               (el) => el.productId === product._id
             );
-            
+
             if (index !== -1) {
               const newProduct = { ...product };
               newProduct.quantite -= vente.quantite[index];
@@ -100,6 +101,11 @@ const AppRoot = () => {
           return newProducts;
         });
       });
+
+      socket.on(`${user_travail_pour}-current-time`, (data) => {
+        console.log('current-time', data);
+        setCurrentTiming(data);
+      });
     });
   }, []);
 
@@ -116,6 +122,7 @@ const AppRoot = () => {
     setVentes(globalVentes);
     setBillet(globalBillet);
     setUser(globalUser);
+    setCurrentTiming(globalCurrentTiming);
   }, []);
 
   const updateTotalVentes = (total) => {
@@ -288,6 +295,7 @@ const AppRoot = () => {
         updateBillet,
         user,
         resetTotalVentes,
+        currentTiming,
       }}
     >
       <ProductsContext.Provider

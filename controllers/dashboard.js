@@ -90,12 +90,17 @@ exports.dashboard = async (req, res) => {
         return acc;
       }, {});
 
+      const toDayKey = formatDate(new Date());
+
       const yesterdayKey = formatDate(
         moment(new Date()).subtract(1, 'days').toDate()
       );
 
       const yesterday = venteByDay[yesterdayKey] || [];
-      const today = VenteToDay.result || [];
+      const today =
+        (userAdmin.result.timings.length > 0
+          ? venteByDay[toDayKey]
+          : VenteToDay.result) || [];
 
       const yesterdayTotal = yesterday.reduce((acc, item) => {
         return acc + item.prix;

@@ -4,6 +4,8 @@ const { employeQueries } = require('../requests/EmployeQueries');
 const categorieModel = require('../models/categorie.model');
 const { BilletQueries } = require('../requests/BilletQueries');
 const { settingQueries } = require('../requests/settingQueries');
+const { helperCurrentTime } = require('../utils/helperCurrentTime');
+const { userQueries } = require('../requests/UserQueries');
 
 exports.emdashboard = async (req, res) => {
   try {
@@ -47,6 +49,9 @@ exports.emdashboard = async (req, res) => {
     });
 
     const parentSetting = await settingQueries.getSettingByUserId(
+      req.session.user.travail_pour
+    );
+    const parentInfo = await userQueries.getUserById(
       req.session.user.travail_pour
     );
 
@@ -93,6 +98,12 @@ exports.emdashboard = async (req, res) => {
         sum,
         categories: Categories,
         billet,
+        currentTiming:
+          parentInfo?.result?.timings?.length > 0
+            ? helperCurrentTime({
+                timings: parentInfo?.result?.timings || [],
+              })
+            : null,
       });
     } else {
       res.redirect('/emconnexion');
