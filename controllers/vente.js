@@ -592,97 +592,103 @@ exports.retourListe = async (req, res) => {
 };
 
 exports.venteBilan = async (req, res) => {
-  if (req.session.user) {
-    const query = req.query;
+  try {
+    if (req.session.user) {
+      const query = req.query;
 
-    const start =
-      query.from !== 'null'
-        ? new Date(new Date(query.from).setHours(0, 0, 0))
+      const start =
+        query.from !== 'null'
+          ? new Date(new Date(query.from).setHours(0, 0, 0))
+          : null;
+      const end =
+        query.to !== 'null'
+          ? new Date(new Date(query.to).setHours(23, 59, 59))
+          : null;
+
+      const users = query.users
+        ? query.users?.includes('[')
+          ? JSON.parse(query.users || '[]')
+          : [query.users]
         : null;
-    const end =
-      query.to !== 'null'
-        ? new Date(new Date(query.to).setHours(23, 59, 59))
-        : null;
 
-    const users = query.users
-      ? query.users?.includes('[')
-        ? JSON.parse(query.users || '[]')
-        : [query.users]
-      : null;
-
-    let filter = {
-      travail_pour: req.session.user._id,
-      status_commande: {
-        $in: ['Validée', 'Retour'],
-      },
-    };
-
-    if (start) {
-      filter.createdAt = {
-        $gte: start,
+      let filter = {
+        travail_pour: req.session.user._id,
+        status_commande: {
+          $in: ['Validée', 'Retour'],
+        },
       };
-    }
 
-    if (end) {
-      if (!filter.createdAt) {
-        filter.createdAt = {};
-      }
-
-      filter.createdAt.$lte = end;
-    }
-
-    if (users?.length > 0) {
-      filter.employe = {
-        $in: users,
-      };
-    }
-
-    const ventes = await venteQueries.getVentes(filter);
-
-    let produits = [];
-
-    // recupere les produits vendus
-    for (let vente of ventes.result) {
-      // tous produit dans chaque vente(par index et produit)
-      for (let [produitIndex, produit] of vente.produit.entries()) {
-        // fait un nouveau formatage de produit pour le bilan
-        const total_vente =
-          vente.quantite[produitIndex] < 0
-            ? vente.prix
-            : produit.prix_vente * vente.quantite[produitIndex];
-
-        const total_achat = produit.prix_achat * vente.quantite[produitIndex];
-
-        const product = {
-          nom: produit.produit.nom_produit,
-          categorie: produit.produit.categorie,
-          prix_vente: produit.prix_vente,
-          prix_achat: produit.prix_achat,
-          quantite: vente.quantite[produitIndex],
-          taille: produit.taille,
-          _id: produit._id,
-          productId: produit.productId,
-          total_vente,
-          benefice: total_vente - total_achat,
-          employe: vente.employe,
-          createdAt: vente.createdAt,
-          retour_quantite:
-            vente.quantite[produitIndex] < 0 ? vente.quantite[produitIndex] : 0,
-          prix: vente.quantite[produitIndex] < 0 ? vente.prix : 0,
+      if (start) {
+        filter.createdAt = {
+          $gte: start,
         };
-
-        produits.push(product);
       }
-    }
 
-    res.send({
-      etat: true,
-      data: produits,
-    });
-  } else {
-    res.status(401).send({
-      etat: false,
-      data: 'error signature',
-    });
+      if (end) {
+        if (!filter.createdAt) {
+          filter.createdAt = {};
+        }
+
+        filter.createdAt.$lte = end;
+      }
+
+      if (users?.length > 0) {
+        filter.employe = {
+          $in: users,
+        };
+      }
+
+      const ventes = await venteQueries.getVentes(filter);
+
+      let produits = [];
+
+      // recupere les produits vendus
+      for (let vente of ventes.result) {
+        // tous produit dans chaque vente(par index et produit)
+        for (let [produitIndex, produit] of vente.produit.entries()) {
+          // fait un nouveau formatage de produit pour le bilan
+          const total_vente =
+            vente.quantite[produitIndex] < 0
+              ? vente.prix
+              : produit.prix_vente * vente.quantite[produitIndex];
+
+          const total_achat = produit.prix_achat * vente.quantite[produitIndex];
+
+          const product = {
+            nom: produit.produit?.nom_produit,
+            categorie: produit.produit.categorie,
+            prix_vente: produit.prix_vente,
+            prix_achat: produit.prix_achat,
+            quantite: vente.quantite[produitIndex],
+            taille: produit.taille,
+            _id: produit._id,
+            productId: produit.productId,
+            total_vente,
+            benefice: total_vente - total_achat,
+            employe: vente.employe,
+            createdAt: vente.createdAt,
+            retour_quantite:
+              vente.quantite[produitIndex] < 0
+                ? vente.quantite[produitIndex]
+                : 0,
+            prix: vente.quantite[produitIndex] < 0 ? vente.prix : 0,
+          };
+
+          produits.push(product);
+        }
+      }
+
+      res.send({
+        etat: true,
+        data: produits,
+      });
+    } else {
+      res.status(401).send({
+        etat: false,
+        data: 'error signature',
+      });
+    }
+  } catch (err) {
+    res.status(500).send({});
   }
 };
