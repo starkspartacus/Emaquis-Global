@@ -67,6 +67,7 @@ const {
 } = require('../controllers/stock-img.controller');
 const { settingQueries } = require('../requests/settingQueries');
 const { userQueries } = require('../requests/UserQueries');
+const { generateTicket } = require('../controllers/ticket.controller');
 
 var router = express.Router();
 
@@ -328,6 +329,8 @@ router.post('/emajouterproduit', upload.single('image'), async (req, res) => {
 
   const description = req.body.description;
 });
+
+router.get('/generate-ticket/:orderId', generateTicket);
 
 router.use('/billet', billetRouter);
 router.use('/app', appConfigRouter);
