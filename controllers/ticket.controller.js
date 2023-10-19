@@ -1,8 +1,8 @@
-const puppeteer = require('puppeteer');
-const path = require('path');
-const ejs = require('ejs');
-const { venteQueries } = require('../requests/venteQueries');
-const { userQueries } = require('../requests/UserQueries');
+const puppeteer = require("puppeteer");
+const path = require("path");
+const ejs = require("ejs");
+const { venteQueries } = require("../requests/venteQueries");
+const { userQueries } = require("../requests/UserQueries");
 
 exports.generateTicket = async (req, res) => {
   try {
@@ -16,12 +16,12 @@ exports.generateTicket = async (req, res) => {
 
       if (vente.result) {
         const browser = await puppeteer.launch({
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+          args: ["--no-sandbox", "--disable-setuid-sandbox"],
         });
         const page = await browser.newPage();
 
         const htmlContent = await ejs.renderFile(
-          path.join(__dirname, '../templates/orderTicket.ejs'),
+          path.join(__dirname, "../templates/orderTicket.ejs"),
           {
             vente: vente.result,
             nom_etablissement: admin.result.nom_etablissement,
@@ -34,20 +34,20 @@ exports.generateTicket = async (req, res) => {
         await page.setContent(htmlContent);
 
         const pdf = await page.pdf({
-          path: 'page.pdf',
-          format: 'A4',
+          path: "page.pdf",
+          format: "A4",
           printBackground: false,
         });
 
         browser.close();
 
-        res.contentType('application/pdf');
+        res.contentType("application/pdf");
         res.send(pdf);
       } else {
         res.send("La commande n'existe pas");
       }
     } else {
-      res.send('Vous devez être connecté pour accéder à cette page');
+      res.send("Vous devez être connecté pour accéder à cette page");
     }
   } catch (err) {
     res.send("Une erreur s'est produite, veuillez réessayer plus tard");
