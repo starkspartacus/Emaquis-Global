@@ -10,9 +10,11 @@ exports.generateTicket = async (req, res) => {
     if (user) {
       const adminId = user.travail_pour || user.id || user._id;
       const orderId = req.params.orderId;
+      
 
       const admin = await userQueries.getUserById(adminId);
       const vente = await venteQueries.getVentesById(orderId);
+      
 
       if (vente.result) {
         const browser = await puppeteer.launch({
@@ -24,10 +26,17 @@ exports.generateTicket = async (req, res) => {
           path.join(__dirname, "../templates/orderTicket.ejs"),
           {
             vente: vente.result,
+            
             nom_etablissement: admin.result.nom_etablissement,
+            adresse: admin.result.adresse,
+            telephone: admin.result.telephone,
+            email: admin.result.email,
+            country: admin.result.country,
+            city: admin.result.city,
             total: vente.result.produit.reduce((acc, curr, index) => {
               return acc + curr.prix_vente * vente.result.quantite[index];
             }, 0),
+            id_vente: vente.result._id,
           }
         );
 
