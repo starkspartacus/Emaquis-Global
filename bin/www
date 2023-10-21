@@ -117,6 +117,7 @@ UserLogin.on("connection", (socket) => {
           ...userlogin._doc,
           token,
         };
+        console.log(token)
         
         socket.handshake.session.save();
         socket.emit("loginsuccess", "/dashboard");

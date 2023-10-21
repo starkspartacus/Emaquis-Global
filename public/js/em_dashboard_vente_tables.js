@@ -73,6 +73,8 @@ const TablesItem = ({
 
         setTimeout(() => {
           setShowSuccess(false);
+          setVenteToConfirm(vente);
+          $('#confirmOrder').modal('show');
         }, 500);
       })
       .catch((err) => {
@@ -269,6 +271,77 @@ const ModalDelete = ({
   );
 };
 
+const ModalConfirmOrder = ({ venteIdToConfirm, onClose }) => {
+  const handleClose = () => {
+    onClose();
+    $('#confirmOrder').modal('hide');
+  };
+
+  return (
+    <div
+      className='modal fade'
+      id='confirmOrder'
+      tabindex='-1'
+      role='dialog'
+      aria-labelledby='myModalTitle'
+      data-backdrop='false'
+    >
+      <div
+        className='modal-dialog modal-dialog-centered'
+        style={{
+          maxWidth: '600px',
+        }}
+        role='document'
+      >
+        {!!venteIdToConfirm && (
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <h2 className='modal-title' id='exampleModalLongTitle'>
+                Commande confirmée avec succès
+              </h2>
+              <button
+                type='button'
+                className='close close-modal'
+                data-dismiss='modal'
+                aria-label='Close'
+                id='close-modal'
+                onClick={handleClose}
+              >
+                <span aria-hidden='true'>&times;</span>
+              </button>
+            </div>
+            <div className='modal-body'>
+              <h4 className='text-center'>Voulez-vous imprimer le ticket</h4>
+            </div>
+
+            <div className='modal-footer'>
+              <button
+                type='button'
+                className='btn btn-danger close-modal'
+                onClick={handleClose}
+              >
+                Non
+              </button>
+              <a
+                type='button'
+                className='btn btn-success close-modal'
+                data-dismiss='modal'
+                onClick={handleClose}
+                href={`/generate-ticket/${
+                  venteIdToConfirm._id || venteIdToConfirm
+                }`}
+                target='_blank'
+              >
+                Oui
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const ModalCollectedAmount = ({ vente, onClose }) => {
   const [loading, setLoading] = React.useState(false);
 
@@ -434,6 +507,7 @@ const EmDashboardVenteTables = () => {
   const [showDanger, setShowDanger] = React.useState(false);
   const [venteIdToDelete, setVenteIdToDelete] = React.useState(null);
   const [venteToConfirm, setVenteToConfirm] = React.useState(null);
+  const [venteConfirmed, setVenteConfirmed] = React.useState(null);
   const { venteId } = React.useContext(ProductsContext);
 
   return (
@@ -505,6 +579,10 @@ const EmDashboardVenteTables = () => {
       />
       <ModalCollectedAmount
         vente={venteToConfirm}
+        onClose={() => setVenteToConfirm(null)}
+      />
+      <ModalConfirmOrder
+        venteIdToConfirm={venteToConfirm}
         onClose={() => setVenteToConfirm(null)}
       />
     </React.Fragment>
