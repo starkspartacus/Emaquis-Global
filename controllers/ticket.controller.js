@@ -18,6 +18,7 @@ exports.generateTicket = async (req, res) => {
 
       if (vente.result) {
         const browser = await puppeteer.launch({
+          headless: 'new',
           args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
         const page = await browser.newPage();
@@ -59,6 +60,7 @@ exports.generateTicket = async (req, res) => {
       res.send('Vous devez être connecté pour accéder à cette page');
     }
   } catch (err) {
+    console.log('👉 👉 👉  ~ file: ticket.controller.js:62 ~ err:', err);
     res.send("Une erreur s'est produite, veuillez réessayer plus tard");
   }
 };
