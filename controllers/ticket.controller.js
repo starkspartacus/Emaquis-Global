@@ -43,11 +43,7 @@ exports.generateTicket = async (req, res) => {
 
         await page.setContent(htmlContent);
 
-        const pdf = await page.pdf({
-          path: 'page.pdf',
-          format: 'A4',
-          printBackground: false,
-        });
+        const pdf = await page.pdf();
 
         browser.close();
 
