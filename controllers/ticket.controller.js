@@ -1,4 +1,3 @@
-PUPPETEER_SKIP_DOWNLOAD
 const puppeteer = require("puppeteer");
 const path = require("path");
 const ejs = require("ejs");
