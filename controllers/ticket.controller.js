@@ -36,7 +36,7 @@ exports.generateTicket = async (req, res) => {
             total: vente.result.produit.reduce((acc, curr, index) => {
               return acc + curr.prix_vente * vente.result.quantite[index];
             }, 0),
-            id_vente: vente.result._id,
+            id_vente: vente.result._id.toString().slice(-8),
           }
         );
 
