@@ -23,22 +23,22 @@ exports.helperCurrentTime = ({ date = new Date(), timings }) => {
   const currentMinute = date.getMinutes();
 
   const currentTime = `${formatTime(currentHour)}:${formatTime(currentMinute)}`;
-
   let { endTime, endIsLessThanStart } = helperGetTimeEnd(timing);
   const { endTime: prevEndTime } = helperGetTimeEnd(prevTiming);
 
   if (currentTime < timing.start && currentTime < prevEndTime) {
-    timing = { ...prevTiming };
+    timing = prevTiming;
     isPrevDay = true;
     const { endTime: newEndTime, endIsLessThanStart: newEndIsLessThanStart } =
-      helperGetTimeEnd(timing);
+      helperGetTimeEnd(prevTiming);
+
     endTime = newEndTime;
     endIsLessThanStart = newEndIsLessThanStart;
   }
 
   if (
     (timing.start <= currentTime && currentTime <= endTime) ||
-    (endIsLessThanStart && currentTime <= endTime)
+    (endIsLessThanStart && currentTime <= timing.end)
   ) {
     const [startHours, startMinutes] = timing.start.split(':');
     const [endHours, endMinutes] = timing.end.split(':');

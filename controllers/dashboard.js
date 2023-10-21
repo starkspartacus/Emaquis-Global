@@ -98,7 +98,7 @@ exports.dashboard = async (req, res) => {
 
       const yesterday = venteByDay[yesterdayKey] || [];
       const today =
-        (userAdmin.result.timings.length > 0
+        (userAdmin.result.timings.length === 0
           ? venteByDay[toDayKey]
           : VenteToDay.result) || [];
 
