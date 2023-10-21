@@ -3,6 +3,7 @@ const path = require("path");
 const ejs = require("ejs");
 const { venteQueries } = require("../requests/venteQueries");
 const { userQueries } = require("../requests/UserQueries");
+const {employeQueries} = require("../requests/employeQueries");
 
 exports.generateTicket = async (req, res) => {
   try {
@@ -14,6 +15,7 @@ exports.generateTicket = async (req, res) => {
 
       const admin = await userQueries.getUserById(adminId);
       const vente = await venteQueries.getVentesById(orderId);
+      const barman = await employeQueries.getEmployeById(vente.result.employe);
       
 
       if (vente.result) {
@@ -26,7 +28,7 @@ exports.generateTicket = async (req, res) => {
           path.join(__dirname, "../templates/orderTicket.ejs"),
           {
             vente: vente.result,
-            
+            barman: barman.result.nom,
             nom_etablissement: admin.result.nom_etablissement,
             adresse: admin.result.adresse,
             telephone: admin.result.telephone,

@@ -53,6 +53,7 @@
               justify-content: space-between;
               margin: 1rem 0;
               font-family: 'Roboto', sans-serif;
+              font-size: 0.7rem;
             "
         >
           <div>
@@ -63,7 +64,7 @@
 
           <div>
             <h3>Facture N°: <%= id_vente %></h3>
-            <h3>Employé: </h3>
+            <h3>Employé: <%= barman %></h3>
             <p><%= new Date().toLocaleString() %></p>
           </div>
           
@@ -131,6 +132,7 @@
                 flex-direction: row;
                 justify-content: space-between;
                 font-family: 'Roboto', sans-serif;
+                font-size: 0.8rem;
               "
             >
               <h3 style="flex: 1">Total:</h3>
@@ -142,6 +144,7 @@
                 flex-direction: row;
                 justify-content: space-between;
                 font-family: 'Roboto', sans-serif;
+                font-size: 0.8rem;
               "
             >
               <h3 style="flex: 1">TVA(%)</h3>
@@ -160,7 +163,7 @@
               "
             >
               <p style="flex: 1">Somme encaissée:</p>
-              <p><%= vente.somme_encaisse %> F</p>
+              <p><%= vente.somme_encaisse %> FCFA</p>
             </div>
 
             <div
@@ -172,7 +175,7 @@
               "
             >
               <p style="flex: 1">Monnaie rendu:</p>
-              <p><%= vente.monnaie %> F</p>
+              <p><%= vente.monnaie %> FCFA</p>
             </div>
           </div>
 
@@ -183,7 +186,7 @@
             "
             >
             https://www.e-maquis.com/<br>
-            <span>conseiller E-maquis : +225 0709454685</span><br>
+            <span>conseiller E-maquis :+330760484911<br> +225 0709454685</span><br>
             <span style="font-size: 8px">Powered by <a href="https://haut-numerique.com/">HNM</a></span><br>
             
             
