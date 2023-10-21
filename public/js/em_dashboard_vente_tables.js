@@ -352,6 +352,9 @@ const ModalCollectedAmount = ({ vente, onClose }) => {
   const handleClose = () => {
     onClose();
     $('#collectedAmount').modal('hide');
+
+    $('#confirmOrder').modal('show');
+
     setSommeEncaisse(null);
   };
 
@@ -507,7 +510,6 @@ const EmDashboardVenteTables = () => {
   const [showDanger, setShowDanger] = React.useState(false);
   const [venteIdToDelete, setVenteIdToDelete] = React.useState(null);
   const [venteToConfirm, setVenteToConfirm] = React.useState(null);
-  const [venteConfirmed, setVenteConfirmed] = React.useState(null);
   const { venteId } = React.useContext(ProductsContext);
 
   return (
@@ -577,10 +579,7 @@ const EmDashboardVenteTables = () => {
         setShowDanger={setShowDanger}
         setShowSuccess={setShowSuccess}
       />
-      <ModalCollectedAmount
-        vente={venteToConfirm}
-        onClose={() => setVenteToConfirm(null)}
-      />
+      <ModalCollectedAmount vente={venteToConfirm} onClose={() => {}} />
       <ModalConfirmOrder
         venteIdToConfirm={venteToConfirm}
         onClose={() => setVenteToConfirm(null)}
