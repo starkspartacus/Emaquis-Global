@@ -87,7 +87,7 @@ exports.addproduitPost = async (req, res) => {
         size: req.body.taille,
       });
 
-      if (setting.result.hasStock) {
+      if (setting.result.hasStock && !req.body.is_cocktail) {
         if (!stock.result && req.body.quantite > 0) {
           res.status(401).send({
             message: "Le stock n'existe pas",
@@ -125,6 +125,7 @@ exports.addproduitPost = async (req, res) => {
         promo_price: parseInt(req.body.promo_price) || null,
         session: session,
         historiques: [],
+        is_cocktail: req.body.is_cocktail,
       };
 
       const produit_exist = await produitQueries.getProduitByData({
@@ -135,7 +136,11 @@ exports.addproduitPost = async (req, res) => {
 
       let result = null;
 
-      if (stock.result && setting.result.hasStock) {
+      if (
+        stock.result &&
+        setting.result.hasStock &&
+        !produit_exist.result.is_cocktail
+      ) {
         await stock.result.updateOne({
           $inc: {
             quantity: -data.quantite,
@@ -156,7 +161,11 @@ exports.addproduitPost = async (req, res) => {
             : user.username,
       };
 
-      if (produit_exist.etat && produit_exist.result) {
+      if (
+        produit_exist.etat &&
+        produit_exist.result &&
+        !produit_exist.result.is_cocktail
+      ) {
         result = await produitQueries.updateProduit(
           { produitId: produit_exist.result._id, session },
           {
@@ -233,7 +242,7 @@ exports.editproduitPost = async (req, res) => {
       size: req.body.taille,
     });
 
-    if (setting.result.hasStock) {
+    if (setting.result.hasStock && !req.body.is_cocktail) {
       if (!stock.result && req.body.quantite > 0) {
         res.status(401).send({
           message: "Le stock n'existe pas",
@@ -278,7 +287,7 @@ exports.editproduitPost = async (req, res) => {
 
     // ok on fait le test maintenant
 
-    if (stock.result && setting.result.hasStock) {
+    if (stock.result && setting.result.hasStock && !req.body.is_cocktail) {
       await stock.result.updateOne({
         $inc: {
           quantity: -data.quantite,
@@ -292,7 +301,9 @@ exports.editproduitPost = async (req, res) => {
       taille: data.taille,
     });
 
-    const newQty = data.quantite + produit_exist.result.quantite;
+    const newQty = req.body.is_cocktail
+      ? 0
+      : data.quantite + produit_exist.result.quantite;
 
     const newHistorique = {
       quantite: newQty,

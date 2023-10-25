@@ -169,7 +169,7 @@ const AppRoot = () => {
   };
 
   const addProductToCart = (product) => {
-    if (product.quantite <= 0) {
+    if (product.quantite <= 0 && !product.is_cocktail) {
       return;
     }
 
@@ -179,9 +179,10 @@ const AppRoot = () => {
       const qty = cartItem.quantity - (cartItem.quantity_already_sold || 0);
 
       if (
-        qty + 1 > product.quantite ||
-        (categorySelectedId === 'formule' &&
-          qty + cartItem.promo_quantity > product.quantite)
+        !product.is_cocktail &&
+        (qty + 1 > product.quantite ||
+          (categorySelectedId === 'formule' &&
+            qty + cartItem.promo_quantity > product.quantite))
       ) {
         alert('Vous ne pouvez pas ajouter plus de produits que le stock');
         return;
@@ -216,7 +217,7 @@ const AppRoot = () => {
   const updateProductQuantity = (product, quantity) => {
     const cartItem = carts.find((cart) => cart._id === product._id);
     if (cartItem) {
-      if (quantity > product.quantite) {
+      if (!product.is_cocktail && quantity > product.quantite) {
         alert('Vous ne pouvez pas ajouter plus de produits que le stock');
         return;
       }
@@ -262,6 +263,7 @@ const AppRoot = () => {
         ...product,
         quantity: vente.quantite[index],
         quantity_already_sold: vente.quantite[index],
+        is_cocktail: product.taille === 'c',
         _id: product.productId,
       });
     });

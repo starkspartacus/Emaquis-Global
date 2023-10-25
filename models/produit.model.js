@@ -24,6 +24,10 @@ const ProduitSchema = new Schema(
       type: Number,
       default: null,
     },
+    is_cocktail: {
+      type: Boolean,
+      default: false,
+    },
 
     historiques: {
       type: [Object],
