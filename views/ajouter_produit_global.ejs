@@ -166,14 +166,20 @@
                       <div class="col-lg-6">
                         <select
                           class="nice_Select2 nice_Select_line wide"
-                          style="display: none"
-                          name="categorie"
-                          required
+                          
                         >
                           <option value="">Selectionner la marques</option>
-                          <% marques.forEach((m) =>{%>
-                          <option value="<%= m %>"</option>
-                          <%})%>
+                          
+                        </select>
+                      </div>
+                      
+                      <div class="col-lg-6">
+                        <select
+                          class="nice_Select2 nice_Select_line wide"
+                          
+                        >
+                          <option value="">Selectionner le pays</option>
+                          
                         </select>
                       </div>
 
@@ -274,7 +280,8 @@
   })
 </script> -->
     <script>
-      const marques = <%- JSON.stringify(marques) %> ;
+      
+      
 
       const inputFile = $('input[type="file"]');
 
