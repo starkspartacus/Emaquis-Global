@@ -146,7 +146,10 @@ exports.ventePost = async (req, res) => {
             sum += vente.quantite[index] * currentProduct.result.prix_vente;
           }
 
-          if (currentProduct.result.quantite < vente.quantite[index]) {
+          if (
+            !currentProduct.result.is_cocktail &&
+            currentProduct.result.quantite < vente.quantite[index]
+          ) {
             product_unavailables.push({
               nom_produit: currentProduct.result.produit.nom_produit,
               taille: currentProduct.result.taille,
@@ -323,7 +326,10 @@ exports.editventePost = async (req, res) => {
           const qty =
             oldVente?.result?.quantite[product_in_old_vente_index] || 0;
 
-          if (currentProduct.result.quantite + qty < body.quantite[index]) {
+          if (
+            !currentProduct.result.is_cocktail &&
+            currentProduct.result.quantite + qty < body.quantite[index]
+          ) {
             if (product_in_old_vente_index !== -1) {
               const qty = oldVente.result.quantite[product_in_old_vente_index];
 

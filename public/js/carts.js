@@ -28,7 +28,8 @@ const CartItem = ({ product }) => {
         <img src={product.produit.image} alt='product' />
         <div>
           <h6>
-            {quantity}x {product.produit.nom_produit} {product.taille}{' '}
+            {quantity}x {product.produit.nom_produit}{' '}
+            {!product.is_cocktail && product.taille}{' '}
             {product.promo && product.promo_quantity <= quantity && (
               <p className='badge formule'>F</p>
             )}
@@ -61,8 +62,9 @@ const CartItem = ({ product }) => {
           className='btn btn-valider incr'
           onClick={() => handleUpdateProductQuantity(product, 'incr')}
           disabled={
+            !product.is_cocktail &&
             product.quantite <=
-            product.quantity - (product.quantity_already_sold || 0)
+              product.quantity - (product.quantity_already_sold || 0)
           }
         >
           +

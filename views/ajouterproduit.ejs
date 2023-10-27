@@ -237,6 +237,9 @@
 
 
         const productInStock =  stocks.find(s => s.produit._id == productId && s.size == selectedSize);
+        const categorySelected = categories.find(c => c._id == categoryId);
+        const is_cocktail = categorySelected && categorySelected.nom.toLowerCase().includes('cocktail');
+       
        
 
         const generateQuantityByLocker = ({ locker, size, produit, stockType }) => {
@@ -265,19 +268,21 @@
         const handleSubmit = ()=>{
           const data = {
             produit: productId,
-            taille: selectedSize,
+            taille: is_cocktail? 'c' :selectedSize,
             prix_vente: prix_vente,
             prix_achat: prix_achat,
-            quantite: quantite,
+            quantite: is_cocktail?0:quantite,
             session: adminSession,
             promo: promo,
             promo_quantity: promoQuantity,
             promo_price: promoPrice,
-            stockType
+            stockType,
+            is_cocktail
           }
+          
 
 
-          if(hasStock && quantite > 0){
+          if(hasStock && quantite > 0 && !is_cocktail){
             if(productInStock){
               const qty = ['cardboard','locker'].includes(stockType)?  generateQuantityByLocker({
               locker: quantite,
@@ -302,7 +307,8 @@
 
 
           for(let key of Object.keys(data)){
-            if(!['promo','promo_quantity','promo_price'].includes(key) &&!data[key]){
+            const checkIsCocktail = is_cocktail && ['prix_vente','prix_achat','produit'].includes(key) && !data[key]
+            if(!['promo','promo_quantity','promo_price'].includes(key) && ((!data[key] && !is_cocktail) || checkIsCocktail)){
               return alert("Veuillez remplir tous les champs");
             }else if(data.promo && (!data.promo_quantity || !data.promo_price)){
               return alert("Veuillez remplir tous les champs");
@@ -338,7 +344,7 @@
                   if(p.produit._id == productId){
                     return {
                       ...p,
-                      quantite:  p.quantite + parseInt(newQty)
+                      quantite: is_cocktail? 0 :  p.quantite + parseInt(newQty)
                     }
                   }
                   return p;
@@ -362,6 +368,7 @@
                 setPromoPrice('');
                 setPromoQuantity('');
                 setPromo(false);
+                
 
                 $('select:not(#stockType)').val('');
                 $('select:not(#stockType)').niceSelect('update');
@@ -377,7 +384,7 @@
 
             }, 500);
           }).catch(err=>{
-            console.log('👉 👉 👉  ~ file: ajouterproduit.ejs:295 ~ err:', err)
+           
             setShowError(true);
             setLoading(false);
           })
@@ -433,7 +440,7 @@
 
           if(products.length > 0 && productId  && categoryId){
 
-            const product = products.find(p => p.produit._id == productId && p.produit.categorie._id == categoryId && p.taille == selectedSize);
+            const product = products.find(p => p.produit._id == productId && p.produit.categorie._id == categoryId && (p.taille == selectedSize || is_cocktail));
 
             if(product){
               setPrixVente(product.prix_vente);
@@ -541,7 +548,7 @@
                     </select>
                   </div>
 
-                  <div className='col-lg-6'>
+                  {!is_cocktail &&<div className='col-lg-6'>
                     <div className='common_input mb_15'>
                       <select
                         className='nice_Select2 nice_Select_line wide'
@@ -549,7 +556,8 @@
                         id="taille"
                         required
                         value={selectedSize}
-                        disabled={updateProduct}
+                        disabled={updateProduct || is_cocktail}
+
                       >
                       <option value="">Selectionner la taille du produit</option>
                         {sizesProduct.map(size =>(
@@ -566,8 +574,7 @@
                         hidden
                       />
                     </div>
-                  </div>
-
+                  </div>}
 
                   <div className='col-lg-6'>
                     <div className='common_input mb_15'>
@@ -584,7 +591,7 @@
                       />
                     </div>
                   </div>
-                  <div className='col-lg-6'>
+                   <div className='col-lg-6'>
                     <div className='common_input mb_15'>
                       <input
                         type='number'
@@ -592,6 +599,7 @@
                         name='prix_achat'
                         required
                         value={prix_achat}
+                      
                         onChange={(e) => {
                           const value = e.target.value;
                           setPrixAchat(value);
@@ -606,7 +614,7 @@
                     </div>
                   </div>
 
-                  <div className='col-lg-6'>
+                  {!is_cocktail &&  <div className='col-lg-6'>
                     <div className="row">
                     <div className={'col-lg-6 common_input mb_15'}>
                       <input
@@ -615,13 +623,14 @@
                         name='quantite'
                         required
                         value={quantite}
+                       
                         onChange={(e) => {
                           const value = e.target.value;
                           setQuantite(value);
                         }}
                       />
                     </div>
-                  <div className='col-lg-6 common_input mb_15'>
+                 <div className='col-lg-6 common_input mb_15'>
                       <select
                         className='nice_Select2 nice_Select_line wide'
                         name='stockType'
@@ -645,7 +654,7 @@
                     </div>
                     </div>
 
-                  </div>
+                  </div>}
 
                    <div className="col-lg-12 pl-4">
                     <div className="form-check">
@@ -696,8 +705,12 @@
 
 
                   <div className='col-lg-6'>
-                    {!!productSelected &&  <p>Quantité total du produit: {quantiteStock || 0}</p>}
+                   {!is_cocktail &&
+                    <React.Fragment>
+                      {!!productSelected &&  <p>Quantité total du produit: {quantiteStock || 0}</p>}
                     {productSelected && hasStock &&  <p>Quantité en stock: {productInStock ? productInStock.quantity : 0}</p>}
+                    </React.Fragment>
+                   }
                    {!!productSelected &&  <img src={productSelected.image} id="preview-image" alt="" width="150px" height="150px" style={{
                       objectFit:'contain'
                      }} />
