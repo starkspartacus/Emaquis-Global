@@ -308,7 +308,8 @@
 
           for(let key of Object.keys(data)){
             const checkIsCocktail = is_cocktail && ['prix_vente','prix_achat','produit'].includes(key) && !data[key]
-            if(!['promo','promo_quantity','promo_price'].includes(key) && ((!data[key] && !is_cocktail) || checkIsCocktail)){
+
+            if((!['promo','promo_quantity','promo_price','is_cocktail'].includes(key) && (!data[key] && !is_cocktail)) || checkIsCocktail){
               return alert("Veuillez remplir tous les champs");
             }else if(data.promo && (!data.promo_quantity || !data.promo_price)){
               return alert("Veuillez remplir tous les champs");
