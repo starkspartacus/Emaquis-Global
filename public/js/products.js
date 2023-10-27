@@ -51,7 +51,9 @@ const ProductCard = ({ product }) => {
   return (
     <div className='product-card'>
       <div className='d-flex justify-content-between'>
-        <h4 className='badge emTaille taille_produits'>{product.taille}</h4>
+        {!product.is_cocktail && (
+          <h4 className='badge emTaille taille_produits'>{product.taille}</h4>
+        )}
         {product.promo && (
           <h4 className='badge formule'>
             {product.promo_quantity} x {product.promo_price}
@@ -74,24 +76,24 @@ const ProductCard = ({ product }) => {
           <p className='emPriceproduct'>{`${product.prix_vente} FCFA`}</p>
         )}
 
-        {product.quantite > 0 && (
+        {(product.quantite > 0 || product.is_cocktail) && (
           <p>
             {product.isReturnProduct ? 'Quantité' : 'Stock'}:{' '}
             <span
               style={{
                 color:
-                  product.quantite >= 100
+                  product.quantite >= 100 || product.is_cocktail
                     ? 'rgb(47, 204, 47)'
                     : 'rgb(219, 36, 23)',
               }}
             >
-              {product.quantite}
+              {product.is_cocktail ? '∞' : product.quantite}
             </span>
           </p>
         )}
-        {!product.isReturnProduct && product.quantite === 0 && (
-          <p className=''>Rupture de stock</p>
-        )}
+        {!product.isReturnProduct &&
+          !product.is_cocktail &&
+          product.quantite === 0 && <p className=''>Rupture de stock</p>}
         {product.isReturnProduct && (
           <p className=''>Expire: le {product.dateline}</p>
         )}
@@ -117,7 +119,9 @@ const ProductCard = ({ product }) => {
           </button>
         </div>
       )}
-      {product.quantite === 0 && <div className='product-overlay' />}
+      {product.quantite === 0 && !product.is_cocktail && (
+        <div className='product-overlay' />
+      )}
     </div>
   );
 };

@@ -8,15 +8,14 @@ exports.produitQueries = class {
         produit: data.produit,
         prix_vente: data.prix_vente,
         prix_achat: data.prix_achat,
-        quantite: data.quantite,
+        quantite: data.quantite || 0,
         taille: data.taille,
         promo: data.promo,
         promo_quantity: data.promo_quantity,
         promo_price: data.promo_price,
-
         historiques: data.historiques,
-
         session: data.session,
+        is_cocktail: data.is_cocktail,
       });
 
       await produit

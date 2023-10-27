@@ -237,8 +237,11 @@
 
 
 
-          const productInStock =  stocks.find(s => s.produit._id == productId && s.size == selectedSize);
-
+        const productInStock =  stocks.find(s => s.produit._id == productId && s.size == selectedSize);
+        const categorySelected = categories.find(c => c._id == categoryId);
+        const is_cocktail = categorySelected && categorySelected.nom.toLowerCase().includes('cocktail');
+       
+       
 
           const generateQuantityByLocker = ({ locker, size, produit, stockType }) => {
               if (!locker || !size) return 1;
@@ -263,29 +266,31 @@
           };
 
 
-          const handleSubmit = ()=>{
-            const data = {
-              produit: productId,
-              taille: selectedSize,
-              prix_vente: prix_vente,
-              prix_achat: prix_achat,
-              quantite: quantite,
-              session: adminSession,
-              promo: promo,
-              promo_quantity: promoQuantity,
-              promo_price: promoPrice,
+        const handleSubmit = ()=>{
+          const data = {
+            produit: productId,
+            taille: is_cocktail? 'c' :selectedSize,
+            prix_vente: prix_vente,
+            prix_achat: prix_achat,
+            quantite: is_cocktail?0:quantite,
+            session: adminSession,
+            promo: promo,
+            promo_quantity: promoQuantity,
+            promo_price: promoPrice,
+            stockType,
+            is_cocktail
+          }
+          
+
+
+          if(hasStock && quantite > 0 && !is_cocktail){
+            if(productInStock){
+              const qty = ['cardboard','locker'].includes(stockType)?  generateQuantityByLocker({
+              locker: quantite,
+              size: selectedSize,
+              produit: productSelected,
               stockType
-            }
-
-
-            if(hasStock && quantite > 0){
-              if(productInStock){
-                const qty = ['cardboard','locker'].includes(stockType)?  generateQuantityByLocker({
-                locker: quantite,
-                size: selectedSize,
-                produit: productSelected,
-                stockType
-              }) : quantite;
+            }) : quantite;
 
 
 
@@ -302,13 +307,14 @@
             setShowError(false)
 
 
-            for(let key of Object.keys(data)){
-              if(!['promo','promo_quantity','promo_price'].includes(key) &&!data[key]){
-                return alert("Veuillez remplir tous les champs");
-              }else if(data.promo && (!data.promo_quantity || !data.promo_price)){
-                return alert("Veuillez remplir tous les champs");
-              }
+          for(let key of Object.keys(data)){
+            const checkIsCocktail = is_cocktail && ['prix_vente','prix_achat','produit'].includes(key) && !data[key]
+            if(!['promo','promo_quantity','promo_price'].includes(key) && ((!data[key] && !is_cocktail) || checkIsCocktail)){
+              return alert("Veuillez remplir tous les champs");
+            }else if(data.promo && (!data.promo_quantity || !data.promo_price)){
+              return alert("Veuillez remplir tous les champs");
             }
+          }
 
 
 
@@ -331,38 +337,39 @@
 
               const newQty = data.quantite;
 
-              setShowSuccess(true);
-              setTimeout(() => {
-                setShowSuccess(false);
-                setProducts(
-                  products.map(p => {
-                    if(p.produit._id == productId){
-                      return {
-                        ...p,
-                        quantite:  p.quantite + parseInt(newQty)
-                      }
+            setShowSuccess(true);
+            setTimeout(() => {
+              setShowSuccess(false);
+              setProducts(
+                products.map(p => {
+                  if(p.produit._id == productId){
+                    return {
+                      ...p,
+                      quantite: is_cocktail? 0 :  p.quantite + parseInt(newQty)
                     }
-                    return p;
-                  })
-                )
+                  }
+                  return p;
+                })
+              )
 
 
 
                 setLoading(false);
 
-                if(updateProduct){
-                  window.location.href = '/listeproduit';
-                }else{
-                  setProductSelected(null);
-                  setProductId(null);
-                  setSelectedSize(null);
-                  setPrixVente('');
-                  setPrixAchat('');
-                  setQuantite('');
-                  setQuantiteStock('');
-                  setPromoPrice('');
-                  setPromoQuantity('');
-                  setPromo(false);
+              if(updateProduct){
+                window.location.href = '/listeproduit';
+              }else{
+                setProductSelected(null);
+                setProductId(null);
+                setSelectedSize(null);
+                setPrixVente('');
+                setPrixAchat('');
+                setQuantite('');
+                setQuantiteStock('');
+                setPromoPrice('');
+                setPromoQuantity('');
+                setPromo(false);
+                
 
                   $('select:not(#stockType)').val('');
                   $('select:not(#stockType)').niceSelect('update');
@@ -376,13 +383,13 @@
                 }
 
 
-              }, 500);
-            }).catch(err=>{
-              console.log('👉 👉 👉  ~ file: ajouterproduit.ejs:295 ~ err:', err)
-              setShowError(true);
-              setLoading(false);
-            })
-          }
+            }, 500);
+          }).catch(err=>{
+           
+            setShowError(true);
+            setLoading(false);
+          })
+        }
 
 
 
@@ -434,7 +441,7 @@
 
             if(products.length > 0 && productId  && categoryId){
 
-              const product = products.find(p => p.produit._id == productId && p.produit.categorie._id == categoryId && p.taille == selectedSize);
+            const product = products.find(p => p.produit._id == productId && p.produit.categorie._id == categoryId && (p.taille == selectedSize || is_cocktail));
 
               if(product){
                 setPrixVente(product.prix_vente);
@@ -542,95 +549,97 @@
                       </select>
                     </div>
 
-                    <div className='col-lg-6'>
-                      <div className='common_input mb_15'>
-                        <select
-                          className='nice_Select2 nice_Select_line wide'
-                          name='taille'
-                          id="taille"
-                          required
-                          value={selectedSize}
-                          disabled={updateProduct}
-                        >
-                        <option value="">Selectionner la taille du produit</option>
-                          {sizesProduct.map(size =>(
-                              <option value={size}>{size}</option>
-                              ))}
+                  {!is_cocktail &&<div className='col-lg-6'>
+                    <div className='common_input mb_15'>
+                      <select
+                        className='nice_Select2 nice_Select_line wide'
+                        name='taille'
+                        id="taille"
+                        required
+                        value={selectedSize}
+                        disabled={updateProduct || is_cocktail}
+
+                      >
+                      <option value="">Selectionner la taille du produit</option>
+                        {sizesProduct.map(size =>(
+                            <option value={size}>{size}</option>
+                            ))}
 
                         </select>
 
-                        <input
-                          type='text'
-                          placeholder='zo'
-                          name='session'
-                          value='<%= user?.id %>'
-                          hidden
-                        />
-                      </div>
+                      <input
+                        type='text'
+                        placeholder='zo'
+                        name='session'
+                        value='<%= user?.id %>'
+                        hidden
+                      />
                     </div>
+                  </div>}
 
-
-                    <div className='col-lg-6'>
-                      <div className='common_input mb_15'>
-                        <input
-                          type='number'
-                          placeholder='prix de vente ex: 700'
-                          name='prix_vente'
-                          required
-                          value={prix_vente}
-                          onChange={(e) => {
-                            const value = e.target.value;
-                            setPrixVente(value);
-                          }}
-                        />
-                      </div>
+                  <div className='col-lg-6'>
+                    <div className='common_input mb_15'>
+                      <input
+                        type='number'
+                        placeholder='prix de vente ex: 700'
+                        name='prix_vente'
+                        required
+                        value={prix_vente}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setPrixVente(value);
+                        }}
+                      />
                     </div>
-                    <div className='col-lg-6'>
-                      <div className='common_input mb_15'>
-                        <input
-                          type='number'
-                          placeholder="prix d'achat  ex: 320"
-                          name='prix_achat'
-                          required
-                          value={prix_achat}
-                          onChange={(e) => {
-                            const value = e.target.value;
-                            setPrixAchat(value);
-                          }}
-                        />
-                        <small class="text-info">
-                            le prix d'achat d'une bouteille se calcule
-                             en divisant le prix d'achat du
-                             carton ou du casier par le nombre de bouteille dans
-                             le carton ou du casier
-                          </small>
-                      </div>
+                  </div>
+                   <div className='col-lg-6'>
+                    <div className='common_input mb_15'>
+                      <input
+                        type='number'
+                        placeholder="prix d'achat  ex: 320"
+                        name='prix_achat'
+                        required
+                        value={prix_achat}
+                      
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setPrixAchat(value);
+                        }}
+                      />
+                      <small class="text-info">
+                          le prix d'achat d'une bouteille se calcule
+                           en divisant le prix d'achat du
+                           carton ou du casier par le nombre de bouteille dans 
+                           le carton ou du casier
+                        </small>
                     </div>
+                  </div>
 
-                    <div className='col-lg-6'>
-                      <div className="row">
-                      <div className={'col-lg-6 common_input mb_15'}>
-                        <input
-                          type='number'
-                          placeholder='quantite'
-                          name='quantite'
-                          required
-                          value={quantite}
-                          onChange={(e) => {
-                            const value = e.target.value;
-                            setQuantite(value);
-                          }}
-                        />
-                      </div>
-                    <div className='col-lg-6 common_input mb_15'>
-                        <select
-                          className='nice_Select2 nice_Select_line wide'
-                          name='stockType'
-                          id="stockType"
-                          required
-                          value={stockType}
-
-                        >
+                  {!is_cocktail &&  <div className='col-lg-6'>
+                    <div className="row">
+                    <div className={'col-lg-6 common_input mb_15'}>
+                      <input
+                        type='number'
+                        placeholder='quantite'
+                        name='quantite'
+                        required
+                        value={quantite}
+                       
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setQuantite(value);
+                        }}
+                      />
+                    </div>
+                 <div className='col-lg-6 common_input mb_15'>
+                      <select
+                        className='nice_Select2 nice_Select_line wide'
+                        name='stockType'
+                        id="stockType"
+                        required
+                        value={stockType}
+                       
+                      >
 
 
                           {
@@ -646,7 +655,7 @@
                       </div>
                       </div>
 
-                    </div>
+                  </div>}
 
                      <div className="col-lg-12 pl-4">
                       <div className="form-check">
@@ -696,14 +705,18 @@
                      }
 
 
-                    <div className='col-lg-6'>
+                  <div className='col-lg-6'>
+                   {!is_cocktail &&
+                    <React.Fragment>
                       {!!productSelected &&  <p>Quantité total du produit: {quantiteStock || 0}</p>}
-                      {productSelected && hasStock &&  <p>Quantité en stock: {productInStock ? productInStock.quantity : 0}</p>}
-                     {!!productSelected &&  <img src={productSelected.image} id="preview-image" alt="" width="150px" height="150px" style={{
-                        objectFit:'contain'
-                       }} />
-                      }
-                    </div>
+                    {productSelected && hasStock &&  <p>Quantité en stock: {productInStock ? productInStock.quantity : 0}</p>}
+                    </React.Fragment>
+                   }
+                   {!!productSelected &&  <img src={productSelected.image} id="preview-image" alt="" width="150px" height="150px" style={{
+                      objectFit:'contain'
+                     }} />
+                    }
+                  </div>
 
                     <div className='col-lg-12'>
                       <div className='create_report_btn mt_30'>

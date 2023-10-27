@@ -51,12 +51,12 @@ const TablesStocksBody = () => {
                 className=''
                 style={{
                   color:
-                    product.quantite >= 100
+                    product.quantite >= 100 || product.is_cocktail
                       ? 'rgb(47, 204, 47)'
                       : 'rgb(219, 36, 23)',
                 }}
               >
-                {product.quantite}
+                {product.is_cocktail ? '∞' : product.quantite}
               </a>
             </td>
           </tr>
