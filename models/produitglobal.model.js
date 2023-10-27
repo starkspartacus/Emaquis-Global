@@ -10,6 +10,8 @@ const ProduitSchema = new Schema(
       required: true,
     },
     image: { type: String, default: '01.jpg' },
+    marque: { type: String, required: false },
+    pays: { type: String, required: false },
   },
   { timestamps: true }
 );

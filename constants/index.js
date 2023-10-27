@@ -18,6 +18,16 @@ exports.PRODUCT_SIZE = [
   "250cl",
 ];
 
+// Marques boisson
+
+exports.MARQUES = [
+  "Coca-Cola",
+  "Solibra",
+  "Brassivoire",
+  "BGI",
+  "Bière Ivoire",
+];
+
 // pays de l'afrique de l'ouest
 
 exports.PAYS = [
