@@ -164,16 +164,11 @@
                         </select>
                       </div>
                       <div class="col-lg-6">
-                        <select
-                          class="nice_Select2 nice_Select_line wide"
-                          
-                        >
-                        <option value="">Selectionner la marque</option>
-                        <% marques.forEach(marque =>{%>
-                        <option value="<%= marque %>"><%= marque %></option>
-                        <%})%>
-                          
-                        </select>
+                        <div class="col-md-6"><label class="labels">Marques</label>
+                          <select class='form-control' id="marques" name="basserie">
+                            
+                          </select>
+                        </div>
                       </div>
                       
                       <div class="col-lg-6">
@@ -284,7 +279,9 @@
 </script> -->
     <script>
       
-      
+      const brasseries = <%- JSON.stringify(marques) %>;
+
+      const brasserie = brasseries.find(brasserie => brasserie.nom === "Brasserie");
 
       const inputFile = $('input[type="file"]');
 

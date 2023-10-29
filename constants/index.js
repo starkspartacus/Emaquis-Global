@@ -21,11 +21,23 @@ exports.PRODUCT_SIZE = [
 // Marques boisson
 
 exports.MARQUES = [
-  "Coca-Cola",
-  "Solibra",
-  "Brassivoire",
-  "BGI",
-  "Bière Ivoire",
+  {
+    code: "coca_cola",
+    nom: "Coca-Cola",
+    pays: "USA",
+    categorie: "boisson",
+  },
+  {
+    code:"brassivoir",
+    nom:"Brassivoir",
+    categorie:"boisson"
+  },
+  {
+    code:"solibra",
+    nom:"Solibra",
+    categorie:"boisson"
+  }
+  
 ];
 
 // pays de l'afrique de l'ouest
