@@ -168,7 +168,10 @@
                           class="nice_Select2 nice_Select_line wide"
                           
                         >
-                          <option value="">Selectionner la marques</option>
+                        <option value="">Selectionner la marque</option>
+                        <% marques.forEach(marque =>{%>
+                        <option value="<%= marque %>"><%= marque %></option>
+                        <%})%>
                           
                         </select>
                       </div>
