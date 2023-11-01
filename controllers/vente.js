@@ -10,6 +10,7 @@ const { formatDate } = require('../utils/generateYear');
 const { getDateByWeekendMonthYear } = require('../utils/generateWeekly');
 const { userQueries } = require('../requests/UserQueries');
 const { helperCurrentTime } = require('../utils/helperCurrentTime');
+const { calculPromoTotal } = require('../utils/calculPromoTotal');
 
 exports.venteByMonth = async (req, res) => {
   try {
@@ -656,6 +657,8 @@ exports.venteBilan = async (req, res) => {
           const total_vente =
             vente.quantite[produitIndex] < 0
               ? vente.prix
+              : produit.promo
+              ? calculPromoTotal(produit, vente.quantite[produitIndex])
               : produit.prix_vente * vente.quantite[produitIndex];
 
           const total_achat = produit.prix_achat * vente.quantite[produitIndex];

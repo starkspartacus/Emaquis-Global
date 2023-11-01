@@ -9,7 +9,7 @@ function getDateByWeekendMonthYear(weekend, month, year) {
     .isoWeekday(1); // met le premier jour de la semaine au lundi
 
   // Calculez le nombre de semaines entre le premier et le dernier jour du mois
-  const numWeeks = getWeeksInMonth(month, year);
+  const numWeeks = getWeeksInMonth(month - 1, year);
 
   const weeks = [];
   let currentWeekStart = startDate.clone();
@@ -24,7 +24,7 @@ function getDateByWeekendMonthYear(weekend, month, year) {
   const week = weeks[Number(weekend) - 1];
 
   if (!week) {
-    return getDateByWeekendMonthYear(1, month + 1, year);
+    return getDateByWeekendMonthYear(1, month >= 11 ? 0 : month + 1, year);
   }
 
   // Obtenir le premier jour de la semaine
@@ -37,7 +37,11 @@ function getDateByWeekendMonthYear(weekend, month, year) {
 }
 
 function getWeeksInMonth(month, year) {
-  const firstDayOfMonth = moment(`${year}-${month + 1}-01`, 'YYYY-MM-DD');
+  const isLastMonth = month >= 11;
+  const firstDayOfMonth = moment(
+    `${isLastMonth ? year + 1 : year}-${isLastMonth ? 0 : month + 1}-01`,
+    'YYYY-MM-DD'
+  );
 
   // Obtenez le dernier jour du mois
   const lastDayOfMonth = moment(firstDayOfMonth).endOf('month');

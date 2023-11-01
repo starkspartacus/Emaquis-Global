@@ -1,10 +1,9 @@
-exports.deconnexion = (req, res) => {
-    if (req.session.user) {
-        delete req.session.user;
-        res.redirect('/');
-    } else {
-        res.redirect('/');
-    }
+exports.deconnexion = async (req, res) => {
+  if (req.session.user) {
+    await req.session.destroy();
 
+    res.redirect('/');
+  } else {
+    res.redirect('/');
+  }
 };
-

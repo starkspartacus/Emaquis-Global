@@ -24,7 +24,7 @@ const swaggerUi = require("swagger-ui-express"),
 
 const FileUpload = require("../utils/fileupload");
 
-const db = require("../settings/database");
+const {dbConnection} = require("../settings/database");
 const { all } = require("../routes/index");
 const { uploadFile } = require("../utils/uploadFile");
 
@@ -50,7 +50,7 @@ app.io = io;
 /**
  * Listen on provided port, on all network interfaces.
  */
-db();
+dbConnection();
 
 const SaveUSer = io.of("/inscription").use(Serveur.getSharedSession());
 

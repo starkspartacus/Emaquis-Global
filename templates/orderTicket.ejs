@@ -1,138 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-     <!-- Google tag (gtag.js) -->
-     <script
-     async
-     src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"
-   ></script>
-   <script>
-     window.dataLayer = window.dataLayer || [];
 
-     function gtag() {
-       dataLayer.push(arguments);
-     }
-     gtag("js", new Date());
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-     gtag("config", "G-NT2SW8WBHT");
-   </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" />
-    <link rel="stylesheet" href="../css/ticket.css" />
-    <title>Ticket</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-    </style>
-    
-  </head>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
-  <body>
-    <div
-      style="
+    gtag("config", "G-NT2SW8WBHT");
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" />
+  <link rel="stylesheet" href="../css/ticket.css" />
+  <title>Ticket</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div style="
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-      "
-    >
-      <div style="width: 40vh">
-        <div
-          style="
+      ">
+    <div style="width: 40vh">
+      <div style="
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 2rem 0;
-          "
-        >
-          <img
-            src="https://www.e-maquis.com/newAssets/images/logo/emaquisLogo2.png"
-            alt="logo"
-            style="width: 70px; height: 70px"
-          />
-          <h1>E-maquis</h1>
-          
-        </div>
-        <div
-        style="
+          ">
+        <img src="https://www.e-maquis.com/newAssets/images/logo/emaquisLogo2.png" alt="logo" style="width: 70px; height: 70px" />
+        <h1>E-maquis</h1>
+
+      </div>
+      <div style="
               display: flex;
               flex-direction: row;
               justify-content: space-between;
               margin: 1rem 0;
               font-family: 'Roboto', sans-serif;
               font-size: 0.7rem;
-            "
-        >
-          <div>
-            <h3><%=nom_etablissement %></h3>
-            <h3><%=adresse %></h3>
-            
-          </div>
+            ">
+        <div>
+          <h3><%=nom_etablissement %></h3>
+          <h3><%=adresse %></h3>
 
-          <div>
-            <h3>Facture N°: <%= id_vente %></h3>
-            <h3>Employé: <%= barman %></h3>
-            <p><%= new Date().toLocaleString() %></p>
-          </div>
-          
         </div>
 
-        <div style="margin-top: 2vh">
-          <div
-            style="
+        <div>
+          <h3>Facture N°: <%= id_vente %></h3>
+          <h3>Employé: <%= barman %></h3>
+          <p><%= new Date().toLocaleString() %></p>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 2vh">
+        <div style="
               display: flex;
               flex-direction: row;
               justify-content: space-between;
               margin: 1rem 0;
               font-family: 'Roboto', sans-serif;
-            "
-          >
-            <h4 style="flex: 2.5">Produit</h4>
-            <h4 style="flex: 1; text-align: center">Qté</h4>
-            <h4 style="flex: 1; text-align: center">P.U</h4>
-            <h4 style="flex: 1; text-align: right">Total</h4>
-          </div>
+            ">
+          <h4 style="flex: 2.5">Produit</h4>
+          <h4 style="flex: 1; text-align: center">Qté</h4>
+          <h4 style="flex: 1; text-align: center">P.U</h4>
+          <h4 style="flex: 1; text-align: right">Total</h4>
+        </div>
 
-          <div>
-            <% for (let i = 0; i < vente.produit.length; i++) { %>
+        <div>
+          <% for (let i = 0; i < vente.produit.length; i++) { %>
 
-            <div
-              style="
+          <div style="
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 margin-bottom: 0.5rem;
                 font-family: 'Roboto', sans-serif;
-              "
-            >
-              <p style="flex: 2.5">
-                <%= vente.produit[i].produit.nom_produit %>
-              </p>
-              <p style="flex: 1; text-align: center">
-                <%= vente.quantite[i] %>
-              </p>
-              <p style="flex: 1; text-align: center">
-                <%= vente.produit[i].prix_vente %>
-              </p>
-              <p style="flex: 1; text-align: right">
-                <%= vente.produit[i].prix_vente * vente.quantite[i] %>
-              </p>
-            </div>
-
-            <% } %>
+              ">
+            <p style="flex: 2.5">
+              <%= vente.produit[i].produit.nom_produit %> <% if (vente.produit[i].promo) { %> <span style='color:rgb(219, 36, 23);display: inline-block;font-size: 10px;font-weight: bold;'>F</span> <% } %>
+            </p>
+            <p style="flex: 1; text-align: center">
+              <%= vente.quantite[i] %>
+            </p>
+            <p style="flex: 1; text-align: center">
+              <%= vente.produit[i].prix_vente %>
+            </p>
+            <p style="flex: 1; text-align: right">
+              <%= vente.produit[i].total_price %>
+            </p>
           </div>
 
-          <div
-            style="
+          <% } %>
+        </div>
+
+        <div style="
               width: 100%;
               border: 1px solid black;
               border-left: none;
@@ -140,76 +120,67 @@
               margin-top: 1rem;
               padding: 1rem 0;
               font-family: 'Roboto', sans-serif;
-            "
-          >
-            <div
-              style="
+            ">
+          <div style="
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 font-family: 'Roboto', sans-serif;
                 font-size: 0.8rem;
-              "
-            >
-              <h3 style="flex: 1">Total:</h3>
-              <h3><%= total %> FCFA</h3>
-            </div>
-            <div
-              style="
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                font-family: 'Roboto', sans-serif;
-                font-size: 0.8rem;
-              "
-            >
-              <h3 style="flex: 1">TVA(%)</h3>
-              <h3>0</h3>
-            </div>
+              ">
+            <h3 style="flex: 1">Total:</h3>
+            <h3><%= total %> FCFA</h3>
           </div>
+          <div style="
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                font-family: 'Roboto', sans-serif;
+                font-size: 0.8rem;
+              ">
+            <h3 style="flex: 1">TVA(%)</h3>
+            <h3>0</h3>
+          </div>
+        </div>
 
-          <div style="padding: 1rem 0">
-            <div
-              style="
+        <div style="padding: 1rem 0">
+          <div style="
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 margin-bottom: 0.5rem;
                 font-family: 'Roboto', sans-serif;
-              "
-            >
-              <p style="flex: 1">Somme encaissée:</p>
-              <p><%= vente.somme_encaisse %> FCFA</p>
-            </div>
+              ">
+            <p style="flex: 1">Somme encaissée:</p>
+            <p><%= vente.somme_encaisse %> FCFA</p>
+          </div>
 
-            <div
-              style="
+          <div style="
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 font-family: 'Roboto', sans-serif;
-              "
-            >
-              <p style="flex: 1">Monnaie rendu:</p>
-              <p><%= vente.monnaie %> FCFA</p>
-            </div>
+              ">
+            <p style="flex: 1">Monnaie rendu:</p>
+            <p><%= vente.monnaie %> FCFA</p>
           </div>
+        </div>
 
-          <div style="display: flex; justify-content: flex-end">
-            <p style="font-size: 10px;
+        <div style="display: flex; justify-content: flex-end">
+          <p style="font-size: 10px;
             font-family: 'Roboto', sans-serif;
             
-            "
-            >
+            ">
             https://www.e-maquis.com/<br>
             <span>conseiller E-maquis :+330760484911<br> +225 0709454685</span><br>
             <span style="font-size: 8px">Powered by <a href="https://haut-numerique.com/">HNM</a></span><br>
-            
-            
+
+
           </p>
-          </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
