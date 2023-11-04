@@ -596,7 +596,9 @@
                     <div className='common_input mb_15'>
                       <input
                         type='number'
+
                         placeholder="prix d'achat  ex: 320"
+
                         name='prix_achat'
                         required
                         value={prix_achat}
@@ -613,6 +615,12 @@
                            le carton ou du casier
                         </small>
                     </div>
+                    <small className="text-info">
+                      Le prix d'achat d'une bouteille, se calcule en
+                      divisant le prix d'achat d'un carton ou d'un casier par
+                      le nombre de bouteille dans le carton ou le casier.
+                    </small>
+
                   </div>
 
                   {!is_cocktail &&  <div className='col-lg-6'>
@@ -638,17 +646,17 @@
                         id="stockType"
                         required
                         value={stockType}
-                       
+
                       >
 
-                        
+
                         {
                           ['locker','cardboard','bottle'].map(type =>(
                             <option value={type}>{type ==="locker"?"Casier": type === "cardboard"? "Carton": "Bouteille"}</option>
                             ))
                         }
 
-                      
+
 
 
                       </select>
