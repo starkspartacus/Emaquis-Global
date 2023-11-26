@@ -73,6 +73,12 @@ exports.editUserProfile = async (req, res) => {
     }
 
     if (userUpdate.etat) {
+      const user = await userQueries.getUserById(req.session.user.id);
+
+      req.session.user = {
+        ...req.session.user,
+        ...user.result._doc,
+      };
       res.redirect('/dashboard');
     }
   } catch (error) {

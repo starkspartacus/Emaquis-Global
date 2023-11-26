@@ -123,7 +123,6 @@ exports.produitQueries = class {
             $exists: false
           } }] 
         })
-          .populate({path:'categorie',select:'_id nom'})
           .then((data) => {
             next({
               etat: true,
