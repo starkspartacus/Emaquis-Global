@@ -1,4 +1,4 @@
-const { PRODUCT_SIZE } = require('../constants');
+const { PRODUCT_SIZE, MARQUES, PAYS } = require('../constants');
 const { stockQueries } = require('../requests/StocksQueries');
 const { categorieQueries } = require('../requests/categorieQueries');
 const { produitQueries } = require('../requests/produitQueries');
@@ -57,6 +57,8 @@ exports.addproduitGlobal = async (req, res) => {
         res.render('ajouter_produit_global', {
           categories: categories,
           user: sess,
+          brands: MARQUES,
+          pays: PAYS,
         });
       }
     } catch (error) {

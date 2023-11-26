@@ -10,6 +10,8 @@ const ProduitSchema = new Schema(
       required: true,
     },
     image: { type: String, default: '01.jpg' },
+    country: { type: String },
+    brand: { type: String, lowercase: true },
   },
   { timestamps: true }
 );
