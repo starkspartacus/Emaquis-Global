@@ -127,13 +127,20 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="common_input mb_15">
-                        <input type="text" placeholder="nom du produit" name="nom_produit" required />
+                        <% if(product){ %>
+                        	<input type="hidden" name="productId" value="<%= product._id %>" />
+                          <% } %>
+                        <input type="text" placeholder="nom du produit" name="nom_produit" required value="<%= product ? product.nom_produit :''%> " />
                       </div>
                     </div>
 
                     <div class="col-lg-6">
                       <select class="nice_Select2 nice_Select_line wide" style="display: none" name="categorie" required>
                         <option value="">Selectionner la catégorie</option>
+                        <% if(product){ %>
+                        <option value="<%= product.categorie._id %>" selected><%= product.categorie.nom %></option>
+                          <% } %>
+
                         <% categories.forEach(categorie =>{%>
                         <option value="<%= categorie._id %>"><%= categorie.nom %></option>
                         <%})%>
@@ -151,9 +158,23 @@
 
                           <select class="nice_Select2 nice_Select_line wide" style="display: none" name="country" required>
                             <option value="">Selectionner le pays</option>
+
+
                             <% pays.forEach((p)=> { %>
 
-                            <option value="<%= p.code %>"><%= p.nom %></option>
+                              <% if(product){ %>
+                                <% if(p.code != product.country){ %>
+                                  <option value="<%= p.code %>"><%= p.nom %></option>
+                                <% } else { %>
+                                  <option value="<%= product.country %>" selected><%= product.country %></option>
+                                <% } %>
+
+                                <% }else{ %>
+              
+                                    <option value="<%= p.code %>"><%= p.nom %></option>
+                              <% } %>
+
+                           
 
                             <% }); %>
                           </select>
@@ -163,7 +184,16 @@
                           <select class="nice_Select2 nice_Select_line wide" style="display: none" name="brand" required>
                             <option value="">Selectionner la marque</option>
                             <% brands.forEach(brand =>{%>
-                            <option value="<%= brand.code %>"><%= brand.nom %></option>
+                              <% if(product){ %>
+                                <% if(brand.code != product.brand){ %>
+                                  <option value="<%= brand.nom %>"><%= brand.nom %></option>
+                                <% } else { %>
+                                  <option value="<%= product.brand %>" selected><%= product.brand %></option>
+                                <% } %>
+                                <% }else{ %>
+                                    <option value="<%= brand.nom %>"><%= brand.nom %></option>
+                              <% } %>
+                           
                             <%})%>
                           </select>
                         </div>
@@ -176,7 +206,7 @@
                     <div class="col-12">
                       <div class="create_report_btn mt_30">
                         <button type="submit" id="#button" class="btn_1 radius_btn d-block text-center">
-                          Ajouter Produit
+                         <%= product ? "Modifier" : "Ajouter" %> Produit
                         </button>
                       </div>
                     </div>

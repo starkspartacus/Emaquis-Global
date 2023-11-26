@@ -37,11 +37,7 @@ exports.produitQueries = class {
 
   static setGlobalProduit(data) {
     return new Promise(async (next) => {
-      const produit = new produitGlobal({
-        nom_produit: data.nom_produit,
-        categorie: data.categorie,
-        image: data.image,
-      });
+      const produit = new produitGlobal(data);
 
       await produit
         .save()
@@ -60,11 +56,23 @@ exports.produitQueries = class {
     });
   }
 
+  static updateGlobalProduit(id, data) {
+    return new Promise(async (next,reject) => {
+      produitGlobal.updateOne({ _id: id }, data).then((res) => {
+        next({
+          etat: true,
+          result: res,
+        });
+      }).catch(reject);
+    })
+  }
+
   static getGlobalProduit() {
     try {
       return new Promise(async (next) => {
         produitGlobal
           .find()
+          .populate({path:'categorie',select:'_id nom'})
           .then((data) => {
             next({
               etat: true,
@@ -96,6 +104,34 @@ exports.produitQueries = class {
             });
           })
           .catch((err) => {
+            next({
+              etat: false,
+              err: err,
+            });
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static getGlobalProduitByCountry(country) {
+    try {
+      return new Promise(async (next) => {
+        produitGlobal
+          .find({ $or: [{ country: country }, { country: {
+            $exists: false
+          } }] 
+        })
+          .populate({path:'categorie',select:'_id nom'})
+          .then((data) => {
+            next({
+              etat: true,
+              result: data,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
             next({
               etat: false,
               err: err,

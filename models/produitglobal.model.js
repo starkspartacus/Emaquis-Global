@@ -11,7 +11,7 @@ const ProduitSchema = new Schema(
     },
     image: { type: String, default: '01.jpg' },
     country: { type: String },
-    brand: { type: String, lowercase: true },
+    brand: { type: String },
   },
   { timestamps: true }
 );

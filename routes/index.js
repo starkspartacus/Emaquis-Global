@@ -68,6 +68,7 @@ const {
 const { settingQueries } = require('../requests/settingQueries');
 const { userQueries } = require('../requests/UserQueries');
 const { generateTicket } = require('../controllers/ticket.controller');
+const {listeProduitGlobal, postProduitGlobal, getProduitGlobal } = require('../controllers/produitglobal.controler');
 
 var router = express.Router();
 
@@ -124,6 +125,7 @@ router.post('/listcategorie', listcategoriecontroller.seecatPost);
 
 router.get('/listeproduit', listeproduitcontroller.produit);
 router.post('/listeproduit', listeproduitcontroller.produitPost);
+router.get('/listeproduitglobal', listeProduitGlobal);
 
 router.get('/products', produitsList);
 router.get('/categories', listcategoriecontroller.categoriesList);
@@ -197,7 +199,12 @@ router.post('/reglage', reglagecontroller.editUserReglage);
 router.get(
   '/ajouter-produit-global',
   authSuperAdmin,
-  ajouterproduitcontroller.addproduitGlobal
+  getProduitGlobal
+);
+router.get(
+  '/edit-produit-global',
+  authSuperAdmin,
+  getProduitGlobal
 );
 router.get('/ajouterproduit', ajouterproduitcontroller.addproduit);
 router.get('/emajouterproduit', emajouterproduitcontroller.addproduit);
@@ -255,25 +262,7 @@ router.post(
   '/ajouter-produit-global',
   authSuperAdmin,
   upload.single('image'),
-  async (req, res) => {
-    const file = req.file;
-
-    console.log('file', file);
-    const result = await uploadFile(file);
-    console.log('result', result);
-    if (result) {
-      const data = {
-        nom_produit: req.body.nom_produit,
-        categorie: req.body.categorie,
-        image: result.Location,
-      };
-      console.log(data);
-      const Result = await produitQueries.setGlobalProduit(data);
-      console.log(Result);
-      //  res.send(200)
-      res.redirect('/ajouter-produit-global');
-    }
-  }
+  postProduitGlobal
 );
 
 router.post('/ajouterproduit', ajouterproduitcontroller.addproduitPost);

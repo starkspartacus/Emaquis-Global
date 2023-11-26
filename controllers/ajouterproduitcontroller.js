@@ -12,7 +12,7 @@ exports.addproduit = async (req, res) => {
     try {
       let sess = req.session.user;
       const Categorie = await categorieQueries.getCategorie();
-      const resProduits = await produitQueries.getGlobalProduit();
+      const resProduits = await produitQueries.getGlobalProduitByCountry(sess.country);
       const resProduitsBySession = await produitQueries.getProduitBySession(
         sess.id || sess.travail_pour
       );
@@ -196,7 +196,7 @@ exports.editProduit = async (req, res) => {
     let sess = req.session.user;
 
     const Categorie = await categorieQueries.getCategorie();
-    const resProduits = await produitQueries.getGlobalProduit();
+    const resProduits = await produitQueries.getGlobalProduitByCountry(sess.country);
     const resProduitsBySession = await produitQueries.getProduitBySession(
       sess.id || sess.travail_pour
     );

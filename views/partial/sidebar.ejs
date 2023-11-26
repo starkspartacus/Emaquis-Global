@@ -66,7 +66,11 @@
         <li><a href="/listeproduit"> voir mes produits</a></li>
         <li><a href="/ajouterproduit">Enregistrer un produit</a></li>
 
+
         <% if(locals.user?.isAdmin){ %>
+          <li>
+            <a href="/listeproduitglobal">Liste produits global</a>
+          </li>
         <li>
           <a href="/ajouter-produit-global">Enregistrer un produit global</a>
         </li>
