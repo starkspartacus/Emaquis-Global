@@ -42,12 +42,12 @@ const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
 
 const storage = multer.diskStorage({
-  storage: multer.memoryStorage(),
-  filename: function (req, file, cb) {
-    console.log(file);
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + '-' + uniqueSuffix);
-  },
+	storage: multer.memoryStorage(),
+	filename: function (req, file, cb) {
+		console.log(file);
+		const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+		cb(null, file.fieldname + '-' + uniqueSuffix);
+	},
 });
 
 const upload = multer({ storage: storage });
@@ -62,13 +62,18 @@ const { produitsList } = require('../controllers/produit');
 const { PRODUCT_SIZE } = require('../constants');
 const { stocksList, addStock } = require('../controllers/stock.controller');
 const {
-  stocksImageList,
-  addStockImage,
+	stocksImageList,
+	addStockImage,
 } = require('../controllers/stock-img.controller');
 const { settingQueries } = require('../requests/settingQueries');
 const { userQueries } = require('../requests/UserQueries');
 const { generateTicket } = require('../controllers/ticket.controller');
-const {listeProduitGlobal, postProduitGlobal, getProduitGlobal } = require('../controllers/produitglobal.controler');
+const {
+	listeProduitGlobal,
+	postProduitGlobal,
+	getProduitGlobal,
+	deleteProduitGlobal,
+} = require('../controllers/produitglobal.controler');
 
 var router = express.Router();
 
@@ -130,10 +135,10 @@ router.get('/listeproduitglobal', listeProduitGlobal);
 router.get('/products', produitsList);
 router.get('/categories', listcategoriecontroller.categoriesList);
 router.get('/products-sizes', (req, res) => {
-  res.send({
-    data: PRODUCT_SIZE,
-    success: true,
-  });
+	res.send({
+		data: PRODUCT_SIZE,
+		success: true,
+	});
 });
 
 router.get('/vente', checkAuthUser, ventecontroller.vente);
@@ -145,8 +150,8 @@ router.post('/vente/status/:venteId', ventecontroller.editStatusVente);
 
 router.post('/retournerproduit', retourcontroller.addbackPost);
 router.post(
-  '/confirm/retournerproduit/:id',
-  retourcontroller.confirmBackProduct
+	'/confirm/retournerproduit/:id',
+	retourcontroller.confirmBackProduct
 );
 
 router.get('/retournerproduit', retourcontroller.addback);
@@ -154,8 +159,8 @@ router.get('/listeRetour', retourcontroller.listeRetour);
 router.get('/retournerproduit/:code', retourcontroller.getProductReturn);
 router.get('/retourner-produit-valid', retourcontroller.getProductsReturnValid);
 router.get(
-  '/retourner-produit-filtered',
-  retourcontroller.getProductReturnByQuery
+	'/retourner-produit-filtered',
+	retourcontroller.getProductReturnByQuery
 );
 
 router.post('/historiquevente', ventecontroller.venteListe);
@@ -167,17 +172,17 @@ router.get('/contact', contactcontroller.contact);
 router.post('/contact', contactcontroller.contactPost);
 
 router.get(
-  '/produit_par_categorie',
-  produitparcategorie_controller.categorieProduct
+	'/produit_par_categorie',
+	produitparcategorie_controller.categorieProduct
 );
 router.post(
-  '/produit_par_categorie',
-  produitparcategorie_controller.categorieProductPost
+	'/produit_par_categorie',
+	produitparcategorie_controller.categorieProductPost
 );
 
 router.post(
-  '/categorie_par_client',
-  usercategoriecontroller.usercategoriesPost
+	'/categorie_par_client',
+	usercategoriecontroller.usercategoriesPost
 );
 
 router.get('/allemploye', allemployecontroller.allemploye);
@@ -196,16 +201,8 @@ router.put('/profile/timings', profilecontroller.editUserTimings);
 router.get('/reglage', reglagecontroller.reglage);
 router.post('/reglage', reglagecontroller.editUserReglage);
 
-router.get(
-  '/ajouter-produit-global',
-  authSuperAdmin,
-  getProduitGlobal
-);
-router.get(
-  '/edit-produit-global',
-  authSuperAdmin,
-  getProduitGlobal
-);
+router.get('/ajouter-produit-global', authSuperAdmin, getProduitGlobal);
+router.get('/edit-produit-global', authSuperAdmin, getProduitGlobal);
 router.get('/ajouterproduit', ajouterproduitcontroller.addproduit);
 router.get('/emajouterproduit', emajouterproduitcontroller.addproduit);
 
@@ -219,35 +216,35 @@ router.post('/summaryadmin', summaryadmincontroller.summaryadmin);
 // user session
 
 router.get('/get-user-session', async (req, res) => {
-  if (req.session.user) {
-    let user = req.session.user?._doc || req.session.user;
-    const newUserData = await userQueries.getUserById(user._id || user.id);
-    const { password, ...data } = newUserData.result._doc;
+	if (req.session.user) {
+		let user = req.session.user?._doc || req.session.user;
+		const newUserData = await userQueries.getUserById(user._id || user.id);
+		const { password, ...data } = newUserData.result._doc;
 
-    const setting = await settingQueries.getSettingByUserId(user._id);
-    res.send({
-      success: true,
-      data: {
-        ...data,
-        product_return_type: setting.result.product_return_type,
-        objective: setting.result.objective,
-        numberOfTables: setting.result.numberOfTables,
-        hasStock: setting.result.hasStock,
-      },
-    });
-  } else {
-    res.send({
-      success: false,
-      data: null,
-    });
-  }
+		const setting = await settingQueries.getSettingByUserId(user._id);
+		res.send({
+			success: true,
+			data: {
+				...data,
+				product_return_type: setting.result.product_return_type,
+				objective: setting.result.objective,
+				numberOfTables: setting.result.numberOfTables,
+				hasStock: setting.result.hasStock,
+			},
+		});
+	} else {
+		res.send({
+			success: false,
+			data: null,
+		});
+	}
 });
 
 // Produits
 
 router.get(
-  '/get-products-global',
-  emajouterproduitcontroller.getProductsGlobalList
+	'/get-products-global',
+	emajouterproduitcontroller.getProductsGlobalList
 );
 
 //STOCKS
@@ -259,64 +256,70 @@ router.get('/stocks-images', stocksImageList);
 router.post('/add-stock-image', upload.single('image'), addStockImage);
 
 router.post(
-  '/ajouter-produit-global',
-  authSuperAdmin,
-  upload.single('image'),
-  postProduitGlobal
+	'/ajouter-produit-global',
+	authSuperAdmin,
+	upload.single('image'),
+	postProduitGlobal
+);
+
+router.delete(
+	'/delete-produit-global/:productId',
+	authSuperAdmin,
+	deleteProduitGlobal
 );
 
 router.post('/ajouterproduit', ajouterproduitcontroller.addproduitPost);
 router.get('/editproduit', ajouterproduitcontroller.editProduit);
 router.post('/editproduit', ajouterproduitcontroller.editproduitPost);
 router.delete(
-  '/deleteproduit/:productId',
-  ajouterproduitcontroller.deleteProduit
+	'/deleteproduit/:productId',
+	ajouterproduitcontroller.deleteProduit
 );
 
 router.post('/emajouterproduit', upload.single('image'), async (req, res) => {
-  const file = req.file;
-  const bucketName = process.env.AWS_BUCKET_NAME;
-  const region = process.env.AWS_BUCKET_REGION;
-  const accessKeyId = process.env.AWS_ACCESS_KEY;
-  const secretAccessKey = process.env.AWS_SECRET_KEY;
+	const file = req.file;
+	const bucketName = process.env.AWS_BUCKET_NAME;
+	const region = process.env.AWS_BUCKET_REGION;
+	const accessKeyId = process.env.AWS_ACCESS_KEY;
+	const secretAccessKey = process.env.AWS_SECRET_KEY;
 
-  const s3 = new S3({
-    region,
-    accessKeyId,
-    secretAccessKey,
-  });
+	const s3 = new S3({
+		region,
+		accessKeyId,
+		secretAccessKey,
+	});
 
-  // uploads a file to s3
-  function uploadFile(file) {
-    const fileStream = fs.createReadStream(file.path);
+	// uploads a file to s3
+	function uploadFile(file) {
+		const fileStream = fs.createReadStream(file.path);
 
-    const uploadParams = {
-      Bucket: bucketName,
-      Body: fileStream,
-      Key: file.originalname,
-      acl: 'public-read',
-    };
-    return s3.upload(uploadParams).promise();
-  }
+		const uploadParams = {
+			Bucket: bucketName,
+			Body: fileStream,
+			Key: file.originalname,
+			acl: 'public-read',
+		};
+		return s3.upload(uploadParams).promise();
+	}
 
-  const result = await uploadFile(file);
-  if (result) {
-    const data = {
-      nom_produit: req.body.nom_produit,
-      categorie: req.body.categorie,
-      prix_vente: parseInt(req.body.prix_vente),
-      prix_achat: parseInt(req.body.prix_achat),
-      quantite: parseInt(req.body.quantite),
-      image: result.Location,
-      session: req.body.session,
-    };
-    const Result = await produitQueries.setProduit(data);
-    console.log(Result);
-    res.send(200);
-    res.redirect('/listeproduit');
-  }
+	const result = await uploadFile(file);
+	if (result) {
+		const data = {
+			nom_produit: req.body.nom_produit,
+			categorie: req.body.categorie,
+			prix_vente: parseInt(req.body.prix_vente),
+			prix_achat: parseInt(req.body.prix_achat),
+			quantite: parseInt(req.body.quantite),
+			image: result.Location,
+			session: req.body.session,
+		};
+		const Result = await produitQueries.setProduit(data);
+		console.log(Result);
+		res.send(200);
+		res.redirect('/listeproduit');
+	}
 
-  const description = req.body.description;
+	const description = req.body.description;
 });
 
 router.get('/generate-ticket/:orderId', generateTicket);
@@ -325,19 +328,19 @@ router.use('/billet', billetRouter);
 router.use('/app', appConfigRouter);
 
 router.get('*', (req, res) => {
-  if (req.session.user) {
-    res.setHeader('Content-Type', 'text/html');
+	if (req.session.user) {
+		res.setHeader('Content-Type', 'text/html');
 
-    // react build folder
+		// react build folder
 
-    res.sendFile(path.join(__dirname, '../reactBilan/index.html'));
-  } else {
-    res.redirect('/connexion');
-  }
-  // req header
-  // res header
-  // res status
-  // res body
+		res.sendFile(path.join(__dirname, '../reactBilan/index.html'));
+	} else {
+		res.redirect('/connexion');
+	}
+	// req header
+	// res header
+	// res status
+	// res body
 });
 
 module.exports = router;

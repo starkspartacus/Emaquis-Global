@@ -1,240 +1,305 @@
 <!DOCTYPE html>
 <html lang="zxx">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<meta
+		http-equiv="content-type"
+		content="text/html;charset=UTF-8"
+	/>
 
-<head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
 
-    gtag('config', 'G-NT2SW8WBHT');
-  </script>
-  <!-- End Google tag (gtag.js) -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Management Admin</title>
+			gtag('config', 'G-NT2SW8WBHT');
+		</script>
+		<!-- End Google tag (gtag.js) -->
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<title>Management Admin</title>
 
-  <%- include('partial/head.ejs') %>
-</head>
+		<%- include('partial/head.ejs') %>
+	</head>
 
-<body class="crm_body_bg">
-  <%- include('partial/sidebar.ejs') %>
-  <!--/ sidebar  -->
+	<body class="crm_body_bg">
+		<%- include('partial/sidebar.ejs') %>
+		<!--/ sidebar  -->
 
-  <section class="main_content dashboard_part large_header_bg">
-    <!-- menu  -->
-    <%- include('partial/notif.ejs') %>
-    <!--/ menu  -->
-    <div class="main_content_iner overly_inner">
-      <div class="container-fluid p-0">
-        <!-- page title  -->
-        <!-- page title  -->
-        <div class="row">
-          <div class="col-12">
-            <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
-              <div class="page_title_left d-flex align-items-center">
-                <h3 class="f_s_25 f_w_700 dark_text mr_30">
-                  Tableau de bord
-                </h3>
-                <!--<ol class="breadcrumb page_bradcam mb-0">
+		<section class="main_content dashboard_part large_header_bg">
+			<!-- menu  -->
+			<%- include('partial/notif.ejs') %>
+			<!--/ menu  -->
+			<div class="main_content_iner overly_inner">
+				<div class="container-fluid p-0">
+					<!-- page title  -->
+					<!-- page title  -->
+					<div class="row">
+						<div class="col-12">
+							<div
+								class="page_title_box d-flex flex-wrap align-items-center justify-content-between"
+							>
+								<div class="page_title_left d-flex align-items-center">
+									<h3 class="f_s_25 f_w_700 dark_text mr_30">
+										Tableau de bord
+									</h3>
+									<!--<ol class="breadcrumb page_bradcam mb-0">
                     <li class="breadcrumb-item">
                       <a href="javascript:void(0);">Acceuil</a>
                     </li>
                     <li class="breadcrumb-item active">Analyse</li>
                   </ol>-->
-              </div>
-              <div class="page_title_right d-flex">
-                <div class="page_date d-flex align-items-center">
+								</div>
+								<div class="page_title_right d-flex">
+									<div class="page_date d-flex align-items-center">
+										<div class="date_content ml-2">
+											<span id="heure"></span>
+											<script>
+												setInterval('heure()', 1000);
+											</script>
+										</div>
+									</div>
+									<div class="page_date d-flex align-items-center">
+										<div class="date_content ml-2">
+											<span id="date"></span>
+										</div>
+									</div>
+									<div class="page_date_button d-flex align-items-center">
+										<script>
+											var d = new Date();
+											//affichage de la date du jour
+											var jour = d.getDate();
+											var mois = d.getMonth();
+											var annee = d.getFullYear();
+											var date = jour + '/' + (mois + 1) + '/' + annee;
+											document.getElementById('date').innerHTML = date;
+											//affichage de l'heure dynamique
+											function heure() {
+												var d = new Date();
+												var h = d.getHours();
+												var m = d.getMinutes();
+												var s = d.getSeconds();
+												if (h < 10) {
+													h = '0' + h;
+												}
+												if (m < 10) {
+													m = '0' + m;
+												}
+												if (s < 10) {
+													s = '0' + s;
+												}
+												document.getElementById('heure').innerHTML =
+													h + ':' + m + ':' + s;
+											}
+										</script>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<p
+							id="sess"
+							hidden
+						>
+							<%= user?.id %>
+						</p>
+						<div class="col-12">
+							<p
+								id="sess"
+								hidden
+							></p>
+							<div class="white_card card_height_100 mb_30">
+								<div class="white_card_header">
+									<div class="box_header m-0">
+										<div class="main-title">
+											<h3 class="m-0">Ajouter un produit</h3>
+										</div>
+									</div>
+								</div>
 
-                  <div class="date_content ml-2">
-                    <span id="heure"></span>
-                    <script>
-                      setInterval("heure()", 1000);
-                    </script>
+								<form
+									action="/ajouter-produit-global"
+									method="post"
+									enctype="multipart/form-data"
+								>
+									<div
+										class="alert alert-success"
+										role="alert"
+										style="text-align: center; display: none"
+										id="alert-success"
+									>
+										Nouveau produit enregistré avec succès !
+									</div>
+									<div
+										class="alert alert-danger"
+										role="alert"
+										style="text-align: center; display: none"
+										id="alert-danger"
+									>
+										Echec de l'opération, veuillez recommencer!
+									</div>
+									<div class="white_card_body">
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="common_input mb_15">
+													<% if(product){ %>
+													<input
+														type="hidden"
+														name="productId"
+														value="<%= product._id %>"
+													/>
+													<% } %>
+													<input
+														type="text"
+														placeholder="nom du produit"
+														name="nom_produit"
+														required
+														value="<%= product ? product.nom_produit :''%> "
+													/>
+												</div>
+											</div>
 
-                  </div>
+											<div class="col-lg-6">
+												<select
+													class="nice_Select2 nice_Select_line wide"
+													style="display: none"
+													name="categorie"
+													required
+												>
+													<option value="">Selectionner la catégorie</option>
+													<% if(product){ %>
+													<option
+														value="<%= product.categorie._id %>"
+														selected
+													>
+														<%= product.categorie.nom %>
+													</option>
+													<% } %> <% categories.forEach(categorie =>{%>
+													<option value="<%= categorie._id %>">
+														<%= categorie.nom %>
+													</option>
+													<%})%>
+												</select>
+											</div>
 
-                </div>
-                <div class="page_date d-flex align-items-center">
+											<div class="col-lg-6">
+												<p>photo</p>
+												<input
+													type="file"
+													placeholder="image"
+													name="image"
+													accept="image/*"
+												/>
+											</div>
 
-                  <div class="date_content ml-2">
-                    <span id="date"></span>
+											<div class="col-lg-6">
+												<div class="row">
+													<div class="col-lg-6">
+														<select
+															class="nice_Select2 nice_Select_line wide"
+															style="display: none"
+															name="country"
+														>
+															<option value="">Selectionner le pays</option>
 
-                  </div>
-                </div>
-                <div class="page_date_button d-flex  align-items-center">
+															<% pays.forEach((p)=> { %> <% if(product){ %> <%
+															if(p.code != product.country){ %>
+															<option value="<%= p.code %>">
+																<%= p.nom %>
+															</option>
+															<% } else { %>
+															<option
+																value="<%= product.country %>"
+																selected
+															>
+																<%= product.country %>
+															</option>
+															<% } %> <% }else{ %>
 
-                  <script>
-                    var d = new Date();
-                    //affichage de la date du jour
-                    var jour = d.getDate();
-                    var mois = d.getMonth();
-                    var annee = d.getFullYear();
-                    var date = jour + "/" + (mois + 1) + "/" + annee;
-                    document.getElementById("date").innerHTML = date;
-                    //affichage de l'heure dynamique
-                    function heure() {
-                      var d = new Date();
-                      var h = d.getHours();
-                      var m = d.getMinutes();
-                      var s = d.getSeconds();
-                      if (h < 10) {
-                        h = "0" + h;
-                      }
-                      if (m < 10) {
-                        m = "0" + m;
-                      }
-                      if (s < 10) {
-                        s = "0" + s;
-                      }
-                      document.getElementById("heure").innerHTML = h + ":" + m + ":" + s;
-                    }
-                  </script>
+															<option value="<%= p.code %>">
+																<%= p.nom %>
+															</option>
+															<% } %> <% }); %>
+														</select>
+													</div>
 
-                </div>
+													<div class="col-lg-6">
+														<select
+															class="nice_Select2 nice_Select_line wide"
+															style="display: none"
+															name="brand"
+														>
+															<option value="">Selectionner la marque</option>
+															<% brands.forEach(brand =>{%> <% if(product){ %>
+															<% if(brand.code != product.brand){ %>
+															<option value="<%= brand.nom %>">
+																<%= brand.nom %>
+															</option>
+															<% } else { %>
+															<option
+																value="<%= product.brand %>"
+																selected
+															>
+																<%= product.brand %>
+															</option>
+															<% } %> <% }else{ %>
+															<option value="<%= brand.nom %>">
+																<%= brand.nom %>
+															</option>
+															<% } %> <%})%>
+														</select>
+													</div>
+												</div>
+											</div>
 
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <p id="sess" hidden><%= user?.id %></p>
-          <div class="col-12">
-            <p id="sess" hidden></p>
-            <div class="white_card card_height_100 mb_30">
-              <div class="white_card_header">
-                <div class="box_header m-0">
-                  <div class="main-title">
-                    <h3 class="m-0">Ajouter un produit</h3>
-                  </div>
-                </div>
-              </div>
+											<div class="col-12">
+												<div class="create_report_btn mt_30">
+													<button
+														type="submit"
+														id="#button"
+														class="btn_1 radius_btn d-block text-center"
+													>
+														<%= product ? "Modifier" : "Ajouter" %> Produit
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-              <form action="/ajouter-produit-global" method="post" enctype="multipart/form-data">
-                <div class="alert alert-success" role="alert" style="text-align: center; display: none" id="alert-success">
-                  Nouveau produit enregistré avec succès !
-                </div>
-                <div class="alert alert-danger" role="alert" style="text-align: center; display: none" id="alert-danger">
-                  Echec de l'opération, veuillez recommencer!
-                </div>
-                <div class="white_card_body">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="common_input mb_15">
-                        <% if(product){ %>
-                        	<input type="hidden" name="productId" value="<%= product._id %>" />
-                          <% } %>
-                        <input type="text" placeholder="nom du produit" name="nom_produit" required value="<%= product ? product.nom_produit :''%> " />
-                      </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                      <select class="nice_Select2 nice_Select_line wide" style="display: none" name="categorie" required>
-                        <option value="">Selectionner la catégorie</option>
-                        <% if(product){ %>
-                        <option value="<%= product.categorie._id %>" selected><%= product.categorie.nom %></option>
-                          <% } %>
-
-                        <% categories.forEach(categorie =>{%>
-                        <option value="<%= categorie._id %>"><%= categorie.nom %></option>
-                        <%})%>
-                      </select>
-                    </div>
-
-                    <div class="col-lg-6">
-                      <p>photo</p>
-                      <input type="file" placeholder="image" name="image" accept="image/*" />
-                    </div>
-
-                    <div class="col-lg-6">
-                      <div class='row'>
-                        <div class="col-lg-6">
-
-                          <select class="nice_Select2 nice_Select_line wide" style="display: none" name="country" required>
-                            <option value="">Selectionner le pays</option>
-
-
-                            <% pays.forEach((p)=> { %>
-
-                              <% if(product){ %>
-                                <% if(p.code != product.country){ %>
-                                  <option value="<%= p.code %>"><%= p.nom %></option>
-                                <% } else { %>
-                                  <option value="<%= product.country %>" selected><%= product.country %></option>
-                                <% } %>
-
-                                <% }else{ %>
-              
-                                    <option value="<%= p.code %>"><%= p.nom %></option>
-                              <% } %>
-
-                           
-
-                            <% }); %>
-                          </select>
-                        </div>
-
-                        <div class="col-lg-6">
-                          <select class="nice_Select2 nice_Select_line wide" style="display: none" name="brand" required>
-                            <option value="">Selectionner la marque</option>
-                            <% brands.forEach(brand =>{%>
-                              <% if(product){ %>
-                                <% if(brand.code != product.brand){ %>
-                                  <option value="<%= brand.nom %>"><%= brand.nom %></option>
-                                <% } else { %>
-                                  <option value="<%= product.brand %>" selected><%= product.brand %></option>
-                                <% } %>
-                                <% }else{ %>
-                                    <option value="<%= brand.nom %>"><%= brand.nom %></option>
-                              <% } %>
-                           
-                            <%})%>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-
-                    <div class="col-12">
-                      <div class="create_report_btn mt_30">
-                        <button type="submit" id="#button" class="btn_1 radius_btn d-block text-center">
-                         <%= product ? "Modifier" : "Ajouter" %> Produit
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="footer_part">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="footer_iner text-center">
-
-              <p>2023 © E-MAQUIS - Designed by <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> - <a href="/faq">FAQ</a></p>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- main content part end
+			<div class="footer_part">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="footer_iner text-center">
+								<p>
+									2023 © E-MAQUIS - Designed by
+									<a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> -
+									<a href="/faq">FAQ</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- main content part end
 
 
     <div id="back-top" style="display: none">
@@ -244,9 +309,9 @@
     </div>
 
     <!-- footer  -->
-  <%- include('partial/script.ejs') %>
-  <script src="../jquery-3.4.1.min.js"></script>
-  <!-- <script>
+		<%- include('partial/script.ejs') %>
+		<script src="../jquery-3.4.1.min.js"></script>
+		<!-- <script>
   const socket = io(window.location.origin + window.location.pathname);
   console.log(window.location.origin + window.location.pathname);
 
@@ -280,26 +345,25 @@
 
   })
 </script> -->
-  <script>
-    const inputFile = $('input[type="file"]');
+		<script>
+			const inputFile = $('input[type="file"]');
 
-    inputFile.on("change", (e) => {
-      const file = e.target.files[0];
-      const img = document.getElementById("product-image");
-      if (img) {
-        img.style.display = "inline-block";
-        img.src = URL.createObjectURL(file);
-      }
-    });
+			inputFile.on('change', (e) => {
+				const file = e.target.files[0];
+				const img = document.getElementById('product-image');
+				if (img) {
+					img.style.display = 'inline-block';
+					img.src = URL.createObjectURL(file);
+				}
+			});
 
-    $("#button").click(function() {
-      setTimeout(1000, () => {
-        location.reload(true);
-      });
-    });
-  </script>
-</body>
+			$('#button').click(function () {
+				setTimeout(1000, () => {
+					location.reload(true);
+				});
+			});
+		</script>
+	</body>
 
-<!-- Mirrored from demo.dashboardpack.com/user-management-html/add_new_user.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 17:20:09 GMT -->
-
+	<!-- Mirrored from demo.dashboardpack.com/user-management-html/add_new_user.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 17:20:09 GMT -->
 </html>
