@@ -1058,6 +1058,9 @@ exports.MONTHS = [
 exports.MARQUES = [
   { code: 1, nom: 'Solibra' },
   { code: 2, nom: 'Brassivoire' },
+  { code: 3, nom: 'Brakina' },
+  { code: 4, nom: 'Bramali' },
+  { code: 5, nom: 'BGI' },
 ];
 
 exports.START_TIP_DAY = new Date('2023-10-08T00:00:00.000Z');
