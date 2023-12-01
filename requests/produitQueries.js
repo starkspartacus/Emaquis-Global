@@ -124,11 +124,11 @@ exports.produitQueries = class {
 				produitGlobal
 					.find({
 						$or: [
-							{ country: country },
 							{
-								country: {
-									$exists: false,
-								},
+								country,
+							},
+							{
+								country: null,
 							},
 						],
 					})

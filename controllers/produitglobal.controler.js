@@ -12,8 +12,9 @@ exports.listeProduitGlobal = async (req, res) => {
 			res.render('listeproduitglobal', {
 				productsGlobal: productsGlobal.map((product) => ({
 					...product._doc,
-					country:
-						PAYS.find((pays) => pays.code === product.country)?.nom || '',
+					country: product.country.map(
+						(country) => PAYS.find((pays) => pays.code === country)?.nom || ''
+					),
 				})),
 				user: req.session.user,
 			});
