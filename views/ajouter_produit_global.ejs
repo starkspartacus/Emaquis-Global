@@ -215,16 +215,16 @@
 															<option value="">Selectionner le pays</option>
 
 															<% pays.forEach((p)=> { %> <% if(product){ %> <%
-															if(p.code != product.country){ %>
+															if(!product.country.includes(p.code)){ %>
 															<option value="<%= p.code %>">
 																<%= p.nom %>
 															</option>
 															<% } else { %>
 															<option
-																value="<%= product.country %>"
+																value="<%= product.country.find(c=> c === p.code) %>"
 																selected
 															>
-																<%= product.country %>
+																<%= product.country.find(c=> c === p.code) %>
 															</option>
 															<% } %> <% }else{ %>
 
