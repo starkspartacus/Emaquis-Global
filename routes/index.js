@@ -40,7 +40,7 @@ const path = require('path');
 
 const multer = require('multer');
 const { produitQueries } = require('../requests/produitQueries');
-
+const { employeQueries } = require('../requests/EmployeQueries');
 const storage = multer.diskStorage({
 	storage: multer.memoryStorage(),
 	filename: function (req, file, cb) {
@@ -65,6 +65,7 @@ const {
 	stocksImageList,
 	addStockImage,
 } = require('../controllers/stock-img.controller');
+const { addEmployeeImage } = require('../controllers/allemploye'); 
 const { settingQueries } = require('../requests/settingQueries');
 const { userQueries } = require('../requests/UserQueries');
 const { generateTicket } = require('../controllers/ticket.controller');
@@ -341,6 +342,36 @@ router.get('*', (req, res) => {
 	// res header
 	// res status
 	// res body
+});
+
+
+router.post('/employee/addpic/:id',upload.single('image'),async (req,res)=>{
+	try{
+		const {id}  = req.params;
+		console.log(id)
+		  let image = '';
+        if (req.file) {
+          const file = req.file;
+		  console.log(file)
+		  
+          const result = await uploadFile(file);
+          if (result) {
+            image = result.Location;
+          }
+        } else {
+          image = req.body.image;
+        }
+		console.log(image)
+        const result = await employeQueries.updateEmployeePhotoById(id, image);
+        res.send({
+          data: result.result,
+          success: result.etat,
+		 
+        });
+	} catch (e) {
+      console.log(e);
+      res.status(500).send({ success: false });
+    }
 });
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const { employeQueries } = require('../requests/EmployeQueries');
+
 exports.allemploye = async (req, res) => {
   try {
     const user = req.session.user;
@@ -26,6 +27,8 @@ exports.allemploye = async (req, res) => {
     res.redirect(e);
   }
 };
+
+
 
 exports.allBarmans = async (req, res) => {
   if (req.session.user) {
@@ -64,4 +67,32 @@ exports.allemployePost = async (req, res) => {
   } else {
     res.redirect('/');
   }
+
+  exports.addEmployeeImage = async (req, res) => {
+    // const user = req.session.user;
+    try {
+      // if (user) {
+        const { id } = req.params;
+        console.log("id")
+        // let image = '';
+        // if (req.file) {
+        //   const file = req.file;
+        //   const result = await uploadFile(file);
+        //   if (result) {
+        //     image = result.Location;
+        //   }
+        // } else {
+        //   image = req.body.image;
+        // }
+        // const result = await employeQueries.updateEmployeePhotoById(id, image);
+        // res.send({
+        //   data: result.result,
+        //   success: result.etat,
+        // });
+      // }
+    } catch (e) {
+      console.log(e);
+      // res.status(500).send({ success: false });
+    }
+  };
 };
