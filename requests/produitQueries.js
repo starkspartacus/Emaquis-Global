@@ -59,7 +59,7 @@ exports.produitQueries = class {
 	static updateGlobalProduit(id, data) {
 		return new Promise(async (next, reject) => {
 			produitGlobal
-				.updateOne({ _id: id }, data)
+				.updateOne({ _id: id, isDeleted: false }, data)
 				.then((res) => {
 					next({
 						etat: true,
@@ -74,7 +74,7 @@ exports.produitQueries = class {
 		try {
 			return new Promise(async (next) => {
 				produitGlobal
-					.find()
+					.find({ isDeleted: false })
 					.populate({ path: 'categorie', select: '_id nom' })
 					.then((data) => {
 						next({
@@ -98,7 +98,7 @@ exports.produitQueries = class {
 		try {
 			return new Promise(async (next) => {
 				produitGlobal
-					.findOne({ _id: id })
+					.findOne({ _id: id, isDeleted: false })
 					.populate('categorie')
 					.then((data) => {
 						next({
@@ -131,6 +131,7 @@ exports.produitQueries = class {
 								country: null,
 							},
 						],
+						isDeleted: false,
 					})
 					.then((data) => {
 						next({
@@ -156,6 +157,7 @@ exports.produitQueries = class {
 			return new Promise(async (next) => {
 				Produit.find({
 					session: sessionId,
+					isDeleted: false,
 				})
 					.populate({
 						path: 'produit',
@@ -185,7 +187,7 @@ exports.produitQueries = class {
 	static getProduit() {
 		try {
 			return new Promise(async (next) => {
-				Produit.find()
+				Produit.find({ isDeleted: false })
 					.populate({
 						path: 'produit',
 						populate: {
@@ -216,6 +218,7 @@ exports.produitQueries = class {
 			return new Promise(async (next) => {
 				Produit.find({
 					session: sessionId,
+					isDeleted: false,
 				})
 					.populate({
 						path: 'produit',
@@ -245,7 +248,7 @@ exports.produitQueries = class {
 	static getProduitById(id) {
 		try {
 			return new Promise(async (next) => {
-				Produit.findById({ _id: id })
+				Produit.findById({ _id: id, isDeleted: false })
 					.populate({
 						path: 'produit',
 						populate: {
@@ -295,7 +298,7 @@ exports.produitQueries = class {
 	static getProduitByUser(id) {
 		try {
 			return new Promise(async (next) => {
-				Produit.findById({ session: id })
+				Produit.findById({ session: id, isDeleted: false })
 					.then((data) => {
 						next({
 							etat: true,
@@ -317,7 +320,11 @@ exports.produitQueries = class {
 	static deleteProduit(data) {
 		try {
 			return new Promise(async (next) => {
-				Produit.deleteOne(data)
+				Produit.updateOne(data, {
+					$set: {
+						isDeleted: true,
+					},
+				})
 					.then((res) => {
 						next({
 							etat: true,
@@ -351,7 +358,14 @@ exports.produitQueries = class {
 	static deleteProduitGlobal(id) {
 		return new Promise((next, reject) => {
 			produitGlobal
-				.deleteOne({ _id: id })
+				.updateOne(
+					{ _id: id },
+					{
+						$set: {
+							isDeleted: true,
+						},
+					}
+				)
 				.then((res) => {
 					next({
 						etat: true,

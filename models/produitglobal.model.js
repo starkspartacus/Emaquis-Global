@@ -12,6 +12,10 @@ const ProduitSchema = new Schema(
 		image: { type: String, default: '01.jpg' },
 		country: { type: [String], default: [] },
 		brand: { type: String },
+		isDeleted: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	{ timestamps: true }
 );
