@@ -1,4 +1,5 @@
 exports.PRODUCT_SIZE = [
+  "10cl",
   "25cl",
   "30cl",
   "33cl",

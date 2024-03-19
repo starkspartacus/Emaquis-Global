@@ -1,296 +1,257 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<meta
-		http-equiv="content-type"
-		content="text/html;charset=UTF-8"
-	/>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
-	<head>
-		<!-- Google tag (gtag.js) -->
-		<script
-			async
-			src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"
-		></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
 
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-			gtag('config', 'G-NT2SW8WBHT');
-		</script>
-		<meta charset="utf-8" />
-		<title>Tableau de board</title>
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no"
-		/>
-		<meta
-			content="Premium Multipurpose Admin & Dashboard Template"
-			name="description"
-		/>
-		<meta
-			content="MyraStudio"
-			name="author"
-		/>
-		<meta
-			http-equiv="X-UA-Compatible"
-			content="IE=edge"
-		/>
-		<script
-			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-			integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-			integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-			crossorigin="anonymous"
-		></script>
-		<script src="vendors/apex_chart/apex-chart2.js"></script>
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="js/confetti.js"></script>
+      gtag("config", "G-NT2SW8WBHT");
+    </script>
+    <meta charset="utf-8" />
+    <title>Tableau de board</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      content="Premium Multipurpose Admin & Dashboard Template"
+      name="description"
+    />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <script src="vendors/apex_chart/apex-chart2.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="js/confetti.js"></script>
 
-		<script
-			src="js/notifMano.js"
-			type="application/javascript"
-		></script>
+    <script src="js/notifMano.js" type="application/javascript"></script>
 
-		<!-- App favicon -->
-		<link
-			rel="shortcut icon"
-			href="assets/images/favicon.ico"
-		/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
 
-		<!-- App css -->
-		<link
-			href="assets/css/bootstrap.min.css"
-			rel="stylesheet"
-			type="text/css"
-		/>
-		<link
-			href="assets/css/icons.min.css"
-			rel="stylesheet"
-			type="text/css"
-		/>
-		<link
-			href="assets/css/theme.min.css"
-			rel="stylesheet"
-			type="text/css"
-		/>
-		<link
-			href="assets/css/style.css"
-			rel="stylesheet"
-			type="text/css"
-		/>
-		<link
-			rel="stylesheet"
-			href="css/metisMenu.css"
-		/>
+    <!-- App css -->
+    <link
+      href="assets/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/metisMenu.css" />
 
-		<!-- Favicon -->
-		<link
-			rel="shortcut icon"
-			type="image/x-icon"
-			href="../img/paresseux_sous_officiel.png"
-		/>
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../img/paresseux_sous_officiel.png"
+    />
 
-		<%- include('partial/newHead.ejs') %> <%-
-		include('partial/notifManoScript.ejs') %>
-	</head>
+    <%- include('partial/newHead.ejs') %> <%-
+    include('partial/notifManoScript.ejs') %>
+  </head>
 
-	<body class="crm_body_bg">
-		<div id="layout-wrapper">
-			<!-- ============================================================== -->
-			<!-- Start right Content here -->
-			<!-- ============================================================== -->
-			<div class="main-content">
-				<div class="page-content">
-					<div class="container-fluid">
-						<!-- start page title -->
-						<div class="row">
-							<div class="col-12">
-								<div
-									class="page-title-box d-flex align-items-center justify-content-between"
-								>
-									<h4 class="mb-0 font-size-18">Tableau de board</h4>
+  <body class="crm_body_bg">
+    <div id="layout-wrapper">
+      <!-- ============================================================== -->
+      <!-- Start right Content here -->
+      <!-- ============================================================== -->
+      <div class="main-content">
+        <div class="page-content">
+          <div class="container-fluid">
+            <!-- start page title -->
+            <div class="row">
+              <div class="col-12">
+                <div
+                  class="page-title-box d-flex align-items-center justify-content-between"
+                >
+                  <h4 class="mb-0 font-size-18">Tableau de board</h4>
 
-									<!-- <div class="page-title-right">
+                  <!-- <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Xacton</a></li>
                                         <li class="breadcrumb-item active">Dashboard</li>
                                     </ol>
                                 </div>
                                 -->
-								</div>
-							</div>
-						</div>
-						<!-- end page title -->
+                </div>
+              </div>
+            </div>
+            <!-- end page title -->
 
-						<div class="row">
-							<!-- Button trigger modal -->
+            <div class="row">
+              <!-- Button trigger modal -->
 
-							<div class="col-md-6 col-xl-3">
-								<div class="card bg-primary border-primary card_custom">
-									<div class="card-body">
-										<div class="mb-4">
-											<span class="badge badge-soft-light float-right"></span>
-											<h5 class="card-title mb-0 text-white">
-												Total employé(es)
-											</h5>
-										</div>
-										<div class="row d-flex align-items-center mb-4">
-											<div class="col-12">
-												<h2 class="d-flex align-items-center mb-0 text-white">
-													<a href="/utilisateur"><%- totalemploye %></a>
-												</h2>
-											</div>
-											<!-- <div class="col-4 text-right">
+              <div class="col-md-6 col-xl-3">
+                <div class="card bg-primary border-primary card_custom">
+                  <div class="card-body">
+                    <div class="mb-4">
+                      <span class="badge badge-soft-light float-right"></span>
+                      <h5 class="card-title mb-0 text-white">
+                        Total employé(es)
+                      </h5>
+                    </div>
+                    <div class="row d-flex align-items-center mb-4">
+                      <div class="col-12">
+                        <h2 class="d-flex align-items-center mb-0 text-white">
+                          <a href="/utilisateur"><%- totalemploye %></a>
+                        </h2>
+                      </div>
+                      <!-- <div class="col-4 text-right">
                                             <span class="text-white-50">12.5% <i class="mdi mdi-arrow-up"></i></span>
                                         </div>
                                         -->
-										</div>
-										<!--
+                    </div>
+                    <!--
                                     <div class="progress badge-soft-light shadow-sm" style="height: 5px;">
                                         <div class="progress-bar bg-light" role="progressbar" style="width: 38%;"></div>
                                     </div>
                                     -->
-									</div>
-								</div>
-							</div>
-							<!-- end col-->
-							<div
-								style="postion: absolute; inset: 0"
-								id="confetti"
-							></div>
-							<div class="col-md-6 col-xl-3">
-								<div class="card bg-success border-success card_custom">
-									<div class="card-body">
-										<div class="mb-4">
-											<span class="badge badge-soft-light float-right"
-												>Aujourd'hui</span
-											>
-											<h5 class="card-title mb-0 text-white">Ventes</h5>
-										</div>
-										<div class="row d-flex align-items-center mb-4">
-											<div class="col-8">
-												<h2 class="d-flex align-items-center text-white mb-0">
-													<a href="/data_table"><%= totalVente %></a>
-												</h2>
-											</div>
-											<div class="col-4 text-right">
-												<span class="text-white-50"
-													><% if(toDayPercent>0) { %>
-													<a
-														href="#"
-														class="text_color_5"
-													>
-														<%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
-														<i class="mdi mdi-arrow-up"></i>
-													</a>
-													<% } else { %>
-													<a
-														href="#"
-														style="color: rgb(237, 47, 47)"
-													>
-														<%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
-														<i class="mdi mdi-arrow-down"></i>
-													</a>
-													<% } %>
-												</span>
-											</div>
-										</div>
-										<!--
+                  </div>
+                </div>
+              </div>
+              <!-- end col-->
+              <div style="postion: absolute; inset: 0" id="confetti"></div>
+              <div class="col-md-6 col-xl-3">
+                <div class="card bg-success border-success card_custom">
+                  <div class="card-body">
+                    <div class="mb-4">
+                      <span class="badge badge-soft-light float-right"
+                        >Aujourd'hui</span
+                      >
+                      <h5 class="card-title mb-0 text-white">Ventes</h5>
+                    </div>
+                    <div class="row d-flex align-items-center mb-4">
+                      <div class="col-8">
+                        <h2 class="d-flex align-items-center text-white mb-0">
+                          <a href="/data_table"><%= totalVente %></a>
+                        </h2>
+                      </div>
+                      <div class="col-4 text-right">
+                        <span class="text-white-50"
+                          ><% if(toDayPercent>0) { %>
+                          <a href="#" class="text_color_5">
+                            <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
+                            <i class="mdi mdi-arrow-up"></i>
+                          </a>
+                          <% } else { %>
+                          <a href="#" style="color: rgb(237, 47, 47)">
+                            <%= `${toDayPercent>0?"+":""}${toDayPercent}`%> %
+                            <i class="mdi mdi-arrow-down"></i>
+                          </a>
+                          <% } %>
+                        </span>
+                      </div>
+                    </div>
+                    <!--
                                     <div class="progress badge-soft-light shadow-sm" style="height: 7px;">
                                         <div class="progress-bar bg-light" role="progressbar" style="width: 38%;"></div>
                                     </div>
                                     -->
-									</div>
-								</div>
-							</div>
-							<!-- end col-->
+                  </div>
+                </div>
+              </div>
+              <!-- end col-->
 
-							<div class="col-md-6 col-xl-3">
-								<div class="card bg-warning border-warning card_custom">
-									<div class="card-body">
-										<div class="mb-4">
-											<span class="badge badge-soft-light float-right"
-												>Produit le plus vendu</span
-											>
-											<h5 class="card-title mb-0 text-white"></h5>
-										</div>
-										<div class="row d-flex align-items-center mb-4">
-											<% if(productMostSold?.produit) { %>
-											<div
-												class="single_plan d-flex align-items-center justify-content-between"
-											>
-												<div class="plan_left d-flex align-items-center">
-													<div class="thumb obj_prod">
-														<a href="/bilan"
-															><img
-																src="<%= productMostSold?.produit?.image %>"
-																alt="img boisson"
-																style="
-																	width: 40px;
-																	height: 40px;
-																	object-fit: contain;
-																"
-															/>
-														</a>
-													</div>
-													<div>
-														<span class="text-white"
-															><%= productMostSold?.produit?.nom_produit %> <%=
-															productMostSold?.taille %> x <%=
-															productMostSold?.quantite %></span
-														>
-													</div>
-												</div>
-											</div>
-											<% } %>
-										</div>
-										<!--
+              <div class="col-md-6 col-xl-3">
+                <div class="card bg-warning border-warning card_custom">
+                  <div class="card-body">
+                    <div class="mb-4">
+                      <span class="badge badge-soft-light float-right"
+                        >Produit le plus vendu</span
+                      >
+                      <h5 class="card-title mb-0 text-white"></h5>
+                    </div>
+                    <div class="row d-flex align-items-center mb-4">
+                      <% if(productMostSold?.produit) { %>
+                      <div
+                        class="single_plan d-flex align-items-center justify-content-between"
+                      >
+                        <div class="plan_left d-flex align-items-center">
+                          <div class="thumb obj_prod">
+                            <a href="/bilan"
+                              ><img
+                                src="<%= productMostSold?.produit?.image %>"
+                                alt="img boisson"
+                                style="
+                                  width: 40px;
+                                  height: 40px;
+                                  object-fit: contain;
+                                "
+                              />
+                            </a>
+                          </div>
+                          <div>
+                            <span class="text-white"
+                              ><%= productMostSold?.produit?.nom_produit %> <%=
+                              productMostSold?.taille %> x <%=
+                              productMostSold?.quantite %></span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <% } %>
+                    </div>
+                    <!--
                                     <div class="progress badge-soft-light shadow-sm" style="height: 7px;">
                                         <div class="progress-bar bg-light" role="progressbar" style="width: 68%;"></div>
                                     </div>
                                     -->
-									</div>
-								</div>
-							</div>
-							<!-- end col-->
+                  </div>
+                </div>
+              </div>
+              <!-- end col-->
 
-							<div class="col-md-6 col-xl-3">
-								<div class="card bg-info border-info card_custom">
-									<div class="card-body">
-										<div class="mb-4">
-											<span class="badge badge-soft-light float-right"
-												>Cette semaine</span
-											>
-											<h5 class="card-title mb-0 text-white">
-												Chiffre d'affaires
-											</h5>
-										</div>
-										<div class="row d-flex align-items-center mb-4">
-											<div class="col-12">
-												<h2 class="d-flex align-items-center text-white mb-0">
-													<a href="/bilan"><%= totalVenteWeek %></a>
-												</h2>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- end col-->
-						</div>
-						<!-- end row -->
+              <div class="col-md-6 col-xl-3">
+                <div class="card bg-info border-info card_custom">
+                  <div class="card-body">
+                    <div class="mb-4">
+                      <span class="badge badge-soft-light float-right"
+                        >Cette semaine</span
+                      >
+                      <h5 class="card-title mb-0 text-white">
+                        Chiffre d'affaires
+                      </h5>
+                    </div>
+                    <div class="row d-flex align-items-center mb-4">
+                      <div class="col-12">
+                        <h2 class="d-flex align-items-center text-white mb-0">
+                          <a href="/bilan"><%= totalVenteWeek %></a>
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end col-->
+            </div>
+            <!-- end row -->
 
-						<div class="row d-flex">
-							<div class="col-lg-7">
-								<div class="card card_custom">
-									<div class="card-body">
-										<!--
+            <div class="row d-flex">
+              <div class="col-lg-7">
+                <div class="card card_custom">
+                  <div class="card-body">
+                    <!--
                                     <div class="dropdown float-right position-relative">
                                         <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
                                             aria-expanded="false">
@@ -311,129 +272,111 @@
                                         </ul>
                                     </div>
                                     -->
-										<h4 class="card-title d-inline-block">Ventes</h4>
+                    <h4 class="card-title d-inline-block">Ventes</h4>
 
-										<div class="row text-center mt-4">
-											<select
-												class="nice_Select2 max-width-220 mr-2"
-												id="chart_week"
-											>
-												<option value="">choisir la semaine</option>
-												<% for( let week = 1; week <= weeksInMonth; week++) { %>
-												<% if(week === currentWeekIndex) { %>
-												<option
-													value="<%= week %>"
-													selected
-												>
-													Semaine <%= week %>
-												</option>
-												<% } else { %>
+                    <div class="row text-center mt-4">
+                      <select
+                        class="nice_Select2 max-width-220 mr-2"
+                        id="chart_week"
+                      >
+                        <option value="">choisir la semaine</option>
+                        <% for( let week = 1; week <= weeksInMonth; week++) { %>
+                        <% if(week === currentWeekIndex) { %>
+                        <option value="<%= week %>" selected>
+                          Semaine <%= week %>
+                        </option>
+                        <% } else { %>
 
-												<option value="<%= week %>">Semaine <%= week %></option>
-												<% } %> <% } %>
-											</select>
+                        <option value="<%= week %>">Semaine <%= week %></option>
+                        <% } %> <% } %>
+                      </select>
 
-											<label for="chart_month"></label
-											><select
-												class="nice_Select2 max-width-220 mr-2"
-												id="chart_month"
-											>
-												<option value="1">choisir le mois</option>
-												<% for( month of months) { %> <% if (month.code === new
-												Date().getMonth()+1) { %>
-												<option
-													value="<%= month.code %>"
-													selected
-												>
-													<%= month.nom %>
-												</option>
-												<% } else { %>
-												<option value="<%= month.code %>">
-													<%= month.nom %>
-												</option>
-												<% } %> <% } %>
-											</select>
+                      <label for="chart_month"></label
+                      ><select
+                        class="nice_Select2 max-width-220 mr-2"
+                        id="chart_month"
+                      >
+                        <option value="1">choisir le mois</option>
+                        <% for( month of months) { %> <% if (month.code === new
+                        Date().getMonth()+1) { %>
+                        <option value="<%= month.code %>" selected>
+                          <%= month.nom %>
+                        </option>
+                        <% } else { %>
+                        <option value="<%= month.code %>">
+                          <%= month.nom %>
+                        </option>
+                        <% } %> <% } %>
+                      </select>
 
-											<select
-												class="nice_Select2 max-width-220"
-												id="chart_year"
-											>
-												<option value="1">choisir l'année</option>
-												<% for( year of years) { %> <% if(year === new
-												Date().getFullYear()) { %>
-												<option
-													value="<%= year %>"
-													selected
-												>
-													<%= year %>
-												</option>
-												<% } else { %>
+                      <select
+                        class="nice_Select2 max-width-220"
+                        id="chart_year"
+                      >
+                        <option value="1">choisir l'année</option>
+                        <% for( year of years) { %> <% if(year === new
+                        Date().getFullYear()) { %>
+                        <option value="<%= year %>" selected>
+                          <%= year %>
+                        </option>
+                        <% } else { %>
 
-												<option value="<%= year %>"><%= year %></option>
-												<% } %> <% } %>
-											</select>
-										</div>
-									</div>
-									<div class="white_card_body">
-										<div id="management_bar"></div>
-										<div class="loader_container">
-											<div class="loader"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- end col -->
+                        <option value="<%= year %>"><%= year %></option>
+                        <% } %> <% } %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="white_card_body">
+                    <div id="management_bar"></div>
+                    <div class="loader_container">
+                      <div class="loader"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end col -->
 
-							<!--Objectif à atteindre -->
-							<div class="col-xl-4">
-								<div class="white_card white_card_bottom card_height_100 mb_30">
-									<div class="white_card_header">
-										<div class="box_header m-0">
-											<div class="main-title">
-												<h3 class="m-0 justify-content-center d-flex">
-													Objectif à atteindre
-												</h3>
-											</div>
-											<div class="header_more_tool">
-												<div class="dropdown">
-													<span
-														class="dropdown-toggle"
-														id="dropdownMenuButton"
-														data-toggle="dropdown"
-													>
-														<i class="ti-more-alt"></i>
-													</span>
-													<div
-														class="dropdown-menu dropdown-menu-right"
-														aria-labelledby="dropdownMenuButton"
-													>
-														<a
-															class="dropdown-item"
-															href="#"
-														>
-															<i class="ti-eye"></i> Voir plus
-														</a>
-														<a
-															class="dropdown-item"
-															href="#"
-														>
-															<i class="ti-printer"></i> Print</a
-														>
-														<a
-															class="dropdown-item"
-															href="#"
-														>
-															<i class="fa fa-download"></i> Download</a
-														>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="white_card_body">
-										<div id="chart-currently"></div>
-										<div class="monthly_plan_wraper">
-											<!--
+              <!--Objectif à atteindre -->
+              <div class="col-xl-4">
+                <div class="white_card white_card_bottom card_height_100 mb_30">
+                  <div class="white_card_header">
+                    <div class="box_header m-0">
+                      <div class="main-title">
+                        <h3 class="m-0 justify-content-center d-flex">
+                          Objectif à atteindre
+                        </h3>
+                      </div>
+                      <div class="header_more_tool">
+                        <div class="dropdown">
+                          <span
+                            class="dropdown-toggle"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                          >
+                            <i class="ti-more-alt"></i>
+                          </span>
+                          <div
+                            class="dropdown-menu dropdown-menu-right"
+                            aria-labelledby="dropdownMenuButton"
+                          >
+                            <a class="dropdown-item" href="#">
+                              <i class="ti-eye"></i> Voir plus
+                            </a>
+                            <a class="dropdown-item" href="#">
+                              <i class="ti-printer"></i> Print</a
+                            >
+                            <a class="dropdown-item" href="#">
+                              <i class="fa fa-download"></i> Download</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="white_card_body">
+                    <div id="chart-currently"></div>
+                    <div class="monthly_plan_wraper">
+                      <!--
                                 <% if(productMostSold?.produit) { %>
                                 <div class="single_plan d-flex align-items-center justify-content-between">
                                   <div class="plan_left d-flex align-items-center">
@@ -455,7 +398,7 @@
                                 </div>
                                 <% } %>
                                 -->
-											<!-- <div
+                      <!-- <div
                                     class="single_plan d-flex align-items-center justify-content-between"
                                   >
                                     <div class="plan_left d-flex align-items-center">
@@ -484,580 +427,574 @@
                                       </div>
                                     </div>
                                   </div> -->
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- end row-->
-
-						<div class="row">
-							<div class="col-xl-6">
-								<div class="card card_custom">
-									<div class="card-body">
-										<h4 class="card-title">Inventaire du stock</h4>
-										<p class="card-subtitle mb-4 font-size-13"></p>
-
-										<div class="table-responsive custom-scroll">
-											<table
-												class="table table-centered table-hover table-xl mb-0"
-												id="recent-orders"
-											>
-												<thead>
-													<tr>
-														<th class="border-top-0">Nom de produit</th>
-														<th class="border-top-0">Prix d'achat</th>
-														<th class="border-top-0">Prix de vente</th>
-														<th class="border-top-0">quantité</th>
-														<th class="border-top-0">Taille</th>
-													</tr>
-												</thead>
-												<tbody>
-													<% Tab.forEach(el =>{%>
-													<tr>
-														<td class="text-truncate">
-															<div class="customer d-flex align-items-center">
-																<div class="thumb_34 mr_15 mt-0">
-																	<img
-																		src="<%= el.produit.image %>"
-																		alt=""
-																		style="
-																			width: 40px;
-																			height: 40px;
-																			object-fit: contain;
-																		"
-																	/>
-																</div>
-																<span class="f_s_12 f_w_600 color_text_5"
-																	><%= el.produit.nom_produit %></span
-																>
-															</div>
-														</td>
-														<td class="text-truncate">
-															<%= el.prix_achat %> FCFA
-														</td>
-														<td>
-															<span class="badge badge-soft-secondary p-2">
-																<%= el.prix_vente %> FCFA
-															</span>
-														</td>
-														<td>
-															<% if(el.quantite <= 100 && !el.is_cocktail){ %>
-															<a
-																href="#"
-																class=""
-																style="color: rgb(219, 36, 23)"
-															>
-																<%= el.quantite %></a
-															>
-
-															<% } else{ %>
-															<a
-																href="#"
-																class=""
-																style="color: rgb(47, 204, 47)"
-															>
-																<%=el.is_cocktail ? "∞": el.quantite %></a
-															>
-
-															<% } %>
-														</td>
-														<td class="text-truncate"><%= el.taille %></td>
-													</tr>
-													<%})%>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<!-- end card-body-->
-								</div>
-								<!-- end card-->
-							</div>
-							<!-- end col -->
-
-							<div class="col-xl-6">
-								<div class="card card_custom">
-									<div class="card-body">
-										<h4 class="card-title">Details des ventes</h4>
-										<p class="card-subtitle mb-4 font-size-13"></p>
-
-										<div class="table-responsive custom-scroll">
-											<% for (product of allProductsByDayGrouped) { %>
-											<table
-												class="table table-borderless table-hover table-centered table-nowrap mb-0"
-											>
-												<tbody>
-													<tr class="thumb_vente">
-														<td>
-															<div class="product-image">
-																<img
-																	src="<%= product.produit?.image %>"
-																	alt=""
-																	class="thumb"
-																/>
-															</div>
-															<span class="text-muted font-size-12"></span>
-														</td>
-														<td>
-															<h5 class="font-size-15 mb-1 font-weight-normal">
-																<%= product.prix_vente %> FCFA
-															</h5>
-															<span class="text-muted font-size-12"
-																>vente total</span
-															>
-														</td>
-														<td>
-															<h5 class="font-size-17 mb-1 font-weight-normal">
-																<%= product.quantite %>
-															</h5>
-															<span class="text-muted font-size-12"
-																>nombre vendu</span
-															>
-														</td>
-														<td>
-															<h5 class="font-size-15 mb-1 font-weight-normal">
-																<%= product.produit?.nom_produit %>
-															</h5>
-															<span class="text-muted font-size-12"
-																><%= product.taille %></span
-															>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<% } %>
-										</div>
-									</div>
-									<!-- end card-body-->
-								</div>
-								<!-- end card-->
-							</div>
-							<!-- end col -->
-						</div>
-					</div>
-					<!-- container-fluid -->
-				</div>
-				<!-- End Page-content -->
-
-				<footer class="footer">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-sm-6">
-								<!-- insert la constante year -->
-								<%= year %> © HNM.
-							</div>
-							<div class="col-sm-6">
-								<div class="text-sm-right d-none d-sm-block">Design & HNM</div>
-							</div>
-						</div>
-					</div>
-				</footer>
-			</div>
-			<!-- end main content-->
-		</div>
-		<div class="menu-overlay"></div>
-		<style>
-			.sidebar .logo .large_logo img {
-				width: 70%;
-				margin-left: 15%;
-			}
-
-			.white_card_body {
-				position: relative;
-			}
-
-			.loader_container {
-				position: absolute;
-				inset: 0;
-				background-color: rgba(255, 255, 255, 0.5);
-				z-index: 1000;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				display: none;
-			}
-
-			.loader {
-				border: 10px solid #f3f3f3;
-				border-radius: 50%;
-				border-top: 10px solid #ff9c2c;
-				width: 50px;
-				height: 50px;
-				-webkit-animation: spin 0.8s linear infinite;
-				/* Safari */
-				animation: spin 0.8s linear infinite;
-			}
-
-			/* Safari */
-
-			@-webkit-keyframes spin {
-				0% {
-					-webkit-transform: rotate(0deg);
-				}
-
-				100% {
-					-webkit-transform: rotate(360deg);
-				}
-			}
-
-			@keyframes spin {
-				0% {
-					transform: rotate(0deg);
-				}
-
-				100% {
-					transform: rotate(360deg);
-				}
-			}
-		</style>
-
-		<%- include('partial/newSideBar.ejs') %>
-
-		<!--/ sidebar  -->
-
-		<div
-			id="back-top"
-			style="display: none"
-		>
-			<a
-				title="Go to Top"
-				href="#"
-			>
-				<i class="ti-angle-up"></i>
-			</a>
-		</div>
-
-		<script>
-			// currently sale
-
-			//const socket = io();
-			const date = new Date();
-			const month = date.getMonth() + 1;
-			const year = date.getFullYear();
-
-			const celebriteObjective = () => {
-			  startConfetti({
-			    particleCount: 100,
-			    spread: 70,
-			    origin: {
-			      y: 0.6
-			    }
-			  });
-
-
-			  const canvas = document.getElementsByTagName('canvas');
-
-			  if (canvas) {
-			    canvas[0].style.position = 'absolute';
-			    canvas[0].style.top = '0';
-			    canvas[0].style.left = '0';
-			    canvas[0].style.width = '100%';
-			    canvas[0].style.height = '100%';
-
-
-			    setTimeout(() => {
-			      stopConfetti();
-			    }, 3000);
-
-			  }
-			}
-			const ventes = <%- JSON.stringify(venteByDay) %>;
-			const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
-			//     const user_travail_pour = <%- JSON.stringify(user.travail_pour) %>;
-			// const socket = io();
-			// socket.on('connect', () => {
-			//   socket.on(`${user_travail_pour}-editvente`,(data)=>{
-			//     $.notify("Vous avez une vente  !", "success");
-			//     const ventes = <%- JSON.stringify(venteByDay) %>;
-			//     const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
-
-			//   })
-			// })
-			//  const ventes = <%- JSON.stringify(venteByDay) %>;
-			//  const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
-
-
-			if (localStorage.getItem('celebriteObjective') && localStorage.getItem('celebriteObjectiveDate') != new Date().toLocaleDateString()) {
-			  localStorage.removeItem('celebriteObjective');
-			  localStorage.removeItem('celebriteObjectiveDate');
-			}
-
-
-			if (objectivePercent == 100 && !localStorage.getItem('celebriteObjective')) {
-			  celebriteObjective();
-			  localStorage.setItem('celebriteObjective', true);
-			  localStorage.setItem('celebriteObjectiveDate', new Date().toLocaleDateString());
-			}
-
-
-			const filterLabelsByMonth = (data, month, year) => {
-			  return Object.keys(data).filter(label => {
-			    const dateSplit = label.split('/');
-			    return Number(dateSplit[0]) == month && dateSplit[2] == year;
-			  });
-			}
-
-
-			const filterVentesValuesByMonth = (data, month, year) => {
-			  return Object.entries(data).map((vente) => {
-			    return [vente[0], vente[1].reduce((acc, val) => acc + val.prix, 0)]
-			  }).filter(vente => {
-			    const dateSplit = vente[0].split('/');
-			    return Number(dateSplit[0]) == month && dateSplit[2] == year;
-			  }).sort((a, b) => {
-			    if (new Date(a[0]) > new Date(b[0])) return -1;
-			    if (new Date(a[0]) < new Date(b[0])) return 1;
-			    return 0;
-			  }).map((vente) => vente[1]);
-			}
-
-
-			const fetchData = async () => {
-			  const week = $('#chart_week').val();
-			  const month = $('#chart_month').val();
-			  const year = $('#chart_year').val();
-
-			  $('.loader_container').css('display', 'flex');
-
-			  // loading chart
-
-			  chart_management.updateOptions({
-			    labels: [],
-			    series: [{
-			      name: 'total',
-			      type: 'column',
-			      data: [],
-			    }]
-			  })
-
-
-
-
-			  const res = await fetch(`vente-by-month?month=${month>9?month:'0'+month}&year=${year}&week=${week}`);
-			  const data = await res.json();
-
-
-			  if (data.success) {
-			    const ventesLabels = filterLabelsByMonth(data?.data, month, year);
-
-			    const ventesValues = filterVentesValuesByMonth(data?.data, month, year);
-
-
-			    chart_management.updateOptions({
-			      labels: ventesLabels.reverse(),
-			      series: [{
-			        name: 'total',
-			        type: 'column',
-			        data: ventesValues.reverse(),
-			      }]
-			    })
-			  }
-
-			  $('.loader_container').css('display', 'none');
-
-			}
-
-
-			const ventesLabels = filterLabelsByMonth(ventes, month, year);
-
-
-			const ventesValues = filterVentesValuesByMonth(ventes, month, year);
-
-			var options = {
-			  series: [objectivePercent],
-			  chart: {
-			    height: 300,
-			    type: 'radialBar',
-			    offsetY: 0,
-			  },
-			  plotOptions: {
-			    radialBar: {
-			      startAngle: -90,
-			      endAngle: 90,
-
-			      hollow: {
-			        margin: 0,
-			        size: '70%',
-			      },
-			      dataLabels: {
-			        showOn: 'always',
-			        name: {
-			          show: true,
-			          fontSize: '13px',
-			          fontWeight: '700',
-			          offsetY: -5,
-			          color: ['#98ED58', '#E5ECFF'],
-			        },
-			        value: {
-			          color: ['#98ED58', '#E5ECFF'],
-			          fontSize: '30px',
-			          fontWeight: '700',
-			          offsetY: -40,
-			          show: true,
-			        },
-			      },
-			      track: {
-			        background: ['rgba(150,103,27,0.35)', '#E5ECFF'],
-			        strokeWidth: '100%',
-			      },
-			    },
-			  },
-			  colors: ['#98ED58'],
-			  stroke: {
-			    lineCap: 'round',
-			  },
-			  labels: ['Progress'],
-			};
-
-			var chart = new ApexCharts(
-			  document.querySelector('#chart-currently'),
-			  options
-			);
-			chart.render();
-
-			/* -------------------------------------------------------------------------- */
-			/*                                     chart                                    */
-			/* -------------------------------------------------------------------------- */
-
-			options = {
-			  chart: {
-			    height: 500,
-			    type: 'line',
-			    stacked: !1,
-			    toolbar: {
-			      show: !1
-			    },
-			  },
-			  stroke: {
-			    width: [0, 2, 4],
-			    curve: 'smooth'
-			  },
-			  plotOptions: {
-			    bar: {
-			      columnWidth: '30%'
-			    }
-			  },
-			  colors: ['#FF9C2C', '#dfe2e6', '#98ED58'],
-			  series: [{
-			    name: 'total',
-			    type: 'column',
-			    data: ventesValues.reverse(),
-			  }],
-			  fill: {
-			    opacity: [0.85, 0.25, 1],
-			    gradient: {
-			      inverseColors: !1,
-			      shade: 'light',
-			      type: 'vertical',
-			      opacityFrom: 0.85,
-			      opacityTo: 0.55,
-			      stops: [0, 100, 100, 100],
-			    },
-			  },
-			  labels: ventesLabels.reverse(),
-			  markers: {
-			    size: 0
-			  },
-			  xaxis: {
-			    type: 'datetime'
-			  },
-			  yaxis: {
-			    title: {
-			      text: 'Prix total'
-			    }
-			  },
-			  tooltip: {
-			    shared: !0,
-			    intersect: !1,
-			    y: {
-			      formatter: function(e) {
-			        return void 0 !== e ? e.toFixed(0) + ' FCFA' : e;
-			      },
-			    },
-			  },
-			  grid: {
-			    borderColor: '#f1f1f1'
-			  },
-			};
-			let chart_management = new ApexCharts(
-			  document.querySelector('#management_bar'),
-			  options
-			)
-
-
-			chart_management.render();
-			console.log("chart management")
-			//
-			console.log("chart management 11")
-
-
-			// socket.on('connect', () => {
-
-			//   //      socket.on(`
-			//   //     $ {
-			//   //       user_travail_pour
-			//   //     } - editvente`, (data) => {
-			//   // //   alert('Edit');
-			//   // //   console.log("chart management 22")
-
-			//   // // })
-			// })
-			console.log("chart management 33")
-			//chart_week
-
-			$('#chart_week').on('change', async function() {
-			  const {
-			    ventesLabels,
-			    ventesValues
-			  } = await fetchData();
-
-			})
-
-
-			$('#chart_month').on('change', async function() {
-			  const {
-			    ventesLabels,
-			    ventesValues
-			  } = await fetchData();
-
-
-			})
-
-
-			$('#chart_year').on('change', async function() {
-			  const {
-			    ventesLabels,
-			    ventesValues
-			  } = await fetchData();
-
-
-			})
-		</script>
-
-		<script>
-			$(document).ready(function () {
-				$('#imprimer').on('click', function () {
-					window.print();
-				});
-			});
-		</script>
-
-		<!-- jQuery  -->
-
-		<script src="assets/js/bootstrap.bundle.min.js"></script>
-		<script src="assets/js/metismenu.min.js"></script>
-		<script src="assets/js/waves.js"></script>
-		<script src="assets/js/simplebar.min.js"></script>
-
-		<!-- Morris Js-->
-		<script src="../plugins/morris-js/morris.min.js"></script>
-		<!-- Raphael Js-->
-		<script src="../plugins/raphael/raphael.min.js"></script>
-
-		<!-- Morris Custom Js-->
-		<script src="assets/pages/dashboard-demo.js"></script>
-
-		<!-- App js -->
-		<script src="assets/js/theme.js"></script>
-	</body>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end row-->
+
+            <div class="row">
+              <div class="col-xl-6">
+                <div class="card card_custom">
+                  <div class="card-body">
+                    <h4 class="card-title">Inventaire du stock</h4>
+                    <p class="card-subtitle mb-4 font-size-13"></p>
+
+                    <div class="table-responsive custom-scroll">
+                      <table
+                        class="table table-centered table-hover table-xl mb-0"
+                        id="recent-orders"
+                      >
+                        <thead>
+                          <tr>
+                            <th class="border-top-0">Nom de produit</th>
+                            <th class="border-top-0">Prix d'achat</th>
+                            <th class="border-top-0">Prix de vente</th>
+                            <th class="border-top-0">quantité</th>
+                            <th class="border-top-0">Taille</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% Tab.forEach(el =>{%>
+                          <tr>
+                            <td class="text-truncate">
+                              <div class="customer d-flex align-items-center">
+                                <div class="thumb_34 mr_15 mt-0">
+                                  <img
+                                    src="<%= el.produit.image %>"
+                                    alt=""
+                                    style="
+                                      width: 40px;
+                                      height: 40px;
+                                      object-fit: contain;
+                                    "
+                                  />
+                                </div>
+                                <span class="f_s_12 f_w_600 color_text_5"
+                                  ><%= el.produit.nom_produit %></span
+                                >
+                              </div>
+                            </td>
+                            <td class="text-truncate">
+                              <%= el.prix_achat %> FCFA
+                            </td>
+                            <td>
+                              <span class="badge badge-soft-secondary p-2">
+                                <%= el.prix_vente %> FCFA
+                              </span>
+                            </td>
+                            <td>
+                              <% if(el.quantite <= 100 && !el.is_cocktail){ %>
+                              <a
+                                href="#"
+                                class=""
+                                style="color: rgb(219, 36, 23)"
+                              >
+                                <%= el.quantite %></a
+                              >
+
+                              <% } else{ %>
+                              <a
+                                href="#"
+                                class=""
+                                style="color: rgb(47, 204, 47)"
+                              >
+                                <%=el.is_cocktail ? "∞": el.quantite %></a
+                              >
+
+                              <% } %>
+                            </td>
+                            <td class="text-truncate"><%= el.taille %></td>
+                          </tr>
+                          <%})%>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!-- end card-body-->
+                </div>
+                <!-- end card-->
+              </div>
+              <!-- end col -->
+
+              <div class="col-xl-6">
+                <div class="card card_custom">
+                  <div class="card-body">
+                    <h4 class="card-title">Details des ventes</h4>
+                    <p class="card-subtitle mb-4 font-size-13"></p>
+
+                    <div class="table-responsive custom-scroll">
+                      <% for (product of allProductsByDayGrouped) { %>
+                      <table
+                        class="table table-borderless table-hover table-centered table-nowrap mb-0"
+                      >
+                        <tbody>
+                          <tr class="thumb_vente">
+                            <td>
+                              <div class="product-image">
+                                <img
+                                  src="<%= product.produit?.image %>"
+                                  alt=""
+                                  class="thumb"
+                                />
+                              </div>
+                              <span class="text-muted font-size-12"></span>
+                            </td>
+                            <td>
+                              <h5 class="font-size-15 mb-1 font-weight-normal">
+                                <%= product.prix_vente %> FCFA
+                              </h5>
+                              <span class="text-muted font-size-12"
+                                >vente total</span
+                              >
+                            </td>
+                            <td>
+                              <h5 class="font-size-17 mb-1 font-weight-normal">
+                                <%= product.quantite %>
+                              </h5>
+                              <span class="text-muted font-size-12"
+                                >nombre vendu</span
+                              >
+                            </td>
+                            <td>
+                              <h5 class="font-size-15 mb-1 font-weight-normal">
+                                <%= product.produit?.nom_produit %>
+                              </h5>
+                              <span class="text-muted font-size-12"
+                                ><%= product.taille %></span
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <% } %>
+                    </div>
+                  </div>
+                  <!-- end card-body-->
+                </div>
+                <!-- end card-->
+              </div>
+              <!-- end col -->
+            </div>
+          </div>
+          <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- insert la constante year -->
+                <%= year %> © HNM.
+              </div>
+              <div class="col-sm-6">
+                <div class="text-sm-right d-none d-sm-block">Design & HNM</div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+      <!-- end main content-->
+    </div>
+    <div class="menu-overlay"></div>
+    <style>
+      .sidebar .logo .large_logo img {
+        width: 70%;
+        margin-left: 15%;
+      }
+
+      .white_card_body {
+        position: relative;
+      }
+
+      .loader_container {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(255, 255, 255, 0.5);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: none;
+      }
+
+      .loader {
+        border: 10px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 10px solid #ff9c2c;
+        width: 50px;
+        height: 50px;
+        -webkit-animation: spin 0.8s linear infinite;
+        /* Safari */
+        animation: spin 0.8s linear infinite;
+      }
+
+      /* Safari */
+
+      @-webkit-keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <%- include('partial/newSideBar.ejs') %>
+
+    <!--/ sidebar  -->
+
+    <div id="back-top" style="display: none">
+      <a title="Go to Top" href="#">
+        <i class="ti-angle-up"></i>
+      </a>
+    </div>
+
+    <script>
+      // currently sale
+
+      //const socket = io();
+      const date = new Date();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+
+      const celebriteObjective = () => {
+        startConfetti({
+          particleCount: 100,
+          spread: 70,
+          origin: {
+            y: 0.6
+          }
+        });
+
+
+        const canvas = document.getElementsByTagName('canvas');
+
+        if (canvas) {
+          canvas[0].style.position = 'absolute';
+          canvas[0].style.top = '0';
+          canvas[0].style.left = '0';
+          canvas[0].style.width = '100%';
+          canvas[0].style.height = '100%';
+
+
+          setTimeout(() => {
+            stopConfetti();
+          }, 3000);
+
+        }
+      }
+      const ventes = <%- JSON.stringify(venteByDay) %>;
+      const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
+      //     const user_travail_pour = <%- JSON.stringify(user.travail_pour) %>;
+      // const socket = io();
+      // socket.on('connect', () => {
+      //   socket.on(`${user_travail_pour}-editvente`,(data)=>{
+      //     $.notify("Vous avez une vente  !", "success");
+      //     const ventes = <%- JSON.stringify(venteByDay) %>;
+      //     const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
+
+      //   })
+      // })
+      //  const ventes = <%- JSON.stringify(venteByDay) %>;
+      //  const objectivePercent = <%- JSON.stringify(objectivePercent) %>;
+
+
+      if (localStorage.getItem('celebriteObjective') && localStorage.getItem('celebriteObjectiveDate') != new Date().toLocaleDateString()) {
+        localStorage.removeItem('celebriteObjective');
+        localStorage.removeItem('celebriteObjectiveDate');
+      }
+
+
+      if (objectivePercent == 100 && !localStorage.getItem('celebriteObjective')) {
+        celebriteObjective();
+        localStorage.setItem('celebriteObjective', true);
+        localStorage.setItem('celebriteObjectiveDate', new Date().toLocaleDateString());
+      }
+
+
+      const filterLabelsByMonth = (data, month, year) => {
+        return Object.keys(data).filter(label => {
+          const dateSplit = label.split('/');
+          return Number(dateSplit[0]) == month && dateSplit[2] == year;
+        });
+      }
+
+
+      const filterVentesValuesByMonth = (data, month, year) => {
+        return Object.entries(data).map((vente) => {
+          return [vente[0], vente[1].reduce((acc, val) => acc + val.prix, 0)]
+        }).filter(vente => {
+          const dateSplit = vente[0].split('/');
+          return Number(dateSplit[0]) == month && dateSplit[2] == year;
+        }).sort((a, b) => {
+          if (new Date(a[0]) > new Date(b[0])) return -1;
+          if (new Date(a[0]) < new Date(b[0])) return 1;
+          return 0;
+        }).map((vente) => vente[1]);
+      }
+
+
+      const fetchData = async () => {
+        const week = $('#chart_week').val();
+        const month = $('#chart_month').val();
+        const year = $('#chart_year').val();
+
+        $('.loader_container').css('display', 'flex');
+
+        // loading chart
+
+        chart_management.updateOptions({
+          labels: [],
+          series: [{
+            name: 'total',
+            type: 'column',
+            data: [],
+          }]
+        })
+
+
+
+
+        const res = await fetch(`vente-by-month?month=${month>9?month:'0'+month}&year=${year}&week=${week}`);
+        const data = await res.json();
+
+
+        if (data.success) {
+          const ventesLabels = filterLabelsByMonth(data?.data, month, year);
+
+          const ventesValues = filterVentesValuesByMonth(data?.data, month, year);
+
+
+          chart_management.updateOptions({
+            labels: ventesLabels.reverse(),
+            series: [{
+              name: 'total',
+              type: 'column',
+              data: ventesValues.reverse(),
+            }]
+          })
+        }
+
+        $('.loader_container').css('display', 'none');
+
+      }
+
+
+      const ventesLabels = filterLabelsByMonth(ventes, month, year);
+
+
+      const ventesValues = filterVentesValuesByMonth(ventes, month, year);
+
+      var options = {
+        series: [objectivePercent],
+        chart: {
+          height: 300,
+          type: 'radialBar',
+          offsetY: 0,
+        },
+        plotOptions: {
+          radialBar: {
+            startAngle: -90,
+            endAngle: 90,
+
+            hollow: {
+              margin: 0,
+              size: '70%',
+            },
+            dataLabels: {
+              showOn: 'always',
+              name: {
+                show: true,
+                fontSize: '13px',
+                fontWeight: '700',
+                offsetY: -5,
+                color: ['#98ED58', '#E5ECFF'],
+              },
+              value: {
+                color: ['#98ED58', '#E5ECFF'],
+                fontSize: '30px',
+                fontWeight: '700',
+                offsetY: -40,
+                show: true,
+              },
+            },
+            track: {
+              background: ['rgba(150,103,27,0.35)', '#E5ECFF'],
+              strokeWidth: '100%',
+            },
+          },
+        },
+        colors: ['#98ED58'],
+        stroke: {
+          lineCap: 'round',
+        },
+        labels: ['Progress'],
+      };
+
+      var chart = new ApexCharts(
+        document.querySelector('#chart-currently'),
+        options
+      );
+      chart.render();
+
+      /* -------------------------------------------------------------------------- */
+      /*                                     chart                                    */
+      /* -------------------------------------------------------------------------- */
+
+      options = {
+        chart: {
+          height: 500,
+          type: 'line',
+          stacked: !1,
+          toolbar: {
+            show: !1
+          },
+        },
+        stroke: {
+          width: [0, 2, 4],
+          curve: 'smooth'
+        },
+        plotOptions: {
+          bar: {
+            columnWidth: '30%'
+          }
+        },
+        colors: ['#FF9C2C', '#dfe2e6', '#98ED58'],
+        series: [{
+          name: 'total',
+          type: 'column',
+          data: ventesValues.reverse(),
+        }],
+        fill: {
+          opacity: [0.85, 0.25, 1],
+          gradient: {
+            inverseColors: !1,
+            shade: 'light',
+            type: 'vertical',
+            opacityFrom: 0.85,
+            opacityTo: 0.55,
+            stops: [0, 100, 100, 100],
+          },
+        },
+        labels: ventesLabels.reverse(),
+        markers: {
+          size: 0
+        },
+        xaxis: {
+          type: 'datetime'
+        },
+        yaxis: {
+          title: {
+            text: 'Prix total'
+          }
+        },
+        tooltip: {
+          shared: !0,
+          intersect: !1,
+          y: {
+            formatter: function(e) {
+              return void 0 !== e ? e.toFixed(0) + ' FCFA' : e;
+            },
+          },
+        },
+        grid: {
+          borderColor: '#f1f1f1'
+        },
+      };
+      let chart_management = new ApexCharts(
+        document.querySelector('#management_bar'),
+        options
+      )
+
+
+      chart_management.render();
+      console.log("chart management")
+      //
+      console.log("chart management 11")
+
+
+      // socket.on('connect', () => {
+
+      //   //      socket.on(`
+      //   //     $ {
+      //   //       user_travail_pour
+      //   //     } - editvente`, (data) => {
+      //   // //   alert('Edit');
+      //   // //   console.log("chart management 22")
+
+      //   // // })
+      // })
+      console.log("chart management 33")
+      //chart_week
+
+      $('#chart_week').on('change', async function() {
+        const {
+          ventesLabels,
+          ventesValues
+        } = await fetchData();
+
+      })
+
+
+      $('#chart_month').on('change', async function() {
+        const {
+          ventesLabels,
+          ventesValues
+        } = await fetchData();
+
+
+      })
+
+
+      $('#chart_year').on('change', async function() {
+        const {
+          ventesLabels,
+          ventesValues
+        } = await fetchData();
+
+
+      })
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        $("#imprimer").on("click", function () {
+          window.print();
+        });
+      });
+    </script>
+
+    <!-- jQuery  -->
+
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/metismenu.min.js"></script>
+    <script src="assets/js/waves.js"></script>
+    <script src="assets/js/simplebar.min.js"></script>
+
+    <!-- Morris Js-->
+    <script src="../plugins/morris-js/morris.min.js"></script>
+    <!-- Raphael Js-->
+    <script src="../plugins/raphael/raphael.min.js"></script>
+
+    <!-- Morris Custom Js-->
+    <script src="assets/pages/dashboard-demo.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/theme.js"></script>
+  </body>
 </html>
