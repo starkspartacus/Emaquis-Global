@@ -1,4 +1,5 @@
 const { employeQueries } = require('../requests/EmployeQueries');
+
 exports.allemploye = async (req, res) => {
   try {
     const user = req.session.user;
@@ -26,6 +27,8 @@ exports.allemploye = async (req, res) => {
     res.redirect(e);
   }
 };
+
+
 
 exports.allBarmans = async (req, res) => {
   if (req.session.user) {
@@ -64,4 +67,6 @@ exports.allemployePost = async (req, res) => {
   } else {
     res.redirect('/');
   }
+
+
 };

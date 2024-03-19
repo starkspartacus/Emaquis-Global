@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const connection = async () => {
   try {
     await mongoose.connect(
-      'mongodb+srv://aniki:anikileboss@cluster0.qlorx.mongodb.net/emaquis?retryWrites=true&w=majority',
+     process.env.MONGO_URI,
       {
         //   await mongoose.connect("mongodb://127.0.0.1:27017/emaquis", {
         useNewUrlParser: true,

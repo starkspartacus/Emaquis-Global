@@ -27,6 +27,10 @@
   <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="css/metisMenu.css">
 
+  <script src="/assets/js/jquery.min.js"></script>
+
+  
+
 
   <%- include('partial/newHead.ejs') %>
 
@@ -274,7 +278,6 @@
   <!-- footer  -->
   <!-- jquery slim -->
 
-
   <script src="/socket.io/socket.io.js "></script>
   <script>
     const socket = io(window.location.origin + window.location.pathname);
@@ -315,9 +318,8 @@
 
     $('#pays').change(() => {
       const countryValue = $('#pays').val();
-
-
       const country = countries.find((c) => c.code === countryValue);
+      
       if (country) {
         $('#city').html('<option value="" selected>Selection ta ville</option>');
         country.cities.forEach((ville) => {

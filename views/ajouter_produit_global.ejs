@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="zxx">
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
   <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'G-NT2SW8WBHT');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-NT2SW8WBHT");
     </script>
     <!-- End Google tag (gtag.js) -->
     <meta charset="utf-8" />
@@ -21,6 +28,7 @@
 
     <%- include('partial/head.ejs') %>
   </head>
+
   <body class="crm_body_bg">
     <%- include('partial/sidebar.ejs') %>
     <!--/ sidebar  -->
@@ -50,55 +58,48 @@
                   </ol>-->
                 </div>
                 <div class="page_title_right d-flex">
-                    <div class="page_date d-flex align-items-center">
-
-                        <div class="date_content ml-2">
-                        <span id="heure"></span>
-                        <script>
-                            setInterval("heure()", 1000);
-                        </script>
-
-                        </div>
-
+                  <div class="page_date d-flex align-items-center">
+                    <div class="date_content ml-2">
+                      <span id="heure"></span>
+                      <script>
+                        setInterval("heure()", 1000);
+                      </script>
                     </div>
-                    <div class="page_date d-flex align-items-center">
-
-                        <div class="date_content ml-2">
-                        <span id="date"></span>
-
-                        </div>
+                  </div>
+                  <div class="page_date d-flex align-items-center">
+                    <div class="date_content ml-2">
+                      <span id="date"></span>
                     </div>
-                  <div class="page_date_button d-flex  align-items-center">
-
+                  </div>
+                  <div class="page_date_button d-flex align-items-center">
                     <script>
                       var d = new Date();
                       //affichage de la date du jour
-                        var jour = d.getDate();
-                        var mois = d.getMonth();
-                        var annee = d.getFullYear();
-                        var date = jour + "/" + (mois + 1) + "/" + annee;
-                        document.getElementById("date").innerHTML = date;
-                        //affichage de l'heure dynamique
-                        function heure(){
-                          var d = new Date();
-                          var h = d.getHours();
-                          var m = d.getMinutes();
-                          var s = d.getSeconds();
-                          if(h<10){
-                            h = "0"+h;
-                          }
-                          if(m<10){
-                            m = "0"+m;
-                          }
-                          if(s<10){
-                            s = "0"+s;
-                          }
-                          document.getElementById("heure").innerHTML = h+":"+m+":"+s;
+                      var jour = d.getDate();
+                      var mois = d.getMonth();
+                      var annee = d.getFullYear();
+                      var date = jour + "/" + (mois + 1) + "/" + annee;
+                      document.getElementById("date").innerHTML = date;
+                      //affichage de l'heure dynamique
+                      function heure() {
+                        var d = new Date();
+                        var h = d.getHours();
+                        var m = d.getMinutes();
+                        var s = d.getSeconds();
+                        if (h < 10) {
+                          h = "0" + h;
                         }
+                        if (m < 10) {
+                          m = "0" + m;
+                        }
+                        if (s < 10) {
+                          s = "0" + s;
+                        }
+                        document.getElementById("heure").innerHTML =
+                          h + ":" + m + ":" + s;
+                      }
                     </script>
-
                   </div>
-
                 </div>
               </div>
             </div>
@@ -141,11 +142,19 @@
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="common_input mb_15">
+                          <% if(product){ %>
+                          <input
+                            type="hidden"
+                            name="productId"
+                            value="<%= product._id %>"
+                          />
+                          <% } %>
                           <input
                             type="text"
                             placeholder="nom du produit"
                             name="nom_produit"
                             required
+                            value="<%= product ? product.nom_produit :''%> "
                           />
                         </div>
                       </div>
@@ -158,8 +167,14 @@
                           required
                         >
                           <option value="">Selectionner la catégorie</option>
-                          <% categories.forEach(categorie =>{%>
-                          <option value="<%= categorie._id %>"><%= categorie.nom %></option>
+                          <% if(product){ %>
+                          <option value="<%= product.categorie._id %>" selected>
+                            <%= product.categorie.nom %>
+                          </option>
+                          <% } %> <% categories.forEach(categorie =>{%>
+                          <option value="<%= categorie._id %>">
+                            <%= categorie.nom %>
+                          </option>
                           <%})%>
                         </select>
                       </div>
@@ -174,10 +189,63 @@
                         />
                       </div>
 
-                      <div class="col-lg-12">
-                       <img src="" id="product-image" width="200px" height="200px" alt="" style="object-fit: contain;display: none;">
-                      </div>
+                      <div class="col-lg-6">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <select
+                              class="nice_Select2 nice_Select_line wide"
+                              style="display: none"
+                              name="country"
+                              multiple
+                            >
+                              <option value="">Selectionner le pays</option>
 
+                              <% pays.forEach((p)=> { %> <% if(product){ %> <%
+                              if(!product.country.includes(p.code)){ %>
+                              <option value="<%= p.code %>">
+                                <%= p.nom %>
+                              </option>
+                              <% } else { %>
+                              <option
+                                value="<%= product.country.find(c=> c === p.code) %>"
+                                selected
+                              >
+                                <%= product.country.find(c=> c === p.code) %>
+                              </option>
+                              <% } %> <% }else{ %>
+
+                              <option value="<%= p.code %>">
+                                <%= p.nom %>
+                              </option>
+                              <% } %> <% }); %>
+                            </select>
+                          </div>
+
+                          <div class="col-lg-6">
+                            <select
+                              class="nice_Select2 nice_Select_line wide"
+                              style="display: none"
+                              name="brand"
+                            >
+                              <option value="">Selectionner la marque</option>
+                              <% brands.forEach(brand =>{%> <% if(product){ %>
+                              <% if(brand.code != product.brand){ %>
+                              <option value="<%= brand.nom %>">
+                                <%= brand.nom %>
+                              </option>
+                              <% } else { %>
+                              <option value="<%= product.brand %>" selected>
+                                <%= product.brand %>
+                              </option>
+                              <% } %> <% }else{ %>
+                              <option value="<%= brand.nom %>">
+                                <%= brand.nom %>
+                              </option>
+                              <% } %> <%})%>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
 
                       <div class="col-12">
                         <div class="create_report_btn mt_30">
@@ -186,7 +254,7 @@
                             id="#button"
                             class="btn_1 radius_btn d-block text-center"
                           >
-                            Ajouter Produit
+                            <%= product ? "Modifier" : "Ajouter" %> Produit
                           </button>
                         </div>
                       </div>
@@ -199,15 +267,16 @@
         </div>
       </div>
 
-
       <div class="footer_part">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12">
               <div class="footer_iner text-center">
-
-                  <p>2023 © E-MAQUIS - Designed by <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> - <a href="/faq">FAQ</a></p>
-
+                <p>
+                  2023 © E-MAQUIS - Designed by
+                  <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> -
+                  <a href="/faq">FAQ</a>
+                </p>
               </div>
             </div>
           </div>
@@ -261,16 +330,15 @@
   })
 </script> -->
     <script>
-
       const inputFile = $('input[type="file"]');
 
       inputFile.on("change", (e) => {
         const file = e.target.files[0];
-      const img = document.getElementById("product-image");
-      if(img){
-        img.style.display = "inline-block";
-        img.src = URL.createObjectURL(file);
-      }
+        const img = document.getElementById("product-image");
+        if (img) {
+          img.style.display = "inline-block";
+          img.src = URL.createObjectURL(file);
+        }
       });
 
       $("#button").click(function () {
