@@ -9,6 +9,7 @@ const EmployeSchema = new Schema(
     travail_pour: { type: Schema.Types.ObjectId, ref: 'user', required: true },
     statut: { type: String, required: true },
     numero: { type: String, required: true },
+    image: { type: String },
     adresse: { type: String, required: true },
     password: { type: String, required: true },
     deleted: {

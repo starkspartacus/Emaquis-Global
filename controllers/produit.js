@@ -45,4 +45,40 @@ exports.produitsPost = async (req, res) => {
   } else {
     res.redirect('/');
   }
+
+
+  exports.produitBySession = async (req, res) => {
+    // if (req.session.user) {
+      try {
+        const { id } = req.params;
+        const produitBySession = await produitQueries.getProduitBySession(id);
+        console.log(produitBySession)
+        if (produitBySession.result.length===0 ) {
+           return res.status(404).json({
+            error: false,
+            messageCode: "NotFound",
+            message: "aucun produit trouvé.",
+          });
+        }
+    
+       return res.status(200).json({
+          error: false,
+          messageCode: "Success",
+          message: "Succès",
+          produitBySession,
+        });
+      } catch (err) {
+        console.log(err);
+        return res.status(500).json({
+          error: true,
+          messageCode: "Error",
+          message: "internal error",
+        });
+      }
+    // } else {
+    //   res.redirect('/');
+    // }
+  };
+  
+
 };

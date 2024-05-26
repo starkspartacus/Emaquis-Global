@@ -1,5 +1,5 @@
 /** @format */
-
+require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -8,10 +8,21 @@ const logger = require('morgan');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express'),
   swaggerDocument = require('./swagger.json');
-const session = require('express-session')({
+
+const expressSession = require('express-session');
+var MongoStore = require('connect-mongo');
+
+const session = expressSession({
   secret: 'maisdismoitucherchesquoiputin',
   resave: true,
   saveUninitialized: true,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    dbName: 'emaquis',
+    dbCollection: 'sessions',
+    autoRemove: 'interval',
+    autoRemoveInterval: 1,
+  }),
   cookie: {
     maxAge: 3600000,
   },
