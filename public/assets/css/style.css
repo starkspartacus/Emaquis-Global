@@ -26,6 +26,11 @@
 .selectProduit {
 }
 
+.driver-popover.driverjs-theme{
+  background-color: #fde047;
+  color: #000;
+}
+
 .thumb {
   background-color: #e9ecef;
   height: 50px;

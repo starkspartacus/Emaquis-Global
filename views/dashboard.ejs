@@ -45,7 +45,11 @@
     <script src="js/confetti.js"></script>
 
     <script src="js/notifMano.js" type="application/javascript"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"
+    />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico" />
 
@@ -139,7 +143,18 @@
                       <span class="badge badge-soft-light float-right"
                         >Aujourd'hui</span
                       >
-                      <h5 class="card-title mb-0 text-white">Ventes</h5>
+                      <div class="d-flex justify-center items-center">
+                        <script src="https://cdn.lordicon.com/lordicon.js"></script>
+
+                        <lord-icon
+                          src="https://cdn.lordicon.com/buigvcwg.json"
+                          trigger="loop"
+                          delay="3500"
+                          style="width: 50px; height: 50px"
+                        >
+                        </lord-icon>
+                        <h5 class="card-title mb-0 text-white">Ventes</h5>
+                      </div>
                     </div>
                     <div class="row d-flex align-items-center mb-4">
                       <div class="col-8">
@@ -251,27 +266,6 @@
               <div class="col-lg-7">
                 <div class="card card_custom">
                   <div class="card-body">
-                    <!--
-                                    <div class="dropdown float-right position-relative">
-                                        <a href="#" class="dropdown-toggle h4 text-muted" data-toggle="dropdown"
-                                            aria-expanded="false">
-                                            <i class="mdi mdi-dots-vertical"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="#" class="dropdown-item" id="imprimer">
-                                              <i class="ti-printer"></i>
-                                              Imprimer</a>
-                                            </li>
-                                            <ul class="dropdown-item">
-                                              <li><a href="https://api.whatsapp.com/send?text=Bonjour%20à%20tous%21" target="_blank">Partager sur WhatsApp</a></li>
-                                              <li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2F" target="_blank">Partager sur Facebook</a></li>
-                                            </ul>
-                                            <li><a href="#" class="dropdown-item">Something else here</a></li>
-                                            <li class="dropdown-divider"></li>
-                                            <li><a href="#" class="dropdown-item">Separated link</a></li>
-                                        </ul>
-                                    </div>
-                                    -->
                     <h4 class="card-title d-inline-block">Ventes</h4>
 
                     <div class="row text-center mt-4">
@@ -654,7 +648,201 @@
       }
     </style>
 
-    <%- include('partial/newSideBar.ejs') %>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+      <!-- ========== Left Sidebar Start ========== -->
+      <div class="vertical-menu">
+        <div data-simplebar class="h-100">
+          <div class="navbar-brand-box mt-10 logo_sidebar">
+            <a href="/dashboard">
+              <img src="../img/paresseux_sous_officiel.png" alt="" />
+            </a>
+          </div>
+
+          <!--- Sidemenu -->
+          <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+              <li>
+                <a
+                  href="javascript: void(0);"
+                  class="has-arrow waves-effect"
+                  aria-expanded="false"
+                >
+                  <div class="nav_icon_small" id="element-bilan">
+                    <img
+                      src="../img/paresseux_sous_officiel.png"
+                      style="height: 22px; width: 25px"
+                      alt=""
+                    />
+                    <span>E-Maquis-Bilan</span>
+                  </div>
+                </a>
+
+                <ul class="sub-menu" aria-expanded="false">
+                  <li class="">
+                    <a href="/bilan">Bilan</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="tutoNewAddEmploye">
+                <a
+                  href="javascript: void(0);"
+                  class="has-arrow waves-effect"
+                  aria-expanded="false"
+                >
+                  <div class="nav_icon_small" id="element-employe">
+                    <img
+                      src="../img/icone_employee.png"
+                      alt=""
+                      style="height: 29px; width: 29px"
+                    />
+                    <span>Employé(es)</span>
+                  </div>
+                </a>
+
+                <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="/ajouteruser">ajouter</a></li>
+                  <li><a href="/utilisateur"> Liste des employés</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <a
+                  href="javascript: void(0);"
+                  class="has-arrow waves-effect"
+                  aria-expanded="false"
+                >
+                  <div class="nav_icon_small">
+                    <img
+                      src="../img/icone_ventes.png"
+                      style="
+                        height: 22px;
+                        width: 37px;
+                        transform: rotate(-20deg);
+                      "
+                      alt=""
+                    />
+                    <span>Vente</span>
+                  </div>
+                </a>
+
+                <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="/data_table"> Liste des ventes</a></li>
+                </ul>
+              </li>
+
+              <li class="tutoNewCompte">
+                <a
+                  href="javascript: void(0);"
+                  class="has-arrow waves-effect"
+                  aria-expanded="false"
+                >
+                  <div class="nav_icon_small" id="element-produit">
+                    <img
+                      src="img/menu-icon/bouteille.png"
+                      style="
+                        height: 22px;
+                        width: 37px;
+                        transform: rotate(-20deg);
+                      "
+                      alt=""
+                    />
+                    <span>Produits</span>
+                  </div>
+                </a>
+
+                <ul>
+                  <li><a href="/ajouterproduit">Enregistrer un produit</a></li>
+                  <li><a href="/listeproduit"> Approvisionnement</a></li>
+
+                  <% if(locals.user?.isAdmin){ %>
+                  <li>
+                    <a href="/listeproduitglobal">Liste produits global</a>
+                  </li>
+                  <li>
+                    <a href="/ajouter-produit-global"
+                      >Enregistrer un produit global</a
+                    >
+                  </li>
+                  <% } %>
+                </ul>
+              </li>
+
+              <li>
+                <a
+                  href="javascript: void(0);"
+                  class="has-arrow waves-effect"
+                  aria-expanded="false"
+                >
+                  <div class="nav_icon_small">
+                    <img
+                      src="../img/categorie.svg"
+                      style="
+                        height: 22px;
+                        width: 37px;
+                        transform: rotate(-20deg);
+                      "
+                      alt=""
+                    />
+                    <span>Catégories</span>
+                  </div>
+                </a>
+
+                <ul>
+                  <li><a href="/listcategorie"> Mes catégories</a></li>
+                  <% if(locals.user?.isAdmin){ %>
+                  <li><a href="/ajoutercategorie">ajouter</a></li>
+                  <% } %>
+                </ul>
+              </li>
+
+              <li>
+                <a
+                  href="javascript: void(0);"
+                  class="has-arrow waves-effect"
+                  aria-expanded="false"
+                >
+                  <div class="nav_icon_small">
+                    <img
+                      src="img/menu-icon/reglage.png"
+                      style="height: 22px; width: 30px"
+                      alt=""
+                    />
+                    <span>Paramètres</span>
+                  </div>
+                </a>
+
+                <ul class="sub-menu" aria-expanded="false">
+                  <div class="profile_info_details">
+                    <li><a href="/profile">Mon Profil </a></li>
+                    <!--          <li><a href="/reglage" class="list-group-item disabled">Réglage<span class="badge badge-info">Bêta</span></a></li>-->
+                    <li><a href="/deconnexion">Déconnexion </a></li>
+                  </div>
+                </ul>
+              </li>
+
+              <!--<li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect"><i
+                                class="mdi mdi-share-variant"></i><span>Multi Level</span></a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li><a href="javascript: void(0);">Level 1.1</a></li>
+                            <li><a href="javascript: void(0);" class="has-arrow">Level 1.2</a>
+                                <ul class="sub-menu" aria-expanded="true">
+                                    <li><a href="javascript: void(0);">Level 2.1</a></li>
+                                    <li><a href="javascript: void(0);">Level 2.2</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li> -->
+            </ul>
+          </div>
+          <!-- Sidebar -->
+        </div>
+      </div>
+      <!-- Left Sidebar End -->
+    </div>
 
     <!--/ sidebar  -->
 
@@ -665,6 +853,56 @@
     </div>
 
     <script>
+      const driver = window.driver.js.driver;
+      console.log("Route: ", window.location.pathname);
+      console.log("origine: ", window.location.origin);
+      const currentRoute = window.location.pathname;
+      console.log("currentRoute: ", currentRoute);
+      const driverObj = driver({
+        showProgress: true,
+        showAnimation: true,
+        animationDuration: 2000,
+        showButtons: true,
+        showBackButton: true,
+        showResetButton: true,
+        showCloseButton: true,
+        showNextButton: true,
+        showSkipButton: true,
+        showPrevButton: true,
+        showPauseButton: true,
+        showPlayButton: true,
+        showFullscreenButton: true,
+        popoverClass: "driverjs-theme",
+        steps: [
+          {
+            element: "#element-produit",
+            popover: {
+              title: "Ajouter vos produits",
+              description:
+                "En ajoutant les produits de votre établissement, vous aurez une visibilité complète sur l'état du stock. Ainsi, vous pourrez approvisionner à distance si vous constatez une baisse, assurant une gestion efficace et sans interruption de votre inventaire.",
+            },
+          },
+          {
+            element: "#element-employe",
+            popover: {
+              title: "Ajouter les employées de votre établissement",
+              description:
+                "En ajoutant vos employé(e)s, ceux-ci auront accès à la liste des boissons de votre établissement et pourront ainsi effectuer des prises de commandes.",
+            },
+          },
+          {
+            element: "#element-bilan",
+            popover: {
+              title: "Bilan",
+              description:
+                "La section bilan vous permet de consulter vos ventes sur toute les périodes, vous aide à prendre des décisions et vous permet de valoriser vos employés en consultant leurs performances",
+            },
+          },
+        ],
+      });
+      if (currentRoute == "/dashboard") {
+        driverObj.drive();
+      }
       // currently sale
 
       //const socket = io();

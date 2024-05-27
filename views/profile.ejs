@@ -26,8 +26,10 @@
   <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="css/metisMenu.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
 
   <script src="/assets/js/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
 
   
 
@@ -122,8 +124,8 @@
                                 <h4 class="text-right">Paramètre </h4>
                               </div>
                               <div class="row mt-2">
-                                <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" placeholder="Nom" name='nom' value="<%= user.nom %>" required></div>
-                                <div class="col-md-6"><label class="labels">Prenom</label><input type="text" class="form-control" name='prenoms' value="<%= user.prenoms %>" placeholder="Prenom" required></div>
+                                <div class="col-md-6" id="element-nom"><label class="labels">Nom</label><input  type="text" class="form-control" placeholder="Nom" name='nom' value="<%= user.nom %>" required></div>
+                                <div class="col-md-6" id="element-prenom"><label class="labels">Prenom</label><input type="text" class="form-control" name='prenoms' value="<%= user.prenoms %>" placeholder="Prenom" required></div>
                               </div>
                               <div class="row mt-3">
                                 <div class="col-md-12"><label class="labels">Nom de l'établissement</label><input type="text" class="form-control" name='nom_etablissement' placeholder="Entrer le nom de l'établissement" value="<%= user.nom_etablissement %>"></div>
@@ -182,7 +184,7 @@
                               
 
 
-                              <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Enregistrer Profil</button></div>
+                              <div class="mt-5 text-center" id="element-save"><button class="btn btn-primary profile-button" type="submit">Enregistrer Profil</button></div>
                             </div>
                           </div>
                           <div class="col-md-4">
@@ -257,7 +259,7 @@
           <div class="col-lg-12">
             <div class="footer_iner text-center">
               <p>
-                2023 © E-MAQUIS - Designed by
+                2024 © E-MAQUIS - Designed by
                 <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> - <a href="/faq">FAQ</a>
               </p>
             </div>
@@ -281,6 +283,62 @@
   <script src="/socket.io/socket.io.js "></script>
   <script>
     const socket = io(window.location.origin + window.location.pathname);
+
+    const currentRouteProfil = window.location.pathname;
+    
+
+    const driver = window.driver.js.driver;
+
+const driverObj = driver({
+  showProgress: true,
+  showAnimation: true,
+  animationDuration: 2000,
+  showButtons: true,
+  showBackButton: true,
+  showResetButton: true,
+  showCloseButton: true,
+  showNextButton: true,
+  showSkipButton: true,
+  showPrevButton: true,
+  showPauseButton: true,
+  showPlayButton: true,
+  showFullscreenButton: true,
+  popoverClass: 'driverjs-theme',
+  steps: [
+    {
+      element: "#element-nom",
+      popover: {
+        title: "Important",
+        description: "Le champ Nom ne peut pas être vide. Veuillez le remplir."
+      }
+    },
+    {
+      element: "#element-prenom",
+      popover: {
+        title: "Attention",
+        description: "Le champ Prénom ne peut pas être vide. Veuillez le remplir."
+      }
+    },
+    {
+      element: "#element-save",
+      popover: {
+        title: "Important",
+        description: "Cliquez sur le bouton pour enregistrer les modifications afin de pouvoir charger les produits liés à votre pays"
+      }
+    }
+  ]
+});
+
+const nom = '<%= user.nom %>'
+
+
+if(nom.trim() === ''){
+  driverObj.drive();
+}
+
+  
+
+
 
     $(document).ready(function() {
 
