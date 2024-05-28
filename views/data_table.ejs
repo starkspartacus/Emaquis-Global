@@ -3,13 +3,18 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-      gtag('config', 'G-NT2SW8WBHT');
+      gtag("config", "G-NT2SW8WBHT");
     </script>
     <!-- End Google tag (gtag.js) -->
     <meta charset="utf-8" />
@@ -18,18 +23,19 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <script src="assets/js/jquery.min.js"></script>
-  <title>Liste des ventes</title>
-  <!-- App css -->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-  
+    <title>Liste des ventes</title>
+    <!-- App css -->
+    <link
+      href="assets/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
 
-  <%- include('partial/newHead.ejs') %>
-
-    <%- include('partial/head.ejs') %>
-    <%- include('partial/script.ejs') %>
+    <%- include('partial/newHead.ejs') %> <%- include('partial/head.ejs') %> <%-
+    include('partial/script.ejs') %>
   </head>
   <body class="crm_body_bg">
     <style>
@@ -60,6 +66,12 @@
       .venteRed td {
         color: rgb(219, 36, 23) !important;
       }
+      .venteGreen  {
+        color: rgb(0, 128, 0) !important;
+      }
+      .venteOrange  {
+        color: rgb(255, 165, 0) !important;
+      }
     </style>
 
     <%- include('partial/newSideBar.ejs') %>
@@ -67,7 +79,6 @@
 
     <section class="main_content dashboard_part large_header_bg">
       <!-- menu  -->
-      
 
       <div class="main_content_iner">
         <div class="container-fluid p-0">
@@ -84,7 +95,6 @@
                 <div class="white_card_body">
                   <div class="QA_section">
                     <div class="white_box_tittle list_header">
-                      
                       <%- include('partial/inputSearch.ejs') %>
                     </div>
 
@@ -105,7 +115,7 @@
                         </thead>
                         <tbody>
                           <% for(let vente of ventes) {%>
-                          <tr class="<%=vente.prix<0?'venteRed':''%>">
+                          <tr class="<%=vente.prix<0?'venteRed': '' %>">
                             <td><%= vente.code %></td>
                             <td><%= vente.produit %></td>
                             <td><%= vente.categories%></td>
@@ -115,7 +125,7 @@
                             <td><%= vente.quantite%></td>
 
                             <td><%= vente.prix%></td>
-                            <td><%= vente.status_commande %></td>
+                            <td class="<%=vente.prix>0? vente.status_commande =="Validée"? "venteGreen":"venteOrange":""%>"><%= vente.status_commande %></td>
                             <td><%= (vente.createdAt) %></td>
                           </tr>
                           <% } %>
@@ -136,9 +146,9 @@
             <div class="col-lg-12">
               <div class="footer_iner text-center">
                 <p>
-                  2023 © HNM - Designed by
-                  <a href="#"> <i class="ti-gun"></i> </a
-                  ><a href="#"> HNM</a> - <a href="/faq">FAQ</a>
+                  2024 © HNM - Designed by
+                  <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> -
+                  <a href="/faq">FAQ</a>
                 </p>
               </div>
             </div>
@@ -147,8 +157,6 @@
       </div>
     </section>
     <div class="menu-overlay"></div>
-
-    
 
     <!--/### CHAT_MESSAGE_BOX  ### -->
     <div id="back-top" style="display: none">
@@ -163,17 +171,15 @@
     <script src="assets/js/metismenu.min.js"></script>
     <script src="assets/js/waves.js"></script>
     <script src="assets/js/simplebar.min.js"></script>
-  
-    
-  
+
     <!-- Morris Js-->
     <script src="../plugins/morris-js/morris.min.js"></script>
     <!-- Raphael Js-->
     <script src="../plugins/raphael/raphael.min.js"></script>
-  
+
     <!-- Morris Custom Js-->
     <script src="assets/pages/dashboard-demo.js"></script>
-  
+
     <!-- App js -->
     <script src="assets/js/theme.js"></script>
   </body>

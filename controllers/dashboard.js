@@ -1,23 +1,23 @@
-const { MONTHS } = require('../constants');
-const { employeQueries } = require('../requests/EmployeQueries');
-const { produitQueries } = require('../requests/produitQueries');
-const { venteQueries } = require('../requests/venteQueries');
-const { formatAmount } = require('../utils/formatAmount');
-const { generateYears, formatDate } = require('../utils/generateYear');
-const moment = require('moment');
-const { getPercent } = require('../utils/getPercent');
-const { settingQueries } = require('../requests/settingQueries');
+const { MONTHS } = require("../constants");
+const { employeQueries } = require("../requests/EmployeQueries");
+const { produitQueries } = require("../requests/produitQueries");
+const { venteQueries } = require("../requests/venteQueries");
+const { formatAmount } = require("../utils/formatAmount");
+const { generateYears, formatDate } = require("../utils/generateYear");
+const moment = require("moment");
+const { getPercent } = require("../utils/getPercent");
+const { settingQueries } = require("../requests/settingQueries");
 const {
   getDateByWeekendMonthYear,
   getWeeksInMonth,
-} = require('../utils/generateWeekly');
-const { helperCurrentTime } = require('../utils/helperCurrentTime');
-const { userQueries } = require('../requests/UserQueries');
+} = require("../utils/generateWeekly");
+const { helperCurrentTime } = require("../utils/helperCurrentTime");
+const { userQueries } = require("../requests/UserQueries");
 
 exports.dashboard = async (req, res) => {
   if (req.session.user) {
     // let totalemploye;
-    res.setHeader('Content-Type', 'text/html');
+    res.setHeader("Content-Type", "text/html");
     const session = req.session.user;
     const userId = session.id;
     try {
@@ -35,7 +35,7 @@ exports.dashboard = async (req, res) => {
 
       const currentWeekIndex =
         currentDate.isoWeek() -
-        moment(currentDate).startOf('month').isoWeek() +
+        moment(currentDate).startOf("month").isoWeek() +
         1;
 
       const { start, end } = getDateByWeekendMonthYear(
@@ -53,13 +53,13 @@ exports.dashboard = async (req, res) => {
       const VenteToDay = await venteQueries.getVentes({
         createdAt: { $gte: startDate, $lte: endDate },
         travail_pour: userId,
-        status_commande: { $in: ['Validée', 'Retour'] },
+        status_commande: { $in: ["Validée", "Retour"] },
       });
 
       const Vente = await venteQueries.getVentes({
         createdAt: { $gte: start, $lte: end },
         travail_pour: userId,
-        status_commande: { $in: ['Validée', 'Retour'] },
+        status_commande: { $in: ["Validée", "Retour"] },
       });
 
       const settings = await settingQueries.getSettingByUserId(userId);
@@ -93,7 +93,7 @@ exports.dashboard = async (req, res) => {
       const toDayKey = formatDate(new Date());
 
       const yesterdayKey = formatDate(
-        moment(new Date()).subtract(1, 'days').toDate()
+        moment(new Date()).subtract(1, "days").toDate()
       );
 
       const yesterday = venteByDay[yesterdayKey] || [];
@@ -146,7 +146,7 @@ exports.dashboard = async (req, res) => {
         let products = [];
         for (let [key, value] of Object.entries(item.produit)) {
           products.push({
-            ...value._doc,
+            ...(value._doc || value),
             quantite: Number(item.quantite[key] || item.quantite[0]),
           });
         }
@@ -204,7 +204,7 @@ exports.dashboard = async (req, res) => {
       const objectivePercent =
         (totalVente / (settings?.result.objective || 1)) * 100;
 
-      res.render('dashboard', {
+      res.render("dashboard", {
         totalemploye: employe.length,
         Tab: prod,
         totalVente: formatAmount(totalVente),
@@ -223,24 +223,24 @@ exports.dashboard = async (req, res) => {
         weeksInMonth,
       });
     } catch (e) {
-      console.log('err', e);
+      console.log("err", e);
       res.redirect(e);
     }
   } else {
-    res.redirect('/');
+    res.redirect("/");
   }
 };
 
 exports.dashboardPost = async (req, res) => {
   if (req.session.user) {
-    res.setHeader('Content-Type', 'text/html');
+    res.setHeader("Content-Type", "text/html");
     try {
-      res.render('dashboard', { user: req.session.user });
+      res.render("dashboard", { user: req.session.user });
     } catch (e) {
-      console.log('err', e);
+      console.log("err", e);
       res.redirect(e);
     }
   } else {
-    res.redirect('/');
+    res.redirect("/");
   }
 };
