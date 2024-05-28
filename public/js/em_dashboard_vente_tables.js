@@ -2,15 +2,15 @@ const TablesHead = () => {
   return (
     <thead>
       <tr>
-        <th scope='col'>Produit</th>
-        <th scope='col'>Quantité</th>
-        <th scope='col'>Prix</th>
-        <th scope='col'>Encaisse</th>
-        <th scope='col'>Monnaie</th>
-        <th scope='col'>Table</th>
-        <th scope='col'>Date</th>
-        <th scope='col'>Employé</th>
-        <th scope='col'>Action</th>
+        <th scope="col">Produit</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Encaisse</th>
+        <th scope="col">Monnaie</th>
+        <th scope="col">Table</th>
+        <th scope="col">Date</th>
+        <th scope="col">Employé</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
   );
@@ -25,24 +25,24 @@ const TablesItem = ({
   venteToConfirm,
 }) => {
   const [loading, setLoading] = React.useState({
-    ['Validée']: false,
-    ['Annulée']: false,
+    ["Validée"]: false,
+    ["Annulée"]: false,
   });
 
   const { confirmVente } = React.useContext(AppContext);
   const { initCarts, venteId } = React.useContext(ProductsContext);
 
   const handleSubmit = (venteId, type) => {
-    if (type === 'edit') {
+    if (type === "edit") {
       initCarts(vente);
       return;
-    } else if (type === 'Annulée') {
-      $('#deleteVenteModal').modal('show');
+    } else if (type === "Annulée") {
+      $("#deleteVenteModal").modal("show");
 
       setVenteIdToDelete(venteId);
       return;
     } else if (!vente.amount_collected) {
-      $('#collectedAmount').modal('show');
+      $("#collectedAmount").modal("show");
 
       setVenteToConfirm(vente);
       return;
@@ -57,10 +57,10 @@ const TablesItem = ({
     });
 
     fetch(`/vente/status/${venteId}`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({ type }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
       .then((res) => {
@@ -74,7 +74,7 @@ const TablesItem = ({
         setTimeout(() => {
           setShowSuccess(false);
           setVenteToConfirm(vente);
-          $('#confirmOrder').modal('show');
+          $("#confirmOrder").modal("show");
         }, 500);
       })
       .catch((err) => {
@@ -87,7 +87,7 @@ const TablesItem = ({
   };
 
   const produits = vente.produit.map((el, i) => {
-    const text = i === vente.produit.length - 1 ? '' : ' , ';
+    const text = i === vente.produit.length - 1 ? "" : " , ";
     if (
       vente.formules &&
       vente.formules.find(
@@ -97,7 +97,7 @@ const TablesItem = ({
       )
     ) {
       return (
-        <span className='product-formule' key={el._id}>
+        <span className="product-formule" key={el._id}>
           {el.produit.nom_produit}
           {text}
         </span>
@@ -117,51 +117,51 @@ const TablesItem = ({
       className={`vente_table_item${
         vente._id === venteId ||
         (venteToConfirm && vente._id === venteToConfirm._id)
-          ? ' active'
-          : ''
+          ? " active"
+          : ""
       }`}
     >
       <td>{produits}</td>
-      <td>{vente.quantite.join(',')}</td>
+      <td>{vente.quantite.join(",")}</td>
       <td>{vente.prix}</td>
       <td>{vente.somme_encaisse}</td>
       <td>{vente.monnaie}</td>
       <td>{vente.table_number}</td>
       <td>
-        {new Date(vente.createdAt).toLocaleDateString('fr-FR', {
-          year: 'numeric',
-          month: 'numeric',
-          day: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric',
-          second: 'numeric',
+        {new Date(vente.createdAt).toLocaleDateString("fr-FR", {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
         })}
       </td>
       <td>{vente.employe.prenoms || vente.employe.prenom}</td>
 
-      <td className='btn-actions'>
+      <td className="btn-actions">
         <button
-          disabled={loading['Validée'] || loading['Annulée']}
-          onClick={() => handleSubmit(vente._id, 'Validée')}
+          disabled={loading["Validée"] || loading["Annulée"]}
+          onClick={() => handleSubmit(vente._id, "Validée")}
         >
-          <img src='/svgs/okcircle.svg' alt='valid' />
+          <img src="/svgs/okcircle.svg" alt="valid" />
         </button>
         <button
           style={{
-            display: 'inline-block',
-            margin: '0 5px',
+            display: "inline-block",
+            margin: "0 5px",
           }}
-          onClick={() => handleSubmit(vente._id, 'edit')}
+          onClick={() => handleSubmit(vente._id, "edit")}
         >
-          <img src='/svgs/modifier.svg' alt='edit' />
+          <img src="/svgs/modifier.svg" alt="edit" />
         </button>
 
         {vente.amount_collected && (
           <button
-            disabled={loading['Validée'] || loading['Annulée']}
-            onClick={() => handleSubmit(vente._id, 'Annulée')}
+            disabled={loading["Validée"] || loading["Annulée"]}
+            onClick={() => handleSubmit(vente._id, "Annulée")}
           >
-            <img src='/svgs/trash-b.svg' alt='cancel' />
+            <img src="/svgs/trash-b.svg" alt="cancel" />
           </button>
         )}
       </td>
@@ -181,21 +181,21 @@ const ModalDelete = ({
 
   const handleClose = () => {
     onClose();
-    $('#deleteVenteModal').modal('hide');
+    $("#deleteVenteModal").modal("hide");
   };
 
   const handleUpdateVente = () => {
     setLoading(true);
     fetch(`/vente/status/${venteIdToDelete}`, {
-      method: 'POST',
-      body: JSON.stringify({ type: 'Annulée' }),
+      method: "POST",
+      body: JSON.stringify({ type: "Annulée" }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
       .then((res) => {
         setShowSuccess(true);
-        confirmVente(venteIdToDelete, 'Annulée');
+        confirmVente(venteIdToDelete, "Annulée");
         setLoading(false);
 
         setTimeout(() => {
@@ -211,54 +211,54 @@ const ModalDelete = ({
 
   return (
     <div
-      className='modal fade'
-      id='deleteVenteModal'
-      tabindex='-1'
-      role='dialog'
-      aria-labelledby='myModalTitle'
-      data-backdrop='false'
+      className="modal fade"
+      id="deleteVenteModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalTitle"
+      data-backdrop="false"
     >
       <div
-        className='modal-dialog modal-dialog-centered'
+        className="modal-dialog modal-dialog-centered"
         style={{
-          maxWidth: '600px',
+          maxWidth: "600px",
         }}
-        role='document'
+        role="document"
       >
         {!!venteIdToDelete && (
-          <div className='modal-content'>
-            <div className='modal-header'>
-              <h2 className='modal-title' id='exampleModalLongTitle'>
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2 className="modal-title" id="exampleModalLongTitle">
                 Suppression d'une vente
               </h2>
               <button
-                type='button'
-                className='close close-modal'
-                data-dismiss='modal'
-                aria-label='Close'
-                id='close-modal'
+                type="button"
+                className="close close-modal"
+                data-dismiss="modal"
+                aria-label="Close"
+                id="close-modal"
                 onClick={handleClose}
               >
-                <span aria-hidden='true'>&times;</span>
+                <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className='modal-body'>
+            <div className="modal-body">
               <h4> êtes vous sûr de vouloir supprimer la vente ?</h4>
             </div>
 
-            <div className='modal-footer'>
+            <div className="modal-footer">
               <button
-                type='button'
-                className='btn btn-danger close-modal'
+                type="button"
+                className="btn btn-danger close-modal"
                 onClick={handleUpdateVente}
                 disabled={loading}
               >
-                {loading ? 'Annulation..' : 'Oui'}
+                {loading ? "Annulation.." : "Oui"}
               </button>
               <button
-                type='button'
-                className='btn btn-success close-modal'
-                data-dismiss='modal'
+                type="button"
+                className="btn btn-success close-modal"
+                data-dismiss="modal"
                 onClick={handleClose}
               >
                 Non
@@ -274,63 +274,63 @@ const ModalDelete = ({
 const ModalConfirmOrder = ({ venteIdToConfirm, onClose }) => {
   const handleClose = () => {
     onClose();
-    $('#confirmOrder').modal('hide');
+    $("#confirmOrder").modal("hide");
   };
 
   return (
     <div
-      className='modal fade'
-      id='confirmOrder'
-      tabindex='-1'
-      role='dialog'
-      aria-labelledby='myModalTitle'
-      data-backdrop='false'
+      className="modal fade"
+      id="confirmOrder"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalTitle"
+      data-backdrop="false"
     >
       <div
-        className='modal-dialog modal-dialog-centered'
+        className="modal-dialog modal-dialog-centered"
         style={{
-          maxWidth: '600px',
+          maxWidth: "600px",
         }}
-        role='document'
+        role="document"
       >
         {!!venteIdToConfirm && (
-          <div className='modal-content'>
-            <div className='modal-header'>
-              <h2 className='modal-title' id='exampleModalLongTitle'>
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2 className="modal-title" id="exampleModalLongTitle">
                 Commande confirmée avec succès
               </h2>
               <button
-                type='button'
-                className='close close-modal'
-                data-dismiss='modal'
-                aria-label='Close'
-                id='close-modal'
+                type="button"
+                className="close close-modal"
+                data-dismiss="modal"
+                aria-label="Close"
+                id="close-modal"
                 onClick={handleClose}
               >
-                <span aria-hidden='true'>&times;</span>
+                <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className='modal-body'>
-              <h4 className='text-center'>Voulez-vous imprimer le ticket</h4>
+            <div className="modal-body">
+              <h4 className="text-center">Voulez-vous imprimer le ticket</h4>
             </div>
 
-            <div className='modal-footer'>
+            <div className="modal-footer">
               <button
-                type='button'
-                className='btn btn-danger close-modal'
+                type="button"
+                className="btn btn-danger close-modal"
                 onClick={handleClose}
               >
                 Non
               </button>
               <a
-                type='button'
-                className='btn btn-success close-modal'
-                data-dismiss='modal'
+                type="button"
+                className="btn btn-success close-modal"
+                data-dismiss="modal"
                 onClick={handleClose}
                 href={`/generate-ticket/${
                   venteIdToConfirm._id || venteIdToConfirm
                 }`}
-                target='_blank'
+                target="_blank"
               >
                 Oui
               </a>
@@ -349,18 +349,20 @@ const ModalCollectedAmount = ({ vente, onClose }) => {
 
   const [sommeEncaisse, setSommeEncaisse] = React.useState(null);
 
-  const handleClose = () => {
+  const handleClose = (orderUpdated) => {
     onClose();
-    $('#collectedAmount').modal('hide');
+    $("#collectedAmount").modal("hide");
 
-    $('#confirmOrder').modal('show');
+    if (orderUpdated) {
+      $("#confirmOrder").modal("show");
+    }
 
     setSommeEncaisse(null);
   };
 
   const handleUpdateVente = () => {
     if (sommeEncaisse < vente.prix) {
-      alert('La somme encaissée doit être supérieure au prix de la vente');
+      alert("La somme encaissée doit être supérieure au prix de la vente");
       return;
     }
 
@@ -375,9 +377,9 @@ const ModalCollectedAmount = ({ vente, onClose }) => {
 
     setLoading(true);
     fetch(`/editvente/${vente._id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
@@ -385,87 +387,87 @@ const ModalCollectedAmount = ({ vente, onClose }) => {
       .then((data) => {
         if (data.etat) {
           setLoading(false);
-          confirmVente(vente._id, 'Validée');
-          handleClose();
+          confirmVente(vente._id, "Validée");
+          handleClose(true);
         } else {
-          alert('Une erreur est survenue');
+          alert("Une erreur est survenue");
           setLoading(false);
         }
       })
       .catch((err) => {
         console.log(err);
-        alert('Une erreur est survenue');
+        alert("Une erreur est survenue");
         setLoading(false);
       });
   };
 
   return (
     <div
-      className='modal fade'
-      id='collectedAmount'
-      tabindex='-1'
-      role='dialog'
-      aria-labelledby='myModalTitle'
-      data-backdrop='false'
+      className="modal fade"
+      id="collectedAmount"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalTitle"
+      data-backdrop="false"
     >
       <div
-        className='modal-dialog modal-dialog-centered'
+        className="modal-dialog modal-dialog-centered"
         style={{
-          maxWidth: '600px',
+          maxWidth: "600px",
         }}
-        role='document'
+        role="document"
       >
         {!!vente && (
-          <div className='modal-content'>
-            <div className='modal-header'>
-              <h3 className='modal-title' id='exampleModalLongTitle'>
+          <div className="modal-content">
+            <div className="modal-header">
+              <h3 className="modal-title" id="exampleModalLongTitle">
                 Confirmation de la vente table N°{vente.table_number}
               </h3>
               <button
-                type='button'
-                className='close close-modal'
-                data-dismiss='modal'
-                aria-label='Close'
-                id='close-modal'
-                onClick={handleClose}
+                type="button"
+                className="close close-modal"
+                data-dismiss="modal"
+                aria-label="Close"
+                id="close-modal"
+                onClick={() => handleClose()}
               >
-                <span aria-hidden='true'>&times;</span>
+                <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className='modal-body'>
+            <div className="modal-body">
               <h4>
                 Prix: <b>{vente.prix} FCFA</b>
               </h4>
               <input
-                type='number'
-                placeholder='Somme encaissé'
-                className='form-control mb-1'
+                type="number"
+                placeholder="Somme encaissé"
+                className="form-control mb-1"
                 value={sommeEncaisse}
                 onChange={(e) => setSommeEncaisse(e.target.value)}
               />
               <p>
-                Monnaie à rendre:{' '}
+                Monnaie à rendre:{" "}
                 <b>
-                  {vente.prix < sommeEncaisse ? sommeEncaisse - vente.prix : 0}{' '}
+                  {vente.prix < sommeEncaisse ? sommeEncaisse - vente.prix : 0}{" "}
                   FCFA
                 </b>
               </p>
             </div>
 
-            <div className='modal-footer'>
+            <div className="modal-footer">
               <button
-                type='button'
-                className='btn btn-success close-modal'
+                type="button"
+                className="btn btn-success close-modal"
                 onClick={handleUpdateVente}
                 disabled={loading}
               >
-                {loading ? 'En cours..' : 'Valider'}
+                {loading ? "En cours.." : "Valider"}
               </button>
               <button
-                type='button'
-                className='btn btn-danger close-modal'
-                data-dismiss='modal'
-                onClick={handleClose}
+                type="button"
+                className="btn btn-danger close-modal"
+                data-dismiss="modal"
+                onClick={() => handleClose()}
               >
                 Fermer
               </button>
@@ -514,46 +516,46 @@ const EmDashboardVenteTables = () => {
 
   return (
     <React.Fragment>
-      <div className={`col-xl-12 z-2 mt-${venteId ? '5' : '2'}`}>
-        <div className='white_card mb_30 card_height_100'>
-          <div className='white_card_header'>
-            <div className='row align-items-center justify-content-between flex-wrap'>
-              <div className='col-lg-4'>
-                <div className='main-title'>
-                  <h3 className='m-0'>Commandes en attente</h3>
+      <div className={`col-xl-12 z-2 mt-${venteId ? "5" : "2"}`}>
+        <div className="white_card mb_30 card_height_100">
+          <div className="white_card_header">
+            <div className="row align-items-center justify-content-between flex-wrap">
+              <div className="col-lg-4">
+                <div className="main-title">
+                  <h3 className="m-0">Commandes en attente</h3>
                 </div>
               </div>
             </div>
           </div>
-          <div className='table-wrapper-scroll-y my-custom-scrollbar'>
+          <div className="table-wrapper-scroll-y my-custom-scrollbar">
             {showSuccess && (
               <div
-                className='alert alert-success'
-                role='alert'
+                className="alert alert-success"
+                role="alert"
                 // style="text-align: center; display: none"
                 style={{
-                  textAlign: 'center',
+                  textAlign: "center",
                 }}
-                id='alert-success'
+                id="alert-success"
               >
                 Operation effectuée avec succès !
               </div>
             )}
             {showDanger && (
               <div
-                className='alert alert-danger'
-                role='alert'
+                className="alert alert-danger"
+                role="alert"
                 // style="text-align: center; display: none"
                 style={{
-                  textAlign: 'center',
+                  textAlign: "center",
                 }}
-                id='alert-danger'
+                id="alert-danger"
               >
                 Echec de l'opération, veillez recommencer!
               </div>
             )}
             <table
-              className='table table-bordered table-striped mb-9'
+              className="table table-bordered table-striped mb-9"
               // className="table lms_table_active2 p-0"
               // style={{
               //   width: "98%",
