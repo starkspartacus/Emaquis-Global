@@ -1,57 +1,70 @@
 <!DOCTYPE html>
 <html lang="zxx">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
-<head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-NT2SW8WBHT"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag('config', 'G-NT2SW8WBHT');
-  </script>
-  <!-- End Google tag (gtag.js) -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <script src="assets/js/jquery.min.js"></script>
-  <title>Ajout employé(es)</title>
-  <!-- App css -->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
-  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="css/style.css" />
+      gtag("config", "G-NT2SW8WBHT");
+    </script>
+    <!-- End Google tag (gtag.js) -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <script src="assets/js/jquery.min.js"></script>
+    <title>Ajout employé(es)</title>
+    <!-- App css -->
+    <link
+      href="assets/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"
+    />
 
-  <%- include('partial/newHead.ejs') %>
-  <%- include('partial/head.ejs') %>
-  
+    <%- include('partial/newHead.ejs') %> <%- include('partial/head.ejs') %>
+  </head>
 
-</head>
+  <body class="crm_body_bg">
+    <%- include('partial/newSideBar.ejs') %>
 
-<body class="crm_body_bg">
-  <%- include('partial/newSideBar.ejs') %>
-  
+    <!--/ sidebar  -->
 
-  <!--/ sidebar  -->
+    <section class="main_content dashboard_part large_header_bg">
+      <!-- menu  -->
 
-  <section class="main_content dashboard_part large_header_bg">
-    <!-- menu  -->
-    
-    <!--/ menu  -->
-    <div class="main_content_iner overly_inner">
-      <div class="container-fluid p-0">
-        <!-- page title  -->
-        <!-- page title  -->
-        <div class="row">
-          <div class="col-12">
-            <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
-              <div class="page_title_left d-flex align-items-center">
-                <!--
+      <!--/ menu  -->
+      <div class="main_content_iner overly_inner">
+        <div class="container-fluid p-0">
+          <!-- page title  -->
+          <!-- page title  -->
+          <div class="row">
+            <div class="col-12">
+              <div
+                class="page_title_box d-flex flex-wrap align-items-center justify-content-between"
+              >
+                <div class="page_title_left d-flex align-items-center">
+                  <!--
                 <h3 class="f_s_25 f_w_700 dark_text mr_30">
                   Tableau de bord
                 </h3>
@@ -62,289 +75,449 @@
                     <li class="breadcrumb-item active">Analyse</li>
                   </ol> 
                   -->
-              </div>
-              <div class="page_title_right">
-                <div class="page_title_right d-flex">
-                  <div class="page_date d-flex align-items-center">
-
-                    <div class="date_content ml-2">
-                      <span id="heure"></span>
+                </div>
+                <div class="page_title_right">
+                  <div class="page_title_right d-flex">
+                    <div class="page_date d-flex align-items-center">
+                      <div class="date_content ml-2">
+                        <span id="heure"></span>
+                        <script>
+                          setInterval("heure()", 1000);
+                        </script>
+                      </div>
+                    </div>
+                    <div class="page_date d-flex align-items-center">
+                      <div class="date_content ml-2">
+                        <span id="date"></span>
+                      </div>
+                    </div>
+                    <div class="page_date_button d-flex align-items-center">
                       <script>
-                        setInterval("heure()", 1000);
-                      </script>
-
-                    </div>
-
-                  </div>
-                  <div class="page_date d-flex align-items-center">
-
-                    <div class="date_content ml-2">
-                      <span id="date"></span>
-
-                    </div>
-                  </div>
-                  <div class="page_date_button d-flex  align-items-center">
-
-                    <script>
-                      var d = new Date();
-                      //affichage de la date du jour
-                      var jour = d.getDate();
-                      var mois = d.getMonth();
-                      var annee = d.getFullYear();
-                      var date = jour + "/" + (mois + 1) + "/" + annee;
-                      document.getElementById("date").innerHTML = date;
-                      //affichage de l'heure dynamique
-                      function heure() {
                         var d = new Date();
-                        var h = d.getHours();
-                        var m = d.getMinutes();
-                        var s = d.getSeconds();
-                        if (h < 10) {
-                          h = "0" + h;
+                        //affichage de la date du jour
+                        var jour = d.getDate();
+                        var mois = d.getMonth();
+                        var annee = d.getFullYear();
+                        var date = jour + "/" + (mois + 1) + "/" + annee;
+                        document.getElementById("date").innerHTML = date;
+                        //affichage de l'heure dynamique
+                        function heure() {
+                          var d = new Date();
+                          var h = d.getHours();
+                          var m = d.getMinutes();
+                          var s = d.getSeconds();
+                          if (h < 10) {
+                            h = "0" + h;
+                          }
+                          if (m < 10) {
+                            m = "0" + m;
+                          }
+                          if (s < 10) {
+                            s = "0" + s;
+                          }
+                          document.getElementById("heure").innerHTML =
+                            h + ":" + m + ":" + s;
                         }
-                        if (m < 10) {
-                          m = "0" + m;
-                        }
-                        if (s < 10) {
-                          s = "0" + s;
-                        }
-                        document.getElementById("heure").innerHTML = h + ":" + m + ":" + s;
-                      }
-                    </script>
-
+                      </script>
+                    </div>
                   </div>
-
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <p id="sess" hidden><%= user?.id %></p>
-            <div class="white_card card_height_100 mb_30">
-              <div class="white_card_header">
-                <div class="box_header m-0">
-                  <div class="main-title">
-                    <h3 class="m-0">Ajouter un nouvel employé</h3>
+          <div class="row">
+            <div class="col-12">
+              <p id="sess" hidden><%= user?.id %></p>
+              <div class="white_card card_height_100 mb_30">
+                <div class="white_card_header">
+                  <div class="box_header m-0">
+                    <div class="main-title">
+                      <h3 class="m-0">Ajouter un nouvel employé</h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <form action="" method="">
-                <% if(locals.update) { %>
-                <div class="alert alert-success" role="alert" style="text-align: center; display: none" id="alert-success">
-                  Employé modifier avec succès !
-                </div>
+                <form action="" method="">
+                  <% if(locals.update) { %>
+                  <div
+                    class="alert alert-success"
+                    role="alert"
+                    style="text-align: center; display: none"
+                    id="alert-success"
+                  >
+                    Employé modifier avec succès !
+                  </div>
 
-                <% } else { %>
-                <div class="alert alert-success" role="alert" style="text-align: center; display: none" id="alert-success">
-                  Nouvel employé enregistrer avec succès !
-                </div>
-                <% } %>
-                <div class="alert alert-danger" role="alert" style="text-align: center; display: none" id="alert-danger">
-                  Echec de l'opération, veuillez recommencer!
-                </div>
-                <div class="white_card_body">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="common_input mb_15">
-                        <input type="text" placeholder="prénom" name="prenom" value="<%= locals.employe?.prenom %>" class="form-focus" />
+                  <% } else { %>
+                  <div
+                    class="alert alert-success"
+                    role="alert"
+                    style="text-align: center; display: none"
+                    id="alert-success"
+                  >
+                    Nouvel employé enregistrer avec succès !
+                  </div>
+                  <% } %>
+                  <div
+                    class="alert alert-danger"
+                    role="alert"
+                    style="text-align: center; display: none"
+                    id="alert-danger"
+                  >
+                    Echec de l'opération, veuillez recommencer!
+                  </div>
+                  <div class="white_card_body">
+                    <div class="row">
+                      <div class="col-lg-6" id="element-prenom">
+                        <div class="common_input mb_15">
+                          <input
+                            type="text"
+                            placeholder="prénom"
+                            name="prenom"
+                            value="<%= locals.employe?.prenom %>"
+                            class="form-focus"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="common_input mb_15">
-                        <input type="text" placeholder="nom" name="nom" value="<%=locals.employe?.nom%>" class="form-focus" />
+                      <div class="col-lg-6" id="element-nom">
+                        <div class="common_input mb_15">
+                          <input
+                            type="text"
+                            placeholder="nom"
+                            name="nom"
+                            value="<%=locals.employe?.nom%>"
+                            class="form-focus"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="common_input mb_15">
-                        <input type="text" placeholder="speudo" name="speudo" value="<%=locals.employe?.pseudo%>" class="form-focus" />
+                      <div class="col-lg-6" id="element-alias">
+                        <div class="common_input mb_15">
+                          <input
+                            type="text"
+                            placeholder="speudo"
+                            name="speudo"
+                            value="<%=locals.employe?.pseudo%>"
+                            class="form-focus"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="common_input mb_15">
-                        <input type="text" placeholder="adresse" name="adresse" value="<%=locals.employe?.adresse%>" class="form-focus" />
+                      <div class="col-lg-6" id="element-adresse">
+                        <div class="common_input mb_15">
+                          <input
+                            type="text"
+                            placeholder="adresse"
+                            name="adresse"
+                            value="<%=locals.employe?.adresse%>"
+                            class="form-focus"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="common_input mb_15 input-group">
-                        <input type="number" placeholder="Numéro de téléphone" name="numero" value="<%=locals.employe?.numero%>" required class="form-focus form-focus-warning" />
-                        <small class="text-info">Le numéro de téléphone va permettre à
-                          la serveuse, au gestionnaire ou au barman de pouvoir se connecter à l'application mobile
-                          <span class="text-danger">"E-Maquis"</span>
-                          pour pouvoir prendre les commandes des clients, et le Barman aura besoin de ce numéro pour
-                          pouvoir se connecter à son espaces de travail Barman.
-                          Le numéro de téléphone doit être unique.
-
-                        </small>
+                      <div class="col-lg-6">
+                        <div
+                          class="common_input mb_15 input-group"
+                          id="element-phone"
+                        >
+                          <input
+                            type="number"
+                            placeholder="Numéro de téléphone"
+                            name="numero"
+                            value="<%=locals.employe?.numero%>"
+                            required
+                            class="form-focus form-focus-warning"
+                          />
+                          <small class="text-info"
+                            >Le numéro de téléphone va permettre à la serveuse,
+                            au gestionnaire ou au barman de pouvoir se connecter
+                            à l'application mobile
+                            <span class="text-danger">"E-Maquis"</span>
+                            pour pouvoir prendre les commandes des clients, et
+                            le Barman aura besoin de ce numéro pour pouvoir se
+                            connecter à son espaces de travail Barman. Le numéro
+                            de téléphone doit être unique.
+                          </small>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="common_input mb_15">
-                        <input type="password" placeholder="mot de passe" name="password" class="form-focus" />
+                      <div class="col-lg-6" id="element-password">
+                        <div class="common_input mb_15">
+                          <input
+                            type="password"
+                            placeholder="mot de passe"
+                            name="password"
+                            class="form-focus"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="common_input mb_15">
-                        <!-- <input
+                      <div class="col-lg-6">
+                        <div class="common_input mb_15">
+                          <!-- <input
                             type="email"
                             placeholder="Email"
                             name="email"
                             value="<%=locals.employe?.email%>"
                           /> -->
-                        <input type="text" name="session" value="<%= user?.id %>" hidden />
-                        <input type="checkbox" name="update" value="<%= locals.update %>" hidden />
+                          <input
+                            type="text"
+                            name="session"
+                            value="<%= user?.id %>"
+                            hidden
+                          />
+                          <input
+                            type="checkbox"
+                            name="update"
+                            value="<%= locals.update %>"
+                            hidden
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="col-lg-6">
-                      <select class="nice_Select2 nice_Select_line wide form-focus" style="display: none" name="role" value="<%=locals.employe?.role%>" required>
-                        <option value="1">Selectionner le rôle</option>
-                        <option value="Barman">Barman</option>
-                        <option value="serveur(euse)">serveur(euse)</option>
-                        <option value="Manager">Manager</option>
-                        <option value="gestionnaire">Gestionnaire</option>
-                      </select>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                      <div class="create_report_btn mt_30">
-                        <button type="submit" class="btn_1 radius_btn d-block text-center btn_1_Verif">
-                          <%= locals.update?"Modifier": "Ajouter"%> employé
-                        </button>
+                      <div class="col-lg-6" id="element-roles">
+                        <select
+                          class="nice_Select2 nice_Select_line wide form-focus"
+                          style="display: none"
+                          name="role"
+                          value="<%=locals.employe?.role%>"
+                          required
+                        >
+                          <option value="1">Selectionner le rôle</option>
+                          <option value="Barman">Barman</option>
+                          <option value="serveur(euse)">serveur(euse)</option>
+                          <option value="Manager">Manager</option>
+                          <option value="gestionnaire">Gestionnaire</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6" id="element-save">
+                        <div class="create_report_btn mt_30">
+                          <button
+                            type="submit"
+                            class="btn_1 radius_btn d-block text-center btn_1_Verif"
+                          >
+                            <%= locals.update?"Modifier": "Ajouter"%> employé
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- footer part -->
-    <div class="footer_part">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="footer_iner text-center">
-              <p>
-                2023 © E-Maquis - Designed by
-                <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> - <a href="/faq">FAQ</a>
-              </p>
+      <!-- footer part -->
+      <div class="footer_part">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="footer_iner text-center">
+                <p>
+                  2023 © E-Maquis - Designed by
+                  <a href="#"> <i class="ti-gun"></i> </a><a href="#"> HNM</a> -
+                  <a href="/faq">FAQ</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
+    <!-- main content part end -->
+    <div class="menu-overlay"></div>
+
+    <div id="back-top" style="display: none">
+      <a title="Go to Top" href="#">
+        <i class="ti-angle-up"></i>
+      </a>
     </div>
-  </section>
-  <!-- main content part end -->
-  <div class="menu-overlay"></div>
 
-  <div id="back-top" style="display: none">
-    <a title="Go to Top" href="#">
-      <i class="ti-angle-up"></i>
-    </a>
-  </div>
+    <!-- footer  -->
+    <%- include('partial/script.ejs') %> <%-
+    include('partial/scriptNewTemp.ejs') %>
 
-  <!-- footer  -->
-  <%- include('partial/script.ejs') %>
-  <%- include('partial/scriptNewTemp.ejs') %>
-  
-  <script src="/socket.io/socket.io.js "></script>
-  <script>
-    const socket = io(window.location.origin + window.location.pathname);
-    console.log(window.location.origin + window.location.pathname);
+    <script src="/socket.io/socket.io.js "></script>
+    <script>
+      const socket = io(window.location.origin + window.location.pathname);
+      console.log(window.location.origin + window.location.pathname);
 
-    $('form').on('submit', (e) => {
-      e.preventDefault();
-      isSucces = true;
-      const updated = $('input[name="update"]').val() == 'true';
-      const data = {
-        nom: $('input[name="nom"]').val(),
-        prenom: $('input[name="prenom"]').val(),
-        chef_etablissement: $('input[name="session"]').val(),
-        role: $('select[name="role"]').val(),
-        email: $('input[name="email"]').val(),
-        adresse: $('input[name="adresse"]').val(),
-        password: $('input[name="password"]').val(),
-        numero: $('input[name="numero"]').val(),
-      };
+      $("form").on("submit", (e) => {
+        e.preventDefault();
+        isSucces = true;
+        const updated = $('input[name="update"]').val() == "true";
+        const data = {
+          nom: $('input[name="nom"]').val(),
+          prenom: $('input[name="prenom"]').val(),
+          chef_etablissement: $('input[name="session"]').val(),
+          role: $('select[name="role"]').val(),
+          email: $('input[name="email"]').val(),
+          adresse: $('input[name="adresse"]').val(),
+          password: $('input[name="password"]').val(),
+          numero: $('input[name="numero"]').val(),
+        };
 
-
-
-      if (
-        !updated &&
-        (data.nom == '' ||
-          data.prenom == '' ||
-          data.email == '' ||
-          data.adresse == '' ||
-          data.password == '' ||
-          data.numero == '' || data.role === "1")
-      ) {
-        isSucces = false;
-        alert('Veuillez remplir tous les champs');
-        return;
-      }
-
-      if (updated) {
-        if (data.role === '1') {
-          data.role = '<%= locals.employe?.role %>';
+        if (
+          !updated &&
+          (data.nom == "" ||
+            data.prenom == "" ||
+            data.email == "" ||
+            data.adresse == "" ||
+            data.password == "" ||
+            data.numero == "" ||
+            data.role === "1")
+        ) {
+          isSucces = false;
+          alert("Veuillez remplir tous les champs");
+          return;
         }
-        socket.emit('updateEmploye', {
-          userId: '<%= locals.employe?._id%>',
-          data,
-        });
-        console.log('update', {
-          userId: '<%= locals.employe?._id%>',
-          data,
-        });
-      } else {
-        socket.emit('setemploye', data);
-      }
 
-      socket.on('saved', (data) => {
-        document.getElementById('alert-success').style.display = 'block';
-        $('input').val('');
-        setTimeout(() => {
-          document.getElementById('alert-success').style.display = 'none';
-          if (data.update) {
-            window.location.href = '/utilisateur';
+        if (updated) {
+          if (data.role === "1") {
+            data.role = "<%= locals.employe?.role %>";
           }
-        }, 1000);
+          socket.emit("updateEmploye", {
+            userId: "<%= locals.employe?._id%>",
+            data,
+          });
+          console.log("update", {
+            userId: "<%= locals.employe?._id%>",
+            data,
+          });
+        } else {
+          socket.emit("setemploye", data);
+        }
+
+        socket.on("saved", (data) => {
+          document.getElementById("alert-success").style.display = "block";
+          $("input").val("");
+          setTimeout(() => {
+            document.getElementById("alert-success").style.display = "none";
+            if (data.update) {
+              window.location.href = "/utilisateur";
+            }
+          }, 1000);
+        });
+        socket.on("bad", () => {
+          setTimeout(
+            () =>
+              (document.getElementById("alert-danger").style.display = "block"),
+            1000
+          );
+        });
       });
-      socket.on('bad', () => {
-        setTimeout(
-          () =>
-          (document.getElementById('alert-danger').style.display = 'block'),
-          1000
-        );
+      const driver = window.driver.js.driver;
+      // Définir une variable pour garder une trace si l'action a déjà été effectuée
+      let guideAlreadyShown = false;
+
+      const currentRoute = window.location.pathname;
+
+      const driverObj = driver({
+        showProgress: true,
+        showAnimation: true,
+        animationDuration: 2000,
+        showButtons: true,
+        showBackButton: true,
+        showResetButton: true,
+        showCloseButton: true,
+        showNextButton: true,
+        showSkipButton: true,
+        showPrevButton: true,
+        showPauseButton: true,
+        showPlayButton: true,
+        showFullscreenButton: true,
+        popoverClass: "driverjs-theme",
+        steps: [
+          {
+            element: "#element-nom",
+            popover: {
+              title: "Ajouter vos produits",
+              description:
+                "En ajoutant les produits de votre établissement, vous aurez une visibilité complète sur l'état du stock. Ainsi, vous pourrez approvisionner à distance si vous constatez une baisse, assurant une gestion efficace et sans interruption de votre inventaire.",
+            },
+          },
+          {
+            element: "#element-prenom",
+            popover: {
+              title: "Ajouter les employées de votre établissement",
+              description:
+                "En ajoutant vos employé(e)s, ceux-ci auront accès à la liste des boissons de votre établissement et pourront ainsi effectuer des prises de commandes.",
+            },
+          },
+          {
+            element: "#element-alias",
+            popover: {
+              title: "Bilan",
+              description:
+                "La section bilan vous permet de consulter vos ventes sur toute les périodes, vous aide à prendre des décisions et vous permet de valoriser vos employés en consultant leurs performances",
+            },
+          },
+          {
+            element: "#element-adresse",
+            popover: {
+              title: "Bilan",
+              description:
+                "La section bilan vous permet de consulter vos ventes sur toute les périodes, vous aide à prendre des décisions et vous permet de valoriser vos employés en consultant leurs performances",
+            },
+          },
+          {
+            element: "#element-phone",
+            popover: {
+              title: "Bilan",
+              description:
+                "La section bilan vous permet de consulter vos ventes sur toute les périodes, vous aide à prendre des décisions et vous permet de valoriser vos employés en consultant leurs performances",
+            },
+          },
+          {
+            element: "#element-password",
+            popover: {
+              title: "Bilan",
+              description:
+                "La section bilan vous permet de consulter vos ventes sur toute les périodes, vous aide à prendre des décisions et vous permet de valoriser vos employés en consultant leurs performances",
+            },
+          },
+          {
+            element: "#element-roles",
+            popover: {
+              title: "Bilan",
+              description:
+                "La section bilan vous permet de consulter vos ventes sur toute les périodes, vous aide à prendre des décisions et vous permet de valoriser vos employés en consultant leurs performances",
+            },
+          },
+          {
+            element: "#element-save",
+            popover: {
+              title: "Bilan",
+              description:
+                "La section bilan vous permet de consulter vos ventes sur toute les périodes, vous aide à prendre des décisions et vous permet de valoriser vos employés en consultant leurs performances",
+            },
+          },
+        ],
       });
-    });
-  </script>
 
-  <script src="../js/verifInput.js" defer></script>
-   <!-- jQuery  -->
-  
-   <script src="assets/js/bootstrap.bundle.min.js"></script>
-   <script src="assets/js/metismenu.min.js"></script>
-   <script src="assets/js/waves.js"></script>
-   <script src="assets/js/simplebar.min.js"></script>
- 
-   
- 
-   <!-- Morris Js-->
-   <script src="../plugins/morris-js/morris.min.js"></script>
-   <!-- Raphael Js-->
-   <script src="../plugins/raphael/raphael.min.js"></script>
- 
-   <!-- Morris Custom Js-->
-   <script src="assets/pages/dashboard-demo.js"></script>
- 
-   <!-- App js -->
-   <script src="assets/js/theme.js"></script>
-</body>
+      const name = "<%= locals.employe?.prenom %>";
+      if (name === "" && !localStorage.getItem("guideAlreadyShown")) {
+        driverObj.drive();
+        // Mettre à jour la variable pour indiquer que le guide a été affiché
+        localStorage.setItem("guideAlreadyShown", true);
+      }
+    </script>
 
-<!-- Mirrored from demo.dashboardpack.com/user-management-html/add_new_user.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 17:20:09 GMT -->
+    <script src="../js/verifInput.js" defer></script>
+    <!-- jQuery  -->
 
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/metismenu.min.js"></script>
+    <script src="assets/js/waves.js"></script>
+    <script src="assets/js/simplebar.min.js"></script>
+
+    <!-- Morris Js-->
+    <script src="../plugins/morris-js/morris.min.js"></script>
+    <!-- Raphael Js-->
+    <script src="../plugins/raphael/raphael.min.js"></script>
+
+    <!-- Morris Custom Js-->
+    <script src="assets/pages/dashboard-demo.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/theme.js"></script>
+  </body>
+
+  <!-- Mirrored from demo.dashboardpack.com/user-management-html/add_new_user.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 17:20:09 GMT -->
 </html>
