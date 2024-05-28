@@ -24,7 +24,7 @@ const swaggerUi = require("swagger-ui-express"),
 
 const FileUpload = require("../utils/fileupload");
 
-const db = require("../settings/database");
+const {dbConnection} = require("../settings/database");
 const { all } = require("../routes/index");
 const { uploadFile } = require("../utils/uploadFile");
 
@@ -42,7 +42,10 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
  */
 
 var server = http.createServer(app);
-const io = require("socket.io").listen(server, {
+// const io = require("socket.io").listen(server, {
+//   maxHttpBufferSize: 1e8,
+// });
+const io = require("socket.io")(server, {
   maxHttpBufferSize: 1e8,
 });
 
@@ -50,7 +53,7 @@ app.io = io;
 /**
  * Listen on provided port, on all network interfaces.
  */
-db();
+dbConnection();
 
 const SaveUSer = io.of("/inscription").use(Serveur.getSharedSession());
 
@@ -117,7 +120,8 @@ UserLogin.on("connection", (socket) => {
           ...userlogin._doc,
           token,
         };
-
+       
+        
         socket.handshake.session.save();
         socket.emit("loginsuccess", "/dashboard");
       } else {

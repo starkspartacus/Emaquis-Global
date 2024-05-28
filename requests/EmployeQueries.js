@@ -99,6 +99,38 @@ exports.employeQueries = class {
     });
   }
 
+  static updateEmployeePhotoById(id, photoData) {
+    return new Promise(async (next) => {
+      await Employe.findOneAndUpdate(
+        { _id: id, deleted: false },
+        { $set: { image: photoData } },
+        { new: true } // Pour retourner le document mis à jour
+      )
+        .then((updatedEmployee) => {
+          if (updatedEmployee) {
+            next({
+              etat: true,
+              message: "Photo mise à jour avec succès",
+              result: updatedEmployee,
+            });
+          } else {
+            next({
+              etat: false,
+              message: "Employé introuvable ou supprimé",
+            });
+          }
+        })
+        .catch((err) => {
+          next({
+            etat: false,
+            message: "Erreur lors de la mise à jour de la photo",
+            err: err,
+          });
+        });
+    });
+  }
+  
+
   static getAllEmploye() {
     return new Promise(async (next) => {
       Employe.find({

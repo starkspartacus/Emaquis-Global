@@ -1,4 +1,5 @@
 exports.PRODUCT_SIZE = [
+  "10cl",
   "25cl",
   "30cl",
   "33cl",
@@ -16,28 +17,6 @@ exports.PRODUCT_SIZE = [
   "150cl",
   "200cl",
   "250cl",
-];
-
-// Marques boisson
-
-exports.MARQUES = [
-  {
-    code: "coca_cola",
-    nom: "Coca-Cola",
-    pays: "USA",
-    categorie: "boisson",
-  },
-  {
-    code:"brassivoir",
-    nom:"Brassivoir",
-    categorie:"boisson"
-  },
-  {
-    code:"solibra",
-    nom:"Solibra",
-    categorie:"boisson"
-  }
-  
 ];
 
 // pays de l'afrique de l'ouest
@@ -1075,6 +1054,15 @@ exports.MONTHS = [
   { code: 10, nom: "Octobre" },
   { code: 11, nom: "Novembre" },
   { code: 12, nom: "Décembre" },
+];
+
+exports.MARQUES = [
+  { code: 1, nom: "Solibra" },
+  { code: 2, nom: "Brassivoire" },
+  { code: 3, nom: "Brakina" },
+  { code: 4, nom: "Bramali" },
+  { code: 5, nom: "BGI" },
+  { code: 6, nom: "Coca-Cola" },
 ];
 
 exports.START_TIP_DAY = new Date("2023-10-08T00:00:00.000Z");
