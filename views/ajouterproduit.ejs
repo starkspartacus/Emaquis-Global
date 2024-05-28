@@ -220,14 +220,14 @@
             const [selectedSize, setSelectedSize] = React.useState(<%- JSON.stringify(product?.taille) %>);
             const [ categoryId, setCategoryId ] = React.useState(<%- JSON.stringify(product?.produit?.categorie?._id) %>);
 
-            const [ prix_vente, setPrixVente ] = React.useState(<%- JSON.stringify(product?.prix_vente) %>);
-            const [ prix_achat, setPrixAchat ] = React.useState(<%- JSON.stringify(product?.prix_achat) %>);
-            const [ quantite, setQuantite ] = React.useState(0);
-            const [ quantiteStock, setQuantiteStock ] = React.useState(<%- JSON.stringify(product?.quantite) %>);
-            const [ promo,setPromo] = React.useState(<%- JSON.stringify(product?.promo) %>);
-            const [promoQuantity, setPromoQuantity] = React.useState(<%- JSON.stringify(product?.promo_quantity) %>);
-            const [promoPrice, setPromoPrice] = React.useState(<%- JSON.stringify(product?.promo_price) %>);
-            const [stockType, setStockType] = React.useState(updateProduct?'bottle':'locker');
+          const [ prix_vente, setPrixVente ] = React.useState(<%- JSON.stringify(product?.prix_vente) %>);
+          const [ prix_achat, setPrixAchat ] = React.useState(<%- JSON.stringify(product?.prix_achat) %>);
+          const [ quantite, setQuantite ] = React.useState(0);
+          const [ quantiteStock, setQuantiteStock ] = React.useState(<%- JSON.stringify(product?.quantite) %>);
+          const [ promo,setPromo] = React.useState(<%- JSON.stringify(product?.promo) %>);
+          const [promoQuantity, setPromoQuantity] = React.useState(<%- JSON.stringify(product?.promo_quantity) %>);
+          const [promoPrice, setPromoPrice] = React.useState(<%- JSON.stringify(product?.promo_price) %>);
+          const [stockType, setStockType] = React.useState(updateProduct?'bottle':'locker');
 
 
             const [loading, setLoading] = React.useState(false);
@@ -294,13 +294,13 @@
 
 
 
-            if(qty > productInStock.quantity){
-              return alert("La quantité en stock est insuffisante");
+              if(qty > productInStock.quantity){
+                return alert("La quantité en stock est insuffisante");
+              }
+              }else{
+                return alert("Ce produit n'est pas en stock")
+              }
             }
-            }else{
-              return alert('Ce produit n\'est pas en stock')
-            }
-          }
 
 
               setShowSuccess(false)
@@ -510,51 +510,52 @@
                     style={{
                       textAlign: 'center',
 
-                }}
-                id='alert-danger'
-              >
-                Echec de l'opération, veuillez recommencer!
-              </div>}
-              <div className='white_card_body'>
-                <div className='row'>
-                  <div className='col-lg-6'>
-                    <select
-                      className='nice_Select2 nice_Select_line wide'
-                      name='categorie'
-                      id='categorie'
-                      required
-                      value={categoryId}
-                      disabled={updateProduct}
-                    >
-                    <option value="">Selectionner la catégorie</option>
-                       {categories.map(categorie =>(
-                          <option value={categorie._id}>{categorie.nom}</option>
-                          ))}
+                  }}
+                  id='alert-danger'
+                >
+                  Echec de l'opération, veuillez recommencer!
+                </div>}
+                <div className='white_card_body'>
+                  <div className='row'>
+                    <div className='col-lg-6'>
 
-                    </select>
-                  </div>
+      																<select className="select wide"
 
-                  <div className='col-lg-6 mb_15' id='productContainer'>
-                    <select
-                      className='nice_Select2 nice_Select_line wide'
-                      name='produit'
-                      id='produit'
-                      required
-                      disabled={updateProduct}
-                      onChange={(e) => {
-                        const id = e.target.value;
-                        setProductId(id);
-                      }}
-                      value={productId}
-                    >
-                    <option value="">Selectionner un produit</option>
-                      {allProducts.sort((a,b) => a.nom_produit.localeCompare(b.nom_produit)).map(produit =>(
-                          <option value={produit._id}>{produit.nom_produit}</option>
-                          ))}
+      																name='categorie'
+                        id='categorie'
+                        required
+                        value={categoryId}
+                        disabled={updateProduct}
+      																>
+      																<option value="">Selectionner la catégorie</option>
+      																{categories.map(categorie =>(
+      																			<option value={categorie._id}>{categorie.nom}</option>
+      																			))}
+      															</select>
+                    </div>
+
+                    <div className='col-lg-6 mb_15' id='productContainer'>
 
 
-                    </select>
-                  </div>
+
+      																<select className="select wide selectProduit"
+
+      																name='produit'
+      																id='produit'
+      																required
+      																disabled={updateProduct}
+      																onChange={(e) => {
+      																		const id = e.target.value;
+      																		setProductId(id);
+      																}}
+      																value={productId}
+      																>
+      																	<option disabled selected>Selectionner un produit</option>
+      																	{allProducts.sort((a,b) => a.nom_produit.localeCompare(b.nom_produit)).map(produit =>(
+      																		<option value={produit._id}>{produit.nom_produit}</option>
+      																		))}
+      															</select>
+                    </div>
 
                     {!is_cocktail &&<div className='col-lg-6'>
                       <div className='common_input mb_15'>
@@ -571,7 +572,7 @@
       																{sizesProduct.map(size =>(
       																				<option value={size}>{size}</option>
       																				))}
-        															</select>
+      															</select>
 
                         <input
                           type='text'

@@ -19,28 +19,6 @@ exports.PRODUCT_SIZE = [
   "250cl",
 ];
 
-// Marques boisson
-
-exports.MARQUES = [
-  {
-    code: "coca_cola",
-    nom: "Coca-Cola",
-    pays: "USA",
-    categorie: "boisson",
-  },
-  {
-    code:"brassivoir",
-    nom:"Brassivoir",
-    categorie:"boisson"
-  },
-  {
-    code:"solibra",
-    nom:"Solibra",
-    categorie:"boisson"
-  }
-  
-];
-
 // pays de l'afrique de l'ouest
 
 exports.PAYS = [
